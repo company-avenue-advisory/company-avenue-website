@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail, Clock, ArrowRight, Linkedin, Twitter, Instagram, Facebook } from "lucide-react";
 import { COMPANY, SERVICES } from "@/lib/constants";
 
@@ -41,15 +42,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand col */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <span className="text-white font-heading font-bold text-lg">CA</span>
-              </div>
-              <div>
-                <span className="font-heading font-bold text-white text-base block">
-                  Company Avenue
-                </span>
-                <span className="text-white/40 text-xs">Advisory Pvt. Ltd.</span>
+            <Link href="/" className="flex items-center mb-5">
+              <div className="relative h-14 w-56">
+                <Image
+                  src="/images/logo.webp"
+                  alt={COMPANY.fullName}
+                  fill
+                  className="object-contain object-left"
+                  sizes="224px"
+                />
               </div>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs">

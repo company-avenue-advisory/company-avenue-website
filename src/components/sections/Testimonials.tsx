@@ -1,84 +1,123 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { TESTIMONIALS } from "@/lib/constants";
+
+const testimonials = [
+  {
+    name: "Arjun Sharma",
+    role: "Founder, TechBridge Solutions",
+    rating: 5,
+    text: "Company Avenue handled our entire Pvt. Ltd. registration and GST setup in under 10 days. Completely transparent, professional and available whenever we needed them.",
+    avatar: "AS",
+    avatarBg: "bg-blue-100 text-blue-700",
+  },
+  {
+    name: "Priya Mehta",
+    role: "CEO, Retail Ventures India",
+    rating: 5,
+    text: "Three years of accounting and payroll support — zero errors, always on time. They genuinely feel like an in-house finance team rather than an external firm.",
+    avatar: "PM",
+    avatarBg: "bg-purple-100 text-purple-700",
+  },
+  {
+    name: "Rohan Kapoor",
+    role: "MD, Kapoor Exports",
+    rating: 5,
+    text: "Got our IEC registration and trademark done in record time. The team is highly knowledgeable and the pricing is completely upfront with no surprises.",
+    avatar: "RK",
+    avatarBg: "bg-green-100 text-green-700",
+  },
+  {
+    name: "Neha Singh",
+    role: "Co-Founder, HealthFirst Clinics",
+    rating: 5,
+    text: "Switched to Company Avenue for annual ROC filings and ITR. Seamless, fully digital, and their team proactively reminds us of all compliance deadlines.",
+    avatar: "NS",
+    avatarBg: "bg-rose-100 text-rose-700",
+  },
+  {
+    name: "Vikram Patel",
+    role: "Director, Patel Manufacturing",
+    rating: 5,
+    text: "Excellent MSME and Startup India registration support. Their compliance expertise gave us the confidence to focus completely on scaling our operations.",
+    avatar: "VP",
+    avatarBg: "bg-amber-100 text-amber-700",
+  },
+];
 
 export function Testimonials() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  const scroll = (dir: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const amount = 360;
-    scrollRef.current.scrollBy({ left: dir === "right" ? amount : -amount, behavior: "smooth" });
-  };
+  // Auto-scroll
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let id: ReturnType<typeof setInterval>;
+    const start = () => {
+      id = setInterval(() => {
+        if (!el) return;
+        const maxScroll = el.scrollWidth - el.clientWidth;
+        if (el.scrollLeft >= maxScroll - 10) {
+          el.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          el.scrollBy({ left: 320, behavior: "smooth" });
+        }
+      }, 3500);
+    };
+    start();
+    el.addEventListener("mouseenter", () => clearInterval(id));
+    el.addEventListener("mouseleave", start);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <section className="section-pad bg-background" id="testimonials">
+    <section className="py-24 bg-white" id="testimonials">
       <div className="container-custom">
-        <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
-          <SectionHeader
-            eyebrow="Client Stories"
-            title="What Our Clients Say"
-            subtitle="Real reviews from businesses we've helped register, file, and grow."
-            align="left"
-            className="mb-0"
-          />
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => scroll("left")}
-              aria-label="Previous testimonial"
-              className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center hover:border-primary hover:text-primary transition-colors shadow-sm"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              aria-label="Next testimonial"
-              className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center hover:border-primary hover:text-primary transition-colors shadow-sm"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
-        </div>
+        <SectionHeader
+          eyebrow="Client Stories"
+          title="What Our Clients Say"
+          subtitle="Real reviews from founders, directors and business owners we have helped grow."
+          className="mb-14"
+        />
 
         <div
-          ref={scrollRef}
-          className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
+          ref={trackRef}
+          className="flex gap-5 overflow-x-auto pb-3 snap-x snap-mandatory"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {TESTIMONIALS.map((t, i) => (
+          {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
               className="flex-shrink-0 w-80 md:w-96 snap-start"
             >
-              <div className="bg-white rounded-2xl p-6 shadow-card border border-slate-100 h-full flex flex-col">
-                <Quote size={20} className="text-accent/40 mb-4" />
+              <div className="h-full bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-card hover:border-primary/10 transition-all duration-300 flex flex-col">
+                <Quote size={22} className="text-slate-200 mb-4" />
 
-                <div className="flex items-center gap-0.5 mb-4">
+                <div className="flex gap-0.5 mb-4">
                   {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />
+                    <Star key={i} size={13} className="text-amber-400 fill-amber-400" />
                   ))}
                 </div>
 
-                <p className="text-slate-700 text-sm leading-relaxed flex-1 mb-5">
+                <p className="text-slate-600 text-sm leading-relaxed flex-1 mb-6">
                   &ldquo;{t.text}&rdquo;
                 </p>
 
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
-                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0">
-                    <span className="font-heading font-bold text-white text-sm">{t.avatar}</span>
+                <div className="flex items-center gap-3 border-t border-slate-100 pt-4">
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-heading font-bold text-sm shrink-0 ${t.avatarBg}`}
+                  >
+                    {t.avatar}
                   </div>
                   <div>
                     <p className="font-heading font-semibold text-dark text-sm">{t.name}</p>
-                    <p className="text-muted text-xs">
-                      {t.role}, {t.company}
-                    </p>
+                    <p className="text-muted text-xs">{t.role}</p>
                   </div>
                 </div>
               </div>
@@ -86,34 +125,31 @@ export function Testimonials() {
           ))}
         </div>
 
-        {/* Google rating bar */}
+        {/* Google aggregate */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-5 bg-white rounded-2xl p-6 shadow-card border border-slate-100"
+          className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4"
         >
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#4285F4]/10 flex items-center justify-center">
-              <span className="font-heading font-bold text-[#4285F4] text-xl">G</span>
+            <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center shadow-sm">
+              <span className="font-heading font-bold text-[#4285F4] text-lg">G</span>
             </div>
             <div>
-              <p className="font-heading font-bold text-dark text-lg">4.9 / 5.0</p>
-              <div className="flex items-center gap-1 mt-0.5">
+              <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={12} className="text-yellow-400 fill-yellow-400" />
+                  <Star key={i} size={12} className="text-amber-400 fill-amber-400" />
                 ))}
-                <span className="text-muted text-xs ml-1">200+ Google Reviews</span>
+                <span className="font-heading font-bold text-dark text-sm ml-1">4.9</span>
               </div>
+              <p className="text-muted text-xs mt-0.5">Based on 200+ Google Reviews</p>
             </div>
           </div>
-          <p className="text-muted text-sm text-center sm:text-right max-w-xs">
-            Verified reviews from real clients on Google Business Profile
-          </p>
           <a
             href="#"
-            className="text-primary text-sm font-heading font-semibold hover:underline shrink-0"
+            className="text-primary text-sm font-heading font-semibold hover:underline"
           >
             Read All Reviews →
           </a>

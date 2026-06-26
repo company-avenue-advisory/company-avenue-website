@@ -1,37 +1,34 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, MessageCircle } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { COMPANY } from "@/lib/constants";
 
 const faqs = [
   {
-    q: "How long does Private Limited Company registration take?",
-    a: "Typically 7–10 business days after all documents are submitted. The timeline includes DIN/DSC issuance, name approval, and Certificate of Incorporation.",
+    q: "How long does Company Registration take?",
+    a: "A Private Limited Company is typically incorporated in 7–10 business days after all documents are submitted. This includes DIN/DSC issuance, name approval and Certificate of Incorporation from the MCA.",
   },
   {
-    q: "Is GST registration mandatory for all businesses?",
-    a: "GST is mandatory if your annual turnover exceeds ₹40 lakhs (goods) or ₹20 lakhs (services). Inter-state suppliers and e-commerce sellers must register regardless of turnover.",
+    q: "Which business structure should I choose?",
+    a: "It depends on your business goals. A Pvt. Ltd. is ideal for startups seeking investment. An LLP works well for professional firms and service businesses. A Sole Proprietorship suits solo operators with lower compliance needs. We guide you through this during your free consultation.",
   },
   {
-    q: "What documents are needed for company registration?",
-    a: "PAN, Aadhaar, and passport-size photo for all directors; address proof for the registered office; and a utility bill. We provide a complete checklist tailored to your company type.",
+    q: "Is GST registration mandatory?",
+    a: "GST is mandatory if your annual turnover exceeds ₹40 lakhs (goods) or ₹20 lakhs (services). Inter-state suppliers and all e-commerce sellers must register regardless of turnover. Voluntary registration is also available and often beneficial.",
   },
   {
-    q: "Can I register a company if I'm a foreign national?",
-    a: "Yes. Foreign nationals can be directors or shareholders in Indian companies. Additional documents like apostilled passports are required, and we handle the entire process.",
+    q: "How much does Trademark Registration cost?",
+    a: "Government fees start at ₹4,500 per class for individuals, startups and MSMEs and ₹9,000 per class for others. Our professional fees are transparent and provided upfront. We handle end-to-end filing, examination response and follow-up.",
   },
   {
-    q: "What is the difference between a Private Limited Company and an LLP?",
-    a: "A Pvt. Ltd. has stricter compliance but better investor access and scalability. An LLP has simpler compliance and flexible profit distribution. We help you choose based on your business goals.",
+    q: "Can the complete registration process be done online?",
+    a: "Yes, 100%. Our process is fully digital — document collection, verification, application filing and certificate delivery are all done online. You never need to visit any government office or our office.",
   },
   {
-    q: "How much does it cost to register a company?",
-    a: "Our pricing is transparent and fixed. Company registration starts from ₹6,999 inclusive of government fees. Get a detailed quote after a free consultation.",
-  },
-  {
-    q: "Do you provide ongoing compliance support after registration?",
-    a: "Yes. We offer annual compliance packages covering ROC filings, ITR, GST returns, and more. Your dedicated relationship manager proactively reminds you of all due dates.",
+    q: "Do you provide annual compliance services after registration?",
+    a: "Absolutely. We offer annual compliance packages covering ROC filings, ITR, GST returns, TDS returns and more. Your dedicated relationship manager proactively reminds you of all statutory deadlines.",
   },
 ];
 
@@ -39,34 +36,42 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="section-pad bg-background">
+    <section className="py-24 bg-white">
       <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+
+          {/* Left — 2 cols */}
+          <div className="lg:col-span-2">
             <SectionHeader
               eyebrow="FAQ"
               title="Frequently Asked Questions"
-              subtitle="Quick answers to common questions about our services and processes."
+              subtitle="Quick, clear answers to the most common questions about our services and process."
               align="left"
-              className="mb-0"
+              className="mb-8"
             />
-            <div className="mt-8 p-6 rounded-2xl bg-primary text-white">
-              <p className="font-heading font-semibold text-base mb-2">
+
+            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                <MessageCircle size={18} className="text-primary" />
+              </div>
+              <p className="font-heading font-semibold text-dark text-sm mb-2">
                 Still have questions?
               </p>
-              <p className="text-white/60 text-sm mb-5">
-                Our experts are available Mon–Sat, 9 AM – 7 PM.
+              <p className="text-muted text-sm leading-relaxed mb-5">
+                Our experts are available Mon–Sat, 9 AM – 7 PM for a free 30-minute consultation.
               </p>
-              <div className="flex flex-col gap-2">
+              <div className="space-y-2">
                 <a
-                  href="https://wa.me/919876543210"
-                  className="flex items-center gap-2 text-white text-sm font-medium hover:text-accent transition-colors"
+                  href={`https://wa.me/${COMPANY.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm font-heading font-semibold text-primary hover:underline"
                 >
-                  WhatsApp us →
+                  Chat on WhatsApp →
                 </a>
                 <a
                   href="/contact"
-                  className="flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors"
                 >
                   Book a free consultation →
                 </a>
@@ -74,40 +79,57 @@ export function FAQ() {
             </div>
           </div>
 
-          <div className="space-y-3">
-            {faqs.map((faq, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm"
-              >
-                <button
-                  onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/30"
-                  aria-expanded={open === i}
+          {/* Right — 3 cols */}
+          <div className="lg:col-span-3">
+            {/* Schema-ready itemscope */}
+            <div itemScope itemType="https://schema.org/FAQPage" className="space-y-3">
+              {faqs.map((faq, i) => (
+                <div
+                  key={i}
+                  itemScope
+                  itemProp="mainEntity"
+                  itemType="https://schema.org/Question"
+                  className="bg-white border border-slate-100 rounded-2xl overflow-hidden"
                 >
-                  <span className="font-heading font-semibold text-dark text-sm leading-snug">
-                    {faq.q}
-                  </span>
-                  <span className="shrink-0 w-7 h-7 rounded-lg bg-primary/8 flex items-center justify-center text-primary">
-                    {open === i ? <Minus size={14} /> : <Plus size={14} />}
-                  </span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {open === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                  <button
+                    onClick={() => setOpen(open === i ? null : i)}
+                    aria-expanded={open === i}
+                    className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 rounded-2xl"
+                  >
+                    <span
+                      itemProp="name"
+                      className="font-heading font-semibold text-dark text-sm leading-snug"
                     >
-                      <p className="px-5 pb-4 text-muted text-sm leading-relaxed">
-                        {faq.a}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
+                      {faq.q}
+                    </span>
+                    <span className="shrink-0 w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500">
+                      {open === i ? <Minus size={13} /> : <Plus size={13} />}
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {open === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.22, ease: "easeInOut" }}
+                        itemScope
+                        itemProp="acceptedAnswer"
+                        itemType="https://schema.org/Answer"
+                      >
+                        <p
+                          itemProp="text"
+                          className="px-5 pb-4 text-muted text-sm leading-relaxed"
+                        >
+                          {faq.a}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

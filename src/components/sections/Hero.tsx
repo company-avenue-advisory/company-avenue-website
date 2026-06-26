@@ -1,190 +1,269 @@
 "use client";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { ArrowRight, Star, CheckCircle } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
+import {
+  CheckCircle, ArrowRight, Star, Building2, Receipt,
+  ShieldCheck, BookOpen, FileText, BadgeCheck,
+} from "lucide-react";
 
-const floatCards = [
-  { value: "15+", label: "Years Experience", delay: 0.6 },
-  { value: "1000+", label: "Businesses Served", delay: 0.8 },
-  { value: "98%", label: "Client Satisfaction", delay: 1.0 },
+const floatingBadges = [
+  { icon: BadgeCheck, label: "Certificate Issued", color: "text-green-600", bg: "bg-green-50", delay: 0.6 },
+  { icon: Receipt, label: "GST Approved", color: "text-blue-600", bg: "bg-blue-50", delay: 0.75 },
+  { icon: ShieldCheck, label: "Trademark Filed", color: "text-purple-600", bg: "bg-purple-50", delay: 0.9 },
+  { icon: FileText, label: "ROC Filing Done", color: "text-orange-600", bg: "bg-orange-50", delay: 1.05 },
+  { icon: BookOpen, label: "ITR Submitted", color: "text-teal-600", bg: "bg-teal-50", delay: 1.2 },
+];
+
+const services = [
+  "Business Registration",
+  "GST Compliance",
+  "Trademark",
+  "Accounting",
+  "ROC Filing",
 ];
 
 const trustPoints = [
-  "Trusted by 1000+ startups & enterprises",
-  "100% online — no office visits needed",
-  "CA & CS certified experts",
+  "15+ Years Experience",
+  "1000+ Happy Clients",
+  "Expert Chartered Accountants",
+  "End-to-End Compliance Support",
 ];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] },
+  }),
+};
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-dark via-primary-900 to-primary-800">
-      {/* Background texture */}
-      <div className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-          backgroundSize: "48px 48px",
-        }}
-      />
+    <section className="relative min-h-screen bg-white flex items-center overflow-hidden pt-[72px]">
+      {/* Subtle geometric background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[700px] h-[700px] rounded-full bg-slate-50 -translate-y-1/3 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-slate-50/60 translate-y-1/3 -translate-x-1/4" />
+        {/* Thin grid lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+              <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#0F2D52" strokeWidth="1" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
 
-      {/* Subtle glow blobs */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/30 rounded-full blur-[120px] opacity-40" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent/20 rounded-full blur-[100px] opacity-30" />
+      <div className="container-custom relative z-10 py-20 md:py-28">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-      <div className="container-custom relative z-10 pt-28 pb-20 md:pt-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left — content */}
+          {/* ── Left ── */}
           <div>
+            {/* Star badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-1.5 mb-6"
+              custom={0}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-7"
             >
-              <Star size={12} className="text-accent fill-accent" />
-              <span className="text-white/80 text-xs font-heading font-medium tracking-wide">
-                India&apos;s Most Trusted Compliance Partner
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={11} className="text-amber-400 fill-amber-400" />
+              ))}
+              <span className="text-amber-700 text-xs font-heading font-semibold tracking-wide">
+                Trusted by 1000+ Business Owners
               </span>
             </motion.div>
 
+            {/* H1 */}
             <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="heading-xl text-white mb-6"
+              custom={1}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="font-heading font-bold text-[2.6rem] md:text-5xl lg:text-[3.2rem] leading-[1.15] tracking-tight text-dark mb-6"
             >
-              Business Compliance,{" "}
-              <span className="text-accent relative">
-                Done Right
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.7, delay: 0.7 }}
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent/50 origin-left"
-                />
-              </span>
-              <br />
-              from Day One
+              Helping Businesses{" "}
+              <span className="text-primary">Start, Grow</span>
+              <br className="hidden md:block" />
+              {" "}&amp; Stay Compliant.
             </motion.h1>
 
+            {/* Subheading */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-white/65 text-lg leading-relaxed mb-8 max-w-lg"
+              custom={2}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="text-slate-500 text-lg leading-relaxed mb-9 max-w-xl"
             >
-              From company registration to annual compliance — we handle the paperwork 
-              so you can focus on building your business. Trusted by 1000+ companies across India.
+              Company Avenue Advisory Private Limited is your trusted partner for Company
+              Registration, GST, Trademark, Income Tax Filing, Accounting, Payroll,
+              ROC Compliance and Business Advisory Services across India.
             </motion.p>
 
+            {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-4 mb-10"
+              custom={3}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="flex flex-wrap gap-3 mb-10"
             >
-              <Button
+              <Link
                 href="/contact"
-                variant="accent"
-                size="lg"
-                icon={<ArrowRight size={16} />}
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-heading font-semibold text-sm rounded-xl hover:bg-primary-800 transition-colors shadow-sm hover:shadow-md"
               >
                 Book Free Consultation
-              </Button>
-              <Button
+                <ArrowRight size={15} />
+              </Link>
+              <Link
                 href="/services"
-                size="lg"
-                className="border border-white/25 text-white bg-transparent hover:bg-white/10"
+                className="inline-flex items-center gap-2 px-6 py-3.5 border border-slate-200 text-slate-700 font-heading font-semibold text-sm rounded-xl hover:border-primary hover:text-primary transition-all"
               >
                 Explore Services
-              </Button>
+              </Link>
             </motion.div>
 
+            {/* Trust points */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col gap-2.5"
+              custom={4}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-2 gap-x-6 gap-y-2.5"
             >
-              {trustPoints.map((point) => (
-                <div key={point} className="flex items-center gap-2.5">
-                  <CheckCircle size={15} className="text-accent shrink-0" />
-                  <span className="text-white/55 text-sm font-body">{point}</span>
+              {trustPoints.map((pt) => (
+                <div key={pt} className="flex items-center gap-2">
+                  <CheckCircle size={14} className="text-primary shrink-0" />
+                  <span className="text-slate-500 text-sm font-body">{pt}</span>
                 </div>
               ))}
             </motion.div>
           </div>
 
-          {/* Right — image + stats */}
-          <div className="relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-[0_24px_80px_rgba(0,0,0,0.4)]"
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=85"
-                alt="Professional business consulting team in a modern office"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/40 via-transparent to-transparent" />
-            </motion.div>
+          {/* ── Right — Dashboard card ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="relative flex justify-center lg:justify-end"
+          >
+            {/* Main card */}
+            <div className="relative w-full max-w-md">
+              <div className="bg-white border border-slate-200 rounded-3xl shadow-[0_8px_48px_rgba(15,45,82,0.10)] p-6">
+                {/* Card header */}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
+                      <Building2 size={16} className="text-white" />
+                    </div>
+                    <div>
+                      <p className="font-heading font-bold text-dark text-sm leading-tight">
+                        Company Avenue
+                      </p>
+                      <p className="text-muted text-xs">Compliance Dashboard</p>
+                    </div>
+                  </div>
+                  <span className="flex items-center gap-1.5 text-xs font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                    Active
+                  </span>
+                </div>
 
-            {/* Floating stat cards */}
-            {floatCards.map((card, i) => (
-              <motion.div
-                key={card.label}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: card.delay }}
-                className={`absolute bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.15)] border border-white/20 ${
-                  i === 0
-                    ? "-left-6 top-8"
-                    : i === 1
-                    ? "-right-4 top-1/3"
-                    : "-left-4 bottom-8"
-                }`}
-              >
-                <p className="font-heading font-bold text-2xl text-primary leading-none">
-                  {card.value}
+                {/* Service pills */}
+                <p className="text-xs font-heading font-semibold text-muted uppercase tracking-widest mb-3">
+                  Our Services
                 </p>
-                <p className="text-muted text-xs mt-0.5 font-body whitespace-nowrap">
-                  {card.label}
-                </p>
-              </motion.div>
-            ))}
-
-            {/* Google rating card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
-              className="absolute -right-2 bottom-6 bg-white rounded-2xl px-4 py-3 shadow-card flex items-center gap-3"
-            >
-              <div className="w-8 h-8 rounded-lg bg-[#4285F4]/10 flex items-center justify-center">
-                <span className="font-heading font-bold text-[#4285F4] text-sm">G</span>
-              </div>
-              <div>
-                <div className="flex items-center gap-0.5 mb-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={10} className="text-yellow-400 fill-yellow-400" />
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {services.map((s) => (
+                    <span
+                      key={s}
+                      className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-lg text-xs font-heading font-medium text-slate-600"
+                    >
+                      {s}
+                    </span>
                   ))}
                 </div>
-                <p className="text-xs text-muted font-body whitespace-nowrap">
-                  4.9 · 200+ Google Reviews
-                </p>
+
+                {/* Progress bars */}
+                <div className="space-y-3 mb-5">
+                  {[
+                    { label: "Applications Filed", val: 92, color: "bg-primary" },
+                    { label: "On-Time Delivery", val: 98, color: "bg-accent" },
+                    { label: "Client Satisfaction", val: 98, color: "bg-green-500" },
+                  ].map((bar) => (
+                    <div key={bar.label}>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-xs text-muted">{bar.label}</span>
+                        <span className="text-xs font-heading font-semibold text-dark">{bar.val}%</span>
+                      </div>
+                      <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${bar.val}%` }}
+                          transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
+                          className={`h-full rounded-full ${bar.color}`}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Divider */}
+                <div className="border-t border-slate-100 pt-4 flex items-center justify-between">
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={11} className="text-amber-400 fill-amber-400" />
+                    ))}
+                    <span className="text-xs text-muted ml-1">4.9 / 5.0</span>
+                  </div>
+                  <span className="text-xs text-muted">200+ Google Reviews</span>
+                </div>
               </div>
-            </motion.div>
-          </div>
+
+              {/* Floating notification badges */}
+              {floatingBadges.map((badge, i) => {
+                const Icon = badge.icon;
+                const positions = [
+                  "-top-4 -left-8",
+                  "top-1/4 -left-10",
+                  "-bottom-4 left-4",
+                  "top-1/3 -right-8",
+                  "-top-2 right-8",
+                ];
+                return (
+                  <motion.div
+                    key={badge.label}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: badge.delay }}
+                    style={{
+                      animation: `float-${i} ${3 + i * 0.4}s ease-in-out infinite`,
+                    }}
+                    className={`absolute ${positions[i]} flex items-center gap-2 bg-white border border-slate-100 rounded-xl px-3 py-2 shadow-[0_4px_20px_rgba(0,0,0,0.08)] whitespace-nowrap`}
+                  >
+                    <div className={`w-6 h-6 rounded-lg ${badge.bg} flex items-center justify-center shrink-0`}>
+                      <Icon size={12} className={badge.color} />
+                    </div>
+                    <span className="text-xs font-heading font-semibold text-dark">{badge.label}</span>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+      {/* Floating badge animation keyframes via inline style */}
+      <style>{`
+        @keyframes floatY {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-6px); }
+        }
+      `}</style>
     </section>
   );
 }
