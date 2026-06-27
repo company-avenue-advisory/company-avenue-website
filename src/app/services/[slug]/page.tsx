@@ -134,7 +134,7 @@ const defaultDetail = {
 };
 
 export async function generateStaticParams() {
-  return SERVICES.filter((s) => s.id !== "private-limited-company" && s.id !== "llp-registration").map((s) => ({ slug: s.id }));
+  return SERVICES.filter((s) => s.id !== "private-limited-company" && s.id !== "llp-registration" && s.id !== "startup-india").map((s) => ({ slug: s.id }));
 }
 
 export async function generateMetadata({

@@ -496,48 +496,59 @@ export function GSTPage() {
               </motion.div>
             </div>
 
-            {/* Right — glass card */}
+            {/* Right — Certificate image */}
             <motion.div initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }} className="relative"
             >
-              <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-3xl shadow-[0_12px_60px_rgba(15,45,82,0.12)] p-6 max-w-md mx-auto">
-                <div className="flex items-center justify-between mb-5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center">
-                      <Receipt size={16} className="text-white" />
+              <div className="relative max-w-md mx-auto">
+                <div className="bg-white border border-slate-200 rounded-3xl shadow-[0_12px_60px_rgba(15,45,82,0.12)] overflow-hidden">
+                  <div className="bg-primary px-5 py-3.5 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
+                        <Receipt size={14} className="text-accent" />
+                      </div>
+                      <div>
+                        <p className="font-heading font-bold text-white text-xs">GST Registration Certificate</p>
+                        <p className="text-white/50 text-[10px]">Goods & Services Tax Network (GSTN)</p>
+                      </div>
                     </div>
+                    <span className="text-[10px] font-heading font-semibold bg-green-500/20 text-green-300 border border-green-400/30 px-2.5 py-1 rounded-full">● Official</span>
+                  </div>
+                  <div className="relative w-full aspect-[4/3] bg-slate-50">
+                    <Image
+                      src="/images/gst-certificate.jpg"
+                      alt="Sample GST Registration Certificate issued by GSTN"
+                      fill
+                      className="object-contain p-3"
+                      sizes="(max-width: 768px) 100vw, 45vw"
+                      priority
+                    />
+                  </div>
+                  <div className="px-5 py-3.5 border-t border-slate-100 flex items-center justify-between bg-slate-50/50">
                     <div>
-                      <p className="font-heading font-bold text-dark text-sm">GST Registration Snapshot</p>
-                      <p className="text-muted text-xs">Company Avenue Advisory</p>
+                      <p className="text-muted text-[10px]">Validity</p>
+                      <p className="font-heading font-bold text-primary text-xs">Lifetime — No Renewal</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-muted text-[10px]">GSTIN Issued</p>
+                      <p className="font-heading font-bold text-green-600 text-xs">✓ GSTN Portal</p>
                     </div>
                   </div>
-                  <span className="flex items-center gap-1.5 text-xs font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />Live
-                  </span>
                 </div>
-                <div className="space-y-2.5">
-                  {heroSnapshot.map((item, i) => (
-                    <motion.div key={item.label}
-                      initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.35, delay: 0.4 + i * 0.07 }}
-                      className="flex items-center justify-between py-2 border-b border-slate-50 last:border-0"
-                    >
-                      <span className="text-xs text-muted">{item.label}</span>
-                      <span className="text-xs font-heading font-semibold text-dark">{item.value}</span>
-                    </motion.div>
-                  ))}
-                </div>
-                <div className="mt-5 flex items-center justify-between bg-primary/5 rounded-xl p-3">
-                  <div>
-                    <p className="text-xs text-muted">Starting from</p>
-                    <p className="font-heading font-bold text-primary text-xl">₹999</p>
-                  </div>
-                  <Link href="/contact"
-                    className="px-4 py-2 bg-primary text-white text-xs font-heading font-semibold rounded-lg hover:bg-[#0a2444] transition-colors"
-                  >
-                    Get Started
-                  </Link>
-                </div>
+                <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1, duration: 0.5 }}
+                  className="absolute -right-5 top-10 bg-white rounded-2xl px-4 py-3 shadow-xl border border-slate-100"
+                >
+                  <p className="text-[10px] text-muted font-heading">Processing Time</p>
+                  <p className="font-heading font-bold text-primary text-sm">2–7 Days</p>
+                </motion.div>
+                <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2, duration: 0.5 }}
+                  className="absolute -left-5 bottom-12 bg-white rounded-2xl px-4 py-3 shadow-xl border border-slate-100"
+                >
+                  <p className="text-[10px] text-muted font-heading">Govt. Fee</p>
+                  <p className="font-heading font-bold text-green-600 text-sm">₹0 — Free</p>
+                </motion.div>
               </div>
             </motion.div>
           </div>
