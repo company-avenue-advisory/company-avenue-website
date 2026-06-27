@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { AvenueAILoader } from "@/components/AvenueAILoader";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -65,11 +66,29 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${plusJakarta.variable} ${inter.variable}`}>
+      <head>
+        {/* Anti-FOUC: hide body until stylesheet is parsed */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          body { visibility: hidden; }
+          body.ready { visibility: visible; }
+        `}} />
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            function ready() { document.body.classList.add('ready'); }
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', ready);
+            } else {
+              ready();
+            }
+          })();
+        `}} />
+      </head>
       <body className="font-body bg-background text-dark antialiased">
         <SmoothScroll>
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <AvenueAILoader />
         </SmoothScroll>
       </body>
     </html>
