@@ -9,4 +9,5 @@ const AvenueAI = dynamic(
 
 export function AvenueAILoader() {
   return <AvenueAI />;
+  
 }
