@@ -1,0 +1,12 @@
+import type { Metadata } from "next";
+import { PartnershipFirmPage } from "@/components/sections/PartnershipFirmPage";
+
+export const metadata: Metadata = {
+  title: "Partnership Firm Registration Online | Company Avenue Advisory",
+  description:
+    "Register a Partnership Firm under the Indian Partnership Act, 1932. Deed drafting, PAN, bank account opening. Simple, flexible business structure starting ₹1,499.",
+};
+
+export default function PartnershipFirmServicePage() {
+  return <PartnershipFirmPage />;
+}
