@@ -121,6 +121,23 @@ export const NAV_LINKS = [
       },
     ],
   },
+  {
+    label: "Tools",
+    href: "/calculators",
+    children: [
+      {
+        group: "Calculators & Tools",
+        items: [
+          { label: "GST Calculator", href: "/calculators/gst-calculator" },
+          { label: "Income Tax Calculator", href: "/calculators/income-tax-calculator" },
+          { label: "TDS Rate Finder", href: "/calculators/tds-rate-finder" },
+          { label: "Company Registration Cost", href: "/calculators/company-registration-cost" },
+          { label: "LLP vs Pvt Ltd Comparison", href: "/calculators/llp-vs-pvt-ltd" },
+          { label: "Business Structure Advisor", href: "/calculators/business-structure-advisor" },
+        ],
+      },
+    ],
+  },
   { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

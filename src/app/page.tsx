@@ -10,6 +10,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { CalculatorsTeaser } from "@/components/sections/CalculatorsTeaser";
 
 export const metadata: Metadata = {
   title: "Company Avenue Advisory Pvt. Ltd. | Company Registration, GST, Trademark & Compliance",
@@ -47,6 +48,7 @@ export default function HomePage() {
       <Process />
       <Industries />
       <Testimonials />
+      <CalculatorsTeaser />
       <BlogSection />
       <FAQ />
       <CTABanner />
