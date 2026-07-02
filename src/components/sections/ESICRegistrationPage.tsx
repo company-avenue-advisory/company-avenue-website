@@ -419,7 +419,7 @@ export function ESICRegistrationPage() {
                 What is ESIC Registration?
               </h2>
               <p className="text-slate-500 text-base leading-relaxed mb-5">
-                <strong>ESIC (Employee State Insurance Corporation) Registration</strong> is mandatory for every establishment with 10 or more employees earning ≤₹21,000/month. Governed by the <strong>Employees' State Insurance Act, 1948</strong>, it provides comprehensive social security — medical care, sickness benefits, maternity benefits, disability coverage, and more.
+                <strong>ESIC (Employee State Insurance Corporation) Registration</strong> is mandatory for every establishment with 10 or more employees earning ≤₹21,000/month. Governed by the <strong>Employees&apos; State Insurance Act, 1948</strong>, it provides comprehensive social security — medical care, sickness benefits, maternity benefits, disability coverage, and more.
               </p>
               <p className="text-slate-500 text-base leading-relaxed mb-5">
                 Employers contribute <strong>3.25% of gross wages</strong> and employees contribute <strong>0.75%</strong>, totalling 4% of gross wages. Monthly contributions must be paid by the <strong>15th of the following month</strong>, and <strong>half-yearly returns</strong> are filed twice a year. Non-compliance attracts penalties of ₹5,000 per day and prosecution.
@@ -548,7 +548,7 @@ export function ESICRegistrationPage() {
                 </div>
                 <div className="bg-primary/5 border border-primary/15 rounded-xl p-4 flex items-center gap-3">
                   <Info size={15} className="text-primary shrink-0" />
-                  <p className="text-dark text-xs leading-relaxed">All employee documents including Aadhaar are required for IP number generation. Company Avenue will prepare and submit the ESIC Form 1 (Employer's Registration Form) and Form 1A (Family Declaration) on your behalf.</p>
+                  <p className="text-dark text-xs leading-relaxed">All employee documents including Aadhaar are required for IP number generation. Company Avenue will prepare and submit the ESIC Form 1 (Employer&apos;s Registration Form) and Form 1A (Family Declaration) on your behalf.</p>
                 </div>
               </div>
             </section>

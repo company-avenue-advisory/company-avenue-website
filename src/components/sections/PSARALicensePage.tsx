@@ -3,28 +3,48 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
-  Clock, Landmark, FileText, BadgeCheck, Repeat2, CheckCircle,
-  ArrowRight, Phone, IndianRupee, Shield, Users, Building2,
-  ShieldCheck, Award, TrendingUp, Briefcase, UserCheck, LifeBuoy,
+  ArrowRight, Phone, CheckCircle, Plus, Minus, FileText,
+  Building2, Users, Briefcase, Award, ShieldCheck, TrendingUp,
+  AlertTriangle, Clock, BadgeCheck, DollarSign,
+  Landmark, Info, AlertCircle, ChevronRight, Wallet,
+  Scale, UserCheck, RefreshCcw, Zap, Globe, Shield,
 } from "lucide-react";
+import { CTABanner } from "@/components/sections/CTABanner";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] } }),
+  show: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] },
+  }),
 };
+
+function Eyebrow({ label }: { label: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 text-xs font-heading font-semibold tracking-widest uppercase text-accent mb-4">
+      <span className="w-6 h-px bg-accent" />{label}<span className="w-6 h-px bg-accent" />
+    </span>
+  );
+}
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-slate-100 last:border-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-4 text-left group">
-        <span className="font-heading font-semibold text-dark text-sm pr-4 group-hover:text-primary transition-colors">{q}</span>
-        <span className="shrink-0 w-6 h-6 rounded-full bg-primary/8 flex items-center justify-center text-primary text-lg font-light">{open ? "−" : "+"}</span>
+    <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question"
+      className="border border-slate-100 rounded-2xl overflow-hidden bg-white">
+      <button onClick={() => setOpen(!open)} aria-expanded={open}
+        className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/20">
+        <span itemProp="name" className="font-heading font-semibold text-dark text-sm leading-snug">{q}</span>
+        <span className="shrink-0 w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500">
+          {open ? <Minus size={13} /> : <Plus size={13} />}
+        </span>
       </button>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }} className="overflow-hidden">
-            <p className="text-muted text-sm leading-relaxed pb-4">{a}</p>
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22, ease: "easeInOut" }}
+            itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer" className="overflow-hidden">
+            <p itemProp="text" className="px-5 pb-4 text-muted text-sm leading-relaxed">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -33,144 +53,389 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 const quickFacts = [
-  { icon: Clock, label: "Timeline", value: "30–60 Working Days" },
-  { icon: Landmark, label: "Authority", value: "State Controlling Authority" },
-  { icon: FileText, label: "Act", value: "PSARA 2005" },
-  { icon: IndianRupee, label: "Starting From", value: "₹9,999" },
-  { icon: BadgeCheck, label: "Validity", value: "5 Years (Renewable)" },
-  { icon: Repeat2, label: "Security Deposit", value: "₹1 lakh – ₹3 lakh" },
+  { icon: Landmark,    label: "Act",             value: "PSARA 2005" },
+  { icon: Shield,      label: "Issuing Auth.",   value: "District Licensing Auth." },
+  { icon: Clock,       label: "Timeline",        value: "30-60 Business Days" },
+  { icon: DollarSign,  label: "Starting At",     value: "₹9,999" },
+  { icon: AlertCircle, label: "Penalty",         value: "₹25,000 + 1 Year Jail" },
+  { icon: Users,       label: "Training",        value: "100 hrs Guards / 160 hrs Supervisors" },
+];
+
+const benefits = [
+  { icon: ShieldCheck, title: "Legal Authority to Operate Security Agency", desc: "PSARA license is the only legal basis to operate a private security agency in India. Operating without it is a cognizable criminal offence under Section 4 of the PSARA Act." },
+  { icon: Award,       title: "Eligibility for Corporate Contracts",        desc: "Large corporates, banks, hospitals, malls, and government organisations only engage PSARA-licensed security agencies. The license opens the door to high-value, long-term contracts." },
+  { icon: Users,       title: "Ability to Deploy Trained Guards and Supervisors", desc: "PSARA license allows you to legally deploy guards (100 hours training) and supervisors (160 hours training) trained at NSDC-approved or government-recognised training institutes." },
+  { icon: Globe,       title: "State-Specific License for Operations",      desc: "Each state issues its own PSARA license through the District Licensing Authority. Multi-state operations require separate licenses in each state — we manage multi-state applications." },
+  { icon: Scale,       title: "Legally Deploy Armed Security Personnel",    desc: "With appropriate endorsements on the PSARA license and arms licenses for guards, you can legally deploy armed security personnel — a premium service category for banks and VIP protection." },
+  { icon: TrendingUp,  title: "Qualifies for Government Security Tenders",  desc: "Central and state government security tenders mandatorily require PSARA license as an eligibility criterion. Without it, you cannot participate in government security procurement." },
+  { icon: RefreshCcw,  title: "Renewable License Structure",                desc: "PSARA license is initially issued for 5 years and can be renewed. A consistent compliance and renewal record builds institutional trust with clients and regulators." },
+  { icon: UserCheck,   title: "Protects Business Against Legal Action",     desc: "A valid PSARA license protects your security agency from criminal complaints, police action, and regulatory shutdowns — providing operational security for your business." },
 ];
 
 const whoNeeds = [
-  { icon: Shield, title: "Security Agencies", desc: "Any company providing armed or unarmed security guards to clients." },
-  { icon: Building2, title: "Corporate Security", desc: "In-house security divisions spun off as separate agencies." },
-  { icon: Users, title: "Event Security", desc: "Agencies providing crowd management and event security services." },
-  { icon: TrendingUp, title: "Facility Management", desc: "FM companies offering integrated security solutions." },
-  { icon: Briefcase, title: "Investigation Agencies", desc: "Detective and private investigation firms with guard deployment." },
-  { icon: ShieldCheck, title: "Bank & ATM Security", desc: "Agencies specialising in financial institution security." },
-  { icon: Award, title: "Industrial Security", desc: "Agencies guarding factories, warehouses, and industrial sites." },
-  { icon: UserCheck, title: "Residential Security", desc: "Gated community and housing society security management firms." },
+  { icon: Building2,   title: "New Security Agency Startups",              desc: "Anyone starting a private security company in India must obtain a PSARA license before deploying any guards or supervisors. No security agency can legally operate without it." },
+  { icon: Users,       title: "Housekeeping Companies Adding Security",    desc: "Facility management and housekeeping companies adding security services to their portfolio need a separate PSARA license for the security division." },
+  { icon: Globe,       title: "Agencies Expanding to New States",          desc: "Security agencies licensed in one state must obtain a fresh license in each new state before deploying guards there. Multi-state expansion requires multi-state PSARA compliance." },
+  { icon: Briefcase,   title: "Companies Seeking Large Corporate Contracts", desc: "Agencies eyeing contracts with banks, IT parks, malls, airports, or large corporates need a valid and current PSARA license as a mandatory eligibility criterion." },
+  { icon: TrendingUp,  title: "Agencies Upgrading to Armed Security Services", desc: "Security agencies seeking to provide armed guard services need both a PSARA license and appropriate arms license endorsements for the deployment of armed personnel." },
+  { icon: AlertCircle, title: "Agencies with Expired or Lapsed Licenses",  desc: "Agencies whose PSARA license has expired must immediately apply for renewal. Operating with an expired license is equivalent to operating without a license." },
 ];
 
-const steps = [
-  { n: "01", title: "Eligibility Check", desc: "Verify the promoters meet character and background verification requirements under PSARA 2005." },
-  { n: "02", title: "Business Registration", desc: "Ensure the security agency is registered as a company, LLP, or firm before PSARA application." },
-  { n: "03", title: "Security Deposit", desc: "Deposit ₹1 lakh (up to 100 guards) or ₹3 lakh (above 100 guards) with State Controlling Authority." },
-  { n: "04", title: "Training Compliance", desc: "Ensure guards have completed 100-hour training at an NSDC/NSGDF-affiliated training institute." },
-  { n: "05", title: "Application Filing", desc: "Submit PSARA application to State Controlling Authority with all required documents and deposit proof." },
-  { n: "06", title: "Police Verification", desc: "Background verification of promoters and key management personnel by state police." },
-  { n: "07", title: "Authority Inspection", desc: "State Controlling Authority may inspect training facilities and review compliance." },
-  { n: "08", title: "License Issued", desc: "PSARA license issued for 5 years upon satisfactory completion of all requirements." },
+const processSteps = [
+  { n: "01", title: "Company Incorporation and INC Compliance",  desc: "Ensure the agency is incorporated (Pvt Ltd, LLP, or partnership). The applicant must be an Indian citizen with no criminal record. Directors/partners must submit police verification certificates." },
+  { n: "02", title: "Training Institute Agreement",              desc: "Execute an agreement with a NSDC-approved training institute or government-recognised security training institute for mandatory training of guards (100 hours) and supervisors (160 hours) as per Schedule I of PSARA Rules." },
+  { n: "03", title: "State Rules Familiarisation",               desc: "Each state has its own PSARA Rules under the central PSARA Act. Review the specific state&apos;s licensing requirements, fee structure, and document requirements before filing." },
+  { n: "04", title: "Application to District Licensing Authority", desc: "File the PSARA license application with the Controlling Authority (District Licensing Authority / Commissioner of Police) in the district where the principal office is registered. Pay prescribed fee." },
+  { n: "05", title: "Police Verification of Directors/Partners",  desc: "All directors, partners, and principal officers of the agency must undergo police verification. Criminal background checks are conducted by local police. Clean records are mandatory for license grant." },
+  { n: "06", title: "Premises Verification",                     desc: "The licensing authority may physically verify the registered office premises of the security agency to confirm the address, facilities, and operational readiness of the applicant." },
+  { n: "07", title: "Hearing Before Controlling Authority",       desc: "The Controlling Authority reviews the application, police verification reports, training institute agreement, and other documents. An oral hearing may be scheduled before the license is granted." },
+  { n: "08", title: "PSARA License Issuance",                    desc: "Once satisfied with all requirements, the Controlling Authority issues the PSARA license specifying the state(s) of operation, category (armed/unarmed), and validity period (typically 5 years)." },
 ];
 
-const documents = [
-  "Certificate of Incorporation / Partnership Deed",
-  "PAN and address proof of the agency",
-  "Identity and address proof of all directors/partners",
-  "Character certificates from police (for directors)",
-  "Security deposit payment receipt",
-  "Proof of training institute tie-up (NSDC/NSGDF affiliated)",
-  "List of trained personnel with training certificates",
-  "Details of arms licenses (if armed security provided)",
+const requiredDocs = [
+  { icon: FileText,   label: "Certificate of Incorporation or Partnership Deed" },
+  { icon: Users,      label: "Police Verification Certificate (all directors)" },
+  { icon: FileText,   label: "Training Institute Agreement (NSDC-approved)" },
+  { icon: Building2,  label: "Registered Office Address Proof" },
+  { icon: FileText,   label: "PAN Card of the Agency" },
+  { icon: FileText,   label: "GST Registration Certificate" },
+  { icon: UserCheck,  label: "Identity and address proof of all directors" },
+  { icon: FileText,   label: "Affidavit of no criminal record (each director)" },
+  { icon: Scale,      label: "List of guards and supervisors (if any)" },
+  { icon: DollarSign, label: "Government fee payment proof" },
 ];
 
 const faqs = [
-  { q: "Who needs a PSARA license?", a: "Any person or entity providing security guards, bouncers, or security personnel to third parties for a fee must obtain a PSARA license. This includes traditional security agencies, event security companies, and integrated facility management firms with security divisions." },
-  { q: "Is PSARA a national or state-level license?", a: "PSARA is state-specific — you need a separate license for each state where you deploy security personnel. The State Controlling Authority (typically a senior IPS officer) issues the license. Operations across multiple states require multiple PSARA licenses." },
-  { q: "What is the consequence of operating without PSARA?", a: "Operating a private security agency without PSARA is a criminal offence under Section 4(1) of the PSARA Act 2005. Penalties include imprisonment of up to 1 year and/or a fine up to ₹25,000 for first offence, scaling up for repeat offences." },
-  { q: "What training is required for security guards?", a: "All security personnel must undergo a minimum 100-hour training covering physical fitness, unarmed combat, fire safety, first aid, and professional conduct at an institute recognised by the National Skill Development Corporation (NSDC) or the National Security Guard Development Force (NSGDF)." },
-  { q: "Can a foreign-owned company obtain a PSARA license?", a: "PSARA has specific restrictions on foreign investment in private security agencies. The precise FDI limits are regulated separately. Foreign companies typically operate through joint ventures with Indian security agencies that hold the PSARA license." },
-  { q: "What is the renewal process for PSARA license?", a: "PSARA licenses are valid for 5 years and must be renewed before expiry. The renewal application is filed with the State Controlling Authority with updated documents, security deposit continuation proof, and compliance records of the previous 5-year period." },
+  {
+    q: "What is PSARA and why is it mandatory for security agencies?",
+    a: "PSARA stands for the Private Security Agencies (Regulation) Act, 2005. It is a central legislation enacted to regulate the functioning of private security agencies across India. Under Section 4 of the Act, no person can carry on or commence the business of a private security agency without a valid license granted by the Controlling Authority (typically the District Licensing Authority or Commissioner of Police) of the respective state. Operating a security agency without PSARA license is a criminal offence punishable under Section 25 of the Act with a fine of up to ₹25,000 and/or imprisonment up to one year.",
+  },
+  {
+    q: "What training is required for guards and supervisors under PSARA?",
+    a: "Under Schedule I to the PSARA Rules, all private security guards must undergo mandatory training of at least 100 hours before deployment. Supervisors must undergo at least 160 hours of training. The training must be conducted by a training institute recognized by the state government or approved by NSDC (National Skill Development Corporation). The training covers: physical fitness, fire safety, emergency handling, first aid, laws and regulations, report writing, and behavioral skills. Failure to deploy trained guards is a violation of the PSARA license conditions.",
+  },
+  {
+    q: "Is PSARA license state-specific or valid across India?",
+    a: "PSARA license is state-specific — it is issued by the Controlling Authority of a particular state and is valid only for operations within that state. A security agency that operates in multiple states must obtain a separate PSARA license from the licensing authority in each state. For example, a security company operating in Delhi, Maharashtra, and Karnataka would need three separate PSARA licenses — one from each state&apos;s licensing authority. We assist with multi-state PSARA licensing for agencies expanding across India.",
+  },
+  {
+    q: "Who is eligible to apply for a PSARA license?",
+    a: "Under PSARA, the following persons are eligible to apply: (1) Indian citizens (foreign nationals are generally not permitted to own or operate private security agencies); (2) Companies, LLPs, firms, or individuals with no criminal record for any offence involving moral turpitude; (3) Applicants who can demonstrate they have a training arrangement with a recognized institute; (4) Persons who are not bankrupt or under any court-ordered disqualification. All directors, partners, and principal officers must submit clean police verification certificates. Persons convicted of offences are disqualified from obtaining a PSARA license.",
+  },
+  {
+    q: "What is the fee for PSARA license and how long is it valid?",
+    a: "The fee for PSARA license varies by state. Typically, the government fee ranges from ₹5,000 to ₹25,000 depending on the state and the number of guards the agency proposes to employ. The PSARA license is typically valid for 5 years from the date of issuance. Renewal application must be filed before the expiry date. Operating with an expired PSARA license is treated the same as operating without a license and attracts the same penalties under Section 25.",
+  },
+  {
+    q: "Can a PSARA-licensed agency deploy armed guards?",
+    a: "Yes, but with additional requirements. A PSARA license covers both unarmed and armed security deployment, but for armed deployment: (1) the license must specifically allow armed services (this is typically indicated on the license); (2) each armed guard must possess a valid Arms License under the Arms Act, 1959; (3) the security agency must maintain proper records of all arms, ammunition, and their deployment; and (4) state-specific rules on armed guards must be complied with. Not all states grant armed security permissions in PSARA licenses — this must be verified for each state of operation.",
+  },
+  {
+    q: "What happens if a guard commits an offence during duty?",
+    a: "Under PSARA, the private security agency is vicariously responsible for the conduct of its security personnel during the course of employment. If a guard commits an offence (e.g., assault, theft, or negligence) while on duty: (1) the agency may be held liable along with the individual; (2) the Controlling Authority can suspend or cancel the PSARA license; and (3) the agency may face civil liability to the client for damages. This is why comprehensive liability insurance, proper training documentation, and background verification of every guard are not just good practices but essential risk management for security agencies.",
+  },
+  {
+    q: "What records must a PSARA-licensed agency maintain?",
+    a: "Under PSARA Rules, every licensed security agency must maintain: (1) registers of all security guards and supervisors employed; (2) training records showing completion of mandatory training hours; (3) police verification records for each guard; (4) records of arms and ammunition (for armed agencies); (5) deployment records showing which guards are deployed at which site; (6) client contracts; and (7) records of any disciplinary actions or complaints. These records must be produced on demand before the Controlling Authority and are subject to periodic inspection by police and the licensing authority.",
+  },
 ];
 
 export function PSARALicensePage() {
   return (
-    <div className="bg-white">
-      <section className="relative overflow-hidden bg-gradient-to-br from-dark via-primary to-primary-700 pt-36 pb-24">
-        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
-        <div className="container-custom relative max-w-3xl">
-          <motion.span variants={fadeUp} initial="hidden" animate="show" custom={0} className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-4 block">Startup & MSME • Company Avenue Advisory</motion.span>
-          <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1} className="font-heading font-bold text-4xl md:text-5xl text-white leading-[1.1] mb-6">PSARA License<br />for Security Agencies</motion.h1>
-          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/60 text-lg mb-8">Obtain your Private Security Agencies Regulation Act (PSARA) 2005 license from the State Controlling Authority. Mandatory for all private security agencies in India. Starting ₹9,999.</motion.p>
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-4">
-            <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 bg-accent text-dark font-heading font-bold text-sm rounded-xl hover:bg-amber-500 transition-colors shadow-lg">Apply Now <ArrowRight size={15} /></Link>
-            <a href="tel:+919876543210" className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/10 text-white font-heading font-medium text-sm rounded-xl hover:bg-white/20 transition-colors border border-white/20"><Phone size={14} /> Call Expert</a>
+    <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
+
+      {/* HERO */}
+      <section className="relative bg-[#081726] text-white pt-24 pb-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{ backgroundImage: `radial-gradient(circle, white 1px, transparent 1px)`, backgroundSize: "36px 36px" }} />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="container-custom relative z-10">
+          <nav className="flex items-center gap-2 text-xs text-slate-400 mb-8 font-heading">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <ChevronRight size={12} />
+            <Link href="/services" className="hover:text-white transition-colors">Services</Link>
+            <ChevronRight size={12} />
+            <span className="text-accent">PSARA License</span>
+          </nav>
+          <div className="max-w-3xl">
+            <motion.div variants={fadeUp} initial="hidden" animate="show">
+              <Eyebrow label="Private Security Compliance" />
+            </motion.div>
+            <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1}
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" itemProp="name">
+              PSARA License{" "}
+              <span className="text-accent">for Security Agencies</span>
+            </motion.h1>
+            <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
+              className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
+              Obtain your mandatory Private Security Agencies Regulation Act license from the District Licensing Authority. State-specific, mandatory before deploying guards or supervisors — required for corporate contracts, government tenders, and legal operation of any security business in India.
+            </motion.p>
+            <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-3">
+              <Link href="/contact"
+                className="inline-flex items-center gap-2 bg-accent text-dark px-7 py-3.5 rounded-xl font-heading font-bold text-sm hover:bg-accent/90 transition-colors">
+                Get PSARA License <ArrowRight size={15} />
+              </Link>
+              <a href="tel:+919876543210"
+                className="inline-flex items-center gap-2 border border-white/20 text-white px-7 py-3.5 rounded-xl font-heading font-semibold text-sm hover:bg-white/10 transition-colors">
+                <Phone size={15} /> Talk to an Expert
+              </a>
+            </motion.div>
+          </div>
+          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-14">
+            {quickFacts.map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <div key={i} className="bg-white/8 border border-white/10 rounded-2xl px-4 py-4 text-center backdrop-blur-sm">
+                  <Icon size={18} className="text-accent mx-auto mb-2" />
+                  <p className="text-accent font-heading font-bold text-sm leading-tight">{f.value}</p>
+                  <p className="text-slate-400 text-xs mt-1 font-heading">{f.label}</p>
+                </div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
 
-      <section className="py-10 bg-white border-b border-slate-100">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {quickFacts.map((f, i) => (
-              <motion.div key={f.label} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="text-center p-4 rounded-2xl bg-primary/4 border border-primary/8">
-                <f.icon size={20} className="text-primary mx-auto mb-2" />
-                <p className="text-[11px] text-muted font-heading font-medium mb-0.5">{f.label}</p>
-                <p className="text-xs font-heading font-bold text-dark">{f.value}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-slate-50">
-        <div className="container-custom">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">Who Needs It</span><h2 className="font-heading font-bold text-3xl text-dark">Who Requires a PSARA License?</h2></div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {whoNeeds.map((w, i) => (
-              <motion.div key={w.title} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="bg-white p-6 rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-card transition-all">
-                <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center mb-4"><w.icon size={18} className="text-primary" /></div>
-                <h3 className="font-heading font-semibold text-dark text-sm mb-2">{w.title}</h3>
-                <p className="text-muted text-xs leading-relaxed">{w.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* WHAT IS */}
       <section className="py-20 bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">Process</span><h2 className="font-heading font-bold text-3xl text-dark">PSARA License Application Process</h2></div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {steps.map((s, i) => (
-              <motion.div key={s.n} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="p-6 rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-card transition-all">
-                <span className="font-heading font-black text-3xl text-primary/10 mb-3 block">{s.n}</span>
-                <h3 className="font-heading font-semibold text-dark text-sm mb-2">{s.title}</h3>
-                <p className="text-muted text-xs leading-relaxed">{s.desc}</p>
-              </motion.div>
-            ))}
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
+              <Eyebrow label="Overview" />
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark mb-5">
+                What is PSARA License?
+              </h2>
+              <p className="text-muted text-base leading-relaxed mb-5">
+                The <strong className="text-dark">Private Security Agencies Regulation Act (PSARA), 2005</strong> is a central law that regulates all private security agencies in India. Under Section 4 of the Act, no person can carry on the business of a private security agency without a valid license from the <strong className="text-dark">Controlling Authority (District Licensing Authority)</strong> of the respective state.
+              </p>
+              <p className="text-muted text-base leading-relaxed mb-5">
+                Security agencies must train guards for a minimum of <strong className="text-dark">100 hours</strong> and supervisors for <strong className="text-dark">160 hours</strong> at NSDC-approved or government-recognised training institutes. Police verification of all directors and principals is mandatory. Armed guard deployment requires additional licensing endorsements.
+              </p>
+              <p className="text-muted text-base leading-relaxed mb-6">
+                Operating without a PSARA license attracts penalties of <strong className="text-dark">₹25,000 fine and/or 1 year imprisonment</strong> under Section 25. The license is valid for 5 years and is state-specific — each state of operation requires a separate license.
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {["State-Specific License", "5-Year Validity", "Police Verification Required", "NSDC Training Mandatory"].map(pt => (
+                  <div key={pt} className="flex items-start gap-2.5 bg-slate-50 rounded-xl p-3 border border-slate-100">
+                    <CheckCircle size={14} className="text-primary shrink-0 mt-0.5" />
+                    <span className="text-dark text-xs leading-snug">{pt}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={1}>
+              <div className="bg-red-50 border border-red-200 rounded-3xl p-8">
+                <div className="flex items-center gap-3 mb-5">
+                  <AlertCircle size={18} className="text-red-600" />
+                  <p className="font-heading font-bold text-dark text-sm">PSARA Violations and Penalties</p>
+                </div>
+                <div className="space-y-3 mb-5">
+                  {[
+                    { offence: "Operating without PSARA license",         penalty: "₹25,000 fine + 1 year imprisonment (Sec 25)" },
+                    { offence: "Deploying untrained guards",               penalty: "License suspension / cancellation" },
+                    { offence: "No police verification of guards",         penalty: "License conditions violation" },
+                    { offence: "Operating in unlicensed state",            penalty: "Same as operating without license" },
+                    { offence: "Falsification of records",                 penalty: "Criminal prosecution" },
+                    { offence: "Armed deployment without endorsement",     penalty: "Arms Act violation" },
+                  ].map((item) => (
+                    <div key={item.offence} className="bg-white border border-red-100 rounded-xl p-3">
+                      <p className="font-heading font-semibold text-dark text-xs mb-1">{item.offence}</p>
+                      <p className="text-red-700 text-xs">{item.penalty}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-start gap-2">
+                  <AlertTriangle size={13} className="text-amber-500 shrink-0 mt-0.5" />
+                  <p className="text-dark text-xs leading-relaxed">
+                    PSARA enforcement has intensified significantly. Police and licensing authorities conduct periodic raids on unlicensed agencies.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
+      {/* WHO NEEDS */}
       <section className="py-20 bg-slate-50">
-        <div className="container-custom max-w-2xl">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">Checklist</span><h2 className="font-heading font-bold text-3xl text-dark">Documents Required</h2></div>
-          <div className="space-y-3">
-            {documents.map((d, i) => (
-              <motion.div key={d} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="flex items-center gap-3 bg-white p-4 rounded-xl border border-slate-100">
-                <CheckCircle size={16} className="text-primary shrink-0" />
-                <span className="text-sm text-dark">{d}</span>
-              </motion.div>
-            ))}
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Applicability" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Who Needs PSARA License?</h2>
+            <p className="text-muted mt-4 leading-relaxed">
+              Any entity deploying security guards or supervisors as a commercial service must have a PSARA license.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {whoNeeds.map((w, i) => {
+              const Icon = w.icon;
+              return (
+                <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                  className="bg-white border border-slate-100 rounded-2xl p-5 shadow-card hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center mb-4">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-bold text-dark text-sm mb-2">{w.title}</h3>
+                  <p className="text-muted text-xs leading-relaxed">{w.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
+      {/* BENEFITS */}
       <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Key Benefits" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Benefits of PSARA License</h2>
+            <p className="text-muted mt-4">Legal operation, premium contracts, and business protection for your security agency.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {benefits.map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                  className="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:bg-primary/5 hover:border-primary/20 transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center mb-4">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-bold text-dark text-sm mb-2">{b.title}</h3>
+                  <p className="text-muted text-xs leading-relaxed">{b.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="py-20 bg-slate-50">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Our Process" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">PSARA License Process - Step by Step</h2>
+            <p className="text-muted mt-4">From company setup to license certificate — we manage the complete PSARA process.</p>
+          </div>
+          <div className="relative">
+            <div className="absolute left-[22px] top-0 bottom-0 w-px bg-slate-200 hidden md:block" aria-hidden="true" />
+            <div className="space-y-5">
+              {processSteps.map((step, i) => (
+                <motion.div key={step.n} custom={i} variants={fadeUp} initial="hidden"
+                  whileInView="show" viewport={{ once: true, margin: "-40px" }}
+                  className="flex gap-5 relative">
+                  <div className="w-11 h-11 rounded-full bg-primary text-white font-heading font-bold text-xs flex items-center justify-center shrink-0 z-10 shadow-sm">
+                    {step.n}
+                  </div>
+                  <div className="bg-white border border-slate-100 rounded-2xl p-4 flex-1 hover:shadow-card hover:border-primary/15 transition-all duration-300">
+                    <p className="font-heading font-bold text-dark text-sm mb-1">{step.title}</p>
+                    <p className="text-muted text-xs leading-relaxed">{step.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DOCUMENTS & PRICING */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-14 items-start">
+            <div>
+              <Eyebrow label="Documentation" />
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark mb-5">Documents Required</h2>
+              <p className="text-muted leading-relaxed mb-8">
+                State-specific requirements apply. We review your state&apos;s PSARA Rules and advise on exact documentation needed.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {requiredDocs.map((doc, i) => {
+                  const Icon = doc.icon;
+                  return (
+                    <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                      className="flex items-center gap-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-3">
+                      <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center shrink-0">
+                        <Icon size={14} className="text-primary" />
+                      </div>
+                      <span className="text-dark text-xs font-medium">{doc.label}</span>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={1}>
+              <div className="bg-primary rounded-3xl p-8 text-white">
+                <div className="flex items-center gap-2 mb-3">
+                  <Wallet size={18} className="text-accent" />
+                  <p className="font-heading font-semibold text-base">Starting at ₹9,999</p>
+                </div>
+                <p className="text-white/60 text-xs mb-5 leading-relaxed">
+                  All-inclusive professional fee. Includes application preparation, training institute liaison, police verification coordination, and license follow-up. Government fees at actuals.
+                </p>
+                <div className="space-y-2 mb-5">
+                  {[
+                    "PSARA Eligibility Assessment",
+                    "Training Institute Agreement",
+                    "Application Preparation",
+                    "District Authority Filing",
+                    "Police Verification Coordination",
+                    "Premises Inspection Support",
+                    "Authority Hearing Assistance",
+                    "PSARA License Certificate",
+                  ].map(pt => (
+                    <div key={pt} className="flex items-center gap-2">
+                      <CheckCircle size={12} className="text-accent shrink-0" />
+                      <span className="text-white/80 text-xs">{pt}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="border-t border-white/10 pt-4 mb-5">
+                  <p className="text-white/60 text-xs mb-2">Timeline:</p>
+                  <div className="space-y-1">
+                    {[
+                      { phase: "Document & Application Prep",  time: "5-7 days" },
+                      { phase: "Police Verification",          time: "15-30 days" },
+                      { phase: "Authority Review",             time: "10-20 days" },
+                      { phase: "Total",                        time: "30-60 business days" },
+                    ].map(item => (
+                      <div key={item.phase} className="flex justify-between text-xs">
+                        <span className="text-white/60">{item.phase}</span>
+                        <span className="text-white font-heading font-semibold">{item.time}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <Link href="/contact"
+                  className="w-full py-3 bg-accent text-dark text-xs font-heading font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-amber-400 transition-colors">
+                  Get PSARA License <ArrowRight size={13} />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-slate-50" itemScope itemType="https://schema.org/FAQPage">
         <div className="container-custom max-w-3xl">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">FAQs</span><h2 className="font-heading font-bold text-3xl text-dark">Frequently Asked Questions</h2></div>
-          <div className="bg-slate-50 rounded-2xl p-6">{faqs.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}</div>
+          <div className="text-center mb-14">
+            <Eyebrow label="FAQ" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Frequently Asked Questions</h2>
+            <p className="text-muted mt-4">Everything about PSARA license, training requirements, state-specific rules, and security agency compliance.</p>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((f, i) => (
+              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}>
+                <FaqItem q={f.q} a={f.a} />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-r from-dark to-primary">
-        <div className="container-custom text-center">
-          <h2 className="font-heading font-bold text-3xl text-white mb-4">Get Your PSARA License in 30–60 Days</h2>
-          <p className="text-white/60 text-lg mb-8">Complete State Controlling Authority application support, police verification coordination, and training compliance.</p>
-          <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-dark font-heading font-bold rounded-xl hover:bg-amber-500 transition-colors">Apply for PSARA License <ArrowRight size={16} /></Link>
-        </div>
-      </section>
-    </div>
+      <CTABanner />
+    </main>
   );
 }

@@ -3,29 +3,48 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
-  Clock, Landmark, FileText, BadgeCheck, Repeat2, CheckCircle,
-  ArrowRight, Phone, IndianRupee, Users, ShieldCheck, TrendingUp,
-  Award, DollarSign, Building2, HeartPulse, HandHeart,
-  UserCheck, LifeBuoy,
+  ArrowRight, Phone, CheckCircle, Plus, Minus, FileText,
+  Building2, Users, Briefcase, Award, ShieldCheck, TrendingUp,
+  AlertTriangle, Clock, BadgeCheck, DollarSign,
+  Landmark, Info, AlertCircle, ChevronRight, Wallet,
+  BarChart3, BookOpen, Scale, Banknote, ClipboardList, UserCheck,
 } from "lucide-react";
+import { CTABanner } from "@/components/sections/CTABanner";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] } }),
+  show: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] },
+  }),
 };
+
+function Eyebrow({ label }: { label: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 text-xs font-heading font-semibold tracking-widest uppercase text-accent mb-4">
+      <span className="w-6 h-px bg-accent" />{label}<span className="w-6 h-px bg-accent" />
+    </span>
+  );
+}
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-slate-100 last:border-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-4 text-left group">
-        <span className="font-heading font-semibold text-dark text-sm pr-4 group-hover:text-primary transition-colors">{q}</span>
-        <span className="shrink-0 w-6 h-6 rounded-full bg-primary/8 flex items-center justify-center text-primary text-lg font-light">{open ? "−" : "+"}</span>
+    <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question"
+      className="border border-slate-100 rounded-2xl overflow-hidden bg-white">
+      <button onClick={() => setOpen(!open)} aria-expanded={open}
+        className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/20">
+        <span itemProp="name" className="font-heading font-semibold text-dark text-sm leading-snug">{q}</span>
+        <span className="shrink-0 w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500">
+          {open ? <Minus size={13} /> : <Plus size={13} />}
+        </span>
       </button>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }} className="overflow-hidden">
-            <p className="text-muted text-sm leading-relaxed pb-4">{a}</p>
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22, ease: "easeInOut" }}
+            itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer" className="overflow-hidden">
+            <p itemProp="text" className="px-5 pb-4 text-muted text-sm leading-relaxed">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -34,151 +53,390 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 const quickFacts = [
-  { icon: Clock, label: "Timeline", value: "45–60 Working Days" },
-  { icon: Landmark, label: "Authority", value: "Commissioner of Income Tax" },
-  { icon: FileText, label: "Act", value: "Payment of Gratuity Act 1972" },
-  { icon: IndianRupee, label: "Starting From", value: "₹14,999" },
-  { icon: BadgeCheck, label: "Tax Deduction", value: "Section 36(1)(v) — u/s 40A(7)" },
-  { icon: Repeat2, label: "Exemption Limit", value: "₹20 Lakh (Section 10(10))" },
+  { icon: DollarSign,  label: "Tax Deduction",   value: "Section 36(1)(v)" },
+  { icon: Banknote,    label: "Max Tax-Exempt",   value: "₹20 Lakh per Employee" },
+  { icon: Clock,       label: "Timeline",         value: "30-45 Business Days" },
+  { icon: DollarSign,  label: "Starting At",      value: "₹14,999" },
+  { icon: Landmark,    label: "IT Approval",      value: "Commissioner of IT" },
+  { icon: BarChart3,   label: "Accounting",       value: "AS 15 / Ind AS 19" },
 ];
 
-const gratuityFormula = [
-  { label: "Formula", value: "15/26 × Last Drawn Salary × Years of Service" },
-  { label: "Eligibility", value: "Minimum 5 years of continuous service" },
-  { label: "Last Salary", value: "Basic + DA (Dearness Allowance)" },
-  { label: "Max Exempt", value: "₹20,00,000 (Section 10(10) of Income Tax Act)" },
-  { label: "Payment Deadline", value: "Within 30 days of becoming payable" },
-  { label: "Penalty for Delay", value: "Simple interest @ 10% p.a. from due date" },
+const benefits = [
+  { icon: DollarSign,  title: "Tax Deduction Under Section 36(1)(v)",   desc: "Contributions made to an approved gratuity fund are deductible as a business expense under Section 36(1)(v). This converts what would be a cash outflow into a tax-efficient liability." },
+  { icon: ShieldCheck, title: "Off-Balance-Sheet Liability Management",  desc: "Without a trust, gratuity is an unfunded liability on the balance sheet. With an approved trust, the liability is funded externally, improving the company&apos;s financial ratios and creditworthiness." },
+  { icon: BarChart3,   title: "AS 15 / Ind AS 19 Compliance",           desc: "Proper accounting treatment under AS 15 (Employee Benefits) and Ind AS 19 requires actuarial valuation of defined benefit obligations. A trust provides the funding mechanism for this." },
+  { icon: Users,       title: "Employee Benefit and Retention Tool",     desc: "An approved gratuity trust demonstrates employer commitment to employee welfare. It reassures long-serving employees that their statutory entitlement is ring-fenced and secure." },
+  { icon: Scale,       title: "Managed by Independent Trustees",         desc: "Trust assets are managed separately from the company&apos;s operations by appointed trustees. This protects employee benefits even if the company faces financial difficulties." },
+  { icon: Award,       title: "Actuarial Valuation for Accurate Provisioning", desc: "Annual actuarial valuation (required under AS 15 / Ind AS 19) ensures the trust corpus is adequate to meet projected gratuity obligations, preventing funding shortfalls." },
+  { icon: Banknote,    title: "Maximum Tax Exemption ₹20 Lakh",         desc: "Under the Payment of Gratuity Act, gratuity up to ₹20 lakh per employee is exempt from income tax. The trust structure ensures this exemption is properly administered." },
+  { icon: TrendingUp,  title: "Better Cash Flow Management",             desc: "Regular contributions to the trust spread the gratuity cost over the service period rather than creating a large one-time cash outflow when senior employees retire or leave." },
 ];
 
 const whoNeeds = [
-  { icon: Building2, title: "Companies (10+ Employees)", desc: "Any establishment with 10 or more employees for at least 1 day is mandatorily covered under the Gratuity Act." },
-  { icon: TrendingUp, title: "Startups Scaling Up", desc: "Planning to retain employees long-term and optimise employer tax deductions." },
-  { icon: DollarSign, title: "Tax Planning Companies", desc: "Employer contributions to an approved trust are deductible u/s 36(1)(v) — saving corporate tax." },
-  { icon: Users, title: "Large Employers", desc: "Companies with 100+ employees where gratuity liability is significant — trust provides better funding control." },
-  { icon: Award, title: "PE-Backed Companies", desc: "PE investors often require structured employee benefit trust as part of HR governance." },
-  { icon: HeartPulse, title: "Healthcare Organisations", desc: "Hospitals with long-tenured nursing and medical staff with significant gratuity exposure." },
-  { icon: HandHeart, title: "NGOs & Institutions", desc: "Schools, colleges, and charitable institutions with 10+ employees." },
-  { icon: ShieldCheck, title: "Manufacturing Units", desc: "Factories with long-service blue-collar workers accumulating substantial gratuity liabilities." },
+  { icon: Building2,   title: "Companies with 10+ Employees",            desc: "The Payment of Gratuity Act applies to all establishments employing 10 or more persons. Setting up an approved trust provides structured, tax-efficient compliance." },
+  { icon: Users,       title: "IT / Technology Companies",               desc: "High-compensation tech companies with large workforces face significant gratuity obligations. An approved trust manages these liabilities efficiently while providing maximum tax benefit." },
+  { icon: Briefcase,   title: "Manufacturing Companies with Long-Serving Staff", desc: "Manufacturing companies with blue-collar workers who often complete 5+ years of service face substantial gratuity payouts. A funded trust ensures these are met without cash flow disruption." },
+  { icon: TrendingUp,  title: "Listed Companies and Ind AS Filers",      desc: "Ind AS 19 requires actuarial valuation and appropriate funding of defined benefit plans. A gratuity trust provides the funding structure required for Ind AS compliance." },
+  { icon: Landmark,    title: "PSUs and Government-Aided Organisations", desc: "Public sector undertakings and government-aided organisations must have approved gratuity trusts under their service rules and relevant ministry guidelines." },
+  { icon: Award,       title: "Companies Preparing for IPO or M&A",      desc: "Investors and acquirers assess employee benefit obligations during due diligence. An approved, funded gratuity trust demonstrates proper governance of HR liabilities." },
 ];
 
-const steps = [
-  { n: "01", title: "Gratuity Liability Assessment", desc: "Calculate current and projected gratuity liability based on employee count, salary, and tenure." },
-  { n: "02", title: "Trust Deed Drafting", desc: "Draft the Gratuity Trust Deed with trustees, trust objectives, investment policy, and benefit rules." },
-  { n: "03", title: "Board Approval", desc: "Pass board resolution approving formation of gratuity trust and appointing trustees." },
-  { n: "04", title: "Trust Registration", desc: "Register the Trust Deed with the local Sub-Registrar as per the Indian Trusts Act / respective state trusts acts." },
-  { n: "05", title: "IT Recognition Application", desc: "Apply to the Commissioner of Income Tax for recognition of the trust u/s 36(1)(v) for employer deduction." },
-  { n: "06", title: "CIT Recognition", desc: "Commissioner reviews the trust deed and issues recognition certificate — typically takes 30–45 days." },
-  { n: "07", title: "Trust Bank Account", desc: "Open a separate bank account for the trust. Transfer initial contribution from employer." },
-  { n: "08", title: "Annual Contributions", desc: "Actuary computes annual contribution based on projected liability. Contribution is deposited before March 31 for deduction in the current FY." },
+const processSteps = [
+  { n: "01", title: "Actuarial Valuation",                    desc: "Commission an actuarial valuation from a Fellow of the Institute of Actuaries of India (FIAI). The actuary calculates the Present Value of Obligation (PVO) using assumptions for salary growth, attrition, mortality, and discount rate." },
+  { n: "02", title: "Trust Deed Drafting",                    desc: "Draft the Trust Deed establishing the Private Gratuity Trust — specifying the settlor (company), trustees (at least two: one employer, one employee representative), beneficiaries, contribution provisions, investment norms, and administration rules." },
+  { n: "03", title: "Board Resolution",                       desc: "Pass a Board Resolution authorising: (1) establishment of the gratuity trust; (2) appointment of trustees; (3) initial contribution to the trust corpus; and (4) authorisation to apply for Income Tax approval." },
+  { n: "04", title: "Trust Registration",                     desc: "Register the Trust Deed with the Sub-Registrar of Assurances where the trust is situated. Pay stamp duty as applicable in the state. The registered Trust Deed is the foundational legal document." },
+  { n: "05", title: "Application for IT Approval",            desc: "File an application before the Commissioner of Income Tax (Exemptions) under Section 2(5) of the Income Tax Act requesting approval of the gratuity trust as an &lsquo;approved gratuity fund&rsquo;." },
+  { n: "06", title: "IT Approval Hearing",                    desc: "Attend hearing before the Commissioner of Income Tax. Submit Trust Deed, actuarial valuation report, Board Resolution, and supporting documents. Respond to queries raised by the Income Tax authority." },
+  { n: "07", title: "Approval Order",                         desc: "Once satisfied, the Commissioner of Income Tax issues the approval order designating the trust as an &lsquo;approved gratuity fund&rsquo;. This enables Section 36(1)(v) deduction for contributions from the date of approval." },
+  { n: "08", title: "Annual Administration",                  desc: "Invest trust corpus as per IT Rules (IRDA-approved funds, government securities). Conduct annual actuarial valuation. Make annual contributions. Maintain trust accounts and file trust income tax return (ITR-7)." },
+];
+
+const requiredDocs = [
+  { icon: FileText,     label: "Trust Deed (duly registered)" },
+  { icon: BarChart3,    label: "Actuarial Valuation Report (FIAI certified)" },
+  { icon: Users,        label: "List of Trustees with consent letters" },
+  { icon: Building2,    label: "Board Resolution establishing the trust" },
+  { icon: FileText,     label: "Certificate of Incorporation of the company" },
+  { icon: ClipboardList,label: "Employee register with salary and service details" },
+  { icon: Banknote,     label: "Initial Contribution Cheque / Transfer to Trust" },
+  { icon: FileText,     label: "PAN Card of the Trust" },
+  { icon: BookOpen,     label: "Trust Bank Account Opening Documents" },
+  { icon: FileText,     label: "Previous gratuity fund balance (if transferring)" },
 ];
 
 const faqs = [
-  { q: "Is gratuity mandatory for all companies?", a: "Yes. Under the Payment of Gratuity Act 1972, every establishment with 10 or more employees (on any day during the preceding 12 months) is mandatorily covered. Once covered, the act continues to apply even if employee count falls below 10." },
-  { q: "What is the difference between an approved and non-approved gratuity trust?", a: "An approved gratuity trust (recognised by the Commissioner of Income Tax u/s 36(1)(v)) allows employer contributions to be claimed as tax-deductible expenses. A non-approved trust does not get this deduction — employer can only deduct actual gratuity paid when an employee leaves." },
-  { q: "What is the maximum gratuity that is tax-exempt for employees?", a: "The maximum gratuity exempt from income tax for an employee is ₹20 lakh under Section 10(10) of the Income Tax Act. Gratuity above ₹20 lakh is taxable as salary income in the hands of the employee." },
-  { q: "What if a company does not set up a gratuity trust?", a: "Companies without an approved trust can still pay gratuity — but they can only claim tax deduction when actual payment is made (not when provisioned). This creates cash flow challenges for large organisations. Additionally, if they cannot pay, employees can file claims with the Controlling Authority." },
-  { q: "Can an actuary certificate be avoided?", a: "No. An actuarial valuation is required annually to determine the appropriate contribution to the gratuity trust. The actuary uses mortality tables, salary growth assumptions, and attrition rates to compute the present value of future gratuity obligations." },
-  { q: "What is the alternative to a Gratuity Trust?", a: "The most common alternative is a Group Gratuity Policy with LIC (Life Insurance Corporation of India) or private insurers. Premiums paid to LIC are also deductible u/s 36(1)(v). Many SMEs prefer the LIC route as it is simpler than managing a separate trust — but large companies benefit from more control through their own trust." },
+  {
+    q: "What is a Private Gratuity Trust and why do companies set it up?",
+    a: "A Private Gratuity Trust is a trust created by an employer under the Payment of Gratuity Act, 1972 to manage and fund the gratuity obligations of the company. When approved by the Commissioner of Income Tax under the Income Tax Act (as an &lsquo;approved gratuity fund&rsquo;), contributions made to this trust become tax-deductible under Section 36(1)(v). The trust holds the funds separately from the company, ensuring employee gratuity claims are protected. Companies set it up to: get income tax deduction on contributions, manage their gratuity liability off-balance sheet, comply with AS 15 / Ind AS 19, and demonstrate financial discipline to auditors and investors.",
+  },
+  {
+    q: "What is the gratuity formula and how is it calculated?",
+    a: "Gratuity is calculated using the formula: (15/26) x Last Drawn Monthly Salary x Number of Years of Completed Service. The 15/26 factor represents 15 days&apos; wages per year of service. Here, salary includes basic salary and dearness allowance (not HRA, bonus, or commissions). Completed service means service rounded to the nearest 6 months (e.g., 4 years 7 months = 5 years; 4 years 5 months = 4 years). The maximum tax-exempt gratuity under the Payment of Gratuity Act for government employees is ₹20 lakh. For non-government employees, the tax-exempt limit is also ₹20 lakh under Section 10(10) of the Income Tax Act.",
+  },
+  {
+    q: "What is an actuarial valuation and why is it mandatory?",
+    a: "An actuarial valuation is a scientific assessment of a company&apos;s future gratuity obligation conducted by a Fellow of the Institute of Actuaries of India (FIAI). It uses statistical models to estimate the Present Value of Obligation (PVO) — i.e., how much money the company needs today to meet all future gratuity payments. The valuation uses assumptions including: salary escalation rate, discount rate (based on government security yields), attrition rate, and Indian mortality tables. AS 15 and Ind AS 19 mandate annual actuarial valuation for defined benefit plans (of which gratuity is one). Without actuarial valuation, the financial statements cannot properly disclose gratuity liability.",
+  },
+  {
+    q: "Under which section of the Income Tax Act are contributions deductible?",
+    a: "Contributions made by an employer to an approved gratuity fund (approved by the Commissioner of Income Tax under Part C of the Fourth Schedule to the Income Tax Act) are deductible as a business expense under Section 36(1)(v) of the Income Tax Act, 1961. The deduction is allowed only if the trust has obtained the required approval from the Income Tax Commissioner. Unapproved gratuity funds or provisions without a funded trust do not get this deduction — they are only deductible when the actual payment is made (Section 37 basis).",
+  },
+  {
+    q: "What are the investment norms for a Private Gratuity Trust?",
+    a: "Trust investments must comply with Rule 67 of the Income Tax Rules, which specifies approved investment avenues. The approved investments include: (1) Government securities (central and state government); (2) Deposits with public sector banks; (3) Deposits with development banks (NABARD, NHB, SIDBI); (4) Life insurance policies from IRDA-approved insurers; (5) Units of UTI and SEBI-regulated mutual funds; (6) Bonds of public sector undertakings. The trust cannot invest in shares of the sponsoring company or its group entities. Compliance with investment norms is verified by the IT Department during approval and subsequent assessments.",
+  },
+  {
+    q: "What is the difference between AS 15 and Ind AS 19 for gratuity accounting?",
+    a: "AS 15 (Employee Benefits) is applicable to companies that follow Indian GAAP (generally companies below the Ind AS threshold). It requires actuarial valuation using the Projected Unit Credit method and disclosure of the gratuity obligation, plan assets, and actuarial gain/loss. Ind AS 19 (Employee Benefits) is the IFRS-converged standard applicable to listed companies and larger unlisted companies. Under Ind AS 19, actuarial gains and losses must be recognised in Other Comprehensive Income (OCI) rather than the Profit & Loss Account — a key difference from AS 15 where actuarial gains/losses can be amortised through P&L. Both standards require annual actuarial valuation by a qualified actuary.",
+  },
+  {
+    q: "What tax returns does the gratuity trust need to file?",
+    a: "An approved gratuity trust is a separate legal entity for tax purposes. It must: (1) Obtain a PAN (Permanent Account Number) for the trust; (2) File an Income Tax Return (ITR-7) annually; (3) Maintain books of accounts separately from the company; (4) Report investment income, contributions received, and gratuity paid during the year; (5) Ensure TDS compliance on investment income where applicable. The trust&apos;s income (if any) from investments may be exempt under Section 10 subject to conditions. An annual audit of trust accounts by a practising CA is typically required by the trust deed.",
+  },
+  {
+    q: "Can an existing ULIP or group gratuity policy replace a Private Gratuity Trust?",
+    a: "No. A group gratuity policy from a life insurance company (like LIC Group Gratuity Scheme) is an alternative to a Private Gratuity Trust but is not the same. Under a group policy, the employer pays premiums to the insurance company which manages the fund. This is simpler but provides less control and flexibility. The Premium payments are deductible under Section 36(1)(v) if the policy is from an IRDA-approved insurer. A Private Gratuity Trust provides the employer with more control over investments and administration, potentially better investment returns, and is preferred by larger companies with sophisticated HR and finance teams.",
+  },
 ];
 
 export function GratuityTrustPage() {
   return (
-    <div className="bg-white">
-      <section className="relative overflow-hidden bg-gradient-to-br from-dark via-primary to-primary-700 pt-36 pb-24">
-        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
-        <div className="container-custom relative max-w-3xl">
-          <motion.span variants={fadeUp} initial="hidden" animate="show" custom={0} className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-4 block">Payroll & HR • Company Avenue Advisory</motion.span>
-          <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1} className="font-heading font-bold text-4xl md:text-5xl text-white leading-[1.1] mb-6">Gratuity Trust<br />Registration</motion.h1>
-          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/60 text-lg mb-8">Set up an Income Tax-approved Gratuity Trust under Section 36(1)(v) to make employer gratuity contributions tax-deductible. Mandatory compliance + long-term employee benefit planning. Starting ₹14,999.</motion.p>
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-4">
-            <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 bg-accent text-dark font-heading font-bold text-sm rounded-xl hover:bg-amber-500 transition-colors shadow-lg">Set Up Gratuity Trust <ArrowRight size={15} /></Link>
-            <a href="tel:+919876543210" className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/10 text-white font-heading font-medium text-sm rounded-xl hover:bg-white/20 transition-colors border border-white/20"><Phone size={14} /> Call Expert</a>
+    <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
+
+      {/* HERO */}
+      <section className="relative bg-[#081726] text-white pt-24 pb-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{ backgroundImage: `radial-gradient(circle, white 1px, transparent 1px)`, backgroundSize: "36px 36px" }} />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="container-custom relative z-10">
+          <nav className="flex items-center gap-2 text-xs text-slate-400 mb-8 font-heading">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <ChevronRight size={12} />
+            <Link href="/services" className="hover:text-white transition-colors">Services</Link>
+            <ChevronRight size={12} />
+            <span className="text-accent">Gratuity Trust Registration</span>
+          </nav>
+          <div className="max-w-3xl">
+            <motion.div variants={fadeUp} initial="hidden" animate="show">
+              <Eyebrow label="Employee Benefits Compliance" />
+            </motion.div>
+            <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1}
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" itemProp="name">
+              Private Gratuity{" "}
+              <span className="text-accent">Trust Registration</span>
+            </motion.h1>
+            <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
+              className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
+              Set up an Income Tax-approved private gratuity trust to claim Section 36(1)(v) deductions, comply with AS 15 / Ind AS 19, manage off-balance-sheet employee liabilities, and protect employee gratuity entitlements. Includes actuarial valuation coordination and IT approval.
+            </motion.p>
+            <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-3">
+              <Link href="/contact"
+                className="inline-flex items-center gap-2 bg-accent text-dark px-7 py-3.5 rounded-xl font-heading font-bold text-sm hover:bg-accent/90 transition-colors">
+                Set Up Gratuity Trust <ArrowRight size={15} />
+              </Link>
+              <a href="tel:+919876543210"
+                className="inline-flex items-center gap-2 border border-white/20 text-white px-7 py-3.5 rounded-xl font-heading font-semibold text-sm hover:bg-white/10 transition-colors">
+                <Phone size={15} /> Talk to a CA
+              </a>
+            </motion.div>
+          </div>
+          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-14">
+            {quickFacts.map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <div key={i} className="bg-white/8 border border-white/10 rounded-2xl px-4 py-4 text-center backdrop-blur-sm">
+                  <Icon size={18} className="text-accent mx-auto mb-2" />
+                  <p className="text-accent font-heading font-bold text-sm leading-tight">{f.value}</p>
+                  <p className="text-slate-400 text-xs mt-1 font-heading">{f.label}</p>
+                </div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
 
-      <section className="py-10 bg-white border-b border-slate-100">
+      {/* WHAT IS */}
+      <section className="py-20 bg-white">
         <div className="container-custom">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {quickFacts.map((f, i) => (
-              <motion.div key={f.label} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="text-center p-4 rounded-2xl bg-primary/4 border border-primary/8">
-                <f.icon size={20} className="text-primary mx-auto mb-2" />
-                <p className="text-[11px] text-muted font-heading font-medium mb-0.5">{f.label}</p>
-                <p className="text-xs font-heading font-bold text-dark">{f.value}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-slate-50">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
             <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
-              <span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">Gratuity Formula</span>
-              <h2 className="font-heading font-bold text-3xl text-dark mb-6">How Gratuity Is Calculated</h2>
-              <div className="bg-white border-2 border-primary/20 rounded-2xl p-6 mb-6">
-                <p className="font-heading font-bold text-primary text-lg mb-2">Gratuity = 15/26 × Last Salary × Years of Service</p>
-                <p className="text-muted text-sm">Where "Last Salary" = Basic + Dearness Allowance</p>
-              </div>
-              <div className="space-y-3">
-                {gratuityFormula.map((g) => (
-                  <div key={g.label} className="flex justify-between items-center bg-white p-3 rounded-xl border border-slate-100">
-                    <span className="text-sm text-muted font-heading">{g.label}</span>
-                    <span className="text-sm font-heading font-semibold text-dark">{g.value}</span>
+              <Eyebrow label="Overview" />
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark mb-5">
+                What is a Private Gratuity Trust?
+              </h2>
+              <p className="text-muted text-base leading-relaxed mb-5">
+                A Private Gratuity Trust is a trust created by an employer to fund and manage the company&apos;s gratuity obligation to employees under the <strong className="text-dark">Payment of Gratuity Act, 1972</strong>. When approved by the Commissioner of Income Tax, contributions to this trust become deductible under <strong className="text-dark">Section 36(1)(v)</strong>.
+              </p>
+              <p className="text-muted text-base leading-relaxed mb-5">
+                Gratuity is calculated as <strong className="text-dark">(15/26) x Last Salary x Years of Service</strong>. With average salaries rising, a company with 200+ employees can face a gratuity liability of ₹5-20 crore. A funded trust manages this systematically rather than as a sudden cash outflow.
+              </p>
+              <p className="text-muted text-base leading-relaxed mb-6">
+                Under <strong className="text-dark">AS 15 and Ind AS 19</strong>, the gratuity obligation must be actuarially valued and disclosed annually. The trust provides the funding structure required for proper accounting treatment and clean audit opinion on financial statements.
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {["Section 36(1)(v) Deduction", "Actuarial Valuation Required", "AS 15 / Ind AS 19 Compliant", "IT Commissioner Approval"].map(pt => (
+                  <div key={pt} className="flex items-start gap-2.5 bg-slate-50 rounded-xl p-3 border border-slate-100">
+                    <CheckCircle size={14} className="text-primary shrink-0 mt-0.5" />
+                    <span className="text-dark text-xs leading-snug">{pt}</span>
                   </div>
                 ))}
               </div>
             </motion.div>
             <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={1}>
-              <span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">Who Needs It</span>
-              <h2 className="font-heading font-bold text-3xl text-dark mb-6">Who Should Set Up a Gratuity Trust?</h2>
-              <div className="space-y-3">
-                {whoNeeds.map((w) => (
-                  <div key={w.title} className="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-100">
-                    <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center shrink-0 mt-0.5"><w.icon size={15} className="text-primary" /></div>
-                    <div>
-                      <h3 className="font-heading font-semibold text-dark text-sm">{w.title}</h3>
-                      <p className="text-muted text-xs">{w.desc}</p>
+              <div className="bg-primary/5 border border-primary/15 rounded-3xl p-8">
+                <Eyebrow label="Gratuity Formula" />
+                <p className="font-heading font-bold text-dark text-base mb-5">Gratuity Calculation</p>
+                <div className="bg-primary rounded-2xl p-5 text-white text-center mb-5">
+                  <p className="font-heading font-bold text-lg mb-1">Gratuity = 15/26 &times; Last Salary &times; Years</p>
+                  <p className="text-white/60 text-xs">Where Salary = Basic + Dearness Allowance</p>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { label: "Max Tax-Exempt Amount",   value: "₹20 Lakh per employee" },
+                    { label: "Minimum Qualifying Service", value: "5 years continuous service" },
+                    { label: "15/26 Factor",            value: "15 days per year of service" },
+                    { label: "Death / Disability",      value: "Payable even below 5 years" },
+                    { label: "Tax Section",             value: "Section 10(10) - Exempt" },
+                    { label: "Deduction Section",       value: "Section 36(1)(v) - Trust contribution" },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-center justify-between py-1.5 border-b border-slate-100 last:border-0">
+                      <span className="text-xs text-muted">{item.label}</span>
+                      <span className="text-xs font-heading font-semibold text-dark">{item.value}</span>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+                <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-start gap-2">
+                  <AlertTriangle size={13} className="text-amber-500 shrink-0 mt-0.5" />
+                  <p className="text-dark text-xs leading-relaxed">
+                    <strong>Note:</strong> Without an approved trust, gratuity contributions are NOT deductible in the year of provision — only when actual payment is made.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
+      {/* WHO NEEDS */}
+      <section className="py-20 bg-slate-50">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Applicability" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Who Should Set Up a Gratuity Trust?</h2>
+            <p className="text-muted mt-4 leading-relaxed">
+              Any employer with significant gratuity obligations benefits from a structured, IT-approved trust.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {whoNeeds.map((w, i) => {
+              const Icon = w.icon;
+              return (
+                <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                  className="bg-white border border-slate-100 rounded-2xl p-5 shadow-card hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center mb-4">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-bold text-dark text-sm mb-2">{w.title}</h3>
+                  <p className="text-muted text-xs leading-relaxed">{w.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* BENEFITS */}
       <section className="py-20 bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">Process</span><h2 className="font-heading font-bold text-3xl text-dark">Gratuity Trust Setup Process</h2></div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {steps.map((s, i) => (
-              <motion.div key={s.n} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="p-6 rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-card transition-all">
-                <span className="font-heading font-black text-3xl text-primary/10 mb-3 block">{s.n}</span>
-                <h3 className="font-heading font-semibold text-dark text-sm mb-2">{s.title}</h3>
-                <p className="text-muted text-xs leading-relaxed">{s.desc}</p>
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Key Benefits" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Benefits of an Approved Gratuity Trust</h2>
+            <p className="text-muted mt-4">Tax efficiency, accounting compliance, and employee protection in one structured framework.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {benefits.map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                  className="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:bg-primary/5 hover:border-primary/20 transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center mb-4">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-bold text-dark text-sm mb-2">{b.title}</h3>
+                  <p className="text-muted text-xs leading-relaxed">{b.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="py-20 bg-slate-50">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Our Process" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Gratuity Trust Setup Process - Step by Step</h2>
+            <p className="text-muted mt-4">From actuarial valuation to Income Tax approval — we manage the complete process.</p>
+          </div>
+          <div className="relative">
+            <div className="absolute left-[22px] top-0 bottom-0 w-px bg-slate-200 hidden md:block" aria-hidden="true" />
+            <div className="space-y-5">
+              {processSteps.map((step, i) => (
+                <motion.div key={step.n} custom={i} variants={fadeUp} initial="hidden"
+                  whileInView="show" viewport={{ once: true, margin: "-40px" }}
+                  className="flex gap-5 relative">
+                  <div className="w-11 h-11 rounded-full bg-primary text-white font-heading font-bold text-xs flex items-center justify-center shrink-0 z-10 shadow-sm">
+                    {step.n}
+                  </div>
+                  <div className="bg-white border border-slate-100 rounded-2xl p-4 flex-1 hover:shadow-card hover:border-primary/15 transition-all duration-300">
+                    <p className="font-heading font-bold text-dark text-sm mb-1">{step.title}</p>
+                    <p className="text-muted text-xs leading-relaxed">{step.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DOCUMENTS */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-14 items-start">
+            <div>
+              <Eyebrow label="Documentation" />
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark mb-5">Documents Required</h2>
+              <p className="text-muted leading-relaxed mb-8">
+                The following documents are needed for trust deed registration and Income Tax approval application.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {requiredDocs.map((doc, i) => {
+                  const Icon = doc.icon;
+                  return (
+                    <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                      className="flex items-center gap-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-3">
+                      <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center shrink-0">
+                        <Icon size={14} className="text-primary" />
+                      </div>
+                      <span className="text-dark text-xs font-medium">{doc.label}</span>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={1}>
+              <div className="bg-primary rounded-3xl p-8 text-white">
+                <div className="flex items-center gap-2 mb-3">
+                  <Wallet size={18} className="text-accent" />
+                  <p className="font-heading font-semibold text-base">Starting at ₹14,999</p>
+                </div>
+                <p className="text-white/60 text-xs mb-5 leading-relaxed">
+                  Comprehensive fee for trust deed drafting, registration coordination, IT approval application, and first-year administration setup.
+                </p>
+                <div className="space-y-2 mb-5">
+                  {[
+                    "Trust Deed Drafting",
+                    "Trustee Appointment Support",
+                    "Actuarial Valuation Coordination",
+                    "Trust Registration Coordination",
+                    "IT Approval Application",
+                    "IT Commissioner Hearing Support",
+                    "PAN and Bank Account Opening",
+                    "Annual Trust Account Setup",
+                  ].map(pt => (
+                    <div key={pt} className="flex items-center gap-2">
+                      <CheckCircle size={12} className="text-accent shrink-0" />
+                      <span className="text-white/80 text-xs">{pt}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="border-t border-white/10 pt-4 mb-5">
+                  <p className="text-white/60 text-xs mb-2">Timeline:</p>
+                  <div className="space-y-1">
+                    {[
+                      { phase: "Trust Deed and Registration", time: "10-15 days" },
+                      { phase: "IT Approval Process",         time: "20-30 days" },
+                      { phase: "Total",                       time: "30-45 business days" },
+                    ].map(item => (
+                      <div key={item.phase} className="flex justify-between text-xs">
+                        <span className="text-white/60">{item.phase}</span>
+                        <span className="text-white font-heading font-semibold">{item.time}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <Link href="/contact"
+                  className="w-full py-3 bg-accent text-dark text-xs font-heading font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-amber-400 transition-colors">
+                  Set Up Gratuity Trust <ArrowRight size={13} />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-slate-50" itemScope itemType="https://schema.org/FAQPage">
+        <div className="container-custom max-w-3xl">
+          <div className="text-center mb-14">
+            <Eyebrow label="FAQ" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Frequently Asked Questions</h2>
+            <p className="text-muted mt-4">Everything about private gratuity trust setup, IT approval, actuarial valuation, and AS 15 compliance.</p>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((f, i) => (
+              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}>
+                <FaqItem q={f.q} a={f.a} />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-slate-50">
-        <div className="container-custom max-w-3xl">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">FAQs</span><h2 className="font-heading font-bold text-3xl text-dark">Frequently Asked Questions</h2></div>
-          <div className="bg-white rounded-2xl p-6">{faqs.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}</div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-gradient-to-r from-dark to-primary">
-        <div className="container-custom text-center">
-          <h2 className="font-heading font-bold text-3xl text-white mb-4">Protect Your Employees & Save Tax</h2>
-          <p className="text-white/60 text-lg mb-8">Set up an approved Gratuity Trust and make employer contributions fully tax-deductible.</p>
-          <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-dark font-heading font-bold rounded-xl hover:bg-amber-500 transition-colors">Set Up Gratuity Trust <ArrowRight size={16} /></Link>
-        </div>
-      </section>
-    </div>
+      <CTABanner />
+    </main>
   );
 }

@@ -462,7 +462,7 @@ export function ChangeInDirectorsPage() {
                   <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 flex items-start gap-3">
                     <AlertCircle size={16} className="text-amber-600 shrink-0 mt-0.5" />
                     <p className="text-amber-800 text-sm leading-relaxed">
-                      <strong>Note:</strong> Failure to file DIR-12 also means the outgoing director remains legally responsible for the company's decisions — a serious personal liability risk.
+                      <strong>Note:</strong> Failure to file DIR-12 also means the outgoing director remains legally responsible for the company&apos;s decisions — a serious personal liability risk.
                     </p>
                   </div>
                 </motion.div>
@@ -790,7 +790,7 @@ export function ChangeInDirectorsPage() {
               <span className="w-6 h-px bg-accent" />Get Started Today<span className="w-6 h-px bg-accent" />
             </span>
             <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-6 max-w-3xl mx-auto leading-tight">
-              Don't Miss the 30-Day<br />
+              Don&apos;t Miss the 30-Day<br />
               <span className="text-accent">DIR-12 Filing Deadline</span>
             </h2>
             <p className="text-white/60 text-lg max-w-xl mx-auto mb-10 leading-relaxed">

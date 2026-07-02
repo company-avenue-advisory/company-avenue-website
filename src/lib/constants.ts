@@ -13,110 +13,199 @@ export const COMPANY = {
 };
 
 export const NAV_LINKS = [
-  { label: "Home", href: "/" },
   {
-    label: "Services",
+    label: "Start Business",
     href: "/services",
     children: [
       {
-        group: "Company Formation",
+        group: "Indian Companies",
         items: [
           { label: "Private Limited Company", href: "/services/private-limited-company" },
-          { label: "Limited Liability Partnership", href: "/services/llp-registration" },
-          { label: "One Person Company", href: "/services/one-person-company" },
+          { label: "LLP Registration", href: "/services/llp-registration" },
+          { label: "One Person Company (OPC)", href: "/services/one-person-company" },
           { label: "Partnership Firm", href: "/services/partnership-firm" },
           { label: "Sole Proprietorship", href: "/services/sole-proprietorship" },
           { label: "Section 8 (NGO) Company", href: "/services/section-8-company" },
           { label: "Nidhi Company", href: "/services/nidhi-company" },
           { label: "Producer Company", href: "/services/producer-company" },
-          { label: "Indian Subsidiary", href: "/services/indian-subsidiary" },
+        ],
+      },
+      {
+        group: "Special Entities",
+        items: [
+          { label: "Public Limited Company", href: "/services/public-limited-company" },
+          { label: "NBFC Registration", href: "/services/nbfc-registration" },
+          { label: "Chit Fund Company", href: "/services/chit-fund-company" },
+          { label: "Microfinance Company (MFI)", href: "/services/microfinance-company" },
+        ],
+      },
+      {
+        group: "Foreign Business in India",
+        items: [
+          { label: "Indian Subsidiary Company", href: "/services/indian-subsidiary" },
           { label: "Branch / Liaison Office", href: "/services/branch-office" },
         ],
       },
       {
-        group: "Tax & GST",
+        group: "Quick Picks",
+        items: [
+          { label: "LLP vs Pvt Ltd Comparison", href: "/calculators/llp-vs-pvt-ltd" },
+          { label: "Business Structure Advisor", href: "/calculators/business-structure-advisor" },
+          { label: "Registration Cost Calculator", href: "/calculators/company-registration-cost" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "IPR",
+    href: "/services",
+    children: [
+      {
+        group: "Trademark",
+        items: [
+          { label: "Trademark Registration", href: "/services/trademark-registration" },
+          { label: "Trademark Objection Reply", href: "/services/trademark-objection" },
+          { label: "Trademark Renewal", href: "/services/trademark-renewal" },
+          { label: "Trademark Watch Service", href: "/services/trademark-watch" },
+          { label: "Trademark Assignment", href: "/services/trademark-assignment" },
+        ],
+      },
+      {
+        group: "International IP",
+        items: [
+          { label: "International Trademark (Madrid)", href: "/services/international-trademark" },
+          { label: "GI Tag Registration", href: "/services/gi-tag-registration" },
+        ],
+      },
+      {
+        group: "Other IP Rights",
+        items: [
+          { label: "Copyright Registration", href: "/services/copyright-registration" },
+          { label: "Patent Registration", href: "/services/patent-registration" },
+          { label: "Patent Search & Drafting", href: "/services/patent-search" },
+          { label: "Design Registration", href: "/services/design-registration" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Tax & Payroll",
+    href: "/services",
+    children: [
+      {
+        group: "GST Services",
         items: [
           { label: "GST Registration", href: "/services/gst-registration" },
           { label: "GST Return Filing", href: "/services/gst-filing" },
           { label: "GST Amendment / Cancellation", href: "/services/gst-amendment" },
-          { label: "Income Tax Return", href: "/services/income-tax-return" },
+          { label: "GST LUT Filing", href: "/services/gst-lut-filing" },
+        ],
+      },
+      {
+        group: "Income Tax",
+        items: [
+          { label: "Income Tax Return (ITR)", href: "/services/income-tax-return" },
           { label: "TDS Return Filing", href: "/services/tds-return" },
           { label: "Advance Tax Payment", href: "/services/advance-tax" },
           { label: "Tax Audit (Sec 44AB)", href: "/services/tax-audit" },
           { label: "Transfer Pricing Study", href: "/services/transfer-pricing" },
+          { label: "12A & 80G Registration", href: "/services/12a-80g-registration" },
         ],
       },
       {
-        group: "MCA / ROC Compliance",
+        group: "Labour Law & HR",
+        items: [
+          { label: "PF Registration & Filing", href: "/services/pf-registration" },
+          { label: "ESIC Registration", href: "/services/esic-registration" },
+          { label: "Payroll Management", href: "/services/payroll-management" },
+          { label: "Shops & Establishment Registration", href: "/services/shops-establishment" },
+          { label: "Labour Law Compliance", href: "/services/labour-law-compliance" },
+          { label: "POSH Compliance", href: "/services/posh-compliance" },
+          { label: "Factories Act Compliance", href: "/services/factories-act" },
+          { label: "Gratuity Trust Registration", href: "/services/gratuity-trust" },
+        ],
+      },
+      {
+        group: "Accounting & CFO",
+        items: [
+          { label: "Accounting & Bookkeeping", href: "/services/accounting-bookkeeping" },
+          { label: "Virtual CFO Services", href: "/services/virtual-cfo" },
+          { label: "Financial Statements", href: "/services/financial-statements" },
+          { label: "Business Valuation", href: "/services/business-valuation" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Compliance",
+    href: "/services",
+    children: [
+      {
+        group: "Annual Compliance",
         items: [
           { label: "ROC Annual Filing (Pvt Ltd)", href: "/services/roc-compliance" },
           { label: "LLP Annual Filing", href: "/services/llp-annual-filing" },
           { label: "Director KYC (DIR-3)", href: "/services/director-kyc" },
+          { label: "Post-Incorporation Compliance", href: "/services/post-incorporation-compliance" },
+          { label: "XBRL Filing", href: "/services/xbrl-filing" },
+          { label: "AGM & Board Meeting Services", href: "/services/agm-services" },
+        ],
+      },
+      {
+        group: "Company Changes",
+        items: [
           { label: "Change in Directors", href: "/services/change-in-directors" },
           { label: "Increase Authorised Capital", href: "/services/increase-authorised-capital" },
           { label: "Registered Office Change", href: "/services/registered-office-change" },
           { label: "Company Name Change", href: "/services/company-name-change" },
+          { label: "Share Transfer & Transmission", href: "/services/share-transfer" },
           { label: "Strike Off / Company Closure", href: "/services/company-closure" },
         ],
       },
+      {
+        group: "Business Conversion",
+        items: [
+          { label: "Proprietorship to Pvt Ltd", href: "/services/proprietorship-to-pvtltd" },
+          { label: "Partnership to LLP", href: "/services/partnership-to-llp" },
+          { label: "LLP to Private Limited Company", href: "/services/llp-to-company" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Regulatory",
+    href: "/services",
+    children: [
       {
         group: "Startup & MSME",
         items: [
           { label: "Startup India (DPIIT)", href: "/services/startup-india" },
           { label: "MSME / Udyam Registration", href: "/services/msme-registration" },
-          { label: "IEC Registration", href: "/services/iec-registration" },
+          { label: "IEC Registration (Import-Export)", href: "/services/iec-registration" },
+          { label: "APEDA Registration", href: "/services/apeda-registration" },
+        ],
+      },
+      {
+        group: "Licenses & Registrations",
+        items: [
           { label: "FSSAI Food License", href: "/services/fssai-license" },
           { label: "Professional Tax Registration", href: "/services/professional-tax" },
           { label: "Trade License", href: "/services/trade-license" },
           { label: "Drug License", href: "/services/drug-license" },
           { label: "PSARA License", href: "/services/psara-license" },
           { label: "LMPC Registration", href: "/services/lmpc-registration" },
+          { label: "AYUSH License", href: "/services/ayush-license" },
         ],
       },
       {
-        group: "Intellectual Property",
+        group: "Industrial & Environment",
         items: [
-          { label: "Trademark Registration", href: "/services/trademark-registration" },
-          { label: "Trademark Objection Reply", href: "/services/trademark-objection" },
-          { label: "Trademark Renewal", href: "/services/trademark-renewal" },
-          { label: "Copyright Registration", href: "/services/copyright-registration" },
-          { label: "Patent Registration", href: "/services/patent-registration" },
-          { label: "Design Registration", href: "/services/design-registration" },
-        ],
-      },
-      {
-        group: "Payroll & HR",
-        items: [
-          { label: "PF Registration & Filing", href: "/services/pf-registration" },
-          { label: "ESIC Registration", href: "/services/esic-registration" },
-          { label: "Payroll Management", href: "/services/payroll-management" },
-          { label: "Gratuity Trust Registration", href: "/services/gratuity-trust" },
-        ],
-      },
-      {
-        group: "Accounting & Finance",
-        items: [
-          { label: "Accounting & Bookkeeping", href: "/services/accounting-bookkeeping" },
-          { label: "Virtual CFO Services", href: "/services/virtual-cfo" },
-          { label: "Business Valuation", href: "/services/business-valuation" },
-          { label: "Financial Statements", href: "/services/financial-statements" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Industries",
-    href: "/industries",
-    children: [
-      {
-        group: "Sectors",
-        items: [
-          { label: "IT & Technology", href: "/industries/it-technology" },
-          { label: "Manufacturing", href: "/industries/manufacturing" },
-          { label: "Healthcare", href: "/industries/healthcare" },
-          { label: "Retail & Ecommerce", href: "/industries/retail-ecommerce" },
-          { label: "Import & Export", href: "/industries/import-export" },
-          { label: "Real Estate", href: "/industries/real-estate" },
+          { label: "ISO Certification", href: "/services/iso-certification" },
+          { label: "BIS Registration", href: "/services/bis-registration" },
+          { label: "Environment Clearance (PCB)", href: "/services/environment-clearance" },
+          { label: "DOT / Telecom License", href: "/services/dot-telecom-license" },
+          { label: "Barcode Registration", href: "/services/barcode-registration" },
+          { label: "EPR Registration", href: "/services/epr-registration" },
         ],
       },
     ],
@@ -138,9 +227,7 @@ export const NAV_LINKS = [
       },
     ],
   },
-  { label: "Resources", href: "/resources" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Get Help", href: "/contact", variant: "gethelp" as const },
 ];
 
 export const SERVICES = [
@@ -216,6 +303,34 @@ export const SERVICES = [
     icon: "MapPin",
     category: "Company Formation",
   },
+  {
+    id: "public-limited-company",
+    title: "Public Limited Company",
+    shortDesc: "Incorporate a Public Limited Company — ideal for large businesses seeking public funding and stock market listing.",
+    icon: "Building2",
+    category: "Company Formation",
+  },
+  {
+    id: "nbfc-registration",
+    title: "NBFC Registration",
+    shortDesc: "Register a Non-Banking Financial Company with RBI — for lending, investment, and financial services.",
+    icon: "Landmark",
+    category: "Company Formation",
+  },
+  {
+    id: "chit-fund-company",
+    title: "Chit Fund Company Registration",
+    shortDesc: "Register a Chit Fund Company under the Chit Funds Act, 1982 with state government approval.",
+    icon: "PiggyBank",
+    category: "Company Formation",
+  },
+  {
+    id: "microfinance-company",
+    title: "Microfinance Company (MFI)",
+    shortDesc: "Register a Microfinance Institution as Section 8 Company or NBFC-MFI for lending to low-income borrowers.",
+    icon: "HandCoins",
+    category: "Company Formation",
+  },
 
   // ── Tax & GST ──────────────────────────────────────────────────────
   {
@@ -276,6 +391,48 @@ export const SERVICES = [
     icon: "ArrowLeftRight",
     category: "Tax & GST",
   },
+  {
+    id: "gst-lut-filing",
+    title: "GST LUT Filing",
+    shortDesc: "File Letter of Undertaking (LUT) to export goods and services without payment of IGST.",
+    icon: "FileCheck",
+    category: "Tax & GST",
+  },
+  {
+    id: "12a-80g-registration",
+    title: "12A & 80G Registration",
+    shortDesc: "Register your NGO or trust under Section 12A and 80G for income tax exemption and donor tax benefits.",
+    icon: "HeartHandshake",
+    category: "Tax & GST",
+  },
+  {
+    id: "shops-establishment",
+    title: "Shops & Establishment Registration",
+    shortDesc: "Mandatory state registration for shops, offices, restaurants, and commercial establishments.",
+    icon: "Store",
+    category: "Tax & GST",
+  },
+  {
+    id: "labour-law-compliance",
+    title: "Labour Law Compliance",
+    shortDesc: "End-to-end compliance with Indian labour laws — Minimum Wages, Contract Labour, Bonus Act and more.",
+    icon: "ShieldCheck",
+    category: "Tax & GST",
+  },
+  {
+    id: "posh-compliance",
+    title: "POSH Compliance",
+    shortDesc: "Prevention of Sexual Harassment (POSH) Act compliance — ICC setup, policy drafting, and annual report.",
+    icon: "Users",
+    category: "Tax & GST",
+  },
+  {
+    id: "factories-act",
+    title: "Factories Act Compliance",
+    shortDesc: "Factory license, annual returns, and ongoing compliance under the Factories Act, 1948.",
+    icon: "Factory",
+    category: "Tax & GST",
+  },
 
   // ── MCA / ROC Compliance ───────────────────────────────────────────
   {
@@ -333,6 +490,55 @@ export const SERVICES = [
     title: "Strike Off / Company Closure",
     shortDesc: "Voluntarily close your company through Fast Track Exit (STK-2) or NCLT winding-up process.",
     icon: "XCircle",
+    category: "MCA / ROC Compliance",
+  },
+  {
+    id: "post-incorporation-compliance",
+    title: "Post-Incorporation Compliance",
+    shortDesc: "Complete all mandatory post-incorporation filings — INC-20A, first board meeting, share allotment, and more.",
+    icon: "ClipboardCheck",
+    category: "MCA / ROC Compliance",
+  },
+  {
+    id: "xbrl-filing",
+    title: "XBRL Filing",
+    shortDesc: "XBRL tagging and filing of financial statements for companies mandated by MCA/SEBI regulations.",
+    icon: "FileCode",
+    category: "MCA / ROC Compliance",
+  },
+  {
+    id: "agm-services",
+    title: "AGM & Board Meeting Services",
+    shortDesc: "End-to-end AGM and board meeting management — notices, agenda, minutes, and statutory compliance.",
+    icon: "CalendarCheck",
+    category: "MCA / ROC Compliance",
+  },
+  {
+    id: "share-transfer",
+    title: "Share Transfer & Transmission",
+    shortDesc: "Legal transfer of shares with SH-4, stamp duty, board resolution, and updated register of members.",
+    icon: "ArrowLeftRight",
+    category: "MCA / ROC Compliance",
+  },
+  {
+    id: "proprietorship-to-pvtltd",
+    title: "Proprietorship to Pvt Ltd Conversion",
+    shortDesc: "Convert your sole proprietorship to a Private Limited Company with full business migration support.",
+    icon: "TrendingUp",
+    category: "MCA / ROC Compliance",
+  },
+  {
+    id: "partnership-to-llp",
+    title: "Partnership to LLP Conversion",
+    shortDesc: "Convert an existing partnership firm to an LLP — preserving continuity while gaining limited liability.",
+    icon: "GitMerge",
+    category: "MCA / ROC Compliance",
+  },
+  {
+    id: "llp-to-company",
+    title: "LLP to Private Limited Company",
+    shortDesc: "Convert your LLP to a Private Limited Company to access equity funding and better corporate governance.",
+    icon: "Building2",
     category: "MCA / ROC Compliance",
   },
 
@@ -401,6 +607,62 @@ export const SERVICES = [
     icon: "Package",
     category: "Startup & MSME",
   },
+  {
+    id: "ayush-license",
+    title: "AYUSH License",
+    shortDesc: "Manufacturing and retail license for Ayurveda, Unani, Siddha, and Homeopathy products.",
+    icon: "Leaf",
+    category: "Startup & MSME",
+  },
+  {
+    id: "iso-certification",
+    title: "ISO Certification",
+    shortDesc: "ISO 9001, 14001, 22000, 27001 and other management system certifications for your business.",
+    icon: "BadgeCheck",
+    category: "Startup & MSME",
+  },
+  {
+    id: "bis-registration",
+    title: "BIS Registration (ISI Mark)",
+    shortDesc: "Bureau of Indian Standards registration — mandatory ISI Mark for electronics, toys, and regulated products.",
+    icon: "ShieldCheck",
+    category: "Startup & MSME",
+  },
+  {
+    id: "environment-clearance",
+    title: "Environment Clearance (PCB)",
+    shortDesc: "Environmental clearance, Consent to Establish (CTE) and Consent to Operate (CTO) from Pollution Control Board.",
+    icon: "TreePine",
+    category: "Startup & MSME",
+  },
+  {
+    id: "dot-telecom-license",
+    title: "DOT / Telecom License",
+    shortDesc: "Department of Telecom licenses — ISP, OSP, VNO, and other telecom authorizations from DOT.",
+    icon: "Radio",
+    category: "Startup & MSME",
+  },
+  {
+    id: "apeda-registration",
+    title: "APEDA Registration",
+    shortDesc: "APEDA registration for exporters of agricultural and processed food products from India.",
+    icon: "Wheat",
+    category: "Startup & MSME",
+  },
+  {
+    id: "barcode-registration",
+    title: "Barcode Registration (GS1 India)",
+    shortDesc: "GS1 India barcode registration for product tracking, retail distribution, and e-commerce compliance.",
+    icon: "Barcode",
+    category: "Startup & MSME",
+  },
+  {
+    id: "epr-registration",
+    title: "EPR Registration",
+    shortDesc: "Extended Producer Responsibility registration for plastic, e-waste, and battery manufacturers/importers.",
+    icon: "Recycle",
+    category: "Startup & MSME",
+  },
 
   // ── Intellectual Property ──────────────────────────────────────────
   {
@@ -443,6 +705,41 @@ export const SERVICES = [
     title: "Design Registration",
     shortDesc: "Register the visual appearance of your product design under the Designs Act, 2000.",
     icon: "Palette",
+    category: "Intellectual Property",
+  },
+  {
+    id: "trademark-watch",
+    title: "Trademark Watch Service",
+    shortDesc: "Monitor trademark registry for conflicting new filings and protect your registered brand automatically.",
+    icon: "Eye",
+    category: "Intellectual Property",
+  },
+  {
+    id: "trademark-assignment",
+    title: "Trademark Assignment & Transfer",
+    shortDesc: "Transfer ownership of a registered trademark with TM-P filing and assignment deed.",
+    icon: "ArrowRightLeft",
+    category: "Intellectual Property",
+  },
+  {
+    id: "international-trademark",
+    title: "International Trademark (Madrid)",
+    shortDesc: "File international trademark applications via Madrid Protocol to protect your brand in 130+ countries.",
+    icon: "Globe",
+    category: "Intellectual Property",
+  },
+  {
+    id: "gi-tag-registration",
+    title: "GI Tag Registration",
+    shortDesc: "Register a Geographical Indication tag for products with special geographical origin and reputation.",
+    icon: "MapPin",
+    category: "Intellectual Property",
+  },
+  {
+    id: "patent-search",
+    title: "Patent Search & Drafting",
+    shortDesc: "Prior art search, patentability opinion, and complete patent specification drafting by technical experts.",
+    icon: "Search",
     category: "Intellectual Property",
   },
 

@@ -70,7 +70,7 @@ const processSteps = [
   { n: "01", title: "Check Eligibility",         desc: "Verify if your establishment has 20 or more employees. Count all categories including contract staff." },
   { n: "02", title: "EPFO Portal Registration",  desc: "Register the establishment on the EPFO Unified Portal (unifiedportal-emp.epfindia.gov.in) with complete details." },
   { n: "03", title: "UAN Allotment",             desc: "Generate Universal Account Numbers for all existing employees and new joiners through the employer portal." },
-  { n: "04", title: "Monthly ECR Preparation",   desc: "Prepare the Electronic Challan cum Return with each employee's wage and PF contribution details." },
+  { n: "04", title: "Monthly ECR Preparation",   desc: "Prepare the Electronic Challan cum Return with each employee&apos;s wage and PF contribution details." },
   { n: "05", title: "Challan Payment by 15th",   desc: "Upload the ECR and pay the PF challan through net banking or NEFT before the 15th of each month." },
   { n: "06", title: "Monthly ECR Upload",        desc: "Upload the approved ECR on the EPFO portal after payment to complete the monthly compliance cycle." },
   { n: "07", title: "Annual PF Return",          desc: "File the annual return with updated employee details and contribution summary for the financial year." },
@@ -129,7 +129,7 @@ const relatedServices = [
 const faqs = [
   {
     q: "Who must register for PF — what is the 20-employee threshold?",
-    a: "Under the Employees' Provident Funds and Miscellaneous Provisions Act, 1952, every establishment with 20 or more employees is mandatorily required to register. All categories of employees are counted — permanent, contract, and probationary. Once the threshold is crossed, registration must be done within 30 days. After registration, the employer continues to be covered even if headcount falls below 20.",
+    a: "Under the Employees&apos; Provident Funds and Miscellaneous Provisions Act, 1952, every establishment with 20 or more employees is mandatorily required to register. All categories of employees are counted — permanent, contract, and probationary. Once the threshold is crossed, registration must be done within 30 days. After registration, the employer continues to be covered even if headcount falls below 20.",
   },
   {
     q: "Can an employer voluntarily register for PF with fewer than 20 employees?",
@@ -418,10 +418,10 @@ export function PFRegistrationPage() {
                 What is PF Registration?
               </h2>
               <p className="text-slate-500 text-base leading-relaxed mb-5">
-                <strong>Provident Fund (PF) Registration</strong> is mandatory for every establishment employing 20 or more persons. Governed by the <strong>Employees' Provident Funds and Miscellaneous Provisions Act, 1952</strong>, it requires employers to register on the EPFO portal and contribute 12% of each employee's basic wages every month.
+                <strong>Provident Fund (PF) Registration</strong> is mandatory for every establishment employing 20 or more persons. Governed by the <strong>Employees&apos; Provident Funds and Miscellaneous Provisions Act, 1952</strong>, it requires employers to register on the EPFO portal and contribute 12% of each employee&apos;s basic wages every month.
               </p>
               <p className="text-slate-500 text-base leading-relaxed mb-5">
-                The <strong>ECR (Electronic Challan cum Return)</strong> is filed monthly by the employer, detailing each employee's wage and PF contribution. The challan must be paid by the <strong>15th of the following month</strong>. Failure to register or file on time attracts penalties of ₹5,000 per day plus interest at 12% per annum on delayed payments.
+                The <strong>ECR (Electronic Challan cum Return)</strong> is filed monthly by the employer, detailing each employee&apos;s wage and PF contribution. The challan must be paid by the <strong>15th of the following month</strong>. Failure to register or file on time attracts penalties of ₹5,000 per day plus interest at 12% per annum on delayed payments.
               </p>
               <div className="grid grid-cols-2 gap-3">
                 {["Mandatory for 20+ employees", "12% employer contribution", "Monthly ECR filing", "Employee UAN issued"].map(pt => (
@@ -547,7 +547,7 @@ export function PFRegistrationPage() {
                 </div>
                 <div className="bg-primary/5 border border-primary/15 rounded-xl p-4 flex items-center gap-3">
                   <Info size={15} className="text-primary shrink-0" />
-                  <p className="text-dark text-xs leading-relaxed">All documents must be self-attested. Company Avenue's team will guide you through exact format requirements and verify documents before submission to avoid rejection.</p>
+                  <p className="text-dark text-xs leading-relaxed">All documents must be self-attested. Company Avenue&apos;s team will guide you through exact format requirements and verify documents before submission to avoid rejection.</p>
                 </div>
               </div>
             </section>

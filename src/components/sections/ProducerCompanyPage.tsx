@@ -186,7 +186,7 @@ export function ProducerCompanyPage() {
                 className="inline-flex items-center gap-2 bg-green-50 border border-green-100 rounded-full px-4 py-1.5 mb-6"
               >
                 {[...Array(5)].map((_, i) => <Star key={i} size={11} className="text-amber-400 fill-amber-400" />)}
-                <span className="text-green-700 text-xs font-heading font-semibold">India's Trusted FPO Registration Experts</span>
+                <span className="text-green-700 text-xs font-heading font-semibold">India&apos;s Trusted FPO Registration Experts</span>
               </motion.div>
               <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
                 className="font-heading font-bold text-[2.4rem] md:text-5xl leading-[1.15] tracking-tight text-dark mb-5"
@@ -196,7 +196,7 @@ export function ProducerCompanyPage() {
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >
-                Register a Producer Company (Farmer Producer Organization) under Part IXA of the Companies Act 2013. We handle MOA drafting with producer objects, SPICe+ filing, and full MCA compliance — empowering India's primary producers.
+                Register a Producer Company (Farmer Producer Organization) under Part IXA of the Companies Act 2013. We handle MOA drafting with producer objects, SPICe+ filing, and full MCA compliance — empowering India&apos;s primary producers.
               </motion.p>
               <motion.div custom={3} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap gap-3 mb-10">
                 <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-heading font-semibold text-sm rounded-xl hover:bg-[#0a2444] transition-colors shadow-sm">
@@ -322,7 +322,7 @@ export function ProducerCompanyPage() {
                     <div className="text-center p-8">
                       <Wheat size={64} className="text-primary/20 mx-auto mb-4" />
                       <p className="font-heading font-bold text-2xl text-primary">FPO / Producer Company</p>
-                      <p className="text-muted text-sm mt-2">Empowering India's Primary Producers</p>
+                      <p className="text-muted text-sm mt-2">Empowering India&apos;s Primary Producers</p>
                     </div>
                   </div>
                   <div className="absolute -bottom-4 -right-4 bg-primary rounded-2xl px-5 py-4 text-white shadow-lg">
@@ -585,7 +585,7 @@ export function ProducerCompanyPage() {
       <section className="bg-primary py-20">
         <div className="container-custom text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">Empower India's Farmers — Register Your FPO Today</h2>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">Empower India&apos;s Farmers — Register Your FPO Today</h2>
             <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
               Producer Company under Part IXA — the fastest route to collective market power, government grants, and institutional credit for primary producers.
             </p>

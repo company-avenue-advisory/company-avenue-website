@@ -292,7 +292,7 @@ export function RegisteredOfficeChangePage() {
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >
-                Change your company's registered office address legally with MCA. Complete INC-22 filing support, board resolution drafting, ROC follow-up, and post-filing GST & bank update guidance — all in one place.
+                Change your company&apos;s registered office address legally with MCA. Complete INC-22 filing support, board resolution drafting, ROC follow-up, and post-filing GST & bank update guidance — all in one place.
               </motion.p>
               <motion.div custom={3} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap gap-3 mb-10">
                 <Link href="/contact"

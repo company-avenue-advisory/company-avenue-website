@@ -306,7 +306,7 @@ export function AdvanceTaxPage() {
                 What Is Advance Tax?
               </h2>
               <p className="text-muted leading-relaxed mb-4">
-                <strong className="text-dark">Advance Tax</strong>, commonly called "pay-as-you-earn" tax, is
+                <strong className="text-dark">Advance Tax</strong>, commonly called &ldquo;pay-as-you-earn&rdquo; tax, is
                 the income tax payable in the same financial year in which you earn the income — rather
                 than as a lump sum at the end of the year while filing your ITR. Governed by{" "}
                 <strong className="text-dark">Sections 207 to 219</strong> of the Income Tax Act, 1961,

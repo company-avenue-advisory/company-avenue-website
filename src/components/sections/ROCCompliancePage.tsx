@@ -309,10 +309,10 @@ export function ROCCompliancePage() {
                 <strong className="text-dark">MGT-7</strong> (annual return).
               </p>
               <p className="text-muted text-base leading-relaxed mb-5">
-                <strong className="text-dark">Form AOC-4</strong> carries the company's audited Balance Sheet, Profit &amp; Loss Account, Cash Flow Statement, and Directors' Report to the MCA portal. It must be filed within 30 days of the Annual General Meeting (AGM) — typically by <strong className="text-dark">30 October</strong>.
+                <strong className="text-dark">Form AOC-4</strong> carries the company&apos;s audited Balance Sheet, Profit &amp; Loss Account, Cash Flow Statement, and Directors&apos; Report to the MCA portal. It must be filed within 30 days of the Annual General Meeting (AGM) — typically by <strong className="text-dark">30 October</strong>.
               </p>
               <p className="text-muted text-base leading-relaxed mb-6">
-                <strong className="text-dark">Form MGT-7</strong> is the Annual Return — a comprehensive snapshot of the company's corporate structure including shareholding pattern, registered office, directors, and key changes during the year. It is due within 60 days of the AGM — typically by <strong className="text-dark">29 November</strong>. Failure to file attracts a penalty of{" "}
+                <strong className="text-dark">Form MGT-7</strong> is the Annual Return — a comprehensive snapshot of the company&apos;s corporate structure including shareholding pattern, registered office, directors, and key changes during the year. It is due within 60 days of the AGM — typically by <strong className="text-dark">29 November</strong>. Failure to file attracts a penalty of{" "}
                 <strong className="text-dark">₹100 per day</strong> with no upper cap.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -381,7 +381,7 @@ export function ROCCompliancePage() {
             <Eyebrow label="Key Benefits" />
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Why File On Time?</h2>
             <p className="text-muted mt-4">
-              Timely ROC filing is not just a legal obligation — it protects your company's status, directors' credibility, and business opportunities.
+              Timely ROC filing is not just a legal obligation — it protects your company&apos;s status, directors&apos; credibility, and business opportunities.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -469,7 +469,7 @@ export function ROCCompliancePage() {
                 Under Section 164(2) of the Companies Act, a director who fails to file annual returns for <strong className="text-dark">3 consecutive financial years</strong> is automatically disqualified. A disqualified director cannot be appointed as a director in any company for <strong className="text-dark">5 years</strong>.
               </p>
               <p className="text-muted text-sm leading-relaxed mb-5">
-                The MCA's ACTIVE scheme (Active Company Tagging Identities and Verification) also marks companies as non-compliant on public records — visible to banks, investors, and regulators.
+                The MCA&apos;s ACTIVE scheme (Active Company Tagging Identities and Verification) also marks companies as non-compliant on public records — visible to banks, investors, and regulators.
               </p>
               <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 flex items-start gap-3">
                 <AlertCircle size={15} className="text-red-600 shrink-0 mt-0.5" />
@@ -658,7 +658,7 @@ export function ROCCompliancePage() {
               Annual Compliance Made Simple
             </h2>
             <p className="text-slate-300 text-base max-w-xl mx-auto mb-8 leading-relaxed">
-              Don't let deadlines sneak up on you. Engage Company Avenue Advisory today and have your AOC-4 and MGT-7 filed correctly, on time, every year.
+              Don&apos;t let deadlines sneak up on you. Engage Company Avenue Advisory today and have your AOC-4 and MGT-7 filed correctly, on time, every year.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link

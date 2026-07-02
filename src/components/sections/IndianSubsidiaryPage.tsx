@@ -166,7 +166,7 @@ export function IndianSubsidiaryPage() {
                 An Indian Subsidiary is a Private Limited Company incorporated in India where the majority of shares (or all shares) are held by a foreign parent company. It is governed by the Companies Act 2013 and must comply with FEMA (Foreign Exchange Management Act) for any cross-border transactions.
               </p>
               <p className="text-muted leading-relaxed">
-                Unlike a Branch or Liaison Office (which require prior RBI approval), a subsidiary is a separate legal entity with full operational independence. It can conduct all business activities permitted under India's FDI policy.
+                Unlike a Branch or Liaison Office (which require prior RBI approval), a subsidiary is a separate legal entity with full operational independence. It can conduct all business activities permitted under India&apos;s FDI policy.
               </p>
             </motion.div>
             <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={1} className="space-y-3">

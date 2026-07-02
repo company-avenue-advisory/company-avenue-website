@@ -200,7 +200,7 @@ export function PartnershipFirmPage() {
                 className="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-6"
               >
                 {[...Array(5)].map((_, i) => <Star key={i} size={11} className="text-amber-400 fill-amber-400" />)}
-                <span className="text-amber-700 text-xs font-heading font-semibold">India's Most Trusted Business Registration Partner</span>
+                <span className="text-amber-700 text-xs font-heading font-semibold">India&apos;s Most Trusted Business Registration Partner</span>
               </motion.div>
 
               <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
@@ -333,7 +333,7 @@ export function PartnershipFirmPage() {
                     What is a Partnership Firm?
                   </h2>
                   <p className="text-slate-500 text-base leading-relaxed mb-5">
-                    A Partnership Firm is one of India's oldest and most popular business structures. Governed by the <strong>Indian Partnership Act, 1932</strong>, it is formed when two or more individuals agree to carry on a business together and share its profits and losses as per a mutually agreed ratio.
+                    A Partnership Firm is one of India&apos;s oldest and most popular business structures. Governed by the <strong>Indian Partnership Act, 1932</strong>, it is formed when two or more individuals agree to carry on a business together and share its profits and losses as per a mutually agreed ratio.
                   </p>
                   <p className="text-slate-500 text-base leading-relaxed mb-6">
                     Unlike a company, a partnership firm is not a separate legal entity from its partners. The partners are collectively the firm. This makes it simple to start, easy to manage and straightforward to dissolve — making it ideal for traders, professionals, family businesses and small retailers.

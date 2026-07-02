@@ -303,14 +303,14 @@ export function TransferPricingPage() {
               </h2>
               <p className="text-muted text-base leading-relaxed mb-5">
                 Transfer pricing refers to the prices at which transactions occur between associated enterprises (AEs) — companies that are related through common ownership or control across international borders. Indian tax law under{" "}
-                <strong className="text-dark">Sections 92 to 92F of the Income Tax Act, 1961</strong> mandates that all such transactions be conducted at an <em>arm's length price</em> (ALP).
+                <strong className="text-dark">Sections 92 to 92F of the Income Tax Act, 1961</strong> mandates that all such transactions be conducted at an <em>arm&apos;s length price</em> (ALP).
               </p>
               <p className="text-muted text-base leading-relaxed mb-5">
-                An arm's length price is the price that independent, unrelated parties would agree to for a comparable transaction in similar market conditions. If your company charges below-market prices for services rendered to an overseas parent, or pays above-market royalties to a foreign licensor, the Income Tax Department can make an adjustment — treating the difference as additional taxable income in India.
+                An arm&apos;s length price is the price that independent, unrelated parties would agree to for a comparable transaction in similar market conditions. If your company charges below-market prices for services rendered to an overseas parent, or pays above-market royalties to a foreign licensor, the Income Tax Department can make an adjustment — treating the difference as additional taxable income in India.
               </p>
               <p className="text-muted text-base leading-relaxed mb-6">
                 A Transfer Pricing Study is a detailed economic report that documents your transactions, benchmarks prices against comparable market data, and certifies through{" "}
-                <strong className="text-dark">Form 3CEB</strong> that all international related-party transactions are at arm's length. This study is mandatory when your aggregate international transactions with AEs exceed ₹1 crore in any financial year.
+                <strong className="text-dark">Form 3CEB</strong> that all international related-party transactions are at arm&apos;s length. This study is mandatory when your aggregate international transactions with AEs exceed ₹1 crore in any financial year.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -639,7 +639,7 @@ export function TransferPricingPage() {
               30 November Deadline Is Approaching
             </h2>
             <p className="text-slate-300 text-base max-w-xl mx-auto mb-8 leading-relaxed">
-              Don't wait until October. Commission your Transfer Pricing Study now and ensure your Form 3CEB is certified and ready well before the deadline.
+              Don&apos;t wait until October. Commission your Transfer Pricing Study now and ensure your Form 3CEB is certified and ready well before the deadline.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link

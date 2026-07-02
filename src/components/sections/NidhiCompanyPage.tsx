@@ -190,7 +190,7 @@ export function NidhiCompanyPage() {
                 className="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-6"
               >
                 {[...Array(5)].map((_, i) => <Star key={i} size={11} className="text-amber-400 fill-amber-400" />)}
-                <span className="text-amber-700 text-xs font-heading font-semibold">India's Trusted Nidhi Company Experts</span>
+                <span className="text-amber-700 text-xs font-heading font-semibold">India&apos;s Trusted Nidhi Company Experts</span>
               </motion.div>
               <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
                 className="font-heading font-bold text-[2.4rem] md:text-5xl leading-[1.15] tracking-tight text-dark mb-5"
@@ -576,7 +576,7 @@ export function NidhiCompanyPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">Launch Your Community Finance Company</h2>
             <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
-              Nidhi Company — India's simplest RBI-exempt financial institution. Expert CA support. Starting at ₹14,999.
+              Nidhi Company — India&apos;s simplest RBI-exempt financial institution. Expert CA support. Starting at ₹14,999.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-dark font-heading font-bold text-sm rounded-xl hover:bg-amber-400 transition-colors shadow-lg">

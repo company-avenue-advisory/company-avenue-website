@@ -166,7 +166,7 @@ const whyUsPoints = [
 
 const faqs = [
   { q: "What is an Import Export Code (IEC)?", a: "IEC is a 10-digit business identification number issued by DGFT, Ministry of Commerce. It is mandatory for any person or business that imports or exports goods/services from India, and is linked to the PAN of the business or individual." },
-  { q: "Is IEC registration mandatory?", a: "Yes — without a valid IEC, customs won't clear goods, banks won't process foreign trade remittances, and export schemes are inaccessible. Exemptions apply only to personal-use imports/exports and certain government entities." },
+  { q: "Is IEC registration mandatory?", a: "Yes — without a valid IEC, customs won&apos;t clear goods, banks won&apos;t process foreign trade remittances, and export schemes are inaccessible. Exemptions apply only to personal-use imports/exports and certain government entities." },
   { q: "Who issues the IEC?", a: "The Directorate General of Foreign Trade (DGFT), under the Ministry of Commerce and Industry, issues the IEC. Applications are filed online at dgft.gov.in." },
   { q: "How long does IEC registration take?", a: "Typically 2–5 working days after a complete application is submitted. Applications are filed within 1 business day of receiving all documents. Delays occur only from PAN, bank, or GST data mismatches." },
   { q: "Does the IEC expire?", a: "No — IEC is valid for lifetime with no annual renewal fee. However, holders must update their details (address, bank, GST) annually on the DGFT portal to keep the registration active." },
@@ -434,7 +434,7 @@ export function IECRegistrationPage() {
                     Linked to your PAN, IEC is a <strong className="text-dark">one-time registration with lifetime validity</strong> — no annual renewal, no recurring compliance, and no government fee.
                   </p>
                   <p className="text-muted text-base leading-relaxed">
-                    Without IEC, customs won't clear shipments, banks won't process foreign remittances, and you can't claim export incentives or duty drawback.
+                    Without IEC, customs won&apos;t clear shipments, banks won&apos;t process foreign remittances, and you can&apos;t claim export incentives or duty drawback.
                   </p>
                 </motion.div>
                 <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="space-y-3">
@@ -610,7 +610,7 @@ export function IECRegistrationPage() {
                   Why IEC is Critical for Your Business
                 </h2>
                 <p className="text-muted text-lg leading-relaxed max-w-2xl mb-10">
-                  IEC is not just a compliance requirement — it's the legal foundation of your international trade operations.
+                  IEC is not just a compliance requirement — it&apos;s the legal foundation of your international trade operations.
                 </p>
               </motion.div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

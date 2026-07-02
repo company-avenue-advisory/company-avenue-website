@@ -631,7 +631,7 @@ export function Section8CompanyPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">Start Your NGO with the Right Legal Structure</h2>
             <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
-              Section 8 Company — India's most credible NGO structure. 12A, 80G, CSR and FCRA support. Starting at ₹9,999.
+              Section 8 Company — India&apos;s most credible NGO structure. 12A, 80G, CSR and FCRA support. Starting at ₹9,999.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-dark font-heading font-bold text-sm rounded-xl hover:bg-amber-400 transition-colors shadow-lg">

@@ -3,29 +3,48 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
-  Clock, Landmark, FileText, BadgeCheck, Repeat2, CheckCircle,
-  ArrowRight, Phone, IndianRupee, BarChart3, LineChart, FileSpreadsheet,
-  Building2, TrendingUp, Briefcase, ShieldCheck, Award, DollarSign,
-  UserCheck, LifeBuoy,
+  ArrowRight, Phone, CheckCircle, Plus, Minus, FileText,
+  Building2, Users, Briefcase, Award, ShieldCheck, TrendingUp,
+  AlertTriangle, Clock, BadgeCheck, DollarSign,
+  Landmark, Info, AlertCircle, ChevronRight, Wallet,
+  BarChart3, BookOpen, Database, Scale, Banknote, ClipboardList,
 } from "lucide-react";
+import { CTABanner } from "@/components/sections/CTABanner";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
-  show: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] } }),
+  show: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] },
+  }),
 };
+
+function Eyebrow({ label }: { label: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 text-xs font-heading font-semibold tracking-widest uppercase text-accent mb-4">
+      <span className="w-6 h-px bg-accent" />{label}<span className="w-6 h-px bg-accent" />
+    </span>
+  );
+}
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-slate-100 last:border-0">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-4 text-left group">
-        <span className="font-heading font-semibold text-dark text-sm pr-4 group-hover:text-primary transition-colors">{q}</span>
-        <span className="shrink-0 w-6 h-6 rounded-full bg-primary/8 flex items-center justify-center text-primary text-lg font-light">{open ? "−" : "+"}</span>
+    <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question"
+      className="border border-slate-100 rounded-2xl overflow-hidden bg-white">
+      <button onClick={() => setOpen(!open)} aria-expanded={open}
+        className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/20">
+        <span itemProp="name" className="font-heading font-semibold text-dark text-sm leading-snug">{q}</span>
+        <span className="shrink-0 w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500">
+          {open ? <Minus size={13} /> : <Plus size={13} />}
+        </span>
       </button>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }} className="overflow-hidden">
-            <p className="text-muted text-sm leading-relaxed pb-4">{a}</p>
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22, ease: "easeInOut" }}
+            itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer" className="overflow-hidden">
+            <p itemProp="text" className="px-5 pb-4 text-muted text-sm leading-relaxed">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -34,143 +53,428 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 }
 
 const quickFacts = [
-  { icon: Clock, label: "Preparation Time", value: "7–14 Working Days" },
-  { icon: Landmark, label: "Mandatory Under", value: "Companies Act 2013, Sec 129" },
-  { icon: FileText, label: "ROC Filing", value: "AOC-4 (Annual)" },
-  { icon: IndianRupee, label: "Starting From", value: "₹4,999/year" },
-  { icon: BadgeCheck, label: "Standard", value: "Schedule III / Ind AS" },
-  { icon: Repeat2, label: "Deadline", value: "30 Sept (6 months from FY end)" },
+  { icon: FileText,    label: "Statements",    value: "P&L, Balance Sheet, Cash Flow" },
+  { icon: Landmark,    label: "Compliance",    value: "Schedule III (Companies Act)" },
+  { icon: Clock,       label: "Timeline",      value: "3-7 Business Days" },
+  { icon: DollarSign,  label: "Starting At",   value: "₹4,999/year" },
+  { icon: FileText,    label: "For Filing",    value: "AOC-4, Form 3CB, ITR" },
+  { icon: BadgeCheck,  label: "Standards",     value: "Ind AS / AS (ICAI)" },
 ];
 
-const components = [
-  { icon: BarChart3, title: "Balance Sheet", desc: "Statement of financial position showing assets, liabilities, and equity as at March 31. Schedule III format as per Companies Act 2013." },
-  { icon: LineChart, title: "Profit & Loss Account", desc: "Statement of income and expenditure for the financial year. Shows revenue, costs, EBITDA, depreciation, and net profit/loss." },
-  { icon: FileSpreadsheet, title: "Cash Flow Statement", desc: "Shows inflow and outflow of cash from operating, investing, and financing activities during the year." },
-  { icon: FileText, title: "Notes to Accounts", desc: "Detailed disclosures and explanations for each line item in the balance sheet and P&L — the most detailed part of financial statements." },
-  { icon: Briefcase, title: "Director's Report", desc: "Annual report from the Board of Directors covering business performance, outlook, CSR, risk management, and statutory disclosures." },
-  { icon: Award, title: "Auditor's Report", desc: "Independent opinion by the statutory auditor on whether financial statements present a true and fair view of the company's financials." },
+const statementTypes = [
+  { icon: TrendingUp,  title: "Profit & Loss Account",       desc: "Comprehensive income statement showing revenues, cost of goods sold, gross profit, operating expenses, EBITDA, depreciation, interest, and net profit/loss for the financial year." },
+  { icon: BarChart3,   title: "Balance Sheet",                desc: "Financial position statement showing equity and liabilities on one side and non-current assets, current assets, and other assets on the other — compliant with Schedule III format." },
+  { icon: Banknote,    title: "Cash Flow Statement",          desc: "Mandatory for most companies — shows cash generated and used in operating, investing, and financing activities, reconciled with opening and closing bank balance." },
+  { icon: ClipboardList, title: "Notes to Accounts",         desc: "Detailed disclosures required under Schedule III including accounting policies, contingent liabilities, related party transactions, segment information, and statutory notes." },
+  { icon: FileText,    title: "Directors&apos; Report",       desc: "Annual report from the Board of Directors covering financial highlights, CSR activities, risk management, remuneration policy, and other statutory disclosures required under the Companies Act." },
+  { icon: BookOpen,    title: "Schedules and Annexures",      desc: "Supporting schedules for fixed assets, investments, loans, borrowings, and other financial statement items that provide granular detail not shown in the main statements." },
+];
+
+const benefits = [
+  { icon: ShieldCheck, title: "Mandatory for AOC-4 Filing",           desc: "Companies must file audited financial statements with the Registrar of Companies in Form AOC-4. Without properly prepared statements in Schedule III format, the ROC filing cannot be completed." },
+  { icon: Banknote,    title: "Essential for Bank Loan Sanction",      desc: "Every bank and NBFC requires at least 2-3 years of audited financial statements for evaluating term loans, working capital, overdraft, and project finance applications." },
+  { icon: BarChart3,   title: "Required for Tax Audit (Form 3CB)",     desc: "Businesses above the Section 44AB threshold must have audited financial statements for the CA to certify Form 3CB + 3CD. No financial statements means no tax audit report." },
+  { icon: TrendingUp,  title: "Investor and Due Diligence Ready",      desc: "Investors, private equity firms, and strategic acquirers demand professionally prepared, audited financial statements as the starting point for any due diligence process." },
+  { icon: Scale,       title: "Ind AS and AS Compliance",              desc: "Large companies must prepare Ind AS-compliant statements while smaller companies follow AS (Accounting Standards). Non-compliance attracts qualifications in the statutory audit report." },
+  { icon: Award,       title: "Accurate ITR Filing",                   desc: "The income tax return for companies (ITR-6) is directly derived from the financial statements. Errors in the financials cascade into incorrect ITR, attracting scrutiny and notices." },
+  { icon: Database,    title: "GST Reconciliation",                    desc: "Financial statements must be reconciled with GST returns (GSTR-1, 3B, 9). Unexplained differences between financial statement turnover and GST turnover attract GST audit and notice." },
+  { icon: Users,       title: "Stakeholder Reporting",                 desc: "Financial statements are the primary accountability document for shareholders, creditors, employees, and regulators. Their accuracy directly impacts trust in the management team." },
 ];
 
 const whoNeeds = [
-  { icon: Building2, title: "Private Limited Companies", desc: "Mandatory annual statutory requirement — AOC-4 and MGT-7 filing with ROC." },
-  { icon: TrendingUp, title: "LLPs & Partnerships", desc: "Annual Statement of Accounts for LLPs and partnership firms for tax and compliance purposes." },
-  { icon: DollarSign, title: "Startups Fundraising", desc: "Investors, VCs, and banks demand audited financials for due diligence." },
-  { icon: Briefcase, title: "Loan Applicants", desc: "Banks require audited financial statements for working capital loans, term loans, and CCs." },
-  { icon: ShieldCheck, title: "Government Contractors", desc: "Tenders often require last 3 years of audited financials as eligibility criteria." },
-  { icon: Award, title: "Companies Filing GST Audit", desc: "GSTR-9C reconciliation requires certified financial statements from a CA." },
-  { icon: LineChart, title: "Tax Filing (ITR-6)", desc: "Companies filing ITR-6 need financial statements as the basis for tax computation." },
-  { icon: FileSpreadsheet, title: "Transfer Pricing Cases", desc: "Form 3CEB and transfer pricing documentation rely on audited consolidated financials." },
+  { icon: Building2,   title: "All Private Limited Companies",         desc: "Every Pvt Ltd company must prepare audited financial statements annually for ROC filing (AOC-4), regardless of turnover or profit levels." },
+  { icon: Landmark,    title: "LLPs with Turnover Above ₹40 Lakh",    desc: "LLPs with turnover exceeding ₹40 lakh or contribution exceeding ₹25 lakh must prepare and get accounts audited and file them with the MCA." },
+  { icon: Users,       title: "Proprietorships and Partnerships Seeking Loans", desc: "While not always mandatory, banks require professionally prepared financial statements to process credit facilities for sole proprietorships and partnership firms." },
+  { icon: TrendingUp,  title: "Companies with Tax Audit Requirement",  desc: "Businesses and professionals above Section 44AB thresholds must have CA-prepared and certified financial statements as the basis for Form 3CB/3CD tax audit reporting." },
+  { icon: Briefcase,   title: "Startups Raising Funds",                desc: "Investors perform financial due diligence on audited statements. Startups preparing for seed, Series A, or any institutional funding must have proper financial statements ready." },
+  { icon: Database,    title: "Companies Filing for Government Tenders", desc: "Most government and PSU tenders require submission of audited financial statements for the past 2-3 years as part of technical and financial eligibility criteria." },
 ];
 
-const steps = [
-  { n: "01", title: "Books Handover", desc: "Provide tally data, bank statements, invoices, payroll registers, and supporting documents for the financial year." },
-  { n: "02", title: "Trial Balance Preparation", desc: "Compile all ledger balances into a Trial Balance reconciled with bank statements and GST returns." },
-  { n: "03", title: "Adjusting Entries", desc: "Pass year-end adjustments — depreciation, prepaid expenses, accrued income, provisions for taxes." },
-  { n: "04", title: "P&L Preparation", desc: "Prepare Statement of Profit & Loss with revenue, cost of goods, operating expenses, and net profit." },
-  { n: "05", title: "Balance Sheet", desc: "Prepare Balance Sheet in Schedule III format with proper classification of assets and liabilities." },
-  { n: "06", title: "Notes to Accounts", desc: "Draft detailed notes — accounting policies, related party transactions, contingent liabilities, segment info." },
-  { n: "07", title: "Director's Report & Board Approval", desc: "Draft Director's Report, get board approval for financial statements, and pass resolution." },
-  { n: "08", title: "Statutory Audit", desc: "Statutory auditor audits the financial statements and issues Auditor's Report. Financial statements finalised." },
+const processSteps = [
+  { n: "01", title: "Books of Accounts Review",           desc: "Review all accounting entries in Tally or accounting software — purchases, sales, expenses, bank entries, journal entries — and identify errors, missing entries, or unreconciled items." },
+  { n: "02", title: "Bank Reconciliation",                desc: "Reconcile every bank account balance as per books with bank statements. Identify and clear outstanding cheques, ECS mismatches, and bank charges not recorded in books." },
+  { n: "03", title: "Fixed Asset Register Update",        desc: "Update the fixed asset register with all additions and disposals during the year. Compute depreciation as per Companies Act Schedule II rates (SLM or WDV method as applicable)." },
+  { n: "04", title: "Closing Stock Verification",         desc: "Obtain and verify the closing stock statement. Reconcile with purchase and sales records. Apply the consistent valuation method (FIFO/weighted average) as per accounting policies." },
+  { n: "05", title: "Ledger Scrutiny and Provisions",     desc: "Scrutinise all ledger balances. Make year-end provisions for expenses payable, audit fees, income tax, gratuity, leave encashment, and any other accruals required by accounting standards." },
+  { n: "06", title: "Financial Statement Preparation",    desc: "Prepare the Trading Account, Profit & Loss Account, and Balance Sheet in Schedule III format (for companies) or standard format (for firms/proprietorships) with complete notes to accounts." },
+  { n: "07", title: "Schedules and Notes to Accounts",    desc: "Prepare all supporting schedules and disclosure notes as required — related party transactions, segment reporting, statutory dues, contingent liabilities, lease disclosures, and accounting policies." },
+  { n: "08", title: "Director/Partner Approval",          desc: "Present the draft financial statements to the board of directors or partners for review and approval. Incorporate feedback and prepare the final signed set for statutory audit and MCA/IT filing." },
+];
+
+const requiredDocs = [
+  { icon: BookOpen,    label: "Tally / Accounting Software Data (trial balance)" },
+  { icon: Database,    label: "Bank Statements (all accounts, full year)" },
+  { icon: FileText,    label: "Sales Invoices and Purchase Bills" },
+  { icon: ClipboardList, label: "Fixed Asset Details (purchases, disposals)" },
+  { icon: BarChart3,   label: "Closing Stock Statement (quantity and value)" },
+  { icon: Users,       label: "Salary and HR Records" },
+  { icon: FileText,    label: "Loan Agreements and Repayment Schedules" },
+  { icon: Banknote,    label: "TDS Challans and Form 26AS" },
+  { icon: FileText,    label: "GST Returns (GSTR-1, 3B, 9)" },
+  { icon: Building2,   label: "Prior Year Audited Statements (for comparison)" },
 ];
 
 const faqs = [
-  { q: "Are financial statements mandatory for all companies?", a: "Yes. Under Section 129 of the Companies Act 2013, every company must prepare and present financial statements at every Annual General Meeting (AGM). These must comply with Schedule III format (Division I for AS companies, Division II for Ind AS companies)." },
-  { q: "What is the difference between AS and Ind AS?", a: "Accounting Standards (AS) are issued by ICAI and apply to most Indian companies. Indian Accounting Standards (Ind AS) are India's converged IFRS standards and apply mandatorily to: (1) listed companies, (2) companies with net worth ≥₹250 crore, and (3) holding/subsidiary/JV/associate of such companies." },
-  { q: "What is the penalty for not filing AOC-4?", a: "Under Section 137, failure to file AOC-4 within 30 days of AGM (or 60 days for OPCs) attracts: ₹100 per day of default. Additionally, directors can be prosecuted, and repeated non-filing can lead to striking off the company." },
-  { q: "What if the company had no business activity during the year?", a: "Even a dormant or inactive company must prepare a 'Nil' financial statement and file AOC-4 with MCA. The Balance Sheet will show only the share capital contributed and the profit & loss account will be nil. Failure to file is still a default." },
-  { q: "Is a Chartered Accountant required for preparing financial statements?", a: "Preparation can technically be done by management, but statutory audit by a Chartered Accountant is mandatory for all companies under Section 139 of the Companies Act 2013. The auditor's report is an integral part of the financial statements filed with MCA." },
-  { q: "What documents do I need to provide for financial statement preparation?", a: "You need: bank statements for all accounts, Tally/accounting software data export, purchase and sales invoices, expense vouchers and receipts, payroll records, loan agreements and repayment schedules, fixed asset register, TDS certificates (Form 16A/26AS), and GST returns (GSTR-1, GSTR-3B)." },
+  {
+    q: "What is Schedule III of the Companies Act and why does it matter?",
+    a: "Schedule III to the Companies Act, 2013 prescribes the format in which the financial statements of all companies registered under the Act must be prepared. It specifies the exact format for the Balance Sheet (assets and liabilities), Statement of Profit and Loss (revenues and expenses), and the minimum disclosure requirements in Notes to Accounts. Companies that do not prepare their financial statements in the prescribed Schedule III format will face qualifications in the statutory audit report and potential rejection by the RoC during AOC-4 filing. Schedule III was significantly revised in 2021 to add new disclosures including CSR spending, crypto assets, and trade payable ageing.",
+  },
+  {
+    q: "What is the difference between Ind AS and AS (Accounting Standards)?",
+    a: "Accounting Standards (AS) are issued by the ICAI and have been applicable in India since the 1980s. They are applicable to companies below the Ind AS threshold. Indian Accounting Standards (Ind AS) are converged with International Financial Reporting Standards (IFRS) and are applicable to: (1) all listed companies; (2) unlisted companies with paid-up capital of ₹250 crore or more; (3) companies with net worth of ₹500 crore or more; and (4) insurance/banking companies from designated dates. Key differences include fair value measurement, lease accounting (Ind AS 116), financial instruments (Ind AS 109), and revenue recognition (Ind AS 115). Once a company moves to Ind AS, it cannot revert to AS.",
+  },
+  {
+    q: "Is the Cash Flow Statement mandatory for all companies?",
+    a: "Under Schedule III of the Companies Act, the Cash Flow Statement (prepared using the indirect method under AS 3 / Ind AS 7) is mandatory for all companies except: (1) One Person Companies (OPCs); and (2) Small Companies with paid-up capital not exceeding ₹4 crore and turnover not exceeding ₹40 crore. For all other private and public companies, the Cash Flow Statement is a mandatory component of the annual financial statements and must be filed in AOC-4 with the RoC.",
+  },
+  {
+    q: "What are Related Party Transaction (RPT) disclosures and why are they important?",
+    a: "Related Party Transactions (RPTs) are transactions between a company and its directors, key managerial personnel (KMPs), holding companies, subsidiaries, associates, or any entity controlled by these persons. Schedule III and AS 18 / Ind AS 24 require detailed disclosure of all RPTs in the Notes to Accounts — including the nature of the relationship, description of transactions, amounts involved, and outstanding balances. Improper or undisclosed RPTs attract adverse audit qualifications, regulatory scrutiny, and in the case of listed companies, SEBI enforcement action.",
+  },
+  {
+    q: "Can financial statements be revised or restated after they are filed?",
+    a: "Under the Companies Act, 2013, a company can revise its financial statements after they have been approved by the Board of Directors but before they are laid at the AGM and filed with the RoC — with Board approval and a revised auditor&apos;s report. After filing with the RoC, revision requires an NCLT order. Under SEBI regulations for listed companies, material restatements must be disclosed to stock exchanges and communicated to shareholders. The revised statements must be filed with the RoC as per the prescribed procedure with applicable additional fees.",
+  },
+  {
+    q: "What disclosures were added to Schedule III in the 2021 amendment?",
+    a: "The MCA significantly amended Schedule III in 2021 to add several new disclosure requirements including: (1) Ageing schedule of trade receivables and trade payables (0-90 days, 90-180 days, 180-360 days, 360 days+); (2) CSR spending details and unspent CSR amounts; (3) Ratios — current ratio, debt-equity ratio, return on equity, etc. (8 mandatory ratios with YoY comparison); (4) Details of cryptocurrency/virtual digital assets held; (5) Benami property disclosures; (6) Undisclosed income details; (7) Security given over assets; and (8) Disclosures on loans granted to related parties and investments made by companies.",
+  },
+  {
+    q: "What is the link between financial statements and GST reconciliation?",
+    a: "The turnover declared in financial statements must reconcile with the turnover reported in GST returns (particularly GSTR-9 Annual Return). GST officers compare the two during GST audit. Unexplained differences — whether due to exempted supplies, zero-rated exports, or timing differences in invoice recognition — must be properly disclosed and explained. Financial statements must also disclose GST-related balances: input tax credit on balance sheet, GST payables, and RCM liabilities. A professionally prepared set of financial statements will ensure this reconciliation is documented and auditable.",
+  },
+  {
+    q: "How long does it take to prepare financial statements?",
+    a: "Professional preparation of financial statements typically takes 3 to 7 business days depending on the size of the entity, the quality of books maintained, and the availability of supporting documents. For companies with multiple locations, complex inventories, or significant related party transactions, the timeline may extend to 2-3 weeks. Our team works efficiently to close accounts on time for both ROC filing deadlines and tax audit requirements. Early engagement (April-June for the March financial year) is strongly recommended to avoid last-minute pressure.",
+  },
 ];
 
 export function FinancialStatementsPage() {
   return (
-    <div className="bg-white">
-      <section className="relative overflow-hidden bg-gradient-to-br from-dark via-primary to-primary-700 pt-36 pb-24">
-        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
-        <div className="container-custom relative max-w-3xl">
-          <motion.span variants={fadeUp} initial="hidden" animate="show" custom={0} className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-4 block">Accounting & Finance • Company Avenue Advisory</motion.span>
-          <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1} className="font-heading font-bold text-4xl md:text-5xl text-white leading-[1.1] mb-6">Financial Statements<br />Preparation & Filing</motion.h1>
-          <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/60 text-lg mb-8">Mandatory annual financial statements — Balance Sheet, P&L, Cash Flow, and Notes to Accounts — prepared in Schedule III format under the Companies Act 2013. Audit-ready, investor-ready. Starting ₹4,999/year.</motion.p>
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-4">
-            <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 bg-accent text-dark font-heading font-bold text-sm rounded-xl hover:bg-amber-500 transition-colors shadow-lg">Get Started <ArrowRight size={15} /></Link>
-            <a href="tel:+919876543210" className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/10 text-white font-heading font-medium text-sm rounded-xl hover:bg-white/20 transition-colors border border-white/20"><Phone size={14} /> Call Expert</a>
+    <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
+
+      {/* HERO */}
+      <section className="relative bg-[#081726] text-white pt-24 pb-20 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{ backgroundImage: `radial-gradient(circle, white 1px, transparent 1px)`, backgroundSize: "36px 36px" }} />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="container-custom relative z-10">
+          <nav className="flex items-center gap-2 text-xs text-slate-400 mb-8 font-heading">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <ChevronRight size={12} />
+            <Link href="/services" className="hover:text-white transition-colors">Services</Link>
+            <ChevronRight size={12} />
+            <span className="text-accent">Financial Statements</span>
+          </nav>
+          <div className="max-w-3xl">
+            <motion.div variants={fadeUp} initial="hidden" animate="show">
+              <Eyebrow label="Accounting &amp; Compliance" />
+            </motion.div>
+            <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1}
+              className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" itemProp="name">
+              Financial Statement{" "}
+              <span className="text-accent">Preparation</span>
+            </motion.h1>
+            <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
+              className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
+              Expert preparation of P&amp;L Account, Balance Sheet, Cash Flow Statement, and Notes to Accounts in Schedule III format. Ready for statutory audit, ROC filing (AOC-4), tax audit (Form 3CB), bank submissions, and investor due diligence.
+            </motion.p>
+            <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-3">
+              <Link href="/contact"
+                className="inline-flex items-center gap-2 bg-accent text-dark px-7 py-3.5 rounded-xl font-heading font-bold text-sm hover:bg-accent/90 transition-colors">
+                Prepare My Financials <ArrowRight size={15} />
+              </Link>
+              <a href="tel:+919876543210"
+                className="inline-flex items-center gap-2 border border-white/20 text-white px-7 py-3.5 rounded-xl font-heading font-semibold text-sm hover:bg-white/10 transition-colors">
+                <Phone size={15} /> Talk to a CA
+              </a>
+            </motion.div>
+          </div>
+          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-14">
+            {quickFacts.map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <div key={i} className="bg-white/8 border border-white/10 rounded-2xl px-4 py-4 text-center backdrop-blur-sm">
+                  <Icon size={18} className="text-accent mx-auto mb-2" />
+                  <p className="text-accent font-heading font-bold text-sm leading-tight">{f.value}</p>
+                  <p className="text-slate-400 text-xs mt-1 font-heading">{f.label}</p>
+                </div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
 
-      <section className="py-10 bg-white border-b border-slate-100">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {quickFacts.map((f, i) => (
-              <motion.div key={f.label} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="text-center p-4 rounded-2xl bg-primary/4 border border-primary/8">
-                <f.icon size={20} className="text-primary mx-auto mb-2" />
-                <p className="text-[11px] text-muted font-heading font-medium mb-0.5">{f.label}</p>
-                <p className="text-xs font-heading font-bold text-dark">{f.value}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-slate-50">
-        <div className="container-custom">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">Components</span><h2 className="font-heading font-bold text-3xl text-dark">What's Included in Financial Statements?</h2></div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {components.map((c, i) => (
-              <motion.div key={c.title} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="bg-white p-6 rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-card transition-all">
-                <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center mb-4"><c.icon size={18} className="text-primary" /></div>
-                <h3 className="font-heading font-semibold text-dark text-sm mb-2">{c.title}</h3>
-                <p className="text-muted text-xs leading-relaxed">{c.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* WHAT IS */}
       <section className="py-20 bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">Who Needs It</span><h2 className="font-heading font-bold text-3xl text-dark">Who Needs Financial Statements?</h2></div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {whoNeeds.map((w, i) => (
-              <motion.div key={w.title} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="p-6 rounded-2xl border border-slate-100 hover:border-primary/20 hover:shadow-card transition-all">
-                <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center mb-4"><w.icon size={18} className="text-primary" /></div>
-                <h3 className="font-heading font-semibold text-dark text-sm mb-2">{w.title}</h3>
-                <p className="text-muted text-xs leading-relaxed">{w.desc}</p>
-              </motion.div>
-            ))}
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
+              <Eyebrow label="Overview" />
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark mb-5">
+                What Are Financial Statements?
+              </h2>
+              <p className="text-muted text-base leading-relaxed mb-5">
+                Financial statements are the formal records of the financial activities and position of a business. Under the <strong className="text-dark">Companies Act, 2013 and Schedule III</strong>, every registered company must prepare a complete set of financial statements comprising the Profit &amp; Loss Account, Balance Sheet, Cash Flow Statement, Statement of Changes in Equity, and Notes to Accounts.
+              </p>
+              <p className="text-muted text-base leading-relaxed mb-5">
+                For companies, these statements must be prepared in the <strong className="text-dark">Schedule III format</strong> and comply with <strong className="text-dark">Ind AS or AS</strong> as applicable. They form the basis for statutory audit, ROC filing (AOC-4), tax audit (Form 3CB), income tax return (ITR-6), and bank loan applications.
+              </p>
+              <p className="text-muted text-base leading-relaxed mb-6">
+                The 2021 Schedule III amendment added significant new disclosures including <strong className="text-dark">ageing analysis of debtors/creditors, 8 mandatory financial ratios, CSR disclosures, and crypto asset reporting</strong> — making professional preparation more important than ever.
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {["Schedule III Format", "Ind AS / AS Compliant", "Mandatory for AOC-4", "Audit Ready"].map(pt => (
+                  <div key={pt} className="flex items-start gap-2.5 bg-slate-50 rounded-xl p-3 border border-slate-100">
+                    <CheckCircle size={14} className="text-primary shrink-0 mt-0.5" />
+                    <span className="text-dark text-xs leading-snug">{pt}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={1}>
+              <div className="bg-primary/5 border border-primary/15 rounded-3xl p-8">
+                <Eyebrow label="What We Prepare" />
+                <p className="font-heading font-bold text-dark text-base mb-5">Components of Financial Statements</p>
+                <div className="space-y-3">
+                  {statementTypes.map((type) => {
+                    const Icon = type.icon;
+                    return (
+                      <div key={type.title} className="flex items-start gap-3 py-2 border-b border-slate-100 last:border-0">
+                        <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center shrink-0 mt-0.5">
+                          <Icon size={14} className="text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-heading font-semibold text-dark text-xs mb-0.5">{type.title}</p>
+                          <p className="text-muted text-xs leading-snug">{type.desc}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
+      {/* WHO NEEDS */}
       <section className="py-20 bg-slate-50">
         <div className="container-custom">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">Process</span><h2 className="font-heading font-bold text-3xl text-dark">How We Prepare Your Financials</h2></div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {steps.map((s, i) => (
-              <motion.div key={s.n} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i} className="bg-white p-6 rounded-2xl border border-slate-100">
-                <span className="font-heading font-black text-3xl text-primary/10 mb-3 block">{s.n}</span>
-                <h3 className="font-heading font-semibold text-dark text-sm mb-2">{s.title}</h3>
-                <p className="text-muted text-xs leading-relaxed">{s.desc}</p>
-              </motion.div>
-            ))}
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Applicability" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Who Needs Financial Statement Preparation?</h2>
+            <p className="text-muted mt-4 leading-relaxed">
+              Professional financial statement preparation is essential for compliance, fundraising, and business credibility.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {whoNeeds.map((w, i) => {
+              const Icon = w.icon;
+              return (
+                <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                  className="bg-white border border-slate-100 rounded-2xl p-5 shadow-card hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center mb-4">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-bold text-dark text-sm mb-2">{w.title}</h3>
+                  <p className="text-muted text-xs leading-relaxed">{w.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
+      {/* BENEFITS */}
       <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Key Benefits" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Why Professional Financial Statement Preparation Matters</h2>
+            <p className="text-muted mt-4">Properly prepared financial statements unlock compliance, credit, and capital.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {benefits.map((b, i) => {
+              const Icon = b.icon;
+              return (
+                <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                  className="bg-slate-50 border border-slate-100 rounded-2xl p-5 hover:bg-primary/5 hover:border-primary/20 transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-primary/8 flex items-center justify-center mb-4">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-bold text-dark text-sm mb-2">{b.title}</h3>
+                  <p className="text-muted text-xs leading-relaxed">{b.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="py-20 bg-slate-50">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Our Process" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Financial Statement Preparation - Step by Step</h2>
+            <p className="text-muted mt-4">Our CAs follow a rigorous 8-step process to ensure accuracy and compliance.</p>
+          </div>
+          <div className="relative">
+            <div className="absolute left-[22px] top-0 bottom-0 w-px bg-slate-200 hidden md:block" aria-hidden="true" />
+            <div className="space-y-5">
+              {processSteps.map((step, i) => (
+                <motion.div key={step.n} custom={i} variants={fadeUp} initial="hidden"
+                  whileInView="show" viewport={{ once: true, margin: "-40px" }}
+                  className="flex gap-5 relative">
+                  <div className="w-11 h-11 rounded-full bg-primary text-white font-heading font-bold text-xs flex items-center justify-center shrink-0 z-10 shadow-sm">
+                    {step.n}
+                  </div>
+                  <div className="bg-white border border-slate-100 rounded-2xl p-4 flex-1 hover:shadow-card hover:border-primary/15 transition-all duration-300">
+                    <p className="font-heading font-bold text-dark text-sm mb-1">{step.title}</p>
+                    <p className="text-muted text-xs leading-relaxed">{step.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* DOCUMENTS */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-14 items-start">
+            <div>
+              <Eyebrow label="Documentation" />
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark mb-5">Documents Required</h2>
+              <p className="text-muted leading-relaxed mb-8">
+                Share these documents at the start of the engagement. The better organised your records, the faster and more accurate the financial statements.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {requiredDocs.map((doc, i) => {
+                  const Icon = doc.icon;
+                  return (
+                    <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}
+                      className="flex items-center gap-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-3">
+                      <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center shrink-0">
+                        <Icon size={14} className="text-primary" />
+                      </div>
+                      <span className="text-dark text-xs font-medium">{doc.label}</span>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={1}>
+              <div className="bg-blue-50 border border-blue-200 rounded-3xl p-8">
+                <div className="flex items-center gap-3 mb-5">
+                  <Info size={18} className="text-blue-600" />
+                  <p className="font-heading font-bold text-dark text-sm">New Schedule III Disclosures (2021)</p>
+                </div>
+                <p className="text-muted text-sm leading-relaxed mb-4">The 2021 amendment added these mandatory disclosures to financial statements:</p>
+                <div className="space-y-2">
+                  {[
+                    "Ageing analysis of trade receivables (4 buckets)",
+                    "Ageing analysis of trade payables (4 buckets)",
+                    "8 mandatory financial ratios with prior year comparison",
+                    "CSR spending details and unspent amounts",
+                    "Cryptocurrency / VDA holdings disclosure",
+                    "Benami property details (if any)",
+                    "Security of assets given as collateral",
+                    "Loans to related parties and investments by company",
+                    "MSME dues beyond 45-day payment timeline",
+                    "Undisclosed income / assets from income tax proceedings",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <AlertTriangle size={12} className="text-blue-600 shrink-0 mt-0.5" />
+                      <span className="text-dark text-xs leading-snug">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* TIMELINE & PRICING */}
+      <section className="py-20 bg-slate-50">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <Eyebrow label="Timeline &amp; Pricing" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Timeline &amp; Investment</h2>
+            <p className="text-muted mt-4">Fast turnaround with CA-certified quality.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div className="bg-white border border-slate-100 rounded-3xl p-8 shadow-card">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+                  <Clock size={18} className="text-white" />
+                </div>
+                <p className="font-heading font-bold text-dark">Timeline</p>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { phase: "Books Review & Reconciliation", time: "1-2 days" },
+                  { phase: "Adjustments & Provisions",     time: "1-2 days" },
+                  { phase: "Statement Preparation",        time: "1-2 days" },
+                  { phase: "Notes and Schedules",          time: "1 day" },
+                  { phase: "Review and Client Approval",   time: "1 day" },
+                  { phase: "Total (Simple Entities)",      time: "3-7 business days" },
+                ].map((item) => (
+                  <div key={item.phase} className="flex items-center justify-between py-2 border-b border-slate-50 last:border-0">
+                    <span className="text-xs text-muted">{item.phase}</span>
+                    <span className="text-xs font-heading font-semibold text-dark">{item.time}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-primary rounded-3xl p-8 text-white">
+              <div className="flex items-center gap-2 mb-3">
+                <Wallet size={18} className="text-accent" />
+                <p className="font-heading font-semibold text-base">Starting at ₹4,999/year</p>
+              </div>
+              <p className="text-white/60 text-xs mb-6 leading-relaxed">
+                All-inclusive annual fee. Includes books review, financial statement preparation in Schedule III format, notes to accounts, and director approval set.
+              </p>
+              <div className="space-y-2 mb-6">
+                {["Profit & Loss Account", "Balance Sheet (Schedule III)", "Cash Flow Statement", "Notes to Accounts", "8 Mandatory Ratios", "2021 Amendment Disclosures", "GST Reconciliation Support", "Audit-Ready Set"].map(pt => (
+                  <div key={pt} className="flex items-center gap-2">
+                    <CheckCircle size={12} className="text-accent shrink-0" />
+                    <span className="text-white/80 text-xs">{pt}</span>
+                  </div>
+                ))}
+              </div>
+              <Link href="/contact"
+                className="w-full py-3 bg-accent text-dark text-xs font-heading font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-amber-400 transition-colors">
+                Prepare My Financials <ArrowRight size={13} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 bg-white" itemScope itemType="https://schema.org/FAQPage">
         <div className="container-custom max-w-3xl">
-          <div className="text-center mb-12"><span className="text-accent text-xs font-heading font-bold tracking-widest uppercase mb-3 block">FAQs</span><h2 className="font-heading font-bold text-3xl text-dark">Frequently Asked Questions</h2></div>
-          <div className="bg-slate-50 rounded-2xl p-6">{faqs.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}</div>
+          <div className="text-center mb-14">
+            <Eyebrow label="FAQ" />
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-dark">Frequently Asked Questions</h2>
+            <p className="text-muted mt-4">Everything about financial statement preparation, Schedule III, and Ind AS compliance.</p>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((f, i) => (
+              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i}>
+                <FaqItem q={f.q} a={f.a} />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-r from-dark to-primary">
-        <div className="container-custom text-center">
-          <h2 className="font-heading font-bold text-3xl text-white mb-4">Get Audit-Ready Financials on Time</h2>
-          <p className="text-white/60 text-lg mb-8">Statutory-compliant Balance Sheet, P&L, and Notes to Accounts — prepared by expert CAs and filed before the deadline.</p>
-          <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-dark font-heading font-bold rounded-xl hover:bg-amber-500 transition-colors">Prepare My Financials <ArrowRight size={16} /></Link>
-        </div>
-      </section>
-    </div>
+      <CTABanner />
+    </main>
   );
 }
