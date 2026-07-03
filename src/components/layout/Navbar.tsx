@@ -66,7 +66,7 @@ export function Navbar() {
 
   // Store trigger button positions so mega menu can align to them
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
-  const [megaLeft, setMegaLeft] = useState(0);
+  const [dropdownLeft, setDropdownLeft] = useState(0);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -91,22 +91,21 @@ export function Navbar() {
 
   const open = (label: string) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    // Compute where to horizontally center the mega menu over the trigger,
-    // clamped so it never overflows the viewport
-    if (MEGA_LABELS.includes(label)) {
-      const btn = triggerRefs.current[label];
-      const nav = navRef.current;
-      if (btn && nav) {
-        const btnRect = btn.getBoundingClientRect();
-        const navRect = nav.getBoundingClientRect();
-        const dropdownWidth = 840;
-        // Ideal: center of dropdown aligns with center of trigger button
-        const idealLeft = (btnRect.left - navRect.left) + btnRect.width / 2 - dropdownWidth / 2;
-        // Clamp: don't let right edge exceed viewport, don't let left go below 0
-        const maxLeft = window.innerWidth - navRect.left - dropdownWidth - 8;
-        const clampedLeft = Math.max(0, Math.min(idealLeft, maxLeft));
-        setMegaLeft(clampedLeft);
-      }
+    // Compute dropdown position relative to nav container
+    const btn = triggerRefs.current[label];
+    const nav = navRef.current;
+    if (btn && nav) {
+      const btnRect = btn.getBoundingClientRect();
+      const navRect = nav.getBoundingClientRect();
+      const dropdownWidth = MEGA_LABELS.includes(label) ? 840 : 280;
+      // Ideal: center dropdown under trigger (for mega) or left-align (for simple)
+      const idealLeft = MEGA_LABELS.includes(label)
+        ? (btnRect.left - navRect.left) + btnRect.width / 2 - dropdownWidth / 2
+        : btnRect.left - navRect.left;
+      // Clamp: don't overflow viewport
+      const maxLeft = window.innerWidth - navRect.left - dropdownWidth - 8;
+      const clampedLeft = Math.max(0, Math.min(idealLeft, maxLeft));
+      setDropdownLeft(clampedLeft);
     }
     setActiveDropdown(label);
   };
@@ -119,6 +118,9 @@ export function Navbar() {
   const getHelpItem = NAV_LINKS.find((item) => (item as { variant?: string }).variant === "gethelp");
   const activeMegaItem = navItems.find(
     (item) => item.label === activeDropdown && MEGA_LABELS.includes(item.label)
+  );
+  const activeSimpleItem = navItems.find(
+    (item) => item.label === activeDropdown && !MEGA_LABELS.includes(item.label) && !!item.children
   );
 
   return (
@@ -167,28 +169,7 @@ export function Navbar() {
                     )} />
                   </button>
 
-                  {/* Simple dropdown (non-mega) */}
-                  {!MEGA_LABELS.includes(item.label) && (
-                    <AnimatePresence>
-                      {activeDropdown === item.label && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 8 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 8 }}
-                          transition={{ duration: 0.14 }}
-                          onMouseEnter={() => open(item.label)}
-                          onMouseLeave={close}
-                          className="absolute top-full mt-1 left-0 w-[280px] bg-white rounded-2xl shadow-[0_8px_56px_rgba(0,0,0,0.14)] border border-slate-100 overflow-hidden z-50"
-                        >
-                          <SimpleDropdown
-                            groups={item.children as NavGroup[]}
-                            showViewAll={{ label: "View all tools", href: "/calculators" }}
-                            onClose={() => setActiveDropdown(null)}
-                          />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  )}
+                  {/* Simple dropdown rendered at nav level — see overlay below */}
                 </div>
               ) : (
                 <Link key={item.label} href={item.href}
@@ -254,12 +235,35 @@ export function Navbar() {
                 onMouseEnter={() => open(activeMegaItem.label)}
                 onMouseLeave={close}
                 className="absolute top-full mt-1 w-[840px] bg-white rounded-2xl shadow-[0_8px_56px_rgba(0,0,0,0.14)] border border-slate-100 overflow-hidden z-50"
-                style={{ left: megaLeft }}
+                style={{ left: dropdownLeft }}
               >
                 <MegaMenuDropdown
                   label={activeMegaItem.label}
                   groups={activeMegaItem.children as NavGroup[]}
                   popular={POPULAR_CARDS[activeMegaItem.label]}
+                  onClose={() => setActiveDropdown(null)}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* ── Simple dropdown (Tools): same overlay approach ── */}
+          <AnimatePresence>
+            {activeSimpleItem && (
+              <motion.div
+                key={activeSimpleItem.label}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.14 }}
+                onMouseEnter={() => open(activeSimpleItem.label)}
+                onMouseLeave={close}
+                className="absolute top-full mt-1 w-[280px] bg-white rounded-2xl shadow-[0_8px_56px_rgba(0,0,0,0.14)] border border-slate-100 overflow-hidden z-50"
+                style={{ left: dropdownLeft }}
+              >
+                <SimpleDropdown
+                  groups={activeSimpleItem.children as NavGroup[]}
+                  showViewAll={{ label: "View all tools", href: "/calculators" }}
                   onClose={() => setActiveDropdown(null)}
                 />
               </motion.div>

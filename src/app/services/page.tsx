@@ -9,6 +9,7 @@ import {
   Briefcase, Store, Pill, Shield, Package, MessageSquareWarning, RefreshCw,
   Copyright, Lightbulb, Palette, Landmark, HeartPulse, HandHeart,
   LineChart, BarChart3, FileSpreadsheet, PersonStanding,
+  BadgeDollarSign, Lightbulb as LightbulbIcon, LayoutGrid,
 } from "lucide-react";
 import { SERVICES } from "@/lib/constants";
 import { CTABanner } from "@/components/sections/CTABanner";
@@ -31,14 +32,14 @@ const iconMap: Record<string, React.ElementType> = {
 
 const categories = [...new Set(SERVICES.map((s) => s.category))];
 
-const categoryMeta: Record<string, { emoji: string; desc: string }> = {
-  "Company Formation": { emoji: "🏢", desc: "Register any business structure — Pvt Ltd, LLP, OPC, Partnership, NGO and more." },
-  "Tax & GST": { emoji: "📊", desc: "GST registration, returns, income tax, TDS, advance tax and audit — full tax compliance." },
-  "MCA / ROC Compliance": { emoji: "📋", desc: "Annual ROC filings, director KYC, company changes and corporate governance." },
-  "Startup & MSME": { emoji: "🚀", desc: "DPIIT recognition, Udyam, IEC, FSSAI, trade license and sector-specific registrations." },
-  "Intellectual Property": { emoji: "💡", desc: "Trademark, copyright, patent and design registration — protect your brand and innovations." },
-  "Payroll & HR": { emoji: "👥", desc: "PF, ESIC, payroll processing and gratuity — complete employee compliance." },
-  "Accounting & Finance": { emoji: "📈", desc: "Bookkeeping, financial statements, virtual CFO and business valuation." },
+const categoryMeta: Record<string, { icon: React.ElementType; desc: string }> = {
+  "Company Formation": { icon: Building2, desc: "Register any business structure — Pvt Ltd, LLP, OPC, Partnership, NGO and more." },
+  "Tax & GST":         { icon: IndianRupee, desc: "GST registration, returns, income tax, TDS, advance tax and audit — full tax compliance." },
+  "MCA / ROC Compliance": { icon: ClipboardList, desc: "Annual ROC filings, director KYC, company changes and corporate governance." },
+  "Startup & MSME":   { icon: Rocket, desc: "DPIIT recognition, Udyam, IEC, FSSAI, trade license and sector-specific registrations." },
+  "Intellectual Property": { icon: Lightbulb, desc: "Trademark, copyright, patent and design registration — protect your brand and innovations." },
+  "Payroll & HR":     { icon: Users, desc: "PF, ESIC, payroll processing and gratuity — complete employee compliance." },
+  "Accounting & Finance": { icon: BarChart3, desc: "Bookkeeping, financial statements, virtual CFO and business valuation." },
 };
 
 export default function ServicesPage() {
@@ -75,7 +76,7 @@ export default function ServicesPage() {
                 href={`#${cat.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase()}`}
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-heading font-medium text-slate-600 hover:text-primary hover:bg-primary/5 transition-colors whitespace-nowrap"
               >
-                <span>{categoryMeta[cat]?.emoji}</span>
+                {categoryMeta[cat]?.icon && (() => { const Icon = categoryMeta[cat].icon; return <Icon size={14} className="shrink-0" />; })()}
                 {cat}
               </a>
             ))}
@@ -97,8 +98,8 @@ export default function ServicesPage() {
               >
                 {/* Category header */}
                 <div className="flex items-start gap-4 mb-8">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center text-xl shrink-0">
-                    {meta?.emoji}
+                  <div className="w-12 h-12 rounded-2xl bg-primary/8 border border-primary/10 flex items-center justify-center shrink-0 text-primary">
+                    {meta?.icon && (() => { const Icon = meta.icon; return <Icon size={22} />; })()}
                   </div>
                   <div className="flex-1">
                     <h2 className="font-heading font-bold text-dark text-2xl mb-1">{cat}</h2>
