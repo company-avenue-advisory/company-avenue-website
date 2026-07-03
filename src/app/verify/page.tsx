@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ShieldCheck, Building2, Tag, FileCheck, ArrowRight } from "lucide-react";
+import { ShieldCheck, Building2, Tag, FileCheck, Search, ArrowRight } from "lucide-react";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
@@ -52,6 +52,15 @@ const TOOLS = [
       "Describe your business and instantly see which of the 45 NICE trademark classes it likely falls under — then check name availability on IP India.",
     badge: "Free",
     color: "bg-amber-50 text-amber-600 border-amber-100",
+  },
+  {
+    slug: "company-name-search",
+    icon: Search,
+    title: "Company Name Search",
+    description:
+      "Check if your proposed company name is already registered — searched live against the MCA's Company Master Data across Pvt Ltd, LLP, Limited and OPC suffixes.",
+    badge: "New",
+    color: "bg-rose-50 text-rose-600 border-rose-100",
   },
 ];
 

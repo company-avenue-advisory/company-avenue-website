@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Calculator, IndianRupee, FileText, Building2,
-  Scale, Lightbulb, ArrowRight, ShieldCheck, FileCheck, Tag,
+  Scale, Lightbulb, ArrowRight, ShieldCheck, FileCheck, Tag, ClipboardCheck, Search,
 } from "lucide-react";
 import { CTABanner } from "@/components/sections/CTABanner";
 
@@ -87,6 +87,17 @@ const TOOLS = [
     color: "bg-amber-50 text-amber-600 border-amber-100",
     href: "/calculators/business-structure-advisor",
   },
+  {
+    slug: "compliance-cost-calculator",
+    icon: ClipboardCheck,
+    title: "Annual Compliance Cost Calculator",
+    description:
+      "Pick your entity type, directors/partners, turnover and headcount — get an itemised breakdown of ROC, audit, ITR, GST and payroll compliance costs for the year.",
+    keywords: ["annual compliance cost calculator", "LLP compliance cost", "ROC filing fees"],
+    badge: "New",
+    color: "bg-rose-50 text-rose-600 border-rose-100",
+    href: "/calculators/compliance-cost-calculator",
+  },
 ];
 
 const VERIFY_TOOLS = [
@@ -130,6 +141,16 @@ const VERIFY_TOOLS = [
     color: "bg-amber-50 text-amber-600 border-amber-100",
     href: "/verify/trademark-class-finder",
   },
+  {
+    slug: "company-name-search",
+    icon: Search,
+    title: "Company Name Search",
+    description:
+      "Check if your proposed company name is already registered — searched live against the MCA's Company Master Data across Pvt Ltd, LLP, Limited and OPC suffixes.",
+    badge: "New",
+    color: "bg-rose-50 text-rose-600 border-rose-100",
+    href: "/verify/company-name-search",
+  },
 ];
 
 export default function CalculatorsPage() {
@@ -149,7 +170,7 @@ export default function CalculatorsPage() {
             and calculate registration costs — no signup required.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-white/30 text-sm">
-            <span>✓ 10 Free Tools</span>
+            <span>✓ 11 Free Tools</span>
             <span>✓ FY 2025–26 Updated</span>
             <span>✓ No Registration</span>
             <span>✓ Mobile Friendly</span>

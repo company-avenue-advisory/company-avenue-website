@@ -5,6 +5,17 @@ const DIN_PATTERN = /^[0-9]{8}$/;
 
 const REASON = "Verifying company/director details for Company Avenue Advisory client due-diligence.";
 
+// The MCA registry has no official API — Sandbox (and every other provider) reaches it via a
+// live connector that occasionally times out or goes down. Surface that distinctly from a
+// genuine "not found" so users don't think the CIN/DIN itself is wrong.
+function mcaErrorMessage(err: unknown): string {
+  const message = err instanceof Error ? err.message : "";
+  if (/network error|timeout|gateway/i.test(message)) {
+    return "The MCA registry is temporarily unreachable (this happens upstream, not on our end). Please try again in a few minutes.";
+  }
+  return "Could not verify this right now. Please double-check the CIN/DIN and try again.";
+}
+
 export async function POST(req: NextRequest) {
   if (!isSandboxConfigured()) {
     return NextResponse.json({ error: "Company verification is not configured yet." }, { status: 503 });
@@ -47,7 +58,7 @@ export async function POST(req: NextRequest) {
       });
     } catch (err) {
       console.error("[Company verify]", err);
-      return NextResponse.json({ error: "Could not verify this CIN right now. Please try again." }, { status: 502 });
+      return NextResponse.json({ error: mcaErrorMessage(err) }, { status: 502 });
     }
   }
 
@@ -79,7 +90,7 @@ export async function POST(req: NextRequest) {
       });
     } catch (err) {
       console.error("[Director verify]", err);
-      return NextResponse.json({ error: "Could not verify this DIN right now. Please try again." }, { status: 502 });
+      return NextResponse.json({ error: mcaErrorMessage(err) }, { status: 502 });
     }
   }
 

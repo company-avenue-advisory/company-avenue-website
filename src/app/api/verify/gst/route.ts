@@ -19,6 +19,11 @@ export async function POST(req: NextRequest) {
     }>("/gst/compliance/public/gstin/search", { gstin: gstin.toUpperCase() });
 
     const d = result.data?.data ?? {};
+
+    if (!d.gstin || d.error_cd) {
+      return NextResponse.json({ error: "No GST registration found for this GSTIN." }, { status: 404 });
+    }
+
     const addr = (d.pradr as { addr?: Record<string, string> } | undefined)?.addr;
 
     return NextResponse.json({

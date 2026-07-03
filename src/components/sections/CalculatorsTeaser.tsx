@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Calculator, IndianRupee, FileText, Building2, Scale, Lightbulb, ArrowRight } from "lucide-react";
+import { Calculator, IndianRupee, FileText, Building2, Scale, Lightbulb, ClipboardCheck, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 const TOOLS = [
@@ -47,6 +47,13 @@ const TOOLS = [
     href: "/calculators/business-structure-advisor",
     color: "text-amber-600 bg-amber-50 group-hover:bg-amber-600",
   },
+  {
+    icon: ClipboardCheck,
+    label: "Compliance Cost Calculator",
+    desc: "Itemised annual filing cost breakdown",
+    href: "/calculators/compliance-cost-calculator",
+    color: "text-rose-600 bg-rose-50 group-hover:bg-rose-600",
+  },
 ];
 
 export function CalculatorsTeaser() {
@@ -59,7 +66,7 @@ export function CalculatorsTeaser() {
           subtitle="Instant answers to your tax and compliance questions — no signup, no cost."
         />
 
-        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3">
           {TOOLS.map((tool, i) => {
             const Icon = tool.icon;
             return (

@@ -223,6 +223,7 @@ export const NAV_LINKS = [
           { label: "Company Registration Cost", href: "/calculators/company-registration-cost" },
           { label: "LLP vs Pvt Ltd Comparison", href: "/calculators/llp-vs-pvt-ltd" },
           { label: "Business Structure Advisor", href: "/calculators/business-structure-advisor" },
+          { label: "Annual Compliance Cost Calculator", href: "/calculators/compliance-cost-calculator" },
         ],
       },
       {
@@ -232,6 +233,7 @@ export const NAV_LINKS = [
           { label: "PAN Verification", href: "/verify/pan-verification" },
           { label: "Company & Director Verification", href: "/verify/company-verification" },
           { label: "Trademark Class Finder", href: "/verify/trademark-class-finder" },
+          { label: "Company Name Search", href: "/verify/company-name-search" },
         ],
       },
     ],
