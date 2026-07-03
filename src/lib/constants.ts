@@ -225,6 +225,15 @@ export const NAV_LINKS = [
           { label: "Business Structure Advisor", href: "/calculators/business-structure-advisor" },
         ],
       },
+      {
+        group: "Verification Tools",
+        items: [
+          { label: "GST Verification", href: "/verify/gst-verification" },
+          { label: "PAN Verification", href: "/verify/pan-verification" },
+          { label: "Company & Director Verification", href: "/verify/company-verification" },
+          { label: "Trademark Class Finder", href: "/verify/trademark-class-finder" },
+        ],
+      },
     ],
   },
   { label: "Get Help", href: "/contact", variant: "gethelp" as const },
