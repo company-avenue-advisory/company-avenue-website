@@ -70,4 +70,36 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .legal-prose h2 {
+    @apply font-heading font-bold text-dark text-xl mt-10 mb-3 first:mt-0;
+  }
+
+  .legal-prose h3 {
+    @apply font-heading font-semibold text-dark text-base mt-6 mb-2;
+  }
+
+  .legal-prose p {
+    @apply text-muted text-sm leading-relaxed mb-4;
+  }
+
+  .legal-prose ul {
+    @apply list-disc pl-5 space-y-1.5 mb-4;
+  }
+
+  .legal-prose ol {
+    @apply list-decimal pl-5 space-y-1.5 mb-4;
+  }
+
+  .legal-prose li {
+    @apply text-muted text-sm leading-relaxed;
+  }
+
+  .legal-prose strong {
+    @apply text-dark font-semibold;
+  }
+
+  .legal-prose a {
+    @apply text-primary underline hover:text-primary-800;
+  }
 }

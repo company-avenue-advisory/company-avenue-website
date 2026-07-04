@@ -196,6 +196,16 @@ export function Hero() {
               </motion.div>
             </motion.div>
 
+            <motion.div custom={3.5} variants={fadeUp} initial="hidden" animate="show">
+              <Link
+                href="/pricing"
+                className="inline-flex items-center gap-1.5 mt-4 text-white/50 hover:text-white text-xs font-heading font-medium transition-colors underline underline-offset-4 decoration-white/20"
+              >
+                View Pricing & Packages
+                <ArrowRight size={12} />
+              </Link>
+            </motion.div>
+
             {/* Trust points */}
             <motion.div custom={4} variants={fadeUp} initial="hidden" animate="show"
               className="grid grid-cols-2 gap-x-6 gap-y-2.5"

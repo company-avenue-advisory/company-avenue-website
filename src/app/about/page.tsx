@@ -1,39 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { CheckCircle, Award, Users, TrendingUp, Target, Eye } from "lucide-react";
+import Link from "next/link";
+import { CheckCircle, Award, Users, TrendingUp, Target, Eye, Linkedin, Mail } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Stats } from "@/components/sections/Stats";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { Badge } from "@/components/ui/Badge";
+import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "Learn about Company Avenue Advisory — 15+ years of trusted business compliance for Indian startups and SMEs.",
+  description: "CA Jatin Aggarwal, Principal Consultant at Company Avenue Advisory — 20 years of experience in taxation, ROC compliance and business advisory for Indian startups and SMEs.",
 };
-
-const team = [
-  {
-    name: "Rajesh Kumar",
-    role: "Founder & Managing Director",
-    qual: "CA, CS",
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
-    bio: "15+ years in corporate law, tax advisory, and company secretarial services.",
-  },
-  {
-    name: "Sunita Agarwal",
-    role: "Head of Taxation",
-    qual: "CA (ICAI)",
-    img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80",
-    bio: "Expert in income tax, GST compliance, and transfer pricing for SMEs.",
-  },
-  {
-    name: "Anil Mehta",
-    role: "Head of Registrations",
-    qual: "CS (ICSI)",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
-    bio: "Specializes in MCA filings, ROC compliance, and company secretarial work.",
-  },
-];
 
 const values = [
   { icon: CheckCircle, title: "Integrity", desc: "Ethical practice is the foundation of everything we do." },
@@ -56,9 +34,9 @@ export default function AboutPage() {
               Built on Trust. Driven by Expertise.
             </h1>
             <p className="text-white/55 text-lg leading-relaxed">
-              For over 15 years, Company Avenue Advisory has helped thousands of entrepreneurs, 
-              startups, and growing businesses navigate the complex world of compliance with 
-              confidence and clarity.
+              Founded in {COMPANY.founded}, Company Avenue Advisory is led by a Chartered
+              Accountant with 20 years of experience — helping entrepreneurs, startups, and
+              growing businesses navigate the complex world of compliance with confidence and clarity.
             </p>
           </div>
         </div>
@@ -112,8 +90,8 @@ export default function AboutPage() {
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-primary rounded-2xl p-5 text-white shadow-lg">
-                <p className="font-heading font-bold text-3xl">15+</p>
-                <p className="text-white/60 text-sm">Years of Service</p>
+                <p className="font-heading font-bold text-3xl">20+</p>
+                <p className="text-white/60 text-sm">Years of Experience</p>
               </div>
             </div>
           </div>
@@ -148,38 +126,54 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
+      {/* Principal Consultant */}
       <section className="section-pad bg-white" id="team">
         <div className="container-custom">
           <SectionHeader
             eyebrow="Leadership"
-            title="Meet the Experts Behind Your Compliance"
-            subtitle="Qualified CAs and Company Secretaries with deep expertise across every compliance domain."
+            title="The Expert Behind Your Compliance"
+            subtitle="Company Avenue Advisory is led by a Chartered Accountant with two decades of hands-on experience across taxation, ROC compliance, and business advisory."
             className="mb-16"
           />
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {team.map((member) => (
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-background rounded-2xl overflow-hidden border border-slate-100 shadow-card p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left">
               <div
-                key={member.name}
-                className="group bg-background rounded-2xl overflow-hidden border border-slate-100 shadow-card hover:shadow-card-hover transition-shadow"
+                className="w-24 h-24 rounded-2xl flex items-center justify-center font-heading font-bold text-white text-3xl shrink-0"
+                style={{ background: "linear-gradient(135deg, #0F2D52 0%, #1a6fa8 100%)" }}
               >
-                <div className="relative aspect-square overflow-hidden">
-                  <Image
-                    src={member.img}
-                    alt={member.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <div className="p-5">
-                  <p className="font-heading font-bold text-dark text-base">{member.name}</p>
-                  <p className="text-primary text-sm font-medium mb-1">{member.role}</p>
-                  <Badge variant="default" className="mb-3">{member.qual}</Badge>
-                  <p className="text-muted text-xs leading-relaxed">{member.bio}</p>
+                JA
+              </div>
+              <div>
+                <p className="font-heading font-bold text-dark text-xl">CA Jatin Aggarwal</p>
+                <p className="text-primary text-sm font-medium mb-2">Principal Consultant</p>
+                <Badge variant="default" className="mb-3">Chartered Accountant (ICAI)</Badge>
+                <p className="text-muted text-sm leading-relaxed mb-4">
+                  20 years of experience advising Indian startups and SMEs on GST, income tax,
+                  ROC/MCA compliance, payroll, and virtual-CFO advisory — the principal advisor
+                  behind every engagement at Company Avenue Advisory.
+                </p>
+                <div className="flex items-center justify-center sm:justify-start gap-4">
+                  <a
+                    href="https://www.linkedin.com/in/jatin-aggarwal-ca/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-primary text-xs font-heading font-semibold hover:underline"
+                  >
+                    <Linkedin size={14} /> LinkedIn
+                  </a>
+                  <a
+                    href="mailto:jatin@companyavenueadvisory.com"
+                    className="inline-flex items-center gap-1.5 text-primary text-xs font-heading font-semibold hover:underline"
+                  >
+                    <Mail size={14} /> jatin@companyavenueadvisory.com
+                  </a>
                 </div>
               </div>
-            ))}
+            </div>
+            <p className="text-center text-muted text-xs mt-6">
+              Supported by a dedicated team across taxation, ROC compliance, and payroll — every
+              engagement is personally reviewed by the principal consultant.
+            </p>
           </div>
         </div>
       </section>

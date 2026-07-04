@@ -239,6 +239,7 @@ export const NAV_LINKS = [
       },
     ],
   },
+  { label: "Pricing", href: "/pricing" },
   { label: "Get Help", href: "/contact", variant: "gethelp" as const },
 ];
 
