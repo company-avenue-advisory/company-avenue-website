@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://companyavenue.in",
+    url: "https://companyavenueadvisory.com",
     siteName: "Company Avenue Advisory",
     title: "Company Avenue Advisory Pvt. Ltd. | Business Registration & Compliance Experts",
     description:

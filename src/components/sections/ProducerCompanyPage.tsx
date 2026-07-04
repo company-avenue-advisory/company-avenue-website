@@ -202,7 +202,7 @@ export function ProducerCompanyPage() {
                 <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-heading font-semibold text-sm rounded-xl hover:bg-[#0a2444] transition-colors shadow-sm">
                   Book Free Consultation <ArrowRight size={15} />
                 </Link>
-                <a href="tel:+919876543210" className="inline-flex items-center gap-2 px-6 py-3.5 border border-slate-200 text-slate-700 font-heading font-semibold text-sm rounded-xl hover:border-primary hover:text-primary transition-all">
+                <a href="tel:+919953719111" className="inline-flex items-center gap-2 px-6 py-3.5 border border-slate-200 text-slate-700 font-heading font-semibold text-sm rounded-xl hover:border-primary hover:text-primary transition-all">
                   <Phone size={14} /> Talk to an Expert
                 </a>
               </motion.div>
@@ -556,13 +556,13 @@ export function ProducerCompanyPage() {
                 ))}
               </div>
               <div className="space-y-2">
-                <a href="tel:+919876543210" className="flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white text-xs font-heading font-semibold rounded-xl hover:bg-[#0a2444] transition-colors">
+                <a href="tel:+919953719111" className="flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white text-xs font-heading font-semibold rounded-xl hover:bg-[#0a2444] transition-colors">
                   <Phone size={13} /> Call Now
                 </a>
                 <Link href="/contact" className="flex items-center justify-center gap-2 w-full py-2.5 border border-primary text-primary text-xs font-heading font-semibold rounded-xl hover:bg-primary/5 transition-colors">
                   Book Consultation
                 </Link>
-                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors">
+                <a href="https://wa.me/919953719111" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors">
                   <MessageCircle size={13} /> WhatsApp
                 </a>
               </div>
@@ -593,8 +593,8 @@ export function ProducerCompanyPage() {
               <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-dark font-heading font-bold text-sm rounded-xl hover:bg-amber-400 transition-colors shadow-lg">
                 Get Started Today <ArrowRight size={16} />
               </Link>
-              <a href="tel:+919876543210" className="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-heading font-semibold text-sm rounded-xl hover:bg-white/10 transition-colors">
-                <Phone size={15} /> +91 98765 43210
+              <a href="tel:+919953719111" className="inline-flex items-center gap-2 px-8 py-4 border border-white/30 text-white font-heading font-semibold text-sm rounded-xl hover:bg-white/10 transition-colors">
+                <Phone size={15} /> +91 99537 19111
               </a>
             </div>
           </motion.div>

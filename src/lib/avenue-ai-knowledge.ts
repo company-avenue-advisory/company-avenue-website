@@ -53,9 +53,9 @@ When user says "export" or "import" → Recommend IEC + GST.
 When user says "protect brand" or "brand name" → Recommend Trademark Registration.
 
 ## Contact Information
-- Phone: +91 98765 43210
-- Email: info@companyavenue.in
-- Address: 123, Business Hub, Connaught Place, New Delhi – 110001
+- Phone: +91 99537 19111
+- Email: info@companyavenueadvisory.com
+- Address: 209, Jaina Tower 1, District Center, Professor Joginder Singh Marg, Janakpuri, New Delhi, Delhi 110058, India
 - Working Hours: Mon–Sat: 9:00 AM – 7:00 PM
 
 ## Booking Consultation

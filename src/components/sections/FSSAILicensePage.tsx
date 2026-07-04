@@ -233,13 +233,13 @@ function StickySidebar() {
           <p className="font-heading font-bold text-primary text-lg leading-none">₹1,999 <span className="text-xs text-muted font-normal">(Basic)</span></p>
         </div>
         <div className="space-y-2">
-          <a href="tel:+919876543210"
+          <a href="tel:+919953719111"
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white text-xs font-heading font-semibold rounded-xl hover:bg-[#0a2444] transition-colors"
           ><Phone size={13} /> Call Now</a>
           <Link href="/contact"
             className="flex items-center justify-center gap-2 w-full py-2.5 border border-primary text-primary text-xs font-heading font-semibold rounded-xl hover:bg-primary/5 transition-colors"
           >Book Free Consultation</Link>
-          <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
+          <a href="https://wa.me/919953719111" target="_blank" rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors"
           ><MessageCircle size={13} /> WhatsApp</a>
         </div>
@@ -336,7 +336,7 @@ export function FSSAILicensePage() {
                 >
                   Apply for FSSAI License <ArrowRight size={15} />
                 </Link>
-                <a href="tel:+919876543210"
+                <a href="tel:+919953719111"
                   className="inline-flex items-center gap-2 px-6 py-3.5 border border-slate-200 text-slate-700 font-heading font-semibold text-sm rounded-xl hover:border-primary hover:text-primary transition-all"
                 >
                   <Phone size={14} /> Free Consultation
@@ -759,7 +759,7 @@ export function FSSAILicensePage() {
               >
                 Apply for FSSAI License <ArrowRight size={15} />
               </Link>
-              <a href="tel:+919876543210"
+              <a href="tel:+919953719111"
                 className="inline-flex items-center gap-2 px-7 py-4 bg-white/10 border border-white/20 text-white font-heading font-semibold text-sm rounded-xl hover:bg-white/20 transition-colors"
               >
                 <Phone size={14} /> Speak to an FSSAI Expert

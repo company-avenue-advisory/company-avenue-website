@@ -248,7 +248,7 @@ function StickySidebar() {
           ))}
         </div>
         <div className="space-y-2">
-          <a href="tel:+919876543210"
+          <a href="tel:+919953719111"
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white text-xs font-heading font-semibold rounded-xl hover:bg-[#0a2444] transition-colors"
           >
             <Phone size={13} /> Call Now
@@ -258,7 +258,7 @@ function StickySidebar() {
           >
             Book Consultation
           </Link>
-          <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
+          <a href="https://wa.me/919953719111" target="_blank" rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors"
           >
             <MessageCircle size={13} /> WhatsApp
@@ -352,7 +352,7 @@ export function OPCPage() {
                 >
                   Register Your OPC <ArrowRight size={15} />
                 </Link>
-                <a href="tel:+919876543210"
+                <a href="tel:+919953719111"
                   className="inline-flex items-center gap-2 px-6 py-3.5 border border-slate-200 text-slate-700 font-heading font-semibold text-sm rounded-xl hover:border-primary hover:text-primary transition-all"
                 >
                   <Phone size={14} /> Talk to an Expert

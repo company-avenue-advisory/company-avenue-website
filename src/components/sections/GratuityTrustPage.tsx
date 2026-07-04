@@ -175,7 +175,7 @@ export function GratuityTrustPage() {
                 className="inline-flex items-center gap-2 bg-accent text-dark px-7 py-3.5 rounded-xl font-heading font-bold text-sm hover:bg-accent/90 transition-colors">
                 Set Up Gratuity Trust <ArrowRight size={15} />
               </Link>
-              <a href="tel:+919876543210"
+              <a href="tel:+919953719111"
                 className="inline-flex items-center gap-2 border border-white/20 text-white px-7 py-3.5 rounded-xl font-heading font-semibold text-sm hover:bg-white/10 transition-colors">
                 <Phone size={15} /> Talk to a CA
               </a>

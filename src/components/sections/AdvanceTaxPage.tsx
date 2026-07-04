@@ -268,7 +268,7 @@ export function AdvanceTaxPage() {
               >
                 Get Started — ₹1,999 <ArrowRight size={15} />
               </Link>
-              <a href="tel:+919876543210"
+              <a href="tel:+919953719111"
                 className="inline-flex items-center gap-2 border border-white/20 text-white font-heading font-semibold px-7 py-3.5 rounded-xl hover:border-accent hover:text-accent transition-colors text-sm"
               >
                 <Phone size={14} /> Call an Expert
@@ -332,7 +332,7 @@ export function AdvanceTaxPage() {
                 >
                   Calculate My Advance Tax <ArrowRight size={14} />
                 </Link>
-                <a href="tel:+919876543210"
+                <a href="tel:+919953719111"
                   className="inline-flex items-center gap-2 border border-slate-200 text-dark font-heading font-semibold px-6 py-3 rounded-xl hover:border-primary hover:text-primary transition-colors text-sm"
                 >
                   <Phone size={14} /> Speak to an Expert
@@ -712,10 +712,10 @@ export function AdvanceTaxPage() {
               >
                 Get Started — ₹1,999 <ArrowRight size={16} />
               </Link>
-              <a href="tel:+919876543210"
+              <a href="tel:+919953719111"
                 className="inline-flex items-center gap-2 border border-white/20 text-white font-heading font-semibold px-8 py-4 rounded-xl hover:border-accent hover:text-accent transition-colors text-base"
               >
-                <Phone size={16} /> Call +91 98765 43210
+                <Phone size={16} /> Call +91 99537 19111
               </a>
             </div>
             <p className="text-slate-400 text-xs mt-6 font-heading">

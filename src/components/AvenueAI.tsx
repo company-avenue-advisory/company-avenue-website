@@ -3,11 +3,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
-  X, Minus, Send, RotateCcw, Paperclip, ChevronRight,
+  X, Minus, Send, RotateCcw, Paperclip, ChevronRight, MessageCircle,
 } from "lucide-react";
 import {
   QUICK_ACTIONS, SUGGESTED_QUESTIONS, WELCOME_CAPABILITIES,
 } from "@/lib/avenue-ai-knowledge";
+import { COMPANY } from "@/lib/constants";
 import type { ChatMessage } from "@/app/api/avenue-ai/route";
 
 /* ─── Types ─── */
@@ -315,7 +316,7 @@ export function AvenueAI() {
       if (err instanceof Error && err.name === "AbortError") return;
       setMessages(prev => prev.map(m =>
         m.id === aiMsgId
-          ? { ...m, content: "I'm having trouble connecting right now. Please try again in a moment, or contact us directly at +91 98765 43210.", streaming: false }
+          ? { ...m, content: "I'm having trouble connecting right now. Please try again in a moment, or contact us directly at +91 99537 19111.", streaming: false }
           : m
       ));
     } finally {
@@ -396,6 +397,19 @@ export function AvenueAI() {
             </motion.div>
           )}
         </motion.button>
+
+        {/* WhatsApp FAB */}
+        <motion.a
+          href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.94 }}
+          aria-label="Chat with us on WhatsApp"
+          className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center bg-green-500 hover:bg-green-600 shadow-[0_8px_32px_rgba(37,211,102,0.4)] transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-green-400/40"
+        >
+          <MessageCircle size={26} className="text-white" fill="currentColor" strokeWidth={0} />
+        </motion.a>
       </div>
 
       {/* ── Chat Window ── */}
@@ -406,7 +420,7 @@ export function AvenueAI() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 24 }}
             transition={{ type: "spring", stiffness: 380, damping: 32 }}
-            className="fixed bottom-[100px] right-6 z-[9998] w-[calc(100vw-3rem)] max-w-[380px] flex flex-col rounded-[24px] overflow-hidden shadow-[0_24px_80px_rgba(15,45,82,0.22)] border border-slate-200/80"
+            className="fixed bottom-[164px] md:bottom-[180px] right-6 z-[9998] w-[calc(100vw-3rem)] max-w-[380px] flex flex-col rounded-[24px] overflow-hidden shadow-[0_24px_80px_rgba(15,45,82,0.22)] border border-slate-200/80"
             style={{ height: isMinimized ? "auto" : "min(640px, calc(100vh - 140px))" }}
             onWheel={e => e.stopPropagation()}
             role="dialog"

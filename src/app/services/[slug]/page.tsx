@@ -2443,7 +2443,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <Button href="/contact" variant="accent" size="lg">
                 Get Started — {detail.startingPrice}
               </Button>
-              <a href="tel:+919876543210" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm">
+              <a href="tel:+919953719111" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm">
                 <Phone size={14} />
                 Talk to an Expert
               </a>
@@ -2532,7 +2532,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 <Button href="/contact" variant="primary" size="md" className="w-full justify-center">
                   Book Consultation
                 </Button>
-                <a href="tel:+919876543210" className="flex items-center justify-center gap-2 mt-3 text-primary text-sm font-heading font-semibold hover:underline">
+                <a href="tel:+919953719111" className="flex items-center justify-center gap-2 mt-3 text-primary text-sm font-heading font-semibold hover:underline">
                   <Phone size={14} />
                   Call Now
                 </a>

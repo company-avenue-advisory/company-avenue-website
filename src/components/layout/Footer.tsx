@@ -1,7 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock, ArrowRight, Linkedin, Twitter, Instagram, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ArrowRight, Linkedin, Twitter, Facebook } from "lucide-react";
 import { COMPANY, SERVICES } from "@/lib/constants";
+
+const SHARE_URL = encodeURIComponent(COMPANY.website + "/");
+const SHARE_TITLE = encodeURIComponent(
+  "Company Avenue Advisory | Trusted CA & CS Services for All Your Corporate Needs"
+);
+
+const SOCIAL_LINKS = [
+  { icon: Facebook, href: `https://www.facebook.com/sharer/sharer.php?u=${SHARE_URL}`, label: "Share on Facebook" },
+  { icon: Linkedin, href: "https://www.linkedin.com/company/company-avenue-advisory-pvt-ltd/", label: "Follow us on LinkedIn" },
+  { icon: Twitter, href: `https://x.com/intent/tweet?text=${SHARE_TITLE}&url=${SHARE_URL}`, label: "Share on X" },
+];
 
 export function Footer() {
   const popularServices = SERVICES.slice(0, 6);
@@ -82,15 +93,12 @@ export function Footer() {
             </div>
 
             <div className="flex items-center gap-3 mt-6">
-              {[
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
-                { icon: Twitter, href: "#", label: "Twitter" },
-                { icon: Instagram, href: "#", label: "Instagram" },
-                { icon: Facebook, href: "#", label: "Facebook" },
-              ].map(({ icon: Icon, href, label }) => (
+              {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="w-9 h-9 rounded-lg bg-white/10 hover:bg-accent/20 flex items-center justify-center transition-colors"
                 >
@@ -191,7 +199,7 @@ export function Footer() {
             © {new Date().getFullYear()} {COMPANY.fullName}. All rights reserved.
           </p>
           <p>
-            GSTIN: {COMPANY.gstin} &nbsp;|&nbsp; CIN: U74999DL2009PTC000000
+            GSTIN: {COMPANY.gstin} &nbsp;|&nbsp; CIN: {COMPANY.cin}
           </p>
           <p>
             Designed & built with precision in India 🇮🇳

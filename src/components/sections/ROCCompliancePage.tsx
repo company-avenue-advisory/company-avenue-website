@@ -270,7 +270,7 @@ export function ROCCompliancePage() {
                 File My Annual Returns <ArrowRight size={15} />
               </Link>
               <a
-                href="tel:+919876543210"
+                href="tel:+919953719111"
                 className="inline-flex items-center gap-2 border border-white/20 text-white px-7 py-3.5 rounded-xl font-heading font-semibold text-sm hover:bg-white/10 transition-colors"
               >
                 <Phone size={15} /> Speak to a CS
@@ -668,7 +668,7 @@ export function ROCCompliancePage() {
                 File Now — ₹4,999/year <ArrowRight size={15} />
               </Link>
               <a
-                href="tel:+919876543210"
+                href="tel:+919953719111"
                 className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-xl font-heading font-semibold text-sm hover:bg-white/10 transition-colors"
               >
                 <Phone size={15} /> Call a Company Secretary

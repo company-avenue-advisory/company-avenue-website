@@ -124,7 +124,7 @@ export function ContactPage() {
                         </label>
                         <input
                           {...register("phone")}
-                          placeholder="+91 98765 43210"
+                          placeholder="+91 99537 19111"
                           className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm text-dark placeholder-muted focus:outline-none focus:border-primary transition-colors"
                         />
                         {errors.phone && (
