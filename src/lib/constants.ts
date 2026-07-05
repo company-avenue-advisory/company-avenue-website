@@ -58,7 +58,7 @@ export const NAV_LINKS = [
     ],
   },
   {
-    label: "IPR",
+    label: "IPR & Registrations",
     href: "/services",
     children: [
       {
@@ -85,6 +85,38 @@ export const NAV_LINKS = [
           { label: "Patent Registration", href: "/services/patent-registration" },
           { label: "Patent Search & Drafting", href: "/services/patent-search" },
           { label: "Design Registration", href: "/services/design-registration" },
+        ],
+      },
+      {
+        group: "Startup & MSME",
+        items: [
+          { label: "Startup India (DPIIT)", href: "/services/startup-india" },
+          { label: "MSME / Udyam Registration", href: "/services/msme-registration" },
+          { label: "IEC Registration (Import-Export)", href: "/services/iec-registration" },
+          { label: "APEDA Registration", href: "/services/apeda-registration" },
+        ],
+      },
+      {
+        group: "Licenses & Registrations",
+        items: [
+          { label: "FSSAI Food License", href: "/services/fssai-license" },
+          { label: "Professional Tax Registration", href: "/services/professional-tax" },
+          { label: "Trade License", href: "/services/trade-license" },
+          { label: "Drug License", href: "/services/drug-license" },
+          { label: "PSARA License", href: "/services/psara-license" },
+          { label: "LMPC Registration", href: "/services/lmpc-registration" },
+          { label: "AYUSH License", href: "/services/ayush-license" },
+        ],
+      },
+      {
+        group: "Industrial & Environment",
+        items: [
+          { label: "ISO Certification", href: "/services/iso-certification" },
+          { label: "BIS Registration", href: "/services/bis-registration" },
+          { label: "Environment Clearance (PCB)", href: "/services/environment-clearance" },
+          { label: "DOT / Telecom License", href: "/services/dot-telecom-license" },
+          { label: "Barcode Registration", href: "/services/barcode-registration" },
+          { label: "EPR Registration", href: "/services/epr-registration" },
         ],
       },
     ],
@@ -174,44 +206,6 @@ export const NAV_LINKS = [
     ],
   },
   {
-    label: "Regulatory",
-    href: "/services",
-    children: [
-      {
-        group: "Startup & MSME",
-        items: [
-          { label: "Startup India (DPIIT)", href: "/services/startup-india" },
-          { label: "MSME / Udyam Registration", href: "/services/msme-registration" },
-          { label: "IEC Registration (Import-Export)", href: "/services/iec-registration" },
-          { label: "APEDA Registration", href: "/services/apeda-registration" },
-        ],
-      },
-      {
-        group: "Licenses & Registrations",
-        items: [
-          { label: "FSSAI Food License", href: "/services/fssai-license" },
-          { label: "Professional Tax Registration", href: "/services/professional-tax" },
-          { label: "Trade License", href: "/services/trade-license" },
-          { label: "Drug License", href: "/services/drug-license" },
-          { label: "PSARA License", href: "/services/psara-license" },
-          { label: "LMPC Registration", href: "/services/lmpc-registration" },
-          { label: "AYUSH License", href: "/services/ayush-license" },
-        ],
-      },
-      {
-        group: "Industrial & Environment",
-        items: [
-          { label: "ISO Certification", href: "/services/iso-certification" },
-          { label: "BIS Registration", href: "/services/bis-registration" },
-          { label: "Environment Clearance (PCB)", href: "/services/environment-clearance" },
-          { label: "DOT / Telecom License", href: "/services/dot-telecom-license" },
-          { label: "Barcode Registration", href: "/services/barcode-registration" },
-          { label: "EPR Registration", href: "/services/epr-registration" },
-        ],
-      },
-    ],
-  },
-  {
     label: "Tools",
     href: "/calculators",
     children: [
@@ -239,6 +233,7 @@ export const NAV_LINKS = [
       },
     ],
   },
+  { label: "Blog", href: "/blog" },
   { label: "Pricing", href: "/pricing" },
   { label: "Get Help", href: "/contact", variant: "gethelp" as const },
 ];

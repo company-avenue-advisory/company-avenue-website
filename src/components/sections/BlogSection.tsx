@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Clock, ArrowUpRight, Newspaper } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useLiveNews } from "@/hooks/useLiveNews";
+import { BLOG_POSTS } from "@/lib/blog-posts";
 
 const CATEGORY_COLORS = [
   "bg-blue-50 text-blue-700",
@@ -14,38 +15,16 @@ const CATEGORY_COLORS = [
   "bg-amber-50 text-amber-700",
 ];
 
-const staticPosts = [
-  {
-    id: "private-limited-company-registration-guide",
-    title: "Complete Guide to Private Limited Company Registration in India (2024)",
-    excerpt: "Everything you need to know — documents, timeline, costs, and compliance requirements for incorporating a Pvt. Ltd.",
-    category: "Company Registration",
-    readTime: "8 min read",
-    date: "Dec 12, 2024",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=700&q=80",
-    categoryColor: "bg-blue-50 text-blue-700",
-  },
-  {
-    id: "gst-registration-process",
-    title: "GST Registration: Step-by-Step Guide for New Businesses",
-    excerpt: "A clear walkthrough of the process, eligibility criteria, required documents and common mistakes to avoid.",
-    category: "GST",
-    readTime: "6 min read",
-    date: "Dec 8, 2024",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80",
-    categoryColor: "bg-green-50 text-green-700",
-  },
-  {
-    id: "trademark-registration-india",
-    title: "Why Trademark Registration is Critical for Your Brand in India",
-    excerpt: "Protect your brand identity before someone else does. Classes, filing timelines and enforcement explained.",
-    category: "Trademark",
-    readTime: "5 min read",
-    date: "Nov 28, 2024",
-    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=700&q=80",
-    categoryColor: "bg-purple-50 text-purple-700",
-  },
-];
+const staticPosts = BLOG_POSTS.slice(0, 3).map((post, i) => ({
+  id: post.slug,
+  title: post.title,
+  excerpt: post.excerpt,
+  category: post.category,
+  readTime: post.readTime,
+  date: post.date,
+  image: post.image,
+  categoryColor: CATEGORY_COLORS[i % CATEGORY_COLORS.length],
+}));
 
 const liveCategories = ["All", "GST", "Income Tax", "Trademark", "Company Registration", "Accounting", "Compliance", "Business"];
 const staticCategories = ["GST", "Company Registration", "Trademark", "Income Tax", "Accounting", "Compliance"];
@@ -78,7 +57,7 @@ export function BlogSection() {
             className="mb-0"
           />
           <Link
-            href="/resources"
+            href="/blog"
             className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 border border-slate-200 bg-white text-slate-700 text-sm font-heading font-medium rounded-xl hover:border-primary hover:text-primary transition-all"
           >
             View All Articles
@@ -176,7 +155,7 @@ export function BlogSection() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
               >
                 <Link
-                  href={`/resources/${post.id}`}
+                  href="/blog"
                   className="group flex flex-col bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-card hover:border-primary/10 transition-all duration-300 h-full"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden">

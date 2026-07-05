@@ -56,10 +56,21 @@ export interface CompanyRecord {
   registered_office_address: string;
 }
 
+export interface NameLookupResult {
+  records: CompanyRecord[];
+  datasetUpdatedDate: string | null;
+}
+
 // The public API only supports exact-match filtering on company_name
 // (it's an ES "keyword" field — no wildcard/fuzzy/partial support, confirmed
 // by testing). This looks up one exact name and returns matching records.
-export async function lookupExactCompanyName(name: string): Promise<CompanyRecord[]> {
+//
+// IMPORTANT: this dataset is a periodic snapshot, not live data — as of
+// writing it was last refreshed 2024-12-13. Any company registered after
+// that date will not appear here even though it is real and active. Every
+// caller must surface `datasetUpdatedDate` to the user so a "no match" is
+// never read as "definitely available".
+export async function lookupExactCompanyName(name: string): Promise<NameLookupResult> {
   if (!DATA_GOV_API_KEY) throw new Error("DATA_GOV_API_KEY not configured");
 
   const params = new URLSearchParams({
@@ -74,9 +85,11 @@ export async function lookupExactCompanyName(name: string): Promise<CompanyRecor
 
   // The dataset has near-duplicate snapshot rows per CIN — dedupe.
   const seen = new Set<string>();
-  return records.filter((r) => {
+  const deduped = records.filter((r) => {
     if (seen.has(r.corporate_identification_number)) return false;
     seen.add(r.corporate_identification_number);
     return true;
   });
+
+  return { records: deduped, datasetUpdatedDate: (json.updated_date as string) ?? null };
 }

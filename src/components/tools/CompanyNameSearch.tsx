@@ -1,6 +1,11 @@
 "use client";
 import { useState } from "react";
-import { Search, Loader2, CheckCircle2, XCircle, AlertCircle, Sparkles } from "lucide-react";
+import { Search, Loader2, AlertCircle, AlertTriangle } from "lucide-react";
+
+interface Director {
+  name: string;
+  designation: string;
+}
 
 interface CompanyRecord {
   corporate_identification_number: string;
@@ -9,13 +14,15 @@ interface CompanyRecord {
   company_status: string;
   registered_state: string;
   registrar_of_companies: string;
+  directors: Director[] | null;
 }
 
 interface SearchResult {
   query: string;
   checkedVariants: string[];
   available: boolean;
-  matches: { variant: string; records: CompanyRecord[] }[];
+  matches: CompanyRecord[];
+  datasetUpdatedDate: string | null;
   combinations: {
     taken: { name: string; records: CompanyRecord[] }[];
     available: string[];
@@ -26,6 +33,22 @@ function formatDate(iso: string) {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
   return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+}
+
+function CompanyNarrative({ record }: { record: CompanyRecord }) {
+  const directorNames = record.directors?.map((d) => d.name).filter(Boolean) ?? [];
+  return (
+    <p className="text-sm text-slate-700 leading-relaxed">
+      <strong className="text-dark">{record.company_name}</strong> is registered with the
+      Ministry of Corporate Affairs, CIN <strong className="text-dark">{record.corporate_identification_number}</strong>,
+      incorporated on {formatDate(record.date_of_registration)} in {record.registered_state}
+      {record.registrar_of_companies && record.registrar_of_companies !== "NA" ? ` (${record.registrar_of_companies})` : ""}.
+      Its current status is <strong className="text-dark">{record.company_status}</strong>.
+      {directorNames.length > 0 && (
+        <> The registered directors/signatories on file are {directorNames.join(", ")}.</>
+      )}
+    </p>
+  );
 }
 
 export function CompanyNameSearch() {
@@ -58,6 +81,8 @@ export function CompanyNameSearch() {
     }
   }
 
+  const datasetDateLabel = result?.datasetUpdatedDate ? formatDate(result.datasetUpdatedDate) : null;
+
   return (
     <div className="bg-white rounded-2xl border border-slate-100 shadow-card p-6 md:p-8">
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -65,7 +90,7 @@ export function CompanyNameSearch() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="e.g. Zenith Traders"
+          placeholder="e.g. Zenith Traders, or a full legal name like Reliance Industries Limited"
           className="flex-1 px-4 py-3 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
         />
         <button
@@ -86,102 +111,76 @@ export function CompanyNameSearch() {
       )}
 
       {result && (
-        <div className="mt-6">
-          <div className={`flex items-center gap-3 px-5 py-4 rounded-2xl ${result.available ? "bg-green-50" : "bg-amber-50"}`}>
-            {result.available ? (
-              <CheckCircle2 size={22} className="text-green-600 shrink-0" />
-            ) : (
-              <XCircle size={22} className="text-amber-600 shrink-0" />
-            )}
-            <div>
-              <p className={`font-heading font-bold text-sm ${result.available ? "text-green-800" : "text-amber-800"}`}>
-                {result.available
-                  ? `The bare name "${result.query}" (with common suffixes) looks unregistered`
-                  : `A matching registered company was found`}
-              </p>
-              <p className="text-xs text-muted mt-0.5">
-                Checked: {result.checkedVariants.join(" · ")}
-              </p>
-            </div>
-          </div>
-
-          {result.matches.length > 0 && (
-            <div className="mt-4 space-y-3">
-              {result.matches.map((m) =>
-                m.records.map((r) => (
-                  <div key={r.corporate_identification_number} className="border border-slate-100 rounded-xl p-4">
-                    <p className="font-heading font-bold text-dark text-sm">{r.company_name}</p>
-                    <div className="mt-2 grid sm:grid-cols-2 gap-x-4 gap-y-1 text-xs text-muted">
-                      <span>CIN: <span className="text-dark font-medium">{r.corporate_identification_number}</span></span>
-                      <span>Status: <span className="text-dark font-medium">{r.company_status}</span></span>
-                      <span>State: <span className="text-dark font-medium">{r.registered_state}</span></span>
-                      <span>Incorporated: <span className="text-dark font-medium">{formatDate(r.date_of_registration)}</span></span>
-                    </div>
-                  </div>
-                ))
-              )}
+        <div className="mt-6 space-y-5">
+          {/* Staleness notice — always shown, never buried */}
+          {datasetDateLabel && (
+            <div className="flex items-start gap-2 p-3.5 bg-amber-50 border border-amber-100 rounded-xl text-amber-800 text-xs leading-relaxed">
+              <AlertTriangle size={14} className="shrink-0 mt-0.5" />
+              Our government data source was last refreshed on <strong>{datasetDateLabel}</strong>.
+              A company registered after that date will not show up here even though it is real
+              and active — a &ldquo;no match&rdquo; below is not proof the name is free. Always
+              confirm on the official{" "}
+              <a href="https://www.mca.gov.in/content/mca/global/en/foportal/fologin.html" target="_blank" rel="noopener noreferrer" className="underline font-medium">
+                MCA name check
+              </a>{" "}
+              before filing.
             </div>
           )}
 
-          {(result.combinations.taken.length > 0 || result.combinations.available.length > 0) && (
-            <div className="mt-6">
-              <div className="flex items-center gap-2 mb-3">
-                <Sparkles size={15} className="text-primary" />
-                <p className="font-heading font-bold text-dark text-sm">
-                  Similar Name Combinations for &ldquo;{result.query}&rdquo;
-                </p>
+          {/* Primary result — narrative */}
+          <div>
+            {result.matches.length > 0 ? (
+              <div className="space-y-3">
+                {result.matches.map((m) => (
+                  <CompanyNarrative key={m.corporate_identification_number} record={m} />
+                ))}
               </div>
-              <p className="text-xs text-muted mb-4">
-                A bare name being free doesn&rsquo;t mean every brandable combination is — we checked{" "}
-                {result.combinations.taken.length + result.combinations.available.length} common combinations
-                (Technologies, Ventures, Solutions, Infratech, and more) as Pvt Ltd and LLP.
+            ) : (
+              <p className="text-sm text-slate-700 leading-relaxed">
+                We found <strong className="text-dark">no record</strong> of &ldquo;{result.query}&rdquo;
+                — or its Private Limited, Limited, LLP, or OPC Private Limited variants — in our
+                data as of the refresh date above.
+              </p>
+            )}
+          </div>
+
+          {/* Combinations — narrative */}
+          {(result.combinations.taken.length > 0 || result.combinations.available.length > 0) && (
+            <div className="pt-4 border-t border-slate-100">
+              <p className="text-sm text-slate-700 leading-relaxed mb-3">
+                We also checked {result.combinations.taken.length + result.combinations.available.length}{" "}
+                common name combinations for &ldquo;{result.query}&rdquo; — words like Technologies,
+                Ventures, Solutions, and Infratech — registered as Private Limited or LLP entities.
               </p>
 
               {result.combinations.taken.length > 0 && (
-                <div className="mb-4">
-                  <p className="text-[11px] font-heading font-semibold uppercase tracking-wide text-amber-700 mb-2">
-                    Already Registered ({result.combinations.taken.length})
-                  </p>
-                  <div className="space-y-2">
-                    {result.combinations.taken.map((t) =>
-                      t.records.map((r) => (
-                        <div key={r.corporate_identification_number} className="flex items-center justify-between gap-3 bg-amber-50 border border-amber-100 rounded-xl px-4 py-2.5 text-xs">
-                          <span className="font-heading font-semibold text-dark">{r.company_name}</span>
-                          <span className="text-muted shrink-0">{r.registered_state} · {formatDate(r.date_of_registration)}</span>
-                        </div>
-                      ))
-                    )}
-                  </div>
+                <div className="space-y-3 mb-4">
+                  {result.combinations.taken.map((t) =>
+                    t.records.map((r) => (
+                      <CompanyNarrative key={r.corporate_identification_number} record={r} />
+                    ))
+                  )}
                 </div>
               )}
 
               {result.combinations.available.length > 0 && (
-                <div>
-                  <p className="text-[11px] font-heading font-semibold uppercase tracking-wide text-green-700 mb-2">
-                    Looks Available ({result.combinations.available.length})
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {result.combinations.available.map((n) => (
-                      <span key={n} className="text-xs font-medium text-green-800 bg-green-50 border border-green-100 px-3 py-1.5 rounded-full">
-                        {n}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <p className="text-sm text-slate-500 leading-relaxed">
+                  No record was found for: {result.combinations.available.map((n, i) => (
+                    <span key={n}>
+                      <strong className="text-slate-600 font-medium">{n}</strong>
+                      {i < result.combinations.available.length - 1 ? ", " : "."}
+                    </span>
+                  ))}
+                </p>
               )}
             </div>
           )}
 
-          <div className="mt-6 p-4 bg-slate-50 rounded-xl text-xs text-muted leading-relaxed">
+          <div className="pt-2 text-xs text-muted leading-relaxed">
             This checks <strong className="text-dark">exact-name matches</strong> against the
-            government&rsquo;s Company Master Data across common legal suffixes (Pvt Ltd, Ltd, LLP, OPC)
-            and common descriptive word combinations. It does not check phonetic similarity, trademark
-            conflicts, or MCA&rsquo;s full name-approval rules (Rule 8, Companies Incorporation Rules) —
-            always confirm with the official{" "}
-            <a href="https://www.mca.gov.in/mcafoportal/checkCompanyName.do" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-              MCA name check
-            </a>{" "}
-            before filing.
+            government&rsquo;s Company Master Data. It does not check phonetic similarity,
+            trademark conflicts, or MCA&rsquo;s full name-approval rules (Rule 8, Companies
+            Incorporation Rules).
           </div>
         </div>
       )}

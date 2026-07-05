@@ -149,7 +149,7 @@ export function Footer() {
                 { label: "About Us", href: "/about" },
                 { label: "Our Team", href: "/about#team" },
                 { label: "Careers", href: "/careers" },
-                { label: "Blog & Resources", href: "/resources" },
+                { label: "Blog", href: "/blog" },
                 { label: "Client Testimonials", href: "/#testimonials" },
                 { label: "Contact Us", href: "/contact" },
               ].map((item) => (

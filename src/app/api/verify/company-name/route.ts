@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { lookupExactCompanyName, isDataGovConfigured, type CompanyRecord } from "@/lib/datagovin";
+import { sandboxPost, isSandboxConfigured } from "@/lib/sandbox";
 
 const SUFFIXES = [" PRIVATE LIMITED", " LIMITED", " LLP", " OPC PRIVATE LIMITED"];
 
@@ -11,15 +12,51 @@ const SUFFIXES = [" PRIVATE LIMITED", " LIMITED", " LLP", " OPC PRIVATE LIMITED"
 const COMBO_WORDS = ["TECHNOLOGIES", "VENTURES", "SOLUTIONS", "ENTERPRISES", "INDUSTRIES", "INFRATECH", "EXPORTS", "CONSULTANTS"];
 const COMBO_SUFFIXES = [" PRIVATE LIMITED", " LLP"];
 
+interface MatchedCompany extends CompanyRecord {
+  directors: { name: string; designation: string }[] | null;
+}
+
 interface CheckResult {
   name: string;
   records: CompanyRecord[];
 }
 
-async function checkAll(names: string[]): Promise<CheckResult[]> {
-  return Promise.all(
-    names.map(async (name) => ({ name, records: await lookupExactCompanyName(name) }))
+async function checkAll(names: string[]): Promise<{ results: CheckResult[]; datasetUpdatedDate: string | null }> {
+  let datasetUpdatedDate: string | null = null;
+  const results = await Promise.all(
+    names.map(async (name) => {
+      const { records, datasetUpdatedDate: d } = await lookupExactCompanyName(name);
+      if (d) datasetUpdatedDate = d;
+      return { name, records };
+    })
   );
+  return { results, datasetUpdatedDate };
+}
+
+// Best-effort enrichment: pull director/signatory names for a matched CIN via
+// Sandbox's live MCA connector. This connector has been unreliable (times out
+// upstream) — if it fails, we simply return without directors rather than
+// blocking the whole response on it.
+async function enrichWithDirectors(cin: string): Promise<{ name: string; designation: string }[] | null> {
+  if (!isSandboxConfigured()) return null;
+  try {
+    const result = await sandboxPost<{
+      data: { "directors/signatory_details": { name: string; designation: string }[] };
+    }>("/mca/company/master-data/search", {
+      "@entity": "in.co.sandbox.kyc.mca.master_data.request",
+      id: cin,
+      consent: "Y",
+      reason: "Enriching company name search result with director details for prospective founder.",
+    });
+    return result.data["directors/signatory_details"] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+async function toMatchedCompany(record: CompanyRecord): Promise<MatchedCompany> {
+  const directors = await enrichWithDirectors(record.corporate_identification_number);
+  return { ...record, directors };
 }
 
 export async function POST(req: NextRequest) {
@@ -46,23 +83,30 @@ export async function POST(req: NextRequest) {
     : COMBO_WORDS.flatMap((word) => COMBO_SUFFIXES.map((s) => `${cleaned} ${word}${s}`));
 
   try {
-    const [primaryResults, comboResults] = await Promise.all([
+    const [primary, combos] = await Promise.all([
       checkAll(primaryVariants),
-      checkAll(comboVariants),
+      comboVariants.length ? checkAll(comboVariants) : Promise.resolve({ results: [] as CheckResult[], datasetUpdatedDate: null }),
     ]);
 
-    const primaryMatches = primaryResults.filter((r) => r.records.length > 0);
+    const datasetUpdatedDate = primary.datasetUpdatedDate ?? combos.datasetUpdatedDate;
 
-    const comboTaken = comboResults.filter((r) => r.records.length > 0);
-    const comboAvailable = comboResults.filter((r) => r.records.length === 0).map((r) => r.name);
+    const primaryHits = primary.results.filter((r) => r.records.length > 0).flatMap((r) => r.records);
+    const primaryMatches = await Promise.all(primaryHits.map(toMatchedCompany));
+
+    const comboTakenRaw = combos.results.filter((r) => r.records.length > 0);
+    const comboTaken = await Promise.all(
+      comboTakenRaw.map(async (t) => ({ name: t.name, records: await Promise.all(t.records.map(toMatchedCompany)) }))
+    );
+    const comboAvailable = combos.results.filter((r) => r.records.length === 0).map((r) => r.name);
 
     return NextResponse.json({
       query: cleaned,
       checkedVariants: primaryVariants,
       available: primaryMatches.length === 0,
       matches: primaryMatches,
+      datasetUpdatedDate,
       combinations: {
-        taken: comboTaken.map((t) => ({ name: t.name, records: t.records })),
+        taken: comboTaken,
         available: comboAvailable,
       },
     });

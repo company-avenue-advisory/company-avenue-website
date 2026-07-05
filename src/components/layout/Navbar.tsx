@@ -24,7 +24,7 @@ const POPULAR_CARDS: Record<string, PopularCard> = {
     href: "/services/private-limited-company",
     cta: "Register Now",
   },
-  "IPR": {
+  "IPR & Registrations": {
     badge: "Popular Choice",
     title: "Trademark Registration",
     desc: "Protect your brand under the Trade Marks Act, 1999. Expert filing, objection & renewal support.",
@@ -45,16 +45,9 @@ const POPULAR_CARDS: Record<string, PopularCard> = {
     href: "/services/roc-compliance",
     cta: "File Now",
   },
-  "Regulatory": {
-    badge: "Popular Choice",
-    title: "MSME / Udyam Registration",
-    desc: "Get Govt recognition in 1 day. Unlock collateral-free loans, subsidies & priority sector benefits.",
-    href: "/services/msme-registration",
-    cta: "Register Now",
-  },
 };
 
-const MEGA_LABELS = ["Start Business", "IPR", "Tax & Payroll", "Compliance", "Regulatory"];
+const MEGA_LABELS = ["Start Business", "IPR & Registrations", "Tax & Payroll", "Compliance"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
