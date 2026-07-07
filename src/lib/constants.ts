@@ -233,7 +233,21 @@ export const NAV_LINKS = [
       },
     ],
   },
-  { label: "Blog", href: "/blog" },
+  {
+    label: "Resources",
+    href: "/guides",
+    children: [
+      {
+        group: "Learn & Do",
+        items: [
+          { label: "How-To Guides", href: "/guides" },
+          { label: "Document Templates", href: "/templates" },
+          { label: "Business Resources", href: "/resources" },
+          { label: "Blog & Industry News", href: "/blog" },
+        ],
+      },
+    ],
+  },
   { label: "Pricing", href: "/pricing" },
   { label: "Get Help", href: "/contact", variant: "gethelp" as const },
 ];

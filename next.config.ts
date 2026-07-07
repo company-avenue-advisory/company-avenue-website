@@ -9,8 +9,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/resources", destination: "/blog", permanent: true },
-      { source: "/resources/:slug", destination: "/blog", permanent: true },
+      // /resources is now a live Business Resources hub. Any legacy sub-paths
+      // fall back to the hub itself.
+      { source: "/resources/:slug", destination: "/resources", permanent: true },
     ];
   },
 };

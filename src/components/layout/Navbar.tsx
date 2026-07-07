@@ -256,7 +256,11 @@ export function Navbar() {
               >
                 <SimpleDropdown
                   groups={activeSimpleItem.children as NavGroup[]}
-                  showViewAll={{ label: "View all tools", href: "/calculators" }}
+                  showViewAll={
+                    activeSimpleItem.label === "Tools"
+                      ? { label: "View all tools", href: "/calculators" }
+                      : undefined
+                  }
                   onClose={() => setActiveDropdown(null)}
                 />
               </motion.div>

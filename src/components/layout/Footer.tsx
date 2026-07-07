@@ -147,10 +147,10 @@ export function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: "About Us", href: "/about" },
-                { label: "Our Team", href: "/about#team" },
-                { label: "Careers", href: "/careers" },
+                { label: "How-To Guides", href: "/guides" },
+                { label: "Document Templates", href: "/templates" },
+                { label: "Business Resources", href: "/resources" },
                 { label: "Blog", href: "/blog" },
-                { label: "Client Testimonials", href: "/#testimonials" },
                 { label: "Contact Us", href: "/contact" },
               ].map((item) => (
                 <li key={item.href}>
