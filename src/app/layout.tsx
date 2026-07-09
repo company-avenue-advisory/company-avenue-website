@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { AvenueAILoader } from "@/components/AvenueAILoader";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -85,10 +83,7 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background text-dark antialiased">
         <SmoothScroll>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <AvenueAILoader />
+          <SiteChrome>{children}</SiteChrome>
         </SmoothScroll>
       </body>
     </html>

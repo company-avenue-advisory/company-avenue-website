@@ -34,6 +34,7 @@ const services = [
 
 export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -42,10 +43,24 @@ export function ContactPage() {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 1200));
-    console.log(data);
-    setSubmitted(true);
-    reset();
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/consultation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error ?? "Something went wrong. Please try again.");
+      }
+      setSubmitted(true);
+      reset();
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -177,6 +192,9 @@ export function ContactPage() {
                         <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
                       )}
                     </div>
+                    {submitError && (
+                      <p className="text-red-500 text-sm text-center">{submitError}</p>
+                    )}
                     <Button
                       type="submit"
                       variant="primary"
