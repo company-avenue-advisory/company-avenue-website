@@ -210,15 +210,47 @@ export const NAV_LINKS = [
     href: "/calculators",
     children: [
       {
-        group: "Calculators & Tools",
+        group: "Tax & Business",
         items: [
           { label: "GST Calculator", href: "/calculators/gst-calculator" },
           { label: "Income Tax Calculator", href: "/calculators/income-tax-calculator" },
+          { label: "TDS Calculator", href: "/calculators/tds-calculator" },
           { label: "TDS Rate Finder", href: "/calculators/tds-rate-finder" },
+          { label: "HRA Calculator", href: "/calculators/hra-calculator" },
+          { label: "Salary Calculator", href: "/calculators/salary-calculator" },
+          { label: "Gratuity Calculator", href: "/calculators/gratuity-calculator" },
+          { label: "Business Setup Calculator", href: "/calculators/business-setup-calculator" },
           { label: "Company Registration Cost", href: "/calculators/company-registration-cost" },
+          { label: "Compliance Cost Calculator", href: "/calculators/compliance-cost-calculator" },
+        ],
+      },
+      {
+        group: "Loan & EMI",
+        items: [
+          { label: "EMI Calculator", href: "/calculators/emi-calculator" },
+          { label: "Home Loan EMI Calculator", href: "/calculators/home-loan-emi-calculator" },
+        ],
+      },
+      {
+        group: "Investment & Savings",
+        items: [
+          { label: "SIP Calculator", href: "/calculators/sip-calculator" },
+          { label: "Lumpsum Calculator", href: "/calculators/lumpsum-calculator" },
+          { label: "Mutual Fund Returns Calculator", href: "/calculators/mutual-fund-calculator" },
+          { label: "Compound Interest Calculator", href: "/calculators/compound-interest-calculator" },
+          { label: "FD Calculator", href: "/calculators/fd-calculator" },
+          { label: "RD Calculator", href: "/calculators/rd-calculator" },
+          { label: "PPF Calculator", href: "/calculators/ppf-calculator" },
+          { label: "EPF Calculator", href: "/calculators/epf-calculator" },
+          { label: "NPS Calculator", href: "/calculators/nps-calculator" },
+          { label: "Retirement Planning Calculator", href: "/calculators/retirement-calculator" },
+        ],
+      },
+      {
+        group: "Advisors & Comparisons",
+        items: [
           { label: "LLP vs Pvt Ltd Comparison", href: "/calculators/llp-vs-pvt-ltd" },
           { label: "Business Structure Advisor", href: "/calculators/business-structure-advisor" },
-          { label: "Annual Compliance Cost Calculator", href: "/calculators/compliance-cost-calculator" },
         ],
       },
       {

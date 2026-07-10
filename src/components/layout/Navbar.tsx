@@ -47,7 +47,11 @@ const POPULAR_CARDS: Record<string, PopularCard> = {
   },
 };
 
-const MEGA_LABELS = ["Start Business", "IPR & Registrations", "Tax & Payroll", "Compliance"];
+const MEGA_LABELS = ["Start Business", "IPR & Registrations", "Tax & Payroll", "Compliance", "Tools"];
+
+const MEGA_VIEW_ALL: Record<string, { label: string; href: string }> = {
+  Tools: { label: "All Tools", href: "/calculators" },
+};
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -234,6 +238,7 @@ export function Navbar() {
                   label={activeMegaItem.label}
                   groups={activeMegaItem.children as NavGroup[]}
                   popular={POPULAR_CARDS[activeMegaItem.label]}
+                  viewAll={MEGA_VIEW_ALL[activeMegaItem.label]}
                   onClose={() => setActiveDropdown(null)}
                 />
               </motion.div>
@@ -372,11 +377,13 @@ export function Navbar() {
 }
 
 /* ─── Mega Menu ─── */
-function MegaMenuDropdown({ label, groups, popular, onClose }: {
-  label: string; groups: NavGroup[]; popular?: PopularCard; onClose: () => void;
+function MegaMenuDropdown({ label, groups, popular, viewAll, onClose }: {
+  label: string; groups: NavGroup[]; popular?: PopularCard;
+  viewAll?: { label: string; href: string }; onClose: () => void;
 }) {
   const [activeGroup, setActiveGroup] = useState(groups[0]?.group ?? "");
   const current = groups.find((g) => g.group === activeGroup) ?? groups[0];
+  const viewAllLink = viewAll ?? { label: "All Services", href: "/services" };
 
   return (
     <div className="flex" style={{ minHeight: 340 }}>
@@ -399,9 +406,9 @@ function MegaMenuDropdown({ label, groups, popular, onClose }: {
           </button>
         ))}
         <div className="mt-3 pt-3 border-t border-slate-200 px-2">
-          <Link href="/services" onClick={onClose}
+          <Link href={viewAllLink.href} onClick={onClose}
             className="flex items-center justify-between w-full text-xs font-heading font-semibold text-accent hover:text-accent-dark transition-colors">
-            All Services <ArrowRight size={11} />
+            {viewAllLink.label} <ArrowRight size={11} />
           </Link>
         </div>
       </div>
@@ -419,7 +426,7 @@ function MegaMenuDropdown({ label, groups, popular, onClose }: {
             <div className="grid grid-cols-2 gap-x-3 gap-y-0.5">
               {current?.items.map((child) => (
                 <Link key={child.href} href={child.href} onClick={onClose}
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm text-slate-600 hover:text-primary hover:bg-primary/5 transition-all group">
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] text-slate-600 hover:text-primary hover:bg-primary/5 transition-all group">
                   <ArrowRight size={10} className="text-accent opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                   {child.label}
                 </Link>
