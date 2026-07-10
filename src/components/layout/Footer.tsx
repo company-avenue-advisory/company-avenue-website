@@ -53,10 +53,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand col */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center mb-5">
+            <Link href="/" className="inline-flex items-center mb-5">
               <div className="relative h-14 w-56">
                 <Image
-                  src="/images/logo.webp"
+                  src="/images/new_logo_dark.png"
                   alt={COMPANY.fullName}
                   fill
                   className="object-contain object-left"

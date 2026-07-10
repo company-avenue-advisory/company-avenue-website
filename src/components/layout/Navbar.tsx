@@ -126,16 +126,20 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? "bg-white/96 backdrop-blur-md border-b border-slate-100 shadow-sm"
+            ? "bg-primary-900/95 backdrop-blur-md border-b border-white/10 shadow-lg"
             : "bg-white border-b border-slate-100"
         )}
       >
         <nav className="container-custom flex items-center justify-between h-[72px] relative" ref={navRef}>
-          {/* Logo */}
+          {/* Logo — light on white bar, dark variant once the bar turns navy */}
           <Link href="/" className="shrink-0" onClick={() => setActiveDropdown(null)}>
-            <div className="relative h-14 w-52">
-              <Image src="/images/logo.webp" alt={COMPANY.fullName} fill
-                className="object-contain object-left" priority sizes="208px" />
+            <div className="relative h-14 w-56">
+              <Image src="/images/new_logo.png" alt={COMPANY.fullName} fill priority sizes="224px"
+                className={cn("object-contain object-left transition-opacity duration-300",
+                  scrolled ? "opacity-0" : "opacity-100")} />
+              <Image src="/images/new_logo_dark.png" alt={COMPANY.fullName} fill sizes="224px"
+                className={cn("object-contain object-left transition-opacity duration-300",
+                  scrolled ? "opacity-100" : "opacity-0")} />
             </div>
           </Link>
 
@@ -155,14 +159,17 @@ export function Navbar() {
                     className={cn(
                       "inline-flex items-center gap-1 px-3.5 py-2 text-sm font-heading font-medium rounded-lg transition-all",
                       activeDropdown === item.label
-                        ? "text-primary bg-primary/5"
-                        : "text-slate-600 hover:text-primary hover:bg-slate-50"
+                        ? (scrolled ? "text-white bg-white/10" : "text-primary bg-primary/5")
+                        : (scrolled
+                            ? "text-white/85 hover:text-white hover:bg-white/10"
+                            : "text-slate-600 hover:text-primary hover:bg-slate-50")
                     )}
                   >
                     {item.label}
                     <ChevronDown size={13} className={cn(
-                      "text-slate-400 transition-transform duration-200",
-                      activeDropdown === item.label ? "rotate-180 text-primary" : ""
+                      "transition-transform duration-200",
+                      scrolled ? "text-white/60" : "text-slate-400",
+                      activeDropdown === item.label ? cn("rotate-180", scrolled ? "text-white" : "text-primary") : ""
                     )} />
                   </button>
 
@@ -170,7 +177,12 @@ export function Navbar() {
                 </div>
               ) : (
                 <Link key={item.label} href={item.href}
-                  className="px-3.5 py-2 text-sm font-heading font-medium text-slate-600 hover:text-primary rounded-lg hover:bg-slate-50 transition-all">
+                  className={cn(
+                    "px-3.5 py-2 text-sm font-heading font-medium rounded-lg transition-all",
+                    scrolled
+                      ? "text-white/85 hover:text-white hover:bg-white/10"
+                      : "text-slate-600 hover:text-primary hover:bg-slate-50"
+                  )}>
                   {item.label}
                 </Link>
               )
@@ -187,7 +199,12 @@ export function Navbar() {
               >
                 <button
                   onClick={() => setActiveDropdown(activeDropdown === "Get Help" ? null : "Get Help")}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-heading font-semibold rounded-xl hover:bg-primary-800 transition-colors shadow-sm"
+                  className={cn(
+                    "inline-flex items-center gap-2 px-5 py-2.5 text-sm font-heading font-semibold rounded-xl transition-colors shadow-sm",
+                    scrolled
+                      ? "bg-accent text-primary-900 hover:bg-accent-light"
+                      : "bg-primary text-white hover:bg-primary-800"
+                  )}
                 >
                   Get Help
                   <ChevronDown size={13} className={cn("transition-transform duration-200", activeDropdown === "Get Help" ? "rotate-180" : "")} />
@@ -213,7 +230,10 @@ export function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors"
+            className={cn(
+              "lg:hidden p-2 rounded-lg transition-colors",
+              scrolled ? "text-white hover:bg-white/10" : "text-slate-700 hover:bg-slate-100"
+            )}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -285,9 +305,9 @@ export function Navbar() {
             className="fixed inset-0 z-40 bg-white flex flex-col"
           >
             <div className="flex items-center justify-between px-5 h-[72px] border-b border-slate-100 shrink-0">
-              <div className="relative h-12 w-44">
-                <Image src="/images/logo.webp" alt={COMPANY.fullName} fill
-                  className="object-contain object-left" sizes="176px" />
+              <div className="relative h-12 w-48">
+                <Image src="/images/new_logo.png" alt={COMPANY.fullName} fill
+                  className="object-contain object-left" sizes="192px" />
               </div>
               <button className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors"
                 onClick={() => setMobileOpen(false)} aria-label="Close menu">

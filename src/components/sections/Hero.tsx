@@ -1,19 +1,17 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  Star, Receipt, ShieldCheck, BookOpen, FileText, BadgeCheck, Building2,
-} from "lucide-react";
+import { Star } from "lucide-react";
 import { HeroSearch } from "@/components/sections/hero/HeroSearch";
 
-/* ─── floating compliance badges, spread around the centered content ─── */
-const floatingBadges = [
-  { icon: BadgeCheck,  label: "Certificate Issued", color: "text-green-600",  bg: "bg-green-50",  delay: 0.55, pos: "top-[20%] left-[4%]",   dur: "3.2s" },
-  { icon: Receipt,     label: "GST Approved",       color: "text-blue-600",   bg: "bg-blue-50",   delay: 0.7,  pos: "top-[46%] left-[7%]",   dur: "3.8s" },
-  { icon: ShieldCheck, label: "Trademark Filed",    color: "text-purple-600", bg: "bg-purple-50", delay: 0.85, pos: "bottom-[16%] left-[11%]", dur: "3.5s" },
-  { icon: FileText,    label: "ROC Filing Done",    color: "text-orange-600", bg: "bg-orange-50", delay: 1.0,  pos: "top-[22%] right-[5%]",  dur: "4.1s" },
-  { icon: BookOpen,    label: "ITR Submitted",      color: "text-teal-600",   bg: "bg-teal-50",   delay: 1.15, pos: "top-[48%] right-[8%]",  dur: "3.6s" },
-  { icon: Building2,   label: "Company Registered", color: "text-sky-600",    bg: "bg-sky-50",    delay: 1.3,  pos: "bottom-[15%] right-[10%]", dur: "3.9s" },
+/* ─── floating decorative elements ─── */
+const floatingElements = [
+  { type: "circle", pos: "top-[15%] left-[8%]", size: 60, delay: 0.5, dur: "4s" },
+  { type: "square", pos: "top-[45%] left-[5%]", size: 45, delay: 0.7, dur: "5s" },
+  { type: "triangle", pos: "bottom-[20%] left-[12%]", size: 50, delay: 0.9, dur: "4.5s" },
+  { type: "circle", pos: "top-[25%] right-[10%]", size: 55, delay: 1.1, dur: "5.5s" },
+  { type: "square", pos: "top-[50%] right-[6%]", size: 40, delay: 1.3, dur: "4.8s" },
+  { type: "triangle", pos: "bottom-[18%] right-[14%]", size: 48, delay: 1.5, dur: "5.2s" },
 ];
 
 const fadeUp = {
@@ -33,13 +31,23 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex items-center overflow-hidden pt-[72px]"
-      style={{ background: "linear-gradient(160deg, #05101f 0%, #091a30 35%, #0a2240 60%, #0d2a4e 100%)" }}
+      className="relative flex items-center justify-center overflow-hidden"
+      style={{ minHeight: "100vh" }}
     >
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/99a2d6b7-7657-484c-aa91-99607b20ff78.png')",
+        }}
+      />
+      {/* Dark overlay to ensure text readability */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#05101f]/90 via-[#091a30]/85 to-[#0a2240]/80" />
+      
       {/* ══ BACKGROUND LAYERS ══ */}
       <div className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -94,59 +102,67 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Floating badges */}
-      {floatingBadges.map((badge) => {
-        const Icon = badge.icon;
-        return (
-          <motion.div
-            key={badge.label}
-            initial={{ opacity: 0, scale: 0.75, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: badge.delay, ease: [0.25, 0.1, 0.25, 1] }}
-            className={`absolute ${badge.pos} hidden lg:flex items-center gap-2 rounded-xl px-3 py-2 whitespace-nowrap z-[5]`}
-            style={{
-              background: "rgba(8,20,42,0.8)",
-              backdropFilter: "blur(16px)",
-              WebkitBackdropFilter: "blur(16px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
-              animation: `badgeFloat ${badge.dur} ease-in-out infinite`,
-              animationDelay: `${badge.delay}s`,
-            }}
-          >
-            <div className={`w-6 h-6 rounded-lg ${badge.bg} flex items-center justify-center shrink-0`}>
-              <Icon size={12} className={badge.color} />
-            </div>
-            <span className="text-xs font-heading font-semibold text-slate-200">{badge.label}</span>
-          </motion.div>
-        );
-      })}
+      {/* Floating decorative elements */}
+      {floatingElements.map((el, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.08, scale: 1 }}
+          transition={{ duration: 0.6, delay: el.delay, ease: "easeOut" }}
+          className={`absolute ${el.pos} hidden lg:block pointer-events-none z-[3]`}
+          style={{
+            width: el.size,
+            height: el.size,
+            animation: `elementFloat ${el.dur} ease-in-out infinite`,
+            animationDelay: `${el.delay}s`,
+          }}
+        >
+          {el.type === "circle" && (
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(77,166,232,0.6)" strokeWidth="2" />
+              <circle cx="50" cy="50" r="35" fill="none" stroke="rgba(214,166,79,0.4)" strokeWidth="1.5" />
+            </svg>
+          )}
+          {el.type === "square" && (
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <rect x="5" y="5" width="90" height="90" fill="none" stroke="rgba(214,166,79,0.5)" strokeWidth="2" />
+              <rect x="20" y="20" width="60" height="60" fill="none" stroke="rgba(77,166,232,0.4)" strokeWidth="1.5" />
+            </svg>
+          )}
+          {el.type === "triangle" && (
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <polygon points="50,10 90,85 10,85" fill="none" stroke="rgba(77,166,232,0.5)" strokeWidth="2" />
+              <polygon points="50,25 75,70 25,70" fill="none" stroke="rgba(214,166,79,0.4)" strokeWidth="1.5" />
+            </svg>
+          )}
+        </motion.div>
+      ))}
 
       {/* ══ CENTERED CONTENT ══ */}
-      <motion.div style={{ y: yContent, opacity }} className="container-custom relative z-10 py-24 md:py-28">
-        <div className="max-w-3xl mx-auto text-center">
+      <motion.div style={{ y: yContent, opacity }} className="container-custom relative z-10 w-full py-38 md:py-44">
+        <div className="max-w-4xl mx-auto text-center">
 
           {/* Rating pill */}
           <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show"
-            className="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-8 border"
+            className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-8 border"
             style={{ background: "rgba(214,166,79,0.08)", borderColor: "rgba(214,166,79,0.25)" }}
           >
             <span className="flex items-center gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={12} className="text-amber-400 fill-amber-400" />
+                <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
               ))}
             </span>
-            <span className="text-amber-200/90 text-xs font-heading font-semibold tracking-wide">
+            <span className="text-amber-200/90 text-sm font-heading font-semibold tracking-wide">
               4.9/5 · Trusted by 1000+ Business Owners
             </span>
           </motion.div>
 
           {/* H1 */}
           <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
-            className="font-heading font-bold text-[2.4rem] sm:text-5xl lg:text-[3.6rem] leading-[1.1] tracking-tight mb-6"
+            className="font-heading font-bold text-[2.6rem] sm:text-5xl lg:text-[4rem] leading-[1.1] tracking-tight mb-7"
             style={{ color: "#f0f6ff" }}
           >
-            Start, Run &amp; Grow Your Business —{" "}
+            Start, Run &amp; Grow Your Business -{" "}
             <span style={{ background: "linear-gradient(90deg, #4da6e8 0%, #D6A64F 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Fully Compliant.
             </span>
@@ -154,11 +170,11 @@ export function Hero() {
 
           {/* Subheading */}
           <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
-            className="text-slate-400 text-base md:text-lg leading-relaxed mb-9 max-w-2xl mx-auto"
+            className="text-slate-300 text-lg md:text-xl leading-relaxed mb-10 max-w-3xl mx-auto"
           >
             Company registration, GST, trademark, tax filing and ROC compliance —
             handled end-to-end by{" "}
-            <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-sm font-heading font-semibold align-middle"
+            <span className="inline-flex items-center rounded-full px-3 py-1 text-base font-heading font-semibold align-middle"
               style={{ background: "rgba(77,166,232,0.14)", border: "1px solid rgba(77,166,232,0.3)", color: "#9fcbf0" }}
             >
               expert CAs &amp; CS
@@ -173,7 +189,7 @@ export function Hero() {
 
           {/* Trust strip */}
           <motion.div custom={5} variants={fadeUp} initial="hidden" animate="show"
-            className="mt-11 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-400"
+            className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-slate-300"
           >
             {[
               { k: "15+", v: "Years Experience" },
@@ -181,9 +197,9 @@ export function Hero() {
               { k: "50+", v: "Compliance Services" },
               { k: "4.9★", v: "Google Rating" },
             ].map((s) => (
-              <div key={s.v} className="flex items-baseline gap-1.5">
-                <span className="font-heading font-bold text-white text-lg">{s.k}</span>
-                <span className="text-xs md:text-sm">{s.v}</span>
+              <div key={s.v} className="flex items-baseline gap-2">
+                <span className="font-heading font-bold text-white text-xl">{s.k}</span>
+                <span className="text-sm md:text-base">{s.v}</span>
               </div>
             ))}
           </motion.div>
@@ -196,9 +212,9 @@ export function Hero() {
       />
 
       <style>{`
-        @keyframes badgeFloat {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-7px); }
+        @keyframes elementFloat {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-12px) rotate(5deg); }
         }
       `}</style>
     </section>

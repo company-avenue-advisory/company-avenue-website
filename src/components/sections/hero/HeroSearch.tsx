@@ -109,18 +109,20 @@ export function HeroSearch() {
   }
 
   return (
-    <div ref={wrapRef} className="relative w-full max-w-2xl mx-auto">
+    <div ref={wrapRef} className="relative w-full max-w-3xl mx-auto">
       {/* Search bar */}
       <div
-        className="group relative flex items-center rounded-2xl transition-all"
+        className="group relative flex items-center rounded-full transition-all"
         style={{
-          background: "rgba(255,255,255,0.97)",
+          background: "rgba(255,255,255,0.12)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
           boxShadow: open
-            ? "0 0 0 2px rgba(214,166,79,0.55), 0 24px 60px rgba(3,12,28,0.5)"
-            : "0 12px 44px rgba(3,12,28,0.45), inset 0 1px 0 rgba(255,255,255,0.6)",
+            ? "0 0 0 2px rgba(214,166,79,0.55), 0 20px 50px rgba(3,12,28,0.4)"
+            : "0 8px 32px rgba(3,12,28,0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
         }}
       >
-        <Search size={20} className="absolute left-5 text-primary/50" />
+        <Search size={20} className="absolute left-5 text-white/60" />
         <input
           value={query}
           onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
@@ -128,11 +130,11 @@ export function HeroSearch() {
           onKeyDown={onKeyDown}
           aria-label="Search services"
           placeholder={`Search "${ROTATING[placeholderIdx]}"`}
-          className="w-full bg-transparent pl-14 pr-32 py-4 md:py-[18px] text-[15px] md:text-base text-dark placeholder:text-slate-400 font-body rounded-2xl focus:outline-none"
+          className="w-full bg-transparent pl-14 pr-32 py-4 text-base md:text-[17px] text-white placeholder:text-white/50 font-body rounded-full focus:outline-none"
         />
         <button
           onClick={() => go()}
-          className="absolute right-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-heading font-semibold text-sm text-white transition-all hover:brightness-110"
+          className="absolute right-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-heading font-semibold text-sm text-white transition-all hover:brightness-110"
           style={{ background: "linear-gradient(135deg, #1565a8 0%, #0F2D52 100%)", boxShadow: "0 4px 16px rgba(21,101,168,0.4)" }}
         >
           <Search size={15} />

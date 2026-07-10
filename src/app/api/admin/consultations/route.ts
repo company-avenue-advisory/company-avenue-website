@@ -5,17 +5,23 @@ import { getDb, isMongoConfigured } from "@/lib/mongodb";
 // reaches this handler.
 export async function GET() {
   if (!isMongoConfigured()) {
+    console.error("[admin/consultations] MongoDB not configured - MONGODB_URI missing");
     return NextResponse.json({ error: "Database not configured." }, { status: 503 });
   }
 
   try {
+    console.log("[admin/consultations] Attempting to connect to MongoDB...");
     const db = await getDb();
+    console.log("[admin/consultations] Connected, fetching consultations...");
+    
     const docs = await db
       .collection("consultations")
       .find({})
       .sort({ createdAt: -1 })
       .limit(500)
       .toArray();
+
+    console.log(`[admin/consultations] Found ${docs.length} consultations`);
 
     const consultations = docs.map((d) => ({
       id: String(d._id),
@@ -30,7 +36,10 @@ export async function GET() {
 
     return NextResponse.json({ consultations });
   } catch (err) {
-    console.error("[admin/consultations]", err);
-    return NextResponse.json({ error: "Could not load submissions." }, { status: 502 });
+    console.error("[admin/consultations] Error:", err);
+    return NextResponse.json({ 
+      error: "Could not load submissions.", 
+      details: err instanceof Error ? err.message : String(err) 
+    }, { status: 502 });
   }
 }
