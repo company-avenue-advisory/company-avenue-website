@@ -133,7 +133,7 @@ export function Navbar() {
         <nav className="container-custom flex items-center justify-between h-[72px] relative" ref={navRef}>
           {/* Logo — light on white bar, dark variant once the bar turns navy */}
           <Link href="/" className="shrink-0" onClick={() => setActiveDropdown(null)}>
-            <div className="relative h-14 w-56">
+            <div className="relative h-11 w-44">
               <Image src="/images/new_logo.png" alt={COMPANY.fullName} fill priority sizes="224px"
                 className={cn("object-contain object-left transition-opacity duration-300",
                   scrolled ? "opacity-0" : "opacity-100")} />
@@ -305,9 +305,9 @@ export function Navbar() {
             className="fixed inset-0 z-40 bg-white flex flex-col"
           >
             <div className="flex items-center justify-between px-5 h-[72px] border-b border-slate-100 shrink-0">
-              <div className="relative h-12 w-48">
+              <div className="relative h-10 w-40">
                 <Image src="/images/new_logo.png" alt={COMPANY.fullName} fill
-                  className="object-contain object-left" sizes="192px" />
+                  className="object-contain object-left" sizes="160px" />
               </div>
               <button className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors"
                 onClick={() => setMobileOpen(false)} aria-label="Close menu">
