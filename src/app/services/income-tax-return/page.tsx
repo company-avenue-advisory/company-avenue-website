@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ITRPage } from "@/components/sections/ITRPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/income-tax-return" },
   title: "Income Tax Return (ITR) Filing Online | Expert Tax Filing Services | Company Avenue Advisory",
   description:
     "File your Income Tax Return online with Company Avenue Advisory. Understand ITR forms, eligibility, required documents, due dates, deductions, refunds, and expert tax filing services.",

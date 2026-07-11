@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { OPCPage } from "@/components/sections/OPCPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/one-person-company" },
   title: "One Person Company (OPC) Registration Online | Company Avenue Advisory",
   description:
     "Register your One Person Company (OPC) online with Company Avenue Advisory. Compare OPC vs Sole Proprietorship vs Pvt Ltd, understand eligibility, documents, process, compliance, and pricing.",

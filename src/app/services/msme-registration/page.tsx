@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { MSMERegistrationPage } from "@/components/sections/MSMERegistrationPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/msme-registration" },
   title: "MSME / Udyam Registration Online | Collateral-Free Loans & Govt. Schemes | Company Avenue",
   description:
     "Register your business under Udyam (MSME) and unlock collateral-free loans, government subsidies, priority procurement, and 20+ exclusive schemes. ₹0 government fee. Certificate in 1 business day.",

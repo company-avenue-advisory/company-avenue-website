@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PayrollManagementPage } from "@/components/sections/PayrollManagementPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/payroll-management" },
   title: "Payroll Management Services | PF, ESIC, TDS & Form 16 | Company Avenue",
   description:
     "End-to-end payroll outsourcing for Indian businesses. Salary computation, payslips, PF ECR, ESIC, Professional Tax, TDS on salary, Form 16, and full statutory compliance. CA-managed, on-time, every month.",

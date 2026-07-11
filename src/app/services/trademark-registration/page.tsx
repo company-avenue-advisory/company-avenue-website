@@ -1,31 +1,49 @@
 import type { Metadata } from "next";
 import { TrademarkPage } from "@/components/sections/TrademarkPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Trademark Registration Online | Brand Protection & TM Filing | Company Avenue Advisory",
+  title: "Trademark Registration in Delhi | Protect Your Brand",
   description:
-    "Protect your brand with online trademark registration. Learn about trademark classes, search, filing process, objections, renewals, and complete trademark protection with Company Avenue Advisory.",
+    "Register your trademark in Delhi with expert help. Class search, filing & objection support. Transparent pricing, CA & CS led. Book a free consultation.",
+  alternates: { canonical: "/services/trademark-registration" },
   keywords: [
-    "trademark registration",
-    "trademark registration online",
-    "register trademark india",
-    "brand registration",
-    "trademark filing",
+    "trademark registration in Delhi",
+    "trademark registration cost",
+    "brand name registration",
+    "TM registration online",
     "trademark search",
-    "trademark class",
-    "trademark certificate",
-    "trademark renewal",
     "trademark objection",
-    "intellectual property registration",
   ],
   openGraph: {
-    title: "Trademark Registration Online | Brand Protection | Company Avenue Advisory",
+    title: "Trademark Registration in Delhi | Protect Your Brand",
     description:
-      "Register your trademark with expert assistance. Free search included, class selection guidance, objection handling, and renewal support. PAN India service.",
+      "Register your trademark in Delhi with expert help. Class search, filing & objection support. CA & CS led.",
     type: "website",
   },
 };
 
 export default function TrademarkRegistrationPage() {
-  return <TrademarkPage />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          serviceSchema({
+            name: "Trademark Registration in Delhi",
+            description:
+              "Trademark registration in Delhi with expert class search, filing and objection support. CA & CS led, transparent pricing.",
+            path: "/services/trademark-registration",
+            areaServed: "Delhi",
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Trademark Registration", path: "/services/trademark-registration" },
+          ]),
+        ]}
+      />
+      <TrademarkPage />
+    </>
+  );
 }

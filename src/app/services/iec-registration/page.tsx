@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IECRegistrationPage } from "@/components/sections/IECRegistrationPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/iec-registration" },
   title: "Import Export Code (IEC) Registration | DGFT Registration | Company Avenue",
   description:
     "Get your Import Export Code (IEC) registration online with Company Avenue. Expert DGFT registration assistance, documentation support, fast processing, and complete guidance for import-export businesses across India.",

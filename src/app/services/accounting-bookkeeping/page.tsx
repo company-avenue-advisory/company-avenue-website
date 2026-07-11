@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AccountingBookkeepingPage } from "@/components/sections/AccountingBookkeepingPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/accounting-bookkeeping" },
   title: "Professional Accounting & Bookkeeping Services | Company Avenue",
   description:
     "Outsource your accounting to qualified CAs. Get error-free books, monthly P&L reports, GST accounting, payroll management, and end-to-end financial compliance. Starting at ₹2,499/month.",

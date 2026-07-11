@@ -1,31 +1,49 @@
 import type { Metadata } from "next";
 import { GSTPage } from "@/components/sections/GSTPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "GST Registration Online | Apply GSTIN with Expert Assistance | Company Avenue Advisory",
+  title: "GST Registration in Delhi | Get GSTIN Online Fast",
   description:
-    "Register your business under GST online with Company Avenue Advisory. Check eligibility, understand the GST registration process, required documents, timelines, GSTIN issuance, and post-registration compliance.",
+    "Get your GSTIN in Delhi quickly with expert CAs. 100% online GST registration, document help, transparent pricing. Free consultation — chat on WhatsApp.",
+  alternates: { canonical: "/services/gst-registration" },
   keywords: [
-    "GST registration",
+    "GST registration in Delhi",
     "GST registration online",
-    "GST registration india",
-    "GST number registration",
+    "GSTIN registration",
+    "new GST registration",
     "apply GSTIN",
-    "GST certificate",
-    "GST registration process",
-    "GST registration documents",
-    "GST registration for business",
-    "GST registration for startups",
-    "GST consultant",
+    "GST consultant Delhi",
   ],
   openGraph: {
-    title: "GST Registration Online | Apply GSTIN | Company Avenue Advisory",
+    title: "GST Registration in Delhi | Get GSTIN Online Fast",
     description:
-      "Get your GSTIN in 2–7 working days with expert CA assistance. 100% online, transparent pricing, PAN India service.",
+      "Get your GSTIN in Delhi quickly with expert CAs. 100% online, transparent pricing, document help.",
     type: "website",
   },
 };
 
 export default function GSTRegistrationPage() {
-  return <GSTPage />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          serviceSchema({
+            name: "GST Registration in Delhi",
+            description:
+              "100% online GST registration in Delhi with expert CAs — eligibility check, document help and fast GSTIN issuance.",
+            path: "/services/gst-registration",
+            areaServed: "Delhi",
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "GST Registration", path: "/services/gst-registration" },
+          ]),
+        ]}
+      />
+      <GSTPage />
+    </>
+  );
 }

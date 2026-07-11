@@ -1,28 +1,49 @@
 import type { Metadata } from "next";
 import { PrivateLimitedPage } from "@/components/sections/PrivateLimitedPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Private Limited Company Registration in India | Company Avenue Advisory",
+  title: "Private Limited Company Registration in Delhi | Fast",
   description:
-    "Register your Private Limited Company in India with expert CAs. Complete assistance with name approval, MCA incorporation, PAN, TAN and post-registration compliance. 7–10 working days. 100% online.",
+    "Register your Pvt Ltd company in Delhi in 7–10 days. CA-led, 100% online, fixed transparent pricing, no hidden fees. Book a free consultation now.",
+  alternates: { canonical: "/services/private-limited-company" },
   keywords: [
-    "private limited company registration",
+    "private limited company registration in Delhi",
+    "pvt ltd registration cost",
+    "company incorporation",
+    "pvt ltd company registration online",
     "register pvt ltd company",
     "company registration in india",
-    "company incorporation",
-    "MCA company registration",
-    "private limited registration india",
-    "how to register private limited company india",
-    "documents for private limited company registration",
   ],
   openGraph: {
-    title: "Private Limited Company Registration in India",
+    title: "Private Limited Company Registration in Delhi",
     description:
-      "Start your Private Limited Company with experienced Chartered Accountants. 7–10 working days, 100% online, transparent pricing.",
+      "Register your Pvt Ltd company in Delhi in 7–10 days. CA-led, 100% online, transparent pricing.",
     type: "website",
   },
 };
 
 export default function PrivateLimitedCompanyPage() {
-  return <PrivateLimitedPage />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          serviceSchema({
+            name: "Private Limited Company Registration in Delhi",
+            description:
+              "CA-led Private Limited Company registration in Delhi in 7–10 days — name approval, MCA incorporation, PAN, TAN and compliance.",
+            path: "/services/private-limited-company",
+            areaServed: "Delhi",
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: "Private Limited Company Registration", path: "/services/private-limited-company" },
+          ]),
+        ]}
+      />
+      <PrivateLimitedPage />
+    </>
+  );
 }

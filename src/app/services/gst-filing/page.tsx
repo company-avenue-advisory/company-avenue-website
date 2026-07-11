@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GSTFilingPage } from "@/components/sections/GSTFilingPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/gst-filing" },
   title: "GST Return Filing Online | GSTR-1, GSTR-3B & Annual GST Returns | Company Avenue Advisory",
   description:
     "File GST returns online with expert assistance. Learn about GSTR-1, GSTR-3B, annual GST returns, due dates, penalties, compliance requirements, and filing timelines.",

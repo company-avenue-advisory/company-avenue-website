@@ -3,6 +3,9 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { SiteChrome } from "@/components/layout/SiteChrome";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Analytics, GtmNoScript } from "@/components/analytics/Analytics";
+import { organizationSchema, SITE_URL } from "@/lib/seo";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -19,6 +22,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  // NOTE: no site-wide `alternates.canonical` — a root canonical would be
+  // inherited by every page that doesn't set its own, pointing them all at "/".
+  // Each page sets its own canonical; unset pages self-canonicalize to their URL.
   title: {
     default: "Company Avenue Advisory Pvt. Ltd. | Business Registration & Compliance Experts",
     template: "%s | Company Avenue Advisory",
@@ -65,6 +72,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} ${inter.variable} overflow-x-hidden`}>
       <head>
+        <JsonLd data={organizationSchema} />
+        <Analytics />
         {/* Anti-FOUC: hide body until stylesheet is parsed */}
         <style dangerouslySetInnerHTML={{ __html: `
           body { visibility: hidden; }
@@ -82,6 +91,7 @@ export default function RootLayout({
         `}} />
       </head>
       <body className="font-body bg-background text-dark antialiased overflow-x-hidden w-full max-w-full">
+        <GtmNoScript />
         <SmoothScroll>
           <SiteChrome>{children}</SiteChrome>
         </SmoothScroll>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LLPPage } from "@/components/sections/LLPPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/llp-registration" },
   title: "LLP Registration in India | Limited Liability Partnership | Company Avenue Advisory",
   description:
     "Register your Limited Liability Partnership (LLP) in India with expert CAs. Complete assistance with DSC, DPIN, name reservation, MCA incorporation, PAN, TAN. 7–10 working days. 100% online.",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { StartupIndiaPage } from "@/components/sections/StartupIndiaPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services/startup-india" },
   title: "Startup India Registration | DPIIT Recognition | Company Avenue",
   description:
     "Register your startup under the Startup India initiative with expert DPIIT recognition assistance. Unlock tax exemptions, angel tax relief, funding benefits, patent support, and government incentives with Company Avenue.",

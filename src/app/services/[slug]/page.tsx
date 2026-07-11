@@ -2412,6 +2412,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${service.title} | Company Avenue Advisory`,
     description: detail.tagline,
+    alternates: { canonical: `/services/${slug}` },
   };
 }
 

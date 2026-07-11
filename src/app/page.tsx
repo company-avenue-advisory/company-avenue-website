@@ -14,9 +14,10 @@ import { CalculatorsTeaser } from "@/components/sections/CalculatorsTeaser";
 import { VerifyToolsTeaser } from "@/components/sections/VerifyToolsTeaser";
 
 export const metadata: Metadata = {
-  title: "Company Avenue Advisory Pvt. Ltd. | Company Registration, GST, Trademark & Compliance",
+  title: "Company Registration & GST Services in Delhi | CA-Led",
   description:
-    "Company Avenue Advisory — India's trusted partner for Private Limited Company Registration, GST Registration, Trademark, Income Tax Filing, ROC Compliance and Accounting. Expert Chartered Accountants. 100% Online.",
+    "Register your company, get GST, trademark & compliance done by expert CAs in Delhi. 100% online, transparent pricing. Free consultation — call today.",
+  alternates: { canonical: "/" },
   keywords: [
     "company registration india",
     "private limited company registration",
