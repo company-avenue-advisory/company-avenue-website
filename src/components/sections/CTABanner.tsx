@@ -6,7 +6,7 @@ import { COMPANY } from "@/lib/constants";
 
 export function CTABanner() {
   return (
-    <section className="relative overflow-hidden bg-[#0F2D52] py-24">
+    <section className="relative overflow-hidden bg-[#0F2D52] py-14 md:py-24">
       {/* Subtle dot grid */}
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"

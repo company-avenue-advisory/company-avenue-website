@@ -24,13 +24,13 @@ const industries = [
 
 export function Industries() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-14 md:py-24 bg-white">
       <div className="container-custom">
         <SectionHeader
           eyebrow="Industries"
           title="Businesses We Serve"
           subtitle="Across every sector — from early-stage startups to established enterprises — we bring the same level of expertise and care."
-          className="mb-16"
+          className="mb-10 md:mb-16"
         />
 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">

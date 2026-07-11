@@ -31,8 +31,7 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex items-center justify-center overflow-hidden"
-      style={{ minHeight: "100vh" }}
+      className="relative flex items-center justify-center overflow-hidden min-h-[88vh] md:min-h-screen"
     >
       {/* Background Image with Overlay */}
       <div 
@@ -139,12 +138,12 @@ export function Hero() {
       ))}
 
       {/* ══ CENTERED CONTENT ══ */}
-      <motion.div style={{ y: yContent, opacity }} className="container-custom relative z-10 w-full py-38 md:py-44">
+      <motion.div style={{ y: yContent, opacity }} className="container-custom relative z-10 w-full py-20 md:py-44">
         <div className="max-w-4xl mx-auto text-center">
 
           {/* Rating pill */}
           <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show"
-            className="inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-8 border"
+            className="inline-flex items-center gap-2 md:gap-2.5 rounded-full px-3.5 py-1.5 md:px-5 md:py-2 mb-5 md:mb-8 border"
             style={{ background: "rgba(214,166,79,0.08)", borderColor: "rgba(214,166,79,0.25)" }}
           >
             <span className="flex items-center gap-0.5">
@@ -152,14 +151,14 @@ export function Hero() {
                 <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
               ))}
             </span>
-            <span className="text-amber-200/90 text-sm font-heading font-semibold tracking-wide">
+            <span className="text-amber-200/90 text-xs sm:text-sm font-heading font-semibold tracking-wide">
               4.9/5 · Trusted by 1000+ Business Owners
             </span>
           </motion.div>
 
           {/* H1 */}
           <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
-            className="font-heading font-bold text-[2.6rem] sm:text-5xl lg:text-[4rem] leading-[1.1] tracking-tight mb-7"
+            className="font-heading font-bold text-[1.7rem] sm:text-5xl lg:text-[4rem] leading-[1.15] sm:leading-[1.1] tracking-tight mb-4 md:mb-7"
             style={{ color: "#f0f6ff" }}
           >
             Start, Run &amp; Grow Your Business -{" "}
@@ -170,11 +169,11 @@ export function Hero() {
 
           {/* Subheading */}
           <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
-            className="text-slate-300 text-lg md:text-xl leading-relaxed mb-10 max-w-3xl mx-auto"
+            className="text-slate-300 text-sm md:text-xl leading-relaxed mb-7 md:mb-10 max-w-3xl mx-auto px-1"
           >
             Company registration, GST, trademark, tax filing and ROC compliance —
             handled end-to-end by{" "}
-            <span className="inline-flex items-center rounded-full px-3 py-1 text-base font-heading font-semibold align-middle"
+            <span className="inline-flex items-center rounded-full px-2.5 py-0.5 md:px-3 md:py-1 text-sm md:text-base font-heading font-semibold align-middle"
               style={{ background: "rgba(77,166,232,0.14)", border: "1px solid rgba(77,166,232,0.3)", color: "#9fcbf0" }}
             >
               expert CAs &amp; CS
@@ -189,7 +188,7 @@ export function Hero() {
 
           {/* Trust strip */}
           <motion.div custom={5} variants={fadeUp} initial="hidden" animate="show"
-            className="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-slate-300"
+            className="mt-9 md:mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-10 md:gap-y-4 text-slate-300"
           >
             {[
               { k: "15+", v: "Years Experience" },
@@ -197,9 +196,9 @@ export function Hero() {
               { k: "50+", v: "Compliance Services" },
               { k: "4.9★", v: "Google Rating" },
             ].map((s) => (
-              <div key={s.v} className="flex items-baseline gap-2">
-                <span className="font-heading font-bold text-white text-xl">{s.k}</span>
-                <span className="text-sm md:text-base">{s.v}</span>
+              <div key={s.v} className="flex items-baseline gap-1.5 md:gap-2">
+                <span className="font-heading font-bold text-white text-base md:text-xl">{s.k}</span>
+                <span className="text-xs md:text-base">{s.v}</span>
               </div>
             ))}
           </motion.div>

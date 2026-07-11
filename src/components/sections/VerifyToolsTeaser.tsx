@@ -52,7 +52,7 @@ export function VerifyToolsTeaser() {
           subtitle="Real government-data lookups — GST, PAN, MCA company & director records, and trademark class guidance."
         />
 
-        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="mt-8 md:mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {TOOLS.map((tool, i) => {
             const Icon = tool.icon;
             return (

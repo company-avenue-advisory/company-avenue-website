@@ -42,9 +42,9 @@ export function BlogSection() {
   }, [liveArticles, activeCategory]);
 
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-14 md:py-24 bg-slate-50">
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-9 md:mb-14">
           <SectionHeader
             eyebrow="Knowledge Hub"
             title="Latest Business & Tax Insights"

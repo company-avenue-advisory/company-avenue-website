@@ -32,7 +32,7 @@ export function SectionHeader({
       )}
     >
       {eyebrow && (
-        <span className="inline-flex items-center gap-2 text-xs font-heading font-semibold tracking-widest uppercase text-accent mb-4">
+        <span className="inline-flex items-center gap-2 text-[11px] sm:text-xs font-heading font-semibold tracking-widest uppercase text-accent mb-3 md:mb-4">
           <span className="w-6 h-px bg-accent" />
           {eyebrow}
           <span className="w-6 h-px bg-accent" />
@@ -40,14 +40,14 @@ export function SectionHeader({
       )}
       <h2
         className={cn(
-          "heading-lg text-dark mb-4 text-balance",
+          "heading-lg text-dark mb-3 md:mb-4 text-balance",
           titleClassName
         )}
       >
         {title}
       </h2>
       {subtitle && (
-        <p className="text-muted text-base md:text-lg leading-relaxed">
+        <p className="text-muted text-sm md:text-lg leading-relaxed">
           {subtitle}
         </p>
       )}

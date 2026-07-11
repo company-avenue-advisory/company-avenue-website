@@ -52,15 +52,15 @@
   }
 
   .heading-xl {
-    @apply font-heading font-bold text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight;
+    @apply font-heading font-bold text-[1.7rem] sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight;
   }
 
   .heading-lg {
-    @apply font-heading font-bold text-3xl md:text-4xl leading-tight tracking-tight;
+    @apply font-heading font-bold text-[1.4rem] sm:text-3xl md:text-4xl leading-tight tracking-tight;
   }
 
   .heading-md {
-    @apply font-heading font-semibold text-2xl md:text-3xl leading-snug;
+    @apply font-heading font-semibold text-xl sm:text-2xl md:text-3xl leading-snug;
   }
 
   .heading-sm {

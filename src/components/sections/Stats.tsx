@@ -13,9 +13,9 @@ const stats = [
 
 export function Stats() {
   return (
-    <section className="py-20 bg-slate-50 border-y border-slate-100">
+    <section className="py-12 md:py-20 bg-slate-50 border-y border-slate-100">
       <div className="container-custom">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4">
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
@@ -25,15 +25,15 @@ export function Stats() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm text-center group hover:shadow-card hover:border-primary/10 transition-all duration-300"
+                className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-slate-100 shadow-sm text-center group hover:shadow-card hover:border-primary/10 transition-all duration-300"
               >
-                <div className={`w-10 h-10 rounded-xl ${stat.bg} flex items-center justify-center mx-auto mb-3`}>
-                  <Icon size={18} className={stat.color} />
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${stat.bg} flex items-center justify-center mx-auto mb-2 sm:mb-3`}>
+                  <Icon size={16} className={stat.color} />
                 </div>
-                <div className={`font-heading font-bold text-3xl md:text-4xl ${stat.color} mb-1`}>
+                <div className={`font-heading font-bold text-xl sm:text-3xl md:text-4xl ${stat.color} mb-0.5 sm:mb-1`}>
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="text-muted text-xs font-body leading-snug">{stat.label}</p>
+                <p className="text-muted text-[11px] sm:text-xs font-body leading-snug">{stat.label}</p>
               </motion.div>
             );
           })}

@@ -115,7 +115,7 @@ export function Testimonials() {
   const mapsUrl = isLive && reviewsData?.configured ? reviewsData.mapsUrl : "#";
 
   return (
-    <section className="py-24 bg-white" id="testimonials">
+    <section className="py-14 md:py-24 bg-white" id="testimonials">
       <div className="container-custom">
         <SectionHeader
           eyebrow="Client Stories"
@@ -125,7 +125,7 @@ export function Testimonials() {
               ? "Real reviews from our Google Business Profile — founders, directors and business owners we've helped grow."
               : "Real reviews from founders, directors and business owners we have helped grow."
           }
-          className="mb-14"
+          className="mb-10 md:mb-14"
         />
 
         <div

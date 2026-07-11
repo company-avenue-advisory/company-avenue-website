@@ -63,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${inter.variable}`}>
+    <html lang="en" className={`${plusJakarta.variable} ${inter.variable} overflow-x-hidden`}>
       <head>
         {/* Anti-FOUC: hide body until stylesheet is parsed */}
         <style dangerouslySetInnerHTML={{ __html: `
@@ -81,7 +81,7 @@ export default function RootLayout({
           })();
         `}} />
       </head>
-      <body className="font-body bg-background text-dark antialiased">
+      <body className="font-body bg-background text-dark antialiased overflow-x-hidden w-full max-w-full">
         <SmoothScroll>
           <SiteChrome>{children}</SiteChrome>
         </SmoothScroll>

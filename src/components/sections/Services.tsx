@@ -28,16 +28,16 @@ const services = [
 
 export function Services() {
   return (
-    <section className="py-24 bg-white" id="services">
+    <section className="py-14 md:py-24 bg-white" id="services">
       <div className="container-custom">
         <SectionHeader
           eyebrow="Our Services"
           title="Business Solutions Under One Roof"
           subtitle="From business registration to taxation and compliance, our team ensures your business stays legally compliant while you focus on growth."
-          className="mb-16"
+          className="mb-10 md:mb-16"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
@@ -50,7 +50,7 @@ export function Services() {
               >
                 <Link
                   href={`/services/${service.id}`}
-                  className="group relative flex flex-col bg-white border border-slate-100 rounded-2xl p-6 hover:border-primary/20 hover:shadow-[0_8px_32px_rgba(15,45,82,0.08)] transition-all duration-300 h-full overflow-hidden"
+                  className="group relative flex flex-col bg-white border border-slate-100 rounded-2xl p-4 sm:p-6 hover:border-primary/20 hover:shadow-[0_8px_32px_rgba(15,45,82,0.08)] transition-all duration-300 h-full overflow-hidden"
                 >
                   {/* Hover background */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -62,18 +62,18 @@ export function Services() {
                   )}
 
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="w-11 h-11 rounded-xl bg-primary/6 group-hover:bg-primary flex items-center justify-center mb-4 transition-colors duration-300 shrink-0">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-primary/6 group-hover:bg-primary flex items-center justify-center mb-3 sm:mb-4 transition-colors duration-300 shrink-0">
                       <Icon size={20} className="text-primary group-hover:text-white transition-colors duration-300" />
                     </div>
 
-                    <h3 className="font-heading font-semibold text-dark text-[15px] mb-2 group-hover:text-primary transition-colors leading-snug">
+                    <h3 className="font-heading font-semibold text-dark text-[13.5px] sm:text-[15px] mb-1.5 sm:mb-2 group-hover:text-primary transition-colors leading-snug">
                       {service.title}
                     </h3>
-                    <p className="text-muted text-sm leading-relaxed flex-1 mb-5">
+                    <p className="text-muted text-[11.5px] sm:text-sm leading-relaxed flex-1 mb-2.5 sm:mb-5 line-clamp-2 sm:line-clamp-none">
                       {service.desc}
                     </p>
 
-                    <div className="flex items-center gap-1 text-[13px] font-heading font-semibold text-primary/70 group-hover:text-primary transition-colors">
+                    <div className="hidden sm:flex items-center gap-1 text-xs sm:text-[13px] font-heading font-semibold text-primary/70 group-hover:text-primary transition-colors">
                       Learn More
                       <ArrowUpRight
                         size={13}

@@ -37,13 +37,13 @@ const steps = [
 
 export function Process() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-14 md:py-24 bg-white">
       <div className="container-custom">
         <SectionHeader
           eyebrow="Our Process"
           title="Simple, Transparent & Hassle-Free Registration Process"
           subtitle="A clear 6-step journey from consultation to certification — no jargon, no surprises."
-          className="mb-20"
+          className="mb-12 md:mb-20"
         />
 
         {/* Desktop — horizontal timeline */}

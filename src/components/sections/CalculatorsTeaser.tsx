@@ -66,7 +66,7 @@ export function CalculatorsTeaser() {
           subtitle="Instant answers to your tax and compliance questions — no signup, no cost."
         />
 
-        <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="mt-8 md:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3">
           {TOOLS.map((tool, i) => {
             const Icon = tool.icon;
             return (

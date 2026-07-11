@@ -122,7 +122,7 @@ export function HeroSearch() {
             : "0 8px 32px rgba(3,12,28,0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
         }}
       >
-        <Search size={20} className="absolute left-5 text-white/60" />
+        <Search size={18} className="absolute left-4 sm:left-5 text-white/60" />
         <input
           value={query}
           onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
@@ -130,11 +130,11 @@ export function HeroSearch() {
           onKeyDown={onKeyDown}
           aria-label="Search services"
           placeholder={`Search "${ROTATING[placeholderIdx]}"`}
-          className="w-full bg-transparent pl-14 pr-32 py-4 text-base md:text-[17px] text-white placeholder:text-white/50 font-body rounded-full focus:outline-none"
+          className="w-full bg-transparent pl-11 sm:pl-14 pr-16 sm:pr-32 py-3 sm:py-4 text-sm sm:text-base md:text-[17px] text-white placeholder:text-white/50 font-body rounded-full focus:outline-none truncate"
         />
         <button
           onClick={() => go()}
-          className="absolute right-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-heading font-semibold text-sm text-white transition-all hover:brightness-110"
+          className="absolute right-1.5 sm:right-2 inline-flex items-center gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full font-heading font-semibold text-sm text-white transition-all hover:brightness-110"
           style={{ background: "linear-gradient(135deg, #1565a8 0%, #0F2D52 100%)", boxShadow: "0 4px 16px rgba(21,101,168,0.4)" }}
         >
           <Search size={15} />
@@ -187,12 +187,12 @@ export function HeroSearch() {
       </AnimatePresence>
 
       {/* Quick chips */}
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
+      <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
         {QUICK_CHIPS.map((chip) => (
           <Link
             key={chip.label}
             href={chip.href}
-            className="group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-heading font-medium transition-all"
+            className="group inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-[13px] font-heading font-medium transition-all"
             style={{
               background: "rgba(255,255,255,0.06)",
               border: "1px solid rgba(255,255,255,0.16)",
