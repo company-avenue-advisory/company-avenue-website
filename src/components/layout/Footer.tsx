@@ -190,6 +190,33 @@ export function Footer() {
             </ul>
           </div>
         </div>
+
+        {/* Locations we serve — internal links to local landing pages (local SEO) */}
+        <div className="mt-12 border-t border-white/10 pt-8">
+          <h4 className="font-heading font-semibold text-white text-sm mb-4 uppercase tracking-wider">
+            Locations We Serve
+          </h4>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2.5">
+            {[
+              { label: "Private Limited Registration in Delhi", href: "/services/private-limited-company-registration-delhi" },
+              { label: "GST Registration in Delhi", href: "/services/gst-registration-delhi" },
+              { label: "Trademark Registration in Delhi", href: "/services/trademark-registration-delhi" },
+              { label: "Company Registration in Janakpuri", href: "/services/company-registration-janakpuri" },
+              { label: "GST Registration in Dwarka", href: "/services/gst-registration-dwarka" },
+              { label: "Company Registration in Gurgaon", href: "/services/company-registration-gurgaon" },
+              { label: "Company Registration in Noida", href: "/services/company-registration-noida" },
+            ].map((c) => (
+              <li key={c.href}>
+                <Link
+                  href={c.href}
+                  className="text-white/50 hover:text-white text-sm transition-colors"
+                >
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       {/* Bottom bar */}

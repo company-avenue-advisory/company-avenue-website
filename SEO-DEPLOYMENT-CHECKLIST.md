@@ -1,307 +1,246 @@
 # SEO Deployment & Google Search Console Playbook
 
-This covers everything **you** need to do after the code is deployed. Follow in order.
+What's **left to do**. (Setup already completed — GTM/GA4 created, site deployed, sitemap
+live, old sitemaps cleared, domain verified — has been removed from this file.)
 
 ---
 
-## 0. Plain-English: what these tools actually are
+## ▶ WHERE YOU ARE NOW
 
-**You are not writing any code for this. You are only copying two IDs from Google and pasting them into a settings box.**
+**Done ✅:** site deployed · sitemap live (130 pages, Google re-read it) · old sitemaps gone ·
+domain verified · GA4 created & collecting (`G-P3LQECEJ5L`) · analytics code live on site.
 
-| Thing | What it actually is | Analogy |
-|---|---|---|
-| **GA4** (Google Analytics 4) | The **report**. Tells you how many people visited, which pages they read, where they came from (Google / WhatsApp / ads), and how many became leads. | The *dashboard* in your car — shows speed, fuel, distance. |
-| **GTM** (Google Tag Manager) | The **container/socket board**. You install GTM once, then you can plug in GA4, Google Ads conversion tracking, Meta Pixel etc. from a website — **without a developer touching the code again**. | The *extension board* — plug in new devices anytime, no rewiring. |
-| **Container ID** (`GTM-XXXXXXX`) | Just an **ID string**, not an API key. It tells Google "this website is mine". | Your car's number plate. |
-| **Measurement ID** (`G-XXXXXXXXXX`) | GA4's ID string. | Same idea, for the dashboard. |
-
-> **There is no "API key" and nothing to pay for.** Both GA4 and GTM are 100% free. You just need the two ID strings.
-
-**Why bother?** Two reasons:
-1. You'll know **which pages actually bring you clients** (so you invest in what works).
-2. **Google Ads cannot optimise properly without it.** If Ads can't see which clicks became leads, it just buys you clicks. Once conversion tracking is on, Google Ads automatically hunts for people who *actually fill your form* — this is the single biggest factor in not wasting ad money.
-
-### Where is the analytics code in this project?
-
-Already written — you don't touch it:
-- `src/components/analytics/Analytics.tsx` ← loads the Google scripts
-- `src/lib/gtag.ts` ← sends the events (`generate_lead`, `whatsapp_click`, `call_click`)
-- Both are already hooked into `src/app/layout.tsx` (every page)
-
-It reads your ID from an environment variable. **If the ID is blank, nothing loads at all** (that's why you don't see any Google script on the site right now). Paste the ID → scripts turn on. That's the whole mechanism.
+**Your remaining actions, in order:**
+1. **Fix the env to GA4-direct** — in Vercel keep `NEXT_PUBLIC_GA_ID=G-P3LQECEJ5L`, make
+   `NEXT_PUBLIC_GTM_ID` **blank**, Redeploy. *(Section 1 — avoids double-counting.)*
+2. **Request indexing** for your ~15 money pages. *(Section 3B — the main task right now.)*
+3. **Check what's indexed** weekly. *(Section 3A.)*
+4. **Mark conversions** as key events once they appear in GA4. *(Section 2.)*
+5. **Google Business Profile** + reviews — biggest lever for "CA near me". *(Section 6.)*
 
 ---
 
-## 1. Create your GTM container (get the `GTM-XXXXXXX` ID)
+## 1. Fix your analytics env (GA4-direct)
 
-You're on the "Add a New Account" screen. Fill it exactly like this:
+**Decision: use GA4 directly, not through GTM (for now).** Your lead events
+(`generate_lead`, `whatsapp_click`, `call_click`) reach GA4 **automatically** with GA4-direct.
+Through GTM each event needs extra manual tag setup — unnecessary for a solo owner. GTM stays
+parked; switch to it later only when you run Google Ads.
 
-| Field | What to enter |
-|---|---|
-| Account Name | `Company Avenue Advisory` |
-| Country | **India** (change it from United States) |
-| Share data anonymously | Leave **unchecked** |
-| Container name | `companyavenueadvisory.com` |
-| Target platform | **Web** ← click this one |
-
-Then:
-1. Click **Create** (top right) → accept the Terms of Service (scroll down, click **Yes**).
-2. A popup appears titled **"Install Google Tag Manager"** showing two blocks of code.
-3. **Ignore the code — you don't need it. I've already added it.**
-4. Look at the **top of that popup** (or the top-right of the GTM screen). You'll see your **Container ID**:
-
-   ```
-   GTM-XXXXXXX     ← copy this
-   ```
-5. Click **OK** to close the popup.
-
-**That `GTM-XXXXXXX` string is the only thing you need from Tag Manager.**
-
----
-
-## 2. Create GA4 and connect it inside GTM
-
-GTM is just the socket board — GA4 is the thing you plug into it.
-
-**Step A — make the GA4 property:**
-1. Go to **analytics.google.com** → **Start measuring** (or Admin → Create → Property).
-2. Property name: `Company Avenue Advisory`, timezone **India**, currency **INR**.
-3. Choose platform **Web**, website URL `https://companyavenueadvisory.com`.
-4. It gives you a **Measurement ID** that looks like `G-XXXXXXXXXX` → **copy it**.
-
-**Step B — plug GA4 into GTM:**
-1. Back in **Tag Manager** → **Tags** → **New**.
-2. **Tag Configuration** → choose **Google Tag**.
-3. Paste your `G-XXXXXXXXXX` into the **Tag ID** field.
-4. **Triggering** → choose **All Pages** (Initialization - All Pages also works).
-5. Name it `GA4 - Config` → **Save**.
-6. Click the blue **Submit** button (top right) → **Publish**.
-
-> ⚠️ **Nothing goes live in GTM until you hit Submit → Publish.** This is the #1 beginner mistake — people build tags and wonder why no data appears.
-
----
-
-## 3. Put the ID into the website
-
-You only set **`NEXT_PUBLIC_GTM_ID`**. Leave `NEXT_PUBLIC_GA_ID` **blank** — because GA4 is already loading *inside* GTM. Setting both would count every visitor twice.
-
-**For local testing** — in `avenue-advisory/.env.local`:
+**Correct env values (Vercel — Settings → Environment Variables):**
 ```
-NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
-NEXT_PUBLIC_GA_ID=
+NEXT_PUBLIC_GA_ID=G-P3LQECEJ5L
+NEXT_PUBLIC_GTM_ID=            ← leave BLANK / delete it
 ```
+> ⚠️ Do **not** set both. GTM (with GA4 inside it) *and* GA4-direct = every visitor counted twice.
 
-**For the LIVE site** — ⚠️ this is the step people miss. `.env.local` is a *local* file and is **never uploaded** to your host. You must add the variable in your **hosting dashboard**:
+Then **Save → Redeploy** (env changes only take effect on a fresh deploy).
 
-- **Vercel:** Project → **Settings** → **Environment Variables** → Add
-  - Name: `NEXT_PUBLIC_GTM_ID`
-  - Value: `GTM-XXXXXXX`
-  - Environments: tick **Production** (and Preview)
-  - → **Save**, then **Redeploy** (Deployments → ⋯ → Redeploy). *The variable only takes effect on a fresh deploy.*
-- **Netlify:** Site configuration → Environment variables → same idea, then redeploy.
-
-**How to confirm it worked:** open your live site → right-click → **View Page Source** → Ctrl+F for `googletagmanager`. If you see it, you're live. (Or install the free **Tag Assistant** Chrome extension.)
+**Confirm:** live site → right-click → View Page Source → Ctrl+F for `G-P3LQECEJ5L`.
+Present = tracking is live. (Your GA4 screen already says "Data collection active" ✅.)
 
 ---
 
-## 4. Mark your conversions in GA4
+## 2. Mark your conversions in GA4
 
-The website already *sends* these events. You just have to tell GA4 "these ones are the important ones".
+The site already *sends* these events — you just tell GA4 which ones are "key events".
 
-In **GA4 → Admin → Events** (wait ~24h after launch for them to appear), toggle **"Mark as key event"** on:
+In **GA4 → Admin → Events** (wait ~24–48h after launch so they appear in the list first),
+toggle **"Mark as key event"** on:
 
-| Event | What it means |
+| Event | Fires when |
 |---|---|
-| `generate_lead` | Someone submitted the contact form (fires on `/thank-you`) |
-| `whatsapp_click` | Someone tapped WhatsApp |
+| `generate_lead` | Contact form submitted (fires on `/thank-you`) |
+| `whatsapp_click` | Someone tapped any WhatsApp button |
 | `call_click` | Someone tapped your phone number |
 
-Once these are key events, you can import them into **Google Ads** as conversions — that's what lets Ads optimise for *leads* instead of *clicks*.
+**To test an event right now:** open **GA4 → Reports → Realtime**, then on your live site tap
+the WhatsApp button. Within ~30 seconds you should see `whatsapp_click` appear in the Realtime
+"Event count by Event name" card. That's how you confirm tracking end-to-end.
+
+Once these are key events, you can later import them into **Google Ads** as conversions — that's
+what lets Ads optimise for *leads* instead of *clicks*.
 
 ---
 
-## 5. Deploy the site — ✅ DONE
+## 3. Indexing — how to CHECK what's indexed, and how to REQUEST it
 
-The new build is live on `companyavenueadvisory.com`. Sanity-check these load:
+- **Crawled** = Google's bot visited the page.
+- **Indexed** = Google saved it in its database. **Only indexed pages can appear in search.**
+- **Requesting indexing** = asking Google to look at a page *now* instead of waiting.
 
-- `https://companyavenueadvisory.com/sitemap.xml`  → **130 URLs**
-- `https://companyavenueadvisory.com/robots.txt`   → references the sitemap
-- `https://companyavenueadvisory.com/services/gst-registration-delhi` → new city page
+You do **not** need to request indexing for all 130 pages — the sitemap handles bulk discovery
+automatically over 1–3 weeks. You only *fast-track* your top money pages.
 
----
+### 3A. How to CHECK which pages are already indexed (3 ways)
 
-## 6. Clean up the OLD sitemaps — ✅ DONE
+**Way 1 — 10-second check (Google search).** In normal Google, type:
+```
+site:companyavenueadvisory.com
+```
+It lists (roughly) every indexed page; the result count ≈ how many are indexed. For one page:
+```
+site:companyavenueadvisory.com/services/gst-registration-delhi
+```
+Shows up → indexed. "No results" → not indexed yet.
 
-Search Console previously listed 4 sitemaps from the old website (a 556-page `sitemap.xml`, a `sitemap.rss`, a broken `sitemap_index.xml`, and an `http://www...` one). Those are now gone from the list — nothing left to remove.
+**Way 2 — accurate report (Search Console → Pages).** Left menu → **Indexing → Pages**. Two numbers:
+- **Indexed** (green) — pages that CAN appear in search.
+- **Not indexed** (grey) — with reasons like "Discovered – currently not indexed" (Google knows
+  about it, hasn't gotten to it — normal for new sites) or "Crawled – currently not indexed"
+  (seen but not chosen yet — usually just needs time). Click a reason to see which URLs.
 
-*(If any reappear: Search Console → **Sitemaps** → ⋮ menu on the row → **Remove sitemap**.)*
+**Way 3 — check ONE URL precisely (URL Inspection).** Paste any URL into the **"Inspect any URL"**
+bar at the top of Search Console → "URL is on Google" (indexed ✅) or "URL is not on Google".
 
----
+> New-site reality: right after launch most pages sit in "Discovered – not indexed" for days to
+> a couple of weeks. That's normal, not a bug. Don't panic at low numbers early on.
 
-## 7. Submit the NEW sitemap — ✅ NOTHING TO DO
+### 3B. How to REQUEST indexing (fast-track your money pages)
 
-**You don't need to submit anything.** Here's why this confused you:
+1. Paste the full URL (e.g. `https://companyavenueadvisory.com/services/gst-registration-delhi`)
+   into the **"Inspect any URL"** bar at the top of Search Console.
+2. Wait ~30 sec for the check.
+3. Click **"Request Indexing"** → wait for "Indexing requested".
+4. Next URL. (Google allows ~10–15/day — spread the list over 2 days.)
 
-The old website's sitemap was submitted at **the exact same URL** your new site uses — `https://companyavenueadvisory.com/sitemap.xml`. So that one existing entry in Search Console is still valid; it just now points at your *new* sitemap. Google re-read it after you deployed.
+Requesting does **not** index instantly — it moves the URL to the front of Google's queue (hours
+to a few days). Request each URL **once**; re-requesting the same URL daily does nothing.
 
-Proof it worked — check the row in Search Console:
+**Priority order (do these first):**
 
-| Column | Value | Meaning |
-|---|---|---|
-| Submitted | `Aug 6, 2025` | When it was *first ever* registered. **Irrelevant — ignore this date.** |
-| **Last read** | **`Jul 11, 2026`** | Google re-fetched it *after your deploy*. ✅ |
-| **Status** | **`Success`** | No errors. ✅ |
-| **Discovered pages** | **`130`** | **This is your new sitemap.** ✅ |
-
-That `130` is the giveaway. Your new sitemap contains exactly:
-> 15 static pages + 79 services + 7 city pages + 24 calculators + 5 verify tools = **130**
-
-The old one had 556. So Google has definitively swapped to the new one. **Do not remove and re-add it** — that would only reset the history for no benefit.
-
----
-
-## 8. Confirm the domain is verified
-
-You're using a **domain property** (`sc-domain:companyavenueadvisory.com`) — good, it covers http/https/www automatically. Nothing to do if it already says verified.
-
----
-
-## 9. Request indexing for your money pages (fast-track)
-
-For the **top ~15 pages**, don't wait for Google to crawl — push them manually:
-
-1. Paste a URL into the **"Inspect any URL"** bar at the top of Search Console.
-2. Wait for the check → click **"Request Indexing"**.
-3. Repeat for each. (Google limits to a few dozen/day — that's fine.)
-
-Priority order:
-
-- `/` (home)
-- `/services/private-limited-company`
-- `/services/gst-registration`
-- `/services/trademark-registration`
-- `/services/income-tax-return`
-- `/services/llp-registration`
-- `/services/one-person-company`
-- `/services/roc-compliance`
+- `https://companyavenueadvisory.com/` (home)
+- `https://companyavenueadvisory.com/services/private-limited-company`
+- `https://companyavenueadvisory.com/services/gst-registration`
+- `https://companyavenueadvisory.com/services/trademark-registration`
+- `https://companyavenueadvisory.com/services/income-tax-return`
+- `https://companyavenueadvisory.com/services/llp-registration`
+- `https://companyavenueadvisory.com/services/one-person-company`
+- `https://companyavenueadvisory.com/services/roc-compliance`
 - The 7 city pages:
-  - `/services/private-limited-company-registration-delhi`
-  - `/services/gst-registration-delhi`
-  - `/services/trademark-registration-delhi`
-  - `/services/company-registration-janakpuri`
-  - `/services/gst-registration-dwarka`
-  - `/services/company-registration-gurgaon`
-  - `/services/company-registration-noida`
+  - `https://companyavenueadvisory.com/services/private-limited-company-registration-delhi`
+  - `https://companyavenueadvisory.com/services/gst-registration-delhi`
+  - `https://companyavenueadvisory.com/services/trademark-registration-delhi`
+  - `https://companyavenueadvisory.com/services/company-registration-janakpuri`
+  - `https://companyavenueadvisory.com/services/gst-registration-dwarka`
+  - `https://companyavenueadvisory.com/services/company-registration-gurgaon`
+  - `https://companyavenueadvisory.com/services/company-registration-noida`
 
-The rest get discovered automatically via the sitemap over 1–3 weeks.
+The remaining ~115 pages get found automatically via the sitemap — no action needed.
+**Then monitor:** check **Indexing → Pages** weekly and watch the Indexed count grow.
 
 ---
 
-## 10. Handle old URLs that no longer exist (avoid 404 spikes)
+## 4. Handle old URLs that no longer exist (avoid 404 spikes)
 
 The old site had 556 indexed pages. Any that don't exist on the new site will 404. Two options:
 
-- **Best:** 301-redirect old URLs to the closest new page (do this at the host/CDN level, e.g. Vercel `redirects` or your server config). Send removed service URLs → the matching new `/services/...` page, everything else → `/`.
-- **Acceptable:** let them 404. Our custom 404 page links back to services, and Google drops dead URLs over a few weeks.
+- **Best:** 301-redirect old URLs to the closest new page (host/CDN level — e.g. Vercel
+  `redirects` in `next.config`). Removed service URLs → the matching new `/services/...` page,
+  everything else → `/`.
+- **Acceptable:** let them 404. The custom 404 page links back to services, and Google drops dead
+  URLs over a few weeks.
 
-Check **Search Console → Pages (Indexing report)** weekly for "Not found (404)" and add redirects for any high-value old URLs.
+Check **Search Console → Pages (Indexing report)** weekly for "Not found (404)" and add redirects
+for any high-value old URLs. *(Tell me your hosting + a list of old URLs and I'll write the redirects.)*
 
 ---
 
-## 11. Validate structured data (schema)
+## 5. Validate structured data (schema)
 
 Test 3–4 page types in Google's **Rich Results Test** (search.google.com/test/rich-results):
 
 - Home → should detect **Organization / LocalBusiness**
 - Any service page → **Service** + **BreadcrumbList**
-- Any city page → **Service** + **BreadcrumbList** + **FAQPage** (FAQs can show directly in search results)
+- Any city page → **Service** + **BreadcrumbList** + **FAQPage** (FAQs can show in search results)
 
 Fix nothing unless it reports an error — "warnings" are usually fine.
 
 ---
 
-## 12. Google Business Profile (biggest local-SEO lever for "CA near me")
+## 6. Google Business Profile (biggest local-SEO lever for "CA near me")
 
-This is what makes you show up in the **map pack** for "CA services near me / in Delhi". Not a website task but do it:
+This is what makes you show up in the **map pack** for "CA services near me / in Delhi":
 
 1. Claim/verify **Company Avenue Advisory Pvt. Ltd.** at business.google.com.
-2. **Primary category:** Chartered Accountant. Add: Business Management Consultant, Accounting Firm, Tax Consultant.
+2. **Primary category:** Chartered Accountant. Add: Business Management Consultant, Accounting
+   Firm, Tax Consultant.
 3. Name / Address / Phone must match the website footer **exactly**:
    `209, Jaina Tower 1, District Center, Janakpuri, New Delhi, Delhi 110058` · `+91 99537 19111`.
 4. Add every service, upload 8–10 photos (office, team, logo), set hours Mon–Sat 9–7.
-5. Post weekly, and **ask every happy client for a Google review** — review count + recency is the #1 ranking factor for the map pack.
+5. Post weekly, and **ask every happy client for a Google review** — review count + recency is the
+   #1 ranking factor for the map pack.
 
 ---
 
-## 13. Before running Google Ads
+## 7. Before running Google Ads
 
-- Confirm GA4 conversions are firing (see below), so you can optimise campaigns for leads, not clicks.
-- Use the landing pages we built (city pages) as ad destinations for local campaigns.
+- Confirm GA4 conversions are firing (Section 2) so you can optimise for leads, not clicks.
+- Use the city landing pages as ad destinations for local campaigns.
 - UTM format: `?utm_source=google&utm_medium=cpc&utm_campaign=gst-delhi`
 
 ---
 
-## Analytics events already wired in code
+## Reference — analytics events wired in the code
 
-Once `NEXT_PUBLIC_GTM_ID` is set, these fire automatically. In GA4 → Admin → Events, mark the ★ ones as **Conversions**:
+With `NEXT_PUBLIC_GA_ID` set (GA4-direct), these fire automatically. Mark ★ as key events (Section 2):
 
-| Event | Fires when | Mark as conversion |
+| Event | Fires when | Key event |
 |---|---|---|
-| `generate_lead` | `/thank-you` page loads after form submit | ★ |
+| `generate_lead` | `/thank-you` loads after form submit | ★ |
 | `whatsapp_click` | Any WhatsApp button/float clicked | ★ |
 | `call_click` | Any "Call Now" / tel: link tapped | ★ |
 
-**Still to wire up** (needs the forms/calculators work below): `calculator_lead`, `lead_magnet_download`, `consultation_booked`.
+**Not wired yet** (needs the forms/calculators work below): `calculator_lead`,
+`lead_magnet_download`, `consultation_booked`.
 
 ---
 
-## What's NOT done yet (remaining scope from the spec)
+## Reference — what's NOT built yet (remaining scope from the CAPL spec)
 
-The SEO **foundation** is complete. These lead-gen items from the CAPL spec are separate build tasks still pending:
+The SEO **foundation** is complete. These lead-gen items are separate build tasks still pending:
 
-- Contact form: exact field set + validation + reCAPTCHA v3 + redirect to `/thank-you` (Section G1) — *verify the existing contact form matches and redirects to /thank-you*.
+- Contact form: exact field set + validation + reCAPTCHA v3 + redirect to `/thank-you` (Section G1).
 - Calculator lead-capture gates on all calculators (Section G2).
 - 3 gated lead-magnet PDFs (Section G3).
 - Exit-intent popup (Section G4).
-- 12 blog articles (Section M).
+- 12 blog articles + `/blog/{slug}` detail pages (Section M).
 - Core Web Vitals pass + image WebP/lazy-load audit (Section E).
 
 Tell me when you want to tackle these and I'll do them next.
 
 ---
 
-## Glossary — jargon in this file, in plain English
+## Glossary — jargon in plain English
 
 | Term | What it means |
 |---|---|
-| **Indexing** | Google saving your page into its search database. **Not indexed = cannot ever appear in search**, no matter how good it is. "Request indexing" = asking Google to look at a page now instead of waiting weeks. |
-| **Crawling** | Google's bot *visiting* your page to read it. Crawling comes first, then indexing. |
-| **Sitemap** (`sitemap.xml`) | A machine-readable list of every page on your site, so Google doesn't have to guess. Ours is auto-generated — **add a service to the code and it appears in the sitemap automatically**. |
-| **robots.txt** | A text file telling Google which pages it may/may not visit. Ours allows everything except `/admin`, `/api/`, `/thank-you`. |
-| **Canonical tag** | A hidden line saying "this is the *official* URL for this page." Prevents Google seeing `/page`, `/page/`, `/page?x=1` as 3 duplicate pages and splitting your ranking between them. Every page on the site now has one. |
-| **Schema / structured data / JSON-LD** | Hidden, machine-readable facts about your business (address, hours, phone, services, FAQs). It's how Google can show your **star rating, FAQ dropdowns, and business info** directly in search results. Already added site-wide. |
-| **Rich results** | Those fancy search listings with FAQs/stars/images instead of plain blue links. Powered by the schema above. |
-| **301 redirect** | A permanent "this page moved here" instruction. Important because the **old website had 556 pages** — any of those URLs that no longer exist will 404. A 301 sends that old visitor (and Google) to the right new page instead of an error. |
-| **404** | "Page not found." A few are harmless. Hundreds signal a broken site to Google. |
-| **Meta title / meta description** | The blue clickable headline and the grey text under it in Google results. Not visible on your page itself — only in search. |
-| **H1** | The single main headline of a page. Google uses it heavily to understand the topic. One per page. |
-| **Money page** | A page that directly sells a service (e.g. `/services/gst-registration`) — as opposed to a blog post. These are the ones to prioritise for indexing. |
-| **Key event / conversion** | An action you care about (form submit, WhatsApp click, call). Telling GA4 which events are "key" is what lets Google Ads optimise for real leads instead of random clicks. |
-| **Environment variable** | A setting stored *outside* the code (like a password or an ID). Set on your hosting dashboard, not in the code files. |
-| **Domain property** (`sc-domain:`) | A Search Console setup that covers `http`, `https`, `www` and non-`www` all at once. You already have this — it's the good option. |
+| **Indexing** | Google saving your page into its search database. **Not indexed = cannot appear in search.** "Request indexing" = asking Google to look now instead of waiting weeks. |
+| **Crawling** | Google's bot *visiting* your page. Crawling comes first, then indexing. |
+| **Sitemap** (`sitemap.xml`) | A machine-readable list of every page, so Google doesn't guess. Auto-generated — add a service in code and it appears automatically. |
+| **robots.txt** | Tells Google which pages it may/may not visit. Ours allows all except `/admin`, `/api/`, `/thank-you`. |
+| **Canonical tag** | A hidden line: "this is the *official* URL for this page." Stops Google treating `/page`, `/page/`, `/page?x=1` as duplicates. Every page has one. |
+| **Schema / structured data / JSON-LD** | Hidden machine-readable facts (address, hours, services, FAQs). How Google shows star ratings, FAQ dropdowns and business info in results. Added site-wide. |
+| **Rich results** | Fancy listings with FAQs/stars/images instead of plain blue links. Powered by schema. |
+| **301 redirect** | A permanent "this page moved here". Sends old dead URLs (and Google) to the right new page instead of a 404. |
+| **404** | "Page not found." A few are harmless; hundreds signal a broken site. |
+| **Meta title / description** | The blue headline + grey text in Google results. Only shows in search, not on the page. |
+| **H1** | The single main headline of a page. Google weighs it heavily. One per page. |
+| **Money page** | A page that sells a service (e.g. `/services/gst-registration`) vs a blog post. Prioritise these for indexing. |
+| **Key event / conversion** | An action you care about (form submit, WhatsApp, call). Marking these lets Google Ads optimise for real leads. |
+| **Environment variable** | A setting stored outside the code (like an ID). Set on the hosting dashboard, not in code. |
+| **Domain property** (`sc-domain:`) | A Search Console setup covering http/https/www/non-www at once. You have this — the good option. |
 
 ---
 
 ## The realistic timeline (so you don't panic)
 
-SEO is not instant. Here's what "normal" looks like:
-
 | When | What to expect |
 |---|---|
-| **Day 1–3** | Google re-crawls the sitemap. Analytics starts showing visitors. |
-| **Week 1–2** | Your money pages + city pages get indexed. Search `site:companyavenueadvisory.com` in Google to see what's in. |
-| **Week 3–6** | You start ranking for *long-tail* / brand terms ("Company Avenue Advisory", "CA in Janakpuri"). |
-| **Month 2–4** | Competitive terms ("GST registration in Delhi") begin to move — **this is where Google Business Profile reviews matter most**. |
+| **Day 1–3** | Google re-crawls the sitemap. Analytics shows visitors. |
+| **Week 1–2** | Money + city pages get indexed. Check `site:companyavenueadvisory.com`. |
+| **Week 3–6** | You rank for long-tail / brand terms ("Company Avenue Advisory", "CA in Janakpuri"). |
+| **Month 2–4** | Competitive terms ("GST registration in Delhi") begin to move — **GBP reviews matter most here**. |
 | **Month 4–6+** | Top-3 for local terms is realistic *if* GBP is active and reviews keep coming. |
 
-**Google Ads is the shortcut.** SEO builds the long-term asset; Ads buys you leads *tomorrow*. Do both — and now that conversion tracking is wired up, Ads will actually optimise properly.
+**Google Ads is the shortcut.** SEO builds the long-term asset; Ads buys leads *tomorrow*. Do both.
