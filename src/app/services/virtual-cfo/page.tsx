@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { VirtualCFOPage } from "@/components/sections/VirtualCFOPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/VirtualCFOPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/virtual-cfo" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function VirtualCFOServicePage() {
-  return <VirtualCFOPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <VirtualCFOPage />
+    </>
+  );
 }

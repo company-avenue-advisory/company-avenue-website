@@ -12,6 +12,7 @@ import {
   Bell, DollarSign, HeartPulse, Hash, BookOpen, UserPlus, UserMinus,
   Package, Settings, BarChart2, TrendingDown,
 } from "lucide-react";
+import { faqs } from "@/lib/faqs/PayrollManagementPage";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -213,20 +214,6 @@ const whyUsPoints = [
   { icon: ShieldCheck, title: "End-to-End Statutory Coverage", desc: "PF, ESIC, PT, LWF, TDS, Form 16 — every obligation covered with documentary proof." },
 ];
 
-const faqs = [
-  { q: "What is payroll processing and what does it include?", a: "Payroll processing is the complete cycle of calculating employee compensation — including salary, allowances, statutory deductions (PF, ESIC, PT, TDS), reimbursements, and bonuses — and disbursing net pay. It also includes statutory filings such as PF ECR, ESIC returns, Form 24Q (TDS), and issuance of Form 16." },
-  { q: "What statutory deductions are mandatory in Indian payroll?", a: "In India, mandatory payroll deductions include: Provident Fund (12% employee + 12% employer on basic), ESIC (0.75% employee + 3.25% employer for eligible employees), Professional Tax (state-specific, up to ₹2,500/year), TDS on salary under Section 192, and Labour Welfare Fund (state-specific). Each has separate registration, deposit, and filing requirements." },
-  { q: "What is the PF ECR and when is it due?", a: "The Electronic Challan cum Return (ECR) is the monthly PF contribution statement filed on the EPFO Unified Portal. It must be filed and the challan paid by the 15th of every month for the previous month. Delay attracts interest @ 12% p.a. and damages ranging from 5% to 25% of arrears." },
-  { q: "What is Form 16 and when must it be issued?", a: "Form 16 is the annual TDS certificate issued by an employer to every employee from whose salary TDS has been deducted. Part A (TDS summary from TRACES) and Part B (detailed salary breakup and deductions) must be issued by 31st May for the preceding financial year." },
-  { q: "What is Full & Final Settlement in payroll?", a: "Full & Final Settlement (FnF) is the last payroll processed when an employee exits the organisation. It includes: balance salary, leave encashment (EL balance), gratuity (if eligible), notice pay deduction or payout, deduction of any loans/advances, and final Form 16 issuance. It must comply with the Payment of Gratuity Act and Shops & Establishments Act." },
-  { q: "Is PF applicable to all businesses?", a: "PF is mandatory for establishments with 20 or more employees. However, smaller employers can voluntarily register. Once registered, all employees earning up to ₹15,000/month basic are mandatorily enrolled. Employees earning above ₹15,000 can opt out of voluntary PF if they were not PF members before joining." },
-  { q: "Can you handle payroll for remote or contract employees?", a: "Yes. We handle payroll for full-time employees, remote workers, fixed-term contract staff, and freelancers on payroll. For contract staff, we also handle TDS under Section 194C/194J where applicable. Statutory deductions are applied based on actual employment status." },
-  { q: "How do you handle payroll for new joiners and exits mid-month?", a: "New joiner salaries are pro-rated from the date of joining. Exit payroll includes the final month salary pro-rated to last working day, leave encashment, notice pay adjustment, gratuity computation, and recovery of any outstanding dues — all reconciled in the FnF statement." },
-  { q: "What happens if we miss a PF or ESIC deadline?", a: "Late PF deposits attract interest @ 12% p.a. under Section 7Q and damages from 5% to 25% under Section 14B of the EPF Act. ESIC late payments attract 12% interest. Beyond interest, EPFO and ESIC inspectors can conduct establishment inspections and levy additional penalties. We ensure zero missed deadlines with a proactive compliance calendar." },
-  { q: "How is payroll data shared securely?", a: "Employee data is collected via a secure client portal. Payroll outputs — salary registers, payslips, MIS — are shared via encrypted documents. All team members sign NDAs. We do not request or share payroll data over WhatsApp or unencrypted email attachments." },
-  { q: "What payroll software do you use?", a: "We work with Keka HR, Zoho Payroll, GreytHR, RazorpayX Payroll, TallyPrime, and MS Excel. If you already use a specific HRMS or payroll tool, we adapt to it. For new clients, we recommend the best fit based on your team size, industry, and statutory requirements." },
-  { q: "How much does outsourced payroll cost?", a: "Our pricing is per-employee per-month. Plans start from ₹150–₹250 per employee/month depending on services included. Full compliance (PF + ESIC + PT + TDS + Form 16) is included in our standard plan. A free consultation call helps us provide an exact quote for your team size." },
-];
 
 const relatedServices = [
   { id: "accounting-bookkeeping", title: "Accounting & Bookkeeping", desc: "Books, MIS & financial statements." },

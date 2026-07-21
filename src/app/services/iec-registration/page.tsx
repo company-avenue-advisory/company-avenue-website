@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { IECRegistrationPage } from "@/components/sections/IECRegistrationPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/IECRegistrationPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/iec-registration" },
@@ -27,5 +30,10 @@ export const metadata: Metadata = {
 };
 
 export default function IECRegistrationServicePage() {
-  return <IECRegistrationPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <IECRegistrationPage />
+    </>
+  );
 }

@@ -12,6 +12,7 @@ import {
   Tag, Package, Layers, Palette, Volume2, ChevronRight,
   TrendingUp, BookOpen, CalendarCheck, PenLine, Repeat2,
 } from "lucide-react";
+import { faqs } from "@/lib/faqs/TrademarkPage";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -182,28 +183,6 @@ const relatedServices = [
   { id: "roc-compliance",          title: "Business Advisory",       desc: "Complete compliance support." },
 ];
 
-const faqs = [
-  { q: "What is a trademark?", a: "A trademark is a legally registered intellectual property mark — including a name, logo, slogan, sound, shape, or colour combination — that identifies and distinguishes your goods or services from others. Registration grants exclusive rights to use the mark commercially across India." },
-  { q: "Who can apply for a trademark?", a: "Any person, company, LLP, partnership firm, trust, or organisation that is a proprietor of a mark and is using or intending to use it in commerce can apply for trademark registration. Foreign applicants can also apply through the Indian trademark registry." },
-  { q: "Can individuals register trademarks?", a: "Yes. Individuals and sole proprietors can register trademarks in their personal name. The trademark application allows 'Individual' as the applicant type, and MSME-registered individuals get a reduced government fee of ₹4,500 per class." },
-  { q: "What is a trademark class?", a: "Trademarks are registered under specific classes that define the type of goods or services covered. There are 45 classes in total — Classes 1–34 cover physical goods, and Classes 35–45 cover services. Your mark only protects you in the class(es) you register under." },
-  { q: "How many trademark classes are there?", a: "There are 45 trademark classes under the Nice Classification system — 34 classes for goods (physical products) and 11 classes for services. Choosing the correct class is critical as your trademark protection only applies to the registered classes." },
-  { q: "Can I trademark my logo?", a: "Yes. A logo (device mark) can be trademarked. You should file it in colour if you want colour protection, or in black and white for broader protection regardless of colour. Our team advises on the best approach for your specific logo." },
-  { q: "Can I trademark a business name?", a: "Yes. Business names, brand names, and product names can all be trademarked as word marks. The name must be distinctive and not purely descriptive, generic, or identical to an existing registered mark in the same class." },
-  { q: "How long does trademark registration take?", a: "The complete process typically takes 18–24 months from filing to certificate. However, once you file, you receive a TM symbol right (™) immediately. If no objection or opposition arises, the timeline can sometimes be shorter." },
-  { q: "What happens if someone copies my brand?", a: "With a registered trademark, you have legal recourse including cease and desist notices, civil suits for damages and injunction, and criminal complaints under the Trade Marks Act, 1999. Unregistered marks have significantly weaker legal protection." },
-  { q: "What is the difference between TM and ®?", a: "™ (TM) can be used once you file a trademark application — it indicates a claim of trademark rights. ® (R in circle) can only be used after your trademark is officially registered by the Trade Marks Registry. Misuse of ® is a criminal offence." },
-  { q: "Can I use ™ before registration?", a: "Yes. Once you file your trademark application and receive an application number, you can legally use the ™ symbol next to your mark. This signals your claim to the mark while registration is pending." },
-  { q: "What if my application receives an objection?", a: "The Registry issues an Examination Report citing objections. You must respond within 30 days (extendable). Our team drafts a professional counter-statement with legal arguments and evidence. If needed, we represent you at the hearing before the Trademark Registrar." },
-  { q: "How long is a trademark valid?", a: "A registered trademark is valid for 10 years from the date of filing the application. It can be renewed indefinitely for successive 10-year periods, providing perpetual protection as long as it is renewed on time and not abandoned." },
-  { q: "Can trademarks be renewed?", a: "Yes. Trademarks can be renewed every 10 years for an unlimited number of terms. Renewal must be filed before expiry. A 6-month grace period exists after expiry, but renewal during grace attracts a surcharge. We send renewal reminders proactively." },
-  { q: "Can trademarks be sold or transferred?", a: "Yes. Registered trademarks can be assigned (sold) or licensed to another party. Assignment requires filing Form TM-P with the Registry. Trademark assignments are valuable in business acquisitions, mergers, and brand licensing deals." },
-  { q: "Is trademark registration mandatory?", a: "Not legally mandatory, but highly advisable. Without registration, your legal protection is limited to 'passing off' actions which are harder to prove. Registration provides strong statutory rights, a public record of ownership, and deters competitors." },
-  { q: "Can startups register trademarks?", a: "Yes, and they should — ideally at the beginning. Startups with DPIIT recognition and MSME registration qualify for a reduced government fee (₹4,500 vs ₹9,000 per class). Early registration prevents brand conflicts as you grow." },
-  { q: "How much does trademark registration cost?", a: "Government fee: ₹9,000 per class for individuals/startups/MSMEs and ₹10,000 for companies. Our professional fees start from ₹1,499 per class, inclusive of trademark search, application preparation, and filing. Total cost starts from ₹4,999 (individual with MSME)." },
-  { q: "Can Company Avenue handle trademark objections?", a: "Yes. Our trademark specialists draft counter-statements, prepare evidence, and appear at hearings before the Trade Marks Registry on your behalf. We have a strong track record of resolving objections successfully." },
-  { q: "Can I register my trademark internationally?", a: "Yes. International trademark protection is available through the Madrid Protocol (administered by WIPO), which allows you to file in multiple countries with a single application. We provide international trademark filing guidance and assistance." },
-];
 
 /* ── Trademark Class data ── */
 const classMapping: Record<string, { classes: number[]; note: string }> = {

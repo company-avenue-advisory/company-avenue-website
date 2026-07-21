@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { TdsReturnPage } from "@/components/sections/TdsReturnPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/TdsReturnPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/tds-return" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function TDSReturnServicePage() {
-  return <TdsReturnPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <TdsReturnPage />
+    </>
+  );
 }

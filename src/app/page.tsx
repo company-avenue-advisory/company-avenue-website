@@ -9,9 +9,12 @@ import { Industries } from "@/components/sections/Industries";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { BlogSection } from "@/components/sections/BlogSection";
 import { FAQ } from "@/components/sections/FAQ";
+import { faqs as homeFaqs } from "@/lib/faqs/FAQ";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { CalculatorsTeaser } from "@/components/sections/CalculatorsTeaser";
 import { VerifyToolsTeaser } from "@/components/sections/VerifyToolsTeaser";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Company Registration & GST Services in Delhi | CA-Led",
@@ -41,6 +44,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={faqSchema(homeFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
       {/* H1 is inside Hero */}
       <Hero />
       <Stats />

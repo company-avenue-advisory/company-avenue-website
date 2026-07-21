@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { GSTPage } from "@/components/sections/GSTPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/GSTPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
+import { serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "GST Registration in Delhi | Get GSTIN Online Fast",
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
 export default function GSTRegistrationPage() {
   return (
     <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
       <JsonLd
         data={[
           serviceSchema({

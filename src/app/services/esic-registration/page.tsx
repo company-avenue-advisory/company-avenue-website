@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { ESICRegistrationPage } from "@/components/sections/ESICRegistrationPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/ESICRegistrationPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/esic-registration" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function ESICRegistrationServicePage() {
-  return <ESICRegistrationPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <ESICRegistrationPage />
+    </>
+  );
 }

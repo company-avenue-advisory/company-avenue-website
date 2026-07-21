@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { LLPAnnualFilingPage } from "@/components/sections/LLPAnnualFilingPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/LLPAnnualFilingPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/llp-annual-filing" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function LLPAnnualFilingServicePage() {
-  return <LLPAnnualFilingPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <LLPAnnualFilingPage />
+    </>
+  );
 }

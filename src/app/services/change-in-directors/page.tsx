@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { ChangeInDirectorsPage } from "@/components/sections/ChangeInDirectorsPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/ChangeInDirectorsPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/change-in-directors" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function ChangeInDirectorsServicePage() {
-  return <ChangeInDirectorsPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <ChangeInDirectorsPage />
+    </>
+  );
 }

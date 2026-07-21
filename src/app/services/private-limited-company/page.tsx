@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { PrivateLimitedPage } from "@/components/sections/PrivateLimitedPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/PrivateLimitedPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema, breadcrumbSchema } from "@/lib/seo";
+import { serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Private Limited Company Registration in Delhi | Fast",
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
 export default function PrivateLimitedCompanyPage() {
   return (
     <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
       <JsonLd
         data={[
           serviceSchema({

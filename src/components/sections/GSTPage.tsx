@@ -13,6 +13,7 @@ import {
   Store, Factory, Truck, UtensilsCrossed, Calculator, ArrowUpRight,
   Info, ChevronRight, Package,
 } from "lucide-react";
+import { faqs } from "@/lib/faqs/GSTPage";
 
 /* ─── animation variant ─── */
 const fadeUp = {
@@ -161,26 +162,6 @@ const relatedServices = [
   { id: "trademark-registration",  title: "Trademark Registration",    desc: "Protect your brand name." },
 ];
 
-const faqs = [
-  { q: "What is GST?", a: "Goods and Services Tax (GST) is India's unified indirect tax system that replaced over 17 central and state taxes including VAT, Service Tax, Excise Duty, and Entry Tax. It applies to the supply of goods and services across India under four tax slabs: 5%, 12%, 18%, and 28%." },
-  { q: "Who must register under GST?", a: "Businesses with annual turnover exceeding ₹40 lakhs (goods) or ₹20 lakhs (services) must register. Additionally, e-commerce sellers, inter-state suppliers, businesses making reverse-charge supply, and certain others must register regardless of turnover." },
-  { q: "What is GSTIN?", a: "GSTIN (Goods and Services Tax Identification Number) is a unique 15-digit alphanumeric code issued to every GST-registered business. It encodes the state code, PAN, entity number, alphabet, and a checksum digit. It is used in all GST-related transactions, invoices, and returns." },
-  { q: "How long does GST registration take?", a: "GST registration typically takes 2–7 working days after all documents are submitted correctly. If the GST officer raises a query (Form REG-03), additional time may be required to respond. Our team tracks and resolves queries promptly." },
-  { q: "Is GST registration free?", a: "Government fees for GST registration are zero — it is completely free to register on the GSTN portal. However, professional fees apply for document preparation, application filing, and compliance advisory. We provide transparent, fixed pricing." },
-  { q: "Can I register without a business address?", a: "No. A valid registered office address with supporting documents (electricity bill, rent agreement, NOC) is mandatory for GST registration. For home-based businesses, the residential address can be used with an NOC and utility bill." },
-  { q: "Can freelancers register for GST?", a: "Yes. Freelancers providing services worth more than ₹20 lakhs annually (₹10 lakhs in special category states) must register. Freelancers providing digital services to foreign clients may also need registration regardless of turnover." },
-  { q: "Is GST mandatory below ₹20 lakh?", a: "Not for most businesses. However, inter-state suppliers, e-commerce sellers, businesses liable for reverse charge, casual taxable persons, and input service distributors must register regardless of turnover." },
-  { q: "What is the Composition Scheme?", a: "The Composition Scheme allows small businesses with turnover up to ₹1.5 crore to pay GST at lower flat rates (1%–5%) and file quarterly returns instead of monthly. The trade-off is no Input Tax Credit and no inter-state supply." },
-  { q: "Can I cancel GST registration?", a: "Yes. GST registration can be cancelled voluntarily if your turnover falls below the threshold or your business ceases. It can also be cancelled by the GST officer for non-compliance. After cancellation, you must file a final return (GSTR-10)." },
-  { q: "How do I download my GST Certificate?", a: "After GSTIN issuance, log in to the GST portal (gst.gov.in), navigate to Services > User Services > View/Download Certificate. The certificate is also sent to your registered email and is available to download anytime." },
-  { q: "What documents are required for GST registration?", a: "For individuals/proprietors: PAN, Aadhaar, photograph, bank statement. For companies: PAN, incorporation certificate, MOA/AOA, director details. For all: electricity bill or rent agreement for registered office, and NOC from the property owner." },
-  { q: "Can multiple businesses use one GST number?", a: "No. Each distinct business entity (proprietorship, LLP, company) requires a separate GSTIN. However, if you have multiple business verticals under the same PAN, you can obtain separate registrations for each vertical in the same state." },
-  { q: "Is GST applicable to exports?", a: "Exports are zero-rated supplies under GST. This means no GST is charged on exports, and exporters can claim a refund of ITC paid on inputs used for export. This makes Indian exports globally competitive." },
-  { q: "Can I register online?", a: "Yes, 100% online. The entire process from document submission to GSTIN issuance happens digitally through the GSTN portal. No physical visit to any government office is required. We handle the complete process on your behalf." },
-  { q: "What happens after GST registration?", a: "After receiving your GSTIN, you must issue GST-compliant invoices, file GSTR-1 (outward supplies) and GSTR-3B (tax payment) monthly or quarterly, maintain books of accounts, and pay GST liability on time." },
-  { q: "How much does GST registration cost?", a: "Government fees are zero. Our professional fees start from ₹999 for standard GST registration, inclusive of document review, application preparation, filing, and post-registration support. We provide a detailed breakdown upfront." },
-  { q: "Do I need GST for Amazon?", a: "Yes. All sellers on Amazon India (and other e-commerce marketplaces) must have a valid GSTIN regardless of annual turnover. This is a mandatory requirement under GST law for e-commerce operators. We can help you register before you start selling." },
-];
 
 /* ─── GSTIN Explainer data ─── */
 const gstinParts = [

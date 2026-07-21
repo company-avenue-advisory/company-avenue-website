@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { IncreaseAuthorisedCapitalPage } from "@/components/sections/IncreaseAuthorisedCapitalPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/IncreaseAuthorisedCapitalPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/increase-authorised-capital" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function IncreaseAuthorisedCapitalServicePage() {
-  return <IncreaseAuthorisedCapitalPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <IncreaseAuthorisedCapitalPage />
+    </>
+  );
 }

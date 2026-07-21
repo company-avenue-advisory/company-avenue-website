@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 import { SERVICES } from "@/lib/constants";
+import { BLOG_POSTS } from "@/lib/blog-posts";
+import { GUIDES } from "@/lib/guides";
+import { TEMPLATES } from "@/lib/templates";
 
 // New city landing pages (Section D of the build spec).
 const CITY_PAGES = [
@@ -55,7 +58,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...CITY_PAGES.map((p) => entry(`services/${p}`, 0.85, "monthly")),
     ...CALCULATORS.map((c) => entry(`calculators/${c}`, 0.6, "monthly")),
     ...VERIFY_TOOLS.map((v) => entry(`verify/${v}`, 0.6, "monthly")),
-    // NOTE: individual /blog/{slug} pages are not built yet (only the /blog hub
-    // exists). Add per-post entries here once blog article routes are created.
+    // Content detail pages. These are generated straight from the same data the
+    // routes use, so new posts/guides/templates appear in the sitemap on deploy.
+    ...BLOG_POSTS.map((p) => entry(`blog/${p.slug}`, 0.7, "monthly")),
+    ...GUIDES.map((g) => entry(`guides/${g.slug}`, 0.75, "monthly")),
+    ...TEMPLATES.map((t) => entry(`templates/${t.slug}`, 0.65, "monthly")),
   ];
 }

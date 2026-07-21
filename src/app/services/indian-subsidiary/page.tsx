@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { IndianSubsidiaryPage } from "@/components/sections/IndianSubsidiaryPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/IndianSubsidiaryPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/indian-subsidiary" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function IndianSubsidiaryServicePage() {
-  return <IndianSubsidiaryPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <IndianSubsidiaryPage />
+    </>
+  );
 }

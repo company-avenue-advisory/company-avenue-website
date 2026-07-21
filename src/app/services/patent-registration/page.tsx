@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { PatentRegistrationPage } from "@/components/sections/PatentRegistrationPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/PatentRegistrationPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/patent-registration" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function PatentRegistrationServicePage() {
-  return <PatentRegistrationPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <PatentRegistrationPage />
+    </>
+  );
 }

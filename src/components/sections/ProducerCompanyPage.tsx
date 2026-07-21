@@ -10,6 +10,7 @@ import {
   BookOpen, CalendarCheck, Wheat, Tractor, Leaf, Landmark, Phone,
   ArrowRight, Star, HandCoins, BarChart3, PackageCheck,
 } from "lucide-react";
+import { faqs } from "@/lib/faqs/ProducerCompanyPage";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -139,16 +140,6 @@ const whyUsPoints = [
   { icon: Headphones,  label: "Post-Registration Compliance Management" },
 ];
 
-const faqs = [
-  { q: "Who qualifies as a 'producer' for a Producer Company?", a: "A 'producer' under the Companies Act 2013 (Part IXA) means any person engaged in an activity connected with or relatable to primary produce. This includes farmers, horticulturists, animal breeders, fishermen, weavers, artisans and cottage industry workers. The key criterion is that their income must derive from primary production activities." },
-  { q: "What is the minimum number of members required to form a Producer Company?", a: "A Producer Company can be formed by (a) a minimum of 10 individuals who are producers, or (b) a minimum of 2 Producer Institutions (which are institutions having objectives of producing, harvesting, procuring, grading, pooling, handling, marketing, selling or exporting of primary produce). There is no prescribed maximum number of members." },
-  { q: "Can a corporate entity (company or society) be a member of a Producer Company?", a: "Yes. Producer Institutions — which can be cooperative societies, multi-state cooperative societies or other Producer Companies — can be members of a Producer Company. In such a case, only 2 Producer Institutions are required as promoters. However, individual non-producer corporates or private limited companies cannot become members." },
-  { q: "What activities is a Producer Company allowed to undertake?", a: "A Producer Company can engage in: production, harvesting, procurement, grading, pooling, handling, marketing, selling, export of primary produce of members; processing including preserving, drying, distilling, brewing, vinting, canning; rendering technical, consultancy or training services; generation, transmission and distribution of power; reviving land and water resources; insurance for producers; financing activities for procurement and production. It cannot engage in any non-primary produce business as a primary object." },
-  { q: "What is the difference between a Producer Company and a Cooperative Society?", a: "Both serve similar community purposes but differ fundamentally in regulation and governance. Cooperative Societies are governed by State Cooperative Acts (varying by state) and regulated by the Registrar of Cooperative Societies. Producer Companies are governed by the Companies Act 2013 (central law), regulated by the ROC/MCA, and provide limited liability. Producer Companies also have more corporate governance features including boards, AGMs and audited accounts under Schedule III. They are often easier to form across states." },
-  { q: "What is the minimum capital requirement for a Producer Company?", a: "There is no minimum paid-up capital prescribed for Producer Companies under Part IXA of the Companies Act 2013. However, the ROC may informally expect a nominal capital. Practically, Producer Companies are formed with ₹1 lakh to ₹5 lakhs in paid-up share capital. The shares must be held by active producers and are non-transferable to non-producers." },
-  { q: "Are Producer Companies eligible for government grants and subsidies?", a: "Yes. Producer Companies (especially those promoted as Farmer Producer Organizations or FPOs) are eligible for substantial government support. The Government of India's FPO scheme offers equity grants of up to ₹15 lakh per FPO through NABARD/SFAC, credit guarantee support and CBBOs (Cluster-Based Business Organizations) to hand-hold operations. NABARD, SFAC, and state agriculture departments run multiple schemes specifically for registered Producer Companies." },
-  { q: "What are the key compliance requirements after incorporation?", a: "After incorporating a Producer Company, key annual compliances include: Board Meetings (minimum 4 per year), Annual General Meeting (within 6 months of FY close), Filing of Annual Return (MGT-7), Filing of Financial Statements (AOC-4), Income Tax Return, Director KYC (DIR-3 KYC) annually. Event-based filings include changes in directors, share allotments, and address changes. Statutory audit is mandatory regardless of turnover." },
-];
 
 const relatedServices = [
   { id: "private-limited-company",   title: "Private Limited Company",   desc: "Standard incorporation for businesses." },

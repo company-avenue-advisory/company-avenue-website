@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { PayrollManagementPage } from "@/components/sections/PayrollManagementPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/PayrollManagementPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/payroll-management" },
@@ -27,5 +30,10 @@ export const metadata: Metadata = {
 };
 
 export default function PayrollManagementServicePage() {
-  return <PayrollManagementPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <PayrollManagementPage />
+    </>
+  );
 }

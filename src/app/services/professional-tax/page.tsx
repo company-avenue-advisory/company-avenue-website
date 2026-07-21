@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { ProfessionalTaxPage } from "@/components/sections/ProfessionalTaxPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/ProfessionalTaxPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/professional-tax" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function ProfessionalTaxServicePage() {
-  return <ProfessionalTaxPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <ProfessionalTaxPage />
+    </>
+  );
 }

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { PSARALicensePage } from "@/components/sections/PSARALicensePage";
+import { faqs as serviceFaqs } from "@/lib/faqs/PSARALicensePage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/psara-license" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function PSARALicenseServicePage() {
-  return <PSARALicensePage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <PSARALicensePage />
+    </>
+  );
 }

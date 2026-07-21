@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { ITRPage } from "@/components/sections/ITRPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/ITRPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/income-tax-return" },
@@ -28,5 +31,10 @@ export const metadata: Metadata = {
 };
 
 export default function IncomeTaxReturnPage() {
-  return <ITRPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <ITRPage />
+    </>
+  );
 }

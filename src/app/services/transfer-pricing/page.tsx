@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { TransferPricingPage } from "@/components/sections/TransferPricingPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/TransferPricingPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/transfer-pricing" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function TransferPricingServicePage() {
-  return <TransferPricingPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <TransferPricingPage />
+    </>
+  );
 }

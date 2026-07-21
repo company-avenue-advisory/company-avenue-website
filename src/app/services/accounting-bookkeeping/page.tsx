@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { AccountingBookkeepingPage } from "@/components/sections/AccountingBookkeepingPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/AccountingBookkeepingPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/accounting-bookkeeping" },
@@ -27,5 +30,10 @@ export const metadata: Metadata = {
 };
 
 export default function AccountingBookkeepingServicePage() {
-  return <AccountingBookkeepingPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <AccountingBookkeepingPage />
+    </>
+  );
 }

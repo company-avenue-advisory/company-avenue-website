@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { DirectorKYCPage } from "@/components/sections/DirectorKYCPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/DirectorKYCPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/director-kyc" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function DirectorKYCServicePage() {
-  return <DirectorKYCPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <DirectorKYCPage />
+    </>
+  );
 }

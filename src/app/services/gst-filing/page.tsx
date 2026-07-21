@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { GSTFilingPage } from "@/components/sections/GSTFilingPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/GSTFilingPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/gst-filing" },
@@ -28,5 +31,10 @@ export const metadata: Metadata = {
 };
 
 export default function GSTFilingRoute() {
-  return <GSTFilingPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <GSTFilingPage />
+    </>
+  );
 }

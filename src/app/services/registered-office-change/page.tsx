@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { RegisteredOfficeChangePage } from "@/components/sections/RegisteredOfficeChangePage";
+import { faqs as serviceFaqs } from "@/lib/faqs/RegisteredOfficeChangePage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/registered-office-change" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function RegisteredOfficeChangeServicePage() {
-  return <RegisteredOfficeChangePage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <RegisteredOfficeChangePage />
+    </>
+  );
 }

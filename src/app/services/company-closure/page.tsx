@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { CompanyClosurePage } from "@/components/sections/CompanyClosurePage";
+import { faqs as serviceFaqs } from "@/lib/faqs/CompanyClosurePage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/company-closure" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function CompanyClosureServicePage() {
-  return <CompanyClosurePage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <CompanyClosurePage />
+    </>
+  );
 }

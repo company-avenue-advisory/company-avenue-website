@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { ROCCompliancePage } from "@/components/sections/ROCCompliancePage";
+import { faqs as serviceFaqs } from "@/lib/faqs/ROCCompliancePage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/roc-compliance" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function ROCComplianceServicePage() {
-  return <ROCCompliancePage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <ROCCompliancePage />
+    </>
+  );
 }

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { AdvanceTaxPage } from "@/components/sections/AdvanceTaxPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/AdvanceTaxPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/advance-tax" },
@@ -29,5 +32,10 @@ export const metadata: Metadata = {
 };
 
 export default function AdvanceTaxServicePage() {
-  return <AdvanceTaxPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <AdvanceTaxPage />
+    </>
+  );
 }

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { ProducerCompanyPage } from "@/components/sections/ProducerCompanyPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/ProducerCompanyPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/producer-company" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function ProducerCompanyServicePage() {
-  return <ProducerCompanyPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <ProducerCompanyPage />
+    </>
+  );
 }

@@ -12,6 +12,7 @@ import {
   PiggyBank, Landmark, Banknote, HeartPulse, GraduationCap, Lightbulb,
   Rocket, FlaskConical, Leaf, Bot, Sprout, CircleDollarSign,
 } from "lucide-react";
+import { faqs } from "@/lib/faqs/StartupIndiaPage";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -164,20 +165,6 @@ const whyUsPoints = [
   { icon: TrendingUp, title: "Funding Readiness Guidance", desc: "Post-recognition, we advise on SIDBI Fund of Funds, government grants, and angel investor readiness." },
 ];
 
-const faqs = [
-  { q: "What is DPIIT Recognition under Startup India?", a: "DPIIT Recognition (formerly known as DIPP Recognition) is the official government certification granted by the Department for Promotion of Industry and Internal Trade (DPIIT) under the Startup India initiative. It confirms that your business qualifies as an eligible 'Startup' and makes you eligible for tax exemptions, angel tax relief, patent rebates, and various government scheme benefits." },
-  { q: "Is Startup India Registration mandatory?", a: "No, it is not legally mandatory. However, it is practically essential if you want to access any of the startup-specific government benefits — including the income tax exemption under Section 80-IAC, angel tax exemption, 80% rebate on patent fees, and exemptions in government procurement. Most investors and accelerators also prefer DPIIT-recognized startups." },
-  { q: "What does Startup India Registration cost?", a: "The government application on the Startup India portal is completely free. Company Avenue charges a professional fee for end-to-end assistance including eligibility assessment, documentation preparation, portal registration, and application filing. Contact us for the current fee based on your entity type." },
-  { q: "How long does DPIIT Recognition take?", a: "Once all documents are submitted, the DPIIT typically processes applications within 2–10 working days. The total timeline including our document preparation is 7–15 working days. Complex applications with queries from DPIIT may take slightly longer." },
-  { q: "Can an LLP apply for Startup India Recognition?", a: "Yes. LLPs are eligible for Startup India recognition. The LLP must be incorporated in India, must be less than 10 years old, turnover must not exceed ₹100 Crore, and must be working towards innovation or a scalable business model." },
-  { q: "Can a Partnership Firm apply?", a: "Only registered partnership firms (registered under the Indian Partnership Act, 1932) are eligible. Unregistered partnerships cannot apply. However, it is usually recommended to convert to LLP or Pvt. Ltd. before applying for recognition to maximize scheme benefits." },
-  { q: "What are the tax benefits after Startup India Recognition?", a: "DPIIT-recognized startups can apply for: (1) 100% income tax exemption for 3 consecutive years under Section 80-IAC (requires IMB approval), (2) Angel Tax exemption under Section 56(2)(viib), and (3) 80% rebate on patent filing fees with fast-track examination. Labour law self-certification is also available." },
-  { q: "Can an existing business apply for Startup India?", a: "Yes, provided the business meets all criteria — less than 10 years old, turnover below ₹100 Crore, incorporated as Pvt. Ltd./LLP/registered partnership, and working towards innovation. Businesses formed by splitting an existing company or entity are NOT eligible." },
-  { q: "Is Startup India Recognition permanent?", a: "No. The recognition is valid as long as the startup continues to meet the eligibility criteria (less than 10 years old, turnover below ₹100 Crore). Once the startup exceeds these limits or the 10-year period ends, it is no longer classified as a startup under DPIIT's definition." },
-  { q: "What happens after receiving the Recognition Certificate?", a: "After recognition, you can: apply for the income tax exemption (Section 80-IAC) via the IMB, claim angel tax exemption automatically, apply for patent filing with the 80% fee rebate, participate in government tenders without experience requirements, access SIDBI Fund of Funds for funding, and register on government startup marketplaces." },
-  { q: "Does Startup India Registration help with fundraising?", a: "Yes, significantly. DPIIT recognition exempts you from Angel Tax, which is one of the biggest hurdles for early-stage fundraising. It also gives you access to the SIDBI Fund of Funds (₹10,000 Crore corpus), connects you with recognized Alternative Investment Funds (AIFs), and makes your startup visible on the government-backed Startup India portal." },
-  { q: "Can a startup with foreign investment apply?", a: "Yes, startups with foreign investment are eligible for Startup India recognition, provided the entity is incorporated in India and meets all other eligibility criteria. However, the Angel Tax exemption (Section 56(2)(viib)) under DPIIT recognition applies only to domestic investors — foreign investors are covered under different FEMA regulations." },
-];
 
 const relatedServices = [
   { id: "private-limited-company", title: "Company Registration", desc: "Incorporate your Pvt. Ltd. company." },

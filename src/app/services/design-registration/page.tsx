@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { DesignRegistrationPage } from "@/components/sections/DesignRegistrationPage";
+import { faqs as serviceFaqs } from "@/lib/faqs/DesignRegistrationPage";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/design-registration" },
@@ -9,5 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default function DesignRegistrationServicePage() {
-  return <DesignRegistrationPage />;
+  return (
+    <>
+      <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
+      <DesignRegistrationPage />
+    </>
+  );
 }

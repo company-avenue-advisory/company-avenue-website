@@ -8,6 +8,8 @@ import { SERVICES } from "@/lib/constants";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 
 // Full service details for every service
 const serviceDetails: Record<string, {
@@ -2426,6 +2428,25 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
+      <JsonLd
+        data={[
+          serviceSchema({
+            name: service.title,
+            description: detail.tagline,
+            path: `/services/${slug}`,
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: service.title, path: `/services/${slug}` },
+          ]),
+          // Only emit FAQPage when FAQs are actually rendered on the page —
+          // schema must match visible content.
+          ...(detail.faqs?.length
+            ? [faqSchema(detail.faqs.map((f) => ({ question: f.q, answer: f.a })))]
+            : []),
+        ]}
+      />
       {/* Hero */}
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-20">
         <div className="container-custom">
