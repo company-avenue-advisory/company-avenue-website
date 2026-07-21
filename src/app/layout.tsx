@@ -69,8 +69,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // NOTE: overflow-x-CLIP, not -hidden. Per the CSS overflow spec, setting
+  // `overflow-x: hidden` makes a `visible` overflow-y compute to `auto`, which
+  // turns <html>/<body> into a scroll container and silently breaks every
+  // `position: sticky` on the site (the service-page sidebars scrolled away
+  // instead of pinning). `clip` gives the same horizontal-overflow protection
+  // while leaving overflow-y as `visible`. Verified in Chrome.
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${inter.variable} overflow-x-hidden`}>
+    <html lang="en" className={`${plusJakarta.variable} ${inter.variable} overflow-x-clip`}>
       <head>
         <JsonLd data={organizationSchema} />
         <Analytics />
@@ -90,7 +96,7 @@ export default function RootLayout({
           })();
         `}} />
       </head>
-      <body className="font-body bg-background text-dark antialiased overflow-x-hidden w-full max-w-full">
+      <body className="font-body bg-background text-dark antialiased overflow-x-clip w-full max-w-full">
         <GtmNoScript />
         <SmoothScroll>
           <SiteChrome>{children}</SiteChrome>
