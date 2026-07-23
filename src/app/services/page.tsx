@@ -15,7 +15,7 @@ import { SERVICES } from "@/lib/constants";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "All Services | Company Avenue Advisory",
+  title: "All Services",
   description: "Comprehensive business compliance services — company registration, GST, income tax, trademark, payroll, and more. All 49 services under one roof.",
 };
 

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { trackEvent } from "@/lib/gtag";
 import { Building2, Loader2, AlertCircle } from "lucide-react";
 
 interface CompanyResult {
@@ -50,6 +51,7 @@ export function CompanyVerification() {
         setError(data.error ?? "Something went wrong.");
       } else {
         setResult(data);
+        trackEvent("verify_used", { tool: "company_verification" });
       }
     } catch {
       setError("Network error. Please try again.");

@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/lmpc-registration" },
-  title: "LMPC Registration — Legal Metrology Packaged Commodities | Company Avenue Advisory",
+  title: "LMPC Registration — Legal Metrology Packaged Commodities",
   description:
     "Register under Legal Metrology (Packaged Commodities) Rules 2011 — mandatory for manufacturers, packers, and importers of pre-packaged goods in India. Label compliance + registration. Starting ₹3,999.",
 };

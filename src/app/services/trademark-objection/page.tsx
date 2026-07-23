@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/trademark-objection" },
-  title: "Trademark Objection Reply | Company Avenue Advisory",
+  title: "Trademark Objection Reply",
   description:
     "Expert trademark objection reply to Examination Report under Section 9 or 11. Strong legal arguments, case law citations, and evidence affidavits. Starting ₹2,999.",
 };

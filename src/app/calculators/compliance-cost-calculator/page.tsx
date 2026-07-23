@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, ClipboardCheck } from "lucide-react";
 import { ComplianceCostCalculator } from "@/components/calculators/ComplianceCostCalculator";
+import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Annual Compliance Cost Calculator | Company Avenue Advisory",
+  title: "Annual Compliance Cost Calculator",
   description:
     "Free annual compliance cost calculator for Pvt Ltd, LLP, OPC, Partnership and Sole Proprietorship. Get an itemised breakdown of ROC filings, audit, ITR, GST and payroll compliance costs for FY 2025-26.",
   keywords: [
@@ -50,7 +51,7 @@ export default function ComplianceCostCalculatorPage() {
 
       <section className="py-12 bg-background">
         <div className="container-custom">
-          <ComplianceCostCalculator />
+          <CalcInteractionTracker name="Compliance Cost Calculator"><ComplianceCostCalculator /></CalcInteractionTracker>
 
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[

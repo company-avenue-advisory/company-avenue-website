@@ -87,20 +87,73 @@ To add a new service page, add an entry to the `SERVICES` array in `constants.ts
 
 ## Deployment
 
-The project is optimised for deployment on **Vercel**:
+The site is a **single Vercel deployment** — the Next.js App Router serves both the
+pages and the backend (API routes under `src/app/api/*`). There is no separate
+server to run.
 
-```bash
-npx vercel
-```
+**Deploy flow**
 
-For other platforms, run `npm run build` and serve the `.next/` output with `npm start`.
+1. Push to the connected Git branch (or run `npx vercel --prod`). Vercel builds
+   with `npm run build` and deploys automatically.
+2. `.env.local` is **git-ignored and never uploaded**. Every key the app reads
+   must be added in **Vercel → Project → Settings → Environment Variables**
+   (Production + Preview), otherwise that feature silently no-ops in production.
+3. After changing any env var in Vercel, **redeploy** — env values are read at
+   build time for `NEXT_PUBLIC_*` and at runtime for the rest.
+
+For non-Vercel hosts: `npm run build` then `npm start`, with the same env vars
+present in the environment.
 
 ## Environment Variables
 
-No environment variables are required for the base site. If you integrate a CMS, email service, or analytics, create a `.env.local` file:
+Create `src/.env.local` for local dev and mirror the same keys in Vercel.
+`NEXT_PUBLIC_*` keys are exposed to the browser; all others are server-only.
 
-```env
-# Example
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-RESEND_API_KEY=re_xxxxxxxxxxxx
-```
+| Key | Purpose | Required |
+|---|---|---|
+| `AI_PROVIDER` | Avenue AI chatbot backend: `mock` \| `groq` \| `openai` | for chatbot |
+| `GROQ_API_KEY` / `GROQ_MODEL` | Groq LLM for the chatbot | if `groq` |
+| `OPENAI_API_KEY` / `OPENAI_MODEL` | OpenAI LLM for the chatbot | if `openai` |
+| `NEWSDATA_API_KEY` | Live news in the Knowledge Hub | optional |
+| `SANDBOX_API_KEY` / `SANDBOX_API_SECRET` | GST / PAN / MCA verification tools | for verify tools |
+| `DATA_GOV_API_KEY` | Company Name Search | for name search |
+| `GOOGLE_PLACES_API_KEY` / `GOOGLE_PLACE_ID` | Real Google reviews on the homepage | for live reviews |
+| `MONGODB_URI` | Consultation form storage (MongoDB Atlas) | **yes** |
+| `MONGODB_DB` | DB name (defaults to `avenue-advisory`) | optional |
+| `RESEND_API_KEY` | Lead-notification email | optional |
+| `CONSULTATION_TO_EMAIL` / `CONSULTATION_FROM_EMAIL` | Lead email routing | optional |
+| `ADMIN_USER` / `ADMIN_PASSWORD` | Admin dashboard login (see below) | **yes** |
+| `NEXT_PUBLIC_GTM_ID` | Google Tag Manager container (`GTM-KMKTTDKD`) | for analytics |
+| `NEXT_PUBLIC_GA_ID` | GA4 direct — **leave blank**, GA4 fires inside GTM | no |
+
+> **MongoDB Atlas gotcha:** Vercel serverless uses dynamic egress IPs. In Atlas →
+> Network Access, allow `0.0.0.0/0`, or the consultation form and admin dashboard
+> fail at the TLS handshake (`MongoServerSelectionError`).
+
+## Admin Panel
+
+The lead dashboard lives at **`/admin/consultations`** and its data API at
+`/api/admin/*`. Both are protected by HTTP Basic Auth in
+[`src/middleware.ts`](src/middleware.ts).
+
+- **Credentials are environment variables** — `ADMIN_USER` and `ADMIN_PASSWORD`.
+  They are **not** hardcoded and **not** in the database.
+- **To rotate the password:** change `ADMIN_PASSWORD` in Vercel → Settings →
+  Environment Variables (and in local `.env.local`), then redeploy. No code change.
+- The middleware includes a best-effort per-IP login throttle (10 failed
+  attempts / 15 min → HTTP 429). It is per-instance; for hard guarantees back it
+  with Vercel KV / Upstash.
+
+## Analytics (GTM)
+
+Analytics runs entirely through **Google Tag Manager** (container `GTM-KMKTTDKD`),
+injected by [`src/components/analytics/Analytics.tsx`](src/components/analytics/Analytics.tsx)
+when `NEXT_PUBLIC_GTM_ID` is set. The GA4 tag (`G-P3LQECEJ5L`) is configured
+**inside** the container, so `NEXT_PUBLIC_GA_ID` is intentionally left blank to
+avoid double-counting.
+
+Conversion signals available to GTM triggers:
+
+- WhatsApp / call links carry `data-track="whatsapp"` / `data-track="call"`.
+- `dataLayer` events: `consultation_submit`, `calculator_used`, `verify_used`,
+  `whatsapp_click`, `call_click`, `generate_lead`.

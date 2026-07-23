@@ -85,6 +85,7 @@ export function CityLandingPage({ config }: { config: CityLandingConfig }) {
               <Button
                 href={waLink(waText)}
                 external
+                data-track="whatsapp"
                 size="lg"
                 className="bg-green-500 text-white hover:bg-green-600"
               >
@@ -92,6 +93,7 @@ export function CityLandingPage({ config }: { config: CityLandingConfig }) {
               </Button>
               <Button
                 href={`tel:${PHONE_E164}`}
+                data-track="call"
                 size="lg"
                 className="bg-transparent shadow-none border border-white/25 text-white hover:bg-white/10"
               >
@@ -155,7 +157,7 @@ export function CityLandingPage({ config }: { config: CityLandingConfig }) {
             </div>
             <div>
               <p className="font-heading font-semibold text-dark">Phone</p>
-              <a href={`tel:${PHONE_E164}`} className="text-primary">{COMPANY.phone}</a>
+              <a href={`tel:${PHONE_E164}`} data-track="call" className="text-primary">{COMPANY.phone}</a>
             </div>
             <div>
               <p className="font-heading font-semibold text-dark">Hours</p>
@@ -198,7 +200,7 @@ export function CityLandingPage({ config }: { config: CityLandingConfig }) {
           <p className="text-white/70 mb-6">Talk to our CAs today — fixed transparent pricing, no hidden fees.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button href="/contact" variant="accent" size="lg">Book Free Consultation</Button>
-            <Button href={waLink(waText)} external variant="secondary" size="lg">Chat on WhatsApp</Button>
+            <Button href={waLink(waText)} external data-track="whatsapp" variant="secondary" size="lg">Chat on WhatsApp</Button>
           </div>
         </section>
       </div>

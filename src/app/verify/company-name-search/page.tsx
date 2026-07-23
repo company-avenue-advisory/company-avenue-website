@@ -10,7 +10,7 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { CompanyNameFAQ } from "@/components/tools/CompanyNameFAQ";
 
 export const metadata: Metadata = {
-  title: "Company Name Search & Availability Check Online India (Free) | Company Avenue Advisory",
+  title: "Company Name Search & Availability Check Online India (Free)",
   description:
     "Free company name search and availability checker for India. Instantly check if your proposed Private Limited, LLP, OPC or Limited company name is already registered with the MCA — powered by real Ministry of Corporate Affairs data.",
   keywords: [

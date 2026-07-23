@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/llp-registration" },
-  title: "LLP Registration in India | Limited Liability Partnership | Company Avenue Advisory",
+  title: "LLP Registration in India | Limited Liability Partnership",
   description:
     "Register your Limited Liability Partnership (LLP) in India with expert CAs. Complete assistance with DSC, DPIN, name reservation, MCA incorporation, PAN, TAN. 7–10 working days. 100% online.",
   keywords: [

@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/producer-company" },
-  title: "Producer Company Registration — Farmers & Artisans | Company Avenue Advisory",
+  title: "Producer Company Registration — Farmers & Artisans",
   description:
     "Register a Producer Company under Companies Act 2013 for farmers, fishermen and artisans. Collective bargaining, easier credit access, limited liability. Starting ₹9,999.",
 };

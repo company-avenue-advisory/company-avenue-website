@@ -49,6 +49,7 @@ export function CTABanner() {
             </Link>
             <a
               href={`tel:${COMPANY.phone}`}
+              data-track="call"
               className="inline-flex items-center gap-2 px-7 py-4 border border-white/15 text-white font-heading font-semibold text-sm rounded-xl hover:bg-white/8 transition-colors"
             >
               <Phone size={15} />

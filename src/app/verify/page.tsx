@@ -4,7 +4,7 @@ import { ShieldCheck, Building2, Tag, FileCheck, Search, ArrowRight } from "luci
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Free Business Verification Tools — GST, PAN, MCA & Trademark | Company Avenue Advisory",
+  title: "Free Business Verification Tools — GST, PAN, MCA & Trademark",
   description:
     "Free instant verification tools for Indian businesses — GSTIN verification, PAN verification, company/director (CIN/DIN) lookup, and a trademark class finder.",
   keywords: [

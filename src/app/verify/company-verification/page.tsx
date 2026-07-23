@@ -5,7 +5,7 @@ import { CompanyVerification } from "@/components/tools/CompanyVerification";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Company & Director Verification — CIN/DIN Lookup | Company Avenue Advisory",
+  title: "Company & Director Verification — CIN/DIN Lookup",
   description:
     "Free MCA lookup tool. Verify any company by CIN/LLPIN or any director by DIN — get incorporation date, status, capital structure, and appointment history.",
   keywords: ["CIN verification", "DIN lookup", "MCA company search", "company verification India", "director verification"],

@@ -248,7 +248,7 @@ export function PrivateLimitedPage() {
                 >
                   Book Free Consultation <ArrowRight size={15} />
                 </Link>
-                <a href="tel:+919953719111"
+                <a href="tel:+919953719111" data-track="call"
                   className="inline-flex items-center gap-2 px-6 py-3.5 border border-slate-200 text-slate-700 font-heading font-semibold text-sm rounded-xl hover:border-primary hover:text-primary transition-all"
                 >
                   <Phone size={14} /> Talk to an Expert
@@ -885,7 +885,7 @@ export function PrivateLimitedPage() {
               >
                 Book Free Consultation <ArrowRight size={15} />
               </Link>
-              <a href="tel:+919953719111"
+              <a href="tel:+919953719111" data-track="call"
                 className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white font-heading font-semibold text-sm rounded-xl hover:bg-white/8 transition-colors"
               >
                 <Phone size={15} /> Call Now

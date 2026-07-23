@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/director-kyc" },
-  title: "Director KYC (DIR-3 KYC) Filing | Company Avenue Advisory",
+  title: "Director KYC (DIR-3 KYC) Filing",
   description:
     "File DIR-3 KYC annually to keep your DIN active. Avoid ₹5,000 penalty and DIN deactivation. Quick online filing. Starting ₹499 per director.",
 };

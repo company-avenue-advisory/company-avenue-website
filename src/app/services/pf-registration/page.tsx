@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/pf-registration" },
-  title: "PF Registration — Provident Fund (EPFO) | Company Avenue Advisory",
+  title: "PF Registration — Provident Fund (EPFO)",
   description:
     "Register your establishment under the Employees' Provident Funds Act 1952. Mandatory for 20+ employees. ECR filing, UAN generation. Starting ₹1,999.",
 };

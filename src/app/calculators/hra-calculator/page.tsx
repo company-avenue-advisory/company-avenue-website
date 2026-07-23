@@ -3,7 +3,7 @@ import { HRACalculator } from "@/components/calculators/HRACalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
-  title: "HRA Calculator — House Rent Allowance Exemption | Company Avenue Advisory",
+  title: "HRA Calculator — House Rent Allowance Exemption",
   description: "Calculate your HRA exemption under Section 10(13A). Enter basic salary, HRA received, rent paid and city to see your taxable and exempt HRA.",
   keywords: [
     "HRA calculator",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ThankYouClient } from "./ThankYouClient";
 
 export const metadata: Metadata = {
-  title: "Thank You | Company Avenue Advisory",
+  title: "Thank You",
   description: "Thank you for reaching out. Our team will contact you shortly.",
   robots: { index: false, follow: true },
   alternates: { canonical: "/thank-you" },

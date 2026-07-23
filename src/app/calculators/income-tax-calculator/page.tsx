@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, IndianRupee } from "lucide-react";
 import { IncomeTaxCalculator } from "@/components/calculators/IncomeTaxCalculator";
+import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Income Tax Calculator FY 2025-26 — Old vs New Regime | Company Avenue Advisory",
+  title: "Income Tax Calculator FY 2025-26 — Old vs New Regime",
   description:
     "Free income tax calculator for FY 2025-26. Compare Old vs New regime with Sec 87A rebate, standard deduction, HRA, 80C, 80D. Budget 2025 updated — zero tax up to ₹12L in new regime.",
   keywords: [
@@ -53,7 +54,7 @@ export default function IncomeTaxCalculatorPage() {
       {/* Calculator */}
       <section className="py-12 bg-background">
         <div className="container-custom">
-          <IncomeTaxCalculator />
+          <CalcInteractionTracker name="Income Tax Calculator"><IncomeTaxCalculator /></CalcInteractionTracker>
 
           {/* Key changes section */}
           <div className="mt-12">

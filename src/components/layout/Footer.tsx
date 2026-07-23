@@ -76,7 +76,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={15} className="text-accent shrink-0" />
-                <a href={`tel:${COMPANY.phone}`} className="text-white/50 text-sm hover:text-white transition-colors">
+                <a href={`tel:${COMPANY.phone}`} data-track="call" className="text-white/50 text-sm hover:text-white transition-colors">
                   {COMPANY.phone}
                 </a>
               </div>

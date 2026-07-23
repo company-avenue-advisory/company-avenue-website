@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Scale } from "lucide-react";
 import { LLPvsPvtLtdTool } from "@/components/calculators/LLPvsPvtLtdTool";
+import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "LLP vs Private Limited Company — Which is Better? | Company Avenue Advisory",
+  title: "LLP vs Private Limited Company — Which is Better?",
   description:
     "Compare LLP vs Private Limited Company in India — funding, compliance, taxes, liability, ESOPs, and more. Take our 5-question quiz for a personalized recommendation.",
   keywords: [
@@ -53,7 +54,7 @@ export default function LLPvsPvtLtdPage() {
       {/* Tool */}
       <section className="py-12 bg-background">
         <div className="container-custom">
-          <LLPvsPvtLtdTool />
+          <CalcInteractionTracker name="LLP vs Pvt Ltd"><LLPvsPvtLtdTool /></CalcInteractionTracker>
         </div>
       </section>
 

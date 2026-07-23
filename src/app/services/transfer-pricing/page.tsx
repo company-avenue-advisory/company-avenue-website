@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/transfer-pricing" },
-  title: "Transfer Pricing Compliance & Documentation | Company Avenue Advisory",
+  title: "Transfer Pricing Compliance & Documentation",
   description:
     "Transfer pricing study report, Form 3CEB filing, and APA advisory for international transactions with associated enterprises. Arm's length price documentation. Starting ₹19,999.",
 };

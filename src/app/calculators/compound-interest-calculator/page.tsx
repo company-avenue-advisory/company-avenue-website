@@ -3,7 +3,7 @@ import { CompoundInterestCalculator } from "@/components/calculators/CompoundInt
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
-  title: "Simple & Compound Interest Calculator | Company Avenue Advisory",
+  title: "Simple & Compound Interest Calculator",
   description: "Free compound interest calculator with simple-interest mode. Choose yearly, half-yearly, quarterly or monthly compounding.",
   keywords: [
     "compound interest calculator",

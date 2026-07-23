@@ -228,7 +228,7 @@ export function TransferPricingPage() {
                 Start Your TP Study <ArrowRight size={15} />
               </Link>
               <a
-                href="tel:+919953719111"
+                href="tel:+919953719111" data-track="call"
                 className="inline-flex items-center gap-2 border border-white/20 text-white px-7 py-3.5 rounded-xl font-heading font-semibold text-sm hover:bg-white/10 transition-colors"
               >
                 <Phone size={15} /> Call Our TP Expert
@@ -608,7 +608,7 @@ export function TransferPricingPage() {
                 Start TP Study — ₹29,999 <ArrowRight size={15} />
               </Link>
               <a
-                href="tel:+919953719111"
+                href="tel:+919953719111" data-track="call"
                 className="inline-flex items-center gap-2 border border-white/20 text-white px-8 py-4 rounded-xl font-heading font-semibold text-sm hover:bg-white/10 transition-colors"
               >
                 <Phone size={15} /> Call Our TP Expert

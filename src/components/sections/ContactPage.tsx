@@ -8,6 +8,7 @@ import { MapPin, Phone, Mail, Clock, MessageCircle, CheckCircle } from "lucide-r
 import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { COMPANY } from "@/lib/constants";
+import { trackEvent } from "@/lib/gtag";
 
 const schema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -54,6 +55,9 @@ export function ContactPage() {
         const body = await res.json().catch(() => null);
         throw new Error(body?.error ?? "Something went wrong. Please try again.");
       }
+      // Conversion event — fires only after a genuinely successful submission
+      // (Mongo insert returned ok), not on button click. Section J / Task 2.2.
+      trackEvent("consultation_submit", { form: "book_consultation" });
       setSubmitted(true);
       reset();
     } catch (err) {
@@ -251,6 +255,7 @@ export function ContactPage() {
 
               <a
                 href={`https://wa.me/${COMPANY.whatsapp}`}
+                data-track="whatsapp"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 bg-green-500 rounded-2xl p-5 text-white hover:bg-green-600 transition-colors"

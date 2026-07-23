@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/gst-amendment" },
-  title: "GST Amendment — Update GST Registration Details | Company Avenue Advisory",
+  title: "GST Amendment — Update GST Registration Details",
   description:
     "Update your GST registration details — business name, address, authorized signatory, bank account. Core and non-core amendments on GST portal. Starting ₹999.",
 };

@@ -5,7 +5,7 @@ import { TrademarkClassFinder } from "@/components/tools/TrademarkClassFinder";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Trademark Class Finder — Which NICE Class Fits Your Brand? | Company Avenue Advisory",
+  title: "Trademark Class Finder — Which NICE Class Fits Your Brand?",
   description:
     "Free trademark class finder for India. Describe your business and instantly see which of the 45 NICE trademark classes it falls under, then check name availability.",
   keywords: ["trademark classes India", "NICE classification trademark", "trademark class finder", "which trademark class"],

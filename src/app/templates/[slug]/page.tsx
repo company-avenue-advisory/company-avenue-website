@@ -25,7 +25,7 @@ export async function generateMetadata({
   if (!template) return {};
 
   return {
-    title: `${template.title} — Free Template (India) | Company Avenue Advisory`,
+    title: `${template.title} — Free Template (India)`,
     description: template.description,
     alternates: canonical(`/templates/${template.slug}`),
     openGraph: {

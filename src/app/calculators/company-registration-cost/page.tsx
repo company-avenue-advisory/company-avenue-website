@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Building2 } from "lucide-react";
 import { CompanyRegistrationCalculator } from "@/components/calculators/CompanyRegistrationCalculator";
+import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Company Registration Cost Calculator India 2025 | Company Avenue Advisory",
+  title: "Company Registration Cost Calculator India 2025",
   description:
     "Estimate company registration costs in India — Pvt Ltd, LLP, OPC, Partnership. Includes government fees, state-wise stamp duty, DSC cost, and professional charges. Free tool.",
   keywords: [
@@ -53,7 +54,7 @@ export default function CompanyRegistrationCostPage() {
       {/* Calculator */}
       <section className="py-12 bg-background">
         <div className="container-custom">
-          <CompanyRegistrationCalculator />
+          <CalcInteractionTracker name="Company Registration Cost"><CompanyRegistrationCalculator /></CalcInteractionTracker>
 
           {/* Cost components explained */}
           <div className="mt-12">

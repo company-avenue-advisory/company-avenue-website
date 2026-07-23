@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { trackEvent } from "@/lib/gtag";
 import { Search, ExternalLink, Tag } from "lucide-react";
 import { findMatchingClasses, type TrademarkClass } from "@/lib/trademark-classes";
 
@@ -9,7 +10,9 @@ export function TrademarkClassFinder() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setMatches(findMatchingClasses(query));
+    const found = findMatchingClasses(query);
+    setMatches(found);
+    if (found.length) trackEvent("verify_used", { tool: "trademark_class_finder" });
   }
 
   const ipIndiaSearchUrl = `https://tmrsearch.ipindia.gov.in/tmrpublicsearch/`;

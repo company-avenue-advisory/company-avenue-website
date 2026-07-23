@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/business-valuation" },
-  title: "Business Valuation Services in India | Company Avenue Advisory",
+  title: "Business Valuation Services in India",
   description:
     "SEBI-compliant business valuation for M&A, fundraising, ESOPs, and RBI compliance. DCF, comparable companies, and asset-based approaches. Starting ₹14,999.",
 };

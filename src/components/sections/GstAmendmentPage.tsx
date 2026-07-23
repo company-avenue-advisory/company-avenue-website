@@ -226,7 +226,7 @@ export function GstAmendmentPage() {
               >
                 Get Started — ₹1,499 <ArrowRight size={15} />
               </Link>
-              <a href="tel:+919953719111"
+              <a href="tel:+919953719111" data-track="call"
                 className="inline-flex items-center gap-2 border border-white/20 text-white font-heading font-semibold px-7 py-3.5 rounded-xl hover:border-accent hover:text-accent transition-colors text-sm"
               >
                 <Phone size={14} /> Call an Expert
@@ -289,7 +289,7 @@ export function GstAmendmentPage() {
                 >
                   Start My Application <ArrowRight size={14} />
                 </Link>
-                <a href="tel:+919953719111"
+                <a href="tel:+919953719111" data-track="call"
                   className="inline-flex items-center gap-2 border border-slate-200 text-dark font-heading font-semibold px-6 py-3 rounded-xl hover:border-primary hover:text-primary transition-colors text-sm"
                 >
                   <Phone size={14} /> Speak to an Expert
@@ -693,7 +693,7 @@ export function GstAmendmentPage() {
               >
                 Get Started — ₹1,499 <ArrowRight size={16} />
               </Link>
-              <a href="tel:+919953719111"
+              <a href="tel:+919953719111" data-track="call"
                 className="inline-flex items-center gap-2 border border-white/20 text-white font-heading font-semibold px-8 py-4 rounded-xl hover:border-accent hover:text-accent transition-colors text-base"
               >
                 <Phone size={16} /> Call +91 99537 19111

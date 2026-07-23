@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/sole-proprietorship" },
-  title: "Sole Proprietorship Registration | Company Avenue Advisory",
+  title: "Sole Proprietorship Registration",
   description:
     "Start your sole proprietorship business in India with Udyam/MSME, GST, shop act registrations. Simplest business form for individual entrepreneurs. Starting ₹999.",
 };

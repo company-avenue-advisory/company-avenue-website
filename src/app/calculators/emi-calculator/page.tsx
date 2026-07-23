@@ -3,7 +3,7 @@ import { EMICalculator } from "@/components/calculators/EMICalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
-  title: "EMI Calculator — Loan EMI, Interest & Total Payable | Company Avenue Advisory",
+  title: "EMI Calculator — Loan EMI, Interest & Total Payable",
   description: "Free online EMI calculator for personal, business & car loans. Calculate monthly EMI, total interest and total payment with an interactive breakdown.",
   keywords: [
     "EMI calculator",

@@ -3,7 +3,7 @@ import { TDSCalculator } from "@/components/calculators/TDSCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
-  title: "TDS Calculator — Deduct TDS on Payments | Company Avenue Advisory",
+  title: "TDS Calculator — Deduct TDS on Payments",
   description: "Free TDS calculator for India. Compute TDS amount, rate, section and net payable for professional fees, rent, contracts, commission and more.",
   keywords: [
     "TDS calculator",

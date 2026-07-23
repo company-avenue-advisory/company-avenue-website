@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { trackEvent } from "@/lib/gtag";
 import Link from "next/link";
 import {
   Search, Loader2, AlertCircle, AlertTriangle, CheckCircle2, XCircle,
@@ -162,7 +163,10 @@ export function CompanyNameSearch() {
       });
       const data = await res.json();
       if (!res.ok) setError(data.error ?? "Something went wrong.");
-      else setResult(data);
+      else {
+        setResult(data);
+        trackEvent("verify_used", { tool: "company_name_search" });
+      }
     } catch {
       setError("Network error. Please try again.");
     } finally {

@@ -354,11 +354,11 @@ export function Navbar() {
                 <p className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest px-1 mb-3">
                   Contact Us
                 </p>
-                <a href={`tel:${COMPANY.phone}`}
+                <a href={`tel:${COMPANY.phone}`} data-track="call"
                   className="flex items-center gap-3 w-full px-4 py-3 bg-primary/5 rounded-xl text-sm font-heading font-medium text-primary hover:bg-primary/10 transition-colors">
                   <Phone size={15} /> {COMPANY.phone}
                 </a>
-                <a href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`}
+                <a href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`} data-track="whatsapp"
                   target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-3 w-full px-4 py-3 bg-green-50 rounded-xl text-sm font-heading font-medium text-green-700 hover:bg-green-100 transition-colors">
                   <MessageCircle size={15} className="text-green-600" /> WhatsApp Us

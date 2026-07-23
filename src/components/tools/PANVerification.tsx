@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { trackEvent } from "@/lib/gtag";
 import { ShieldCheck, Loader2, CheckCircle2, XCircle, AlertCircle } from "lucide-react";
 
 interface PANResult {
@@ -45,6 +46,7 @@ export function PANVerification() {
         setError(data.error ?? "Something went wrong.");
       } else {
         setResult(data);
+        trackEvent("verify_used", { tool: "pan_verification" });
       }
     } catch {
       setError("Network error. Please try again.");

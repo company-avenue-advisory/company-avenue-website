@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, Calculator } from "lucide-react";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 
 export function CalcPageShell({
   title,
@@ -42,7 +43,7 @@ export function CalcPageShell({
       {/* Calculator */}
       <section className="py-12 bg-background">
         <div className="container-custom">
-          {children}
+          <CalcInteractionTracker name={breadcrumb}>{children}</CalcInteractionTracker>
 
           {faqs && faqs.length > 0 && (
             <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/patent-registration" },
-  title: "Patent Registration in India | Company Avenue Advisory",
+  title: "Patent Registration in India",
   description:
     "File patent application under the Patents Act 1970 — provisional and complete specifications. Protects inventions for 20 years. Expert patent attorneys. Starting ₹14,999.",
 };

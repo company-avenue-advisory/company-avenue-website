@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/tds-return" },
-  title: "TDS Return Filing — Form 24Q, 26Q, 27Q | Company Avenue Advisory",
+  title: "TDS Return Filing — Form 24Q, 26Q, 27Q",
   description:
     "Quarterly TDS return filing for salary (24Q), non-salary (26Q), and NRI payments (27Q). Avoid ₹200/day late fee under Section 234E. Expert CA filing. Starting ₹1,499/quarter.",
 };

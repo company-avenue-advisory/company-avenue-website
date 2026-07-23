@@ -5,7 +5,7 @@ import { PANVerification } from "@/components/tools/PANVerification";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "PAN Verification Online — Verify PAN Card Details | Company Avenue Advisory",
+  title: "PAN Verification Online — Verify PAN Card Details",
   description:
     "Free PAN verification tool. Confirm a PAN number matches the given name and date of birth, and check Aadhaar-seeding status — with explicit consent.",
   keywords: ["PAN verification online", "verify PAN card", "PAN card status check", "PAN Aadhaar link status"],

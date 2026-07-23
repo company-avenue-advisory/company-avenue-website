@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/roc-compliance" },
-  title: "ROC Annual Compliance for Private Limited Companies | Company Avenue Advisory",
+  title: "ROC Annual Compliance for Private Limited Companies",
   description:
     "Complete ROC annual compliance — AOC-4, MGT-7, board meetings, statutory registers. Avoid MCA penalties up to ₹5 lakh. Expert CA support. Starting ₹5,999/year.",
 };

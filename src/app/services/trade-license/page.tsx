@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/trade-license" },
-  title: "Trade License Registration — Municipal Corporation | Company Avenue Advisory",
+  title: "Trade License Registration — Municipal Corporation",
   description:
     "Obtain a Trade License from your Municipal Corporation before starting business. Mandatory for shops, restaurants, factories, and all commercial establishments. Starting ₹1,499.",
 };

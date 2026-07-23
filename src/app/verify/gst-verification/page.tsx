@@ -5,7 +5,7 @@ import { GSTVerification } from "@/components/tools/GSTVerification";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "GST Verification Online — Check GSTIN Status | Company Avenue Advisory",
+  title: "GST Verification Online — Check GSTIN Status",
   description:
     "Free GSTIN verification tool. Enter any GSTIN and instantly see legal name, trade name, registration status, and address — sourced live from GSTN.",
   keywords: ["GSTIN verification online", "GST number check", "verify GST number", "GSTIN status check"],

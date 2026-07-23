@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Calculator } from "lucide-react";
 import { GSTCalculator } from "@/components/calculators/GSTCalculator";
+import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "GST Calculator — Inclusive & Exclusive | Company Avenue Advisory",
+  title: "GST Calculator — Inclusive & Exclusive",
   description:
     "Free online GST calculator for India. Calculate GST for all slabs (5%, 12%, 18%, 28%), inclusive or exclusive mode, CGST/SGST or IGST split. Updated for FY 2025-26.",
   keywords: [
@@ -54,7 +55,7 @@ export default function GSTCalculatorPage() {
       {/* Calculator */}
       <section className="py-12 bg-background">
         <div className="container-custom">
-          <GSTCalculator />
+          <CalcInteractionTracker name="GST Calculator"><GSTCalculator /></CalcInteractionTracker>
 
           {/* Info section */}
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

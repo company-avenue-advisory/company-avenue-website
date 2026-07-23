@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/nidhi-company" },
-  title: "Nidhi Company Registration | Company Avenue Advisory",
+  title: "Nidhi Company Registration",
   description:
     "Register a Nidhi Company in India — a mutual benefit society under Section 406 of Companies Act 2013. Member deposits, loans, and savings. Starting ₹9,999.",
 };

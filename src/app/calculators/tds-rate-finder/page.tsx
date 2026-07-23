@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, FileText } from "lucide-react";
 import { TDSRateFinder } from "@/components/calculators/TDSRateFinder";
+import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "TDS Rate Finder 2025 — Section, Rate & Threshold | Company Avenue Advisory",
+  title: "TDS Rate Finder 2025 — Section, Rate & Threshold",
   description:
     "Find TDS rates for any payment type instantly — professional fees (194J), rent (194I), contract (194C), salary (192), and 15+ more. Includes section, threshold, and notes.",
   keywords: [
@@ -54,7 +55,7 @@ export default function TDSRateFinderPage() {
       {/* Tool */}
       <section className="py-12 bg-background">
         <div className="container-custom">
-          <TDSRateFinder />
+          <CalcInteractionTracker name="TDS Rate Finder"><TDSRateFinder /></CalcInteractionTracker>
 
           {/* Quick reference */}
           <div className="mt-12">

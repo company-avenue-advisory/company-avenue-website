@@ -31,7 +31,7 @@ export async function generateMetadata({
   if (!post) return {};
 
   return {
-    title: `${post.title} | Company Avenue Advisory`,
+    title: `${post.title}`,
     description: post.excerpt,
     alternates: canonical(`/blog/${post.slug}`),
     openGraph: {

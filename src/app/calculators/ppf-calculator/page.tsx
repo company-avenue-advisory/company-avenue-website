@@ -3,7 +3,7 @@ import { PPFCalculator } from "@/components/calculators/PPFCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
-  title: "PPF Calculator — Public Provident Fund Maturity | Company Avenue Advisory",
+  title: "PPF Calculator — Public Provident Fund Maturity",
   description: "Free PPF calculator. Estimate your Public Provident Fund maturity value, interest and 80C tax savings over 15+ years at the current 7.1% rate.",
   keywords: [
     "PPF calculator",

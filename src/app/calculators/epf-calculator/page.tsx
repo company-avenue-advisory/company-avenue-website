@@ -3,7 +3,7 @@ import { EPFCalculator } from "@/components/calculators/EPFCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
-  title: "EPF Calculator — Provident Fund Corpus at Retirement | Company Avenue Advisory",
+  title: "EPF Calculator — Provident Fund Corpus at Retirement",
   description: "Free EPF calculator. Project your Employees' Provident Fund corpus at retirement with salary growth and the current 8.25% interest rate.",
   keywords: [
     "EPF calculator",

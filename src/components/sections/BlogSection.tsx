@@ -155,7 +155,7 @@ export function BlogSection() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
               >
                 <Link
-                  href="/blog"
+                  href={`/blog/${post.id}`}
                   className="group flex flex-col bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-card hover:border-primary/10 transition-all duration-300 h-full"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden">

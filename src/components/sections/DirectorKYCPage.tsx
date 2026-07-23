@@ -173,13 +173,13 @@ function StickySidebar() {
           ))}
         </div>
         <div className="space-y-2">
-          <a href="tel:+919953719111"
+          <a href="tel:+919953719111" data-track="call"
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white text-xs font-heading font-semibold rounded-xl hover:bg-[#0a2444] transition-colors"
           ><Phone size={13} /> Call Now</a>
           <Link href="/contact"
             className="flex items-center justify-center gap-2 w-full py-2.5 border border-primary text-primary text-xs font-heading font-semibold rounded-xl hover:bg-primary/5 transition-colors"
           >File DIR-3 KYC</Link>
-          <a href="https://wa.me/919953719111" target="_blank" rel="noopener noreferrer"
+          <a href="https://wa.me/919953719111" data-track="whatsapp" target="_blank" rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors"
           ><MessageCircle size={13} /> WhatsApp</a>
         </div>
@@ -289,7 +289,7 @@ export function DirectorKYCPage() {
                 >
                   File DIR-3 KYC <ArrowRight size={15} />
                 </Link>
-                <a href="tel:+919953719111"
+                <a href="tel:+919953719111" data-track="call"
                   className="inline-flex items-center gap-2 px-6 py-3.5 border border-slate-200 text-slate-700 font-heading font-semibold text-sm rounded-xl hover:border-primary hover:text-primary transition-all"
                 >
                   <Phone size={14} /> Talk to Expert
@@ -665,7 +665,7 @@ export function DirectorKYCPage() {
                 >
                   File DIR-3 KYC Now <ArrowRight size={15} />
                 </Link>
-                <a href="tel:+919953719111"
+                <a href="tel:+919953719111" data-track="call"
                   className="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-heading font-semibold text-sm rounded-xl hover:bg-white/5 transition-colors"
                 >
                   <Phone size={15} /> Call Our KYC Expert

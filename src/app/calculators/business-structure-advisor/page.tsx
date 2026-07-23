@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, Lightbulb } from "lucide-react";
 import { BusinessStructureAdvisor } from "@/components/calculators/BusinessStructureAdvisor";
+import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
-  title: "Business Structure Advisor — Which Entity Should You Register? | Company Avenue Advisory",
+  title: "Business Structure Advisor — Which Entity Should You Register?",
   description:
     "Answer 6 quick questions and get a personalized recommendation on the right business structure — Private Limited, LLP, OPC, Partnership, or Sole Proprietorship. Free quiz tool.",
   keywords: [
@@ -53,7 +54,7 @@ export default function BusinessStructureAdvisorPage() {
       {/* Tool */}
       <section className="py-12 bg-background">
         <div className="container-custom">
-          <BusinessStructureAdvisor />
+          <CalcInteractionTracker name="Business Structure Advisor"><BusinessStructureAdvisor /></CalcInteractionTracker>
 
           {/* Quick entity overview */}
           <div className="mt-16">

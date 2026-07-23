@@ -3,7 +3,7 @@ import { RetirementCalculator } from "@/components/calculators/RetirementCalcula
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
-  title: "Retirement Planning Calculator — Corpus & Monthly SIP | Company Avenue Advisory",
+  title: "Retirement Planning Calculator — Corpus & Monthly SIP",
   description: "Free retirement planning calculator. Compute the inflation-adjusted corpus you need and the monthly SIP required to retire comfortably.",
   keywords: [
     "retirement calculator",

@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/gratuity-trust" },
-  title: "Gratuity Trust Registration — Section 36(1)(v) Approval | Company Avenue Advisory",
+  title: "Gratuity Trust Registration — Section 36(1)(v) Approval",
   description:
     "Set up an Income Tax-approved Gratuity Trust to make employer contributions tax-deductible. Mandatory for 10+ employee establishments under the Gratuity Act 1972. Starting ₹14,999.",
 };

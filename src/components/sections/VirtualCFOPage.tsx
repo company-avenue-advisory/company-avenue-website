@@ -189,7 +189,7 @@ function StickySidebar() {
         </div>
         <div className="space-y-2">
           <a
-            href="tel:+919953719111"
+            href="tel:+919953719111" data-track="call"
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-primary text-white text-xs font-heading font-semibold rounded-xl hover:bg-[#0a2444] transition-colors"
           >
             <Phone size={13} /> Call Now
@@ -201,7 +201,7 @@ function StickySidebar() {
             Book Free Consultation
           </Link>
           <a
-            href="https://wa.me/919953719111"
+            href="https://wa.me/919953719111" data-track="whatsapp"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors"
@@ -310,7 +310,7 @@ export function VirtualCFOPage() {
                   Hire Your Virtual CFO <ArrowRight size={15} />
                 </Link>
                 <a
-                  href="tel:+919953719111"
+                  href="tel:+919953719111" data-track="call"
                   className="inline-flex items-center gap-2 px-6 py-3.5 border border-slate-200 text-slate-700 font-heading font-semibold text-sm rounded-xl hover:border-primary hover:text-primary transition-all"
                 >
                   <Phone size={14} /> Free CFO Consultation
@@ -931,7 +931,7 @@ export function VirtualCFOPage() {
               </div>
               <div>
                 <p className="font-heading font-bold text-dark text-sm">Call Us</p>
-                <a href="tel:+919953719111" className="text-primary text-xs font-heading font-semibold hover:underline">
+                <a href="tel:+919953719111" data-track="call" className="text-primary text-xs font-heading font-semibold hover:underline">
                   +91 99537 19111
                 </a>
               </div>
@@ -942,7 +942,7 @@ export function VirtualCFOPage() {
               </div>
               <div>
                 <p className="font-heading font-bold text-dark text-sm">WhatsApp</p>
-                <a href="https://wa.me/919953719111" target="_blank" rel="noopener noreferrer" className="text-green-600 text-xs font-heading font-semibold hover:underline">
+                <a href="https://wa.me/919953719111" data-track="whatsapp" target="_blank" rel="noopener noreferrer" className="text-green-600 text-xs font-heading font-semibold hover:underline">
                   Chat Now
                 </a>
               </div>
@@ -995,7 +995,7 @@ export function VirtualCFOPage() {
                 Start Your Free Onboarding Call <ArrowRight size={15} />
               </Link>
               <a
-                href="tel:+919953719111"
+                href="tel:+919953719111" data-track="call"
                 className="inline-flex items-center gap-2 px-7 py-4 bg-white/10 border border-white/20 text-white font-heading font-semibold text-sm rounded-xl hover:bg-white/20 transition-colors"
               >
                 <Phone size={14} /> Talk to a Senior CA

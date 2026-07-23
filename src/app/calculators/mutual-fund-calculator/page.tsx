@@ -3,7 +3,7 @@ import { MutualFundCalculator } from "@/components/calculators/MutualFundCalcula
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
-  title: "Mutual Fund Returns Calculator — SIP & Lumpsum | Company Avenue Advisory",
+  title: "Mutual Fund Returns Calculator — SIP & Lumpsum",
   description: "Free mutual fund returns calculator supporting both SIP and lumpsum. Estimate maturity value and gains with an interactive breakdown.",
   keywords: [
     "mutual fund calculator",

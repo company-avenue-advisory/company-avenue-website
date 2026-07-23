@@ -6,7 +6,7 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/one-person-company" },
-  title: "One Person Company (OPC) Registration Online | Company Avenue Advisory",
+  title: "One Person Company (OPC) Registration Online",
   description:
     "Register your One Person Company (OPC) online with Company Avenue Advisory. Compare OPC vs Sole Proprietorship vs Pvt Ltd, understand eligibility, documents, process, compliance, and pricing.",
   keywords: [
