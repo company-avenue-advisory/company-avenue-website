@@ -147,6 +147,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: "About Us", href: "/about" },
+                { label: "Govt Startup Schemes", href: "/startup-schemes" },
                 { label: "How-To Guides", href: "/guides" },
                 { label: "Document Templates", href: "/templates" },
                 { label: "Business Resources", href: "/resources" },

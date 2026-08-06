@@ -58,6 +58,83 @@ export const NAV_LINKS = [
     ],
   },
   {
+    label: "Startup Schemes",
+    href: "/startup-schemes",
+    children: [
+      {
+        group: "Most Applied For",
+        items: [
+          { label: "Startup India Seed Fund (SISFS)", href: "/startup-schemes/startup-india-seed-fund-scheme" },
+          { label: "Credit Guarantee for Startups (CGSS)", href: "/startup-schemes/credit-guarantee-scheme-for-startups" },
+          { label: "Biotechnology Ignition Grant (BIG)", href: "/startup-schemes/biotechnology-ignition-grant" },
+          { label: "NIDHI PRAYAS 2.0 Prototype Grant", href: "/startup-schemes/nidhi-prayas" },
+          { label: "iDEX Defence Innovation", href: "/startup-schemes/idex" },
+          { label: "IN-SPACe Seed Fund", href: "/startup-schemes/in-space-seed-fund" },
+          { label: "Mudra Loan (PMMY)", href: "/startup-schemes/pradhan-mantri-mudra-yojana" },
+          { label: "CGTMSE Collateral-Free Credit", href: "/startup-schemes/cgtmse" },
+        ],
+      },
+      {
+        group: "Grants — No Repayment",
+        items: [
+          { label: "All Grant Schemes", href: "/startup-schemes#directory" },
+          { label: "PRISM (Individual Innovators)", href: "/startup-schemes/prism" },
+          { label: "TIDE 2.0 (ICT Startups)", href: "/startup-schemes/tide-2" },
+          { label: "GENESIS (Tier-II/III Cities)", href: "/startup-schemes/genesis" },
+          { label: "DCIS (Telecom & ICT)", href: "/startup-schemes/dcis" },
+          { label: "SPARSH (Social Health)", href: "/startup-schemes/sparsh" },
+          { label: "GREAT (Technical Textiles)", href: "/startup-schemes/great-technical-textiles" },
+          { label: "IFSCA Fintech Incentive", href: "/startup-schemes/ifsca-fintech-incentive-scheme" },
+        ],
+      },
+      {
+        group: "Equity & VC Funds",
+        items: [
+          { label: "Fund of Funds for Startups (FFS)", href: "/startup-schemes/fund-of-funds-for-startups" },
+          { label: "Startup India Fund of Funds 2.0", href: "/startup-schemes/startup-india-fund-of-funds-2" },
+          { label: "AgriSURE Agri Fund", href: "/startup-schemes/agrisure" },
+          { label: "BIRAC AcE Fund (Biotech)", href: "/startup-schemes/ace-fund" },
+          { label: "SAMRIDH Accelerator Funding", href: "/startup-schemes/samridh" },
+          { label: "Antariksh Space VCF", href: "/startup-schemes/antariksh-vcf" },
+          { label: "Self-Reliant India Fund", href: "/startup-schemes/self-reliant-india-fund" },
+        ],
+      },
+      {
+        group: "Loans & Credit Guarantee",
+        items: [
+          { label: "Credit Guarantee for Startups (CGSS)", href: "/startup-schemes/credit-guarantee-scheme-for-startups" },
+          { label: "CGTMSE (MSME Credit Guarantee)", href: "/startup-schemes/cgtmse" },
+          { label: "Pradhan Mantri Mudra Yojana", href: "/startup-schemes/pradhan-mantri-mudra-yojana" },
+          { label: "Stand-Up India (SC/ST & Women)", href: "/startup-schemes/stand-up-india" },
+          { label: "PMFME (Food Processing)", href: "/startup-schemes/pmfme" },
+          { label: "Agriculture Infrastructure Fund", href: "/startup-schemes/agriculture-infrastructure-fund" },
+        ],
+      },
+      {
+        group: "By Sector",
+        items: [
+          { label: "Defence — iDEX, ADITI, TDF", href: "/startup-schemes/idex" },
+          { label: "Space — IN-SPACe, TAF, VCF", href: "/startup-schemes/space-technology-adoption-fund" },
+          { label: "Biotech — BIG, SEED, LEAP", href: "/startup-schemes/birac-seed-fund" },
+          { label: "Agriculture — RKVY, AgriSURE", href: "/startup-schemes/rkvy-agri-entrepreneurship" },
+          { label: "Semiconductor — DLI, C2S", href: "/startup-schemes/design-linked-incentive" },
+          { label: "Quantum & Deep Tech — NQM, RDI", href: "/startup-schemes/national-quantum-mission" },
+        ],
+      },
+      {
+        group: "Get Funded With Us",
+        items: [
+          { label: "Find My Scheme (5 Questions)", href: "/startup-schemes#scheme-finder" },
+          { label: "Startup India / DPIIT Recognition", href: "/services/startup-india" },
+          { label: "CA-Certified Project Report / DPR", href: "/pricing" },
+          { label: "CMA Data for Bank Funding", href: "/pricing" },
+          { label: "Pitch Deck & Financial Model", href: "/pricing" },
+          { label: "Book a Free Eligibility Screen", href: "/contact" },
+        ],
+      },
+    ],
+  },
+  {
     label: "IPR & Registrations",
     href: "/services",
     children: [
@@ -206,9 +283,22 @@ export const NAV_LINKS = [
     ],
   },
   {
-    label: "Tools",
+    // Tools and Resources are merged into a single mega menu — the header can
+    // no longer carry them as two separate top-level items.
+    label: "Tools & Resources",
     href: "/calculators",
     children: [
+      {
+        group: "Guides & Resources",
+        items: [
+          { label: "How-To Guides", href: "/guides" },
+          { label: "Document Templates", href: "/templates" },
+          { label: "Business Resources & Rates", href: "/resources" },
+          { label: "Blog & Industry News", href: "/blog" },
+          { label: "Government Startup Schemes", href: "/startup-schemes" },
+          { label: "Pricing & Packages", href: "/pricing" },
+        ],
+      },
       {
         group: "Tax & Business",
         items: [
@@ -261,21 +351,6 @@ export const NAV_LINKS = [
           { label: "Company & Director Verification", href: "/verify/company-verification" },
           { label: "Trademark Class Finder", href: "/verify/trademark-class-finder" },
           { label: "Company Name Search", href: "/verify/company-name-search" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Resources",
-    href: "/guides",
-    children: [
-      {
-        group: "Learn & Do",
-        items: [
-          { label: "How-To Guides", href: "/guides" },
-          { label: "Document Templates", href: "/templates" },
-          { label: "Business Resources", href: "/resources" },
-          { label: "Blog & Industry News", href: "/blog" },
         ],
       },
     ],

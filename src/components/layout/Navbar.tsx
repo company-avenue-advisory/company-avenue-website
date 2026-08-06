@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronDown, Menu, X, ArrowRight, Phone, MessageCircle, Mail,
-  Clock, CalendarCheck, Star,
+  Clock, CalendarCheck, Star, IndianRupee, Headset,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COMPANY, NAV_LINKS } from "@/lib/constants";
@@ -45,12 +45,58 @@ const POPULAR_CARDS: Record<string, PopularCard> = {
     href: "/services/roc-compliance",
     cta: "File Now",
   },
+  "Startup Schemes": {
+    badge: "Free Eligibility Check",
+    title: "Startup India Seed Fund",
+    desc: "Up to ₹20 lakh grant + ₹50 lakh convertible debt. We screen eligibility, build the application and file it.",
+    href: "/startup-schemes/startup-india-seed-fund-scheme",
+    cta: "Check Eligibility",
+  },
+  "Tools & Resources": {
+    badge: "Most Used",
+    title: "Income Tax Calculator",
+    desc: "Compare old vs new regime for FY 2025-26 in seconds — plus 20+ free calculators and CA-reviewed guides.",
+    href: "/calculators/income-tax-calculator",
+    cta: "Calculate Now",
+  },
 };
 
-const MEGA_LABELS = ["Start Business", "IPR & Registrations", "Tax & Payroll", "Compliance", "Tools"];
+const MEGA_LABELS = [
+  "Start Business",
+  "Startup Schemes",
+  "IPR & Registrations",
+  "Tax & Payroll",
+  "Compliance",
+  "Tools & Resources",
+];
+
+/**
+ * Top-level items rendered as a round icon on desktop instead of a text label —
+ * the header ran out of horizontal room once Startup Schemes was added.
+ * They keep their text label in the mobile menu, and carry an aria-label plus a
+ * hover tooltip so the icon is never the only affordance.
+ */
+const ICON_ONLY_NAV: Record<
+  string,
+  { icon: React.ComponentType<{ size?: number; className?: string }>; tip: string }
+> = {
+  Pricing: { icon: IndianRupee, tip: "Pricing & Packages" },
+};
+
+function NavTooltip({ label }: { label: string }) {
+  return (
+    <span
+      role="tooltip"
+      className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-2 px-2.5 py-1 rounded-lg bg-dark text-white text-[11px] font-heading font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-150 shadow-lg shadow-black/30 z-50"
+    >
+      {label}
+    </span>
+  );
+}
 
 const MEGA_VIEW_ALL: Record<string, { label: string; href: string }> = {
-  Tools: { label: "All Tools", href: "/calculators" },
+  "Tools & Resources": { label: "All Tools", href: "/calculators" },
+  "Startup Schemes": { label: "All 69 Schemes", href: "/startup-schemes" },
 };
 
 export function Navbar() {
@@ -140,7 +186,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-0">
+          <div className="hidden xl:flex items-center gap-0">
             {navItems.map((item) => (
               item.children ? (
                 <div
@@ -153,7 +199,7 @@ export function Navbar() {
                     ref={(el) => { triggerRefs.current[item.label] = el; }}
                     onClick={() => setActiveDropdown(activeDropdown === item.label ? null : item.label)}
                     className={cn(
-                      "inline-flex items-center gap-1 px-3.5 py-2 text-sm font-heading font-medium rounded-lg transition-all",
+                      "inline-flex items-center gap-1 px-3 2xl:px-3.5 py-2 text-sm font-heading font-medium rounded-lg transition-all whitespace-nowrap",
                       activeDropdown === item.label
                         ? "text-white bg-white/10"
                         : "text-white/80 hover:text-white hover:bg-white/10"
@@ -168,30 +214,54 @@ export function Navbar() {
 
                   {/* Simple dropdown rendered at nav level — see overlay below */}
                 </div>
+              ) : ICON_ONLY_NAV[item.label] ? (
+                (() => {
+                  const { icon: Icon, tip } = ICON_ONLY_NAV[item.label];
+                  return (
+                    <div key={item.label} className="relative group ml-1.5">
+                      <Link
+                        href={item.href}
+                        aria-label={tip}
+                        title={tip}
+                        className="w-10 h-10 flex items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white/85 hover:text-white hover:bg-white/15 hover:border-white/30 transition-all"
+                      >
+                        <Icon size={17} />
+                      </Link>
+                      <NavTooltip label={tip} />
+                    </div>
+                  );
+                })()
               ) : (
                 <Link key={item.label} href={item.href}
-                  className="px-3.5 py-2 text-sm font-heading font-medium rounded-lg transition-all text-white/80 hover:text-white hover:bg-white/10">
+                  className="px-3 2xl:px-3.5 py-2 text-sm font-heading font-medium rounded-lg transition-all text-white/80 hover:text-white hover:bg-white/10 whitespace-nowrap">
                   {item.label}
                 </Link>
               )
             ))}
           </div>
 
-          {/* Get Help button */}
-          <div className="hidden lg:flex items-center">
+          {/* Get Help — round accent button, still the brightest thing in the bar */}
+          <div className="hidden xl:flex items-center">
             {getHelpItem && (
               <div
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => open("Get Help")}
                 onMouseLeave={close}
               >
                 <button
                   onClick={() => setActiveDropdown(activeDropdown === "Get Help" ? null : "Get Help")}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-heading font-semibold rounded-xl transition-colors shadow-sm bg-accent text-primary-900 hover:bg-accent-light"
+                  aria-label="Get help — call, WhatsApp, email or book a free consultation"
+                  aria-expanded={activeDropdown === "Get Help"}
+                  title="Get Help"
+                  className={cn(
+                    "relative w-11 h-11 flex items-center justify-center rounded-full transition-colors shadow-sm bg-accent text-primary-900 hover:bg-accent-light",
+                    activeDropdown === "Get Help" ? "bg-accent-light" : ""
+                  )}
                 >
-                  Get Help
-                  <ChevronDown size={13} className={cn("transition-transform duration-200", activeDropdown === "Get Help" ? "rotate-180" : "")} />
+                  <Headset size={19} />
+                  <span className="absolute top-0 right-0 w-2.5 h-2.5 rounded-full bg-green-400 border-2 border-primary-900" />
                 </button>
+                {activeDropdown !== "Get Help" && <NavTooltip label="Get Help" />}
                 <AnimatePresence>
                   {activeDropdown === "Get Help" && (
                     <motion.div
@@ -213,7 +283,7 @@ export function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="lg:hidden p-2 rounded-lg transition-colors text-white hover:bg-white/10"
+            className="xl:hidden p-2 rounded-lg transition-colors text-white hover:bg-white/10"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -245,7 +315,7 @@ export function Navbar() {
             )}
           </AnimatePresence>
 
-          {/* ── Simple dropdown (Tools): same overlay approach ── */}
+          {/* ── Simple dropdown (non-mega items): same overlay approach ── */}
           <AnimatePresence>
             {activeSimpleItem && (
               <motion.div
@@ -261,11 +331,7 @@ export function Navbar() {
               >
                 <SimpleDropdown
                   groups={activeSimpleItem.children as NavGroup[]}
-                  showViewAll={
-                    activeSimpleItem.label === "Tools"
-                      ? { label: "View all tools", href: "/calculators" }
-                      : undefined
-                  }
+                  showViewAll={MEGA_VIEW_ALL[activeSimpleItem.label]}
                   onClose={() => setActiveDropdown(null)}
                 />
               </motion.div>
@@ -471,7 +537,7 @@ function MegaMenuDropdown({ label, groups, popular, viewAll, onClose }: {
   );
 }
 
-/* ─── Simple Dropdown (Tools) ─── */
+/* ─── Simple Dropdown (non-mega items) ─── */
 function SimpleDropdown({ groups, showViewAll, onClose }: {
   groups: NavGroup[]; showViewAll?: { label: string; href: string }; onClose: () => void;
 }) {

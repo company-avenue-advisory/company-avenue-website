@@ -4,6 +4,7 @@ import { SERVICES } from "@/lib/constants";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 import { GUIDES } from "@/lib/guides";
 import { TEMPLATES } from "@/lib/templates";
+import { SCHEMES } from "@/lib/schemes";
 
 // New city landing pages (Section D of the build spec).
 const CITY_PAGES = [
@@ -34,7 +35,7 @@ const VERIFY_TOOLS = [
 const STATIC_PAGES = [
   "", "services", "pricing", "contact", "about", "blog",
   "calculators", "verify", "resources", "guides", "templates",
-  "privacy", "terms", "disclaimer", "refund-policy",
+  "privacy", "terms", "disclaimer", "refund-policy", "startup-schemes",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -63,5 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...BLOG_POSTS.map((p) => entry(`blog/${p.slug}`, 0.7, "monthly")),
     ...GUIDES.map((g) => entry(`guides/${g.slug}`, 0.75, "monthly")),
     ...TEMPLATES.map((t) => entry(`templates/${t.slug}`, 0.65, "monthly")),
+    // Government scheme one-pagers — the funding hub's detail pages.
+    ...SCHEMES.map((s) => entry(`startup-schemes/${s.slug}`, 0.8, "monthly")),
   ];
 }

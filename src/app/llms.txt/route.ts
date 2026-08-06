@@ -1,5 +1,6 @@
 import { SITE_URL } from "@/lib/seo";
 import { COMPANY, SERVICES } from "@/lib/constants";
+import { SCHEMES } from "@/lib/schemes";
 
 // /llms.txt — a curated, plain-text map of the site for AI agents.
 // Honest expectation: major AI *citation* engines (GPTBot, PerplexityBot, ClaudeBot)
@@ -44,10 +45,22 @@ ${CITY_PAGES.map(([t, u]) => `- [${t}](${SITE_URL}${u})`).join("\n")}
 
 ${SERVICES.map((s) => `- [${s.title}](${SITE_URL}/services/${s.id})`).join("\n")}
 
+## Government startup schemes & grants
+
+Directory of ${SCHEMES.length} Central Government funding schemes for Indian startups — eligibility,
+benefits, step-by-step application process and official sources for each.
+
+- [All government startup schemes](${SITE_URL}/startup-schemes)
+
+${SCHEMES.map((s) => `- [${s.abbr ? `${s.abbr} — ` : ""}${s.name}](${SITE_URL}/startup-schemes/${s.slug}) — ${s.support}, ${s.amount}`).join("\n")}
+
 ## Tools
 
 - [Free business & tax calculators](${SITE_URL}/calculators)
 - [Verification tools (GST, PAN, company name, trademark class)](${SITE_URL}/verify)
+- [How-to guides](${SITE_URL}/guides)
+- [Document templates](${SITE_URL}/templates)
+- [Business resources: tax slabs, TDS chart, due dates](${SITE_URL}/resources)
 
 ## Contact
 
