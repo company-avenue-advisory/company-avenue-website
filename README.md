@@ -122,7 +122,11 @@ Create `src/.env.local` for local dev and mirror the same keys in Vercel.
 | `MONGODB_DB` | DB name (defaults to `avenue-advisory`) | optional |
 | `RESEND_API_KEY` | Lead-notification email | optional |
 | `CONSULTATION_TO_EMAIL` / `CONSULTATION_FROM_EMAIL` | Lead email routing | optional |
-| `ADMIN_USER` / `ADMIN_PASSWORD` | Admin dashboard login (see below) | **yes** |
+| `ADMIN_USER` / `ADMIN_PASSWORD` | Admin login for the lead console (see below) | **yes** |
+| `EMP1_USER` / `EMP1_PASSWORD` / `EMP1_NAME` | Employee 1 login | for the team |
+| `EMP2_USER` / `EMP2_PASSWORD` / `EMP2_NAME` | Employee 2 login | for the team |
+| `ADMIN_SESSION_SECRET` | Signs the session cookie (derived from passwords if blank) | optional |
+| `WHATSAPP_*` | Instant WhatsApp lead alerts — see [LEAD-CONSOLE-SETUP.md](LEAD-CONSOLE-SETUP.md) | for alerts |
 | `NEXT_PUBLIC_GTM_ID` | Google Tag Manager container (`GTM-KMKTTDKD`) | for analytics |
 | `NEXT_PUBLIC_GA_ID` | GA4 direct — **leave blank**, GA4 fires inside GTM | no |
 
@@ -130,19 +134,28 @@ Create `src/.env.local` for local dev and mirror the same keys in Vercel.
 > Network Access, allow `0.0.0.0/0`, or the consultation form and admin dashboard
 > fail at the TLS handshake (`MongoServerSelectionError`).
 
-## Admin Panel
+## Lead Console (`/admin`)
 
-The lead dashboard lives at **`/admin/consultations`** and its data API at
-`/api/admin/*`. Both are protected by HTTP Basic Auth in
-[`src/middleware.ts`](src/middleware.ts).
+Role-based lead management. Full setup and day-to-day usage:
+**[LEAD-CONSOLE-SETUP.md](LEAD-CONSOLE-SETUP.md)**.
 
-- **Credentials are environment variables** — `ADMIN_USER` and `ADMIN_PASSWORD`.
-  They are **not** hardcoded and **not** in the database.
-- **To rotate the password:** change `ADMIN_PASSWORD` in Vercel → Settings →
-  Environment Variables (and in local `.env.local`), then redeploy. No code change.
-- The middleware includes a best-effort per-IP login throttle (10 failed
-  attempts / 15 min → HTTP 429). It is per-instance; for hard guarantees back it
-  with Vercel KV / Upstash.
+| Route | Who | What |
+| --- | --- | --- |
+| `/admin/login` | everyone | Sign-in screen |
+| `/admin/leads` | admin | Every lead + assign to an employee |
+| `/admin/my-leads` | employee | Only their assigned leads + task checklist |
+
+- **Credentials are environment variables** (`ADMIN_*`, `EMP1_*`, `EMP2_*`) — not
+  hardcoded, not in the database. An account with a blank password cannot log in.
+- **Sessions** are an HMAC-signed `ca_session` cookie (httpOnly, 12h) issued by
+  `/api/admin/login`; [`src/middleware.ts`](src/middleware.ts) verifies it and
+  enforces which role may open which page.
+- **To rotate a password:** change it in Vercel → Settings → Environment
+  Variables (and in local `.env.local`), then redeploy. If `ADMIN_SESSION_SECRET`
+  is blank, rotating a password also signs everyone out.
+- The login route has a best-effort per-IP throttle (10 failed attempts /
+  15 min → HTTP 429). It is per-instance; for hard guarantees back it with
+  Vercel KV / Upstash.
 
 ## Analytics (GTM)
 

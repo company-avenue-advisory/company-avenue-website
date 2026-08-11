@@ -13,22 +13,64 @@ export function isMongoConfigured() {
   return !!MONGODB_URI;
 }
 
+type Cache = { client: MongoClient; promise: Promise<MongoClient> };
+type GlobalWithMongo = typeof globalThis & { _mongo?: Cache };
+
 // Cache the client promise across invocations / hot reloads.
-let cached = (global as typeof globalThis & {
-  _mongo?: { client: MongoClient; promise: Promise<MongoClient> };
-})._mongo;
+let cached = (global as GlobalWithMongo)._mongo;
+
+function clearCache(client: MongoClient) {
+  // Only clear if nothing has replaced it meanwhile, so a slow failing connect
+  // can't wipe out a newer healthy one.
+  if (cached?.client === client) {
+    cached = undefined;
+    (global as GlobalWithMongo)._mongo = undefined;
+  }
+  void client.close().catch(() => {}); // don't leak the dead socket
+}
+
+function connect(): Cache {
+  const client = new MongoClient(MONGODB_URI, {
+    // Fail fast instead of hanging a request for the 30s defaults. Atlas M0
+    // occasionally stalls the TLS handshake; a quick failure the caller can
+    // retry beats a page that spins for half a minute.
+    serverSelectionTimeoutMS: 8000,
+    connectTimeoutMS: 10000,
+    socketTimeoutMS: 45000,
+    retryReads: true,
+    retryWrites: true,
+  });
+
+  const promise = client.connect().catch((err) => {
+    // A rejected promise must never stay in the cache: every later request
+    // would await this same rejection and 502 forever, even after the network
+    // recovers, until the process restarts.
+    clearCache(client);
+    throw err;
+  });
+
+  const entry: Cache = { client, promise };
+  cached = entry;
+  (global as GlobalWithMongo)._mongo = entry;
+  return entry;
+}
 
 export async function getDb(): Promise<Db> {
   if (!MONGODB_URI) {
     throw new Error("MONGODB_URI is not set");
   }
 
-  if (!cached) {
-    const client = new MongoClient(MONGODB_URI);
-    cached = { client, promise: client.connect() };
-    (global as typeof globalThis & { _mongo?: typeof cached })._mongo = cached;
-  }
+  const entry = cached ?? connect();
 
-  await cached.promise;
-  return cached.client.db(MONGODB_DB);
+  try {
+    await entry.promise;
+    return entry.client.db(MONGODB_DB);
+  } catch (err) {
+    // One retry with a fresh client — Atlas free-tier handshake timeouts are
+    // tagged retryable and usually succeed immediately on a second attempt.
+    console.warn("[mongodb] connect failed, retrying once:", err);
+    const retry = connect();
+    await retry.promise;
+    return retry.client.db(MONGODB_DB);
+  }
 }

@@ -3,6 +3,8 @@ import { z } from "zod";
 import { Resend } from "resend";
 import { getDb, isMongoConfigured } from "@/lib/mongodb";
 import { COMPANY } from "@/lib/constants";
+import { notifyNewLead } from "@/lib/whatsapp";
+import { newTaskList } from "@/lib/leads";
 
 // Same shape the form validates against on the client.
 const schema = z.object({
@@ -45,6 +47,13 @@ export async function POST(req: NextRequest) {
   const submission = {
     ...data,
     status: "new" as const,
+    // Lead-management fields the admin console reads. Seeded here so a brand
+    // new lead already has its follow-up checklist waiting.
+    assignedTo: null as string | null,
+    assignedAt: null as Date | null,
+    completedAt: null as Date | null,
+    tasks: newTaskList(),
+    notes: [] as { text: string; by: string; at: Date }[],
     createdAt: new Date(),
     userAgent: req.headers.get("user-agent") ?? null,
   };
@@ -61,7 +70,12 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 2) Best-effort email notification. Never fail the request if email
+  // 2) Instant WhatsApp alert to the boss — this is what stops a lead going
+  //    cold. Best-effort like email: the lead is already stored above, so a
+  //    WhatsApp failure must never surface to the visitor.
+  await notifyNewLead(data);
+
+  // 3) Best-effort email notification. Never fail the request if email
   //    is down — the lead is already safely stored above.
   if (resendApiKey) {
     try {

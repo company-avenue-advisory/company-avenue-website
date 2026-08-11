@@ -1,80 +1,67 @@
 import { NextRequest, NextResponse } from "next/server";
+import { SESSION_COOKIE, readSessionToken, isAuthConfigured, homeFor } from "@/lib/auth";
 
-// Protect the admin dashboard and its data API with HTTP Basic Auth.
-// Credentials live in env vars ADMIN_USER / ADMIN_PASSWORD (change them in
-// Vercel → Settings → Environment Variables, then redeploy — see README).
+/* Gate the admin console with the signed session cookie issued by
+   /api/admin/login. Two roles:
 
-// ── Best-effort brute-force throttle (Task 1.1 follow-up) ────────────────────
-// In-memory per-IP counter of FAILED attempts. NOTE: middleware runs on
-// distributed/serverless instances, so this state is per-instance and resets on
-// cold start — it slows down trivial scripted attacks against a warm instance
-// but is NOT a substitute for a shared store. For hard guarantees, back this
-// with Upstash/Vercel KV. A strong 16+ char ADMIN_PASSWORD remains the primary
-// defense.
-const WINDOW_MS = 15 * 60 * 1000; // 15 minutes
-const MAX_FAILS = 10; // failed attempts per IP per window
-const fails = new Map<string, { count: number; first: number }>();
+     admin    → /admin/leads      (every lead, assigns work)
+     employee → /admin/my-leads   (only leads assigned to them)
 
-function rateLimited(ip: string): boolean {
-  const now = Date.now();
-  const rec = fails.get(ip);
-  if (!rec) return false;
-  if (now - rec.first > WINDOW_MS) {
-    fails.delete(ip);
-    return false;
-  }
-  return rec.count >= MAX_FAILS;
+   Brute-force throttling lives in the login route now, since that is the
+   only place credentials are checked.                                    */
+
+const PUBLIC_PATHS = ["/admin/login", "/api/admin/login", "/api/admin/logout"];
+
+const ADMIN_ONLY = ["/admin/leads", "/admin/consultations"];
+const EMPLOYEE_ONLY = ["/admin/my-leads"];
+
+function isApi(pathname: string) {
+  return pathname.startsWith("/api/");
 }
 
-function recordFail(ip: string): void {
-  const now = Date.now();
-  const rec = fails.get(ip);
-  if (!rec || now - rec.first > WINDOW_MS) {
-    fails.set(ip, { count: 1, first: now });
-  } else {
-    rec.count += 1;
-  }
-}
+export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
 
-export function middleware(req: NextRequest) {
-  const user = process.env.ADMIN_USER ?? "";
-  const pass = process.env.ADMIN_PASSWORD ?? "";
-
-  // If not configured, block access outright rather than leaving it open.
-  if (!user || !pass) {
+  if (!isAuthConfigured()) {
     return new NextResponse("Admin login is not configured.", { status: 503 });
   }
 
-  const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
-    req.headers.get("x-real-ip") ||
-    "unknown";
+  const session = await readSessionToken(req.cookies.get(SESSION_COOKIE)?.value);
 
-  if (rateLimited(ip)) {
-    return new NextResponse("Too many attempts. Try again later.", {
-      status: 429,
-      headers: { "Retry-After": "900" },
-    });
+  // Login page: bounce an already-signed-in user straight to their console.
+  if (PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+    if (pathname === "/admin/login" && session) {
+      return NextResponse.redirect(new URL(homeFor(session.role), req.url));
+    }
+    return NextResponse.next();
   }
 
-  const header = req.headers.get("authorization") ?? "";
-  if (header.startsWith("Basic ")) {
-    const decoded = atob(header.slice(6)); // "user:pass"
-    const idx = decoded.indexOf(":");
-    const givenUser = decoded.slice(0, idx);
-    const givenPass = decoded.slice(idx + 1);
-    if (givenUser === user && givenPass === pass) {
-      fails.delete(ip); // reset on success
-      return NextResponse.next();
+  if (!session) {
+    if (isApi(pathname)) {
+      return NextResponse.json({ error: "Not signed in." }, { status: 401 });
+    }
+    const url = new URL("/admin/login", req.url);
+    // Remember where they were headed so login can send them back.
+    if (pathname !== "/admin") url.searchParams.set("next", pathname);
+    return NextResponse.redirect(url);
+  }
+
+  // /admin itself is just a doorway to the right console.
+  if (pathname === "/admin") {
+    return NextResponse.redirect(new URL(homeFor(session.role), req.url));
+  }
+
+  // Page-level role gating. API handlers do their own, finer-grained checks.
+  if (!isApi(pathname)) {
+    const wrongRole =
+      (session.role !== "admin" && ADMIN_ONLY.some((p) => pathname.startsWith(p))) ||
+      (session.role !== "employee" && EMPLOYEE_ONLY.some((p) => pathname.startsWith(p)));
+    if (wrongRole) {
+      return NextResponse.redirect(new URL(homeFor(session.role), req.url));
     }
   }
 
-  // Wrong or missing credentials — count it and re-challenge.
-  recordFail(ip);
-  return new NextResponse("Authentication required.", {
-    status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="Avenue Admin", charset="UTF-8"' },
-  });
+  return NextResponse.next();
 }
 
 export const config = {
