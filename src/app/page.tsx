@@ -14,7 +14,7 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { CalculatorsTeaser } from "@/components/sections/CalculatorsTeaser";
 import { VerifyToolsTeaser } from "@/components/sections/VerifyToolsTeaser";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Company Registration & GST Services in Delhi | CA-Led",
@@ -38,6 +38,8 @@ export const metadata: Metadata = {
     description: "Trusted compliance partner for startups, MSMEs and growing businesses across India.",
     type: "website",
     locale: "en_IN",
+    siteName: "Company Avenue Advisory",
+    images: [OG_IMAGE],
   },
 };
 

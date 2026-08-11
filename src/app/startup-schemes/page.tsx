@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, canonical, breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/seo";
+import { SITE_URL, canonical, breadcrumbSchema, faqSchema, serviceSchema, OG_IMAGE } from "@/lib/seo";
 import { COMPANY } from "@/lib/constants";
 import {
   SCHEMES,
@@ -71,6 +71,9 @@ export const metadata: Metadata = {
     description: `${stats.total} Central Government funding schemes for Indian startups: eligibility, application process and expert support.`,
     type: "website",
     url: `${SITE_URL}/startup-schemes`,
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

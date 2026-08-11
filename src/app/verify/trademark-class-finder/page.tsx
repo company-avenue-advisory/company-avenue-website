@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Tag } from "lucide-react";
 import { TrademarkClassFinder } from "@/components/tools/TrademarkClassFinder";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/verify/trademark-class-finder" },
   title: "Trademark Class Finder — Which NICE Class Fits Your Brand?",
   description:
     "Free trademark class finder for India. Describe your business and instantly see which of the 45 NICE trademark classes it falls under, then check name availability.",
@@ -14,6 +17,11 @@ export const metadata: Metadata = {
 export default function TrademarkClassFinderPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Verification Tools", path: "/verify" },
+          { name: "Trademark Class Finder", path: "/verify/trademark-class-finder" },
+        ])} />
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
         <div className="container-custom">
           <nav className="flex items-center gap-1.5 text-white/40 text-xs font-heading mb-6">

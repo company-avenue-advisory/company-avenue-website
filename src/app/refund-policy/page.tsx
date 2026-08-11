@@ -3,6 +3,7 @@ import { LegalPageLayout } from "@/components/layout/LegalPageLayout";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/refund-policy" },
   title: "Refund Policy",
   description: "Our refund and cancellation policy for compliance packages, retainers, and one-off filing services.",
 };

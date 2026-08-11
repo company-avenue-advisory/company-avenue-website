@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Calculator } from "lucide-react";
 import { GSTCalculator } from "@/components/calculators/GSTCalculator";
@@ -6,6 +8,7 @@ import { CalcInteractionTracker } from "@/components/calculators/CalcInteraction
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/gst-calculator" },
   title: "GST Calculator — Inclusive & Exclusive",
   description:
     "Free online GST calculator for India. Calculate GST for all slabs (5%, 12%, 18%, 28%), inclusive or exclusive mode, CGST/SGST or IGST split. Updated for FY 2025-26.",
@@ -22,6 +25,11 @@ export const metadata: Metadata = {
 export default function GSTCalculatorPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Calculators", path: "/calculators" },
+          { name: "GST Calculator", path: "/calculators/gst-calculator" },
+        ])} />
       {/* Hero */}
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
         <div className="container-custom">

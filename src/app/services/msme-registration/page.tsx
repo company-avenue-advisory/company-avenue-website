@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { MSMERegistrationPage } from "@/components/sections/MSMERegistrationPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/MSMERegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/msme-registration" },
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description:
       "Get your Udyam Certificate in 1 business day. Zero government fees. Unlock CGTMSE loans, subsidies, and 20+ government schemes for MSMEs.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

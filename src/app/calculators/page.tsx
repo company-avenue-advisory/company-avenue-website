@@ -8,6 +8,7 @@ import {
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators" },
   title: "Free Business & Tax Calculators",
   description:
     "Free online calculators for Indian businesses — GST calculator, income tax calculator (old vs new regime), TDS rate finder, company registration cost estimator, LLP vs Pvt Ltd comparison, and business structure advisor.",

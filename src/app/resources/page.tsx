@@ -3,6 +3,7 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { ResourcesClient } from "./ResourcesClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/resources" },
   title: "Business Resources — Tax Rates, TDS Chart, GST, ROC Fees & Due Dates",
   description:
     "A single reference desk for Indian businesses: income tax slabs (new & old regime FY 2025-26), TDS rate chart, GST rates & return due dates, MCA/ROC filing fees, stamp duty, government fees, ROC offices, and a compliance calendar — with official sources.",

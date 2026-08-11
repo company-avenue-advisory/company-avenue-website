@@ -3,6 +3,7 @@ import { LumpsumCalculator } from "@/components/calculators/LumpsumCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/lumpsum-calculator" },
   title: "Lumpsum Calculator — One-Time Investment Returns",
   description: "Free lumpsum investment calculator. Estimate the maturity value and returns of a one-time mutual fund or lumpsum investment.",
   keywords: [

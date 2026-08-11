@@ -6,7 +6,7 @@ import { SchemeArticle } from "@/components/schemes/SchemeArticle";
 import { SchemeCard } from "@/components/schemes/scheme-ui";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, canonical, breadcrumbSchema } from "@/lib/seo";
+import { SITE_URL, canonical, breadcrumbSchema, OG_IMAGE } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -42,6 +42,7 @@ export async function generateMetadata({
       description: scheme.headline,
       type: "article",
       url: `${SITE_URL}/startup-schemes/${scheme.slug}`,
+      images: [OG_IMAGE],
     },
   };
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AccountingBookkeepingPage } from "@/components/sections/AccountingBookkeepingPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/AccountingBookkeepingPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/accounting-bookkeeping" },
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description:
       "Expert CA-led accounting services for growing businesses. Monthly reports, GST reconciliation, payroll, and compliance — all under one plan.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

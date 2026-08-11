@@ -3,6 +3,7 @@ import { BlogHubClient } from "./BlogHubClient";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog" },
   title: "Blog — Business, Tax & Compliance Insights",
   description:
     "In-depth, fact-checked guides on GST, income tax, company registration, ROC compliance, trademarks, and business advisory for Indian startups and SMEs — plus live industry news.",

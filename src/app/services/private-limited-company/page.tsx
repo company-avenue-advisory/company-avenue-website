@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PrivateLimitedPage } from "@/components/sections/PrivateLimitedPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/PrivateLimitedPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Private Limited Company Registration in Delhi | Fast",
@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     description:
       "Register your Pvt Ltd company in Delhi in 7–10 days. CA-led, 100% online, transparent pricing.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

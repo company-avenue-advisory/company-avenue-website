@@ -3,6 +3,7 @@ import { SalaryCalculator } from "@/components/calculators/SalaryCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/salary-calculator" },
   title: "Salary Calculator — CTC to In-Hand Take-Home",
   description: "Free salary calculator to convert CTC into monthly in-hand salary. See PF, professional tax and income tax deductions for FY 2025-26.",
   keywords: [

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { IECRegistrationPage } from "@/components/sections/IECRegistrationPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/IECRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/iec-registration" },
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description:
       "Register your Import Export Code (IEC) with DGFT in 2–5 days. Lifetime validity, ₹0 government fee, and complete expert assistance from Company Avenue.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

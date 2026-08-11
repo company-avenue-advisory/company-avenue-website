@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Lightbulb } from "lucide-react";
 import { BusinessStructureAdvisor } from "@/components/calculators/BusinessStructureAdvisor";
@@ -6,6 +8,7 @@ import { CalcInteractionTracker } from "@/components/calculators/CalcInteraction
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/business-structure-advisor" },
   title: "Business Structure Advisor — Which Entity Should You Register?",
   description:
     "Answer 6 quick questions and get a personalized recommendation on the right business structure — Private Limited, LLP, OPC, Partnership, or Sole Proprietorship. Free quiz tool.",
@@ -21,6 +24,11 @@ export const metadata: Metadata = {
 export default function BusinessStructureAdvisorPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Calculators", path: "/calculators" },
+          { name: "Business Structure Advisor", path: "/calculators/business-structure-advisor" },
+        ])} />
       {/* Hero */}
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
         <div className="container-custom">

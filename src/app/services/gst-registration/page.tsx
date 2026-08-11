@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GSTPage } from "@/components/sections/GSTPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/GSTPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "GST Registration in Delhi | Get GSTIN Online Fast",
@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     description:
       "Get your GSTIN in Delhi quickly with expert CAs. 100% online, transparent pricing, document help.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

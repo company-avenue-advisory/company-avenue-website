@@ -5,7 +5,7 @@ import { GUIDES } from "@/lib/guides";
 import { GuideArticle } from "@/components/guides/GuideArticle";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, canonical, breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { SITE_URL, canonical, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -31,6 +31,7 @@ export async function generateMetadata({
       description: guide.excerpt,
       type: "article",
       url: `${SITE_URL}/guides/${guide.slug}`,
+      images: [OG_IMAGE],
     },
   };
 }

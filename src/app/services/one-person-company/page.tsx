@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { OPCPage } from "@/components/sections/OPCPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/OPCPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/one-person-company" },
@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     description:
       "Register your OPC with experienced CAs. Compare OPC vs Sole Proprietorship vs Pvt Ltd. 7–10 working days, 100% online, transparent pricing.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

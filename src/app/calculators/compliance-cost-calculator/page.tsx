@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, ClipboardCheck } from "lucide-react";
 import { ComplianceCostCalculator } from "@/components/calculators/ComplianceCostCalculator";
@@ -6,6 +8,7 @@ import { CalcInteractionTracker } from "@/components/calculators/CalcInteraction
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/compliance-cost-calculator" },
   title: "Annual Compliance Cost Calculator",
   description:
     "Free annual compliance cost calculator for Pvt Ltd, LLP, OPC, Partnership and Sole Proprietorship. Get an itemised breakdown of ROC filings, audit, ITR, GST and payroll compliance costs for FY 2025-26.",
@@ -21,6 +24,11 @@ export const metadata: Metadata = {
 export default function ComplianceCostCalculatorPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Calculators", path: "/calculators" },
+          { name: "Annual Compliance Cost Calculator", path: "/calculators/compliance-cost-calculator" },
+        ])} />
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
         <div className="container-custom">
           <nav className="flex items-center gap-1.5 text-white/40 text-xs font-heading mb-6">

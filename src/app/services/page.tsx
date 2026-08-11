@@ -15,6 +15,7 @@ import { SERVICES } from "@/lib/constants";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services" },
   title: "All Services",
   description: "Comprehensive business compliance services — company registration, GST, income tax, trademark, payroll, and more. All 49 services under one roof.",
 };

@@ -16,6 +16,7 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/pricing" },
   title: "Pricing & Packages",
   description:
     "Transparent, fixed-fee pricing from Company Avenue Advisory — Private Limited, LLP, OPC and Section 8 (NGO) registration, LLP-to-Pvt Ltd conversion, DPIIT/Udyam startup registrations, plus Startup Compliance Pack, SME Monthly Retainer and Growth Advisory retainers. No hidden costs.",

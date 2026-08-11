@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, ShieldCheck } from "lucide-react";
 import { PANVerification } from "@/components/tools/PANVerification";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/verify/pan-verification" },
   title: "PAN Verification Online — Verify PAN Card Details",
   description:
     "Free PAN verification tool. Confirm a PAN number matches the given name and date of birth, and check Aadhaar-seeding status — with explicit consent.",
@@ -14,6 +17,11 @@ export const metadata: Metadata = {
 export default function PANVerificationPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Verification Tools", path: "/verify" },
+          { name: "PAN Verification Online", path: "/verify/pan-verification" },
+        ])} />
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
         <div className="container-custom">
           <nav className="flex items-center gap-1.5 text-white/40 text-xs font-heading mb-6">

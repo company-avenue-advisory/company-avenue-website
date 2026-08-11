@@ -6,7 +6,7 @@ import { TEMPLATES } from "@/lib/templates";
 import { TemplateActions } from "@/components/templates/TemplateActions";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, canonical, breadcrumbSchema } from "@/lib/seo";
+import { SITE_URL, canonical, breadcrumbSchema, OG_IMAGE } from "@/lib/seo";
 import { TEMPLATE_CATEGORY_SERVICE } from "@/lib/content-links";
 
 export const dynamicParams = false;
@@ -33,6 +33,7 @@ export async function generateMetadata({
       description: template.description,
       type: "article",
       url: `${SITE_URL}/templates/${template.slug}`,
+      images: [OG_IMAGE],
     },
   };
 }

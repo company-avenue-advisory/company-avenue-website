@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Building2 } from "lucide-react";
 import { CompanyRegistrationCalculator } from "@/components/calculators/CompanyRegistrationCalculator";
@@ -6,6 +8,7 @@ import { CalcInteractionTracker } from "@/components/calculators/CalcInteraction
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/company-registration-cost" },
   title: "Company Registration Cost Calculator India 2025",
   description:
     "Estimate company registration costs in India — Pvt Ltd, LLP, OPC, Partnership. Includes government fees, state-wise stamp duty, DSC cost, and professional charges. Free tool.",
@@ -22,6 +25,11 @@ export const metadata: Metadata = {
 export default function CompanyRegistrationCostPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Calculators", path: "/calculators" },
+          { name: "Company Registration Cost", path: "/calculators/company-registration-cost" },
+        ])} />
       {/* Hero */}
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
         <div className="container-custom">

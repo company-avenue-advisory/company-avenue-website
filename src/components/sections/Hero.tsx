@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { Star } from "lucide-react";
 import { HeroSearch } from "@/components/sections/hero/HeroSearch";
 
@@ -33,12 +34,19 @@ export function Hero() {
       ref={sectionRef}
       className="relative flex items-center justify-center overflow-hidden min-h-[88vh] md:min-h-screen"
     >
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/images/99a2d6b7-7657-484c-aa91-99607b20ff78.png')",
-        }}
+      {/* Background Image with Overlay.
+          This is the LCP element, so it goes through next/image with `priority`:
+          that emits a <link rel="preload"> in the document head and a responsive
+          srcset. A CSS background-image cannot do either — the browser only
+          discovers it after the stylesheet parses, which delayed LCP badly. */}
+      <Image
+        src="/images/hero-office.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        quality={70}
+        className="object-cover object-center"
       />
       {/* Dark overlay to ensure text readability */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#05101f]/90 via-[#091a30]/85 to-[#0a2240]/80" />

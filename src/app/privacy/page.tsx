@@ -3,6 +3,7 @@ import { LegalPageLayout } from "@/components/layout/LegalPageLayout";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Privacy Policy",
   description: "How Company Avenue Advisory collects, uses, and protects your personal data, in accordance with the Digital Personal Data Protection Act, 2023.",
 };

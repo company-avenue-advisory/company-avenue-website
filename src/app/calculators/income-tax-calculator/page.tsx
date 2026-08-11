@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, IndianRupee } from "lucide-react";
 import { IncomeTaxCalculator } from "@/components/calculators/IncomeTaxCalculator";
@@ -6,6 +8,7 @@ import { CalcInteractionTracker } from "@/components/calculators/CalcInteraction
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/income-tax-calculator" },
   title: "Income Tax Calculator FY 2025-26 — Old vs New Regime",
   description:
     "Free income tax calculator for FY 2025-26. Compare Old vs New regime with Sec 87A rebate, standard deduction, HRA, 80C, 80D. Budget 2025 updated — zero tax up to ₹12L in new regime.",
@@ -22,6 +25,11 @@ export const metadata: Metadata = {
 export default function IncomeTaxCalculatorPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Calculators", path: "/calculators" },
+          { name: "Income Tax Calculator", path: "/calculators/income-tax-calculator" },
+        ])} />
       {/* Hero */}
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
         <div className="container-custom">

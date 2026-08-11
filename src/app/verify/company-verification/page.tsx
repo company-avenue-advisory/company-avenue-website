@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Building2 } from "lucide-react";
 import { CompanyVerification } from "@/components/tools/CompanyVerification";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/verify/company-verification" },
   title: "Company & Director Verification — CIN/DIN Lookup",
   description:
     "Free MCA lookup tool. Verify any company by CIN/LLPIN or any director by DIN — get incorporation date, status, capital structure, and appointment history.",
@@ -14,6 +17,11 @@ export const metadata: Metadata = {
 export default function CompanyVerificationPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Verification Tools", path: "/verify" },
+          { name: "Company & Director Verification", path: "/verify/company-verification" },
+        ])} />
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
         <div className="container-custom">
           <nav className="flex items-center gap-1.5 text-white/40 text-xs font-heading mb-6">

@@ -3,6 +3,7 @@ import { RDCalculator } from "@/components/calculators/RDCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/rd-calculator" },
   title: "RD Calculator — Recurring Deposit Maturity",
   description: "Free recurring deposit (RD) calculator. Compute maturity value and interest on monthly deposits with quarterly compounding.",
   keywords: [

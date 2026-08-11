@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AdvanceTaxPage } from "@/components/sections/AdvanceTaxPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/AdvanceTaxPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/advance-tax" },
@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     description:
       "Avoid 1% monthly interest under Sec 234B/234C. Expert advance tax computation, Challan 280 filing, and year-end reconciliation. PAN India service. Starting ₹1,999.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

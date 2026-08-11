@@ -3,6 +3,7 @@ import { LegalPageLayout } from "@/components/layout/LegalPageLayout";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/disclaimer" },
   title: "Disclaimer",
   description: "Important disclaimers regarding the general information, calculators, and verification tools on this website.",
 };

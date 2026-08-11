@@ -3,6 +3,7 @@ import { BusinessSetupCalculator } from "@/components/calculators/BusinessSetupC
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/business-setup-calculator" },
   title: "Business Setup Calculator — Cost to Start a Company",
   description: "Free business setup calculator. Estimate the cost to register a Pvt Ltd, LLP, OPC, Partnership or Proprietorship, plus GST, MSME and trademark add-ons.",
   keywords: [

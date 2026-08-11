@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Scale } from "lucide-react";
 import { LLPvsPvtLtdTool } from "@/components/calculators/LLPvsPvtLtdTool";
@@ -6,6 +8,7 @@ import { CalcInteractionTracker } from "@/components/calculators/CalcInteraction
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/llp-vs-pvt-ltd" },
   title: "LLP vs Private Limited Company — Which is Better?",
   description:
     "Compare LLP vs Private Limited Company in India — funding, compliance, taxes, liability, ESOPs, and more. Take our 5-question quiz for a personalized recommendation.",
@@ -21,6 +24,11 @@ export const metadata: Metadata = {
 export default function LLPvsPvtLtdPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Calculators", path: "/calculators" },
+          { name: "LLP vs Private Limited Company", path: "/calculators/llp-vs-pvt-ltd" },
+        ])} />
       {/* Hero */}
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
         <div className="container-custom">

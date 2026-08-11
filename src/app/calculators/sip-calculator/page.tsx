@@ -3,6 +3,7 @@ import { SIPCalculator } from "@/components/calculators/SIPCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/sip-calculator" },
   title: "SIP Calculator — Systematic Investment Plan Returns",
   description: "Free SIP calculator. Estimate the future value and returns of your monthly mutual fund SIP with an interactive investment-vs-returns breakdown.",
   keywords: [

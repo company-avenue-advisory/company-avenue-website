@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GSTFilingPage } from "@/components/sections/GSTFilingPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/GSTFilingPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/gst-filing" },
@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     description:
       "Expert GST return filing — GSTR-1, GSTR-3B, GSTR-9 and more. Timely filing, ITC reconciliation, zero late fees. PAN India service.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

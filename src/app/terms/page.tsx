@@ -3,6 +3,7 @@ import { LegalPageLayout } from "@/components/layout/LegalPageLayout";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terms" },
   title: "Terms of Service",
   description: "The terms governing use of the Company Avenue Advisory website and engagement of our chartered accountancy and compliance services.",
 };

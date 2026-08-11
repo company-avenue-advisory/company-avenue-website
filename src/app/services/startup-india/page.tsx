@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { StartupIndiaPage } from "@/components/sections/StartupIndiaPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/StartupIndiaPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/startup-india" },
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description:
       "Get DPIIT Startup India Recognition in 7–15 days. Unlock 3-year income tax exemption, angel tax relief, 80% patent rebate, and government tender benefits.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

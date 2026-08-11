@@ -4,6 +4,7 @@ import { TemplatesClient } from "./TemplatesClient";
 import { TEMPLATES } from "@/lib/templates";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/templates" },
   title: "Free Business Document Templates — Offer Letters, NDAs, Resolutions & Invoices",
   description:
     "Download free, ready-to-use business document templates for Indian companies — job offer letters, appointment letters, NDAs, board resolutions, founders' agreements, consultant agreements, GST tax invoices and more. Copy or download in seconds.",

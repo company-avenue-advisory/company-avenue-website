@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/Badge";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About Us",
   description: "CA Jatin Aggarwal, Principal Consultant at Company Avenue Advisory — 20 years of experience in taxation, ROC compliance and business advisory for Indian startups and SMEs.",
 };

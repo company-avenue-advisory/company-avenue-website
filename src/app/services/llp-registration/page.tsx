@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LLPPage } from "@/components/sections/LLPPage";
 import { faqs as serviceFaqs } from "@/lib/faqs/LLPPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/llp-registration" },
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     description:
       "Register your LLP with experienced CAs. 7–10 working days, 100% online, transparent pricing.",
     type: "website",
+    siteName: "Company Avenue Advisory",
+    locale: "en_IN",
+    images: [OG_IMAGE],
   },
 };
 

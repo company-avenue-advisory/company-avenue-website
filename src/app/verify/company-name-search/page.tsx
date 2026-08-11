@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
 import {
   ChevronRight, Search, ShieldCheck, Database, AlertTriangle, Zap, Gift,
@@ -10,6 +12,7 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { CompanyNameFAQ } from "@/components/tools/CompanyNameFAQ";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/verify/company-name-search" },
   title: "Company Name Search & Availability Check Online India (Free)",
   description:
     "Free company name search and availability checker for India. Instantly check if your proposed Private Limited, LLP, OPC or Limited company name is already registered with the MCA — powered by real Ministry of Corporate Affairs data.",
@@ -98,6 +101,11 @@ const PROCESS = [
 export default function CompanyNameSearchPage() {
   return (
     <>
+      <JsonLd data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Verification Tools", path: "/verify" },
+          { name: "Company Name Search", path: "/verify/company-name-search" },
+        ])} />
       {/* Hero */}
       <div className="relative bg-gradient-to-br from-dark via-primary-900 to-secondary pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.15] [background-image:radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:26px_26px]" />

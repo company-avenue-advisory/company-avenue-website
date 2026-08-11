@@ -3,6 +3,7 @@ import { EMICalculator } from "@/components/calculators/EMICalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/calculators/home-loan-emi-calculator" },
   title: "Home Loan EMI Calculator — Monthly EMI & Interest",
   description: "Free home loan EMI calculator. Calculate your monthly home loan EMI, total interest and repayment for tenures up to 30 years.",
   keywords: [
