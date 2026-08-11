@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CopyrightRegistrationPage } from "@/components/sections/CopyrightRegistrationPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/CopyrightRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -15,7 +16,7 @@ export default function CopyrightRegistrationServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <CopyrightRegistrationPage />
+      <CopyrightRegistrationPage pricingSlot={<ServicePricingBlock serviceId="copyright-registration" />} />
     </>
   );
 }

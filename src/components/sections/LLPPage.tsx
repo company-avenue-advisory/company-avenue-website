@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -356,7 +357,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════════ */
-export function LLPPage() {
+export function LLPPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   const [decisionChoice, setDecisionChoice] = useState<string | null>(null);
   const recommended = decisionOptions.find(d => d.label === decisionChoice)?.recommended;
 
@@ -467,7 +468,7 @@ export function LLPPage() {
                     </div>
                     <div className="text-right">
                       <p className="text-muted text-[10px]">Starting from</p>
-                      <p className="font-heading font-bold text-dark text-xs">₹4,999</p>
+                      <p className="font-heading font-bold text-dark text-xs">₹2,999</p>
                     </div>
                   </div>
                 </div>
@@ -490,6 +491,9 @@ export function LLPPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ── QUICK FACTS ── */}
       <section className="py-16 bg-slate-50 border-y border-slate-100">

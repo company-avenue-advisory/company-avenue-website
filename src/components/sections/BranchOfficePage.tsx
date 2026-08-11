@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -83,7 +84,7 @@ const documents = [
 ];
 
 
-export function BranchOfficePage() {
+export function BranchOfficePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -111,6 +112,9 @@ export function BranchOfficePage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* Quick Facts */}
       <section className="py-10 bg-white border-b border-slate-100">

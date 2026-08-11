@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -120,7 +121,7 @@ const whyUs = [
   { icon: BadgeCheck,   label: "Pharmacist Compliance & Registration Guidance" },
   { icon: Building2,    label: "Premises Setup Advice (Area + Storage)" },
   { icon: FileText,     label: "Site Inspection Preparation Support" },
-  { icon: DollarSign,   label: "Transparent, Fixed Pricing from ₹6,999" },
+  { icon: DollarSign,   label: "Transparent, Fixed Pricing from ₹5,499" },
   { icon: Monitor,      label: "100% Handled by Our Team" },
   { icon: Headphones,   label: "24-Hour Response Time & Ongoing Support" },
 ];
@@ -229,7 +230,7 @@ function StickySidebar() {
           <p className="font-heading font-semibold text-sm">Drug License</p>
         </div>
         <p className="text-white/60 text-xs mb-3 leading-relaxed">Starting from</p>
-        <p className="font-heading font-bold text-3xl text-accent mb-1">₹6,999</p>
+        <p className="font-heading font-bold text-3xl text-accent mb-1">₹5,499</p>
         <p className="text-white/50 text-[11px]">All inclusive. No hidden charges.</p>
         <Link
           href="/contact"
@@ -260,7 +261,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════ */
-export function DrugLicensePage() {
+export function DrugLicensePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -383,7 +384,7 @@ export function DrugLicensePage() {
                 <div className="bg-primary/5 rounded-xl p-3 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-muted">Starting from</p>
-                    <p className="font-heading font-bold text-primary text-xl">₹6,999</p>
+                    <p className="font-heading font-bold text-primary text-xl">₹5,499</p>
                   </div>
                   <Link
                     href="/contact"
@@ -397,6 +398,9 @@ export function DrugLicensePage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ── QUICK FACTS ── */}
       <section className="py-16 bg-slate-50 border-y border-slate-100">

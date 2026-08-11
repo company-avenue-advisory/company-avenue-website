@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -404,7 +405,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════════ */
-export function GSTPage() {
+export function GSTPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -535,6 +536,9 @@ export function GSTPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ── QUICK FACTS ── */}
       <section className="py-16 bg-slate-50 border-y border-slate-100">

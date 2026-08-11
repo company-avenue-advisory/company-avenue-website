@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { COMPANY } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { PHONE_E164, waLink, serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 
 export interface CityLandingConfig {
@@ -38,6 +39,9 @@ export function CityLandingPage({ config }: { config: CityLandingConfig }) {
     path, h1, serviceLabel, city, moneyPageHref, waText,
     intro, included, steps, documents, localNote, faqs, related,
   } = config;
+
+  // City pages carry the same pricing as the service they point at.
+  const pricingServiceId = moneyPageHref.replace("/services/", "");
 
   return (
     <>
@@ -103,6 +107,9 @@ export function CityLandingPage({ config }: { config: CityLandingConfig }) {
           </header>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      <ServicePricingBlock serviceId={pricingServiceId} />
 
       <div className="container-custom pb-16">
         {/* What's included */}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IncreaseAuthorisedCapitalPage } from "@/components/sections/IncreaseAuthorisedCapitalPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/IncreaseAuthorisedCapitalPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -15,7 +16,7 @@ export default function IncreaseAuthorisedCapitalServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <IncreaseAuthorisedCapitalPage />
+      <IncreaseAuthorisedCapitalPage pricingSlot={<ServicePricingBlock serviceId="increase-authorised-capital" />} />
     </>
   );
 }

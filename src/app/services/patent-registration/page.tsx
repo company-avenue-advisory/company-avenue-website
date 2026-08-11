@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PatentRegistrationPage } from "@/components/sections/PatentRegistrationPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/PatentRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -15,7 +16,7 @@ export default function PatentRegistrationServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <PatentRegistrationPage />
+      <PatentRegistrationPage pricingSlot={<ServicePricingBlock serviceId="patent-registration" />} />
     </>
   );
 }

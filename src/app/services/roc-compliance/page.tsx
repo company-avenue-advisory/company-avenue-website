@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ROCCompliancePage } from "@/components/sections/ROCCompliancePage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/ROCCompliancePage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -15,7 +16,7 @@ export default function ROCComplianceServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <ROCCompliancePage />
+      <ROCCompliancePage pricingSlot={<ServicePricingBlock serviceId="roc-compliance" />} />
     </>
   );
 }

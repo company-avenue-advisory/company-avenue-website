@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -181,7 +182,7 @@ const relatedServices = [
 /* ══════════════════════════════════════
    COMPONENT
 ══════════════════════════════════════ */
-export function ROCCompliancePage() {
+export function ROCCompliancePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -251,6 +252,9 @@ export function ROCCompliancePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ── 2. WHAT IS ROC ANNUAL FILING? ── */}
       <section className="py-20 bg-white">

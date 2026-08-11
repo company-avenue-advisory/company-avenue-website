@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -242,7 +243,7 @@ function StickySidebar() {
 }
 
 /* ════════════════════════ MAIN EXPORT ════════════════════════ */
-export function DirectorKYCPage() {
+export function DirectorKYCPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -328,6 +329,9 @@ export function DirectorKYCPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ══ WHAT IS DIR-3 KYC ══ */}
       <section id="what-is" className="py-20 bg-slate-50">

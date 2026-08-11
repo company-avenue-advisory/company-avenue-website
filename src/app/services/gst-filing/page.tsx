@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GSTFilingPage } from "@/components/sections/GSTFilingPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/GSTFilingPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -37,7 +38,7 @@ export default function GSTFilingRoute() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <GSTFilingPage />
+      <GSTFilingPage pricingSlot={<ServicePricingBlock serviceId="gst-filing" />} />
     </>
   );
 }

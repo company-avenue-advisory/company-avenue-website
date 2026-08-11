@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -152,7 +153,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-export function NidhiCompanyPage() {
+export function NidhiCompanyPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white">
 
@@ -249,6 +250,9 @@ export function NidhiCompanyPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* QUICK FACTS */}
       <section className="py-16 bg-slate-50 border-y border-slate-100">

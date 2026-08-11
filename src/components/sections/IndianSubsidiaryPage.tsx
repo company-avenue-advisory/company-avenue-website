@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -38,7 +39,7 @@ const quickFacts = [
   { icon: Clock, label: "Timeline", value: "10–15 Working Days" },
   { icon: Landmark, label: "Authority", value: "MCA + RBI (FEMA)" },
   { icon: FileText, label: "Key Form", value: "SPICe+ / INC-32" },
-  { icon: IndianRupee, label: "Starting From", value: "₹14,999" },
+  { icon: IndianRupee, label: "Starting From", value: "₹31,499" },
   { icon: BadgeCheck, label: "Outcome", value: "Certificate of Incorporation" },
   { icon: Repeat2, label: "FDI Reporting", value: "FCGPR within 30 days" },
 ];
@@ -104,7 +105,7 @@ const whyUs = [
 ];
 
 
-export function IndianSubsidiaryPage() {
+export function IndianSubsidiaryPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -119,7 +120,7 @@ export function IndianSubsidiaryPage() {
               Indian Subsidiary<br />Registration
             </motion.h1>
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/60 text-lg leading-relaxed mb-8 max-w-2xl">
-              Incorporate a wholly-owned Private Limited Company in India as a foreign subsidiary. Full FEMA/RBI compliance, apostilled document handling, and post-incorporation support — from ₹14,999.
+              Incorporate a wholly-owned Private Limited Company in India as a foreign subsidiary. Full FEMA/RBI compliance, apostilled document handling, and post-incorporation support — from ₹31,499.
             </motion.p>
             <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-4">
               <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 bg-accent text-dark font-heading font-bold text-sm rounded-xl hover:bg-amber-500 transition-colors shadow-lg">
@@ -132,6 +133,9 @@ export function IndianSubsidiaryPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* Quick Facts */}
       <section className="py-10 bg-white border-b border-slate-100">

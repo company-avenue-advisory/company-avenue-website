@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { NidhiCompanyPage } from "@/components/sections/NidhiCompanyPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/NidhiCompanyPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -15,7 +16,7 @@ export default function NidhiCompanyServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <NidhiCompanyPage />
+      <NidhiCompanyPage pricingSlot={<ServicePricingBlock serviceId="nidhi-company" />} />
     </>
   );
 }

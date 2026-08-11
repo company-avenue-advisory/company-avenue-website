@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -57,7 +58,7 @@ const quickFacts = [
   { icon: Landmark,    label: "Act",             value: "PSARA 2005" },
   { icon: Shield,      label: "Issuing Auth.",   value: "District Licensing Auth." },
   { icon: Clock,       label: "Timeline",        value: "30-60 Business Days" },
-  { icon: DollarSign,  label: "Starting At",     value: "₹9,999" },
+  { icon: DollarSign,  label: "Starting At",     value: "₹25,500" },
   { icon: AlertCircle, label: "Penalty",         value: "₹25,000 + 1 Year Jail" },
   { icon: Users,       label: "Training",        value: "100 hrs Guards / 160 hrs Supervisors" },
 ];
@@ -107,7 +108,7 @@ const requiredDocs = [
 ];
 
 
-export function PSARALicensePage() {
+export function PSARALicensePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -163,6 +164,9 @@ export function PSARALicensePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* WHAT IS */}
       <section className="py-20 bg-white">
@@ -336,7 +340,7 @@ export function PSARALicensePage() {
               <div className="bg-primary rounded-3xl p-8 text-white">
                 <div className="flex items-center gap-2 mb-3">
                   <Wallet size={18} className="text-accent" />
-                  <p className="font-heading font-semibold text-base">Starting at ₹9,999</p>
+                  <p className="font-heading font-semibold text-base">Starting at ₹25,500</p>
                 </div>
                 <p className="text-white/60 text-xs mb-5 leading-relaxed">
                   All-inclusive professional fee. Includes application preparation, training institute liaison, police verification coordination, and license follow-up. Government fees at actuals.

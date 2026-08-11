@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -265,7 +266,7 @@ function StickySidebar() {
 }
 
 /* ══════════════════════════════════════ MAIN EXPORT ══════════════════════════════════════ */
-export function StartupIndiaPage() {
+export function StartupIndiaPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -403,6 +404,9 @@ export function StartupIndiaPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ══ MAIN CONTENT + STICKY SIDEBAR ══ */}
       <div className="container-custom py-24">

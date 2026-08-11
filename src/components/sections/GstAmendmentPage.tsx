@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -174,7 +175,7 @@ function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
 /* ══════════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════════ */
-export function GstAmendmentPage() {
+export function GstAmendmentPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <main className="overflow-x-hidden">
 
@@ -224,7 +225,7 @@ export function GstAmendmentPage() {
               <Link href="/contact"
                 className="inline-flex items-center gap-2 bg-accent text-[#081726] font-heading font-bold px-7 py-3.5 rounded-xl hover:bg-amber-400 transition-colors text-sm"
               >
-                Get Started — ₹1,499 <ArrowRight size={15} />
+                Get Started — ₹1,999 <ArrowRight size={15} />
               </Link>
               <a href="tel:+919953719111" data-track="call"
                 className="inline-flex items-center gap-2 border border-white/20 text-white font-heading font-semibold px-7 py-3.5 rounded-xl hover:border-accent hover:text-accent transition-colors text-sm"
@@ -253,6 +254,9 @@ export function GstAmendmentPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ── WHAT IS GST AMENDMENT / CANCELLATION ────────────── */}
       <section className="bg-white py-20">
@@ -546,7 +550,7 @@ export function GstAmendmentPage() {
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4">
                   <p className="text-accent font-heading font-bold text-xs uppercase tracking-wider mb-1">Starting at</p>
-                  <p className="text-white font-heading font-extrabold text-3xl">₹1,499</p>
+                  <p className="text-white font-heading font-extrabold text-3xl">₹1,999</p>
                   <p className="text-slate-300 text-xs mt-1">Amendment or Cancellation — complete service</p>
                 </div>
               </div>
@@ -691,7 +695,7 @@ export function GstAmendmentPage() {
               <Link href="/contact"
                 className="inline-flex items-center gap-2 bg-accent text-[#081726] font-heading font-bold px-8 py-4 rounded-xl hover:bg-amber-400 transition-colors text-base"
               >
-                Get Started — ₹1,499 <ArrowRight size={16} />
+                Get Started — ₹1,999 <ArrowRight size={16} />
               </Link>
               <a href="tel:+919953719111" data-track="call"
                 className="inline-flex items-center gap-2 border border-white/20 text-white font-heading font-semibold px-8 py-4 rounded-xl hover:border-accent hover:text-accent transition-colors text-base"

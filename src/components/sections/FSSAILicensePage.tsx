@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -185,7 +186,7 @@ function StickySidebar() {
         </div>
         <div className="bg-primary/5 border border-primary/15 rounded-xl p-3 mb-4">
           <p className="text-xs text-muted mb-1">Starting price</p>
-          <p className="font-heading font-bold text-primary text-lg leading-none">₹1,999 <span className="text-xs text-muted font-normal">(Basic)</span></p>
+          <p className="font-heading font-bold text-primary text-lg leading-none">₹3,499 <span className="text-xs text-muted font-normal">(Basic)</span></p>
         </div>
         <div className="space-y-2">
           <a href="tel:+919953719111" data-track="call"
@@ -206,9 +207,9 @@ function StickySidebar() {
         </div>
         <div className="space-y-2.5">
           {[
-            { type: "Basic",   range: "< ₹12 Lakhs",          price: "₹1,999" },
-            { type: "State",   range: "₹12L – ₹20 Crores",    price: "₹3,999" },
-            { type: "Central", range: "> ₹20 Crores / Multi-State", price: "₹7,999" },
+            { type: "Basic",   range: "< ₹12 Lakhs",          price: "₹3,499" },
+            { type: "State",   range: "₹12L – ₹20 Crores",    price: "₹8,999" },
+            { type: "Central", range: "> ₹20 Crores / Multi-State", price: "₹12,499" },
           ].map(item => (
             <div key={item.type} className="bg-white/10 rounded-xl p-3">
               <div className="flex items-center justify-between mb-1">
@@ -242,7 +243,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════ */
-export function FSSAILicensePage() {
+export function FSSAILicensePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -340,7 +341,7 @@ export function FSSAILicensePage() {
                 <div className="bg-primary/5 rounded-xl p-3 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-muted">Starts from</p>
-                    <p className="font-heading font-bold text-primary text-xl">₹1,999</p>
+                    <p className="font-heading font-bold text-primary text-xl">₹3,499</p>
                     <p className="text-[11px] text-muted">Basic Registration</p>
                   </div>
                   <Link href="/contact"
@@ -352,6 +353,9 @@ export function FSSAILicensePage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ── QUICK FACTS ── */}
       <section className="py-16 bg-slate-50 border-y border-slate-100">
@@ -721,7 +725,7 @@ export function FSSAILicensePage() {
               </a>
             </div>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
-              {["Basic from ₹1,999", "State from ₹3,999", "Central from ₹7,999", "No Hidden Fees"].map(pt => (
+              {["Basic from ₹3,499", "State from ₹8,999", "Central from ₹12,499", "No Hidden Fees"].map(pt => (
                 <div key={pt} className="flex items-center gap-2">
                   <CheckCircle size={14} className="text-accent" />
                   <span className="text-white/80 text-sm">{pt}</span>

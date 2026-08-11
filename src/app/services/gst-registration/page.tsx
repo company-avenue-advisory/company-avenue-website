@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GSTPage } from "@/components/sections/GSTPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/GSTPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -48,7 +49,7 @@ export default function GSTRegistrationPage() {
           ]),
         ]}
       />
-      <GSTPage />
+      <GSTPage pricingSlot={<ServicePricingBlock serviceId="gst-registration" />} />
     </>
   );
 }

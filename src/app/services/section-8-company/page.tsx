@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Section8CompanyPage } from "@/components/sections/Section8CompanyPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/Section8CompanyPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -15,7 +16,7 @@ export default function Section8CompanyServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <Section8CompanyPage />
+      <Section8CompanyPage pricingSlot={<ServicePricingBlock serviceId="section-8-company" />} />
     </>
   );
 }

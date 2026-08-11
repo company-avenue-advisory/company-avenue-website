@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -156,7 +157,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-export function PartnershipFirmPage() {
+export function PartnershipFirmPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white">
 
@@ -219,7 +220,7 @@ export function PartnershipFirmPage() {
               </motion.div>
 
               <motion.div custom={4} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap gap-x-5 gap-y-2">
-                {["7–10 Days Timeline", "Deed by Legal Experts", "Expert CAs", "Starting ₹3,999"].map(pt => (
+                {["7–10 Days Timeline", "Deed by Legal Experts", "Expert CAs", "Starting ₹5,499"].map(pt => (
                   <div key={pt} className="flex items-center gap-1.5">
                     <CheckCircle size={13} className="text-primary" />
                     <span className="text-slate-500 text-sm">{pt}</span>
@@ -261,7 +262,7 @@ export function PartnershipFirmPage() {
                     </div>
                     <div className="text-right">
                       <p className="text-muted text-[10px]">Starting from</p>
-                      <p className="font-heading font-bold text-dark text-xs">₹3,999</p>
+                      <p className="font-heading font-bold text-dark text-xs">₹5,499</p>
                     </div>
                   </div>
                 </div>
@@ -284,6 +285,9 @@ export function PartnershipFirmPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ── QUICK FACTS ── */}
       <section className="py-16 bg-slate-50 border-y border-slate-100">
@@ -633,7 +637,7 @@ export function PartnershipFirmPage() {
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
               <div className="grid grid-cols-2 gap-3">
-                {[{ v: "7–10", l: "Day Timeline" }, { v: "2000+", l: "Firms Formed" }, { v: "15+", l: "Years Exp." }, { v: "₹3,999", l: "Starting Price" }].map(s => (
+                {[{ v: "7–10", l: "Day Timeline" }, { v: "2000+", l: "Firms Formed" }, { v: "15+", l: "Years Exp." }, { v: "₹5,499", l: "Starting Price" }].map(s => (
                   <div key={s.l} className="text-center">
                     <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
                     <p className="text-muted text-[10px] mt-0.5">{s.l}</p>
@@ -653,7 +657,7 @@ export function PartnershipFirmPage() {
               Ready to Register Your Partnership Firm?
             </h2>
             <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
-              Get expert CA assistance, a legally drafted deed and complete registration in 7–10 days. Starting at ₹3,999.
+              Get expert CA assistance, a legally drafted deed and complete registration in 7–10 days. Starting at ₹5,499.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/contact"

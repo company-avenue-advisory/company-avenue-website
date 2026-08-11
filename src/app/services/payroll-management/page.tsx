@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PayrollManagementPage } from "@/components/sections/PayrollManagementPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/PayrollManagementPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -36,7 +37,7 @@ export default function PayrollManagementServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <PayrollManagementPage />
+      <PayrollManagementPage pricingSlot={<ServicePricingBlock serviceId="payroll-management" />} />
     </>
   );
 }

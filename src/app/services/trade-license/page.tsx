@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TradeLicensePage } from "@/components/sections/TradeLicensePage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/TradeLicensePage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -15,7 +16,7 @@ export default function TradeLicenseServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <TradeLicensePage />
+      <TradeLicensePage pricingSlot={<ServicePricingBlock serviceId="trade-license" />} />
     </>
   );
 }

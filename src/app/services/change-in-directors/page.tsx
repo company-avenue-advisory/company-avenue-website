@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ChangeInDirectorsPage } from "@/components/sections/ChangeInDirectorsPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/ChangeInDirectorsPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -15,7 +16,7 @@ export default function ChangeInDirectorsServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <ChangeInDirectorsPage />
+      <ChangeInDirectorsPage pricingSlot={<ServicePricingBlock serviceId="change-in-directors" />} />
     </>
   );
 }

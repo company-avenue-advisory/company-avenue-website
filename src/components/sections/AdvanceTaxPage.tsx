@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -166,7 +167,7 @@ function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
 /* ══════════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════════ */
-export function AdvanceTaxPage() {
+export function AdvanceTaxPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <main className="overflow-x-hidden">
 
@@ -246,6 +247,9 @@ export function AdvanceTaxPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ── WHAT IS ADVANCE TAX ─────────────────────────────── */}
       <section className="bg-white py-20">

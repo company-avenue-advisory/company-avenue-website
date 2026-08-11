@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -184,7 +185,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
 }
 
 /* ─── main export ─── */
-export function PrivateLimitedPage() {
+export function PrivateLimitedPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -302,7 +303,7 @@ export function PrivateLimitedPage() {
                     </div>
                     <div className="text-right">
                       <p className="text-muted text-[10px]">Starting from</p>
-                      <p className="font-heading font-bold text-dark text-xs">₹6,999</p>
+                      <p className="font-heading font-bold text-dark text-xs">₹2,999</p>
                     </div>
                   </div>
                 </div>
@@ -325,6 +326,9 @@ export function PrivateLimitedPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ════════════════════════════════════════
           QUICK FACTS

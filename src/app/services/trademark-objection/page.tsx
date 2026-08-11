@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TrademarkObjectionPage } from "@/components/sections/TrademarkObjectionPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/TrademarkObjectionPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -15,7 +16,7 @@ export default function TrademarkObjectionServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <TrademarkObjectionPage />
+      <TrademarkObjectionPage pricingSlot={<ServicePricingBlock serviceId="trademark-objection" />} />
     </>
   );
 }

@@ -8,8 +8,10 @@ import { SERVICES } from "@/lib/constants";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { getServicePricing, formatINR } from "@/lib/pricing";
 
 // Full service details for every service
 const serviceDetails: Record<string, {
@@ -2426,6 +2428,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const detail = serviceDetails[slug] || defaultDetail;
   const related = SERVICES.filter((s) => s.category === service.category && s.id !== service.id).slice(0, 3);
 
+  // Benchmarked pricing, where we publish it, wins over the legacy placeholder.
+  const pricing = getServicePricing(slug);
+  const startingPrice = pricing ? formatINR(pricing.startingAt) : detail.startingPrice;
+
   return (
     <>
       <JsonLd
@@ -2435,6 +2441,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             description: detail.tagline,
             path: `/services/${slug}`,
           }),
+          // Offer/Product schema is emitted by <ServicePricingBlock> so it can
+          // never drift from the prices actually rendered on the page.
           breadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Services", path: "/services" },
@@ -2463,7 +2471,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <p className="text-white/60 text-lg leading-relaxed mb-8">{detail.tagline}</p>
             <div className="flex flex-wrap items-center gap-4">
               <Button href="/contact" variant="accent" size="lg">
-                Get Started — {detail.startingPrice}
+                Get Started — {startingPrice}
               </Button>
               <a href="tel:+919953719111" data-track="call" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm">
                 <Phone size={14} />
@@ -2477,6 +2485,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </div>
+
+      {/* Pricing + calculators — section 2, high on the page */}
+      <ServicePricingBlock serviceId={slug} />
 
       <section className="py-16 bg-background">
         <div className="container-custom">

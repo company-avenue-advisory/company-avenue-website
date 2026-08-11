@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -139,7 +140,7 @@ const whyUs = [
   { icon: FileText, title: "Complete Documentation", desc: "We prepare, verify, and certify all accounts before filing — ensuring error-free submissions on MCA portal." },
   { icon: Scale, title: "In-house CA for Audit", desc: "LLPs requiring statutory audit get it done in-house — single point of contact for accounts and compliance." },
   { icon: ShieldCheck, title: "No Penalty Guarantee", desc: "We commit to filing within statutory deadlines. If we miss due to our error, we cover the penalty." },
-  { icon: DollarSign, title: "Transparent Fixed Pricing", desc: "Flat annual fee starting at ₹3,999 — all inclusive. No hidden charges for audit, certification, or revisions." },
+  { icon: DollarSign, title: "Transparent Fixed Pricing", desc: "Flat annual fee starting at ₹2,499 — all inclusive. No hidden charges for audit, certification, or revisions." },
   { icon: UserCheck, title: "Dedicated Relationship Manager", desc: "One expert manages your LLP compliance year after year — familiar with your structure and partners." },
   { icon: TrendingUp, title: "Pan-India Service Coverage", desc: "Service all LLPs registered anywhere in India — remote-first process with secure document handling." },
 ];
@@ -162,7 +163,7 @@ function StickySidebar() {
         <p className="font-heading font-bold text-dark text-base mb-1">LLP Annual Filing</p>
         <p className="text-muted text-xs mb-1 leading-relaxed">Form 11 + Form 8 — filed on MCA portal</p>
         <p className="text-2xl font-heading font-bold text-primary mb-4">
-          ₹3,999<span className="text-sm font-normal text-muted">/year</span>
+          ₹2,499<span className="text-sm font-normal text-muted">/year</span>
         </p>
         <div className="space-y-2 mb-5">
           {["Form 11 Annual Return", "Form 8 Accounts & Solvency", "DPIN Status Check", "MCA Acknowledgment", "Penalty Avoidance"].map(pt => (
@@ -242,7 +243,7 @@ function StickySidebar() {
 }
 
 /* ════════════════════════ MAIN EXPORT ════════════════════════ */
-export function LLPAnnualFilingPage() {
+export function LLPAnnualFilingPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -328,6 +329,9 @@ export function LLPAnnualFilingPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ══ WHAT IS LLP ANNUAL FILING ══ */}
       <section id="what-is" className="py-20 bg-slate-50">
@@ -549,7 +553,7 @@ export function LLPAnnualFilingPage() {
                 ))}
               </div>
               <div className="mt-6 bg-primary rounded-2xl p-6 text-white">
-                <p className="font-heading font-bold text-base mb-2">Starting at ₹3,999/year</p>
+                <p className="font-heading font-bold text-base mb-2">Starting at ₹2,499/year</p>
                 <p className="text-white/70 text-sm mb-4">All-inclusive — Form 11, Form 8, DPIN check, CA certification, MCA filing, and SRN acknowledgment.</p>
                 <Link href="/contact"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-primary font-heading font-bold text-sm rounded-xl hover:bg-white/90 transition-colors"

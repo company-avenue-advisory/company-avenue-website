@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -57,7 +58,7 @@ const quickFacts = [
   { icon: FileText,    label: "Form",         value: "STK-2" },
   { icon: Landmark,    label: "Authority",    value: "MCA / RoC" },
   { icon: Clock,       label: "Timeline",     value: "3-6 Months" },
-  { icon: DollarSign,  label: "Starting At",  value: "₹9,999" },
+  { icon: DollarSign,  label: "Starting At",  value: "₹7,999" },
   { icon: AlertCircle, label: "Penalty Risk", value: "Director Disqualification" },
   { icon: ShieldCheck, label: "Protection",   value: "Liability Ends" },
 ];
@@ -107,7 +108,7 @@ const requiredDocs = [
 ];
 
 
-export function CompanyClosurePage() {
+export function CompanyClosurePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -164,6 +165,9 @@ export function CompanyClosurePage() {
         </div>
       </section>
 
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
+
       {/* WHAT IS COMPANY CLOSURE */}
       <section className="py-20 bg-white">
         <div className="container-custom">
@@ -206,7 +210,7 @@ export function CompanyClosurePage() {
                   {[
                     { label: "Eligibility", stk: "NIL assets & liabilities",  nclt: "Companies with assets/liabilities" },
                     { label: "Timeline",    stk: "3-6 months",                nclt: "12-24 months" },
-                    { label: "Cost",        stk: "Low (from ₹9,999)",         nclt: "High (liquidator fees)" },
+                    { label: "Cost",        stk: "Low (from ₹7,999)",         nclt: "High (liquidator fees)" },
                     { label: "Tribunal",    stk: "Not required",              nclt: "NCLT proceedings required" },
                     { label: "Creditors",   stk: "Must be NIL",               nclt: "Settlement via liquidator" },
                   ].map((row) => (
@@ -409,7 +413,7 @@ export function CompanyClosurePage() {
             <div className="bg-primary rounded-3xl p-8 text-white">
               <div className="flex items-center gap-2 mb-3">
                 <Wallet size={18} className="text-accent" />
-                <p className="font-heading font-semibold text-base">Starting at ₹9,999</p>
+                <p className="font-heading font-semibold text-base">Starting at ₹7,999</p>
               </div>
               <p className="text-white/60 text-xs mb-6 leading-relaxed">
                 All-inclusive professional fee. Includes document preparation, STK-2 filing, CA certification of accounts, and compliance clearance support.

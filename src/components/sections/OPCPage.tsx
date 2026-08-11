@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -278,7 +279,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════════ */
-export function OPCPage() {
+export function OPCPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
   const [activeDecision, setActiveDecision] = useState<string | null>(null);
 
   return (
@@ -395,7 +396,7 @@ export function OPCPage() {
                 <div className="mt-5 flex items-center justify-between bg-primary/5 rounded-xl p-3">
                   <div>
                     <p className="text-xs text-muted">Starting from</p>
-                    <p className="font-heading font-bold text-primary text-xl">₹4,999</p>
+                    <p className="font-heading font-bold text-primary text-xl">₹2,999</p>
                   </div>
                   <Link href="/contact"
                     className="px-4 py-2 bg-primary text-white text-xs font-heading font-semibold rounded-lg hover:bg-[#0a2444] transition-colors"
@@ -408,6 +409,9 @@ export function OPCPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing + calculators — section 2 */}
+      {pricingSlot}
 
       {/* ── QUICK FACTS ── */}
       <section className="py-16 bg-slate-50 border-y border-slate-100">

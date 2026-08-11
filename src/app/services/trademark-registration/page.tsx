@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TrademarkPage } from "@/components/sections/TrademarkPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/TrademarkPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -48,7 +49,7 @@ export default function TrademarkRegistrationPage() {
           ]),
         ]}
       />
-      <TrademarkPage />
+      <TrademarkPage pricingSlot={<ServicePricingBlock serviceId="trademark-registration" />} />
     </>
   );
 }

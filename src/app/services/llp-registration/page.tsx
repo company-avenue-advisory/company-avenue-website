@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LLPPage } from "@/components/sections/LLPPage";
+import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { faqs as serviceFaqs } from "@/lib/faqs/LLPPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -36,7 +37,7 @@ export default function LLPRegistrationPage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <LLPPage />
+      <LLPPage pricingSlot={<ServicePricingBlock serviceId="llp-registration" />} />
     </>
   );
 }
