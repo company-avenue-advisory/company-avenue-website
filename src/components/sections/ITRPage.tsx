@@ -405,7 +405,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════ */
-export function ITRPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function ITRPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -441,6 +441,7 @@ export function ITRPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               >
                 Income Tax Return<br /><span className="text-primary">(ITR) Filing Online</span>
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

@@ -249,7 +249,7 @@ function StickySidebar() {
 }
 
 /* ══════════════════════════════════════ MAIN EXPORT ══════════════════════════════════════ */
-export function ChangeInDirectorsPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function ChangeInDirectorsPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -289,6 +289,7 @@ export function ChangeInDirectorsPage({ pricingSlot }: { pricingSlot?: ReactNode
                 Change in Directors<br /><span className="text-primary">or Shareholders</span><br />
                 <span className="text-2xl md:text-3xl text-muted font-medium">DIR-12 · PAS-3 · SH-4</span>
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

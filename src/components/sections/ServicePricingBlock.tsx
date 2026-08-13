@@ -41,8 +41,6 @@ export function ServicePricingBlock({ serviceId }: { serviceId: string }) {
 
   if (!pricing && tools.length === 0) return null;
 
-  const lead = pricing?.tiers[0];
-  const upsells = pricing?.tiers.slice(1) ?? [];
   const offers = pricingOffers(serviceId);
 
   return (
@@ -54,16 +52,9 @@ export function ServicePricingBlock({ serviceId }: { serviceId: string }) {
             "@context": "https://schema.org",
             "@type": "Product",
             name: pricing.label,
-            description: `${pricing.label} by Company Avenue Advisory — professional fees from ${formatINR(pricing.startingAt)}, ${pricing.feeNote}.`,
+            description: `${pricing.label} by Company Avenue Advisory — professional fee ${formatINR(pricing.price)}, ${pricing.feeNote}.`,
             brand: { "@type": "Brand", name: "Company Avenue Advisory" },
-            offers: {
-              "@type": "AggregateOffer",
-              priceCurrency: "INR",
-              lowPrice: String(Math.min(...pricing.tiers.map((t) => t.price))),
-              highPrice: String(Math.max(...pricing.tiers.map((t) => t.price))),
-              offerCount: String(pricing.tiers.length),
-              offers,
-            },
+            offers,
           }}
         />
       )}
@@ -99,11 +90,11 @@ export function ServicePricingBlock({ serviceId }: { serviceId: string }) {
                   <div className="flex flex-wrap items-end gap-x-4 gap-y-2">
                     <div>
                       <p className="text-[11px] font-heading font-semibold tracking-widest uppercase text-accent mb-2">
-                        Starting at
+                        Our professional fee
                       </p>
                       <div className="flex items-end gap-3">
                         <span className="font-heading font-extrabold leading-none text-5xl sm:text-6xl tracking-tight">
-                          {formatINR(pricing.startingAt)}
+                          {formatINR(pricing.price)}
                         </span>
                         {pricing.unit && (
                           <span className="text-base sm:text-lg text-white/70 font-heading font-semibold pb-1">
@@ -118,7 +109,7 @@ export function ServicePricingBlock({ serviceId }: { serviceId: string }) {
                           {formatINR(pricing.compareAt)}
                         </span>
                         <span className="text-[11px] font-heading font-bold px-2 py-1 rounded-md bg-accent text-white">
-                          Save {formatINR(pricing.compareAt - pricing.startingAt)}
+                          Save {formatINR(pricing.compareAt - pricing.price)}
                         </span>
                       </div>
                     )}
@@ -126,45 +117,41 @@ export function ServicePricingBlock({ serviceId }: { serviceId: string }) {
 
                   <p className="mt-3 text-sm text-white/70">{pricing.feeNote}</p>
 
-                  {lead && (
-                    <>
-                      <div className="mt-6 pt-6 border-t border-white/10">
-                        <p className="text-xs font-heading font-bold uppercase tracking-wider text-white/50 mb-4">
-                          The {lead.name} plan includes
-                        </p>
-                        <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
-                          {lead.includes.map((item) => (
-                            <li key={item} className="flex items-start gap-2.5">
-                              <Check size={15} className="text-accent shrink-0 mt-[3px]" />
-                              <span className="text-sm text-white/90 leading-snug">{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                  <div className="mt-6 pt-6 border-t border-white/10">
+                    <p className="text-xs font-heading font-bold uppercase tracking-wider text-white/50 mb-4">
+                      What this fee covers
+                    </p>
+                    <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+                      {pricing.includes.map((item) => (
+                        <li key={item} className="flex items-start gap-2.5">
+                          <Check size={15} className="text-accent shrink-0 mt-[3px]" />
+                          <span className="text-sm text-white/90 leading-snug">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                      <div className="mt-7 flex flex-col sm:flex-row gap-3">
-                        <Link
-                          href="/contact"
-                          className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-white text-sm font-heading font-bold hover:bg-accent-dark transition-colors shadow-sm"
-                        >
-                          Get Started at {formatINR(pricing.startingAt)}
-                          <ArrowRight size={15} />
-                        </Link>
-                        <a
-                          href="tel:+919953719111"
-                          className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/25 text-white text-sm font-heading font-semibold hover:bg-white/10 transition-colors"
-                        >
-                          <Phone size={15} />
-                          Talk to a CA
-                        </a>
-                      </div>
+                  <div className="mt-7 flex flex-col sm:flex-row gap-3">
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent text-white text-sm font-heading font-bold hover:bg-accent-dark transition-colors shadow-sm"
+                    >
+                      Get Started at {formatINR(pricing.price)}
+                      <ArrowRight size={15} />
+                    </Link>
+                    <a
+                      href="tel:+919953719111"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/25 text-white text-sm font-heading font-semibold hover:bg-white/10 transition-colors"
+                    >
+                      <Phone size={15} />
+                      Talk to a CA
+                    </a>
+                  </div>
 
-                      <p className="mt-4 flex items-center gap-2 text-xs text-white/50">
-                        <ShieldCheck size={13} className="shrink-0" />
-                        No hidden charges — every government fee is itemised before you pay.
-                      </p>
-                    </>
-                  )}
+                  <p className="mt-4 flex items-center gap-2 text-xs text-white/50">
+                    <ShieldCheck size={13} className="shrink-0" />
+                    One fee, no packages — every government fee is itemised before you pay.
+                  </p>
                 </div>
               </div>
 
@@ -205,50 +192,6 @@ export function ServicePricingBlock({ serviceId }: { serviceId: string }) {
                 )}
               </div>
             </div>
-
-            {/* ── Higher plans ── */}
-            {upsells.length > 0 && (
-              <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-4">
-                  <h3 className="font-heading font-bold text-dark text-sm">Need more than the basics?</h3>
-                  <span className="text-xs text-muted">Upgrade any time — you only pay the difference.</span>
-                </div>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {upsells.map((tier) => (
-                    <div
-                      key={tier.name}
-                      className={`relative rounded-xl border p-4 ${
-                        tier.popular
-                          ? "border-accent/50 bg-accent/[0.04]"
-                          : "border-slate-200 bg-slate-50/60"
-                      }`}
-                    >
-                      {tier.popular && (
-                        <span className="absolute -top-2 right-3 text-[9px] font-heading font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-accent text-white">
-                          Most Popular
-                        </span>
-                      )}
-                      <p className="text-xs font-heading font-bold uppercase tracking-wider text-muted mb-1.5">
-                        {tier.name}
-                      </p>
-                      <p className="flex items-baseline gap-2">
-                        <span className="font-heading font-extrabold text-2xl text-dark">
-                          {formatINR(tier.price)}
-                        </span>
-                        {tier.compareAt && (
-                          <span className="text-sm text-slate-400 line-through">
-                            {formatINR(tier.compareAt)}
-                          </span>
-                        )}
-                      </p>
-                      {tier.desc && (
-                        <p className="mt-2 text-xs text-muted leading-relaxed">{tier.desc}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </>
         )}
 

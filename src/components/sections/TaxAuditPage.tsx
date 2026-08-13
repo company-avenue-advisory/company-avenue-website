@@ -225,7 +225,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════════ */
-export function TaxAuditPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function TaxAuditPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -264,6 +264,7 @@ export function TaxAuditPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               >
                 Tax Audit under<br /><span className="text-primary">Section 44AB</span>
               </motion.h1>
+              {calcPill}
 
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"

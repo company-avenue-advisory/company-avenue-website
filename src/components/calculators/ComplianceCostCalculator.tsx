@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ClipboardCheck, Info, RefreshCw } from "lucide-react";
+import { FILING_FEES, rocAnnualFee, llpAnnualRocFee, GOVT_FEES } from "@/lib/calc-fees";
 
 type EntityType = "pvtltd" | "opc" | "llp" | "partnership" | "proprietorship";
 
@@ -12,16 +13,6 @@ const ENTITY_TYPES: { key: EntityType; label: string; desc: string; peopleLabel:
   { key: "partnership", label: "Partnership Firm", desc: "No ROC filing, ITR-5 only", peopleLabel: "Number of Partners" },
   { key: "proprietorship", label: "Sole Proprietorship", desc: "ITR only, simplest compliance", peopleLabel: null },
 ];
-
-// Standard MCA e-form fee schedule (Companies Registration Offices & Fees Rules) —
-// same slab structure used for AOC-4, MGT-7/7A and LLP Form 11/8.
-function rocSlabFee(capitalOrContribution: number): number {
-  if (capitalOrContribution <= 1_00_000) return 200;
-  if (capitalOrContribution <= 5_00_000) return 300;
-  if (capitalOrContribution <= 25_00_000) return 400;
-  if (capitalOrContribution <= 1_00_00_000) return 500;
-  return 600;
-}
 
 function taxAuditFee(turnover: number): number {
   if (turnover <= 1_00_00_000) return 8_000;
@@ -69,30 +60,30 @@ export function ComplianceCostCalculator() {
     const needsTaxAudit = turnoverNum > auditThreshold;
 
     if (entityType === "pvtltd" || entityType === "opc") {
-      const rocFee = rocSlabFee(capitalNum);
-      items.push({ label: "AOC-4 — Filing of Financial Statements", note: `ROC govt fee (capital ${formatINR(capitalNum)} slab)`, govtFee: rocFee, professionalFee: 3_000 });
-      items.push({ label: "MGT-7 / MGT-7A — Annual Return", note: "ROC govt fee, same capital slab", govtFee: rocFee, professionalFee: 3_000 });
-      items.push({ label: "Statutory Audit", note: "Mandatory every year regardless of turnover", govtFee: 0, professionalFee: 8_000 });
+      const rocFee = rocAnnualFee(capitalNum);
+      items.push({ label: "AOC-4 — Filing of Financial Statements", note: `ROC govt fee (capital ${formatINR(capitalNum)} slab)`, govtFee: rocFee, professionalFee: FILING_FEES.aoc4 });
+      items.push({ label: "MGT-7 / MGT-7A — Annual Return", note: "ROC govt fee, same capital slab", govtFee: rocFee, professionalFee: FILING_FEES.mgt7 });
+      items.push({ label: "Statutory Audit", note: "Mandatory every year regardless of turnover", govtFee: 0, professionalFee: FILING_FEES.statutoryAudit });
       const kycCount = entityType === "opc" ? 1 : peopleNum;
-      items.push({ label: `DIR-3 KYC (${kycCount} director${kycCount > 1 ? "s" : ""})`, note: "Annual director KYC — ₹5,000 penalty per director if missed", govtFee: 0, professionalFee: 500 * kycCount });
-      items.push({ label: "Secretarial Compliance (Board Meetings & Minutes)", note: "Minimum 4 board meetings/year, statutory registers", govtFee: 0, professionalFee: 4_000 });
-      items.push({ label: "Income Tax Return (ITR-6)", note: "Mandatory corporate ITR filing", govtFee: 0, professionalFee: 5_000 });
+      items.push({ label: `DIR-3 KYC (${kycCount} director${kycCount > 1 ? "s" : ""})`, note: `Annual director KYC — ₹${GOVT_FEES.dirKycLate.toLocaleString("en-IN")} penalty per director if missed`, govtFee: 0, professionalFee: FILING_FEES.dirKyc * kycCount });
+      items.push({ label: "Secretarial Compliance (Board Meetings & Minutes)", note: "Minimum 4 board meetings/year, statutory registers", govtFee: 0, professionalFee: FILING_FEES.secretarial });
+      items.push({ label: "Income Tax Return (ITR-6)", note: "Mandatory corporate ITR filing", govtFee: 0, professionalFee: FILING_FEES.itr6 });
     }
 
     if (entityType === "llp") {
-      const rocFee = rocSlabFee(capitalNum);
-      items.push({ label: "Form 11 — Annual Return", note: `ROC govt fee (contribution ${formatINR(capitalNum)} slab)`, govtFee: rocFee, professionalFee: 2_000 });
-      items.push({ label: "Form 8 — Statement of Account & Solvency", note: "ROC govt fee, same contribution slab", govtFee: rocFee, professionalFee: 2_500 });
-      items.push({ label: `DIR-3 KYC (${peopleNum} designated partner${peopleNum > 1 ? "s" : ""})`, note: "Annual KYC for designated partners", govtFee: 0, professionalFee: 500 * peopleNum });
-      items.push({ label: "Income Tax Return (ITR-5)", note: "Mandatory LLP ITR filing", govtFee: 0, professionalFee: 4_000 });
+      const rocFee = llpAnnualRocFee(capitalNum);
+      items.push({ label: "Form 11 — Annual Return", note: `ROC govt fee (contribution ${formatINR(capitalNum)} slab)`, govtFee: rocFee, professionalFee: FILING_FEES.llpForm11 });
+      items.push({ label: "Form 8 — Statement of Account & Solvency", note: "ROC govt fee, same contribution slab", govtFee: rocFee, professionalFee: FILING_FEES.llpForm8 });
+      items.push({ label: `DIR-3 KYC (${peopleNum} designated partner${peopleNum > 1 ? "s" : ""})`, note: "Annual KYC for designated partners", govtFee: 0, professionalFee: FILING_FEES.dirKyc * peopleNum });
+      items.push({ label: "Income Tax Return (ITR-5)", note: "Mandatory LLP ITR filing", govtFee: 0, professionalFee: FILING_FEES.itr5 });
     }
 
     if (entityType === "partnership") {
-      items.push({ label: "Income Tax Return (ITR-5)", note: "No ROC filing required — firm is not MCA-registered", govtFee: 0, professionalFee: 3_000 });
+      items.push({ label: "Income Tax Return (ITR-5)", note: "No ROC filing required — firm is not MCA-registered", govtFee: 0, professionalFee: FILING_FEES.itr5 });
     }
 
     if (entityType === "proprietorship") {
-      items.push({ label: "Income Tax Return (ITR-3/4)", note: "Filed under the proprietor's own PAN", govtFee: 0, professionalFee: 2_000 });
+      items.push({ label: "Income Tax Return (ITR-3/4)", note: "Filed under the proprietor's own PAN", govtFee: 0, professionalFee: FILING_FEES.itr34 });
     }
 
     if (needsTaxAudit) {
@@ -108,23 +99,23 @@ export function ComplianceCostCalculator() {
 
     if (gstRegistered) {
       if (gstFrequency === "monthly") {
-        items.push({ label: "GST Return Filing (GSTR-1 + 3B, monthly)", note: "12 filings/year", govtFee: 0, professionalFee: 1_000 * 12 });
+        items.push({ label: "GST Return Filing (GSTR-1 + 3B, monthly)", note: "12 filings/year", govtFee: 0, professionalFee: FILING_FEES.gstMonthly * 12 });
       } else {
-        items.push({ label: "GST Return Filing (QRMP scheme, quarterly)", note: "Eligible since turnover < ₹5 Cr", govtFee: 0, professionalFee: 800 * 4 + 1_500 });
+        items.push({ label: "GST Return Filing (QRMP scheme, quarterly)", note: "Eligible since turnover < ₹5 Cr", govtFee: 0, professionalFee: FILING_FEES.gstQuarterly * 4 });
       }
       if (turnoverNum > 2_00_00_000) {
-        items.push({ label: "GSTR-9 — Annual Return", note: "Mandatory above ₹2 Cr turnover", govtFee: 0, professionalFee: 3_000 });
+        items.push({ label: "GSTR-9 — Annual Return", note: "Mandatory above ₹2 Cr turnover", govtFee: 0, professionalFee: FILING_FEES.gstr9 });
       }
       if (turnoverNum > 5_00_00_000) {
-        items.push({ label: "GSTR-9C — Reconciliation Statement", note: "Mandatory above ₹5 Cr turnover, CA-certified", govtFee: 0, professionalFee: 5_000 });
+        items.push({ label: "GSTR-9C — Reconciliation Statement", note: "Mandatory above ₹5 Cr turnover, CA-certified", govtFee: 0, professionalFee: FILING_FEES.gstr9c });
       }
     }
 
     if (employeeNum >= 20) {
-      items.push({ label: "PF (EPFO) — Monthly ECR Filing", note: "Mandatory once headcount reaches 20", govtFee: 0, professionalFee: 1_000 * 12 });
+      items.push({ label: "PF (EPFO) — Monthly ECR Filing", note: "Mandatory once headcount reaches 20", govtFee: 0, professionalFee: FILING_FEES.pfMonthly * 12 });
     }
     if (employeeNum >= 10) {
-      items.push({ label: "ESI — Monthly Contribution Filing", note: "Mandatory once headcount reaches 10 (wages < ₹21,000/month)", govtFee: 0, professionalFee: 800 * 12 });
+      items.push({ label: "ESI — Monthly Contribution Filing", note: "Mandatory once headcount reaches 10 (wages < ₹21,000/month)", govtFee: 0, professionalFee: FILING_FEES.esiMonthly * 12 });
     }
 
     const total = items.reduce((sum, i) => sum + i.govtFee + i.professionalFee, 0);

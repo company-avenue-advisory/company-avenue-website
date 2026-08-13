@@ -243,7 +243,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════ */
-export function FSSAILicensePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function FSSAILicensePage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -281,6 +281,7 @@ export function FSSAILicensePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               >
                 FSSAI Food License<br /><span className="text-primary">Registration Made Easy</span>
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

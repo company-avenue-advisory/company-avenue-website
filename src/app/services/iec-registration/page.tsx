@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IECRegistrationPage } from "@/components/sections/IECRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/IECRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -37,7 +38,10 @@ export default function IECRegistrationServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <IECRegistrationPage pricingSlot={<ServicePricingBlock serviceId="iec-registration" />} />
+      <IECRegistrationPage
+        pricingSlot={<ServicePricingBlock serviceId="iec-registration" />}
+        calcPill={<ServiceCalcPill serviceId="iec-registration" />}
+      />
     </>
   );
 }

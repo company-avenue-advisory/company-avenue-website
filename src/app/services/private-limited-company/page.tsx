@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PrivateLimitedPage } from "@/components/sections/PrivateLimitedPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/PrivateLimitedPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -49,7 +50,10 @@ export default function PrivateLimitedCompanyPage() {
           ]),
         ]}
       />
-      <PrivateLimitedPage pricingSlot={<ServicePricingBlock serviceId="private-limited-company" />} />
+      <PrivateLimitedPage
+        pricingSlot={<ServicePricingBlock serviceId="private-limited-company" />}
+        calcPill={<ServiceCalcPill serviceId="private-limited-company" />}
+      />
     </>
   );
 }

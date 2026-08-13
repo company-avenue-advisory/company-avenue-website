@@ -175,7 +175,7 @@ function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
 /* ══════════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════════ */
-export function GstAmendmentPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function GstAmendmentPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden">
 
@@ -210,6 +210,7 @@ export function GstAmendmentPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               GST Registration{" "}
               <span className="text-accent">Amendment &amp; Cancellation</span>
             </motion.h1>
+            {calcPill}
             <motion.p
               variants={fadeUp} initial="hidden" animate="show" custom={3}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl"

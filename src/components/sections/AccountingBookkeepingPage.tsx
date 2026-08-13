@@ -221,7 +221,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════ */
-export function AccountingBookkeepingPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function AccountingBookkeepingPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -257,6 +257,7 @@ export function AccountingBookkeepingPage({ pricingSlot }: { pricingSlot?: React
               >
                 Professional Accounting &<br /><span className="text-primary">Bookkeeping Services</span><br />for Growing Businesses
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

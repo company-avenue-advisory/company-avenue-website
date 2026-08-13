@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PSARALicensePage } from "@/components/sections/PSARALicensePage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/PSARALicensePage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function PSARALicenseServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <PSARALicensePage pricingSlot={<ServicePricingBlock serviceId="psara-license" />} />
+      <PSARALicensePage
+        pricingSlot={<ServicePricingBlock serviceId="psara-license" />}
+        calcPill={<ServiceCalcPill serviceId="psara-license" />}
+      />
     </>
   );
 }

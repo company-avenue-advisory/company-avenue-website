@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { TdsReturnPage } from "@/components/sections/TdsReturnPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/TdsReturnPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function TDSReturnServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <TdsReturnPage pricingSlot={<ServicePricingBlock serviceId="tds-return" />} />
+      <TdsReturnPage
+        pricingSlot={<ServicePricingBlock serviceId="tds-return" />}
+        calcPill={<ServiceCalcPill serviceId="tds-return" />}
+      />
     </>
   );
 }

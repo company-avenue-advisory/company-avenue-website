@@ -182,7 +182,7 @@ const relatedServices = [
 /* ══════════════════════════════════════
    COMPONENT
 ══════════════════════════════════════ */
-export function ROCCompliancePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function ROCCompliancePage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -212,6 +212,7 @@ export function ROCCompliancePage({ pricingSlot }: { pricingSlot?: ReactNode }) 
               ROC Annual Filing{" "}
               <span className="text-accent">AOC-4 &amp; MGT-7</span>
             </motion.h1>
+            {calcPill}
             <motion.p
               variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl"

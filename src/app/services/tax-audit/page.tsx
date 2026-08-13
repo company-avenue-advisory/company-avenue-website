@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { TaxAuditPage } from "@/components/sections/TaxAuditPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/TaxAuditPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function TaxAuditServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <TaxAuditPage pricingSlot={<ServicePricingBlock serviceId="tax-audit" />} />
+      <TaxAuditPage
+        pricingSlot={<ServicePricingBlock serviceId="tax-audit" />}
+        calcPill={<ServiceCalcPill serviceId="tax-audit" />}
+      />
     </>
   );
 }

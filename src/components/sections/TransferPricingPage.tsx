@@ -181,7 +181,7 @@ const relatedServices = [
 /* ══════════════════════════════════════
    COMPONENT
 ══════════════════════════════════════ */
-export function TransferPricingPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function TransferPricingPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -211,6 +211,7 @@ export function TransferPricingPage({ pricingSlot }: { pricingSlot?: ReactNode }
               Transfer Pricing Study{" "}
               <span className="text-accent">&amp; Form 3CEB</span>
             </motion.h1>
+            {calcPill}
             <motion.p
               variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { StartupIndiaPage } from "@/components/sections/StartupIndiaPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/StartupIndiaPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -37,7 +38,10 @@ export default function StartupIndiaServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <StartupIndiaPage pricingSlot={<ServicePricingBlock serviceId="startup-india" />} />
+      <StartupIndiaPage
+        pricingSlot={<ServicePricingBlock serviceId="startup-india" />}
+        calcPill={<ServiceCalcPill serviceId="startup-india" />}
+      />
     </>
   );
 }

@@ -221,7 +221,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════ */
-export function TrademarkObjectionPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function TrademarkObjectionPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -255,6 +255,7 @@ export function TrademarkObjectionPage({ pricingSlot }: { pricingSlot?: ReactNod
               >
                 Trademark Objection<br /><span className="text-primary">Reply Service</span>
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

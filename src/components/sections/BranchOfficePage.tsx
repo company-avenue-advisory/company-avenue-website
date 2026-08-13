@@ -84,7 +84,7 @@ const documents = [
 ];
 
 
-export function BranchOfficePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function BranchOfficePage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -98,6 +98,7 @@ export function BranchOfficePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
             <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1} className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] mb-6">
               Branch / Liaison /<br />Project Office in India
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/60 text-lg leading-relaxed mb-8 max-w-2xl">
               Set up a Branch Office, Liaison Office, or Project Office in India with prior RBI approval under FEMA. Full application support, AD bank coordination, and annual compliance. Starting ₹19,999.
             </motion.p>

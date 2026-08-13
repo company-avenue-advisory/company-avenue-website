@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AdvanceTaxPage } from "@/components/sections/AdvanceTaxPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/AdvanceTaxPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -39,7 +40,10 @@ export default function AdvanceTaxServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <AdvanceTaxPage pricingSlot={<ServicePricingBlock serviceId="advance-tax" />} />
+      <AdvanceTaxPage
+        pricingSlot={<ServicePricingBlock serviceId="advance-tax" />}
+        calcPill={<ServiceCalcPill serviceId="advance-tax" />}
+      />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { TrademarkRenewalPage } from "@/components/sections/TrademarkRenewalPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/TrademarkRenewalPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function TrademarkRenewalServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <TrademarkRenewalPage pricingSlot={<ServicePricingBlock serviceId="trademark-renewal" />} />
+      <TrademarkRenewalPage
+        pricingSlot={<ServicePricingBlock serviceId="trademark-renewal" />}
+        calcPill={<ServiceCalcPill serviceId="trademark-renewal" />}
+      />
     </>
   );
 }

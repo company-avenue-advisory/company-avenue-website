@@ -59,10 +59,11 @@ const QUESTIONS: Question[] = [
 // Comparison matrix
 const COMPARISON = [
   { feature: "Minimum Members", pvt: "2 Directors + 2 Shareholders", llp: "2 Designated Partners" },
-  { feature: "Registration Cost", pvt: "~₹10,000–20,000", llp: "~₹6,000–10,000" },
-  { feature: "Authorized Capital", pvt: "Required (min ₹1 lakh)", llp: "Not required" },
+  { feature: "Our professional fee", pvt: "₹2,999", llp: "₹2,999" },
+  { feature: "Typical all-in setup cost", pvt: "≈ ₹7,100 (Delhi, ₹1L capital)", llp: "≈ ₹10,900 (₹1L contribution)" },
+  { feature: "Authorised Capital", pvt: "No statutory minimum; ₹1 lakh is typical", llp: "Not applicable — contribution instead" },
   { feature: "Annual Compliance", pvt: "ROC forms, Board meetings, MGT-7, AOC-4", llp: "Form 8 & 11 (simpler)" },
-  { feature: "Compliance Cost", pvt: "Higher (₹15K–30K/yr)", llp: "Lower (₹5K–10K/yr)" },
+  { feature: "Annual compliance cost", pvt: "Higher — ₹19K–25K/yr (audit is mandatory)", llp: "Lower — ₹9K–12K/yr" },
   { feature: "Audit Requirement", pvt: "Mandatory always", llp: "Only if turnover > ₹40L or contribution > ₹25L" },
   { feature: "Venture Capital Funding", pvt: "✓ Supported (equity model)", llp: "✗ Not preferred by VCs" },
   { feature: "ESOPs to Employees", pvt: "✓ Possible via ESOP scheme", llp: "✗ Not possible" },

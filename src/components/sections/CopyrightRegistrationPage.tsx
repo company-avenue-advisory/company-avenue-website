@@ -115,7 +115,7 @@ const requiredDocs = [
 ];
 
 
-export function CopyrightRegistrationPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function CopyrightRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -141,6 +141,7 @@ export function CopyrightRegistrationPage({ pricingSlot }: { pricingSlot?: React
               Copyright{" "}
               <span className="text-accent">Registration in India</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Protect your creative works — books, software, music, films, and designs — with official copyright registration. Get a Certificate of Registration from the Copyright Office with 60-year protection across 180+ countries under the Berne Convention.

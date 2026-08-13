@@ -108,7 +108,7 @@ const requiredDocs = [
 ];
 
 
-export function CompanyNameChangePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function CompanyNameChangePage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -134,6 +134,7 @@ export function CompanyNameChangePage({ pricingSlot }: { pricingSlot?: ReactNode
               Company Name Change{" "}
               <span className="text-accent">INC-24 Filing</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Legally change your company&apos;s name through MCA with a fresh Certificate of Incorporation. From RUN name availability check and EGM special resolution to INC-24 filing and post-change PAN, GST, and bank updates — we handle everything.

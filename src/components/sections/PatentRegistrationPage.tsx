@@ -215,7 +215,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════ */
-export function PatentRegistrationPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function PatentRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -249,6 +249,7 @@ export function PatentRegistrationPage({ pricingSlot }: { pricingSlot?: ReactNod
               >
                 Patent Registration<br /><span className="text-primary">in India — Secure Your Invention</span>
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

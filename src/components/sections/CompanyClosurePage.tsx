@@ -108,7 +108,7 @@ const requiredDocs = [
 ];
 
 
-export function CompanyClosurePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -134,6 +134,7 @@ export function CompanyClosurePage({ pricingSlot }: { pricingSlot?: ReactNode })
               Company Closure{" "}
               <span className="text-accent">(STK-2 Fast Track)</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Close your inactive Private Limited Company legally and permanently using the MCA STK-2 Fast Track Exit route. Eliminate compliance obligations, protect directors from disqualification, and get a formal dissolution order — without any NCLT proceedings.

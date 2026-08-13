@@ -108,7 +108,7 @@ const requiredDocs = [
 ];
 
 
-export function GratuityTrustPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function GratuityTrustPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -134,6 +134,7 @@ export function GratuityTrustPage({ pricingSlot }: { pricingSlot?: ReactNode }) 
               Private Gratuity{" "}
               <span className="text-accent">Trust Registration</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Set up an Income Tax-approved private gratuity trust to claim Section 36(1)(v) deductions, comply with AS 15 / Ind AS 19, manage off-balance-sheet employee liabilities, and protect employee gratuity entitlements. Includes actuarial valuation coordination and IT approval.

@@ -357,7 +357,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════════ */
-export function LLPPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function LLPPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   const [decisionChoice, setDecisionChoice] = useState<string | null>(null);
   const recommended = decisionOptions.find(d => d.label === decisionChoice)?.recommended;
 
@@ -403,6 +403,7 @@ export function LLPPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
                 Limited Liability Partnership<br />
                 <span className="text-primary">(LLP) Registration in India</span>
               </motion.h1>
+              {calcPill}
 
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"

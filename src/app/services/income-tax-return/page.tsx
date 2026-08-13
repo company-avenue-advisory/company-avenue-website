@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ITRPage } from "@/components/sections/ITRPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/ITRPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -38,7 +39,10 @@ export default function IncomeTaxReturnPage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <ITRPage pricingSlot={<ServicePricingBlock serviceId="income-tax-return" />} />
+      <ITRPage
+        pricingSlot={<ServicePricingBlock serviceId="income-tax-return" />}
+        calcPill={<ServiceCalcPill serviceId="income-tax-return" />}
+      />
     </>
   );
 }

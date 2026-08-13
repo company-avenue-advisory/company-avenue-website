@@ -167,7 +167,7 @@ function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
 /* ══════════════════════════════════════════════════════════
    MAIN COMPONENT
 ══════════════════════════════════════════════════════════ */
-export function AdvanceTaxPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function AdvanceTaxPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden">
 
@@ -203,6 +203,7 @@ export function AdvanceTaxPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               Advance Tax Calculation &{" "}
               <span className="text-accent">Payment Services</span>
             </motion.h1>
+            {calcPill}
             <motion.p
               variants={fadeUp} initial="hidden" animate="show" custom={3}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl"

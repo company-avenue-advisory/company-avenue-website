@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getServicePricing, formatINR } from "@/lib/pricing";
@@ -2430,7 +2431,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   // Benchmarked pricing, where we publish it, wins over the legacy placeholder.
   const pricing = getServicePricing(slug);
-  const startingPrice = pricing ? formatINR(pricing.startingAt) : detail.startingPrice;
+  const startingPrice = pricing ? formatINR(pricing.price) : detail.startingPrice;
 
   return (
     <>
@@ -2468,6 +2469,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="max-w-2xl">
             <Badge variant="accent" className="mb-4">{service.category}</Badge>
             <h1 className="font-heading font-bold text-4xl md:text-5xl text-white mb-4 leading-tight">{service.title}</h1>
+            <ServiceCalcPill serviceId={slug} />
             <p className="text-white/60 text-lg leading-relaxed mb-8">{detail.tagline}</p>
             <div className="flex flex-wrap items-center gap-4">
               <Button href="/contact" variant="accent" size="lg">

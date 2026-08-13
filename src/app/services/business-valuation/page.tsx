@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BusinessValuationPage } from "@/components/sections/BusinessValuationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/BusinessValuationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function BusinessValuationServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <BusinessValuationPage pricingSlot={<ServicePricingBlock serviceId="business-valuation" />} />
+      <BusinessValuationPage
+        pricingSlot={<ServicePricingBlock serviceId="business-valuation" />}
+        calcPill={<ServiceCalcPill serviceId="business-valuation" />}
+      />
     </>
   );
 }

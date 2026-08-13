@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { VirtualCFOPage } from "@/components/sections/VirtualCFOPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/VirtualCFOPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function VirtualCFOServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <VirtualCFOPage pricingSlot={<ServicePricingBlock serviceId="virtual-cfo" />} />
+      <VirtualCFOPage
+        pricingSlot={<ServicePricingBlock serviceId="virtual-cfo" />}
+        calcPill={<ServiceCalcPill serviceId="virtual-cfo" />}
+      />
     </>
   );
 }

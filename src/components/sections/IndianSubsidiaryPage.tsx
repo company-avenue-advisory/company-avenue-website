@@ -105,7 +105,7 @@ const whyUs = [
 ];
 
 
-export function IndianSubsidiaryPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function IndianSubsidiaryPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white">
       {/* Hero */}
@@ -119,6 +119,7 @@ export function IndianSubsidiaryPage({ pricingSlot }: { pricingSlot?: ReactNode 
             <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1} className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] mb-6">
               Indian Subsidiary<br />Registration
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/60 text-lg leading-relaxed mb-8 max-w-2xl">
               Incorporate a wholly-owned Private Limited Company in India as a foreign subsidiary. Full FEMA/RBI compliance, apostilled document handling, and post-incorporation support — from ₹31,499.
             </motion.p>

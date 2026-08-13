@@ -106,7 +106,7 @@ const requiredDocs = [
 ];
 
 
-export function IncreaseAuthorisedCapitalPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function IncreaseAuthorisedCapitalPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -132,6 +132,7 @@ export function IncreaseAuthorisedCapitalPage({ pricingSlot }: { pricingSlot?: R
               Increase Authorised{" "}
               <span className="text-accent">Share Capital</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Expand your company&apos;s authorised capital with precision — EGM ordinary resolution, Form MGT-14 within 30 days, altered MOA, and Form SH-7 filing. Essential before funding rounds, ESOP creation, bonus issuance, or debt-to-equity conversion.

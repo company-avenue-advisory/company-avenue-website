@@ -243,7 +243,7 @@ function StickySidebar() {
 }
 
 /* ════════════════════════ MAIN EXPORT ════════════════════════ */
-export function DirectorKYCPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function DirectorKYCPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -279,6 +279,7 @@ export function DirectorKYCPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               >
                 Director KYC<br /><span className="text-primary">DIR-3 KYC Filing</span><br />Annual DIN Compliance
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

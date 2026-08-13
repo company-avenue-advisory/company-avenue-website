@@ -108,7 +108,7 @@ const requiredDocs = [
 ];
 
 
-export function LMPCRegistrationPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function LMPCRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -134,6 +134,7 @@ export function LMPCRegistrationPage({ pricingSlot }: { pricingSlot?: ReactNode 
               LMPC Registration{" "}
               <span className="text-accent">for Importers</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Mandatory registration under the Legal Metrology Act 2009 for all importers and re-packers of pre-packaged goods. Required by Amazon, Flipkart, and customs for MRP declaration, net quantity compliance, and label information requirements on all imported products sold in India.

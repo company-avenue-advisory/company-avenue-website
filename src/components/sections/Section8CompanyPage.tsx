@@ -155,7 +155,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-export function Section8CompanyPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function Section8CompanyPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white">
 
@@ -197,6 +197,7 @@ export function Section8CompanyPage({ pricingSlot }: { pricingSlot?: ReactNode }
                 Section 8 Company<br />
                 <span className="text-primary">Registration (NGO) in India</span>
               </motion.h1>
+              {calcPill}
 
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"

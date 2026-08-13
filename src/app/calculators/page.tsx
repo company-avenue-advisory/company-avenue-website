@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Calculator, IndianRupee, FileText, Building2,
-  Scale, Lightbulb, ArrowRight, ShieldCheck, FileCheck, Tag, ClipboardCheck, Search,
-  Percent, Wallet, Coins, Home, TrendingUp, PiggyBank, Landmark, LineChart, BadgeIndianRupee, Banknote,
-} from "lucide-react";
+import { Calculator, IndianRupee, FileText, Building2, Scale, Lightbulb, ArrowRight, ShieldCheck, FileCheck, Tag, ClipboardCheck, Search, Percent, Wallet, Coins, Home, TrendingUp, PiggyBank, Landmark, LineChart, BadgeIndianRupee, Banknote, Award } from "lucide-react";
 import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
@@ -154,6 +150,39 @@ const TOOLS = [
     badge: "New",
     color: "bg-orange-50 text-orange-600 border-orange-100",
     href: "/calculators/business-setup-calculator",
+  },
+  {
+    slug: "trademark-cost-calculator",
+    icon: Award,
+    title: "Trademark Cost Calculator",
+    description:
+      "Government fee per class, MSME and DPIIT startup concessions, and our filing fee — for as many classes as you need.",
+    keywords: ["trademark registration cost india", "trademark government fee per class"],
+    badge: "New",
+    color: "bg-purple-50 text-purple-600 border-purple-100",
+    href: "/calculators/trademark-cost-calculator",
+  },
+  {
+    slug: "gst-registration-cost-calculator",
+    icon: Percent,
+    title: "GST Registration Cost Calculator",
+    description:
+      "Tells you whether GST registration is mandatory for your turnover and business type, then what it costs to get your GSTIN.",
+    keywords: ["gst registration cost", "is gst registration mandatory"],
+    badge: "New",
+    color: "bg-blue-50 text-blue-600 border-blue-100",
+    href: "/calculators/gst-registration-cost-calculator",
+  },
+  {
+    slug: "fssai-license-cost-calculator",
+    icon: ShieldCheck,
+    title: "FSSAI Licence Cost Calculator",
+    description:
+      "Points you to the right FSSAI category for your turnover — Basic, State or Central — and prices it per year.",
+    keywords: ["fssai license cost", "food license fee india"],
+    badge: "New",
+    color: "bg-green-50 text-green-600 border-green-100",
+    href: "/calculators/fssai-license-cost-calculator",
   },
 ];
 

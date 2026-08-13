@@ -265,7 +265,7 @@ function StickySidebar() {
 }
 
 /* ══════════════════════════════════════ MAIN EXPORT ══════════════════════════════════════ */
-export function IECRegistrationPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function IECRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -302,6 +302,7 @@ export function IECRegistrationPage({ pricingSlot }: { pricingSlot?: ReactNode }
               >
                 Import Export Code<br /><span className="text-primary">(IEC) Registration</span><br />Online — DGFT
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

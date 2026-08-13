@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { COMPANY } from "@/lib/constants";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { PHONE_E164, waLink, serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 
 export interface CityLandingConfig {
@@ -81,6 +82,7 @@ export function CityLandingPage({ config }: { config: CityLandingConfig }) {
 
           <header className="max-w-3xl">
             <h1 className="heading-lg text-white mb-5">{h1}</h1>
+            <ServiceCalcPill serviceId={pricingServiceId} />
             {intro.map((p, i) => (
               <p key={i} className="text-white/70 text-base md:text-lg mb-4 leading-relaxed">{p}</p>
             ))}

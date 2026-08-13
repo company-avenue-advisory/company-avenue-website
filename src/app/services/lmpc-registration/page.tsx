@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LMPCRegistrationPage } from "@/components/sections/LMPCRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/LMPCRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function LMPCRegistrationServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <LMPCRegistrationPage pricingSlot={<ServicePricingBlock serviceId="lmpc-registration" />} />
+      <LMPCRegistrationPage
+        pricingSlot={<ServicePricingBlock serviceId="lmpc-registration" />}
+        calcPill={<ServiceCalcPill serviceId="lmpc-registration" />}
+      />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LLPAnnualFilingPage } from "@/components/sections/LLPAnnualFilingPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/LLPAnnualFilingPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function LLPAnnualFilingServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <LLPAnnualFilingPage pricingSlot={<ServicePricingBlock serviceId="llp-annual-filing" />} />
+      <LLPAnnualFilingPage
+        pricingSlot={<ServicePricingBlock serviceId="llp-annual-filing" />}
+        calcPill={<ServiceCalcPill serviceId="llp-annual-filing" />}
+      />
     </>
   );
 }

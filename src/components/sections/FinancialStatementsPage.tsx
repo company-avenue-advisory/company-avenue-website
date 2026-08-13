@@ -117,7 +117,7 @@ const requiredDocs = [
 ];
 
 
-export function FinancialStatementsPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function FinancialStatementsPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -143,6 +143,7 @@ export function FinancialStatementsPage({ pricingSlot }: { pricingSlot?: ReactNo
               Financial Statement{" "}
               <span className="text-accent">Preparation</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Expert preparation of P&amp;L Account, Balance Sheet, Cash Flow Statement, and Notes to Accounts in Schedule III format. Ready for statutory audit, ROC filing (AOC-4), tax audit (Form 3CB), bank submissions, and investor due diligence.

@@ -249,7 +249,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════ */
-export function VirtualCFOPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function VirtualCFOPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -294,6 +294,7 @@ export function VirtualCFOPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
                 Your Virtual CFO —<br />
                 <span className="text-primary">CFO Expertise at 1/10th Cost</span>
               </motion.h1>
+              {calcPill}
               <motion.p
                 custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"

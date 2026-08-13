@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DesignRegistrationPage } from "@/components/sections/DesignRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/DesignRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function DesignRegistrationServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <DesignRegistrationPage pricingSlot={<ServicePricingBlock serviceId="design-registration" />} />
+      <DesignRegistrationPage
+        pricingSlot={<ServicePricingBlock serviceId="design-registration" />}
+        calcPill={<ServiceCalcPill serviceId="design-registration" />}
+      />
     </>
   );
 }

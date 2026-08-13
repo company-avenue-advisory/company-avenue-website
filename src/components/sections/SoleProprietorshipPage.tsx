@@ -146,7 +146,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-export function SoleProprietorshipPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function SoleProprietorshipPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white">
 
@@ -188,6 +188,7 @@ export function SoleProprietorshipPage({ pricingSlot }: { pricingSlot?: ReactNod
                 Sole Proprietorship<br />
                 <span className="text-primary">Registration in India</span>
               </motion.h1>
+              {calcPill}
 
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"

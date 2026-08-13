@@ -436,7 +436,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════════ */
-export function GSTFilingPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function GSTFilingPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -472,6 +472,7 @@ export function GSTFilingPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               >
                 GST Return Filing<br /><span className="text-primary">Made Easy</span>
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { PRO_FEES, inr } from "@/lib/calc-fees";
 import { motion, AnimatePresence } from "framer-motion";
 import { Lightbulb, ArrowRight, ArrowLeft, Check, RefreshCw } from "lucide-react";
 import Link from "next/link";
@@ -78,12 +79,14 @@ interface Structure {
   pros: string[];
   cons: string[];
   bestFor: string;
+  fee: number;
 }
 
 const STRUCTURES: Record<string, Structure> = {
   pvtltd: {
     name: "Private Limited Company",
     href: "/services/private-limited-company",
+    fee: PRO_FEES["private-limited-company"],
     tagline: "Best for growth-oriented businesses and funded startups",
     pros: [
       "Limited liability for all shareholders",
@@ -102,6 +105,7 @@ const STRUCTURES: Record<string, Structure> = {
   llp: {
     name: "LLP (Limited Liability Partnership)",
     href: "/services/llp-registration",
+    fee: PRO_FEES["llp-registration"],
     tagline: "Best for professionals and service businesses",
     pros: [
       "Limited liability protection",
@@ -120,6 +124,7 @@ const STRUCTURES: Record<string, Structure> = {
   opc: {
     name: "One Person Company (OPC)",
     href: "/services/one-person-company",
+    fee: PRO_FEES["one-person-company"],
     tagline: "Best for solo founders wanting limited liability",
     pros: [
       "Only 1 director needed",
@@ -137,6 +142,7 @@ const STRUCTURES: Record<string, Structure> = {
   partnership: {
     name: "Partnership Firm",
     href: "/services/partnership-firm",
+    fee: PRO_FEES["partnership-firm"],
     tagline: "Simplest multi-person structure",
     pros: [
       "Easiest and cheapest to set up",
@@ -155,6 +161,7 @@ const STRUCTURES: Record<string, Structure> = {
   section8: {
     name: "Section 8 Company (NGO)",
     href: "/services/section-8-company",
+    fee: PRO_FEES["section-8-company"],
     tagline: "Best for non-profit and social enterprises",
     pros: [
       "Trusted structure for charities/NGOs",
@@ -172,6 +179,7 @@ const STRUCTURES: Record<string, Structure> = {
   soleproprietorship: {
     name: "Sole Proprietorship",
     href: "/services/sole-proprietorship",
+    fee: PRO_FEES["sole-proprietorship"],
     tagline: "Simplest structure for individual traders",
     pros: [
       "Zero registration cost (just GST/tax registration)",
@@ -265,7 +273,12 @@ export function BusinessStructureAdvisor() {
               Best Match
             </span>
             <h4 className="text-white font-heading font-bold text-2xl mb-1">{primary.name}</h4>
-            <p className="text-white/60 text-sm mb-5">{primary.tagline}</p>
+            <p className="text-white/60 text-sm mb-4">{primary.tagline}</p>
+            <p className="inline-flex items-baseline gap-2 mb-5 px-3 py-1.5 rounded-lg bg-accent/20 border border-accent/30">
+              <span className="text-white/70 text-[11px] font-heading font-semibold uppercase tracking-wider">Our fee</span>
+              <span className="text-white font-heading font-bold text-lg">{inr(primary.fee)}</span>
+              <span className="text-white/50 text-[11px]">+ govt fees</span>
+            </p>
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
@@ -322,7 +335,8 @@ export function BusinessStructureAdvisor() {
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
                 <h4 className="font-heading font-bold text-dark mb-1">{secondary.name}</h4>
-                <p className="text-muted text-sm mb-3">{secondary.tagline}</p>
+                <p className="text-muted text-sm mb-2">{secondary.tagline}</p>
+                <p className="text-primary font-heading font-bold text-sm mb-3">Our fee {inr(secondary.fee)} <span className="text-muted font-normal text-xs">+ govt fees</span></p>
                 <ul className="space-y-1">
                   {secondary.pros.slice(0, 3).map((p) => (
                     <li key={p} className="flex items-start gap-2">

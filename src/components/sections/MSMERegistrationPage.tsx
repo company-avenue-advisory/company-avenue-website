@@ -387,7 +387,7 @@ function StickySidebar() {
 }
 
 /* ══════════════════════════════════════ MAIN EXPORT ══════════════════════════════════════ */
-export function MSMERegistrationPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function MSMERegistrationPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -424,6 +424,7 @@ export function MSMERegistrationPage({ pricingSlot }: { pricingSlot?: ReactNode 
               >
                 MSME / Udyam<br /><span className="text-primary">Registration Online</span><br />for Indian Businesses
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

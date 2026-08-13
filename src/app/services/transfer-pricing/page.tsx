@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { TransferPricingPage } from "@/components/sections/TransferPricingPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/TransferPricingPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function TransferPricingServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <TransferPricingPage pricingSlot={<ServicePricingBlock serviceId="transfer-pricing" />} />
+      <TransferPricingPage
+        pricingSlot={<ServicePricingBlock serviceId="transfer-pricing" />}
+        calcPill={<ServiceCalcPill serviceId="transfer-pricing" />}
+      />
     </>
   );
 }

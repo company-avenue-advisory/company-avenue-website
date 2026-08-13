@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AccountingBookkeepingPage } from "@/components/sections/AccountingBookkeepingPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/AccountingBookkeepingPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -37,7 +38,10 @@ export default function AccountingBookkeepingServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <AccountingBookkeepingPage pricingSlot={<ServicePricingBlock serviceId="accounting-bookkeeping" />} />
+      <AccountingBookkeepingPage
+        pricingSlot={<ServicePricingBlock serviceId="accounting-bookkeeping" />}
+        calcPill={<ServiceCalcPill serviceId="accounting-bookkeeping" />}
+      />
     </>
   );
 }

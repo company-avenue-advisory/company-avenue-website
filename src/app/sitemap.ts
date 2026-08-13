@@ -25,6 +25,8 @@ const CALCULATORS = [
   "lumpsum-calculator", "mutual-fund-calculator", "nps-calculator", "ppf-calculator",
   "rd-calculator", "retirement-calculator", "salary-calculator", "sip-calculator",
   "tds-calculator", "tds-rate-finder",
+  "trademark-cost-calculator", "gst-registration-cost-calculator",
+  "fssai-license-cost-calculator",
 ];
 
 const VERIFY_TOOLS = [

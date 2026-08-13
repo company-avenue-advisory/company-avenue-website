@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CompanyClosurePage } from "@/components/sections/CompanyClosurePage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/CompanyClosurePage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function CompanyClosureServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <CompanyClosurePage pricingSlot={<ServicePricingBlock serviceId="company-closure" />} />
+      <CompanyClosurePage
+        pricingSlot={<ServicePricingBlock serviceId="company-closure" />}
+        calcPill={<ServiceCalcPill serviceId="company-closure" />}
+      />
     </>
   );
 }

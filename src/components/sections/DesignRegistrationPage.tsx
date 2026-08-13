@@ -114,7 +114,7 @@ const requiredDocs = [
 ];
 
 
-export function DesignRegistrationPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function DesignRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -140,6 +140,7 @@ export function DesignRegistrationPage({ pricingSlot }: { pricingSlot?: ReactNod
               Design Registration{" "}
               <span className="text-accent">Under Designs Act 2000</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Protect the visual appearance of your products — shape, pattern, configuration, and ornamentation — with a 15-year exclusive monopoly under Indian design law. Stop competitors from copying your product&apos;s look before they enter the market.

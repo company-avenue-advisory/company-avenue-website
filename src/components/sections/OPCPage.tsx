@@ -279,7 +279,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════════ */
-export function OPCPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function OPCPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   const [activeDecision, setActiveDecision] = useState<string | null>(null);
 
   return (
@@ -324,6 +324,7 @@ export function OPCPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
                 One Person Company<br />
                 <span className="text-primary">(OPC) Registration in India</span>
               </motion.h1>
+              {calcPill}
 
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"

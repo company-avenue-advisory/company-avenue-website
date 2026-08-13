@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FSSAILicensePage } from "@/components/sections/FSSAILicensePage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/FSSAILicensePage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function FSSAILicenseServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <FSSAILicensePage pricingSlot={<ServicePricingBlock serviceId="fssai-license" />} />
+      <FSSAILicensePage
+        pricingSlot={<ServicePricingBlock serviceId="fssai-license" />}
+        calcPill={<ServiceCalcPill serviceId="fssai-license" />}
+      />
     </>
   );
 }

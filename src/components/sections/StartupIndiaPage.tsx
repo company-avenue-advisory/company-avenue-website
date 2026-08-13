@@ -266,7 +266,7 @@ function StickySidebar() {
 }
 
 /* ══════════════════════════════════════ MAIN EXPORT ══════════════════════════════════════ */
-export function StartupIndiaPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function StartupIndiaPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -303,6 +303,7 @@ export function StartupIndiaPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               >
                 Startup India<br /><span className="text-primary">DPIIT Recognition</span><br />Registration
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

@@ -106,7 +106,7 @@ const requiredDocs = [
 ];
 
 
-export function TrademarkRenewalPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function TrademarkRenewalPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -132,6 +132,7 @@ export function TrademarkRenewalPage({ pricingSlot }: { pricingSlot?: ReactNode 
               Trademark Renewal{" "}
               <span className="text-accent">Form TM-R</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Renew your trademark registration every 10 years under Section 25 of the Trade Marks Act. File within 6 months before expiry (or 6 months after with surcharge). After the grace period, the mark is removed from the register. Protect your brand indefinitely with timely TM-R filing.

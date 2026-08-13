@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MSMERegistrationPage } from "@/components/sections/MSMERegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/MSMERegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -37,7 +38,10 @@ export default function MSMERegistrationServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <MSMERegistrationPage pricingSlot={<ServicePricingBlock serviceId="msme-registration" />} />
+      <MSMERegistrationPage
+        pricingSlot={<ServicePricingBlock serviceId="msme-registration" />}
+        calcPill={<ServiceCalcPill serviceId="msme-registration" />}
+      />
     </>
   );
 }

@@ -151,7 +151,7 @@ const relatedServices = [
   { id: "roc-compliance",            title: "ROC Compliance",            desc: "Annual returns and MCA event filings." },
 ];
 
-export function ProducerCompanyPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function ProducerCompanyPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white">
 
@@ -185,6 +185,7 @@ export function ProducerCompanyPage({ pricingSlot }: { pricingSlot?: ReactNode }
               >
                 Producer Company<br /><span className="text-primary">Registration in India</span>
               </motion.h1>
+              {calcPill}
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >

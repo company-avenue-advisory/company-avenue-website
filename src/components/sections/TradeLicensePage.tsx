@@ -108,7 +108,7 @@ const requiredDocs = [
 ];
 
 
-export function TradeLicensePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function TradeLicensePage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -134,6 +134,7 @@ export function TradeLicensePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               Trade License{" "}
               <span className="text-accent">Registration</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Obtain your municipal Trade License from the local Municipal Corporation, Council, or Gram Panchayat for legal business operation from your premises. Annual renewal by 31 March required. Essential for GST address proof, bank accounts, and government tenders.

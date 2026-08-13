@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ProfessionalTaxPage } from "@/components/sections/ProfessionalTaxPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/ProfessionalTaxPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function ProfessionalTaxServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <ProfessionalTaxPage pricingSlot={<ServicePricingBlock serviceId="professional-tax" />} />
+      <ProfessionalTaxPage
+        pricingSlot={<ServicePricingBlock serviceId="professional-tax" />}
+        calcPill={<ServiceCalcPill serviceId="professional-tax" />}
+      />
     </>
   );
 }

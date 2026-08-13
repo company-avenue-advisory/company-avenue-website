@@ -185,7 +185,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
 }
 
 /* ─── main export ─── */
-export function PrivateLimitedPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function PrivateLimitedPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -232,6 +232,7 @@ export function PrivateLimitedPage({ pricingSlot }: { pricingSlot?: ReactNode })
                 Private Limited Company<br />
                 <span className="text-primary">Registration in India</span>
               </motion.h1>
+              {calcPill}
 
               <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"

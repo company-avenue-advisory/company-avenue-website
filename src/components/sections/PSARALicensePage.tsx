@@ -108,7 +108,7 @@ const requiredDocs = [
 ];
 
 
-export function PSARALicensePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function PSARALicensePage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -134,6 +134,7 @@ export function PSARALicensePage({ pricingSlot }: { pricingSlot?: ReactNode }) {
               PSARA License{" "}
               <span className="text-accent">for Security Agencies</span>
             </motion.h1>
+            {calcPill}
             <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Obtain your mandatory Private Security Agencies Regulation Act license from the District Licensing Authority. State-specific, mandatory before deploying guards or supervisors — required for corporate contracts, government tenders, and legal operation of any security business in India.

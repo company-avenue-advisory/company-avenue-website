@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GratuityTrustPage } from "@/components/sections/GratuityTrustPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/GratuityTrustPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function GratuityTrustServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <GratuityTrustPage pricingSlot={<ServicePricingBlock serviceId="gratuity-trust" />} />
+      <GratuityTrustPage
+        pricingSlot={<ServicePricingBlock serviceId="gratuity-trust" />}
+        calcPill={<ServiceCalcPill serviceId="gratuity-trust" />}
+      />
     </>
   );
 }

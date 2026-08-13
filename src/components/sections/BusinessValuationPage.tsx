@@ -249,7 +249,7 @@ function StickySidebar() {
 /* ══════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════ */
-export function BusinessValuationPage({ pricingSlot }: { pricingSlot?: ReactNode }) {
+export function BusinessValuationPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
     <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
 
@@ -290,6 +290,7 @@ export function BusinessValuationPage({ pricingSlot }: { pricingSlot?: ReactNode
                 Business Valuation<br />
                 <span className="text-primary">That Stands Up to Scrutiny</span>
               </motion.h1>
+              {calcPill}
               <motion.p
                 custom={2} variants={fadeUp} initial="hidden" animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"

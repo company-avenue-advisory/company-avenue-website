@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IndianSubsidiaryPage } from "@/components/sections/IndianSubsidiaryPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/IndianSubsidiaryPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function IndianSubsidiaryServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <IndianSubsidiaryPage pricingSlot={<ServicePricingBlock serviceId="indian-subsidiary" />} />
+      <IndianSubsidiaryPage
+        pricingSlot={<ServicePricingBlock serviceId="indian-subsidiary" />}
+        calcPill={<ServiceCalcPill serviceId="indian-subsidiary" />}
+      />
     </>
   );
 }

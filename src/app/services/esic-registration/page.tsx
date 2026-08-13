@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ESICRegistrationPage } from "@/components/sections/ESICRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/ESICRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function ESICRegistrationServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <ESICRegistrationPage pricingSlot={<ServicePricingBlock serviceId="esic-registration" />} />
+      <ESICRegistrationPage
+        pricingSlot={<ServicePricingBlock serviceId="esic-registration" />}
+        calcPill={<ServiceCalcPill serviceId="esic-registration" />}
+      />
     </>
   );
 }

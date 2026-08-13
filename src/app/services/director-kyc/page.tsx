@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DirectorKYCPage } from "@/components/sections/DirectorKYCPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
+import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/DirectorKYCPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -16,7 +17,10 @@ export default function DirectorKYCServicePage() {
   return (
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
-      <DirectorKYCPage pricingSlot={<ServicePricingBlock serviceId="director-kyc" />} />
+      <DirectorKYCPage
+        pricingSlot={<ServicePricingBlock serviceId="director-kyc" />}
+        calcPill={<ServiceCalcPill serviceId="director-kyc" />}
+      />
     </>
   );
 }
