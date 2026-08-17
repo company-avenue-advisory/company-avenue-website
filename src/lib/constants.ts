@@ -953,55 +953,22 @@ export const SERVICES = [
   },
 ];
 
-export const STATS = [
-  { value: 1000, suffix: "+", label: "Businesses Served" },
-  { value: 15, suffix: "+", label: "Years Experience" },
-  { value: 5000, suffix: "+", label: "Returns Filed" },
-  { value: 98, suffix: "%", label: "Client Retention" },
-];
 
-export const TESTIMONIALS = [
-  {
-    name: "Arjun Sharma",
-    role: "Founder",
-    company: "TechBridge Solutions",
-    rating: 5,
-    text: "Company Avenue handled our entire Pvt. Ltd. registration and GST setup. Professional, fast, and completely transparent about pricing. Highly recommended for any startup.",
-    avatar: "AS",
-  },
-  {
-    name: "Priya Mehta",
-    role: "CEO",
-    company: "Retail Ventures India",
-    rating: 5,
-    text: "We've been using their accounting and payroll services for 3 years. Zero errors, always on time. They genuinely feel like a part of our finance team.",
-    avatar: "PM",
-  },
-  {
-    name: "Rohan Kapoor",
-    role: "Managing Director",
-    company: "Kapoor Exports",
-    rating: 5,
-    text: "Got our IEC registration and trademark done in record time. The team is knowledgeable and available whenever we need them. Great value.",
-    avatar: "RK",
-  },
-  {
-    name: "Neha Singh",
-    role: "Co-Founder",
-    company: "HealthFirst Clinics",
-    rating: 5,
-    text: "Switched to Company Avenue for our annual ROC filings and ITR. The process is seamless, everything is digital, and their team proactively reminds us about deadlines.",
-    avatar: "NS",
-  },
-  {
-    name: "Vikram Patel",
-    role: "Director",
-    company: "Patel Manufacturing Ltd.",
-    rating: 5,
-    text: "Excellent MSME and Startup India registration support. Their expertise in compliance gave us confidence to focus on scaling the business.",
-    avatar: "VP",
-  },
-];
+/* WS-5.2 / WS-5.3 — two exports were REMOVED from here on 17 Aug 2026:
+ *
+ *   STATS         duplicated the figures Stats.tsx owns, including a bare
+ *                 "Years Experience" label. Two sources for one claim is how
+ *                 they drift apart.
+ *   TESTIMONIALS  a second copy of the five fabricated personas (Arjun Sharma,
+ *                 Priya Mehta, Rohan Kapoor, Neha Singh, Vikram Patel). None
+ *                 traced to a real review. Deleting them from Testimonials.tsx
+ *                 while leaving an importable copy here just relocated the
+ *                 hazard.
+ *
+ * Neither was referenced anywhere in src/. Testimonials now come only from live
+ * Google Places data — see src/components/sections/Testimonials.tsx. Do not
+ * reintroduce a hardcoded testimonial array. */
+
 
 export const TRUST_LOGOS = [
   "Google",

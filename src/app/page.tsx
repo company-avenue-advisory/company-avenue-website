@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { Stats } from "@/components/sections/Stats";
-import { TrustBar } from "@/components/sections/TrustBar";
+import { ClientLogos } from "@/components/sections/ClientLogos";
 import { Services } from "@/components/sections/Services";
 import { WhyChoose } from "@/components/sections/WhyChoose";
 import { Process } from "@/components/sections/Process";
@@ -50,7 +50,7 @@ export default function HomePage() {
       {/* H1 is inside Hero */}
       <Hero />
       <Stats />
-      <TrustBar />
+      <ClientLogos />
       <Services />
       <WhyChoose />
       <Process />
