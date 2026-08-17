@@ -46,6 +46,7 @@ export function PANVerification() {
         setError(data.error ?? "Something went wrong.");
       } else {
         setResult(data);
+        trackEvent("verify_tool_use", { tool_name: "pan_verification" });
         trackEvent("verify_used", { tool: "pan_verification" });
       }
     } catch {

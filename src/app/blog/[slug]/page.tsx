@@ -6,7 +6,7 @@ import { Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, canonical, breadcrumbSchema } from "@/lib/seo";
+import { SITE_URL, canonical, breadcrumbSchema, PRINCIPAL_ID } from "@/lib/seo";
 import { CATEGORY_SERVICE } from "@/lib/content-links";
 
 export const dynamicParams = false;
@@ -87,7 +87,11 @@ export default async function BlogPostPage({
             },
             articleSection: post.category,
             ...(published ? { datePublished: published, dateModified: published } : {}),
-            author: { "@id": `${SITE_URL}/#organization` },
+            // WS-4: a named Person as author, not the firm. Regulated content
+            // stating rates and section numbers is credited to the Chartered
+            // Accountant who stands behind it; the firm remains publisher.
+            // The @id resolves to the Person node on /about#principal.
+            author: { "@id": PRINCIPAL_ID },
             publisher: { "@id": `${SITE_URL}/#organization` },
           },
           breadcrumbSchema([

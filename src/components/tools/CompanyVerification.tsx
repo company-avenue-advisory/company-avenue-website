@@ -51,6 +51,7 @@ export function CompanyVerification() {
         setError(data.error ?? "Something went wrong.");
       } else {
         setResult(data);
+        trackEvent("verify_tool_use", { tool_name: "company_verification" });
         trackEvent("verify_used", { tool: "company_verification" });
       }
     } catch {

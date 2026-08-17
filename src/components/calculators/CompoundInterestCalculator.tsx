@@ -68,7 +68,7 @@ export function CompoundInterestCalculator() {
           <div className="bg-slate-50 rounded-xl p-4">
             <SplitDonut invested={res.invested} gains={res.gains} investedLabel="Principal" gainsLabel="Interest" />
           </div>
-          <CTALink label="Need investment advisory?" />
+          <CTALink label="Get the interest taxed correctly in your ITR" href="/services/income-tax-return" />
         </motion.div>
       </div>
     </div>

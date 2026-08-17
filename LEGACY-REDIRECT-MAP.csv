@@ -1,0 +1,14 @@
+Legacy URL,Destination,Type,Destination verified,Implemented,Notes
+/books-keeping-outsourcing/,/services/accounting-bookkeeping,301,Yes,Yes - src/middleware.ts,
+/private-limited-compliance/,/services/roc-compliance,301,Yes,Yes - src/middleware.ts,"Order specified /services/annual-filing, which does not exist on this build. Retargeted to the ROC compliance page (AOC-4 / MGT-7 annual filing)."
+/home/private-limited-company-incorporation/,/services/private-limited-company,301,Yes,Yes - src/middleware.ts,
+/contact-us/,/contact,301,Yes,Yes - src/middleware.ts,"Legacy reviews page was orphaned from this build. /reviews now exists (WS-5.1), so this is a same-path takeover rather than a redirect — no rule is emitted for it."
+/advisor/company-avenue-advisory/,/about,301,Yes,Yes - src/middleware.ts,Returned a hard 404 with no redirect at the time of the audit.
+/authority-hearing-attend/,/services/trademark-objection,301,NEEDS CONFIRMATION,Yes - src/middleware.ts,Order suggests /services/trademark-registration. Objection/hearing representation is the closer match and exists. Confirm with the Principal which the legacy page actually covered.
+/import-export-code-renewal/,/services/iec-registration,301,NEEDS CONFIRMATION,Yes - src/middleware.ts,IEC renewal is handled within the IEC registration service page. Confirm.
+/automation/,/services,301,NEEDS CONFIRMATION,Yes - src/middleware.ts,"Legacy page content unknown. Category index, not homepage."
+/sole-proprietorship-to-private-limited-company/,(none - content withdrawn),410,Yes,Yes - src/middleware.ts,"WS-1.3: stated a private limited company requires share capital of at least ₹1 lakh — removed by the Companies (Amendment) Act, 2015."
+/shares-transfer/,(none - content withdrawn),410,Yes,Yes - src/middleware.ts,WS-1.3: stated a shareholder must hold an approved DIN to transfer shares — DIN is allotted to directors under s.153 and is not a precondition; transfer is governed by s.56 and Form SH-4.
+/reviews/,/reviews,n/a - same path,Yes,Yes - page built (WS-5.1),"Legacy reviews page was orphaned from this build. /reviews now exists at the same path, so no redirect is needed or emitted. Verified 200."
+/blog/<legacy-slug>/  (EVERY legacy post),TBC,TBC,NO,NOT YET,BLOCKED - needs the legacy inventory. Legacy posts used a different slug structure to the current /blog/{slug}. Each must be mapped individually. A blanket /blog/* rule is deliberately NOT implemented: it would discard the accumulated authority of every post.
+(all remaining legacy URLs),TBC,TBC,NO,NOT YET,"BLOCKED - the full inventory must be built from four sources per WS-2.2: the wp_posts table, the legacy sitemap, the Search Console Pages report over 16 months, and a Screaming Frog crawl of the live legacy instance. The rows above are the publicly visible sample only, NOT the complete map."

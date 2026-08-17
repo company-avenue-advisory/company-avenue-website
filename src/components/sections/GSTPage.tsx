@@ -390,7 +390,7 @@ function StickySidebar() {
 
       <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
         <div className="grid grid-cols-2 gap-3">
-          {[{ v: "5000+", l: "Registrations" }, { v: "98%", l: "Approved" }, { v: "15+", l: "Years Exp." }, { v: "2–7", l: "Days" }].map(s => (
+          {[{ v: "5000+", l: "Registrations" }, { v: "98%", l: "Approved" }, { v: "15+", l: "Years CA Practice" }, { v: "2–7", l: "Days" }].map(s => (
             <div key={s.l} className="text-center">
               <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
               <p className="text-muted text-[10px] mt-0.5">{s.l}</p>
@@ -976,7 +976,7 @@ export function GSTPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; ca
                   {[
                     { v: "5000+", l: "GST Registrations",    c: "bg-primary text-white" },
                     { v: "98%",   l: "Approval Success",     c: "bg-accent text-dark" },
-                    { v: "15+",   l: "Years Experience",     c: "bg-slate-800 text-white" },
+                    { v: "15+",   l: "Years CA Practice",     c: "bg-slate-800 text-white" },
                     { v: "24 hrs",l: "Response Time",        c: "bg-green-600 text-white" },
                   ].map((s) => (
                     <motion.div key={s.l} whileHover={{ y: -4 }}

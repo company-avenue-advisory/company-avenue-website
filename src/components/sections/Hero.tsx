@@ -4,6 +4,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import { HeroSearch } from "@/components/sections/hero/HeroSearch";
+import { useGoogleReviews } from "@/hooks/useGoogleReviews";
+import { TRUST_CLAIMS } from "@/lib/nap";
 
 /* ─── floating decorative elements ─── */
 const floatingElements = [
@@ -28,6 +30,14 @@ export function Hero() {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const yContent = useTransform(scrollYProgress, [0, 1], [0, 50]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  // WS-5.3: the hero used to state a hardcoded "4.9/5" and "4.9★ Google
+  // Rating". A star rating is a checkable factual claim, so it now renders
+  // only when it is the live figure from the Google Business Profile — the
+  // same source the Testimonials section and the Organization schema use.
+  const reviews = useGoogleReviews();
+  const liveRating =
+    reviews?.configured && reviews.rating > 0 ? reviews.rating : null;
 
   return (
     <section
@@ -160,7 +170,8 @@ export function Hero() {
               ))}
             </span>
             <span className="text-amber-200/90 text-xs sm:text-sm font-heading font-semibold tracking-wide">
-              4.9/5 · Trusted by 1000+ Business Owners
+              {liveRating !== null ? `${liveRating.toFixed(1)}/5 · ` : ""}
+              Trusted by {TRUST_CLAIMS.clientsServed} Business Owners
             </span>
           </motion.div>
 
@@ -199,10 +210,16 @@ export function Hero() {
             className="mt-9 md:mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-10 md:gap-y-4 text-slate-300"
           >
             {[
-              { k: "15+", v: "Years Experience" },
-              { k: "1000+", v: "Happy Clients" },
+              // WS-5.3: "15+ Years of CA Practice" implied the firm had traded 15
+              // years; incorporation was 2015. The figure is the Principal's
+              // time in practice, so the label now says so.
+              { k: TRUST_CLAIMS.principalYearsInPractice, v: "Years CA Practice" },
+              { k: TRUST_CLAIMS.clientsServed, v: "Happy Clients" },
               { k: "50+", v: "Compliance Services" },
-              { k: "4.9★", v: "Google Rating" },
+              // Rating tile only exists when the live rating does.
+              ...(liveRating !== null
+                ? [{ k: `${liveRating.toFixed(1)}★`, v: "Google Rating" }]
+                : []),
             ].map((s) => (
               <div key={s.v} className="flex items-baseline gap-1.5 md:gap-2">
                 <span className="font-heading font-bold text-white text-base md:text-xl">{s.k}</span>

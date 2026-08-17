@@ -131,7 +131,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "15+ Years Incorporation Experience Across All Entity Types" },
+  { icon: Award,       label: "CA-Led — 15+ Years Incorporating Every Entity Type" },
   { icon: Building2,   label: "100+ Producer Companies & FPOs Registered Across India" },
   { icon: UserCheck,   label: "Dedicated CA & CS for Part IXA Compliance" },
   { icon: DollarSign,  label: "Fixed Transparent Pricing — Starting ₹9,999" },
@@ -565,7 +565,7 @@ export function ProducerCompanyPage({ pricingSlot, calcPill }: { pricingSlot?: R
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
               <div className="grid grid-cols-2 gap-3">
-                {[{ v: "15–20", l: "Days Timeline" }, { v: "100+", l: "FPOs Formed" }, { v: "15+", l: "Years Exp." }, { v: "₹9,999", l: "Starting Price" }].map(s => (
+                {[{ v: "15–20", l: "Days Timeline" }, { v: "100+", l: "FPOs Formed" }, { v: "15+", l: "Years CA Practice" }, { v: "₹9,999", l: "Starting Price" }].map(s => (
                   <div key={s.l} className="text-center">
                     <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
                     <p className="text-muted text-[10px] mt-0.5">{s.l}</p>

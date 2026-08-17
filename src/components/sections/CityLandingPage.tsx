@@ -6,6 +6,47 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { PHONE_E164, waLink, serviceSchema, breadcrumbSchema, faqSchema } from "@/lib/seo";
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   WS-7.2 — location page template.
+
+   The order's warning, in full: duplicating a template with the city name
+   swapped produces doorway pages. Google discounts them and, at scale, treats
+   them as spam. The instruction is to build a template with defined slots for
+   genuinely location-specific content which the client supplies per location,
+   NOT to generate that content, and NOT to launch a page with empty or
+   auto-filled slots.
+
+   So the four client-supplied slots below are all OPTIONAL in the type and
+   every one of them renders only when populated. Nothing here fabricates a
+   local detail, and nothing renders a heading above an empty slot. A location
+   page with no slots filled degrades to the shared service description — which
+   is the honest outcome, not a doorway page dressed as a local one.
+
+   The existing `intro` / `localNote` / `faqs` fields already carried
+   hand-written per-city copy and are unchanged.
+───────────────────────────────────────────────────────────────────────────── */
+
+/** Client-supplied, genuinely location-specific content. All optional. */
+export interface CityLocalContent {
+  /**
+   * Applicable ROC jurisdiction and any state-specific requirement — e.g.
+   * which Registrar of Companies the filing goes to, state stamp duty, or a
+   * state-level registration that does not apply elsewhere.
+   */
+  jurisdiction?: { label: string; body: string }[];
+  /** Local turnaround expectations, where they genuinely differ by location. */
+  turnaround?: string;
+  /**
+   * Genuine local client outcomes. Anonymised is fine; invented is not.
+   * Same standard as WS-5.2 — every one must be a real engagement.
+   */
+  outcomes?: { title: string; body: string }[];
+  /** Directions / local landmark detail for visitors travelling in. */
+  directions?: string;
+  /** Google Maps embed URL for the office serving this location. */
+  mapEmbedUrl?: string;
+}
+
 export interface CityLandingConfig {
   /** URL path e.g. /services/gst-registration-delhi */
   path: string;
@@ -33,12 +74,14 @@ export interface CityLandingConfig {
   faqs: { question: string; answer: string }[];
   /** Related internal links */
   related: { label: string; href: string }[];
+  /** WS-7.2 client-supplied local slots. Omit rather than fill with filler. */
+  local?: CityLocalContent;
 }
 
 export function CityLandingPage({ config }: { config: CityLandingConfig }) {
   const {
     path, h1, serviceLabel, city, moneyPageHref, waText,
-    intro, included, steps, documents, localNote, faqs, related,
+    intro, included, steps, documents, localNote, faqs, related, local,
   } = config;
 
   // City pages carry the same pricing as the service they point at.
@@ -155,10 +198,66 @@ export function CityLandingPage({ config }: { config: CityLandingConfig }) {
           </ul>
         </section>
 
+        {/* WS-7.2 slot — ROC jurisdiction and state-specific requirements.
+            Renders only when the client has supplied rows for this location. */}
+        {local?.jurisdiction && local.jurisdiction.length > 0 && (
+          <section className="mt-14">
+            <h2 className="heading-md text-dark mb-6">
+              Jurisdiction &amp; Local Requirements in {city}
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {local.jurisdiction.map((j, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-black/5 bg-white p-5"
+                >
+                  <p className="font-heading font-semibold text-dark text-sm mb-1.5">
+                    {j.label}
+                  </p>
+                  <p className="text-muted text-sm leading-relaxed">{j.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* WS-7.2 slot — genuine local client outcomes. */}
+        {local?.outcomes && local.outcomes.length > 0 && (
+          <section className="mt-14">
+            <h2 className="heading-md text-dark mb-6">
+              Recent Work in {city}
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {local.outcomes.map((o, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-black/5 bg-background p-5"
+                >
+                  <p className="font-heading font-semibold text-dark text-sm mb-1.5">
+                    {o.title}
+                  </p>
+                  <p className="text-muted text-sm leading-relaxed">{o.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Local block */}
         <section className="mt-14 rounded-2xl border border-black/5 bg-background p-6 md:p-8">
           <h2 className="heading-md text-dark mb-4">Serving Businesses in {city}</h2>
           <p className="text-muted mb-6 leading-relaxed">{localNote}</p>
+
+          {/* WS-7.2 slot — local turnaround expectation. */}
+          {local?.turnaround && (
+            <p className="text-muted mb-6 leading-relaxed">
+              <span className="font-heading font-semibold text-dark">
+                Typical turnaround for {city}:
+              </span>{" "}
+              {local.turnaround}
+            </p>
+          )}
+
           <div className="grid gap-4 sm:grid-cols-3 text-sm">
             <div>
               <p className="font-heading font-semibold text-dark">Office</p>
@@ -173,6 +272,30 @@ export function CityLandingPage({ config }: { config: CityLandingConfig }) {
               <p className="text-muted">{COMPANY.workingHours}</p>
             </div>
           </div>
+
+          {/* WS-7.2 slot — directions. */}
+          {local?.directions && (
+            <p className="mt-6 text-muted text-sm leading-relaxed">
+              <span className="font-heading font-semibold text-dark">
+                Getting here:
+              </span>{" "}
+              {local.directions}
+            </p>
+          )}
+
+          {/* WS-7.2 slot — map. Lazy-loaded: an eager iframe on every city page
+              costs LCP for a element most visitors never look at. */}
+          {local?.mapEmbedUrl && (
+            <div className="mt-6 overflow-hidden rounded-xl border border-black/5">
+              <iframe
+                src={local.mapEmbedUrl}
+                title={`Map of our office serving ${city}`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-64 w-full"
+              />
+            </div>
+          )}
         </section>
 
         {/* FAQ */}

@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { CompanyNameSearch } from "@/components/tools/CompanyNameSearch";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { ToolNextStep } from "@/components/tools/ToolNextStep";
 import { CompanyNameFAQ } from "@/components/tools/CompanyNameFAQ";
 
 export const metadata: Metadata = {
@@ -303,6 +304,32 @@ export default function CompanyNameSearchPage() {
           </div>
         </div>
       </section>
+
+      {/* WS-5.5 — contextual route from this free tool into the paid service. */}
+      <div className="container-custom">
+        <ToolNextStep
+          intro="Found a name that is free? Reserve it before someone else does — availability changes daily."
+          ctaLabel="Reserve this name with our team"
+          ctaHref="/contact"
+          services={[
+          {
+            label: "Private Limited Company",
+            href: "/services/private-limited-company",
+            desc: "Name reservation through SPICe+ and full incorporation in 7–10 working days.",
+          },
+          {
+            label: "LLP Registration",
+            href: "/services/llp-registration",
+            desc: "Reserve your LLP name via RUN-LLP and incorporate with FiLLiP.",
+          },
+          {
+            label: "Trademark Registration",
+            href: "/services/trademark-registration",
+            desc: "A company name is not a brand right. Register the trademark to own it.",
+          },
+          ]}
+        />
+      </div>
 
       <CTABanner />
     </>

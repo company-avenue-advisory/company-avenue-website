@@ -526,7 +526,7 @@ export function ROCCompliancePage({ pricingSlot, calcPill }: { pricingSlot?: Rea
             >
               <Image
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=85"
-                alt="Company Avenue Advisory team"
+                alt="Stock photograph of a team reviewing compliance documents"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

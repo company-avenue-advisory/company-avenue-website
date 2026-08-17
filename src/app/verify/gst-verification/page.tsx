@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronRight, FileCheck } from "lucide-react";
 import { GSTVerification } from "@/components/tools/GSTVerification";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/gst-verification" },
@@ -80,6 +81,32 @@ export default function GSTVerificationPage() {
           </div>
         </div>
       </section>
+
+      {/* WS-5.5 — contextual route from this free tool into the paid service. */}
+      <div className="container-custom">
+        <ToolNextStep
+          intro="You have checked a GSTIN. These are the GST services that usually follow."
+          ctaLabel="Ask a CA about your GST position"
+          ctaHref="/contact"
+          services={[
+          {
+            label: "GST Registration",
+            href: "/services/gst-registration",
+            desc: "Get your own GSTIN in 2–7 working days, filed and followed up by our team.",
+          },
+          {
+            label: "GST Return Filing",
+            href: "/services/gst-filing",
+            desc: "Monthly GSTR-1 and GSTR-3B filed on time, with reconciliation before every deadline.",
+          },
+          {
+            label: "GST Amendment",
+            href: "/services/gst-amendment",
+            desc: "Change a registered address, business name, or add a place of business.",
+          },
+          ]}
+        />
+      </div>
 
       <CTABanner />
     </>

@@ -38,6 +38,8 @@ const STATIC_PAGES = [
   "", "services", "pricing", "contact", "about", "blog",
   "calculators", "verify", "resources", "guides", "templates",
   "privacy", "terms", "disclaimer", "refund-policy", "startup-schemes",
+  // WS-5.1 reviews destination. Also the 301 target for the legacy /reviews/.
+  "reviews",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

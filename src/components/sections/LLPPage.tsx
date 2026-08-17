@@ -151,7 +151,7 @@ const commonMistakes = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "15+ Years of Industry Experience" },
+  { icon: Award,       label: "CA-Led — 15+ Years in Practice" },
   { icon: Building2,   label: "1000+ Businesses Successfully Registered" },
   { icon: UserCheck,   label: "Experienced Chartered Accountants" },
   { icon: DollarSign,  label: "Transparent Pricing — No Hidden Fees" },
@@ -342,7 +342,7 @@ function StickySidebar() {
       {/* Quick stats */}
       <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
         <div className="grid grid-cols-2 gap-3">
-          {[{ v: "7–10", l: "Day Timeline" }, { v: "1000+", l: "LLPs Formed" }, { v: "15+", l: "Years Exp." }, { v: "100%", l: "Online" }].map(s => (
+          {[{ v: "7–10", l: "Day Timeline" }, { v: "1000+", l: "LLPs Formed" }, { v: "15+", l: "Years CA Practice" }, { v: "100%", l: "Online" }].map(s => (
             <div key={s.l} className="text-center">
               <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
               <p className="text-muted text-[10px] mt-0.5">{s.l}</p>
@@ -975,7 +975,7 @@ export function LLPPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; ca
                 <div className="relative">
                   <div className="rounded-3xl overflow-hidden aspect-[4/5] max-w-md shadow-[0_12px_48px_rgba(15,45,82,0.10)]">
                     <Image src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=85"
-                      alt="Company Avenue Advisory professional team"
+                      alt="Stock photograph of partners in a working discussion"
                       fill className="object-cover" sizes="(max-width: 768px) 100vw, 45vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />

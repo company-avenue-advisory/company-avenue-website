@@ -6,13 +6,26 @@ import { Clock, ArrowRight, ArrowUpRight, Newspaper } from "lucide-react";
 import { BLOG_POSTS, BLOG_CATEGORIES } from "@/lib/blog-posts";
 import { useLiveNews } from "@/hooks/useLiveNews";
 
-const FILTERS = ["All", ...BLOG_CATEGORIES, "Industry News"];
-
 export function BlogHubClient() {
   const [filter, setFilter] = useState("All");
   const liveArticles = useLiveNews();
 
   const [featured, ...rest] = BLOG_POSTS;
+
+  /* WS-5.5 — empty-category behaviour.
+     The filter row was built from BLOG_CATEGORIES, which is derived from ALL
+     posts including the featured one. But the grid renders `rest` (every post
+     except the featured), so any category whose only post happens to be
+     featured produced a filter that selected nothing at all: a dead button.
+     Filters are now derived from the posts actually in the grid, so an empty
+     category cannot be offered. "Industry News" stays regardless — it is fed
+     by a live feed and carries its own empty state below. */
+  const FILTERS = useMemo(() => {
+    const populated = BLOG_CATEGORIES.filter((c) =>
+      rest.some((p) => p.category === c)
+    );
+    return ["All", ...populated, "Industry News"];
+  }, [rest]);
 
   const filteredPosts = useMemo(() => {
     if (filter === "Industry News") return [];
@@ -168,10 +181,28 @@ export function BlogHubClient() {
         ))}
       </div>
 
+      {/* WS-5.5: a useful empty state, not a dead end. The live feed can be
+          unconfigured or down; either way the visitor gets somewhere to go. */}
       {filter === "Industry News" && newsToShow.length === 0 && (
-        <p className="text-muted text-sm text-center py-12">
-          Live news isn&rsquo;t configured right now — check back soon.
-        </p>
+        <div className="mx-auto max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center">
+          <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50">
+            <Newspaper size={18} className="text-amber-600" />
+          </div>
+          <p className="font-heading text-base font-semibold text-dark">
+            No live news to show right now
+          </p>
+          <p className="mx-auto mt-2 text-sm leading-relaxed text-muted">
+            The industry feed is quiet or temporarily unavailable. Our own
+            written guides do not depend on it.
+          </p>
+          <button
+            onClick={() => setFilter("All")}
+            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-heading text-sm font-semibold text-white transition-colors hover:bg-primary-700"
+          >
+            Read our articles
+            <ArrowRight size={14} />
+          </button>
+        </div>
       )}
 
     </>

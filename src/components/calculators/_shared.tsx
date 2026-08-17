@@ -116,9 +116,20 @@ export function ResultRow({ label, value, accent }: { label: string; value: stri
   );
 }
 
+/**
+ * The headline figure a calculator produces.
+ *
+ * `data-calc-result` is how CalcInteractionTracker knows the visitor reached a
+ * result and can fire the WS-3.2 `calculator_complete` event. Any calculator
+ * that renders its primary output some other way must carry the attribute on
+ * that element instead, or it will register interaction but never completion.
+ */
 export function HeroResult({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-primary rounded-xl px-4 py-3.5 flex items-center justify-between">
+    <div
+      data-calc-result
+      className="bg-primary rounded-xl px-4 py-3.5 flex items-center justify-between"
+    >
       <span className="text-white/80 text-sm font-heading font-semibold">{label}</span>
       <span className="text-white font-heading font-bold text-xl">{value}</span>
     </div>

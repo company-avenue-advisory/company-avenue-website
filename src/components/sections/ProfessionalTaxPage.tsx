@@ -105,7 +105,7 @@ const deliverables = [
 ];
 
 const whyUs = [
-  { icon: Award,       label: "15+ Years State Tax Compliance Experience" },
+  { icon: Award,       label: "CA-Led — 15+ Years in State Tax Compliance" },
   { icon: MapPin,      label: "Pan-India Coverage — All 21 PT States" },
   { icon: ShieldCheck, label: "Dual Registration: EC + RC in One Engagement" },
   { icon: RefreshCcw,  label: "Return Filing & Renewal Reminders Included" },
@@ -229,7 +229,7 @@ function StickySidebar() {
           {[
             { v: "21", l: "PT States" },
             { v: "5,000+", l: "Clients" },
-            { v: "15+", l: "Years Exp." },
+            { v: "15+", l: "Years CA Practice" },
             { v: "24h", l: "Response" },
           ].map((s) => (
             <div key={s.l} className="text-center">
@@ -765,7 +765,7 @@ export function ProfessionalTaxPage({ pricingSlot, calcPill }: { pricingSlot?: R
                   {[
                     { v: "21",    l: "PT States Served",  c: "bg-primary text-white" },
                     { v: "5,000+",l: "Businesses Helped", c: "bg-accent text-dark" },
-                    { v: "15+",   l: "Years Experience",  c: "bg-slate-800 text-white" },
+                    { v: "15+",   l: "Years CA Practice",  c: "bg-slate-800 text-white" },
                     { v: "3–7",   l: "Days to Register",  c: "bg-green-600 text-white" },
                   ].map((s) => (
                     <motion.div

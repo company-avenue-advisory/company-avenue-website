@@ -105,7 +105,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,        label: "15+ Years Trademark Law Experience" },
+  { icon: Award,        label: "CA-Led — 15+ Years in Trademark Law" },
   { icon: Scale,        label: "Expert Sec 9 & Sec 11 Objection Handling" },
   { icon: Search,       label: "Thorough Cited Mark Research & Analysis" },
   { icon: FileText,     label: "Professional TM-M Counter-Statement Drafting" },
@@ -206,7 +206,7 @@ function StickySidebar() {
       </div>
       <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
         <div className="grid grid-cols-2 gap-3">
-          {[{ v: "500+", l: "Objections Handled" }, { v: "65%", l: "Avg. Success Rate" }, { v: "15+", l: "Years Exp." }, { v: "30d", l: "Deadline Met" }].map(s => (
+          {[{ v: "500+", l: "Objections Handled" }, { v: "65%", l: "Avg. Success Rate" }, { v: "15+", l: "Years CA Practice" }, { v: "30d", l: "Deadline Met" }].map(s => (
             <div key={s.l} className="text-center">
               <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
               <p className="text-muted text-[10px] mt-0.5">{s.l}</p>
@@ -661,7 +661,7 @@ export function TrademarkObjectionPage({ pricingSlot, calcPill }: { pricingSlot?
                   {[
                     { v: "500+",  l: "Objections Handled", c: "bg-primary text-white" },
                     { v: "65%",   l: "Avg Success Rate",   c: "bg-accent text-dark" },
-                    { v: "15+",   l: "Years Experience",   c: "bg-slate-800 text-white" },
+                    { v: "15+",   l: "Years CA Practice",   c: "bg-slate-800 text-white" },
                     { v: "30d",   l: "Deadline Guarantee", c: "bg-green-600 text-white" },
                   ].map(s => (
                     <motion.div key={s.l} whileHover={{ y: -4 }} className={`${s.c} rounded-2xl p-6 text-center shadow-card`}>

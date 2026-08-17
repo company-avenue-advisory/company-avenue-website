@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { waLink, PHONE_E164 } from "@/lib/seo";
-import { trackEvent } from "@/lib/gtag";
 
 // Per-page prefilled WhatsApp message (Section H).
 function prefilledMessage(pathname: string): string {
@@ -40,11 +39,23 @@ export function FloatingCTA() {
           (bottom-right, directly below the chatbot). We only render the mobile
           sticky Call/WhatsApp bar here (Section G4). */}
 
-      {/* Mobile sticky CTA bar — Call Now + WhatsApp, all pages */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-black/10 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.08)] md:hidden">
+      {/* Mobile sticky CTA bar — Call Now + WhatsApp, all pages.
+
+          WS-3.2: the per-link trackEvent("call_click") / ("whatsapp_click")
+          handlers that used to sit on these two anchors are gone. The
+          delegated listener in components/analytics/EventTracking.tsx now
+          fires the specified click_to_call / whatsapp_click events for every
+          tel:/wa.me link on the site — keeping them here as well would
+          double-count exactly the two highest-intent clicks on mobile.
+
+          `data-sticky-cta` is what tells that listener to report
+          link_position: "sticky". */}
+      <div
+        data-sticky-cta
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-black/10 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.08)] md:hidden"
+      >
         <a
           href={`tel:${PHONE_E164}`}
-          onClick={() => trackEvent("call_click", { page_path: pathname })}
           className="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-dark"
         >
           <PhoneIcon className="h-5 w-5 text-primary" />
@@ -54,7 +65,6 @@ export function FloatingCTA() {
           href={wa}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => trackEvent("whatsapp_click", { page_path: pathname })}
           className="flex items-center justify-center gap-2 bg-[#25D366] py-3 text-sm font-semibold text-white"
         >
           <WhatsAppIcon className="h-5 w-5" />

@@ -52,7 +52,7 @@ export function About() {
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:mx-0">
               <Image
                 src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=85"
-                alt="Company Avenue Advisory team working in modern office"
+                alt="Stock photograph of a team working in a modern office"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 40vw"

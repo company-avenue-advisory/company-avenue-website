@@ -241,7 +241,7 @@ export function CompanyRegistrationCalculator() {
       </div>
 
       {/* ── Result ── */}
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
+      <div data-calc-result className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
         <motion.div
           key={`${entity}-${state}-${capital}-${people}-${smallCompany}-${nameReservation}`}
           initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}

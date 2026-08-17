@@ -1,10 +1,18 @@
 import { COMPANY } from "./constants";
+import {
+  ADDRESS,
+  CONFIRMED_SOCIAL_URLS,
+  CONTACT,
+  HOURS,
+  INCORPORATED,
+  STREET_ADDRESS,
+} from "./nap";
 
 export const SITE_URL = "https://companyavenueadvisory.com";
 
 // wa.me requires digits only, no "+" or spaces
-export const WHATSAPP_NUMBER = "919953719111";
-export const PHONE_E164 = "+919953719111";
+export const WHATSAPP_NUMBER = CONTACT.whatsappDigits;
+export const PHONE_E164 = CONTACT.phoneE164;
 
 export function waLink(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -35,12 +43,39 @@ export function canonical(path: string): { canonical: string } {
 }
 
 /**
- * Site-wide Organization / LocalBusiness (AccountingService) schema.
- * Rendered once in the root layout. (Section F of the build spec.)
+ * Site-wide entity schema. Rendered once in the root layout.
+ *
+ * WS-4: `ProfessionalService` is now the leading type, as the work order
+ * specifies. It is a subtype of LocalBusiness, so the address, hours and
+ * contact properties are all still valid; AccountingService and LocalBusiness
+ * stay in the array because they describe the same entity more narrowly and
+ * cost nothing to keep.
+ *
+ * Every NAP value is read from src/lib/nap.ts (WS-10.1). Two things this fixed:
+ *   · `streetAddress` said "209, Jaina Tower 1, District Center, Janakpuri"
+ *     while the footer said "…, Professor Joginder Singh Marg, Janakpuri, …".
+ *     Two different strings for one address is exactly the drift WS-10 is
+ *     about, and schema is the copy Google reads.
+ *   · `sameAs` listed a Facebook and an Instagram URL that the WS-9.1 audit
+ *     could not confirm, plus a LinkedIn URL that is not the firm's page
+ *     (missing the -pvt-ltd suffix). It now contains only confirmed profiles;
+ *     an unconfirmed row in nap.ts cannot reach this array.
+ *
+ * NOTE: still gated on the Principal confirming the canonical NAP in writing.
+ * ADDRESS.confirmed / HOURS.confirmed are both false — deploying structured
+ * data with an unconfirmed address propagates the error into Google's
+ * understanding of the business, which is hard to unwind. The values below are
+ * the website's own existing ones, so this is not a new claim; it is the
+ * existing claim, stated once instead of twice.
  */
 export const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": ["Organization", "AccountingService", "LocalBusiness"],
+  "@type": [
+    "ProfessionalService",
+    "AccountingService",
+    "LocalBusiness",
+    "Organization",
+  ],
   "@id": `${SITE_URL}/#organization`,
   name: COMPANY.fullName,
   alternateName: COMPANY.name,
@@ -49,14 +84,15 @@ export const organizationSchema = {
   image: `${SITE_URL}/images/new_logo.png`,
   telephone: PHONE_E164,
   email: COMPANY.email,
+  foundingDate: INCORPORATED,
   priceRange: "₹₹",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "209, Jaina Tower 1, District Center, Janakpuri",
-    addressLocality: "New Delhi",
-    addressRegion: "Delhi",
-    postalCode: "110058",
-    addressCountry: "IN",
+    streetAddress: STREET_ADDRESS,
+    addressLocality: `${ADDRESS.locality}, ${ADDRESS.city}`,
+    addressRegion: ADDRESS.region,
+    postalCode: ADDRESS.postalCode,
+    addressCountry: ADDRESS.country,
   },
   geo: {
     "@type": "GeoCoordinates",
@@ -64,32 +100,62 @@ export const organizationSchema = {
     longitude: 77.0878,
   },
   areaServed: [
+    { "@type": "City", name: "New Delhi" },
     { "@type": "City", name: "Delhi" },
     { "@type": "City", name: "Dwarka" },
     { "@type": "City", name: "Janakpuri" },
-    { "@type": "City", name: "Gurgaon" },
+    { "@type": "City", name: "Gurugram" },
     { "@type": "City", name: "Noida" },
   ],
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      opens: "09:00",
-      closes: "19:00",
+      dayOfWeek: HOURS.days,
+      opens: HOURS.opens,
+      closes: HOURS.closes,
     },
   ],
-  sameAs: [
-    "https://www.linkedin.com/company/company-avenue-advisory",
-    "https://www.facebook.com/companyavenueadvisory",
-    "https://www.instagram.com/companyavenueadvisory",
+  sameAs: CONFIRMED_SOCIAL_URLS,
+};
+
+/**
+ * The Principal, as a Person node — WS-4.
+ *
+ * The order asks for Person markup to "support author credibility for
+ * regulated content". This site's articles state rates, thresholds and section
+ * numbers, so who stands behind them matters to both readers and Google's
+ * quality signals. The node lives at /about#principal (the leadership block
+ * on the About page) and is what blog posts name as `author`.
+ *
+ * `knowsAbout` is deliberately limited to the practice areas the site
+ * actually publishes on — it is a description, not a keyword list.
+ */
+export const PRINCIPAL_ID = `${SITE_URL}/about#principal`;
+
+export const principalSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": PRINCIPAL_ID,
+  name: "CA Jatin Aggarwal",
+  honorificPrefix: "CA",
+  jobTitle: "Principal Consultant",
+  description:
+    "Chartered Accountant with 15+ years in practice, advising Indian startups and SMEs on GST, income tax, ROC/MCA compliance, payroll and virtual-CFO engagements.",
+  url: `${SITE_URL}/about#team`,
+  worksFor: { "@id": `${SITE_URL}/#organization` },
+  memberOf: {
+    "@type": "Organization",
+    name: "The Institute of Chartered Accountants of India",
+    alternateName: "ICAI",
+  },
+  knowsAbout: [
+    "Goods and Services Tax (India)",
+    "Income Tax (India)",
+    "Company incorporation and ROC compliance",
+    "Trademark registration",
+    "Payroll and labour compliance",
   ],
+  sameAs: ["https://www.linkedin.com/in/jatin-aggarwal-ca/"],
 };
 
 /**

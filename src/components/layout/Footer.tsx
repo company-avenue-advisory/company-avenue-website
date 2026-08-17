@@ -1,18 +1,41 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock, ArrowRight, Linkedin, Twitter, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, ArrowRight, Linkedin, Instagram, Youtube, Facebook } from "lucide-react";
 import { COMPANY, SERVICES } from "@/lib/constants";
+import { SOCIAL_PROFILES, TRUST_CLAIMS } from "@/lib/nap";
+import { NewsletterForm } from "@/components/forms/NewsletterForm";
 
-const SHARE_URL = encodeURIComponent(COMPANY.website + "/");
-const SHARE_TITLE = encodeURIComponent(
-  "Company Avenue Advisory | Trusted CA & CS Services for All Your Corporate Needs"
+/* ─────────────────────────────────────────────────────────────────────────────
+   WS-9.1 DEFECT — SOCIAL ICONS WERE SHARE BUTTONS.
+
+   This footer presented Facebook, LinkedIn and X icons as though they were the
+   firm's profile links. Two of the three were share-intent URLs —
+   facebook.com/sharer and x.com/intent/tweet — so a visitor clicking to check
+   the firm's social presence got a post composer for their own account
+   instead. Only LinkedIn pointed at an actual page.
+
+   The share links are gone. Icons now render ONLY for profiles marked
+   confirmed in src/lib/nap.ts, which is also the source for the schema
+   `sameAs` array, so the two can never disagree. Today that means LinkedIn
+   alone; Facebook is dormant pending the WS-9.2 ACTIVATE/CLOSE decision, and
+   Instagram, YouTube and X have no identified profile.
+
+   To add one: fill in its `url` in nap.ts and set `confirmed: true`.
+───────────────────────────────────────────────────────────────────────────── */
+
+const SOCIAL_ICONS = {
+  linkedin: Linkedin,
+  facebook: Facebook,
+  instagram: Instagram,
+  youtube: Youtube,
+  // No X icon: there is no X profile, and lucide's Twitter glyph is retired
+  // branding. If a handle is ever claimed, add it here.
+  x: null,
+} as const;
+
+const CONFIRMED_SOCIALS = SOCIAL_PROFILES.filter(
+  (p) => p.confirmed && p.url && SOCIAL_ICONS[p.platform]
 );
-
-const SOCIAL_LINKS = [
-  { icon: Facebook, href: `https://www.facebook.com/sharer/sharer.php?u=${SHARE_URL}`, label: "Share on Facebook" },
-  { icon: Linkedin, href: "https://www.linkedin.com/company/company-avenue-advisory-pvt-ltd/", label: "Follow us on LinkedIn" },
-  { icon: Twitter, href: `https://x.com/intent/tweet?text=${SHARE_TITLE}&url=${SHARE_URL}`, label: "Share on X" },
-];
 
 export function Footer() {
   const popularServices = SERVICES.slice(0, 6);
@@ -31,19 +54,9 @@ export function Footer() {
                 Get timely updates on GST, ITR, ROC, and more.
               </p>
             </div>
-            <form className="flex w-full md:w-auto gap-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 md:w-72 px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder-white/30 text-sm focus:outline-none focus:border-accent/50 transition-colors"
-              />
-              <button
-                type="submit"
-                className="px-5 py-3 bg-accent hover:bg-accent-dark text-white rounded-xl text-sm font-heading font-semibold transition-colors"
-              >
-                Subscribe
-              </button>
-            </form>
+            {/* Was a decorative form with no handler — the address went
+                nowhere. See components/forms/NewsletterForm.tsx. */}
+            <NewsletterForm source="footer" />
           </div>
         </div>
       </div>
@@ -64,9 +77,12 @@ export function Footer() {
                 />
               </div>
             </Link>
+            {/* WS-5.3: was "15+ years of expert service", which read as the
+                firm's age. Incorporation was 2015 — the 15+ is the Principal's
+                time in practice. */}
             <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs">
-              India&apos;s trusted compliance partner for startups, MSMEs, and growing businesses. 
-              15+ years of expert service across tax, legal, and corporate compliance.
+              India&apos;s trusted compliance partner for startups, MSMEs, and growing businesses.
+              {" "}{TRUST_CLAIMS.experienceLine}, across tax, legal, and corporate compliance.
             </p>
 
             <div className="space-y-3">
@@ -92,20 +108,25 @@ export function Footer() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 mt-6">
-              {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-accent/20 flex items-center justify-center transition-colors"
-                >
-                  <Icon size={15} className="text-white/60 hover:text-accent" />
-                </a>
-              ))}
-            </div>
+            {CONFIRMED_SOCIALS.length > 0 && (
+              <div className="flex items-center gap-3 mt-6">
+                {CONFIRMED_SOCIALS.map((p) => {
+                  const Icon = SOCIAL_ICONS[p.platform]!;
+                  return (
+                    <a
+                      key={p.platform}
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Company Avenue Advisory on ${p.label}`}
+                      className="w-9 h-9 rounded-lg bg-white/10 hover:bg-accent/20 flex items-center justify-center transition-colors"
+                    >
+                      <Icon size={15} className="text-white/60 hover:text-accent" />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Services */}
@@ -147,6 +168,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: "About Us", href: "/about" },
+                { label: "Client Reviews", href: "/reviews" },
                 { label: "Govt Startup Schemes", href: "/startup-schemes" },
                 { label: "How-To Guides", href: "/guides" },
                 { label: "Document Templates", href: "/templates" },

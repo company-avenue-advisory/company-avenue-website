@@ -59,7 +59,7 @@ export default function ServicesPage() {
             49 services across 7 categories — everything your business needs to stay registered, compliant, and growing. Handled by expert CAs, CSs, and legal professionals.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-white/30 text-sm">
-            <span>✓ 15+ Years Experience</span>
+            <span>✓ 15+ Years of CA Practice</span>
             <span>✓ 1000+ Businesses Served</span>
             <span>✓ 100% Online Process</span>
             <span>✓ Transparent Pricing</span>

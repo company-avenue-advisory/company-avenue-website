@@ -507,7 +507,7 @@ export function TransferPricingPage({ pricingSlot, calcPill }: { pricingSlot?: R
             >
               <Image
                 src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=85"
-                alt="Company Avenue Advisory transfer pricing team"
+                alt="Stock photograph of financial analysts reviewing reports"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

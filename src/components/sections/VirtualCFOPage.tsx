@@ -231,7 +231,7 @@ function StickySidebar() {
         <div className="grid grid-cols-2 gap-3">
           {[
             { v: "500+", l: "Companies" },
-            { v: "15+",  l: "Years Exp." },
+            { v: "15+",  l: "Years CA Practice" },
             { v: "₹50Cr+", l: "Funds Raised" },
             { v: "24h", l: "Response" },
           ].map((s) => (
@@ -783,7 +783,7 @@ export function VirtualCFOPage({ pricingSlot, calcPill }: { pricingSlot?: ReactN
                   {[
                     { v: "500+",  l: "Companies Served",  c: "bg-primary text-white" },
                     { v: "₹50Cr+",l: "Funds Raised",      c: "bg-accent text-dark" },
-                    { v: "15+",   l: "Years Experience",  c: "bg-slate-800 text-white" },
+                    { v: "15+",   l: "Years CA Practice",  c: "bg-slate-800 text-white" },
                     { v: "24h",   l: "Critical Response", c: "bg-green-600 text-white" },
                   ].map((s) => (
                     <motion.div

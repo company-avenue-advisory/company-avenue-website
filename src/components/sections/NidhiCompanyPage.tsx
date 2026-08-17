@@ -108,7 +108,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "15+ Years of Experience in NBFC & Nidhi Structures" },
+  { icon: Award,       label: "CA-Led — 15+ Years in NBFC & Nidhi Structures" },
   { icon: Building2,   label: "200+ Nidhi Companies Successfully Formed" },
   { icon: UserCheck,   label: "Expert CA & CS for Nidhi Compliance" },
   { icon: DollarSign,  label: "Fixed Transparent Pricing — Starting ₹14,999" },
@@ -552,7 +552,7 @@ export function NidhiCompanyPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
               <div className="grid grid-cols-2 gap-3">
-                {[{ v: "30–45", l: "Days Timeline" }, { v: "200+", l: "Nidhis Formed" }, { v: "15+", l: "Years Exp." }, { v: "₹14,999", l: "Starting Price" }].map(s => (
+                {[{ v: "30–45", l: "Days Timeline" }, { v: "200+", l: "Nidhis Formed" }, { v: "15+", l: "Years CA Practice" }, { v: "₹14,999", l: "Starting Price" }].map(s => (
                   <div key={s.l} className="text-center">
                     <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
                     <p className="text-muted text-[10px] mt-0.5">{s.l}</p>

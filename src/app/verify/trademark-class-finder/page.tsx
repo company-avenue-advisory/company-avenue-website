@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronRight, Tag } from "lucide-react";
 import { TrademarkClassFinder } from "@/components/tools/TrademarkClassFinder";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/trademark-class-finder" },
@@ -80,6 +81,32 @@ export default function TrademarkClassFinderPage() {
           </div>
         </div>
       </section>
+
+      {/* WS-5.5 — contextual route from this free tool into the paid service. */}
+      <div className="container-custom">
+        <ToolNextStep
+          intro="Know your class? The filing itself is the next step — and the class you file in decides what you actually own."
+          ctaLabel="Get a free trademark search"
+          ctaHref="/contact"
+          services={[
+          {
+            label: "Trademark Registration",
+            href: "/services/trademark-registration",
+            desc: "TM-A filed in the right class, with the ™ symbol usable immediately.",
+          },
+          {
+            label: "Trademark Objection Reply",
+            href: "/services/trademark-objection",
+            desc: "Examiner raised an objection? Our attorneys draft and file the reply.",
+          },
+          {
+            label: "Copyright Registration",
+            href: "/services/copyright-registration",
+            desc: "For artwork, content and software, where trademark is the wrong instrument.",
+          },
+          ]}
+        />
+      </div>
 
       <CTABanner />
     </>

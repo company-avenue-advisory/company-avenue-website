@@ -57,6 +57,18 @@ export function ContactPage() {
       }
       // Conversion event — fires only after a genuinely successful submission
       // (Mongo insert returned ok), not on button click. Section J / Task 2.2.
+      //
+      // WS-3.2 names this event `contact_form_submit` with `page_path` and
+      // `service_interest`. Both names fire: the specified one is what GA4
+      // marks as a key event, and `consultation_submit` is retained because
+      // the existing GTM container and any historical reports are already
+      // keyed to it. Drop the legacy line once the container is republished.
+      const page_path =
+        typeof window !== "undefined" ? window.location.pathname : "";
+      trackEvent("contact_form_submit", {
+        page_path,
+        service_interest: data.service,
+      });
       trackEvent("consultation_submit", { form: "book_consultation" });
       setSubmitted(true);
       reset();

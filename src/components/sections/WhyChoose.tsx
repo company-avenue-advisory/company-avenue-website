@@ -54,7 +54,7 @@ export function WhyChoose() {
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[16/10] sm:aspect-[4/5] max-w-md mx-auto lg:mx-0 shadow-[0_16px_64px_rgba(15,45,82,0.12)]">
               <Image
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=85"
-                alt="Company Avenue Advisory professional office environment"
+                alt="Stock photograph of a professional office environment"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 45vw"

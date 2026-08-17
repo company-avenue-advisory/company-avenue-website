@@ -10,6 +10,32 @@ export function isGooglePlacesConfigured() {
   return !!(GOOGLE_PLACES_API_KEY && GOOGLE_PLACE_ID);
 }
 
+/**
+ * Public Google Business Profile URLs. Safe to expose to the client — they
+ * contain only the Place ID, never the API key.
+ *
+ * `reviewsUrl` is the fallback destination for the homepage "Read All Reviews"
+ * button (WS-1.4) when Places is unconfigured, and `writeReviewUrl` is the
+ * ask-for-a-review link WS-9.5 needs at certificate handover.
+ *
+ * Both fall back to a Maps search for the business name if no Place ID is set,
+ * so neither can ever render as href="#" — the exact defect WS-1.4 reports.
+ */
+const MAPS_FALLBACK =
+  "https://www.google.com/maps/search/?api=1&query=Company+Avenue+Advisory+Janakpuri+New+Delhi";
+
+export function googleReviewsUrl(): string {
+  return GOOGLE_PLACE_ID
+    ? `https://www.google.com/maps/place/?q=place_id:${GOOGLE_PLACE_ID}`
+    : MAPS_FALLBACK;
+}
+
+export function googleWriteReviewUrl(): string {
+  return GOOGLE_PLACE_ID
+    ? `https://search.google.com/local/writereview?placeid=${GOOGLE_PLACE_ID}`
+    : MAPS_FALLBACK;
+}
+
 export interface GoogleReview {
   authorName: string;
   authorPhotoUrl: string | null;

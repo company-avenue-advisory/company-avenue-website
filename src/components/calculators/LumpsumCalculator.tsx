@@ -34,7 +34,7 @@ export function LumpsumCalculator() {
           <div className="bg-slate-50 rounded-xl p-4">
             <SplitDonut invested={res.invested} gains={res.gains} />
           </div>
-          <CTALink label="Plan your investments with our advisors" />
+          <CTALink label="Report your capital gains correctly — ITR filing" href="/services/income-tax-return" />
         </motion.div>
       </div>
     </div>

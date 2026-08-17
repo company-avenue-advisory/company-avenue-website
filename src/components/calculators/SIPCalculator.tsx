@@ -35,7 +35,7 @@ export function SIPCalculator() {
           <div className="bg-slate-50 rounded-xl p-4">
             <SplitDonut invested={res.invested} gains={res.gains} />
           </div>
-          <CTALink label="Grow wealth with expert financial planning" />
+          <CTALink label="Claim your 80C and report gains — ITR filing" href="/services/income-tax-return" />
         </motion.div>
       </div>
     </div>

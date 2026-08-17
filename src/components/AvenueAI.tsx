@@ -9,7 +9,6 @@ import {
   QUICK_ACTIONS, SUGGESTED_QUESTIONS, WELCOME_CAPABILITIES,
 } from "@/lib/avenue-ai-knowledge";
 import { COMPANY } from "@/lib/constants";
-import { trackEvent } from "@/lib/gtag";
 import type { ChatMessage } from "@/app/api/avenue-ai/route";
 
 /* Real WhatsApp brand glyph (lucide has no brand icon). */
@@ -406,12 +405,16 @@ export function AvenueAI() {
           )}
         </motion.button>
 
-        {/* WhatsApp FAB — sits directly below the chatbot */}
+        {/* WhatsApp FAB — sits directly below the chatbot.
+            WS-3.2: the whatsapp_click handler moved to the delegated listener
+            in components/analytics/EventTracking.tsx; keeping one here too
+            would double-count. data-track-position labels this button in GA4
+            so the floating FAB can be compared against the sticky bar. */}
         <motion.a
+          data-track-position="floating_fab"
           href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi, I need help with company registration / compliance.")}`}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => trackEvent("whatsapp_click", { page_path: typeof window !== "undefined" ? window.location.pathname : "" })}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.94 }}
           aria-label="Chat with us on WhatsApp"

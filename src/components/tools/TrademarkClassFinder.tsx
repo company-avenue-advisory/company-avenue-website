@@ -12,7 +12,11 @@ export function TrademarkClassFinder() {
     e.preventDefault();
     const found = findMatchingClasses(query);
     setMatches(found);
-    if (found.length) trackEvent("verify_used", { tool: "trademark_class_finder" });
+    // Only a search that actually matched a class counts as a tool use.
+    if (found.length) {
+      trackEvent("verify_tool_use", { tool_name: "trademark_class_finder" });
+      trackEvent("verify_used", { tool: "trademark_class_finder" });
+    }
   }
 
   const ipIndiaSearchUrl = `https://tmrsearch.ipindia.gov.in/tmrpublicsearch/`;

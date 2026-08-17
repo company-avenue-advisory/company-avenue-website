@@ -46,7 +46,10 @@ export function EMICalculator({ variant = "generic" }: { variant?: "generic" | "
           <div className="bg-slate-50 rounded-xl p-4">
             <SplitDonut invested={res.principal} gains={res.interest} investedLabel="Principal" gainsLabel="Interest" />
           </div>
-          <CTALink label={isHome ? "Need a home loan compliance check?" : "Need help with business loan documentation?"} />
+          <CTALink
+            label={isHome ? "Claim your home-loan interest under s.24(b) — ITR filing" : "Loan-ready financials and projections — Virtual CFO"}
+            href={isHome ? "/services/income-tax-return" : "/services/virtual-cfo"}
+          />
         </motion.div>
       </div>
     </div>

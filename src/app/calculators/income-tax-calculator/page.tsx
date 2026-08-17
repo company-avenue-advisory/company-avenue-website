@@ -6,12 +6,13 @@ import { ChevronRight, IndianRupee } from "lucide-react";
 import { IncomeTaxCalculator } from "@/components/calculators/IncomeTaxCalculator";
 import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { TaxYearNotice } from "@/components/calculators/TaxYearNotice";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/income-tax-calculator" },
-  title: "Income Tax Calculator FY 2025-26 — Old vs New Regime",
+  title: "Income Tax Calculator FY 2025-26 (AY 2026-27) — Old vs New Regime",
   description:
-    "Free income tax calculator for FY 2025-26. Compare Old vs New regime with Sec 87A rebate, standard deduction, HRA, 80C, 80D. Budget 2025 updated — zero tax up to ₹12L in new regime.",
+    "Free income tax calculator for FY 2025-26 (AY 2026-27) — for belated and revised returns for that period. Compare Old vs New regime with Sec 87A rebate, standard deduction, HRA, 80C, 80D. Budget 2025 updated — zero tax up to ₹12L in new regime.",
   keywords: [
     "income tax calculator India 2025",
     "old vs new tax regime calculator",
@@ -50,11 +51,12 @@ export default function IncomeTaxCalculatorPage() {
             </span>
           </div>
           <h1 className="font-heading font-bold text-3xl md:text-4xl text-white mb-3 leading-tight">
-            Income Tax Calculator FY 2025–26
+            Income Tax Calculator FY 2025&ndash;26
           </h1>
           <p className="text-white/50 text-base max-w-2xl">
-            Compare Old Regime vs New Regime taxes with all major deductions — 80C, 80D, HRA,
-            Home Loan. Includes Budget 2025 rebate: zero tax up to ₹12L in New Regime.
+            Assessment Year 2026&ndash;27. Compare Old Regime vs New Regime taxes with all major
+            deductions — 80C, 80D, HRA, Home Loan. Includes Budget 2025 rebate: zero tax up to
+            ₹12L in New Regime.
           </p>
         </div>
       </div>
@@ -62,6 +64,8 @@ export default function IncomeTaxCalculatorPage() {
       {/* Calculator */}
       <section className="py-12 bg-background">
         <div className="container-custom">
+          <TaxYearNotice />
+
           <CalcInteractionTracker name="Income Tax Calculator"><IncomeTaxCalculator /></CalcInteractionTracker>
 
           {/* Key changes section */}

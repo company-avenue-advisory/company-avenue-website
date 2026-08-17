@@ -7,11 +7,14 @@ import { Stats } from "@/components/sections/Stats";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { Badge } from "@/components/ui/Badge";
 import { COMPANY } from "@/lib/constants";
+import { TRUST_CLAIMS } from "@/lib/nap";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema, principalSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: "About Us",
-  description: "CA Jatin Aggarwal, Principal Consultant at Company Avenue Advisory — 20 years of experience in taxation, ROC compliance and business advisory for Indian startups and SMEs.",
+  description: "CA Jatin Aggarwal, Principal Consultant at Company Avenue Advisory — 15+ years in practice in taxation, ROC compliance and business advisory for Indian startups and SMEs.",
 };
 
 const values = [
@@ -26,6 +29,19 @@ const values = [
 export default function AboutPage() {
   return (
     <>
+      {/* WS-4: Person node for the Principal (author credibility on regulated
+          content) + breadcrumbs. The Person's @id is /about#principal, which
+          blog posts reference as their author. */}
+      <JsonLd
+        data={[
+          principalSchema,
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+        ]}
+      />
+
       {/* Hero */}
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-24">
         <div className="container-custom">
@@ -34,10 +50,15 @@ export default function AboutPage() {
             <h1 className="heading-lg text-white mb-5">
               Built on Trust. Driven by Expertise.
             </h1>
+            {/* WS-5.3: was "Founded in 2009 … a Chartered Accountant with 20
+                years of experience". Neither figure was substantiated — the
+                order records incorporation in 2015 [VERIFIED] and the
+                Principal's practice at 15+ years. Both now read from the
+                canonical record. */}
             <p className="text-white/55 text-lg leading-relaxed">
-              Founded in {COMPANY.founded}, Company Avenue Advisory is led by a Chartered
-              Accountant with 20 years of experience — helping entrepreneurs, startups, and
-              growing businesses navigate the complex world of compliance with confidence and clarity.
+              Incorporated in {COMPANY.founded}, Company Avenue Advisory is {TRUST_CLAIMS.experienceLine.replace(/^Led by/, "led by")}
+              {" "}— helping entrepreneurs, startups, and growing businesses navigate the
+              complex world of compliance with confidence and clarity.
             </p>
           </div>
         </div>
@@ -84,15 +105,18 @@ export default function AboutPage() {
               <div className="rounded-2xl overflow-hidden aspect-[4/3]">
                 <Image
                   src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=85"
-                  alt="Modern office interior"
+                  alt="Stock illustration of a modern office interior"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-primary rounded-2xl p-5 text-white shadow-lg">
-                <p className="font-heading font-bold text-3xl">20+</p>
-                <p className="text-white/60 text-sm">Years of Experience</p>
+              {/* WS-5.3: was a bare "20+ Years of Experience" badge, higher
+                  than any figure in evidence. Now states whose experience it
+                  is and for how long. */}
+              <div className="absolute -bottom-6 -left-6 bg-primary rounded-2xl p-5 text-white shadow-lg max-w-[13rem]">
+                <p className="font-heading font-bold text-3xl">{TRUST_CLAIMS.principalYearsInPractice}</p>
+                <p className="text-white/60 text-sm">Years in practice — our founding Chartered Accountant</p>
               </div>
             </div>
           </div>
@@ -129,11 +153,12 @@ export default function AboutPage() {
 
       {/* Principal Consultant */}
       <section className="section-pad bg-white" id="team">
+        <div id="principal" className="sr-only" aria-hidden="true" />
         <div className="container-custom">
           <SectionHeader
             eyebrow="Leadership"
             title="The Expert Behind Your Compliance"
-            subtitle="Company Avenue Advisory is led by a Chartered Accountant with two decades of hands-on experience across taxation, ROC compliance, and business advisory."
+            subtitle="Company Avenue Advisory is led by a Chartered Accountant with 15+ years of hands-on experience across taxation, ROC compliance, and business advisory."
             className="mb-16"
           />
           <div className="max-w-2xl mx-auto">
@@ -149,7 +174,7 @@ export default function AboutPage() {
                 <p className="text-primary text-sm font-medium mb-2">Principal Consultant</p>
                 <Badge variant="default" className="mb-3">Chartered Accountant (ICAI)</Badge>
                 <p className="text-muted text-sm leading-relaxed mb-4">
-                  20 years of experience advising Indian startups and SMEs on GST, income tax,
+                  15+ years in practice advising Indian startups and SMEs on GST, income tax,
                   ROC/MCA compliance, payroll, and virtual-CFO advisory — the principal advisor
                   behind every engagement at Company Avenue Advisory.
                 </p>

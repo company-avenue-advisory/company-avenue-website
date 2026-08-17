@@ -35,7 +35,7 @@ export function RDCalculator() {
           <div className="bg-slate-50 rounded-xl p-4">
             <SplitDonut invested={res.invested} gains={res.gains} investedLabel="Deposited" gainsLabel="Interest" />
           </div>
-          <CTALink label="Plan your savings smartly" />
+          <CTALink label="RD interest is taxable — file your ITR with a CA" href="/services/income-tax-return" />
         </motion.div>
       </div>
     </div>

@@ -2,9 +2,27 @@
 import { useRef, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Star, Quote } from "lucide-react";
+import Link from "next/link";
+import { Star, Quote, ShieldCheck, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useGoogleReviews } from "@/hooks/useGoogleReviews";
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   WS-5.2 — the five named testimonials that used to live in this file
+   (Arjun Sharma, Priya Mehta, Rohan Kapoor, Neha Singh, Vikram Patel) have
+   been DELETED. None corresponded to any locatable Google review, and they
+   rendered whenever the Places API was unconfigured or erroring — which was
+   the live state of the site.
+
+   Do not reintroduce a hardcoded testimonial array here. If the Principal
+   confirms in writing that a specific named statement is from a real client,
+   it belongs in a reviewed content source with that attribution recorded, not
+   as a silent fallback behind an API call.
+
+   With no live reviews, this section now renders a factual trust panel that
+   points at /reviews and the Google profile. It makes no claim about any
+   individual client.
+───────────────────────────────────────────────────────────────────────────── */
 
 const AVATAR_COLORS = [
   "bg-blue-100 text-blue-700",
@@ -12,49 +30,6 @@ const AVATAR_COLORS = [
   "bg-green-100 text-green-700",
   "bg-rose-100 text-rose-700",
   "bg-amber-100 text-amber-700",
-];
-
-const staticTestimonials = [
-  {
-    name: "Arjun Sharma",
-    role: "Founder, TechBridge Solutions",
-    rating: 5,
-    text: "Company Avenue handled our entire Pvt. Ltd. registration and GST setup in under 10 days. Completely transparent, professional and available whenever we needed them.",
-    avatar: "AS",
-    avatarBg: "bg-blue-100 text-blue-700",
-  },
-  {
-    name: "Priya Mehta",
-    role: "CEO, Retail Ventures India",
-    rating: 5,
-    text: "Three years of accounting and payroll support — zero errors, always on time. They genuinely feel like an in-house finance team rather than an external firm.",
-    avatar: "PM",
-    avatarBg: "bg-purple-100 text-purple-700",
-  },
-  {
-    name: "Rohan Kapoor",
-    role: "MD, Kapoor Exports",
-    rating: 5,
-    text: "Got our IEC registration and trademark done in record time. The team is highly knowledgeable and the pricing is completely upfront with no surprises.",
-    avatar: "RK",
-    avatarBg: "bg-green-100 text-green-700",
-  },
-  {
-    name: "Neha Singh",
-    role: "Co-Founder, HealthFirst Clinics",
-    rating: 5,
-    text: "Switched to Company Avenue for annual ROC filings and ITR. Seamless, fully digital, and their team proactively reminds us of all compliance deadlines.",
-    avatar: "NS",
-    avatarBg: "bg-rose-100 text-rose-700",
-  },
-  {
-    name: "Vikram Patel",
-    role: "Director, Patel Manufacturing",
-    rating: 5,
-    text: "Excellent MSME and Startup India registration support. Their compliance expertise gave us the confidence to focus completely on scaling our operations.",
-    avatar: "VP",
-    avatarBg: "bg-amber-100 text-amber-700",
-  },
 ];
 
 function initials(name: string) {
@@ -72,20 +47,19 @@ export function Testimonials() {
 
   const isLive = reviewsData?.configured === true && reviewsData.reviews.length > 0;
 
+  // Live Google reviews only. No fallback array exists — see the note above.
   const cards = useMemo(() => {
-    if (isLive && reviewsData?.configured) {
-      return reviewsData.reviews.map((r, i) => ({
-        key: `${r.authorName}-${i}`,
-        name: r.authorName,
-        role: "Google Review",
-        rating: r.rating,
-        text: r.text,
-        photoUrl: r.authorPhotoUrl,
-        avatar: initials(r.authorName),
-        avatarBg: AVATAR_COLORS[i % AVATAR_COLORS.length],
-      }));
-    }
-    return staticTestimonials.map((t) => ({ ...t, key: t.name, photoUrl: null as string | null }));
+    if (!isLive || !reviewsData?.configured) return [];
+    return reviewsData.reviews.map((r, i) => ({
+      key: `${r.authorName}-${i}`,
+      name: r.authorName,
+      role: "Google Review",
+      rating: r.rating,
+      text: r.text,
+      photoUrl: r.authorPhotoUrl,
+      avatar: initials(r.authorName),
+      avatarBg: AVATAR_COLORS[i % AVATAR_COLORS.length],
+    }));
   }, [isLive, reviewsData]);
 
   // Auto-scroll
@@ -110,9 +84,12 @@ export function Testimonials() {
     return () => clearInterval(id);
   }, [cards.length]);
 
-  const rating = isLive && reviewsData?.configured ? reviewsData.rating : 4.9;
-  const reviewCount = isLive && reviewsData?.configured ? reviewsData.userRatingCount : null;
-  const mapsUrl = isLive && reviewsData?.configured ? reviewsData.mapsUrl : "#";
+  // WS-5.2/5.3: `rating` used to default to a hardcoded 4.9 when Places was
+  // unavailable. A star rating is a factual claim, so there is no default now —
+  // it renders only when it is the real, live figure.
+  const live = isLive && reviewsData?.configured ? reviewsData : null;
+  const rating = live?.rating ?? null;
+  const reviewCount = live?.userRatingCount ?? null;
 
   return (
     <section className="py-14 md:py-24 bg-white" id="testimonials">
@@ -123,10 +100,34 @@ export function Testimonials() {
           subtitle={
             isLive
               ? "Real reviews from our Google Business Profile — founders, directors and business owners we've helped grow."
-              : "Real reviews from founders, directors and business owners we have helped grow."
+              : "Our reviews live on our Google Business Profile, unedited and unfiltered."
           }
           className="mb-10 md:mb-14"
         />
+
+        {/* No live reviews → a factual panel, never a placeholder client. */}
+        {cards.length === 0 && (
+          <div className="mx-auto max-w-2xl rounded-2xl border border-slate-200 bg-background p-8 text-center">
+            <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white">
+              <ShieldCheck size={18} className="text-primary" />
+            </div>
+            <p className="font-heading text-base font-semibold text-dark">
+              We only publish reviews our clients actually wrote
+            </p>
+            <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted">
+              Rather than show a testimonial you cannot check, we send you
+              straight to the source — every review on our Google Business
+              Profile, unedited.
+            </p>
+            <Link
+              href="/reviews"
+              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-heading text-sm font-semibold text-white transition-colors hover:bg-primary-700"
+            >
+              Read our client reviews
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+        )}
 
         <div
           ref={trackRef}
@@ -177,7 +178,9 @@ export function Testimonials() {
           ))}
         </div>
 
-        {/* Google aggregate */}
+        {/* Google aggregate. The rating block appears only with live data;
+            the "Read All Reviews" link always resolves to /reviews (WS-1.4 —
+            it was href="#" and navigated nowhere). */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -190,29 +193,42 @@ export function Testimonials() {
               <span className="font-heading font-bold text-[#4285F4] text-lg">G</span>
             </div>
             <div>
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={12}
-                    className={i < Math.round(rating) ? "text-amber-400 fill-amber-400" : "text-slate-200 fill-slate-200"}
-                  />
-                ))}
-                <span className="font-heading font-bold text-dark text-sm ml-1">{rating.toFixed(1)}</span>
-              </div>
-              <p className="text-muted text-xs mt-0.5">
-                {reviewCount !== null ? `Based on ${reviewCount} Google Reviews` : "Based on our Google Reviews"}
-              </p>
+              {rating !== null ? (
+                <>
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        size={12}
+                        className={i < Math.round(rating) ? "text-amber-400 fill-amber-400" : "text-slate-200 fill-slate-200"}
+                      />
+                    ))}
+                    <span className="font-heading font-bold text-dark text-sm ml-1">{rating.toFixed(1)}</span>
+                  </div>
+                  <p className="text-muted text-xs mt-0.5">
+                    {reviewCount !== null
+                      ? `Based on ${reviewCount} Google Reviews`
+                      : "Based on our Google Reviews"}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="font-heading font-semibold text-dark text-sm">
+                    Reviewed on Google
+                  </p>
+                  <p className="text-muted text-xs mt-0.5">
+                    Verified reviews from our Google Business Profile
+                  </p>
+                </>
+              )}
             </div>
           </div>
-          <a
-            href={mapsUrl}
-            target={isLive ? "_blank" : undefined}
-            rel={isLive ? "noopener noreferrer" : undefined}
+          <Link
+            href="/reviews"
             className="text-primary text-sm font-heading font-semibold hover:underline"
           >
             Read All Reviews →
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

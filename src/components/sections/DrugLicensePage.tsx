@@ -244,7 +244,7 @@ function StickySidebar() {
           {[
             { v: "2,000+", l: "Licenses Issued" },
             { v: "98%", l: "Success Rate" },
-            { v: "15+", l: "Years Exp." },
+            { v: "15+", l: "Years CA Practice" },
             { v: "24h", l: "Response" },
           ].map((s) => (
             <div key={s.l} className="text-center">
@@ -713,7 +713,7 @@ export function DrugLicensePage({ pricingSlot, calcPill }: { pricingSlot?: React
                 <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-[0_12px_48px_rgba(15,45,82,0.10)]">
                   <Image
                     src="https://images.unsplash.com/photo-1563213126-a4273aed2016?w=800&q=85"
-                    alt="Company Avenue Advisory drug license compliance team"
+                    alt="Stock photograph of a pharmacy dispensing counter"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 45vw"

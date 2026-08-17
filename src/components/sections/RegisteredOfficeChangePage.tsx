@@ -328,7 +328,7 @@ export function RegisteredOfficeChangePage({ pricingSlot, calcPill }: { pricingS
                   <div className="relative w-full aspect-[4/3]">
                     <Image
                       src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=85"
-                      alt="Modern office space representing registered office change"
+                      alt="Stock photograph of a modern office interior"
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 45vw"
@@ -429,7 +429,7 @@ export function RegisteredOfficeChangePage({ pricingSlot, calcPill }: { pricingS
                   <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-card">
                     <Image
                       src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?w=800&q=85"
-                      alt="Company office building representing registered office"
+                      alt="Stock photograph of a commercial office building exterior"
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 40vw"

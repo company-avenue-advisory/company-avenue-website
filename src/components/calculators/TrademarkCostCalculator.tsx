@@ -145,7 +145,7 @@ export function TrademarkCostCalculator() {
       </div>
 
       {/* ── Result ── */}
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
+      <div data-calc-result className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
         <motion.div
           key={`${applicant}-${classes}-${stage}`}
           initial={{ opacity: 0, y: 8 }}

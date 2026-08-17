@@ -165,6 +165,7 @@ export function CompanyNameSearch() {
       if (!res.ok) setError(data.error ?? "Something went wrong.");
       else {
         setResult(data);
+        trackEvent("verify_tool_use", { tool_name: "company_name_search" });
         trackEvent("verify_used", { tool: "company_name_search" });
       }
     } catch {

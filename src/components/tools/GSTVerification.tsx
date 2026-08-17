@@ -37,6 +37,7 @@ export function GSTVerification() {
         setError(data.error ?? "Something went wrong.");
       } else {
         setResult(data);
+        trackEvent("verify_tool_use", { tool_name: "gst_verification" });
         trackEvent("verify_used", { tool: "gst_verification" });
       }
     } catch {

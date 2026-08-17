@@ -210,7 +210,7 @@ function StickySidebar() {
 
       <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
         <div className="grid grid-cols-2 gap-3">
-          {[{ v: "2,500+", l: "Audits Done" }, { v: "100%", l: "On-time" }, { v: "15+", l: "Years Exp." }, { v: "24h", l: "Response" }].map(s => (
+          {[{ v: "2,500+", l: "Audits Done" }, { v: "100%", l: "On-time" }, { v: "15+", l: "Years CA Practice" }, { v: "24h", l: "Response" }].map(s => (
             <div key={s.l} className="text-center">
               <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
               <p className="text-muted text-[10px] mt-0.5">{s.l}</p>
@@ -652,7 +652,7 @@ export function TaxAuditPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNod
                   {[
                     { v: "2,500+", l: "Audits Done",        c: "bg-primary text-white" },
                     { v: "₹0",     l: "Penalties Incurred", c: "bg-accent text-dark" },
-                    { v: "15+",    l: "Years Experience",   c: "bg-slate-800 text-white" },
+                    { v: "15+",    l: "Years CA Practice",   c: "bg-slate-800 text-white" },
                     { v: "24 hrs", l: "Response Time",      c: "bg-green-600 text-white" },
                   ].map((s) => (
                     <motion.div key={s.l} whileHover={{ y: -4 }}

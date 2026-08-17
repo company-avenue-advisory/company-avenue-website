@@ -101,7 +101,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "15+ Years of Business Registration Experience" },
+  { icon: Award,       label: "CA-Led — 15+ Years in Business Registration" },
   { icon: Building2,   label: "5,000+ Proprietorships Assisted" },
   { icon: UserCheck,   label: "Dedicated Chartered Accountant Support" },
   { icon: DollarSign,  label: "Starting at just ₹2,999 — Fully Transparent" },
@@ -601,7 +601,7 @@ export function SoleProprietorshipPage({ pricingSlot, calcPill }: { pricingSlot?
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
               <div className="grid grid-cols-2 gap-3">
-                {[{ v: "3–5", l: "Days Setup" }, { v: "5000+", l: "Proprietorships" }, { v: "15+", l: "Years Exp." }, { v: "₹2,999", l: "Starting Price" }].map(s => (
+                {[{ v: "3–5", l: "Days Setup" }, { v: "5000+", l: "Proprietorships" }, { v: "15+", l: "Years CA Practice" }, { v: "₹2,999", l: "Starting Price" }].map(s => (
                   <div key={s.l} className="text-center">
                     <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
                     <p className="text-muted text-[10px] mt-0.5">{s.l}</p>

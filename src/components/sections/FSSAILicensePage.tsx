@@ -226,7 +226,7 @@ function StickySidebar() {
           {[
             { v: "2,000+", l: "Licenses Filed" },
             { v: "7 Days", l: "Basic License" },
-            { v: "15+",    l: "Years Exp." },
+            { v: "15+",    l: "Years CA Practice" },
             { v: "24h",    l: "Response" },
           ].map(s => (
             <div key={s.l} className="text-center">
@@ -640,7 +640,7 @@ export function FSSAILicensePage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                   {[
                     { v: "2,000+", l: "Licenses Filed",    c: "bg-primary text-white" },
                     { v: "100%",   l: "Legal Compliance",  c: "bg-accent text-dark" },
-                    { v: "15+",    l: "Years Experience",  c: "bg-slate-800 text-white" },
+                    { v: "15+",    l: "Years CA Practice",  c: "bg-slate-800 text-white" },
                     { v: "24 hrs", l: "Response Time",     c: "bg-green-600 text-white" },
                   ].map(s => (
                     <motion.div key={s.l} whileHover={{ y: -4 }} className={`${s.c} rounded-2xl p-6 text-center shadow-card`}>

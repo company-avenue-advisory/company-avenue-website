@@ -112,7 +112,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "15+ Years of Industry Experience" },
+  { icon: Award,       label: "CA-Led — 15+ Years in Practice" },
   { icon: Building2,   label: "2,000+ Partnership Firms Registered" },
   { icon: UserCheck,   label: "Qualified Chartered Accountants & CS" },
   { icon: DollarSign,  label: "Transparent Fixed Pricing — No Surprises" },
@@ -638,7 +638,7 @@ export function PartnershipFirmPage({ pricingSlot, calcPill }: { pricingSlot?: R
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
               <div className="grid grid-cols-2 gap-3">
-                {[{ v: "7–10", l: "Day Timeline" }, { v: "2000+", l: "Firms Formed" }, { v: "15+", l: "Years Exp." }, { v: "₹5,499", l: "Starting Price" }].map(s => (
+                {[{ v: "7–10", l: "Day Timeline" }, { v: "2000+", l: "Firms Formed" }, { v: "15+", l: "Years CA Practice" }, { v: "₹5,499", l: "Starting Price" }].map(s => (
                   <div key={s.l} className="text-center">
                     <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
                     <p className="text-muted text-[10px] mt-0.5">{s.l}</p>

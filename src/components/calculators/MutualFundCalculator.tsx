@@ -57,7 +57,7 @@ export function MutualFundCalculator() {
           <div className="bg-slate-50 rounded-xl p-4">
             <SplitDonut invested={res.invested} gains={res.gains} />
           </div>
-          <CTALink label="Talk to our financial advisors" />
+          <CTALink label="Capital gains on redemption — get your ITR filed" href="/services/income-tax-return" />
         </motion.div>
       </div>
     </div>

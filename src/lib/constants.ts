@@ -1,16 +1,33 @@
+import {
+  ADDRESS_LINE,
+  CONTACT,
+  HOURS_LINE,
+  INCORPORATED,
+  REGISTRATIONS,
+} from "./nap";
+
+/**
+ * Display-facing company facts.
+ *
+ * Every NAP field here is now a re-export of the canonical record in
+ * src/lib/nap.ts (WS-10.1) rather than a literal. Editing an address or a
+ * phone number in this file will not work and should not be attempted —
+ * change nap.ts, which also feeds the structured data.
+ */
 export const COMPANY = {
   name: "Company Avenue Advisory",
   fullName: "Company Avenue Advisory Pvt. Ltd.",
   tagline: "Trusted Business Compliance Partner",
-  email: "info@companyavenueadvisory.com",
-  phone: "+91 99537 19111",
-  whatsapp: "+919953719111",
-  address: "209, Jaina Tower 1, District Center, Professor Joginder Singh Marg, Janakpuri, New Delhi, Delhi 110058, India",
-  workingHours: "Mon – Sat: 9:00 AM – 7:00 PM",
-  website: "https://companyavenueadvisory.com",
-  gstin: "07AABCC1234D1Z5",
-  cin: "U74999MH2015PTC260940",
-  founded: "2009",
+  email: CONTACT.email,
+  phone: CONTACT.phoneDisplay,
+  whatsapp: CONTACT.phoneE164,
+  address: ADDRESS_LINE,
+  workingHours: HOURS_LINE,
+  website: CONTACT.website,
+  gstin: REGISTRATIONS.gstin,
+  cin: REGISTRATIONS.cin,
+  /** Year of incorporation — 2015 per the work order's [VERIFIED] finding. */
+  founded: INCORPORATED,
 };
 
 export const NAV_LINKS = [
@@ -297,6 +314,9 @@ export const NAV_LINKS = [
           { label: "Blog & Industry News", href: "/blog" },
           { label: "Government Startup Schemes", href: "/startup-schemes" },
           { label: "Pricing & Packages", href: "/pricing" },
+          // WS-5.1: the reviews destination must be reachable from the main
+          // navigation, not only the homepage button.
+          { label: "Client Reviews", href: "/reviews" },
         ],
       },
       {

@@ -298,7 +298,7 @@ function StickySidebar() {
       {/* Stats */}
       <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
         <div className="grid grid-cols-2 gap-3">
-          {[{ v: "1000+", l: "Employees Managed" }, { v: "100%", l: "On-Time Filing" }, { v: "15+", l: "Years Exp." }, { v: "24h", l: "Response Time" }].map(s => (
+          {[{ v: "1000+", l: "Employees Managed" }, { v: "100%", l: "On-Time Filing" }, { v: "15+", l: "Years CA Practice" }, { v: "24h", l: "Response Time" }].map(s => (
             <div key={s.l} className="text-center">
               <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
               <p className="text-muted text-[10px] mt-0.5">{s.l}</p>

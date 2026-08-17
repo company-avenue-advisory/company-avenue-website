@@ -60,7 +60,7 @@ export function RetirementCalculator() {
             <span className="text-sm font-heading font-semibold text-primary">Monthly SIP Required</span>
             <span className="text-primary font-heading font-bold text-lg">{formatINR(res.monthlySIP)}</span>
           </div>
-          <CTALink label="Build a retirement plan with our advisors" />
+          <CTALink label="Get the tax side right — ITR filing by a CA" href="/services/income-tax-return" />
         </motion.div>
       </div>
     </div>

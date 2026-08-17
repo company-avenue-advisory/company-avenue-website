@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronRight, ShieldCheck } from "lucide-react";
 import { PANVerification } from "@/components/tools/PANVerification";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/pan-verification" },
@@ -80,6 +81,32 @@ export default function PANVerificationPage() {
           </div>
         </div>
       </section>
+
+      {/* WS-5.5 — contextual route from this free tool into the paid service. */}
+      <div className="container-custom">
+        <ToolNextStep
+          intro="A verified PAN is the starting point for most registrations and filings."
+          ctaLabel="Get help with a tax filing"
+          ctaHref="/contact"
+          services={[
+          {
+            label: "Income Tax Return Filing",
+            href: "/services/income-tax-return",
+            desc: "ITR prepared and filed by a CA, with every deduction claimed correctly.",
+          },
+          {
+            label: "TDS Return Filing",
+            href: "/services/tds-return",
+            desc: "Quarterly TDS returns, challans and Form 16/16A handled end to end.",
+          },
+          {
+            label: "Private Limited Company",
+            href: "/services/private-limited-company",
+            desc: "Company PAN and TAN are issued with your Certificate of Incorporation.",
+          },
+          ]}
+        />
+      </div>
 
       <CTABanner />
     </>

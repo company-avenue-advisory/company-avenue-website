@@ -133,7 +133,7 @@ const whyUsPoints = [
   { icon: Zap, label: "Fast Documentation & Filing" },
   { icon: Monitor, label: "100% Digital Process" },
   { icon: LifeBuoy, label: "End-to-End Compliance Support" },
-  { icon: Award, label: "15+ Years of Industry Experience" },
+  { icon: Award, label: "CA-Led — 15+ Years in Practice" },
   { icon: Building2, label: "1000+ Businesses Registered" },
 ];
 
@@ -399,7 +399,7 @@ export function PrivateLimitedPage({ pricingSlot, calcPill }: { pricingSlot?: Re
               <div className="rounded-3xl overflow-hidden aspect-[4/3] shadow-[0_12px_48px_rgba(15,45,82,0.10)]">
                 <Image
                   src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=85"
-                  alt="Professional business consulting team"
+                  alt="Stock photograph of a business consulting meeting"
                   fill className="object-cover"
                   sizes="(max-width: 768px) 100vw, 45vw"
                 />
@@ -770,7 +770,7 @@ export function PrivateLimitedPage({ pricingSlot, calcPill }: { pricingSlot?: Re
               <div className="rounded-3xl overflow-hidden aspect-[4/5] max-w-md shadow-[0_12px_48px_rgba(15,45,82,0.10)]">
                 <Image
                   src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=85"
-                  alt="Company Avenue Advisory professional team"
+                  alt="Stock photograph of professionals in a planning session"
                   fill className="object-cover"
                   sizes="(max-width: 768px) 100vw, 45vw"
                 />

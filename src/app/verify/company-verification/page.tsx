@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronRight, Building2 } from "lucide-react";
 import { CompanyVerification } from "@/components/tools/CompanyVerification";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/company-verification" },
@@ -80,6 +81,32 @@ export default function CompanyVerificationPage() {
           </div>
         </div>
       </section>
+
+      {/* WS-5.5 — contextual route from this free tool into the paid service. */}
+      <div className="container-custom">
+        <ToolNextStep
+          intro="Looked up a company or director on the MCA registry? These are the filings that keep that record clean."
+          ctaLabel="Review my company's compliance"
+          ctaHref="/contact"
+          services={[
+          {
+            label: "ROC Compliance",
+            href: "/services/roc-compliance",
+            desc: "AOC-4, MGT-7 and every annual filing a company owes the Registrar.",
+          },
+          {
+            label: "Director KYC (DIR-3)",
+            href: "/services/director-kyc",
+            desc: "Annual director KYC before the 30 September deadline — avoid a deactivated DIN.",
+          },
+          {
+            label: "Change in Directors",
+            href: "/services/change-in-directors",
+            desc: "Appointment, resignation and DIR-12 filing, done properly.",
+          },
+          ]}
+        />
+      </div>
 
       <CTABanner />
     </>

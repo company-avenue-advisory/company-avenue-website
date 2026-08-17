@@ -49,7 +49,7 @@ export function NPSCalculator() {
             <span className="text-sm font-heading font-semibold text-primary">Est. Monthly Pension</span>
             <span className="text-primary font-heading font-bold text-lg">{formatINR(res.monthlyPension)}</span>
           </div>
-          <CTALink label="Plan your retirement with experts" />
+          <CTALink label="Claim your 80CCD(1B) deduction — ITR filing" href="/services/income-tax-return" />
         </motion.div>
       </div>
     </div>
