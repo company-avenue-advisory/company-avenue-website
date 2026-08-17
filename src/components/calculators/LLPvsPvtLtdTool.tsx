@@ -59,8 +59,8 @@ const QUESTIONS: Question[] = [
 // Comparison matrix
 const COMPARISON = [
   { feature: "Minimum Members", pvt: "2 Directors + 2 Shareholders", llp: "2 Designated Partners" },
-  { feature: "Our professional fee", pvt: "₹2,999", llp: "₹2,999" },
-  { feature: "Typical all-in setup cost", pvt: "≈ ₹7,100 (Delhi, ₹1L capital)", llp: "≈ ₹10,900 (₹1L contribution)" },
+  { feature: "Our professional fee", pvt: "₹3,499", llp: "₹2,999" },
+  { feature: "Typical all-in setup cost", pvt: "≈ ₹12,452 (Delhi, ₹15L capital)", llp: "≈ ₹10,152 (₹1L contribution)" },
   { feature: "Authorised Capital", pvt: "No statutory minimum; ₹1 lakh is typical", llp: "Not applicable — contribution instead" },
   { feature: "Annual Compliance", pvt: "ROC forms, Board meetings, MGT-7, AOC-4", llp: "Form 8 & 11 (simpler)" },
   { feature: "Annual compliance cost", pvt: "Higher — ₹19K–25K/yr (audit is mandatory)", llp: "Lower — ₹9K–12K/yr" },

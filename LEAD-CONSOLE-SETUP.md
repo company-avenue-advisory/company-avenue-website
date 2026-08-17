@@ -107,6 +107,48 @@ WHATSAPP_META_TEMPLATE_LANG=en
 The recipient variables (`WHATSAPP_BOSS_PHONE`, `WHATSAPP_EMP*_PHONE`) are the
 same, so switching providers is a one-line change. API keys are ignored here.
 
+**Free test number:** every WhatsApp app gets one. It messages up to **5**
+verified recipient numbers at no cost — enough for the boss plus both
+employees — with no business verification and without registering your own
+business number. Note that a number registered to the Cloud API **cannot
+already be in use on regular WhatsApp / WhatsApp Business**, which is another
+reason to stay on the test number for internal alerts.
+
+**The template.** Business-initiated messages need an approved template.
+Create ONE **Utility** template named `new_lead_alert` with this exact body —
+both `notifyNewLead()` and `notifyAssignment()` send this same 4-variable
+shape, so a single approved template covers the whole system:
+
+```
+New lead from the website.
+
+Name: {{1}}
+Phone: {{2}}
+Service: {{3}}
+Message: {{4}}
+
+Open the lead console to assign it.
+```
+
+Then set `WHATSAPP_META_TEMPLATE=new_lead_alert`.
+
+> **Meta rejects a body that starts or ends with a variable** ("dangling
+> parameter"), and rejects two variables placed back to back. That closing
+> line is not decoration — without it the template is refused.
+
+> `WHATSAPP_META_TEMPLATE_LANG` must match the template's language code
+> **exactly**. Picking "English" gives `en`; picking "English (US)" gives
+> `en_US`. A mismatch fails every send with "template name does not exist in
+> the translation".
+
+> Meta rejects template variables containing newlines, tabs, or 4+ consecutive
+> spaces. `sanitiseParam()` in `whatsapp.ts` flattens them to " · " before
+> sending, so a multi-line enquiry cannot fail the send.
+
+Leave `WHATSAPP_META_TEMPLATE` blank and the code sends plain text instead —
+which only works inside an open 24-hour customer-service window (i.e. after
+the recipient has messaged you). Fine for a quick test, not for production.
+
 ### Option C — off
 
 ```

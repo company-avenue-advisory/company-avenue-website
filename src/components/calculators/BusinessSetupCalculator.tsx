@@ -3,21 +3,22 @@ import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { formatINR } from "@/lib/calc";
 import { Segmented, ResultRow, HeroResult, Note, CTALink } from "./_shared";
-import { PRO_FEES, GST_RATE, trademarkGovtFee } from "@/lib/calc-fees";
+import { PRO_FEES, GST_RATE, DSC_PER_PERSON, trademarkGovtFee } from "@/lib/calc-fees";
 
 type Entity = "pvtltd" | "llp" | "opc" | "proprietorship" | "partnership";
 
 /**
- * Government figures are typical all-in incorporation costs (DSC + name approval
- * + stamp duty + PAN/TAN) for a ₹1 lakh capital entity in a mid-cost state. The
- * Registration Cost Calculator itemises these exactly, state by state.
+ * Government figures are the pure-agent pass-through (MCA fee + stamp duty +
+ * name reservation + PAN/TAN) for a ₹15 lakh capital entity in Delhi, per the
+ * incorporation workbook. DSC is billed separately because it carries GST.
+ * The Registration Cost Calculator itemises all of this state by state.
  */
-const BASE: Record<Entity, { label: string; govt: number; professional: number }> = {
-  pvtltd: { label: "Private Limited", govt: 4500, professional: PRO_FEES["private-limited-company"] },
-  llp: { label: "LLP", govt: 4900, professional: PRO_FEES["llp-registration"] },
-  opc: { label: "One Person Co.", govt: 2900, professional: PRO_FEES["one-person-company"] },
-  partnership: { label: "Partnership", govt: 1300, professional: PRO_FEES["partnership-firm"] },
-  proprietorship: { label: "Proprietorship", govt: 0, professional: PRO_FEES["sole-proprietorship"] },
+const BASE: Record<Entity, { label: string; govt: number; dscCount: number; professional: number }> = {
+  pvtltd: { label: "Private Limited", govt: 3603, dscCount: 2, professional: PRO_FEES["private-limited-company"] },
+  llp: { label: "LLP", govt: 1893, dscCount: 2, professional: PRO_FEES["llp-registration"] },
+  opc: { label: "One Person Co.", govt: 3603, dscCount: 1, professional: PRO_FEES["one-person-company"] },
+  partnership: { label: "Partnership", govt: 1843, dscCount: 0, professional: PRO_FEES["partnership-firm"] },
+  proprietorship: { label: "Proprietorship", govt: 0, dscCount: 0, professional: PRO_FEES["sole-proprietorship"] },
 };
 
 const ADDONS = [
@@ -36,9 +37,11 @@ export function BusinessSetupCalculator() {
   const res = useMemo(() => {
     const base = BASE[entity];
     const addonTotal = ADDONS.filter((a) => addons[a.key]).reduce((s, a) => s + a.cost, 0);
-    const govtGst = Math.round(base.professional * GST_RATE);
-    const total = base.govt + base.professional + govtGst + addonTotal;
-    return { base, addonTotal, govtGst, total };
+    const dsc = base.dscCount * DSC_PER_PERSON;
+    // GST applies to our services and the DSC — never to the statutory pass-through.
+    const govtGst = Math.round((base.professional + dsc + addonTotal) * GST_RATE);
+    const total = base.govt + dsc + base.professional + govtGst + addonTotal;
+    return { base, dsc, addonTotal, govtGst, total };
   }, [entity, addons]);
 
   return (
@@ -76,7 +79,7 @@ export function BusinessSetupCalculator() {
             ))}
           </div>
         </div>
-        <Note>Our professional fee is fixed and shown above. Government fees are indicative for ₹1 lakh capital — use the Registration Cost Calculator for an exact, state-wise breakdown.</Note>
+        <Note>Our professional fee is fixed. Government fees shown are the Delhi pass-through at ₹15 lakh authorised capital and carry no GST — use the Registration Cost Calculator for an exact, state-wise breakdown.</Note>
       </div>
 
       <div className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
@@ -85,8 +88,9 @@ export function BusinessSetupCalculator() {
           <HeroResult label="Total" value={formatINR(res.total)} />
           <div className="bg-slate-50 rounded-xl p-4 space-y-3">
             <ResultRow label={`${res.base.label} — Govt Fees`} value={res.base.govt === 0 ? "NIL" : formatINR(res.base.govt)} />
+            {res.dsc > 0 && <ResultRow label={`Digital Signature × ${res.base.dscCount}`} value={formatINR(res.dsc)} />}
             <ResultRow label="Professional Fees" value={formatINR(res.base.professional)} />
-            <ResultRow label="GST on Professional Fees (18%)" value={formatINR(res.govtGst)} />
+            <ResultRow label="GST (18%) — on our fee, DSC & add-ons" value={formatINR(res.govtGst)} />
             {res.addonTotal > 0 && <ResultRow label="Add-on Services" value={formatINR(res.addonTotal)} accent />}
           </div>
           <CTALink label="Get an exact quote & start registration" href="/contact" />

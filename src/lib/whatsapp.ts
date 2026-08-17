@@ -94,7 +94,18 @@ async function sendViaCallMeBot(to: Recipient, text: string): Promise<void> {
   }
 }
 
-async function sendViaMeta(to: Recipient, text: string): Promise<void> {
+/** Meta rejects template parameters containing newlines, tabs, or 4+ consecutive
+ *  spaces ("Parameter text cannot have new-line/tab characters…"). Flatten them
+ *  so a multi-line alert can still ride inside a template variable. */
+function sanitiseParam(s: string): string {
+  return s
+    .replace(/[\r\n\t]+/g, " · ")
+    .replace(/ {4,}/g, "   ")
+    .trim()
+    .slice(0, 1024);
+}
+
+async function sendViaMeta(to: Recipient, text: string, params?: string[]): Promise<void> {
   const token = process.env.WHATSAPP_META_TOKEN ?? "";
   const phoneId = process.env.WHATSAPP_META_PHONE_ID ?? "";
   const template = process.env.WHATSAPP_META_TEMPLATE ?? "";
@@ -111,7 +122,15 @@ async function sendViaMeta(to: Recipient, text: string): Promise<void> {
         template: {
           name: template,
           language: { code: lang },
-          components: [{ type: "body", parameters: [{ type: "text", text }] }],
+          components: [
+            {
+              type: "body",
+              parameters: (params ?? [text]).map((p) => ({
+                type: "text",
+                text: sanitiseParam(p),
+              })),
+            },
+          ],
         },
       }
     : {
@@ -135,12 +154,18 @@ async function sendViaMeta(to: Recipient, text: string): Promise<void> {
   }
 }
 
-/** Single send. Resolves to true only when the provider accepted it. */
-export async function sendWhatsApp(to: Recipient, text: string): Promise<boolean> {
+/** Single send. Resolves to true only when the provider accepted it.
+ *  `params` fills a Meta template's {{1}}, {{2}}… variables; CallMeBot ignores
+ *  it and sends the readable `text` instead. */
+export async function sendWhatsApp(
+  to: Recipient,
+  text: string,
+  params?: string[]
+): Promise<boolean> {
   const p = provider();
   if (p === "none") return false;
   try {
-    if (p === "meta") await sendViaMeta(to, text);
+    if (p === "meta") await sendViaMeta(to, text, params);
     else await sendViaCallMeBot(to, text);
     console.log(`[whatsapp] sent to ${to.id} (${to.label})`);
     return true;
@@ -205,7 +230,9 @@ export async function notifyNewLead(lead: LeadLike): Promise<void> {
     return;
   }
   const text = newLeadMessage(lead, siteUrl("/admin/leads"));
-  await Promise.allSettled(recipients.map((r) => sendWhatsApp(r, text)));
+  // Matches the 4-variable utility template documented in LEAD-CONSOLE-SETUP.md.
+  const params = [lead.name, lead.phone, lead.service, lead.message];
+  await Promise.allSettled(recipients.map((r) => sendWhatsApp(r, text, params)));
 }
 
 /** Fire-and-forget ping to the employee a lead was just handed to. */
@@ -216,5 +243,11 @@ export async function notifyAssignment(
 ): Promise<void> {
   const to = employeeRecipient(employeeId);
   if (!to) return; // employee has no WhatsApp number configured — that's fine
-  await sendWhatsApp(to, assignmentMessage(lead, employeeName, siteUrl("/admin/my-leads")));
+  // Deliberately the SAME 4-variable shape as notifyNewLead, so the whole
+  // system needs only ONE approved Meta template instead of two.
+  await sendWhatsApp(
+    to,
+    assignmentMessage(lead, employeeName, siteUrl("/admin/my-leads")),
+    [lead.name, lead.phone, lead.service, `Assigned to you — ${employeeName}`]
+  );
 }

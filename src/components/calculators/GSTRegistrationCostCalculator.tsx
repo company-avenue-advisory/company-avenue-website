@@ -36,7 +36,8 @@ export function GSTRegistrationCostCalculator() {
     const regFee = PRO_FEES["gst-registration"];
     const returnsFee = PRO_FEES["gst-filing"] * months;
     const proFee = regFee + returnsFee;
-    const gst = Math.round(proFee * GST_RATE);
+    // GST applies to the DSC as well as our fee — the GST department charges nothing.
+    const gst = Math.round((proFee + dsc) * GST_RATE);
     return { dsc, regFee, returnsFee, proFee, gst, total: dsc + proFee + gst };
   }, [cfg.dsc, months]);
 
@@ -211,10 +212,10 @@ export function GSTRegistrationCostCalculator() {
           <div className="space-y-1.5">
             {[
               { label: "GST department fee", amount: 0, note: "There is no government fee for GST registration", pro: false },
-              ...(res.dsc ? [{ label: "Digital Signature (DSC)", amount: res.dsc, note: "Authorised signatory — vendor fee", pro: false }] : []),
+              ...(res.dsc ? [{ label: "Digital Signature (DSC)", amount: res.dsc, note: "Authorised signatory — Class 3, two-year", pro: true }] : []),
               { label: "Our fee — registration", amount: res.regFee, note: "REG-01 filing, ARN tracking, GSTIN", pro: true },
               ...(res.returnsFee ? [{ label: `Our fee — ${months} months of returns`, amount: res.returnsFee, note: `${inr(PRO_FEES["gst-filing"])} × ${months} months`, pro: true }] : []),
-              { label: "GST on professional fee", amount: res.gst, note: "18%", pro: true },
+              { label: "GST @ 18%", amount: res.gst, note: res.dsc ? "On our fee and the DSC" : "On our fee", pro: true },
             ].map((r) => (
               <div
                 key={r.label}

@@ -5,11 +5,16 @@
  * components must receive the resolved values as props (see
  * project-startup-schemes-build client-bundle rule).
  *
- * Benchmarked against setindiabiz.com published professional fees (scraped
- * 2026-08-11). Our professional fee = their entry-level plan + ₹500, and the
- * strike-through "compare at" gets the same +₹500 so the discount delta matches.
- * ONE price per service — no packages or tiers. Government fees are never marked
- * up; they are pass-through, shown "at actual".
+ * ONE price per service — no packages or tiers.
+ *
+ * Company incorporation (Pvt Ltd / OPC / Section 8) is governed by
+ * CAA_Incorporation_Cost_Calculator_Final.xlsx — see lib/calc-fees.ts. That
+ * workbook is the authority for the fee, the MCA scale, stamp duty and GST scope.
+ *
+ * Everything else is benchmarked against setindiabiz.com published professional
+ * fees (scraped 2026-08-11) at their entry-level plan + ₹500, with the same +₹500
+ * on the strike-through so the discount delta matches. Government fees are never
+ * marked up; they are pass-through, shown "at actual".
  */
 import { PRO_FEES, inr } from "@/lib/calc-fees";
 
@@ -43,13 +48,17 @@ export type ServicePricing = {
 
 const GST_NOTE = "GST @18% on professional fees is charged extra.";
 
+/** Companies: MCA fees and stamp duty are pure-agent recoveries — no GST on them. */
+const PURE_AGENT_NOTE =
+  "GST @18% applies to the Digital Signatures and our professional fee only. MCA fees and stamp duty are recovered at actuals as a pure agent under Rule 33 of the CGST Rules, 2017.";
+
 export const SERVICE_PRICING: Record<string, ServicePricing> = {
   /* ─────────────── Company Formation ─────────────── */
 
   "private-limited-company": {
     label: "Private Limited Company Registration Cost",
     price: PRO_FEES["private-limited-company"],
-    compareAt: 5499,
+    compareAt: 5999,
     feeNote: "+ government fees & DSC at actual",
     includes: [
       "Digital Signature (DSC) processing for 2 directors",
@@ -62,14 +71,15 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
     ],
     breakdown: [
       { label: "Our professional fee", value: inr(PRO_FEES["private-limited-company"]) },
-      { label: "Name approval (SPICe+ Part A)", value: "₹1,000" },
-      { label: "DSC — 2 directors", value: "₹3,000", note: "vendor fee, ₹1,500 each" },
-      { label: "MCA incorporation fee", value: "NIL", note: "authorised capital up to ₹15 lakh" },
-      { label: "Stamp duty (MoA/AoA)", value: "At actual", note: "varies by state" },
-      { label: "PAN & TAN", value: "₹131" },
+      { label: "MCA registration fee", value: "NIL", note: "authorised capital up to ₹15 lakh is exempt" },
+      { label: "Stamp duty (e-Form + MoA + AoA)", value: "₹2,460", note: "Delhi at ₹15 lakh capital — varies by state" },
+      { label: "Name reservation (SPICe+ Part A)", value: "₹1,000" },
+      { label: "PAN & TAN", value: "₹143" },
+      { label: "DSC — 2 directors", value: "₹4,000", note: "₹2,000 each, Class 3 two-year" },
+      { label: "GST @18% on DSC + our fee", value: "₹1,350" },
     ],
-    typicalTotal: "≈ ₹8,020 all-in (incl. GST) — 2 directors, ₹1 lakh capital, Delhi",
-    disclaimer: GST_NOTE,
+    typicalTotal: "≈ ₹12,452 all-in — 2 directors, ₹15 lakh capital, Delhi",
+    disclaimer: PURE_AGENT_NOTE,
   },
 
   "llp-registration": {
@@ -88,21 +98,22 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
     ],
     breakdown: [
       { label: "Our professional fee", value: inr(PRO_FEES["llp-registration"]) },
-      { label: "DSC — 2 partners", value: "₹3,000", note: "vendor fee, ₹1,500 each" },
       { label: "Name approval (RUN-LLP)", value: "₹200" },
       { label: "FiLLiP incorporation fee", value: "₹500 – ₹5,000", note: "by capital contribution slab" },
       { label: "Form 3 filing fee", value: "₹50 – ₹200", note: "by capital contribution slab" },
       { label: "LLP Agreement stamp duty", value: "At actual", note: "varies by state, ~1% of contribution" },
-      { label: "PAN & TAN", value: "₹131" },
+      { label: "PAN & TAN", value: "₹143" },
+      { label: "DSC — 2 partners", value: "₹4,000", note: "₹2,000 each, Class 3 two-year" },
+      { label: "GST @18% on DSC + our fee", value: "₹1,260" },
     ],
-    typicalTotal: "≈ ₹8,420 all-in (incl. GST) — 2 partners, ₹1 lakh contribution, Delhi",
+    typicalTotal: "≈ ₹10,152 all-in — 2 partners, ₹1 lakh contribution, Delhi",
     disclaimer: `Government fee shown is the combined FiLLiP + PAN + TAN + Form 3 cost. LLP Agreement stamp duty varies by state. ${GST_NOTE}`,
   },
 
   "one-person-company": {
     label: "One Person Company (OPC) Registration Cost",
     price: PRO_FEES["one-person-company"],
-    compareAt: 5499,
+    compareAt: 5999,
     feeNote: "+ government fees & DSC at actual",
     includes: [
       "Digital Signature (DSC) processing",
@@ -116,14 +127,15 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
     ],
     breakdown: [
       { label: "Our professional fee", value: inr(PRO_FEES["one-person-company"]) },
-      { label: "Name approval (SPICe+ Part A)", value: "₹1,000" },
-      { label: "DSC — 1 director", value: "₹1,500", note: "vendor fee" },
-      { label: "MCA incorporation fee", value: "NIL", note: "authorised capital up to ₹15 lakh" },
-      { label: "Stamp duty (MoA/AoA)", value: "At actual", note: "varies by state" },
-      { label: "PAN & TAN", value: "₹131" },
+      { label: "MCA registration fee", value: "NIL", note: "authorised capital up to ₹15 lakh is exempt" },
+      { label: "Stamp duty (e-Form + MoA + AoA)", value: "₹2,460", note: "Delhi at ₹15 lakh capital — varies by state" },
+      { label: "Name reservation (SPICe+ Part A)", value: "₹1,000" },
+      { label: "PAN & TAN", value: "₹143" },
+      { label: "DSC — 1 director", value: "₹2,000", note: "Class 3, two-year validity" },
+      { label: "GST @18% on DSC + our fee", value: "₹990" },
     ],
-    typicalTotal: "≈ ₹6,520 all-in (incl. GST) — ₹1 lakh capital, Delhi",
-    disclaimer: GST_NOTE,
+    typicalTotal: "≈ ₹10,092 all-in — ₹15 lakh capital, Delhi",
+    disclaimer: PURE_AGENT_NOTE,
   },
 
   "partnership-firm": {
@@ -142,11 +154,11 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
       { label: "Our professional fee", value: inr(PRO_FEES["partnership-firm"]) },
       { label: "Deed stamp paper", value: "At actual", note: "state-specific, typically ₹500 – ₹5,000" },
       { label: "Notarisation", value: "At actual" },
-      { label: "Firm PAN & TAN", value: "₹131" },
+      { label: "Firm PAN & TAN", value: "₹143" },
       { label: "Registrar of Firms fee", value: "At actual", note: "optional but recommended" },
       { label: "Trademark filing (optional add-on)", value: "₹4,500", note: "government fee, per class" },
     ],
-    typicalTotal: "≈ ₹8,320 all-in (incl. GST) — 2 partners, Delhi",
+    typicalTotal: "≈ ₹8,332 all-in (incl. GST) — 2 partners, Delhi",
     disclaimer: GST_NOTE,
   },
 
@@ -186,14 +198,15 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
     ],
     breakdown: [
       { label: "Our professional fee", value: inr(PRO_FEES["section-8-company"]) },
-      { label: "Name approval", value: "₹1,000" },
-      { label: "DSC — 2 directors", value: "₹3,000", note: "vendor fee" },
-      { label: "MCA / ROC fee", value: "₹2,000", note: "approx., licence under Section 8" },
-      { label: "Stamp duty", value: "At actual", note: "varies by state" },
-      { label: "12A & 80G govt. fee", value: "NIL" },
+      { label: "MCA registration fee", value: "NIL", note: "authorised capital up to ₹15 lakh is exempt" },
+      { label: "Stamp duty", value: "₹10", note: "Delhi exempts Section 8 from MoA & AoA duty" },
+      { label: "Name reservation (SPICe+ Part A)", value: "₹1,000" },
+      { label: "PAN & TAN", value: "₹143" },
+      { label: "DSC — 2 directors", value: "₹4,000", note: "₹2,000 each, Class 3 two-year" },
+      { label: "GST @18% on DSC + our fee", value: "₹2,160" },
     ],
-    typicalTotal: "≈ ₹15,920 all-in (incl. GST) — 2 directors, Delhi",
-    disclaimer: GST_NOTE,
+    typicalTotal: "≈ ₹15,312 all-in — 2 directors, ₹15 lakh capital, Delhi",
+    disclaimer: PURE_AGENT_NOTE,
   },
 
   "indian-subsidiary": {
