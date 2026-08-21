@@ -33,8 +33,21 @@ function token(): string {
   return process.env.TELEGRAM_BOT_TOKEN ?? "";
 }
 
+/** Values are typed by hand into the Vercel dashboard, which happily stores
+ *  stray quotes and whitespace. Strip both rather than fail silently. */
+function envValue(name: string): string {
+  return (process.env[name] ?? "").trim().replace(/^["']|["']$/g, "").trim();
+}
+
+/** Tolerant boolean: "true", "TRUE", "True", "1" and "yes" all mean yes.
+ *  A strict === "true" check silently disables the feature on a capitalised
+ *  value, which is invisible and maddening to debug in production. */
+function envFlag(name: string): boolean {
+  return ["true", "1", "yes", "on"].includes(envValue(name).toLowerCase());
+}
+
 function recipient(id: string, label: string, envVar: string): Recipient | null {
-  const chatId = (process.env[envVar] ?? "").trim();
+  const chatId = envValue(envVar);
   return chatId ? { id, label, chatId } : null;
 }
 
@@ -48,7 +61,7 @@ export function employeeRecipient(userId: string): Recipient | null {
 /** Who gets pinged when a brand-new lead arrives. */
 export function leadAlertRecipients(): Recipient[] {
   const list = [recipient("boss", "Boss", "TELEGRAM_BOSS_CHAT_ID")];
-  if (process.env.TELEGRAM_NOTIFY_EMPLOYEES === "true") {
+  if (envFlag("TELEGRAM_NOTIFY_EMPLOYEES")) {
     list.push(employeeRecipient("emp1"), employeeRecipient("emp2"));
   }
   return list.filter((r): r is Recipient => r !== null);
@@ -161,6 +174,13 @@ export async function notifyNewLead(lead: LeadLike): Promise<void> {
     "",
     `<i>${esc(lead.message.slice(0, 600))}</i>`,
   ].join("\n");
+
+  // Logged so a production miss is diagnosable from the Vercel logs alone —
+  // it shows who was resolved, not just who failed.
+  console.log(
+    `[telegram] new lead → ${recipients.map((r) => r.id).join(", ")} ` +
+      `(notifyEmployees=${envFlag("TELEGRAM_NOTIFY_EMPLOYEES")})`
+  );
 
   const buttons = contactButtons(lead, "/admin/leads");
   await Promise.allSettled(recipients.map((r) => send(r, html, buttons)));
