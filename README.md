@@ -126,7 +126,7 @@ Create `src/.env.local` for local dev and mirror the same keys in Vercel.
 | `EMP1_USER` / `EMP1_PASSWORD` / `EMP1_NAME` | Employee 1 login | for the team |
 | `EMP2_USER` / `EMP2_PASSWORD` / `EMP2_NAME` | Employee 2 login | for the team |
 | `ADMIN_SESSION_SECRET` | Signs the session cookie (derived from passwords if blank) | optional |
-| `WHATSAPP_*` | Instant WhatsApp lead alerts — see [LEAD-CONSOLE-SETUP.md](LEAD-CONSOLE-SETUP.md) | for alerts |
+| `TELEGRAM_*` | Instant Telegram lead alerts — see [LEAD-CONSOLE-SETUP.md](LEAD-CONSOLE-SETUP.md) | for alerts |
 | `NEXT_PUBLIC_GTM_ID` | Google Tag Manager container (`GTM-KMKTTDKD`) | for analytics |
 | `NEXT_PUBLIC_GA_ID` | GA4 direct — **leave blank**, GA4 fires inside GTM | no |
 

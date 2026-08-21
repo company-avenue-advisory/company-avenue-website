@@ -3,7 +3,7 @@ import { z } from "zod";
 import { Resend } from "resend";
 import { getDb, isMongoConfigured } from "@/lib/mongodb";
 import { COMPANY } from "@/lib/constants";
-import { notifyNewLead } from "@/lib/whatsapp";
+import { notifyNewLead } from "@/lib/telegram";
 import { newTaskList } from "@/lib/leads";
 
 // Same shape the form validates against on the client.
@@ -70,9 +70,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 2) Instant WhatsApp alert to the boss — this is what stops a lead going
+  // 2) Instant Telegram alert to the boss — this is what stops a lead going
   //    cold. Best-effort like email: the lead is already stored above, so a
-  //    WhatsApp failure must never surface to the visitor.
+  //    Telegram failure must never surface to the visitor.
   await notifyNewLead(data);
 
   // 3) Best-effort email notification. Never fail the request if email

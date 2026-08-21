@@ -5,7 +5,7 @@ import { getSession } from "@/lib/session";
 import { listEmployees, employeeName, type Session } from "@/lib/auth";
 import { toLead } from "@/lib/leads-db";
 import { isLeadStatus, newTaskList, type LeadTask } from "@/lib/leads";
-import { notifyAssignment } from "@/lib/whatsapp";
+import { notifyAssignment } from "@/lib/telegram";
 
 /* Every mutation on a lead funnels through here so the permission rule lives
    in exactly one place:

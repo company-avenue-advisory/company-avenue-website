@@ -1,6 +1,6 @@
 # Lead Console — Setup & Usage
 
-Role-based lead management at `/admin`, plus an instant WhatsApp alert the
+Role-based lead management at `/admin`, plus an instant Telegram alert the
 moment a lead comes in. Everything below is configured with environment
 variables — no code changes needed to add people or rotate passwords.
 
@@ -40,128 +40,65 @@ password instantly signs everybody out.
 
 ---
 
-## 2. WhatsApp alerts — what you need to give me
+## 2. Telegram alerts — what you need to do
 
-Set `WHATSAPP_PROVIDER` to pick how messages are sent.
+Telegram was chosen over WhatsApp deliberately: it is free with no per-message
+cost, official, needs no message-template approval, no business verification,
+and no Meta Business account. (WhatsApp Cloud API onboarding was blocked by an
+advertising restriction on the business portfolio; CallMeBot, the free
+third-party route, stopped responding.)
 
-### Option A — CallMeBot (default: free, no Meta account, ~2 minutes)
+### Setup
 
-This is the "no complication and free" route. It is a personal-use service, so
-**each recipient authorises it once from their own phone**:
+1. **Create the bot.** On Telegram, search **@BotFather** → send `/newbot` →
+   give it a name (e.g. `Company Avenue Leads`) and a username ending in `bot`
+   (e.g. `company_avenue_leads_bot`).
+2. **Copy the token** it replies with into `.env.local`:
 
-1. On the phone that should receive alerts, save **+34 623 80 11 90** as a contact.
-   (CallMeBot has changed this number before — if it stops replying, check the
-   current one at <https://www.callmebot.com/blog/free-api-whatsapp-messages/>
-   before assuming anything is broken.)
-2. WhatsApp that number the exact text:
-   `I allow callmebot to send me messages`
-3. It replies with a personal **API key** (a 6–7 digit number), usually within
-   2 minutes. If nothing arrives in 2 minutes, CallMeBot's own instructions say
-   to wait 24 hours before retrying.
-4. Put the phone number and that key in `.env.local`:
+   ```
+   TELEGRAM_BOT_TOKEN=123456789:AAE...
+   ```
 
-```
-WHATSAPP_PROVIDER=callmebot
-WHATSAPP_BOSS_PHONE=919953719111     # boss's number, country code, no +
-WHATSAPP_BOSS_APIKEY=123456          # the key CallMeBot replied with
-```
+3. **Everyone who should get alerts** opens that bot on Telegram and presses
+   **START**. Nothing happens visibly — that is expected.
+4. **Discover the chat IDs:**
 
-**So all I need from you is: the boss's WhatsApp number, and the API key that
-bot sends back.** That is the whole setup.
+   ```
+   npm run telegram:chat-id
+   ```
 
-Optional — ping an employee automatically when a lead is assigned to them
-(each employee repeats steps 1–3 on their own phone):
+   It prints every chat that has messaged the bot, with the env line to paste.
 
-```
-WHATSAPP_EMP1_PHONE=91XXXXXXXXXX
-WHATSAPP_EMP1_APIKEY=......
-WHATSAPP_EMP2_PHONE=91XXXXXXXXXX
-WHATSAPP_EMP2_APIKEY=......
-```
+5. **Paste them in:**
 
-Optional — alert both employees on *every* new lead, not just their own:
+   ```
+   TELEGRAM_BOSS_CHAT_ID=123456789     # required
+   TELEGRAM_EMP1_CHAT_ID=              # optional
+   TELEGRAM_EMP2_CHAT_ID=              # optional
+   TELEGRAM_NOTIFY_EMPLOYEES=false     # true = employees alerted on every lead
+   ```
 
-```
-WHATSAPP_NOTIFY_EMPLOYEES=true
-```
+6. Restart the dev server. Submit the contact form. The boss's Telegram pings.
 
-**Honest limits of CallMeBot:** it is a free third-party hobby service, rate
-limited to roughly one message every few seconds, with no delivery guarantee or
-support. Fine for a handful of leads a day. It only sends to numbers that
-authorised it, so it can never message customers — only your team.
+> Telegram only retains ~24 hours of updates, so run `telegram:chat-id`
+> reasonably soon after pressing START. If it finds nothing, press START again
+> (or send any message to the bot) and re-run.
 
-### Option B — Official WhatsApp Cloud API (when you outgrow the above)
+> A bot cannot start a conversation. Each recipient **must** press START once
+> or Telegram rejects every send to them with "chat not found".
 
-Meta's own API. Free tier covers a generous monthly volume, but it needs a Meta
-Business account, a verified number, and — for business-initiated messages
-outside a 24-hour window — an approved message template.
+### What the alert looks like
 
-```
-WHATSAPP_PROVIDER=meta
-WHATSAPP_META_TOKEN=EAAG...          # permanent access token
-WHATSAPP_META_PHONE_ID=1234567890    # phone number ID from the dashboard
-WHATSAPP_META_TEMPLATE=new_lead_alert # approved template name (leave blank to send plain text)
-WHATSAPP_META_TEMPLATE_LANG=en
-```
-
-The recipient variables (`WHATSAPP_BOSS_PHONE`, `WHATSAPP_EMP*_PHONE`) are the
-same, so switching providers is a one-line change. API keys are ignored here.
-
-**Free test number:** every WhatsApp app gets one. It messages up to **5**
-verified recipient numbers at no cost — enough for the boss plus both
-employees — with no business verification and without registering your own
-business number. Note that a number registered to the Cloud API **cannot
-already be in use on regular WhatsApp / WhatsApp Business**, which is another
-reason to stay on the test number for internal alerts.
-
-**The template.** Business-initiated messages need an approved template.
-Create ONE **Utility** template named `new_lead_alert` with this exact body —
-both `notifyNewLead()` and `notifyAssignment()` send this same 4-variable
-shape, so a single approved template covers the whole system:
-
-```
-New lead from the website.
-
-Name: {{1}}
-Phone: {{2}}
-Service: {{3}}
-Message: {{4}}
-
-Open the lead console to assign it.
-```
-
-Then set `WHATSAPP_META_TEMPLATE=new_lead_alert`.
-
-> **Meta rejects a body that starts or ends with a variable** ("dangling
-> parameter"), and rejects two variables placed back to back. That closing
-> line is not decoration — without it the template is refused.
-
-> `WHATSAPP_META_TEMPLATE_LANG` must match the template's language code
-> **exactly**. Picking "English" gives `en`; picking "English (US)" gives
-> `en_US`. A mismatch fails every send with "template name does not exist in
-> the translation".
-
-> Meta rejects template variables containing newlines, tabs, or 4+ consecutive
-> spaces. `sanitiseParam()` in `whatsapp.ts` flattens them to " · " before
-> sending, so a multi-line enquiry cannot fail the send.
-
-Leave `WHATSAPP_META_TEMPLATE` blank and the code sends plain text instead —
-which only works inside an open 24-hour customer-service window (i.e. after
-the recipient has messaged you). Fine for a quick test, not for production.
-
-### Option C — off
-
-```
-WHATSAPP_PROVIDER=none
-```
+Name, phone, email, service and the enquiry text, with two tap buttons:
+**💬 Message lead** (opens WhatsApp to the lead, greeting pre-filled) and
+**📋 Open console**. Assigning a lead pings that employee the same way.
 
 ### Safety guarantee
 
-Every WhatsApp send is best-effort and wrapped in its own error handling. If
-WhatsApp is down, the key is wrong, or nothing is configured at all, the lead is
-**still saved to MongoDB and the form still returns success to the visitor**.
-This is tested — a broken WhatsApp config produces a logged error and an
-`HTTP 200` on the form.
+Every send is best-effort and individually wrapped. If Telegram is down, the
+token is wrong, or nothing is configured at all, the lead is **still saved to
+MongoDB and the form still returns success to the visitor**. This is tested —
+an unconfigured bot logs a warning and the form still returns `HTTP 200`.
 
 ---
 
@@ -175,7 +112,7 @@ This is tested — a broken WhatsApp config produces a logged error and an
 - The **assign dropdown on each row** is the admin-only control: pick Employee 1
   or Employee 2 and the lead moves to their console instantly. Picking
   "— Assign to —" un-assigns it again.
-- Assigning fires the WhatsApp ping to that employee (if their number is set)
+- Assigning fires the Telegram ping to that employee (if their chat id is set)
   and logs "Assigned to …" in the lead's activity trail.
 - Admin can do everything an employee can: tick tasks, add notes, change status.
 
@@ -205,7 +142,7 @@ Statuses: `new → assigned → in_progress → completed`, plus `dropped`.
 | [`src/lib/auth.ts`](src/lib/auth.ts) | Accounts, password check, signed session cookie (Edge-safe) |
 | [`src/lib/session.ts`](src/lib/session.ts) | Server-side session reader for routes/pages |
 | [`src/middleware.ts`](src/middleware.ts) | Auth gate + role-based page routing |
-| [`src/lib/whatsapp.ts`](src/lib/whatsapp.ts) | Provider abstraction + message templates |
+| [`src/lib/telegram.ts`](src/lib/telegram.ts) | Bot sends, recipients, message building |
 | [`src/lib/leads.ts`](src/lib/leads.ts) | Shared lead types, statuses, checklist, formatters |
 | [`src/lib/leads-db.ts`](src/lib/leads-db.ts) | Mongo document → `Lead` mapping |
 | [`src/app/api/admin/login`](src/app/api/admin/login/route.ts) | Login + per-IP brute-force throttle |
@@ -228,8 +165,8 @@ redeploy:
 ADMIN_NAME, EMP1_USER, EMP1_PASSWORD, EMP1_NAME,
 EMP2_USER, EMP2_PASSWORD, EMP2_NAME, ADMIN_SESSION_SECRET,
 NEXT_PUBLIC_SITE_URL,
-WHATSAPP_PROVIDER, WHATSAPP_BOSS_PHONE, WHATSAPP_BOSS_APIKEY
-(+ the optional WHATSAPP_EMP* and WHATSAPP_META_* ones you use)
+TELEGRAM_BOT_TOKEN, TELEGRAM_BOSS_CHAT_ID
+(+ the optional TELEGRAM_EMP1_CHAT_ID / TELEGRAM_EMP2_CHAT_ID)
 ```
 
 `.env.local` is for local development only — Vercel never reads it.
