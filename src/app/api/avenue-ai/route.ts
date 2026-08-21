@@ -7,7 +7,7 @@ import { SYSTEM_PROMPT } from "@/lib/avenue-ai-knowledge";
 ───────────────────────────────────────────────────────────── */
 const PROVIDER = process.env.AI_PROVIDER ?? "mock"; // "groq" | "openai" | "mock"
 const GROQ_API_KEY = process.env.GROQ_API_KEY ?? "";
-const GROQ_MODEL = process.env.GROQ_MODEL ?? "llama3-8b-8192";
+const GROQ_MODEL = process.env.GROQ_MODEL ?? "openai/gpt-oss-120b";
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY ?? "";
 const OPENAI_MODEL = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
 
@@ -74,7 +74,7 @@ async function streamGroq(messages: ChatMessage[]): Promise<Response> {
       model: GROQ_MODEL,
       messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
       stream: true,
-      max_tokens: 1024,
+      max_tokens: 2048,
       temperature: 0.7,
     }),
   });
@@ -98,7 +98,7 @@ async function streamOpenAI(messages: ChatMessage[]): Promise<Response> {
       model: OPENAI_MODEL,
       messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
       stream: true,
-      max_tokens: 1024,
+      max_tokens: 2048,
       temperature: 0.7,
     }),
   });
