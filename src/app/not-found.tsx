@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 
 export default function NotFound() {
+  // The navbar/footer moved to (main)/layout.tsx, which this file sits above —
+  // so the 404 renders its own chrome to stay identical to before.
   return (
+    <SiteChrome>
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
       <div className="text-center max-w-md">
         <p className="text-8xl font-heading font-bold text-primary/10 mb-4">404</p>
@@ -35,5 +39,6 @@ export default function NotFound() {
         </div>
       </div>
     </div>
+    </SiteChrome>
   );
 }

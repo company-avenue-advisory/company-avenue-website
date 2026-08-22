@@ -8,6 +8,41 @@
     --font-inter: "Inter", sans-serif;
   }
 
+  /* ── US property theming ──────────────────────────────────────────────────
+     us.companyavenueadvisory.com alternates dark "ink" bands with light
+     "panel" bands. The ink bands are dark in BOTH themes, so only the panel
+     bands need tokens — these drive the `us-panel-*` Tailwind colours.
+
+     Values are space-separated RGB triplets, not hex, so Tailwind's
+     <alpha-value> works: text-us-panel-muted/60 needs to compose an alpha.
+
+     Namespaced --us-* and scoped to .dark, which the India site never sets
+     (it has zero `dark:` classes — verified), so nothing here can reach it. */
+  :root {
+    --us-panel: 246 245 241; /* warm paper  #F6F5F1 */
+    --us-panel-raised: 255 255 255; /* cards       #FFFFFF */
+    --us-panel-fg: 10 13 12; /* ink text    #0A0D0C */
+    --us-panel-muted: 88 95 91; /* body text   #585F5B */
+    --us-panel-line: 227 225 216; /* hairline    #E3E1D8 */
+    --us-panel-accent: 92 122 23; /* deep lime   #5C7A17 — 4.9:1 on paper */
+  }
+
+  .dark {
+    --us-panel: 20 25 23; /* raised dark #141917 — reads lighter than the
+                                             ink bands, so the section rhythm survives */
+    --us-panel-raised: 28 34 32; /* cards       #1C2220 */
+    --us-panel-fg: 237 240 238; /* #EDF0EE */
+    --us-panel-muted: 152 161 157; /* #98A19D */
+    --us-panel-line: 38 46 43; /* #262E2B */
+    --us-panel-accent: 205 255 90; /* signal lime #CDFF5A — legible on dark */
+  }
+
+  /* The shared shell paints #F8FAFC. On the US page in dark mode that shows
+     through as a pale strip under the footer and on overscroll. */
+  .dark body {
+    background-color: #0a0d0c;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
