@@ -185,7 +185,7 @@ export const PRICING_CARDS = [
   },
   {
     key: "pod",
-    label: "Avenue Advisory Pod",
+    label: "Company Avenue Advisory",
     sub: "Dedicated offshore team",
     price: PILOT_FEE_USD,
     unit: "/ month flat, pilot rate",

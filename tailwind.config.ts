@@ -35,43 +35,33 @@ const config: Config = {
         muted: "#64748B",
 
         /* ── US property palette ────────────────────────────────────────────
-           us.companyavenueadvisory.com runs its own visual system: warm ink
-           and paper with a single high-signal lime, sized for a US buyer who
-           is also evaluating Pilot, Bench and Botkeeper. Deliberately NOT the
-           India navy/gold — these keys are additive and nothing else uses
-           them, so the main site is untouched. */
-        us: {
-          ink: {
-            DEFAULT: "#0A0D0C", // page dark
-            800: "#121715", // raised surface on dark
-            700: "#1D2422", // hairline / border on dark
-            600: "#2B3431", // hover border on dark
-          },
-          paper: "#F6F5F1", // warm off-white page
-          line: "#E3E1D8", // hairline on paper
-          lime: {
-            DEFAULT: "#CDFF5A", // on ink only — 1.3:1 on paper, unreadable there
-            dim: "#A9D93C", // decorative rules and dots on paper
-            deep: "#5C7A17", // the on-paper accent: 4.9:1 on #F6F5F1, so small
-            //                  uppercase eyebrows and index numbers stay legible
-            wash: "#EEFFC7",
-          },
-          slate: "#585F5B", // body text on paper
-          chalk: "#9BA39F", // body text on ink
+           us.companyavenueadvisory.com runs its own visual system, sized for a
+           US buyer who is also evaluating Pilot, Bench and Botkeeper.
+           Deliberately NOT the India navy/gold — these keys are additive and
+           nothing else uses them, so the main site is untouched.
 
-          /* Theme-aware tokens for the light "panel" bands (stack, audience,
-             services, pilot, security) — these flip under .dark, while the ink
-             bands above stay dark in both themes. Backed by the --us-* custom
-             properties in globals.css; the rgb(... / <alpha-value>) form is
-             what keeps `/60` opacity modifiers working. */
-          panel: {
-            DEFAULT: "rgb(var(--us-panel) / <alpha-value>)",
-            raised: "rgb(var(--us-panel-raised) / <alpha-value>)",
-            fg: "rgb(var(--us-panel-fg) / <alpha-value>)",
-            muted: "rgb(var(--us-panel-muted) / <alpha-value>)",
-            line: "rgb(var(--us-panel-line) / <alpha-value>)",
-            accent: "rgb(var(--us-panel-accent) / <alpha-value>)",
+           Two literals (ink, lime) plus a semantic set backed by the --us-*
+           custom properties in globals.css. The literals are for surfaces that
+           are the SAME in both themes — the lime fills and the ink text that
+           sits on them. Everything else must use the semantic tokens, or it
+           will not follow the theme.
+
+           rgb(... / <alpha-value>) is what keeps `/60` opacity modifiers
+           working against a custom property. */
+        us: {
+          ink: "#0A0D0C", // text on a lime fill, in both themes
+          lime: {
+            DEFAULT: "#CDFF5A", // a FILL colour, never a text colour on light
+            dim: "#A9D93C",
           },
+
+          bg: "rgb(var(--us-bg) / <alpha-value>)",
+          alt: "rgb(var(--us-bg-alt) / <alpha-value>)",
+          raised: "rgb(var(--us-raised) / <alpha-value>)",
+          fg: "rgb(var(--us-fg) / <alpha-value>)",
+          muted: "rgb(var(--us-muted) / <alpha-value>)",
+          line: "rgb(var(--us-line) / <alpha-value>)",
+          accent: "rgb(var(--us-accent) / <alpha-value>)",
         },
       },
       fontFamily: {

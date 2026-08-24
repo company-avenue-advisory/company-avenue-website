@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function UsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div id="top" className="bg-us-panel">
+    <div id="top" className="us-root bg-us-bg">
       {/* Theme init. Must run before the page paints, so it is inline and
           synchronous rather than an effect — a class applied after hydration
           would flash the wrong theme. The root layout additionally holds

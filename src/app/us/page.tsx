@@ -24,18 +24,21 @@ import {
    us.companyavenueadvisory.com — the US delivery-hub landing page.
 
    ── DESIGN SYSTEM ──────────────────────────────────────────────────────────
-   This page runs its own visual language, not the India site's navy-and-gold:
-   warm ink (#0A0D0C) and paper (#F6F5F1) with a single high-signal lime, tight
-   display type and generous air. The buyer clicking through from a US search
-   ad is also looking at Pilot, Bench and Botkeeper in adjacent tabs, and the
-   page has to survive that comparison on first impression alone.
+   Fully themed, light-first: warm off-white (#FAF9F6) in light mode, ink in
+   dark, with every surface following the theme. Section rhythm comes from
+   alternating `bg-us-bg` and `bg-us-alt`, with cards on `bg-us-raised` sitting
+   proud of both.
 
-   Sections alternate ink → paper → ink so the eye gets a rhythm instead of one
-   long scroll of white cards. Every section is short by construction: the copy
-   budget is enforced in us-content.ts, not here.
+   The ONLY colours pinned across themes are the lime fills and the ink text
+   that sits on them — the primary CTA, the hero highlight and the pricing
+   card. Lime is a fill, never a text colour: #CDFF5A is 1.3:1 on white. Text
+   accents use `text-us-accent`, which is deep olive on light and lime on dark.
 
-   Server component throughout. The only client JS is the lead form; the
-   accordion is native <details>, which costs nothing and stays crawlable.
+   Every other colour must come from a semantic token, or it will not follow
+   the theme. See globals.css for the token definitions.
+
+   Server component throughout. The only client JS is the lead form and the
+   theme toggle; the accordion is native <details>, which stays crawlable.
 ───────────────────────────────────────────────────────────────────────────── */
 
 const TITLE = "Offshore Accounting Pods for US CPA Firms & Businesses";
@@ -46,7 +49,7 @@ export const metadata: Metadata = {
   // Absolute title: the India title template lives in (main)/layout.tsx and no
   // longer reaches this route, but stating it plainly keeps that true if the
   // root layout ever regains one.
-  title: { absolute: `${TITLE} | Avenue Advisory` },
+  title: { absolute: `${TITLE} | Company Avenue Advisory` },
   description: DESCRIPTION,
   keywords: [
     "outsourced accounting for CPA firms",
@@ -64,7 +67,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Avenue Advisory — US",
+    siteName: "Company Avenue Advisory — US",
     title: TITLE,
     description: DESCRIPTION,
     url: US_SITE_URL,
@@ -98,7 +101,11 @@ const serviceSchema = {
   "@type": "Service",
   name: "Dedicated Offshore Accounting Pods",
   serviceType: "Outsourced accounting and bookkeeping",
-  provider: { "@type": "Organization", name: "Avenue Advisory", url: US_SITE_URL },
+  provider: {
+    "@type": "Organization",
+    name: "Company Avenue Advisory",
+    url: US_SITE_URL,
+  },
   areaServed: { "@type": "Country", name: "United States" },
   audience: {
     "@type": "BusinessAudience",
@@ -123,53 +130,38 @@ function Shell({ children, className = "" }: { children: React.ReactNode; classN
   return <div className={`mx-auto max-w-[1180px] px-5 sm:px-8 ${className}`}>{children}</div>;
 }
 
-function Eyebrow({ children, onInk }: { children: React.ReactNode; onInk?: boolean }) {
+function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <p
-      className={
-        "font-heading text-[0.7rem] font-bold uppercase tracking-[0.2em] " +
-        (onInk ? "text-us-lime" : "text-us-panel-accent")
-      }
-    >
+    <p className="font-heading text-[0.7rem] font-bold uppercase tracking-[0.2em] text-us-accent">
       {children}
     </p>
   );
 }
 
-/** Display heading. `tracking-[-0.035em]` and a sub-1 line-height are what make
- *  Plus Jakarta read as a modern US SaaS wordmark rather than a brochure serif. */
-function H2({ children, onInk }: { children: React.ReactNode; onInk?: boolean }) {
+/** Display heading. `tracking-[-0.035em]` and a sub-1.1 line-height are what
+ *  make Plus Jakarta read as a modern US SaaS wordmark, not a brochure serif. */
+function H2({ children }: { children: React.ReactNode }) {
   return (
-    <h2
-      className={
-        "mt-5 max-w-[19ch] font-heading text-[1.85rem] font-extrabold leading-[1.05] tracking-[-0.035em] sm:text-[2.5rem] md:text-[2.9rem] " +
-        (onInk ? "text-white" : "text-us-panel-fg")
-      }
-    >
+    <h2 className="mt-5 max-w-[19ch] font-heading text-[1.85rem] font-extrabold leading-[1.05] tracking-[-0.035em] text-us-fg sm:text-[2.5rem] md:text-[2.9rem]">
       {children}
     </h2>
   );
 }
 
-function Lede({ children, onInk }: { children: React.ReactNode; onInk?: boolean }) {
+function Lede({ children }: { children: React.ReactNode }) {
   return (
-    <p
-      className={
-        "mt-5 max-w-[52ch] text-[1.02rem] leading-relaxed " +
-        (onInk ? "text-us-chalk" : "text-us-panel-muted")
-      }
-    >
-      {children}
-    </p>
+    <p className="mt-5 max-w-[52ch] text-[1.02rem] leading-relaxed text-us-muted">{children}</p>
   );
 }
 
+/** The one button style that never changes with the theme: a lime fill with
+ *  ink text reads at 14:1 on both backgrounds and keeps the brand constant. */
 function CtaPrimary({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <a
       href="#call"
       className={
-        "inline-flex items-center justify-center gap-2 rounded-full bg-us-lime px-7 py-3.5 font-heading text-[0.95rem] font-bold tracking-[-0.01em] text-us-ink transition-all hover:bg-white hover:shadow-[0_0_36px_-6px_rgba(205,255,90,0.5)] " +
+        "inline-flex items-center justify-center gap-2 rounded-full bg-us-lime px-7 py-3.5 font-heading text-[0.95rem] font-bold tracking-[-0.01em] text-us-ink transition-transform hover:scale-[1.03] " +
         className
       }
     >
@@ -189,41 +181,49 @@ export default function UsLandingPage() {
       <JsonLd data={[faqSchema, serviceSchema]} />
 
       {/* ── 1. HERO ─────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-us-ink">
-        {/* Ambient lime bloom behind the headline. Pure CSS, no image weight. */}
+      <section className="relative overflow-hidden bg-us-bg">
+        {/* Ambient lime bloom and hairline graph paper. Both are theme-aware
+            utilities in globals.css — as inline styles with baked hex they
+            could not follow the theme. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-40 left-1/2 h-[540px] w-[900px] -translate-x-1/2 rounded-full opacity-[0.16] blur-[110px]"
-          style={{ background: "radial-gradient(circle, #CDFF5A 0%, transparent 68%)" }}
+          className="us-glow pointer-events-none absolute -top-40 left-1/2 h-[540px] w-[900px] -translate-x-1/2 rounded-full opacity-30 blur-[110px]"
         />
-        {/* Hairline grid — gives the dark field texture without a pattern file. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
-            backgroundSize: "72px 72px",
-            maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%)",
-          }}
-        />
+        <div aria-hidden className="us-grid pointer-events-none absolute inset-0" />
 
         <Shell className="relative pb-16 pt-16 sm:pt-20 lg:pb-24 lg:pt-28">
           <div className="grid items-center gap-14 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-[0.72rem] font-medium text-us-chalk">
-                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-us-lime" />
-                US delivery division of Avenue Advisory
+              <span className="inline-flex items-center gap-2 rounded-full border border-us-line bg-us-raised px-3.5 py-1.5 text-[0.72rem] font-medium text-us-muted">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-us-lime-dim" />
+                US delivery division of Company Avenue Advisory
               </span>
 
-              <h1 className="mt-7 font-heading text-[2.35rem] font-extrabold leading-[1.0] tracking-[-0.042em] text-white sm:text-[3.1rem] lg:text-[3.5rem]">
-                The accounting team
-                <br className="hidden sm:block" />{" "}
-                <span className="text-us-lime">you couldn&apos;t hire.</span>
+              {/* Two stacked blocks rather than one wrapped line. The lime
+                  highlight is a fill behind ink because #CDFF5A is 1.3:1 as
+                  text on the light theme — unreadable — while ink-on-lime is
+                  ~14:1 and reads identically in both themes.
+
+                  Structuring it as `block` + `inline-block` with an explicit
+                  `mt-2` is what keeps the box off the line above. As a padded
+                  INLINE span its background box is sized from the font's
+                  ascent+descent and ignores line-height entirely, so it grew
+                  taller than its line box and cut straight through the "g" of
+                  "accounting". Tuning the h1's leading only ever bought a
+                  couple of pixels, and the margin scales with the viewport the
+                  wrong way — at 2rem the clearance fell back to 2.5px. Here the
+                  gap is a fixed margin that cannot be eroded by font metrics.
+
+                  Splitting the lines also makes the break deterministic, so the
+                  lime box always owns its own line at every width. */}
+              <h1 className="mt-7 font-heading text-[2rem] font-extrabold leading-[1.2] tracking-[-0.042em] text-us-fg sm:text-[3.1rem] lg:text-[3.5rem]">
+                <span className="block">The accounting team</span>
+                <span className="mt-2 inline-block bg-us-lime px-3 py-0.5 leading-[1.25] text-us-ink">
+                  you couldn&apos;t hire.
+                </span>
               </h1>
 
-              <p className="mt-6 max-w-[46ch] text-[1.05rem] leading-relaxed text-us-chalk">
+              <p className="mt-7 max-w-[46ch] text-[1.05rem] leading-relaxed text-us-muted">
                 A named pod — QA Lead plus trained staff — working inside your QuickBooks,
                 Xero, Bill.com and Gusto. Fully white-label. {PILOT_FEE_USD}/month to
                 start, no long-term contract.
@@ -233,13 +233,13 @@ export default function UsLandingPage() {
                 <CtaPrimary>Book a 30-minute call</CtaPrimary>
                 <a
                   href="#pricing"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 px-7 py-3.5 font-heading text-[0.95rem] font-semibold text-white/85 transition-colors hover:border-white/35 hover:text-white"
+                  className="inline-flex items-center justify-center rounded-full border border-us-line bg-us-raised px-7 py-3.5 font-heading text-[0.95rem] font-semibold text-us-fg transition-colors hover:border-us-fg/30"
                 >
                   See pricing
                 </a>
               </div>
 
-              <p className="mt-5 text-[0.85rem] text-white/40">
+              <p className="mt-5 text-[0.85rem] text-us-muted/80">
                 No card. No pitch. We ask what is in your backlog.
               </p>
             </div>
@@ -248,18 +248,18 @@ export default function UsLandingPage() {
                 not invented names: nothing here is a claim a prospect could
                 check and find false. */}
             <div className="relative">
-              <div className="rounded-[1.75rem] border border-white/10 bg-us-ink-800 p-6 shadow-[0_32px_80px_-24px_rgba(0,0,0,0.9)] sm:p-7">
+              <div className="us-shadow-lift rounded-[1.75rem] border border-us-line bg-us-raised p-6 sm:p-7">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="font-heading text-[0.66rem] font-bold uppercase tracking-[0.18em] text-white/35">
+                    <p className="font-heading text-[0.66rem] font-bold uppercase tracking-[0.18em] text-us-muted/70">
                       Your pod
                     </p>
-                    <p className="mt-1.5 font-heading text-lg font-bold tracking-[-0.02em] text-white">
+                    <p className="mt-1.5 font-heading text-lg font-bold tracking-[-0.02em] text-us-fg">
                       Named on day one
                     </p>
                   </div>
-                  <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-us-lime/12 px-2.5 py-1 text-[0.68rem] font-semibold text-us-lime">
-                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-us-lime" />
+                  <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-us-lime px-2.5 py-1 text-[0.68rem] font-bold text-us-ink">
+                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-us-ink" />
                     Active
                   </span>
                 </div>
@@ -272,19 +272,19 @@ export default function UsLandingPage() {
                   ].map((m) => (
                     <li
                       key={m.tag}
-                      className="flex items-center gap-3.5 rounded-2xl border border-white/[0.07] bg-white/[0.02] px-4 py-3.5"
+                      className="flex items-center gap-3.5 rounded-2xl border border-us-line bg-us-bg px-4 py-3.5"
                     >
                       <span
                         aria-hidden
-                        className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/[0.06] font-heading text-[0.7rem] font-bold text-us-chalk"
+                        className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-us-alt font-heading text-[0.7rem] font-bold text-us-muted"
                       >
                         {m.tag}
                       </span>
                       <span className="min-w-0">
-                        <span className="block font-heading text-[0.9rem] font-bold text-white">
+                        <span className="block font-heading text-[0.9rem] font-bold text-us-fg">
                           {m.role}
                         </span>
-                        <span className="block truncate text-[0.8rem] text-white/45">
+                        <span className="block truncate text-[0.8rem] text-us-muted">
                           {m.note}
                         </span>
                       </span>
@@ -292,17 +292,17 @@ export default function UsLandingPage() {
                   ))}
                 </ul>
 
-                <div className="mt-5 rounded-2xl border border-us-lime/20 bg-us-lime/[0.07] px-4 py-3.5">
-                  <p className="font-heading text-[0.64rem] font-bold uppercase tracking-[0.18em] text-us-lime">
+                <div className="mt-5 rounded-2xl border border-us-lime-dim/40 bg-us-lime/15 px-4 py-3.5">
+                  <p className="font-heading text-[0.64rem] font-bold uppercase tracking-[0.18em] text-us-accent">
                     Overnight cycle
                   </p>
-                  <p className="mt-1.5 text-[0.88rem] text-white/85">
+                  <p className="mt-1.5 text-[0.88rem] font-medium text-us-fg">
                     Flagged 5:10 PM ET → back by 8:00 AM ET
                   </p>
                 </div>
               </div>
 
-              <p className="mt-3 text-center text-[0.72rem] text-white/25">
+              <p className="mt-3 text-center text-[0.72rem] text-us-muted/60">
                 Illustrative. Pod size and roles are scoped to your volume.
               </p>
             </div>
@@ -310,24 +310,26 @@ export default function UsLandingPage() {
         </Shell>
 
         {/* Stat band */}
-        <div className="relative border-t border-white/[0.07]">
+        <div className="relative border-t border-us-line">
           <Shell>
-            <dl className="grid grid-cols-2 divide-x divide-white/[0.07] sm:grid-cols-4">
+            {/* Negative margins cancel the Shell padding so the first stat's
+                baseline aligns with the headline above it, while each cell keeps
+                its own gutter against the dividers. */}
+            <dl className="-mx-5 grid grid-cols-2 divide-x divide-us-line sm:-mx-8 sm:grid-cols-4">
               {STATS.map((s, i) => (
                 <div
                   key={s.label}
                   className={
-                    "px-1 py-7 sm:px-6 " +
+                    "px-5 py-7 sm:px-8 " +
                     // On a 2-up phone grid the 3rd cell starts a new row and must
                     // lose the inherited left divider.
-                    (i === 2 ? "border-l-0 sm:border-l " : "") +
-                    (i % 2 === 0 ? "pr-4 sm:pr-6" : "pl-4 sm:pl-6")
+                    (i === 2 ? "border-l-0 sm:border-l" : "")
                   }
                 >
-                  <dt className="font-heading text-[1.7rem] font-extrabold tracking-[-0.03em] text-white sm:text-[2rem]">
+                  <dt className="font-heading text-[1.7rem] font-extrabold tracking-[-0.03em] text-us-fg sm:text-[2rem]">
                     {s.value}
                   </dt>
-                  <dd className="mt-1 text-[0.8rem] leading-snug text-white/40">{s.label}</dd>
+                  <dd className="mt-1 text-[0.8rem] leading-snug text-us-muted">{s.label}</dd>
                 </div>
               ))}
             </dl>
@@ -335,15 +337,15 @@ export default function UsLandingPage() {
         </div>
 
         {/* Trust strip */}
-        <div className="relative border-t border-white/[0.07]">
+        <div className="relative border-t border-us-line">
           <Shell className="py-5">
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-2.5">
               {badges.map((b) => (
                 <li
                   key={b.label}
-                  className="flex items-center gap-2 text-[0.74rem] font-medium text-white/40"
+                  className="flex items-center gap-2 text-[0.74rem] font-medium text-us-muted"
                 >
-                  <span aria-hidden className="text-us-lime">✓</span>
+                  <span aria-hidden className="text-us-accent">✓</span>
                   {b.label}
                 </li>
               ))}
@@ -353,16 +355,16 @@ export default function UsLandingPage() {
       </section>
 
       {/* ── 2. THE STACK ────────────────────────────────────────────────── */}
-      <section className="border-b border-us-panel-line bg-us-panel py-12 sm:py-14">
+      <section className="border-y border-us-line bg-us-alt py-12 sm:py-14">
         <Shell>
-          <p className="text-center font-heading text-[0.7rem] font-bold uppercase tracking-[0.2em] text-us-panel-muted/60">
+          <p className="text-center font-heading text-[0.7rem] font-bold uppercase tracking-[0.2em] text-us-muted/70">
             Your pod already works in your stack
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-x-9 gap-y-4 sm:gap-x-14">
             {STACK_PRIMARY.map((s) => (
               <span
                 key={s}
-                className="font-heading text-[1.15rem] font-extrabold tracking-[-0.03em] text-us-panel-fg sm:text-[1.4rem]"
+                className="font-heading text-[1.15rem] font-extrabold tracking-[-0.03em] text-us-fg sm:text-[1.4rem]"
               >
                 {s}
               </span>
@@ -370,18 +372,9 @@ export default function UsLandingPage() {
           </div>
         </Shell>
 
-        {/* Everything else, scrolling. Faded at both edges so it reads as a
-            continuous ribbon rather than a list that got cut off. */}
-        <div
-          className="relative mt-8 overflow-hidden"
-          style={{
-            maskImage: "linear-gradient(to right, transparent, #000 12%, #000 88%, transparent)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent, #000 12%, #000 88%, transparent)",
-          }}
-        >
-          {/* No gap on the track itself: the keyframe translates exactly -50%, so
-              the two halves must be identical widths. An outer gap would sit
+        <div className="us-fade-x relative mt-8 overflow-hidden">
+          {/* No gap on the track itself: the keyframe translates exactly -50%,
+              so the two halves must be identical widths. An outer gap would sit
               half-inside each half and make the loop jump 6px every cycle. */}
           <div className="flex w-max animate-marquee motion-reduce:animate-none">
             {[0, 1].map((copy) => (
@@ -389,7 +382,7 @@ export default function UsLandingPage() {
                 {STACK_ALSO.map((t) => (
                   <li
                     key={t}
-                    className="whitespace-nowrap rounded-full border border-us-panel-line bg-us-panel-raised px-4 py-2 text-[0.85rem] text-us-panel-muted"
+                    className="whitespace-nowrap rounded-full border border-us-line bg-us-raised px-4 py-2 text-[0.85rem] text-us-muted"
                   >
                     {t}
                   </li>
@@ -401,21 +394,24 @@ export default function UsLandingPage() {
       </section>
 
       {/* ── 3. AUDIENCE ─────────────────────────────────────────────────── */}
-      <section className="bg-us-panel py-20 sm:py-24">
+      <section className="bg-us-bg py-20 sm:py-24">
         <Shell>
           <Eyebrow>Who it is for</Eyebrow>
           <H2>Built for four kinds of overloaded.</H2>
 
-          <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-us-panel-line bg-us-panel-line sm:grid-cols-2 lg:grid-cols-4">
+          <div className="us-shadow-card mt-12 grid gap-px overflow-hidden rounded-3xl border border-us-line bg-us-line sm:grid-cols-2 lg:grid-cols-4">
             {AUDIENCES.map((a, i) => (
-              <div key={a.title} className="group bg-us-panel-raised p-7 transition-colors hover:bg-us-panel-accent/[0.08]">
-                <span className="font-heading text-[0.7rem] font-bold tracking-[0.14em] text-us-panel-accent">
+              <div
+                key={a.title}
+                className="bg-us-raised p-7 transition-colors hover:bg-us-lime/10"
+              >
+                <span className="font-heading text-[0.7rem] font-bold tracking-[0.14em] text-us-accent">
                   0{i + 1}
                 </span>
-                <h3 className="mt-4 font-heading text-[1.05rem] font-extrabold tracking-[-0.02em] text-us-panel-fg">
+                <h3 className="mt-4 font-heading text-[1.05rem] font-extrabold tracking-[-0.02em] text-us-fg">
                   {a.title}
                 </h3>
-                <p className="mt-2.5 text-[0.9rem] leading-relaxed text-us-panel-muted">{a.body}</p>
+                <p className="mt-2.5 text-[0.9rem] leading-relaxed text-us-muted">{a.body}</p>
               </div>
             ))}
           </div>
@@ -423,30 +419,30 @@ export default function UsLandingPage() {
       </section>
 
       {/* ── 4. THE POD MODEL ────────────────────────────────────────────── */}
-      <section id="pod" className="scroll-mt-16 bg-us-ink py-20 sm:py-24">
+      <section id="pod" className="scroll-mt-20 border-y border-us-line bg-us-alt py-20 sm:py-24">
         <Shell>
-          <Eyebrow onInk>Why outsourcing failed you last time</Eyebrow>
-          <H2 onInk>You didn&apos;t get a team. You got a queue.</H2>
-          <Lede onInk>
+          <Eyebrow>Why outsourcing failed you last time</Eyebrow>
+          <H2>You didn&apos;t get a team. You got a queue.</H2>
+          <Lede>
             A staffing pool rotates whoever is free onto your files. A pod is a fixed,
             named group assigned to you and nobody else — so what they learn about your
             firm compounds instead of walking out the door.
           </Lede>
 
           <div className="mt-12 grid gap-5 lg:grid-cols-2">
-            {/* Losing column */}
-            <div className="rounded-3xl border border-white/[0.07] bg-white/[0.02] p-7 sm:p-8">
-              <p className="font-heading text-[1.05rem] font-extrabold tracking-[-0.02em] text-white/45">
+            {/* Losing column — recessed into the band rather than raised. */}
+            <div className="rounded-3xl border border-us-line bg-us-bg p-7 sm:p-8">
+              <p className="font-heading text-[1.05rem] font-extrabold tracking-[-0.02em] text-us-muted">
                 Traditional BPO
               </p>
               <ul className="mt-6 space-y-4">
                 {BPO_VS_POD.map((row) => (
                   <li key={row.dimension}>
-                    <p className="font-heading text-[0.64rem] font-bold uppercase tracking-[0.16em] text-white/25">
+                    <p className="font-heading text-[0.64rem] font-bold uppercase tracking-[0.16em] text-us-muted/55">
                       {row.dimension}
                     </p>
-                    <p className="mt-1 flex items-start gap-2.5 text-[0.92rem] text-white/45">
-                      <span aria-hidden className="mt-px shrink-0 text-white/20">✕</span>
+                    <p className="mt-1 flex items-start gap-2.5 text-[0.92rem] text-us-muted">
+                      <span aria-hidden className="mt-px shrink-0 text-us-muted/45">✕</span>
                       {row.bpo}
                     </p>
                   </li>
@@ -454,19 +450,19 @@ export default function UsLandingPage() {
               </ul>
             </div>
 
-            {/* Winning column */}
-            <div className="relative rounded-3xl border border-us-lime/25 bg-us-lime/[0.05] p-7 shadow-[0_0_64px_-28px_rgba(205,255,90,0.45)] sm:p-8">
-              <p className="font-heading text-[1.05rem] font-extrabold tracking-[-0.02em] text-us-lime">
-                An Avenue Advisory pod
+            {/* Winning column — raised, lime-edged and glowing. */}
+            <div className="us-shadow-lift relative rounded-3xl border-2 border-us-lime bg-us-raised p-7 sm:p-8">
+              <p className="font-heading text-[1.05rem] font-extrabold tracking-[-0.02em] text-us-fg">
+                A Company Avenue Advisory pod
               </p>
               <ul className="mt-6 space-y-4">
                 {BPO_VS_POD.map((row) => (
                   <li key={row.dimension}>
-                    <p className="font-heading text-[0.64rem] font-bold uppercase tracking-[0.16em] text-white/30">
+                    <p className="font-heading text-[0.64rem] font-bold uppercase tracking-[0.16em] text-us-muted/70">
                       {row.dimension}
                     </p>
-                    <p className="mt-1 flex items-start gap-2.5 text-[0.92rem] font-medium text-white">
-                      <span aria-hidden className="mt-px shrink-0 text-us-lime">✓</span>
+                    <p className="mt-1 flex items-start gap-2.5 text-[0.92rem] font-semibold text-us-fg">
+                      <span aria-hidden className="mt-px shrink-0 text-us-accent">✓</span>
                       {row.pod}
                     </p>
                   </li>
@@ -475,7 +471,7 @@ export default function UsLandingPage() {
             </div>
           </div>
 
-          <p className="mt-9 max-w-[58ch] text-[0.95rem] leading-relaxed text-white/45">
+          <p className="mt-9 max-w-[58ch] text-[0.95rem] leading-relaxed text-us-muted">
             The same names in month eleven as in month one — and they work your hours, so
             the timezone that used to be a communication problem is the reason your
             turnaround is overnight.
@@ -484,14 +480,14 @@ export default function UsLandingPage() {
       </section>
 
       {/* ── 5. SERVICES ─────────────────────────────────────────────────── */}
-      <section id="services" className="scroll-mt-16 bg-us-panel py-20 sm:py-24">
+      <section id="services" className="scroll-mt-20 bg-us-bg py-20 sm:py-24">
         <Shell>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <Eyebrow>What your pod does</Eyebrow>
               <H2>Six things, delivered review-ready.</H2>
             </div>
-            <p className="max-w-[26ch] text-[0.9rem] leading-relaxed text-us-panel-muted">
+            <p className="max-w-[26ch] text-[0.9rem] leading-relaxed text-us-muted">
               Not on the list? Bring it to the call — pods are scoped to the work, not to
               a plan tier.
             </p>
@@ -499,14 +495,14 @@ export default function UsLandingPage() {
 
           <div className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((s, i) => (
-              <div key={s.name} className="border-t-2 border-us-panel-fg pt-5">
-                <span className="font-heading text-[0.7rem] font-bold tracking-[0.14em] text-us-panel-accent">
+              <div key={s.name} className="border-t-2 border-us-fg pt-5">
+                <span className="font-heading text-[0.7rem] font-bold tracking-[0.14em] text-us-accent">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 font-heading text-[1.08rem] font-extrabold tracking-[-0.02em] text-us-panel-fg">
+                <h3 className="mt-3 font-heading text-[1.08rem] font-extrabold tracking-[-0.02em] text-us-fg">
                   {s.name}
                 </h3>
-                <p className="mt-2.5 text-[0.9rem] leading-relaxed text-us-panel-muted">{s.body}</p>
+                <p className="mt-2.5 text-[0.9rem] leading-relaxed text-us-muted">{s.body}</p>
               </div>
             ))}
           </div>
@@ -514,11 +510,11 @@ export default function UsLandingPage() {
       </section>
 
       {/* ── 6. PRICING ──────────────────────────────────────────────────── */}
-      <section id="pricing" className="scroll-mt-16 bg-us-ink py-20 sm:py-24">
+      <section id="pricing" className="scroll-mt-20 border-y border-us-line bg-us-alt py-20 sm:py-24">
         <Shell>
-          <Eyebrow onInk>Radical transparency</Eyebrow>
-          <H2 onInk>What everyone charges. Including us.</H2>
-          <Lede onInk>
+          <Eyebrow>Radical transparency</Eyebrow>
+          <H2>What everyone charges. Including us.</H2>
+          <Lede>
             Most firms in this category make you sit through a discovery call to learn a
             number. We think that is a tell.
           </Lede>
@@ -529,22 +525,24 @@ export default function UsLandingPage() {
                 key={c.key}
                 className={
                   "flex flex-col rounded-3xl p-7 sm:p-8 " +
+                  // The lime card is pinned across themes: ink on lime is the
+                  // page's loudest moment and works on either background.
                   (c.highlight
-                    ? "bg-us-lime text-us-ink shadow-[0_0_80px_-30px_rgba(205,255,90,0.7)] lg:-my-3 lg:py-11"
-                    : "border border-white/[0.07] bg-white/[0.02]")
+                    ? "us-shadow-lift bg-us-lime text-us-ink lg:-my-3 lg:py-11"
+                    : "border border-us-line bg-us-raised")
                 }
               >
                 <p
                   className={
                     "font-heading text-[1.05rem] font-extrabold tracking-[-0.02em] " +
-                    (c.highlight ? "text-us-ink" : "text-white/70")
+                    (c.highlight ? "text-us-ink" : "text-us-muted")
                   }
                 >
                   {c.label}
                 </p>
                 <p
                   className={
-                    "mt-1 text-[0.82rem] " + (c.highlight ? "text-us-ink/60" : "text-white/35")
+                    "mt-1 text-[0.82rem] " + (c.highlight ? "text-us-ink/65" : "text-us-muted/70")
                   }
                 >
                   {c.sub}
@@ -553,14 +551,14 @@ export default function UsLandingPage() {
                 <p
                   className={
                     "mt-7 font-heading text-[2.2rem] font-extrabold leading-none tracking-[-0.04em] " +
-                    (c.highlight ? "text-us-ink" : "text-white/70")
+                    (c.highlight ? "text-us-ink" : "text-us-fg")
                   }
                 >
                   {c.price}
                 </p>
                 <p
                   className={
-                    "mt-2 text-[0.8rem] " + (c.highlight ? "text-us-ink/60" : "text-white/35")
+                    "mt-2 text-[0.8rem] " + (c.highlight ? "text-us-ink/65" : "text-us-muted/70")
                   }
                 >
                   {c.unit}
@@ -569,7 +567,7 @@ export default function UsLandingPage() {
                 <ul
                   className={
                     "mt-7 space-y-3 border-t pt-7 " +
-                    (c.highlight ? "border-us-ink/12" : "border-white/[0.07]")
+                    (c.highlight ? "border-us-ink/15" : "border-us-line")
                   }
                 >
                   {c.points.map((p) => (
@@ -577,12 +575,12 @@ export default function UsLandingPage() {
                       <span
                         aria-hidden
                         className={
-                          "mt-px shrink-0 " + (c.highlight ? "text-us-ink/45" : "text-white/20")
+                          "mt-px shrink-0 " + (c.highlight ? "text-us-ink/50" : "text-us-muted/40")
                         }
                       >
                         {c.highlight ? "✓" : "—"}
                       </span>
-                      <span className={c.highlight ? "text-us-ink/85" : "text-white/45"}>{p}</span>
+                      <span className={c.highlight ? "text-us-ink/85" : "text-us-muted"}>{p}</span>
                     </li>
                   ))}
                 </ul>
@@ -590,7 +588,7 @@ export default function UsLandingPage() {
                 {c.highlight && (
                   <a
                     href="#call"
-                    className="mt-8 inline-flex items-center justify-center rounded-full bg-us-ink px-6 py-3.5 font-heading text-[0.92rem] font-bold text-us-lime transition-colors hover:bg-us-ink-800"
+                    className="mt-8 inline-flex items-center justify-center rounded-full bg-us-ink px-6 py-3.5 font-heading text-[0.92rem] font-bold text-us-lime transition-transform hover:scale-[1.03]"
                   >
                     Start a 30-day pilot
                   </a>
@@ -599,14 +597,14 @@ export default function UsLandingPage() {
             ))}
           </div>
 
-          <p className="mt-9 max-w-[70ch] text-[0.78rem] leading-relaxed text-white/30">
+          <p className="mt-9 max-w-[70ch] text-[0.78rem] leading-relaxed text-us-muted/70">
             {PRICING_NOTE}
           </p>
         </Shell>
       </section>
 
       {/* ── 7. THE PILOT ────────────────────────────────────────────────── */}
-      <section className="bg-us-panel py-20 sm:py-24">
+      <section className="bg-us-bg py-20 sm:py-24">
         <Shell>
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16">
             <div>
@@ -622,20 +620,20 @@ export default function UsLandingPage() {
               <CtaPrimary className="mt-8">Start a 30-day pilot</CtaPrimary>
             </div>
 
-            <ol className="relative space-y-8 border-l border-us-panel-line pl-8 lg:pt-3">
+            <ol className="relative space-y-8 border-l border-us-line pl-8 lg:pt-3">
               {PILOT_STEPS.map((step) => (
                 <li key={step.day} className="relative">
                   <span
                     aria-hidden
-                    className="absolute -left-[2.28rem] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-us-panel-accent bg-us-panel"
+                    className="absolute -left-[2.28rem] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-us-accent bg-us-bg"
                   />
-                  <p className="font-heading text-[0.68rem] font-bold uppercase tracking-[0.18em] text-us-panel-accent">
+                  <p className="font-heading text-[0.68rem] font-bold uppercase tracking-[0.18em] text-us-accent">
                     {step.day}
                   </p>
-                  <h3 className="mt-2 font-heading text-[1.05rem] font-extrabold tracking-[-0.02em] text-us-panel-fg">
+                  <h3 className="mt-2 font-heading text-[1.05rem] font-extrabold tracking-[-0.02em] text-us-fg">
                     {step.title}
                   </h3>
-                  <p className="mt-1.5 max-w-[46ch] text-[0.9rem] leading-relaxed text-us-panel-muted">
+                  <p className="mt-1.5 max-w-[46ch] text-[0.9rem] leading-relaxed text-us-muted">
                     {step.body}
                   </p>
                 </li>
@@ -646,34 +644,37 @@ export default function UsLandingPage() {
       </section>
 
       {/* ── 8. SECURITY ─────────────────────────────────────────────────── */}
-      <section id="security" className="scroll-mt-16 border-t border-us-panel-line bg-us-panel-raised py-20 sm:py-24">
+      <section
+        id="security"
+        className="scroll-mt-20 border-y border-us-line bg-us-raised py-20 sm:py-24"
+      >
         <Shell>
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <div>
               <Eyebrow>Security &amp; compliance</Eyebrow>
               <H2>The questions your carrier would ask.</H2>
-              <p className="mt-5 text-[0.9rem] leading-relaxed text-us-panel-muted">
+              <p className="mt-5 text-[0.9rem] leading-relaxed text-us-muted">
                 Send us your vendor-security questionnaire before the call. We would
                 rather answer it in writing, in advance, than talk around it.
               </p>
             </div>
 
-            <div className="divide-y divide-us-panel-line border-y border-us-panel-line">
+            <div className="divide-y divide-us-line border-y border-us-line">
               {SECURITY_FAQS.map((faq) => (
                 <details key={faq.question} className="group py-5">
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-6">
-                    <h3 className="font-heading text-[1rem] font-bold tracking-[-0.015em] text-us-panel-fg">
+                    <h3 className="font-heading text-[1rem] font-bold tracking-[-0.015em] text-us-fg">
                       {faq.question}
                     </h3>
                     <span
                       aria-hidden
-                      className="mt-0.5 shrink-0 text-lg leading-none text-us-panel-accent transition-transform group-open:rotate-45"
+                      className="mt-0.5 shrink-0 text-lg leading-none text-us-accent transition-transform group-open:rotate-45"
                     >
                       +
                     </span>
                   </summary>
 
-                  <div className="mt-4 space-y-3.5 pr-8 text-[0.88rem] leading-relaxed text-us-panel-muted">
+                  <div className="mt-4 space-y-3.5 pr-8 text-[0.88rem] leading-relaxed text-us-muted">
                     {faq.paragraphs.map((p) => (
                       <p key={p.slice(0, 40)}>{p}</p>
                     ))}
@@ -684,7 +685,7 @@ export default function UsLandingPage() {
                           <li key={b.slice(0, 40)} className="flex gap-3">
                             <span
                               aria-hidden
-                              className="mt-[0.5rem] h-1 w-1 shrink-0 rounded-full bg-us-panel-accent"
+                              className="mt-[0.5rem] h-1 w-1 shrink-0 rounded-full bg-us-accent"
                             />
                             <span>{b}</span>
                           </li>
@@ -692,7 +693,7 @@ export default function UsLandingPage() {
                       </ul>
                     )}
 
-                    {faq.closing && <p className="text-us-panel-fg">{faq.closing}</p>}
+                    {faq.closing && <p className="text-us-fg">{faq.closing}</p>}
                   </div>
                 </details>
               ))}
@@ -702,19 +703,18 @@ export default function UsLandingPage() {
       </section>
 
       {/* ── 9. CLOSE + FORM ─────────────────────────────────────────────── */}
-      <section id="call" className="relative scroll-mt-16 overflow-hidden bg-us-ink py-20 sm:py-24">
+      <section id="call" className="relative scroll-mt-20 overflow-hidden bg-us-alt py-20 sm:py-24">
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-52 left-1/2 h-[480px] w-[820px] -translate-x-1/2 rounded-full opacity-[0.13] blur-[110px]"
-          style={{ background: "radial-gradient(circle, #CDFF5A 0%, transparent 68%)" }}
+          className="us-glow pointer-events-none absolute -bottom-52 left-1/2 h-[480px] w-[820px] -translate-x-1/2 rounded-full opacity-25 blur-[110px]"
         />
 
         <Shell className="relative">
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16">
             <div>
-              <Eyebrow onInk>Next step</Eyebrow>
-              <H2 onInk>Thirty minutes. No deck, no pitch.</H2>
-              <Lede onInk>
+              <Eyebrow>Next step</Eyebrow>
+              <H2>Thirty minutes. No deck, no pitch.</H2>
+              <Lede>
                 We look at what is actually on your desk, scope a pod, and put the number
                 in writing the same day.
               </Lede>
@@ -726,8 +726,8 @@ export default function UsLandingPage() {
                   "Security questionnaire answered before you sign",
                   "No long-term contract to begin",
                 ].map((point) => (
-                  <li key={point} className="flex items-start gap-3 text-[0.95rem] text-white/70">
-                    <span aria-hidden className="mt-px shrink-0 text-us-lime">✓</span>
+                  <li key={point} className="flex items-start gap-3 text-[0.95rem] text-us-muted">
+                    <span aria-hidden className="mt-px shrink-0 text-us-accent">✓</span>
                     {point}
                   </li>
                 ))}

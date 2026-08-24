@@ -9,38 +9,55 @@
   }
 
   /* ── US property theming ──────────────────────────────────────────────────
-     us.companyavenueadvisory.com alternates dark "ink" bands with light
-     "panel" bands. The ink bands are dark in BOTH themes, so only the panel
-     bands need tokens — these drive the `us-panel-*` Tailwind colours.
+     us.companyavenueadvisory.com is fully themed: in light mode the ENTIRE
+     page is warm off-white, in dark mode the entire page is ink. Nothing is
+     pinned to one colour any more — the earlier build kept the hero, pricing
+     and footer dark in both themes, which made "light mode" a half measure.
+
+     The section rhythm comes from alternating --us-bg and --us-bg-alt, with
+     cards on --us-raised sitting proud of both.
 
      Values are space-separated RGB triplets, not hex, so Tailwind's
-     <alpha-value> works: text-us-panel-muted/60 needs to compose an alpha.
+     <alpha-value> composes: text-us-muted/60 needs to multiply an alpha in.
 
      Namespaced --us-* and scoped to .dark, which the India site never sets
      (it has zero `dark:` classes — verified), so nothing here can reach it. */
   :root {
-    --us-panel: 246 245 241; /* warm paper  #F6F5F1 */
-    --us-panel-raised: 255 255 255; /* cards       #FFFFFF */
-    --us-panel-fg: 10 13 12; /* ink text    #0A0D0C */
-    --us-panel-muted: 88 95 91; /* body text   #585F5B */
-    --us-panel-line: 227 225 216; /* hairline    #E3E1D8 */
-    --us-panel-accent: 92 122 23; /* deep lime   #5C7A17 — 4.9:1 on paper */
+    --us-bg: 250 249 246; /* #FAF9F6 warm white — page base   */
+    --us-bg-alt: 242 240 234; /* #F2F0EA one step deeper — the band */
+    --us-raised: 255 255 255; /* #FFFFFF cards sit above both     */
+    --us-fg: 15 18 17; /* #0F1211 display + body ink       */
+    --us-muted: 92 99 95; /* #5C635F secondary text           */
+    --us-line: 228 225 216; /* #E4E1D8 hairline                 */
+    --us-accent: 78 107 18; /* #4E6B12 deep lime — 6.1:1 on bg  */
+
+    --us-grid-line: rgba(15, 18, 17, 0.055);
+    --us-glow: rgba(205, 255, 90, 0.55);
+    --us-card-shadow: 0 1px 2px rgba(15, 18, 17, 0.04), 0 18px 40px -24px rgba(15, 18, 17, 0.28);
+    --us-lift-shadow: 0 2px 4px rgba(15, 18, 17, 0.04), 0 32px 70px -34px rgba(15, 18, 17, 0.42);
   }
 
   .dark {
-    --us-panel: 20 25 23; /* raised dark #141917 — reads lighter than the
-                                             ink bands, so the section rhythm survives */
-    --us-panel-raised: 28 34 32; /* cards       #1C2220 */
-    --us-panel-fg: 237 240 238; /* #EDF0EE */
-    --us-panel-muted: 152 161 157; /* #98A19D */
-    --us-panel-line: 38 46 43; /* #262E2B */
-    --us-panel-accent: 205 255 90; /* signal lime #CDFF5A — legible on dark */
+    --us-bg: 10 13 12; /* #0A0D0C */
+    --us-bg-alt: 17 22 20; /* #111614 */
+    --us-raised: 24 30 28; /* #181E1C */
+    --us-fg: 237 240 238; /* #EDF0EE */
+    --us-muted: 152 161 157; /* #98A19D */
+    --us-line: 36 44 41; /* #242C29 */
+    --us-accent: 205 255 90; /* #CDFF5A */
+
+    --us-grid-line: rgba(255, 255, 255, 0.06);
+    --us-glow: rgba(205, 255, 90, 0.5);
+    --us-card-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 18px 40px -24px rgba(0, 0, 0, 0.8);
+    --us-lift-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 32px 70px -30px rgba(0, 0, 0, 0.9);
   }
 
-  /* The shared shell paints #F8FAFC. On the US page in dark mode that shows
-     through as a pale strip under the footer and on overscroll. */
-  .dark body {
-    background-color: #0a0d0c;
+  /* The shared shell paints #F8FAFC (a cool grey). On the US page that shows
+     through under the footer and on overscroll, cold against the warm palette
+     in light mode and glaringly pale in dark. */
+  .us-root,
+  body:has(.us-root) {
+    background-color: rgb(var(--us-bg));
   }
 
   html {
@@ -136,5 +153,36 @@
 
   .legal-prose a {
     @apply text-primary underline hover:text-primary-800;
+  }
+}
+
+@layer utilities {
+  /* Hairline graph paper behind the hero, faded out at the edges. Gives the
+     large flat areas texture without shipping a pattern image. */
+  .us-grid {
+    background-image:
+      linear-gradient(to right, var(--us-grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--us-grid-line) 1px, transparent 1px);
+    background-size: 72px 72px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  .us-glow {
+    background: radial-gradient(circle, var(--us-glow) 0%, transparent 68%);
+  }
+
+  /* Marquee edge fade, so the ribbon reads as continuous rather than cut off. */
+  .us-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .us-shadow-card {
+    box-shadow: var(--us-card-shadow);
+  }
+
+  .us-shadow-lift {
+    box-shadow: var(--us-lift-shadow);
   }
 }

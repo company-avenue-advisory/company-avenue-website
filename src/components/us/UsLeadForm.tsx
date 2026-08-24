@@ -24,7 +24,7 @@ import { US_ROLES, US_SOFTWARE_OPTIONS } from "@/lib/us-content";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const CARD =
-  "rounded-[1.75rem] bg-us-panel-raised p-6 shadow-[0_32px_80px_-28px_rgba(0,0,0,0.55)] sm:p-8";
+  "us-shadow-lift rounded-[1.75rem] border border-us-line bg-us-raised p-6 sm:p-8";
 
 export function UsLeadForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -99,10 +99,10 @@ export function UsLeadForm() {
         >
           ✓
         </span>
-        <p className="mt-5 font-heading text-xl font-extrabold tracking-[-0.02em] text-us-panel-fg">
+        <p className="mt-5 font-heading text-xl font-extrabold tracking-[-0.02em] text-us-fg">
           Request received.
         </p>
-        <p className="mt-3 text-[0.9rem] leading-relaxed text-us-panel-muted">
+        <p className="mt-3 text-[0.9rem] leading-relaxed text-us-muted">
           We will come back within one business day with two or three call times and a
           short note on how we would scope your pod.
         </p>
@@ -111,16 +111,16 @@ export function UsLeadForm() {
   }
 
   const inputClass =
-    "w-full rounded-xl border border-us-panel-line bg-us-panel px-3.5 py-2.5 text-[0.9rem] text-us-panel-fg placeholder:text-us-panel-muted/45 transition-colors focus:border-us-panel-fg focus:bg-us-panel-raised focus:outline-none focus:ring-2 focus:ring-us-lime/45";
+    "w-full rounded-xl border border-us-line bg-us-bg px-3.5 py-2.5 text-[0.9rem] text-us-fg placeholder:text-us-muted/50 transition-colors focus:border-us-fg/40 focus:outline-none focus:ring-2 focus:ring-us-lime/60";
   const labelClass =
-    "mb-1.5 block font-heading text-[0.66rem] font-bold uppercase tracking-[0.14em] text-us-panel-muted";
+    "mb-1.5 block font-heading text-[0.66rem] font-bold uppercase tracking-[0.14em] text-us-muted";
 
   return (
     <form onSubmit={onSubmit} className={CARD}>
-      <p className="font-heading text-xl font-extrabold tracking-[-0.025em] text-us-panel-fg">
+      <p className="font-heading text-xl font-extrabold tracking-[-0.025em] text-us-fg">
         Book a discovery call
       </p>
-      <p className="mt-2 text-[0.88rem] leading-relaxed text-us-panel-muted">
+      <p className="mt-2 text-[0.88rem] leading-relaxed text-us-muted">
         Thirty minutes. We scope a pod and put the number in writing the same day.
       </p>
 
@@ -166,8 +166,8 @@ export function UsLeadForm() {
                 className={
                   "rounded-full border px-3.5 py-1.5 text-[0.85rem] transition-colors " +
                   (on
-                    ? "border-us-panel-fg bg-us-panel-fg text-us-panel"
-                    : "border-us-panel-line bg-us-panel-raised text-us-panel-muted hover:border-us-panel-fg/35 hover:text-us-panel-fg")
+                    ? "border-us-lime bg-us-lime text-us-ink"
+                    : "border-us-line bg-us-bg text-us-muted hover:border-us-fg/35 hover:text-us-fg")
                 }
               >
                 {s}
@@ -200,12 +200,12 @@ export function UsLeadForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-6 w-full rounded-full bg-us-panel-fg px-8 py-4 font-heading text-[0.95rem] font-bold tracking-[-0.01em] text-us-panel transition-colors hover:bg-us-panel-fg/85 disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-6 w-full rounded-full bg-us-lime px-8 py-4 font-heading text-[0.95rem] font-bold tracking-[-0.01em] text-us-ink transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "sending" ? "Sending…" : "Book the call"}
       </button>
 
-      <p className="mt-3 text-center text-[0.75rem] leading-relaxed text-us-panel-muted/70">
+      <p className="mt-3 text-center text-[0.75rem] leading-relaxed text-us-muted/70">
         Used only to prepare for your call. No sequences, no list.
       </p>
     </form>

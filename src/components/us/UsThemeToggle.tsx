@@ -44,7 +44,7 @@ export function UsThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
-      className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/12 text-us-chalk transition-colors hover:border-white/30 hover:text-white"
+      className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-us-line text-us-muted transition-colors hover:border-us-fg/30 hover:text-us-fg"
     >
       {/* Both icons render; CSS picks one. Driving this from `dark` state alone
           would leave the button empty until the effect runs. */}
