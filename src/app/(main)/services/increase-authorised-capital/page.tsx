@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/increase-authorised-capital" },
   title: "Increase Authorised Share Capital — Form SH-7",
   description:
-    "Increase your company's authorised share capital via Ordinary Resolution and Form SH-7 filing with ROC. Required before fresh share allotment, FDI, or ESOPs. Starting ₹2,999.",
+    "Increase your company's authorised share capital via Ordinary Resolution and Form SH-7 filing with ROC. Required before fresh share allotment, FDI, or ESOPs. Starting ₹4,999.",
 };
 
 export default function IncreaseAuthorisedCapitalServicePage() {

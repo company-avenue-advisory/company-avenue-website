@@ -48,7 +48,7 @@ const serviceDetails: Record<string, {
       "No-objection certificate from property owner",
     ],
     timeline: "7–10 business days",
-    startingPrice: "₹6,999",
+    startingPrice: "₹3,499",
     faqs: [
       { q: "Can I convert my proprietorship to a Private Limited Company?", a: "Yes. We handle the conversion process including asset transfer and business migration." },
       { q: "Do I need a physical office for company registration?", a: "You need a registered address in India, which can be your home address initially." },
@@ -78,7 +78,7 @@ const serviceDetails: Record<string, {
       "Photographs of business premises",
     ],
     timeline: "3–5 business days",
-    startingPrice: "₹1,499",
+    startingPrice: "₹2,999",
     faqs: [
       { q: "Who must mandatorily register for GST?", a: "Businesses with turnover above ₹40L (goods) or ₹20L (services), all e-commerce sellers, and inter-state suppliers." },
       { q: "Can I register voluntarily if my turnover is below the threshold?", a: "Yes. Voluntary registration is beneficial if you want to claim ITC or supply to B2B customers who prefer GST-registered vendors." },
@@ -108,7 +108,7 @@ const serviceDetails: Record<string, {
       "Office address proof (utility bill + NOC)",
     ],
     timeline: "7–10 business days",
-    startingPrice: "₹3,999",
+    startingPrice: "₹4,999",
     faqs: [
       { q: "Is registration of partnership firm mandatory?", a: "No, registration is optional but strongly recommended as unregistered firms cannot sue third parties or partners in court." },
       { q: "What is the maximum number of partners?", a: "For general partnerships: 20 partners maximum (10 for banking). For professional firms (CA, advocates): no limit under respective professional acts." },
@@ -138,7 +138,7 @@ const serviceDetails: Record<string, {
       "Utility bill for business address",
     ],
     timeline: "3–7 business days",
-    startingPrice: "₹1,999",
+    startingPrice: "₹2,999",
     faqs: [
       { q: "Does a sole proprietorship need separate registration?", a: "There is no single registration for a proprietorship. It is established through a combination of GST, Udyam (MSME), trade license, and a current bank account." },
       { q: "What are the tax obligations?", a: "Income is reported in your personal ITR (ITR-3 or ITR-4). Tax slabs apply as per individual income tax rates." },
@@ -168,7 +168,7 @@ const serviceDetails: Record<string, {
       "CA certificate of estimated income/expenditure",
     ],
     timeline: "15–20 business days",
-    startingPrice: "₹9,999",
+    startingPrice: "₹7,999",
     faqs: [
       { q: "Can directors of Section 8 company receive salary?", a: "Yes, directors can receive reasonable remuneration for services rendered, approved by the board. However, they cannot receive dividends or profit-sharing." },
       { q: "What is the difference between Section 8 company, trust, and society?", a: "Section 8 company is incorporated under Companies Act (regulated by MCA) with higher credibility. Trusts are governed by the Indian Trusts Act and societies by the Societies Registration Act. Section 8 has better governance structure and is preferred for accessing CSR funds." },
@@ -256,7 +256,7 @@ const serviceDetails: Record<string, {
       "India registered office proof",
     ],
     timeline: "15–25 business days",
-    startingPrice: "₹24,999",
+    startingPrice: "₹31,499",
     faqs: [
       { q: "Which sectors require government approval for FDI?", a: "Sectors requiring government approval include: defence (above 74%), broadcasting, print media, multi-brand retail, satellites, and a few others. Most sectors allow 100% FDI under automatic route." },
       { q: "What is FEMA FC-GPR and when must it be filed?", a: "FC-GPR (Foreign Currency — Gross Provisional Return) must be filed with RBI within 30 days of allotting shares to foreign investors, reporting the foreign investment received." },
@@ -316,7 +316,7 @@ const serviceDetails: Record<string, {
       "TDS / TCS certificates (if applicable)",
     ],
     timeline: "2–3 business days per return",
-    startingPrice: "₹1,499/month",
+    startingPrice: "₹1,250/month",
     faqs: [
       { q: "What GST returns need to be filed?", a: "Regular taxpayers file GSTR-1 (outward supplies), GSTR-3B (tax payment), GSTR-9 (annual return) and GSTR-9C (reconciliation if turnover > ₹5 crore)." },
       { q: "What is the GSTR-2A reconciliation?", a: "GSTR-2A/2B is the auto-populated record of purchases (ITC available). Reconciling with your own purchase register ensures you claim the exact ITC you're entitled to, preventing excess claims and notices." },
@@ -376,7 +376,7 @@ const serviceDetails: Record<string, {
       "Capital gains statements (if any)",
     ],
     timeline: "2–3 business days",
-    startingPrice: "₹999",
+    startingPrice: "₹1,249",
     faqs: [
       { q: "What is the due date for ITR filing?", a: "For individuals and non-audit cases: 31 July. For businesses requiring tax audit: 31 October. For transfer pricing cases: 30 November." },
       { q: "Can I file ITR after the due date?", a: "Yes, you can file a belated return by 31 December of the assessment year with a late filing fee of ₹5,000 (₹1,000 if income below ₹5 lakh)." },
@@ -526,7 +526,7 @@ const serviceDetails: Record<string, {
       "List of directors and shareholders",
     ],
     timeline: "3–5 business days",
-    startingPrice: "₹4,999/year",
+    startingPrice: "₹1,999",
     faqs: [
       { q: "What are the due dates for AOC-4 and MGT-7?", a: "AOC-4 (Financial Statements): within 30 days of AGM (i.e., by 30 October for FY ending March 31). MGT-7 (Annual Return): within 60 days of AGM (i.e., by 29 November). Late fee: ₹100 per day per form." },
       { q: "Does an OPC need to hold an AGM?", a: "No, OPCs are exempt from holding AGMs. The annual return is adopted by the sole member and financial statements are filed within 180 days of financial year end." },
@@ -555,7 +555,7 @@ const serviceDetails: Record<string, {
       "DPIN of all designated partners",
     ],
     timeline: "3–5 business days",
-    startingPrice: "₹3,999/year",
+    startingPrice: "₹2,499 per form",
     faqs: [
       { q: "What are Form 11 and Form 8 for LLP?", a: "Form 11 is the Annual Return of an LLP — it contains information about partners, business activities, and annual accounts summary. Form 8 is the Statement of Accounts and Solvency. Both must be filed with MCA every year." },
       { q: "What if an LLP has NIL turnover — must it still file?", a: "Yes. All active LLPs must file Form 11 and Form 8 regardless of turnover or activity. Even dormant LLPs must comply. Non-filing attracts ₹100/day penalty and eventually marks LLP as non-compliant." },
@@ -585,7 +585,7 @@ const serviceDetails: Record<string, {
       "Passport (for foreign nationals)",
     ],
     timeline: "Same day",
-    startingPrice: "₹699/director",
+    startingPrice: "₹499 per director",
     faqs: [
       { q: "What is the difference between DIR-3 KYC form and DIR-3 KYC-Web?", a: "For the first-time KYC, a director must file the full DIR-3 KYC form (with digital signature). In subsequent years, if mobile and email are unchanged, a simpler web-based KYC (OTP verification only) can be done. If contact details have changed, a fresh form is needed." },
       { q: "What happens if I miss the 30 September deadline?", a: "After 30 September, DIN is marked DEACTIVATED on MCA. It can be reactivated by filing DIR-3 KYC with a fee of ₹5,000. Until reactivation, any company filing where you are a director will be rejected." },
@@ -615,7 +615,7 @@ const serviceDetails: Record<string, {
       "Resignation letter (if removing director)",
     ],
     timeline: "7–10 business days",
-    startingPrice: "₹4,999",
+    startingPrice: "₹1,999",
     faqs: [
       { q: "How soon must DIR-12 be filed after a director appointment/resignation?", a: "DIR-12 must be filed within 30 days of the date of appointment or resignation. Late filing attracts additional fees and potential penalties." },
       { q: "Can a private limited company have only one director?", a: "No. A Private Limited Company must have a minimum of 2 directors at all times. If one director resigns and the remaining count falls below 2, a new director must be appointed before or simultaneously with the resignation taking effect." },
@@ -674,7 +674,7 @@ const serviceDetails: Record<string, {
       "Rent agreement (if rented)",
     ],
     timeline: "7–15 business days",
-    startingPrice: "₹3,999",
+    startingPrice: "₹2,999",
     faqs: [
       { q: "What if I'm changing the registered office to a different state?", a: "Changing to a different ROC jurisdiction within a state requires Form INC-22. Changing to a completely different state requires NCLT approval via Form INC-23, which is a more complex process taking 2–3 months." },
       { q: "Do I need to update GST separately after changing registered office?", a: "Yes. GST registration change (REG-14) must be filed separately on the GST portal after the ROC address change is approved. The GST and ROC/MCA records must both be updated independently." },
@@ -703,7 +703,7 @@ const serviceDetails: Record<string, {
       "Amended MOA and AOA with new name",
     ],
     timeline: "15–25 business days",
-    startingPrice: "₹6,999",
+    startingPrice: "₹9,999",
     faqs: [
       { q: "How do I know if the new name is available?", a: "You can check MCA's RUN (Reserve Unique Name) service. The name must not be identical to or closely resembling any existing company. Trademark clearance is also strongly recommended before filing." },
       { q: "What needs to be updated after the company name change?", a: "After MCA approval: PAN (new PAN card), TAN, GST registration, bank account name, letterhead, website, contracts, and any licenses. Your COI will have both old and new name until updates are complete." },
@@ -733,7 +733,7 @@ const serviceDetails: Record<string, {
       "Form STK-2",
     ],
     timeline: "3–6 months (ROC process)",
-    startingPrice: "₹9,999",
+    startingPrice: "₹20,000",
     faqs: [
       { q: "What is the difference between STK-2 Fast Track Exit and NCLT winding up?", a: "STK-2 (Fast Track) is suitable for companies with NIL liabilities and no operations — it's simpler, cheaper, and faster (3–6 months). NCLT winding up is for companies with assets/liabilities requiring a liquidator, which is more complex and expensive." },
       { q: "Can a struck-off company be revived?", a: "Yes. An application to NCLT under Sec 252 can be made within 20 years of strike-off to restore the company. Restoration is allowed if the company had a legitimate purpose for revival." },
@@ -763,7 +763,7 @@ const serviceDetails: Record<string, {
       "Brief description of innovation and business model",
     ],
     timeline: "5–10 business days",
-    startingPrice: "₹3,999",
+    startingPrice: "₹7,999",
     faqs: [
       { q: "What is the angel tax exemption?", a: "Sec 80-IAC provides 3 consecutive years of 100% income tax holiday on profits for DPIIT-recognized startups within the first 10 years of incorporation." },
       { q: "Does DPIIT recognition guarantee funding?", a: "No, recognition doesn't guarantee funding. But it provides access to government schemes (Startup India Fund, SIDBI), mentorship platforms, and adds credibility with private investors." },
@@ -792,7 +792,7 @@ const serviceDetails: Record<string, {
       "Business details (NIC code, investments, turnover)",
     ],
     timeline: "1–2 business days",
-    startingPrice: "₹1,499",
+    startingPrice: "₹1,999",
     faqs: [
       { q: "Can a Private Limited Company register as MSME?", a: "Yes. Any business entity — proprietorship, partnership, LLP, private limited, public limited, cooperative, trust, or government undertaking — can register as MSME/Udyam if within the investment and turnover thresholds." },
       { q: "What is the Sec 43B(h) delayed payment protection?", a: "From FY 2024–25, buyers who delay payment to MSMEs beyond 45 days cannot claim that payment as a business expense until actually paid. This is a powerful protection mechanism for MSME receivables." },
@@ -823,7 +823,7 @@ const serviceDetails: Record<string, {
       "Office address proof",
     ],
     timeline: "3–5 business days",
-    startingPrice: "₹2,499",
+    startingPrice: "₹1,999",
     faqs: [
       { q: "Is IEC mandatory for all importers and exporters?", a: "Yes, except for personal imports/exports for personal use and government departments. All commercial imports and exports require a valid IEC from DGFT." },
       { q: "Can IEC be used for multiple businesses?", a: "Each IEC is linked to a PAN. A single proprietor can have only one IEC (tied to their PAN). Different businesses (company, LLP) with different PANs need separate IECs." },
@@ -853,7 +853,7 @@ const serviceDetails: Record<string, {
       "List of food products",
     ],
     timeline: "5–15 business days (type-dependent)",
-    startingPrice: "₹1,999 (Basic)",
+    startingPrice: "₹3,999",
     faqs: [
       { q: "What is FOSCOS and how does FSSAI licensing work?", a: "FOSCOS (Food Safety Compliance System) is FSSAI's online portal for applying, renewing, and managing food licenses. Applications are submitted online, fee paid, and subject to inspection (State/Central) before approval." },
       { q: "Do home bakers and cloud kitchens need FSSAI?", a: "Yes. Anyone selling food commercially — including home bakers selling online, cloud kitchens, and tiffin services — requires at minimum a Basic FSSAI registration. There is no exemption for home-based food businesses that sell commercially." },
@@ -882,7 +882,7 @@ const serviceDetails: Record<string, {
       "Business address proof",
     ],
     timeline: "3–7 business days",
-    startingPrice: "₹1,999",
+    startingPrice: "₹2,999",
     faqs: [
       { q: "In which states is professional tax applicable?", a: "Professional Tax is levied in: Maharashtra, Karnataka, West Bengal, Andhra Pradesh, Telangana, Gujarat, Tamil Nadu, Sikkim, Meghalaya, Assam, Kerala, Tripura, Odisha, and Madhya Pradesh. It is NOT applicable in Delhi, UP, Haryana, and several other states." },
       { q: "What is the maximum PT per employee?", a: "The constitutional maximum is ₹2,500 per year per person. This is non-negotiable across all states. The actual amount varies by state and income slab." },
@@ -943,7 +943,7 @@ const serviceDetails: Record<string, {
       "Cold storage certificate (if applicable)",
     ],
     timeline: "15–30 business days",
-    startingPrice: "₹6,999",
+    startingPrice: "₹5,499",
     faqs: [
       { q: "What is the difference between Form 20 and Form 21?", a: "Form 20 is the Drug License for retail sale of drugs. Form 21 is for sale of Schedule C and C1 drugs (biological products, blood, vaccines). Most pharmacies require both Form 20 and Form 21." },
       { q: "Can a drug license be used for Ayurvedic/Homeopathic medicines?", a: "Ayurvedic and Unani medicines are governed by the Drugs and Cosmetics Act but under a separate category. A standard allopathic drug license does not cover Ayurvedic drugs — a separate Ayurvedic drug license under state rules is required." },
@@ -974,7 +974,7 @@ const serviceDetails: Record<string, {
       "Premises address proof",
     ],
     timeline: "30–60 business days",
-    startingPrice: "₹9,999",
+    startingPrice: "₹25,500",
     faqs: [
       { q: "Is PSARA license state-specific?", a: "Yes. Each state issues its own PSARA license under state rules. A security agency operating in multiple states needs PSARA licenses from each state's District Licensing Authority." },
       { q: "What are the training requirements for security guards?", a: "Guards must complete a 100-hour training from NSDC-recognized or state-approved institutes. Supervisors need 160 hours. Training must cover physical fitness, law, communication, and first aid." },
@@ -1035,7 +1035,7 @@ const serviceDetails: Record<string, {
       "User affidavit (for prior use claims)",
     ],
     timeline: "18–24 months for registration (TM applied status immediate)",
-    startingPrice: "₹6,999",
+    startingPrice: "₹3,499 per class",
     faqs: [
       { q: "Can I use ™ symbol before registration is complete?", a: "Yes. You can use ™ (Unregistered Trademark) immediately after filing your application. The ® symbol (Registered Trademark) can only be used after the trademark is fully registered." },
       { q: "What are the 45 trademark classes?", a: "Classes 1–34 cover goods (e.g., chemicals, clothing, beverages, etc.) and classes 35–45 cover services (e.g., advertising, education, insurance, software). Most businesses need 1–3 classes. Multi-class discounts are available for startup applicants." },
@@ -1064,7 +1064,7 @@ const serviceDetails: Record<string, {
       "Affidavit of use (if claiming prior use)",
     ],
     timeline: "7–10 business days (from instruction to filing)",
-    startingPrice: "₹4,999",
+    startingPrice: "₹7,999 per reply",
     faqs: [
       { q: "What is Section 9 vs Section 11 objection?", a: "Section 9 (Absolute Grounds): Mark is descriptive, common to the trade, or non-distinctive. Section 11 (Relative Grounds): Mark conflicts with an existing registered or applied-for mark. Each requires different arguments and evidence." },
       { q: "What is a consent letter / No Objection Certificate?", a: "If your mark is cited as conflicting with an earlier registered mark, you can approach the owner of that mark for a consent letter allowing coexistence. Our team can help negotiate and obtain such consent letters where possible." },
@@ -1092,7 +1092,7 @@ const serviceDetails: Record<string, {
       "Power of attorney (if filed through agent)",
     ],
     timeline: "15–30 business days",
-    startingPrice: "₹3,999",
+    startingPrice: "₹4,999 per class",
     faqs: [
       { q: "What happens if trademark expires without renewal?", a: "After the 6-month grace period, the trademark is removed from the register. After removal, anyone can apply for the same mark. Restoration is possible within 1 year of expiry by applying to the Registrar with late fees." },
       { q: "Can a trademark be renewed indefinitely?", a: "Yes. Trademarks can be renewed every 10 years indefinitely, as long as the mark is in use. There is no maximum duration — a trademark maintained in use can last forever (unlike patents which expire after 20 years)." },
@@ -1122,7 +1122,7 @@ const serviceDetails: Record<string, {
       "Publisher NOC (if published work)",
     ],
     timeline: "30–60 business days (including objection period)",
-    startingPrice: "₹3,999",
+    startingPrice: "₹7,999 per work",
     faqs: [
       { q: "Does copyright exist automatically in India?", a: "Yes. Copyright in India arises automatically upon creation of an original work — no registration is required. Registration however creates a public record and prima facie evidence of ownership, making legal enforcement much stronger." },
       { q: "What is the duration of copyright in India?", a: "For literary, artistic, musical works: lifetime of author + 60 years. For cinematographic films and sound recordings: 60 years from publication. For photographs: 60 years from publication." },
@@ -1181,7 +1181,7 @@ const serviceDetails: Record<string, {
       "Disclaimer (if any excluded features)",
     ],
     timeline: "6–12 months for registration",
-    startingPrice: "₹4,999",
+    startingPrice: "₹9,999 per design",
     faqs: [
       { q: "What is the difference between design registration and trademark?", a: "Design registration protects the visual appearance (shape, pattern, colour) of a product for 15 years. Trademark protects a brand identifier (name, logo) for 10 years (renewable). A product can have both design registration (its unique shape) and trademark (its brand name)." },
       { q: "Can I register the same design in different colours separately?", a: "Yes. Different colour combinations of the same design can be registered as separate design registrations. Each colour variant gets its own registration number and protection." },
@@ -1210,7 +1210,7 @@ const serviceDetails: Record<string, {
       "Digital signature of authorized signatory",
     ],
     timeline: "3–5 business days (registration)",
-    startingPrice: "₹2,999 (registration) + ₹1,499/month (ECR)",
+    startingPrice: "₹2,999",
     faqs: [
       { q: "What is the PF contribution breakdown?", a: "Employee contributes 12% of basic+DA to PF. Employer contributes 12% total — split as 3.67% to PF (EPF) and 8.33% to EPS (pension). Employer also pays 0.5% to EDLI (insurance) and 0.5% as admin charges. Total employer cost: ~13%." },
       { q: "What is the UAN and why does it matter?", a: "UAN (Universal Account Number) is a 12-digit number allotted by EPFO for each employee. It remains the same across employers — employees can transfer PF online, check balance, and withdraw using their UAN. Seeding Aadhaar and bank account with UAN is mandatory." },
@@ -1239,7 +1239,7 @@ const serviceDetails: Record<string, {
       "Bank account details",
     ],
     timeline: "3–7 business days",
-    startingPrice: "₹2,999 (registration) + ₹1,499/month",
+    startingPrice: "₹2,999",
     faqs: [
       { q: "What is the ESI contribution rate?", a: "Employer: 3.25% of employee's wages. Employee: 0.75% of wages. Total: 4% of gross salary. Employees earning ≤ ₹176/day are exempt from employee contribution (employer still contributes). The wage limit for coverage is ₹21,000/month." },
       { q: "What is the pehchan card and how does it work?", a: "The Pehchan Card (ESIC Smart Card) is issued to insured employees and their dependants. It is used for cashless medical treatment at ESIC hospitals and panel hospitals across India. Treatment is available at 1,500+ ESIC hospitals nationwide." },
@@ -1269,7 +1269,7 @@ const serviceDetails: Record<string, {
       "Bank account details",
     ],
     timeline: "2–3 business days per payroll cycle",
-    startingPrice: "₹2,999/month",
+    startingPrice: "₹2,000",
     faqs: [
       { q: "What is included in monthly payroll processing?", a: "Gross salary calculation, deductions (PF, ESIC, PT, TDS, LOP), net salary computation, payslip generation, PF challan, ESIC challan, PT payment, salary bank transfer file, and monthly TDS reconciliation." },
       { q: "How is TDS on salary calculated?", a: "TDS is calculated on estimated annual salary after standard deduction (₹75,000), Chapter VI-A deductions (80C, 80D, HRA, etc.), and divided into monthly deductions. Form 24Q is filed quarterly and Form 16 is issued annually." },
@@ -1330,7 +1330,7 @@ const serviceDetails: Record<string, {
       "Credit card statements",
     ],
     timeline: "3–5 business days per month",
-    startingPrice: "₹4,999/month",
+    startingPrice: "₹2,999/month",
     faqs: [
       { q: "What accounting software do you use?", a: "We work with Tally Prime, Zoho Books, QuickBooks Online, and Xero. We can adapt to your existing software or recommend the best option for your business size and complexity." },
       { q: "What is included in monthly MIS?", a: "Monthly MIS includes P&L vs budget, revenue trend analysis, top customers/expenses, receivables and payables aging, cash flow forecast, and any compliance alerts for the month." },
@@ -1359,7 +1359,7 @@ const serviceDetails: Record<string, {
       "Business plan (if available)",
     ],
     timeline: "Onboarding: 5–7 business days",
-    startingPrice: "₹9,999/month",
+    startingPrice: "₹24,999/month",
     faqs: [
       { q: "What does a Virtual CFO do differently from an accountant?", a: "An accountant records and reports what happened. A Virtual CFO tells you why it happened and what to do next — financial modelling, fundraising strategy, burn rate management, investor communications, tax planning, and strategic financial decision making." },
       { q: "Can a Virtual CFO help with VC fundraising?", a: "Yes. Our Virtual CFO service includes financial model building (5-year projections), investor narrative on financials, due diligence preparation, cap table modelling, and coordination with investors on financial queries." },
@@ -1389,7 +1389,7 @@ const serviceDetails: Record<string, {
       "Key contracts and agreements",
     ],
     timeline: "5–10 business days",
-    startingPrice: "₹14,999",
+    startingPrice: "₹4,999 per report",
     faqs: [
       { q: "Which valuation method is best for a startup?", a: "For pre-revenue startups: Risk-Adjusted NPV or Berkus method. For revenue-stage startups: DCF (Discounted Cash Flow) or Revenue multiples. For asset-heavy businesses: Net Asset Value (NAV) is preferred. We recommend the appropriate method based on business stage." },
       { q: "What is Rule 11UA and why does it matter for FDI?", a: "Under Rule 11UA of IT Rules and FEMA, shares issued to foreign investors must be at Fair Market Value determined by a CA. The issue price cannot be below this FMV, ensuring the company does not undervalue shares issued to foreign investors (prevents round-tripping)." },
@@ -1484,7 +1484,7 @@ const serviceDetails: Record<string, {
       "Bank statement showing minimum NOF",
     ],
     timeline: "90–120 business days (RBI approval)",
-    startingPrice: "₹49,999",
+    startingPrice: "₹5,499",
     faqs: [
       { q: "What is the difference between a Bank and an NBFC?", a: "NBFCs cannot accept demand deposits (savings/current accounts). They are not part of the payment/settlement system and cannot issue cheques. However, they can do most lending activities. NBFCs are regulated by RBI under the RBI Act, 1934." },
       { q: "What are the different types of NBFCs?", a: "Types include: NBFC-ICC (Investment & Credit Company — most common), NBFC-MFI (Microfinance), NBFC-Factor, Infrastructure Finance Company, Mortgage Guarantee Company, NBFC-P2P, and Account Aggregator. Each has specific capital requirements and RBI guidelines." },
@@ -1545,7 +1545,7 @@ const serviceDetails: Record<string, {
       "Board resolution for MFI activities",
     ],
     timeline: "60–120 business days",
-    startingPrice: "₹29,999",
+    startingPrice: "₹5,499",
     faqs: [
       { q: "What is the difference between NBFC-MFI and Section 8 MFI?", a: "NBFC-MFI is for-profit, requires ₹10 crore NOF, and is regulated by RBI. It can raise commercial borrowings. Section 8 MFI is non-profit, has lower capital requirements, but cannot raise deposits and must reinvest surpluses." },
       { q: "Can an MFI charge any interest rate?", a: "No. RBI caps NBFC-MFI lending rates. Pricing must be cost of funds + margin (max 10% for large MFIs, 12% for smaller ones). All fees must be disclosed upfront to borrowers." },
@@ -1725,7 +1725,7 @@ const serviceDetails: Record<string, {
       "Previous year LUT reference number (for renewal)",
     ],
     timeline: "1–2 business days",
-    startingPrice: "₹999/year",
+    startingPrice: "₹999 per year",
     faqs: [
       { q: "What is a Letter of Undertaking (LUT) in GST?", a: "LUT is a declaration filed by exporters promising to complete exports within the prescribed time. It allows export without payment of IGST. Without LUT, exporters must pay IGST and then claim a refund — blocking working capital for months." },
       { q: "What is the deadline for exporting after filing LUT?", a: "For goods: export must happen within 3 months of invoice date. For services: payment must be received in convertible foreign exchange within 1 year. If not done in time, IGST becomes payable with 18% interest." },
@@ -1756,7 +1756,7 @@ const serviceDetails: Record<string, {
       "ITR for previous years (if existing entity)",
     ],
     timeline: "30–45 business days",
-    startingPrice: "₹7,999",
+    startingPrice: "₹9,999",
     faqs: [
       { q: "Is 12A registration a one-time or periodic registration?", a: "As per the Finance Act 2020, 12A registration is now provisional for 3 years initially, then renewed for 5-year periods. All existing registrations also need periodic re-registration. Our team handles renewals proactively." },
       { q: "Can a newly formed NGO get 80G?", a: "Yes. A newly formed NGO can apply for provisional 80G registration before starting activities. The provisional certificate is valid for 3 years. After demonstrating charitable activities, permanent 80G is granted after verification by the income tax authorities." },
@@ -1787,7 +1787,7 @@ const serviceDetails: Record<string, {
       "Passport-size photograph",
     ],
     timeline: "5–10 business days",
-    startingPrice: "₹1,499",
+    startingPrice: "₹3,999",
     faqs: [
       { q: "Who needs Shops & Establishment registration?", a: "Any shop, restaurant, hotel, eating house, cinema house, amusement park, or commercial establishment employing persons must register under the applicable state Shops & Establishments Act. It applies regardless of employee count in most states." },
       { q: "Is S&E registration required for a home-based business?", a: "In most states, if work is carried from residential premises without customer visits, registration may not be mandatory. However, if the home address is used for GST or bank accounts, registration is strongly advisable." },
@@ -1911,7 +1911,7 @@ const serviceDetails: Record<string, {
       "Share subscription agreement",
     ],
     timeline: "7–10 business days",
-    startingPrice: "₹4,999",
+    startingPrice: "₹1,999",
     faqs: [
       { q: "What is INC-20A and why is it mandatory?", a: "INC-20A is the Declaration of Commencement of Business filed within 180 days of incorporation. All directors declare that the company has received share subscription money. Non-filing results in ₹50,000 penalty and the company cannot begin operations." },
       { q: "What statutory registers must be maintained from day one?", a: "Required registers: Register of Members (MGT-1), Register of Directors (MBP-1), Register of Charges, Register of Contracts (MBP-4), Minutes Book (board and general meetings), and Register of Investments. All must be kept at the registered office." },
@@ -1971,7 +1971,7 @@ const serviceDetails: Record<string, {
       "Proposed agenda items",
     ],
     timeline: "5–7 business days (preparation phase)",
-    startingPrice: "₹3,999/meeting",
+    startingPrice: "₹6,499",
     faqs: [
       { q: "What business is mandatory at every AGM?", a: "Every AGM must cover: approval of audited financial statements, declaration of dividend (if any), appointment/re-appointment of auditors (every 5 years), and appointment of directors retiring by rotation. Any other matters are special business requiring separate notice." },
       { q: "Can an AGM be held virtually?", a: "Yes. MCA has permanently allowed companies to hold General Meetings through video conferencing (VC) or audio-visual means (OAVM). Hybrid AGMs are also permitted. Specific procedural requirements for virtual meetings under MCA circulars must be followed." },
@@ -2001,7 +2001,7 @@ const serviceDetails: Record<string, {
       "Stamp paper for share transfer deed",
     ],
     timeline: "7–10 business days",
-    startingPrice: "₹2,999",
+    startingPrice: "₹3,499 per transfer",
     faqs: [
       { q: "What are pre-emption rights in a Pvt Ltd Company?", a: "Pre-emption rights require a shareholder wishing to sell shares to first offer them to existing shareholders before selling to an outsider. This is typically mandated in the Articles of Association. Violation can make the transfer void. Our team checks AOA before processing." },
       { q: "What is the difference between share transfer and transmission?", a: "Transfer is a voluntary act between two parties (sale, gift). Transmission is transfer by operation of law — on death of a shareholder (to legal heirs), insolvency, or succession. Transmission requires different documentation such as probate or succession certificate." },
@@ -2309,7 +2309,7 @@ const serviceDetails: Record<string, {
       "Trademark or brand name (if applicable)",
     ],
     timeline: "5–7 business days",
-    startingPrice: "₹2,999",
+    startingPrice: "₹7,499",
     faqs: [
       { q: "What is the difference between a barcode and a QR code?", a: "A barcode (1D) encodes data in parallel lines — typically a GTIN (product ID). A QR code (2D) can encode URLs and much more data. For retail products, the GS1 barcode (EAN-13 or UPC-A) is the required standard — accepted by all major retailers and e-commerce platforms." },
       { q: "Can I use free online barcode generators?", a: "Free generators create visually correct barcodes but without unique, globally registered GTINs. These are not accepted by retailers like Amazon, Flipkart, or D-Mart because the GTIN is not traceable to a legitimate manufacturer. GS1 India barcodes are the only accepted standard for trade." },
@@ -2431,7 +2431,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   // Benchmarked pricing, where we publish it, wins over the legacy placeholder.
   const pricing = getServicePricing(slug);
-  const startingPrice = pricing ? formatINR(pricing.price) : detail.startingPrice;
+  // Units are written either as a suffix ("/month") or a phrase ("per class") —
+  // only the phrase form takes a separating space.
+  const startingPrice = pricing
+    ? `${formatINR(pricing.price)}${
+        pricing.unit ? (pricing.unit.startsWith("/") ? pricing.unit : ` ${pricing.unit}`) : ""
+      }`
+    : detail.startingPrice;
 
   return (
     <>
@@ -2562,7 +2568,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 </div>
                 <div className="flex items-center gap-2 text-dark text-sm mb-6">
                   <Star size={14} className="text-accent" />
-                  <span>Starting at <strong>{detail.startingPrice}</strong></span>
+                  <span>Starting at <strong>{startingPrice}</strong></span>
                 </div>
                 <Button href="/contact" variant="primary" size="md" className="w-full justify-center">
                   Book Consultation

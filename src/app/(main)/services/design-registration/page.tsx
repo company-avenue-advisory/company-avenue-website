@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/design-registration" },
   title: "Design Registration in India — Designs Act 2000",
   description:
-    "Protect your product's visual appearance — shape, pattern, and ornamentation — under the Designs Act 2000. Up to 15 years of exclusive protection. Starting ₹4,999 (excl. govt fees).",
+    "Protect your product's visual appearance — shape, pattern, and ornamentation — under the Designs Act 2000. Up to 15 years of exclusive protection. Starting ₹9,999 (excl. govt fees).",
 };
 
 export default function DesignRegistrationServicePage() {

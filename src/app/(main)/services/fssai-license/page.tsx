@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/fssai-license" },
   title: "FSSAI License Registration for Food Business",
   description:
-    "Get FSSAI Basic Registration, State License, or Central License for your food business. Restaurants, manufacturers, importers. Starting ₹1,999.",
+    "Get FSSAI Basic Registration, State License, or Central License for your food business. Restaurants, manufacturers, importers. Starting ₹3,999.",
 };
 
 export default function FSSAILicenseServicePage() {

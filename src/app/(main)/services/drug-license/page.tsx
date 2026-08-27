@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/drug-license" },
   title: "Drug License Registration — Retail & Wholesale",
   description:
-    "Obtain Drug License under the Drugs & Cosmetics Act 1940. Retail, wholesale, and manufacturing licenses. Pharmacies, distributors, importers. Starting ₹3,999.",
+    "Obtain Drug License under the Drugs & Cosmetics Act 1940. Retail, wholesale, and manufacturing licenses. Pharmacies, distributors, importers. Starting ₹5,499.",
 };
 
 export default function DrugLicenseServicePage() {

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/business-valuation" },
   title: "Business Valuation Services in India",
   description:
-    "SEBI-compliant business valuation for M&A, fundraising, ESOPs, and RBI compliance. DCF, comparable companies, and asset-based approaches. Starting ₹14,999.",
+    "SEBI-compliant business valuation for M&A, fundraising, ESOPs, and RBI compliance. DCF, comparable companies, and asset-based approaches. Starting ₹4,999.",
 };
 
 export default function BusinessValuationServicePage() {

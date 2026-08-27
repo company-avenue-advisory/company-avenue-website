@@ -7,16 +7,24 @@
  *
  * ONE price per service — no packages or tiers.
  *
- * Company incorporation (Pvt Ltd / OPC / Section 8) is governed by
- * CAA_Incorporation_Cost_Calculator_Final.xlsx — see lib/calc-fees.ts. That
- * workbook is the authority for the fee, the MCA scale, stamp duty and GST scope.
+ * Prices come from three client workbooks (27 Aug 2026) via lib/calc-fees.ts:
+ *   CAA_Incorporation_Cost_Calculator_v2 (2).xlsx  — incorporation fee card, MCA
+ *     scale, State stamp duty, add-ons, the standalone fee schedule, Section 8
+ *     services and the two-stage Startup India engagement
+ *   CAA_LLP_Cost_Calculator_v2.xlsx                — LLP fee bands, DPIN,
+ *     franking and State-wise LLP agreement stamp duty
+ *   Company_Closure_Exit (1).xlsx                  — the closure and exit card
+ * Those files are the authority. Where the closure workbook and the incorporation
+ * workbook's "Other Services Standalone" sheet disagree, the closure workbook wins.
  *
- * Everything else is benchmarked against setindiabiz.com published professional
- * fees (scraped 2026-08-11) at their entry-level plan + ₹500, with the same +₹500
- * on the strike-through so the discount delta matches. Government fees are never
- * marked up; they are pass-through, shown "at actual".
+ * Anything not covered by a workbook keeps its previous benchmark (setindiabiz
+ * entry-level plan + ₹500, scraped 2026-08-11). Government fees are never marked
+ * up; they are pass-through, shown "at actual".
  */
-import { PRO_FEES, inr } from "@/lib/calc-fees";
+import {
+  PRO_FEES, inr, INCORP_FEE_CARD, CLOSURE_HEADLINE, CCFS_2026,
+  SECTION8_SERVICES, STARTUP_INDIA, ADDON_SERVICES, STANDALONE_FEES,
+} from "@/lib/calc-fees";
 
 export type FeeRow = {
   label: string;
@@ -48,6 +56,11 @@ export type ServicePricing = {
 
 const GST_NOTE = "GST @18% on professional fees is charged extra.";
 
+/** Our incorporation fee moves with authorised capital — this is the card. */
+const FEE_CARD_NOTE = `Our fee follows authorised capital: ${INCORP_FEE_CARD
+  .map((r) => `up to ${inr(r.upTo)} → ${inr(r.withName)}`)
+  .join(", ")}. Above ${inr(INCORP_FEE_CARD[INCORP_FEE_CARD.length - 1].upTo)} we quote separately.`;
+
 /** Companies: MCA fees and stamp duty are pure-agent recoveries — no GST on them. */
 const PURE_AGENT_NOTE =
   "GST @18% applies to the Digital Signatures and our professional fee only. MCA fees and stamp duty are recovered at actuals as a pure agent under Rule 33 of the CGST Rules, 2017.";
@@ -70,16 +83,16 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
       "Company PAN & TAN",
     ],
     breakdown: [
-      { label: "Our professional fee", value: inr(PRO_FEES["private-limited-company"]) },
+      { label: "Our professional fee", value: inr(PRO_FEES["private-limited-company"]), note: "at ₹1 lakh authorised capital — rises with the slab" },
       { label: "MCA registration fee", value: "NIL", note: "authorised capital up to ₹15 lakh is exempt" },
-      { label: "Stamp duty (e-Form + MoA + AoA)", value: "₹2,460", note: "Delhi at ₹15 lakh capital — varies by state" },
+      { label: "Stamp duty (e-Form + MoA + AoA)", value: "₹360", note: "Delhi at ₹1 lakh capital — varies by state" },
       { label: "Name reservation (SPICe+ Part A)", value: "₹1,000" },
       { label: "PAN & TAN", value: "₹143" },
       { label: "DSC — 2 directors", value: "₹4,000", note: "₹2,000 each, Class 3 two-year" },
       { label: "GST @18% on DSC + our fee", value: "₹1,350" },
     ],
-    typicalTotal: "≈ ₹12,452 all-in — 2 directors, ₹15 lakh capital, Delhi",
-    disclaimer: PURE_AGENT_NOTE,
+    typicalTotal: "≈ ₹10,352 all-in — 2 directors, ₹1 lakh capital, Delhi",
+    disclaimer: `${FEE_CARD_NOTE} ${PURE_AGENT_NOTE}`,
   },
 
   "llp-registration": {
@@ -97,17 +110,19 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
       "Form 3 filing with ROC",
     ],
     breakdown: [
-      { label: "Our professional fee", value: inr(PRO_FEES["llp-registration"]) },
+      { label: "Our professional fee", value: inr(PRO_FEES["llp-registration"]), note: "incorporation, LLP Agreement drafting and Form 3" },
       { label: "Name approval (RUN-LLP)", value: "₹200" },
       { label: "FiLLiP incorporation fee", value: "₹500 – ₹5,000", note: "by capital contribution slab" },
       { label: "Form 3 filing fee", value: "₹50 – ₹200", note: "by capital contribution slab" },
-      { label: "LLP Agreement stamp duty", value: "At actual", note: "varies by state, ~1% of contribution" },
+      { label: "DPIN / DIN allotment", value: "₹500", note: "per partner without an existing DIN" },
+      { label: "LLP Agreement stamp duty", value: "₹1,000", note: "Delhi — 1% of contribution, min ₹200, max ₹5,000; varies by state" },
       { label: "PAN & TAN", value: "₹143" },
       { label: "DSC — 2 partners", value: "₹4,000", note: "₹2,000 each, Class 3 two-year" },
-      { label: "GST @18% on DSC + our fee", value: "₹1,260" },
+      { label: "Franking, stamp paper & notarisation", value: "₹1,799" },
+      { label: "GST @18% on DSC, franking + our fee", value: "₹1,674" },
     ],
-    typicalTotal: "≈ ₹10,152 all-in — 2 partners, ₹1 lakh contribution, Delhi",
-    disclaimer: `Government fee shown is the combined FiLLiP + PAN + TAN + Form 3 cost. LLP Agreement stamp duty varies by state. ${GST_NOTE}`,
+    typicalTotal: "≈ ₹12,865 all-in — 2 partners, ₹1 lakh contribution, Delhi",
+    disclaimer: `Unlike a company, the LLP Agreement is a physical instrument executed on stamp paper, so the duty is a real cost and franking sits on top of it. Duty varies by state — run the calculator for yours. ${GST_NOTE}`,
   },
 
   "one-person-company": {
@@ -126,22 +141,22 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
       "ESI & PF registration",
     ],
     breakdown: [
-      { label: "Our professional fee", value: inr(PRO_FEES["one-person-company"]) },
+      { label: "Our professional fee", value: inr(PRO_FEES["one-person-company"]), note: "at ₹1 lakh authorised capital — rises with the slab" },
       { label: "MCA registration fee", value: "NIL", note: "authorised capital up to ₹15 lakh is exempt" },
-      { label: "Stamp duty (e-Form + MoA + AoA)", value: "₹2,460", note: "Delhi at ₹15 lakh capital — varies by state" },
+      { label: "Stamp duty (e-Form + MoA + AoA)", value: "₹360", note: "Delhi at ₹1 lakh capital — varies by state" },
       { label: "Name reservation (SPICe+ Part A)", value: "₹1,000" },
       { label: "PAN & TAN", value: "₹143" },
       { label: "DSC — 1 director", value: "₹2,000", note: "Class 3, two-year validity" },
       { label: "GST @18% on DSC + our fee", value: "₹990" },
     ],
-    typicalTotal: "≈ ₹10,092 all-in — ₹15 lakh capital, Delhi",
-    disclaimer: PURE_AGENT_NOTE,
+    typicalTotal: "≈ ₹7,992 all-in — ₹1 lakh capital, Delhi",
+    disclaimer: `${FEE_CARD_NOTE} ${PURE_AGENT_NOTE}`,
   },
 
   "partnership-firm": {
     label: "Partnership Firm Registration Cost",
     price: PRO_FEES["partnership-firm"],
-    compareAt: 7999,
+    compareAt: 6999,
     feeNote: "+ government fees & stamp duty at actual",
     includes: [
       "Expert consultation on deed terms",
@@ -158,7 +173,7 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
       { label: "Registrar of Firms fee", value: "At actual", note: "optional but recommended" },
       { label: "Trademark filing (optional add-on)", value: "₹4,500", note: "government fee, per class" },
     ],
-    typicalTotal: "≈ ₹8,332 all-in (incl. GST) — 2 partners, Delhi",
+    typicalTotal: "≈ ₹6,042 all-in (incl. GST) plus deed stamp paper at actual — 2 partners, Delhi",
     disclaimer: GST_NOTE,
   },
 
@@ -204,9 +219,14 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
       { label: "PAN & TAN", value: "₹143" },
       { label: "DSC — 2 directors", value: "₹4,000", note: "₹2,000 each, Class 3 two-year" },
       { label: "GST @18% on DSC + our fee", value: "₹2,160" },
+      { label: "12A + 80G (Form 104, provisional)", value: inr(SECTION8_SERVICES[0].pro), note: "optional — valid 3 years, filed right after incorporation" },
+      { label: "NGO Darpan (NITI Aayog ID)", value: inr(SECTION8_SERVICES[1].pro), note: "optional" },
+      { label: "CSR-1 registration", value: inr(SECTION8_SERVICES[2].pro), note: "optional — ₹12,500 on the three-year activity record" },
+      { label: "Form 105 — regular registration", value: "₹22,000 – ₹52,000", note: "optional — slab by gross receipts" },
+      { label: "FCRA registration", value: "₹45,000", note: "optional — prior permission ₹30,000" },
     ],
     typicalTotal: "≈ ₹15,312 all-in — 2 directors, ₹15 lakh capital, Delhi",
-    disclaimer: PURE_AGENT_NOTE,
+    disclaimer: `Incorporation follows the same capital-slab fee card as a private limited company. ${PURE_AGENT_NOTE}`,
   },
 
   "indian-subsidiary": {
@@ -288,14 +308,16 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
       "GSTIN & REG-06 certificate",
     ],
     breakdown: [
-      { label: "Our professional fee", value: inr(PRO_FEES["gst-registration"]) },
+      { label: "Our professional fee", value: inr(PRO_FEES["gst-registration"]), note: "standalone" },
+      { label: "Bundled with an incorporation", value: "₹999", note: "when bought alongside company or LLP registration" },
       { label: "GST department fee", value: "NIL" },
-      { label: "Digital signature (companies/LLPs)", value: "₹1,500", note: "not needed for proprietors — Aadhaar OTP" },
-      { label: "Non-Rule-14A applications", value: "₹4,000", note: "standard route with departmental liaison" },
+      { label: "Digital signature (companies/LLPs)", value: "₹2,000", note: "not needed for proprietors — Aadhaar OTP" },
+      { label: "Amendment to registration particulars", value: inr(PRO_FEES["gst-amendment"]), note: "per amendment, later" },
+      { label: "Letter of Undertaking (LUT) filing", value: inr(PRO_FEES["gst-lut-filing"]), note: "per year, exporters" },
       { label: "Site visit / physical verification support", value: "At actual" },
     ],
-    typicalTotal: "≈ ₹1,180 for a proprietor, ≈ ₹2,680 for a company (incl. GST and DSC)",
-    disclaimer: GST_NOTE,
+    typicalTotal: "≈ ₹3,539 for a proprietor, ≈ ₹5,899 for a company (incl. GST and DSC)",
+    disclaimer: `The ₹999 bundled rate applies only where GST registration is bought with an incorporation. ${GST_NOTE}`,
   },
 
   "gst-filing": {
@@ -390,26 +412,31 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
   },
 
   "company-closure": {
-    label: "Company Closure & Dormant Status Cost",
+    label: "Company Closure & Exit Cost",
     price: PRO_FEES["company-closure"],
-    feeNote: "+ ROC fee at actual",
+    feeNote: "+ MCA fee at actual — strike-off in Form STK-2, end to end",
     includes: [
-      "Eligibility review",
-      "Board resolution drafting",
-      "Affidavits and indemnity bonds",
-      "Statement of accounts preparation",
-      "MSC-1 / STK-2 filing with the ROC",
-      "Follow-up until approval",
+      "Exit diagnostic and route opinion, adjusted against the fee if you proceed",
+      "Board meeting, EGM and special resolution support, including Form MGT-14",
+      "Indemnity bond (STK-3) and affidavits (STK-4) drafted for every director",
+      "Statement of accounts in Form STK-8 certified by a Chartered Accountant",
+      "Form STK-2 filed and carried through to the dissolution notice in STK-7",
+      "C-PACE query handling and resubmission",
     ],
     breakdown: [
-      { label: "Our professional fee", value: inr(PRO_FEES["company-closure"]) },
-      { label: "ROC fee — capital of ₹1 lakh", value: "₹1,300" },
-      { label: "STK-2 strike-off fee", value: "₹10,000", note: "if striking off rather than dormant" },
-      { label: "Digital signature", value: "₹1,500", note: "if expired" },
-      { label: "Pending annual filings", value: "At actual", note: "must be cleared first" },
+      { label: "Exit diagnostic & route opinion", value: inr(CLOSURE_HEADLINE.diagnostic), note: "adjusted against our fee if the engagement proceeds" },
+      { label: "Strike-off in Form STK-2 — end to end", value: inr(CLOSURE_HEADLINE.strikeOffStk2) },
+      { label: "MCA fee on Form STK-2", value: inr(CCFS_2026.stk2Concessional), note: `normally ${inr(CCFS_2026.stk2Standard)} — concessional to ${CCFS_2026.deadline} under CCFS-2026` },
+      { label: "Notarisation & stamping of STK-3 / STK-4", value: "₹1,500", note: "per director" },
+      { label: "Overdue AOC-4 and MGT-7 / MGT-7A", value: inr(CLOSURE_HEADLINE.overdueAnnualFilingPerFy), note: "per financial year — must be cleared first" },
+      { label: "Statement of accounts (STK-8), CA certified", value: "₹5,000" },
+      { label: "GST cancellation (REG-16) & final GSTR-10", value: inr(CLOSURE_HEADLINE.gstCancellation) },
+      { label: "EPFO & ESIC closure intimation", value: inr(CLOSURE_HEADLINE.epfEsicClosure), note: "where registered" },
+      { label: "Dormant status instead — Form MSC-1", value: inr(CLOSURE_HEADLINE.dormantMsc1), note: "defer rather than close; MSC-3 ₹4,000/year" },
+      { label: "LLP strike-off — Form 24", value: inr(CLOSURE_HEADLINE.llpForm24), note: "overdue Form 8 / Form 11 ₹4,500 per FY" },
     ],
-    typicalTotal: "≈ ₹10,740 all-in (incl. GST) for dormant status on a ₹1 lakh capital company",
-    disclaimer: GST_NOTE,
+    typicalTotal: "≈ ₹29,640 all-in — clean strike-off, 2 directors, filings up to date, incl. GST and the concessional ₹2,500 MCA fee",
+    disclaimer: `Closure is not a discharge — under Section 250 the liability of every director, officer and member survives dissolution, and the NCLT may restore the company under Section 252 within twenty years. ${GST_NOTE}`,
   },
 
   "agm-services": {
@@ -447,13 +474,13 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
       "Registration certificate",
     ],
     breakdown: [
-      { label: "Our professional fee", value: inr(PRO_FEES["fssai-license"]) },
+      { label: "Our professional fee", value: inr(PRO_FEES["fssai-license"]), note: "₹3,499 bundled with an incorporation" },
       { label: "FSSAI Basic Registration fee", value: "₹100/year" },
       { label: "FSSAI State Licence fee", value: "₹2,000 – ₹5,000/year", note: "by capacity" },
       { label: "FSSAI Central Licence fee", value: "₹7,500/year" },
       { label: "Water / food testing report", value: "At actual", note: "where required" },
     ],
-    typicalTotal: "≈ ₹4,230 all-in (incl. GST) for a one-year Basic Registration",
+    typicalTotal: "≈ ₹4,819 all-in (incl. GST) for a one-year Basic Registration",
     disclaimer: GST_NOTE,
   },
 
@@ -528,7 +555,6 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
   "trademark-registration": {
     label: "Trademark Registration Cost",
     price: PRO_FEES["trademark-registration"],
-    compareAt: 3000,
     unit: "per class",
     feeNote: "+ government fee of ₹4,500 or ₹9,000 per class",
     includes: [
@@ -539,13 +565,16 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
       "TM-A application filing",
     ],
     breakdown: [
-      { label: "Our professional fee", value: inr(PRO_FEES["trademark-registration"]), note: "per class" },
+      { label: "Our professional fee", value: inr(PRO_FEES["trademark-registration"]), note: "per class — ₹2,499 bundled with an incorporation" },
       { label: "Govt. fee — individual / proprietor", value: "₹4,500", note: "per class" },
       { label: "Govt. fee — MSME / DPIIT startup", value: "₹4,500", note: "per class" },
       { label: "Govt. fee — company / LLP / partnership", value: "₹9,000", note: "per class" },
-      { label: "Renewal — every 10 years", value: "₹9,000", note: "per class" },
+      { label: "Search & written opinion", value: "₹1,499", note: "per mark, before you file" },
+      { label: "Reply to examination report", value: inr(PRO_FEES["trademark-objection"]), note: "per reply" },
+      { label: "Show cause hearing attendance", value: "₹9,999", note: "per hearing" },
+      { label: "Renewal — every 10 years", value: inr(PRO_FEES["trademark-renewal"]), note: "per class, plus ₹9,000 govt. fee" },
     ],
-    typicalTotal: "≈ ₹7,450 for an MSME in one class, ≈ ₹11,950 for a company (incl. GST)",
+    typicalTotal: "≈ ₹8,629 for an MSME in one class, ≈ ₹13,129 for a company (incl. GST)",
     disclaimer: `A trademark protects one class of goods or services — multi-class filings multiply both fees. ${GST_NOTE}`,
   },
 
@@ -598,6 +627,513 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
     ],
     typicalTotal: "≈ ₹36,000 a year with full books and monthly reporting",
     disclaimer: `Excludes tax payment, interest and penalty. ${GST_NOTE}`,
+  },
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     Priced from the client workbooks, 27 Aug 2026. Every fee below is quoted
+     in one of the three files; nothing here is benchmarked or inferred.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  /* ─────────────── ROC event filings ─────────────── */
+
+  "change-in-directors": {
+    label: "Change in Directors Cost",
+    price: PRO_FEES["change-in-directors"],
+    feeNote: "+ MCA filing fee at actual",
+    includes: [
+      "Board resolution and consent letters (DIR-2)",
+      "Declaration of non-disqualification (DIR-8)",
+      "DIR-12 prepared and filed inside the 30-day window",
+      "Statutory registers updated",
+      "Resignation letter and DIR-11 support where applicable",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["change-in-directors"]), note: "per DIR-12 filing" },
+      { label: "MCA filing fee", value: "₹200 – ₹600", note: "on the authorised capital slab" },
+      { label: "Director KYC (DIR-3 KYC)", value: inr(PRO_FEES["director-kyc"]), note: "per director, if not already done" },
+      { label: "DSC for a new director", value: "₹2,000", note: "Class 3, two-year validity" },
+      { label: "Board resolution drafting", value: "₹999", note: "per resolution, if standalone" },
+    ],
+    typicalTotal: "≈ ₹2,559 all-in (incl. GST) for one appointment on a ₹1 lakh capital company",
+    disclaimer: GST_NOTE,
+  },
+
+  "director-kyc": {
+    label: "Director KYC (DIR-3 KYC) Cost",
+    price: PRO_FEES["director-kyc"],
+    unit: "per director",
+    feeNote: "no government fee if filed by 30 September",
+    includes: [
+      "DIN status check",
+      "Mobile and email OTP verification",
+      "DIR-3 KYC / KYC-WEB filed and certified",
+      "Filing acknowledgement delivered",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["director-kyc"]), note: "per director" },
+      { label: "MCA fee — filed on time", value: "NIL", note: "due 30 September each year" },
+      { label: "MCA fee — filed late", value: "₹5,000", note: "per director, DIN is deactivated until paid" },
+      { label: "DSC, if lapsed", value: "₹2,000", note: "Class 3, two-year validity" },
+    ],
+    typicalTotal: "≈ ₹589 per director (incl. GST) when filed on time",
+    disclaimer: `Miss 30 September and the DIN is deactivated — reactivation costs ₹5,000 per director in government fee alone. ${GST_NOTE}`,
+  },
+
+  "increase-authorised-capital": {
+    label: "Increase in Authorised Capital Cost",
+    price: PRO_FEES["increase-authorised-capital"],
+    feeNote: "+ MCA fee & stamp duty on the increase at actual",
+    includes: [
+      "Board and EGM notices, with the special resolution drafted",
+      "Altered capital clause of the Memorandum",
+      "Form SH-7 filed inside 30 days",
+      "MGT-14 filed where the Articles are also altered",
+      "Statutory registers and MOA updated",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["increase-authorised-capital"]), note: "per SH-7 filing" },
+      { label: "MCA fee on the increase", value: "At actual", note: "Rule 12 slab — scales with the new capital" },
+      { label: "Stamp duty on the increase", value: "At actual", note: "state rate on the increased capital" },
+      { label: "MGT-14 for the special resolution", value: "₹1,999", note: "where the Articles change too" },
+      { label: "Board / shareholder resolution", value: "₹999", note: "per resolution, if standalone" },
+    ],
+    typicalTotal: "≈ ₹5,899 in professional fees (incl. GST), plus the MCA slab and stamp duty",
+    disclaimer: `The MCA fee and stamp duty both scale with the amount of the increase — run the calculator before you decide the new figure. ${GST_NOTE}`,
+  },
+
+  "share-transfer": {
+    label: "Share Transfer Cost",
+    price: PRO_FEES["share-transfer"],
+    unit: "per transfer",
+    feeNote: "+ share transfer stamp duty at 0.015%",
+    includes: [
+      "Form SH-4 prepared and executed",
+      "Stamping guidance and duty computation",
+      "Board resolution approving the transfer",
+      "Share certificate endorsement",
+      "Register of Members updated",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["share-transfer"]), note: "per transfer" },
+      { label: "Transfer stamp duty", value: "0.015%", note: "of the consideration, on SH-4" },
+      { label: "Fresh share certificates", value: "₹499", note: "per certificate, printed and stamped" },
+      { label: "Allotment of new shares (PAS-3)", value: "₹4,999", note: "if issuing rather than transferring" },
+      { label: "FC-TRS, non-resident transferee", value: "₹14,999", note: "per filing, RBI reporting" },
+    ],
+    typicalTotal: "≈ ₹4,129 per transfer (incl. GST), plus 0.015% duty on the consideration",
+    disclaimer: GST_NOTE,
+  },
+
+  "registered-office-change": {
+    label: "Registered Office Change Cost",
+    price: PRO_FEES["registered-office-change"],
+    feeNote: "+ MCA filing fee at actual",
+    includes: [
+      "Board resolution and INC-22 filing",
+      "Fresh registered office proofs — utility bill and NOC",
+      "Special resolution and MGT-14 where the change crosses a city",
+      "Statutory registers and letterheads updated",
+      "Confirmation of the new address on the MCA master data",
+    ],
+    breakdown: [
+      { label: "Same city, town or village", value: inr(PRO_FEES["registered-office-change"]) },
+      { label: "Same State, new ROC jurisdiction", value: "₹9,999", note: "Regional Director approval required" },
+      { label: "State to State", value: "On quote", note: "RD approval, 2–4 months" },
+      { label: "MCA filing fee", value: "₹200 – ₹600", note: "on the authorised capital slab" },
+      { label: "Leased / virtual office proofs", value: "₹1,499", note: "where we assemble the proof pack" },
+    ],
+    typicalTotal: "≈ ₹3,539 all-in (incl. GST) for a same-city change",
+    disclaimer: `A State-to-State shift needs Regional Director approval and is quoted after a review — it is not a form-filing job. ${GST_NOTE}`,
+  },
+
+  "company-name-change": {
+    label: "Company Name Change Cost",
+    price: PRO_FEES["company-name-change"],
+    feeNote: "+ name reservation & MCA fee at actual",
+    includes: [
+      "Name availability search and RUN application",
+      "Board and EGM notices with the special resolution",
+      "MGT-14 filed inside 30 days",
+      "Form INC-24 filed for Central Government approval",
+      "Fresh certificate of incorporation and updated MOA/AOA",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["company-name-change"]) },
+      { label: "Name reservation (RUN)", value: "₹1,000", note: "per application" },
+      { label: "MCA fee — INC-24 and MGT-14", value: "₹200 – ₹600", note: "each, on the capital slab" },
+      { label: "Fresh name attempt if both lapse", value: "₹999", note: "per attempt, plus government fee" },
+      { label: "Adoption of a new set of Articles", value: "₹4,999", note: "if the Articles are replaced too" },
+    ],
+    typicalTotal: "≈ ₹12,799 all-in (incl. GST) including name reservation and MCA fees",
+    disclaimer: `Every licence, registration, bank account and PAN-linked record has to be updated after approval — we hand over a checklist. ${GST_NOTE}`,
+  },
+
+
+  "post-incorporation-compliance": {
+    label: "Post-Incorporation Compliance Cost",
+    price: PRO_FEES["post-incorporation-compliance"],
+    feeNote: "+ MCA filing fee at actual",
+    includes: [
+      "Declaration of commencement of business (INC-20A)",
+      "Appointment of the first auditor (ADT-1)",
+      "Share certificates issued, printed and stamped",
+      "First board minutes and statutory registers opened",
+      "A 12-month compliance calendar",
+    ],
+    breakdown: [
+      { label: "Commencement of business (INC-20A)", value: "₹1,999", note: "₹1,499 bundled with incorporation" },
+      { label: "First auditor appointment (ADT-1)", value: "₹1,999", note: "₹1,499 bundled with incorporation" },
+      { label: "Share certificates", value: "₹499", note: "per certificate, printed and stamped" },
+      { label: "Board resolutions", value: "₹999", note: "per resolution" },
+      { label: "MCA filing fee", value: "₹200 – ₹600", note: "per form, on the capital slab" },
+    ],
+    typicalTotal: "≈ ₹4,718 all-in (incl. GST) for INC-20A and ADT-1 together",
+    disclaimer: `INC-20A is due within 180 days of incorporation — without it the company cannot legally begin business or borrow. ${GST_NOTE}`,
+  },
+
+  /* ─────────────── Startup & registrations ─────────────── */
+
+  "startup-india": {
+    label: "Startup India / DPIIT Recognition Cost",
+    price: PRO_FEES["startup-india"],
+    feeNote: "no government fee for DPIIT recognition",
+    includes: [
+      "Eligibility check — under 10 years, under ₹100 Cr turnover, and the innovation test",
+      "Innovation and scalability note drafted by us",
+      "Startup India portal profile and DPIIT application filed",
+      "Query handling through to the recognition certificate",
+      "Benefits handover sheet mapping the schemes you become eligible for",
+    ],
+    breakdown: [
+      { label: "DPIIT recognition — our fee", value: inr(STARTUP_INDIA.dpiitOnly), note: "₹6,999 bundled with an incorporation" },
+      { label: "DPIIT government fee", value: "NIL" },
+      { label: "Grant readiness pack — Stage 1", value: inr(STARTUP_INDIA.stage1.fee), note: "eligibility and probability check, charged first to begin work" },
+      { label: "Grant readiness pack — Stage 2", value: inr(STARTUP_INDIA.stage2.fee), note: "readiness report, pitch deck and grant filing" },
+      { label: "Grant readiness pack — total", value: inr(STARTUP_INDIA.packageValue), note: "₹9,599 bundled with an incorporation" },
+      { label: "Section 80-IAC exemption application", value: inr(STARTUP_INDIA.section80IAC), note: "₹22,999 bundled" },
+      { label: "NITI Aayog Darpan ID", value: "₹1,999", note: "₹1,499 bundled" },
+    ],
+    typicalTotal: "≈ ₹9,439 all-in (incl. GST) for DPIIT recognition",
+    disclaimer: `The grant readiness pack is billed in two stages — Stage 2 only if Stage 1 confirms eligibility and you elect to proceed. ${GST_NOTE}`,
+  },
+
+  "msme-registration": {
+    label: "Udyam (MSME) Registration Cost",
+    price: PRO_FEES["msme-registration"],
+    feeNote: "government fee for Udyam registration is NIL",
+    includes: [
+      "Correct NIC code selection — the classification drives scheme eligibility later",
+      "Aadhaar and PAN validation on the Udyam portal",
+      "Investment and turnover classification",
+      "Udyam Registration Certificate with the URN",
+      "Guidance on the benefits the certificate unlocks",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["msme-registration"]), note: "₹999 bundled with an incorporation" },
+      { label: "Udyam government fee", value: "NIL", note: "registration is free on the portal" },
+      { label: "GST registration, if not held", value: inr(PRO_FEES["gst-registration"]), note: "₹999 bundled" },
+      { label: "NITI Aayog Darpan ID", value: "₹1,999", note: "for not-for-profits" },
+    ],
+    typicalTotal: "≈ ₹2,359 all-in (incl. GST) — there is no government fee to pay",
+    disclaimer: `Udyam is free on the government portal. Our fee is for getting the NIC codes and the investment/turnover classification right, which is what scheme eligibility later turns on. ${GST_NOTE}`,
+  },
+
+  "iec-registration": {
+    label: "Import Export Code (IEC) Cost",
+    price: PRO_FEES["iec-registration"],
+    feeNote: "+ ₹500 DGFT government fee",
+    includes: [
+      "DGFT portal registration and profile setup",
+      "Digital signature or Aadhaar-based authentication",
+      "ANF-2A application prepared and filed",
+      "Bank certificate and document coordination",
+      "IEC certificate delivered, with the annual-update reminder",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["iec-registration"]), note: "₹1,499 bundled with an incorporation" },
+      { label: "DGFT government fee", value: "₹500" },
+      { label: "Digital signature, if required", value: "₹2,000", note: "Class 3, two-year validity" },
+      { label: "Letter of Undertaking (LUT) filing", value: inr(PRO_FEES["gst-lut-filing"]), note: "per year — exports without paying IGST" },
+    ],
+    typicalTotal: "≈ ₹2,859 all-in (incl. GST and the DGFT fee)",
+    disclaimer: `An IEC must be updated on the DGFT portal every year between April and June even if nothing has changed, or it is deactivated. ${GST_NOTE}`,
+  },
+
+  "professional-tax": {
+    label: "Professional Tax Registration Cost",
+    price: PRO_FEES["professional-tax"],
+    feeNote: "+ state government fee at actual",
+    includes: [
+      "Applicability check for your State",
+      "PTEC and PTRC registration as required",
+      "Portal application filed with supporting documents",
+      "Registration certificate delivered",
+      "Deduction and return-filing calendar",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["professional-tax"]), note: "₹2,499 bundled with an incorporation" },
+      { label: "State government fee", value: "At actual", note: "varies by State" },
+      { label: "Shops & Establishment registration", value: inr(PRO_FEES["shops-establishment"]), note: "Delhi — ₹2,999 bundled" },
+      { label: "Surrender on closure", value: "₹3,500", note: "per State registration" },
+    ],
+    typicalTotal: "≈ ₹3,539 all-in (incl. GST) for one State registration",
+    disclaimer: `Professional tax is a State levy — it does not apply in every State, and we tell you before you pay if yours is one of them. ${GST_NOTE}`,
+  },
+
+  "shops-establishment": {
+    label: "Shops & Establishment Registration Cost",
+    price: PRO_FEES["shops-establishment"],
+    feeNote: "+ state government fee at actual",
+    includes: [
+      "Establishment category and applicability check",
+      "Labour department portal application",
+      "Employer and employee particulars filed",
+      "Registration certificate delivered",
+      "Display and record-keeping obligations explained",
+    ],
+    breakdown: [
+      { label: "Our professional fee — Delhi", value: inr(PRO_FEES["shops-establishment"]), note: "₹2,999 bundled with an incorporation" },
+      { label: "State government fee", value: "At actual", note: "varies by State and headcount" },
+      { label: "Professional tax registration", value: inr(PRO_FEES["professional-tax"]), note: "applicable States only" },
+      { label: "Surrender on closure", value: "₹3,500", note: "per State registration" },
+    ],
+    typicalTotal: "≈ ₹4,719 all-in (incl. GST) for a Delhi registration",
+    disclaimer: GST_NOTE,
+  },
+
+  "12a-80g-registration": {
+    label: "12A & 80G Registration Cost",
+    price: PRO_FEES["12a-80g-registration"],
+    feeNote: "no government fee — provisional registration and approval",
+    includes: [
+      "Eligibility and objects review",
+      "Form 104 filed for provisional registration and 80G approval",
+      "Trust deed / MOA and activity documentation assembled",
+      "Departmental query handling",
+      "Registration and approval orders delivered",
+    ],
+    breakdown: [
+      { label: "Form 104 — provisional 12A + 80G", value: inr(SECTION8_SERVICES[0].pro), note: "₹8,999 bundled; valid three years" },
+      { label: "Form 105 — regular, receipts below ₹25 lakh", value: inr(SECTION8_SERVICES[3].pro), note: "valid five years" },
+      { label: "Form 105 — regular, ₹25 lakh to ₹2 crore", value: inr(SECTION8_SERVICES[4].pro) },
+      { label: "Form 105 — regular, above ₹2 crore", value: inr(SECTION8_SERVICES[5].pro) },
+      { label: "Reply to a departmental query", value: inr(SECTION8_SERVICES[6].pro), note: "second and subsequent" },
+      { label: "Hearing before the Commissioner (Exemptions)", value: inr(SECTION8_SERVICES[7].pro), note: "per appearance" },
+      { label: "NGO Darpan (NITI Aayog ID)", value: inr(SECTION8_SERVICES[1].pro) },
+      { label: "CSR-1 registration", value: inr(SECTION8_SERVICES[2].pro), note: "₹12,500 on the three-year activity record" },
+    ],
+    typicalTotal: "≈ ₹11,799 all-in (incl. GST) for provisional 12A and 80G",
+    disclaimer: `Provisional registration runs three years; the regular Form 105 application is priced on a slab set by gross receipts in the latest audited year. ${GST_NOTE}`,
+  },
+
+
+  "gst-lut-filing": {
+    label: "GST LUT Filing Cost",
+    price: PRO_FEES["gst-lut-filing"],
+    unit: "per year",
+    feeNote: "no government fee — filed on the GST portal",
+    includes: [
+      "Eligibility check against the LUT conditions",
+      "Form GST RFD-11 prepared with witness particulars",
+      "Filing on the GST portal and ARN tracking",
+      "Acknowledgement (ARN) delivered for your export records",
+      "Renewal reminder before the next financial year",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["gst-lut-filing"]), note: "per financial year" },
+      { label: "GST department fee", value: "NIL" },
+      { label: "Import Export Code (IEC)", value: inr(PRO_FEES["iec-registration"]), note: "if not already held" },
+      { label: "Amendment to registration particulars", value: inr(PRO_FEES["gst-amendment"]), note: "per amendment" },
+    ],
+    typicalTotal: "≈ ₹1,179 per year (incl. GST) — there is no government fee",
+    disclaimer: `An LUT lets you export without paying IGST and claiming a refund. It has to be filed fresh for every financial year. ${GST_NOTE}`,
+  },
+
+  /* ─────────────── Intellectual property ─────────────── */
+
+  "trademark-objection": {
+    label: "Trademark Objection Reply Cost",
+    price: PRO_FEES["trademark-objection"],
+    unit: "per reply",
+    feeNote: "no government fee for an examination reply",
+    includes: [
+      "Examination report analysed against the cited marks",
+      "Grounds of objection addressed section by section",
+      "Evidence of use and affidavit assembled",
+      "Reply drafted and filed inside the 30-day window",
+      "Status tracked through to acceptance or hearing",
+    ],
+    breakdown: [
+      { label: "Reply to examination report", value: inr(PRO_FEES["trademark-objection"]), note: "per reply" },
+      { label: "Show cause hearing attendance", value: "₹9,999", note: "per hearing" },
+      { label: "Search & written opinion", value: "₹1,499", note: "per mark, before you file" },
+      { label: "Government fee on the reply", value: "NIL" },
+      { label: "Opposition notice", value: "₹2,700", note: "government fee, if the mark is opposed after advertisement" },
+    ],
+    typicalTotal: "≈ ₹9,439 per reply (incl. GST)",
+    disclaimer: `An examination report must be answered within 30 days or the application is treated as abandoned. ${GST_NOTE}`,
+  },
+
+  "trademark-renewal": {
+    label: "Trademark Renewal Cost",
+    price: PRO_FEES["trademark-renewal"],
+    unit: "per class",
+    feeNote: "+ ₹9,000 government fee per class",
+    includes: [
+      "Renewal due-date check against the registry record",
+      "Form TM-R prepared and filed",
+      "Surcharge computation where the mark is in the grace period",
+      "Restoration application where the mark has lapsed",
+      "Renewal certificate delivered",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["trademark-renewal"]), note: "per class" },
+      { label: "Government renewal fee", value: "₹9,000", note: "per class, every 10 years" },
+      { label: "Late renewal surcharge", value: "₹4,500", note: "per class, within the grace period" },
+      { label: "Restoration of a lapsed mark", value: "₹9,000", note: "government fee, per class" },
+    ],
+    typicalTotal: "≈ ₹14,899 per class (incl. GST and the government fee)",
+    disclaimer: `A trademark runs 10 years from the date of application. Miss the renewal and the mark can be removed from the register — restoration is possible but costs more. ${GST_NOTE}`,
+  },
+
+  "copyright-registration": {
+    label: "Copyright Registration Cost",
+    price: PRO_FEES["copyright-registration"],
+    unit: "per work",
+    feeNote: "+ government fee at actual by work category",
+    includes: [
+      "Work category determination and Form XIV preparation",
+      "Statement of particulars and statement of further particulars",
+      "NOC from the author or publisher where required",
+      "Filing with the Copyright Office and diary number tracking",
+      "Objection handling through to the registration certificate",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["copyright-registration"]), note: "per work" },
+      { label: "Government fee", value: "At actual", note: "by work category — literary, artistic, software, cinematograph" },
+      { label: "Design registration instead", value: inr(PRO_FEES["design-registration"]), note: "per design, where the work is an article's shape or ornament" },
+      { label: "Assignment or licence deed", value: "₹7,999", note: "per agreement" },
+    ],
+    typicalTotal: "≈ ₹9,439 in professional fees (incl. GST), plus the government fee at actual",
+    disclaimer: `Copyright subsists automatically on creation — registration is evidence of ownership, which is what matters in an infringement action. ${GST_NOTE}`,
+  },
+
+  "design-registration": {
+    label: "Design Registration Cost",
+    price: PRO_FEES["design-registration"],
+    unit: "per design",
+    feeNote: "+ government fee at actual by applicant category",
+    includes: [
+      "Novelty check against the designs register",
+      "Locarno classification selection",
+      "Representation sheets and statement of novelty prepared",
+      "Form 1 filed with the Designs Office",
+      "Objection handling through to registration",
+    ],
+    breakdown: [
+      { label: "Our professional fee", value: inr(PRO_FEES["design-registration"]), note: "per design" },
+      { label: "Government fee", value: "At actual", note: "reduced for individuals, startups and small entities" },
+      { label: "Copyright registration instead", value: inr(PRO_FEES["copyright-registration"]), note: "per work, for artistic works" },
+      { label: "Trademark search & opinion", value: "₹1,499", note: "where the shape also functions as a mark" },
+    ],
+    typicalTotal: "≈ ₹11,799 in professional fees (incl. GST), plus the government fee at actual",
+    disclaimer: `A design must be new and unpublished when you apply — publishing it first destroys novelty. ${GST_NOTE}`,
+  },
+
+  /* ─────────────── HR & payroll ─────────────── */
+
+  "pf-registration": {
+    label: "Provident Fund Registration Cost",
+    price: PRO_FEES["pf-registration"],
+    feeNote: "no government fee — PF and ESIC activated together",
+    includes: [
+      "Applicability check against the headcount threshold",
+      "Shram Suvidha / EPFO portal registration",
+      "Establishment code and ESIC code activation",
+      "Employee UAN generation and KYC seeding",
+      "First ECR filed and the monthly calendar handed over",
+    ],
+    breakdown: [
+      { label: "PF and ESIC activation", value: inr(PRO_FEES["pf-registration"]), note: "₹2,499 bundled with an incorporation" },
+      { label: "EPFO / ESIC government fee", value: "NIL", note: "contributions are separate and paid by the employer" },
+      { label: "Monthly PF return (ECR)", value: "₹1,250/month" },
+      { label: "Monthly ESI return", value: "₹999/month" },
+      { label: "Closure intimation on winding up", value: "₹5,000", note: "EPFO and ESIC together" },
+    ],
+    typicalTotal: "≈ ₹3,539 all-in (incl. GST) for PF and ESIC activation together",
+    disclaimer: `PF and ESIC are activated in one Shram Suvidha registration, so the fee covers both. Statutory contributions are paid by the employer directly. ${GST_NOTE}`,
+  },
+
+  "esic-registration": {
+    label: "ESIC Registration Cost",
+    price: PRO_FEES["esic-registration"],
+    feeNote: "no government fee — PF and ESIC activated together",
+    includes: [
+      "Applicability check against the headcount and wage threshold",
+      "Shram Suvidha / ESIC portal registration",
+      "Establishment code activation",
+      "Employee insurance number generation",
+      "First return filed and the monthly calendar handed over",
+    ],
+    breakdown: [
+      { label: "PF and ESIC activation", value: inr(PRO_FEES["esic-registration"]), note: "₹2,499 bundled with an incorporation" },
+      { label: "ESIC government fee", value: "NIL", note: "contributions are separate and paid by the employer" },
+      { label: "Monthly ESI return", value: "₹999/month" },
+      { label: "Monthly PF return (ECR)", value: "₹1,250/month" },
+      { label: "Closure intimation on winding up", value: "₹5,000", note: "EPFO and ESIC together" },
+    ],
+    typicalTotal: "≈ ₹3,539 all-in (incl. GST) for PF and ESIC activation together",
+    disclaimer: `One Shram Suvidha registration activates both PF and ESIC, so this fee is not charged twice if you take both. ${GST_NOTE}`,
+  },
+
+  /* ─────────────── Finance & advisory ─────────────── */
+
+  "virtual-cfo": {
+    label: "Virtual CFO Cost",
+    price: PRO_FEES["virtual-cfo"],
+    unit: "/month",
+    feeNote: "from — per month, scoped after a discovery call",
+    includes: [
+      "Monthly MIS and management reporting",
+      "Cash-flow forecasting and runway tracking",
+      "Budget versus actual review with the founders",
+      "Investor-ready financials and data-room upkeep",
+      "Tax structuring and board-pack preparation",
+    ],
+    breakdown: [
+      { label: "Virtual CFO retainer", value: inr(PRO_FEES["virtual-cfo"]), note: "per month, ₹24,999 onwards" },
+      { label: "Financial & secretarial due diligence", value: "₹99,999", note: "per engagement, onwards" },
+      { label: "Written structuring or tax position note", value: "₹24,999", note: "per note, onwards" },
+      { label: "Business structuring consultation", value: "₹4,999", note: "60 minutes" },
+      { label: "Internal process & compliance health check", value: "₹34,999", note: "per engagement" },
+      { label: "Valuer / merchant banker report coordination", value: inr(PRO_FEES["business-valuation"]), note: "per report, plus the valuer's fee at actual" },
+    ],
+    typicalTotal: "≈ ₹29,499/month (incl. GST) at the entry scope",
+    disclaimer: `Scoped after a discovery call — the retainer moves with transaction volume, entity count and reporting cadence. ${GST_NOTE}`,
+  },
+
+  "business-valuation": {
+    label: "Business Valuation Cost",
+    price: PRO_FEES["business-valuation"],
+    unit: "per report",
+    feeNote: "+ the Registered Valuer's own fee at actual",
+    includes: [
+      "Valuation purpose and standard determined — FEMA, Companies Act or income tax",
+      "Registered Valuer or merchant banker engaged and briefed",
+      "Financial information pack assembled for the valuer",
+      "Draft report reviewed against the regulatory requirement",
+      "Final report delivered with the filing it supports",
+    ],
+    breakdown: [
+      { label: "Valuer / merchant banker coordination", value: inr(PRO_FEES["business-valuation"]), note: "per report" },
+      { label: "Registered Valuer's fee", value: "At actual", note: "billed by the valuer directly" },
+      { label: "FC-GPR reporting of a share issue", value: "₹14,999", note: "per filing, where the valuation supports FDI" },
+      { label: "FC-TRS reporting of a share transfer", value: "₹14,999", note: "per filing" },
+      { label: "Financial & secretarial due diligence", value: "₹99,999", note: "per engagement, onwards" },
+      { label: "Written structuring or tax position note", value: "₹24,999", note: "per note, onwards" },
+    ],
+    typicalTotal: "≈ ₹5,899 in coordination fees (incl. GST), plus the valuer's own fee",
+    disclaimer: `A valuation for FEMA, a share issue or an income-tax position must be signed by a Registered Valuer or a merchant banker — that fee is theirs and is billed at actual. ${GST_NOTE}`,
   },
 };
 
@@ -889,6 +1425,73 @@ export function getPrimaryCalculator(serviceId: string): CalcTool | null {
 export function hasPricing(serviceId: string): boolean {
   return serviceId in SERVICE_PRICING;
 }
+
+/* ══════════════════════════════════════════════════════
+   À-la-carte fee schedule — rendered on /pricing
+   ══════════════════════════════════════════════════════ */
+
+export type FeeScheduleRow = {
+  service: string;
+  basis: string;
+  /** Pre-formatted: "₹4,999", "₹24,999 onwards", "On quote" */
+  fee: string;
+  note?: string;
+};
+
+export type FeeScheduleGroup = { category: string; rows: FeeScheduleRow[] };
+
+function fmtFee(fee: number | null, onwards?: boolean): string {
+  if (fee === null) return "On quote";
+  return onwards ? `${inr(fee)} onwards` : inr(fee);
+}
+
+/**
+ * The full standalone schedule, grouped for display. Categories are ordered the
+ * way the workbook lists them; the closure group is spliced in from the closure
+ * workbook, which supersedes the incorporation workbook's Closure & Exit rows.
+ */
+export const FEE_SCHEDULE: FeeScheduleGroup[] = (() => {
+  const groups: FeeScheduleGroup[] = [];
+  for (const f of STANDALONE_FEES) {
+    let g = groups.find((x) => x.category === f.category);
+    if (!g) groups.push((g = { category: f.category, rows: [] }));
+    g.rows.push({ service: f.service, basis: f.basis, fee: fmtFee(f.fee, f.onwards), note: f.note });
+  }
+  groups.push({
+    category: "Closure & Exit",
+    rows: [
+      { service: "Exit diagnostic and route opinion", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.diagnostic), note: "Adjusted against fees if the engagement proceeds" },
+      { service: "Strike-off of a company (STK-2), end to end", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.strikeOffStk2), note: `MCA fee ${inr(CCFS_2026.stk2Concessional)} to ${CCFS_2026.deadline} under CCFS-2026` },
+      { service: "Strike-off of an LLP (Form 24), end to end", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.llpForm24) },
+      { service: "Application for dormant status (MSC-1)", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.dormantMsc1) },
+      { service: "Annual return of a dormant company (MSC-3)", basis: "Per year", fee: inr(CLOSURE_HEADLINE.dormantMsc3) },
+      { service: "Application for active status (MSC-4)", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.revivalMsc4) },
+      { service: "Overdue AOC-4 and MGT-7 / MGT-7A", basis: "Per financial year", fee: inr(CLOSURE_HEADLINE.overdueAnnualFilingPerFy) },
+      { service: "Overdue LLP Form 8 and Form 11", basis: "Per financial year", fee: inr(CLOSURE_HEADLINE.overdueLlpFilingPerFy) },
+      { service: "GST cancellation (REG-16) and final GSTR-10", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.gstCancellation) },
+      { service: "EPFO and ESIC closure intimation", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.epfEsicClosure) },
+      { service: "Professional tax / Shops & Establishment surrender", basis: "Per State registration", fee: inr(CLOSURE_HEADLINE.ptShopsSurrender) },
+    ],
+  });
+  groups.push({
+    category: "Section 8 & Not-for-Profit",
+    rows: SECTION8_SERVICES.map((x) => ({
+      service: x.service,
+      basis: x.timeline,
+      fee: inr(x.pro),
+      note: x.note,
+    })),
+  });
+  return groups;
+})();
+
+/** Add-on services, with the lower rate that applies alongside an incorporation. */
+export const ADDON_SCHEDULE = ADDON_SERVICES.map((a) => ({
+  label: a.label,
+  standalone: a.standalone === null ? "On quote" : inr(a.standalone),
+  bundled: a.bundled === null ? "—" : inr(a.bundled),
+  saving: a.standalone !== null && a.bundled !== null ? inr(a.standalone - a.bundled) : null,
+}));
 
 /** "₹2,999" */
 export function formatINR(amount: number): string {

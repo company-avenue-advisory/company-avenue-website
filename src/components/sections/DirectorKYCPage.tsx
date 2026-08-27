@@ -140,7 +140,7 @@ const whyUs = [
   { icon: Fingerprint, title: "Aadhaar OTP Assistance", desc: "We guide you through the Aadhaar-linked OTP process in real time — especially helpful for directors less familiar with MCA portal." },
   { icon: Scale, title: "CA/CS Certification In-house", desc: "No need to find a CA or CS separately — our in-house professionals certify DIR-3 KYC forms as part of our service package." },
   { icon: Globe, title: "Foreign Director Support", desc: "Special process for foreign nationals — apostille guidance, passport-based KYC, and embassy document support." },
-  { icon: DollarSign, title: "Lowest Price at ₹699/Director", desc: "Industry-lowest flat fee per director. Volume discounts for companies with multiple directors. No hidden charges." },
+  { icon: DollarSign, title: "Lowest Price at ₹499/Director", desc: "Industry-lowest flat fee per director. Volume discounts for companies with multiple directors. No hidden charges." },
   { icon: Shield, title: "Reactivation Support", desc: "If your DIN is already deactivated, we handle the reactivation filing with ₹5,000 fee and full documentation support." },
   { icon: TrendingUp, title: "Pan-India Remote Service", desc: "File from anywhere in India. Secure document upload, OTP coordination, and instant acknowledgment — all online." },
 ];
@@ -163,7 +163,7 @@ function StickySidebar() {
         <p className="font-heading font-bold text-dark text-base mb-1">Director KYC — DIR-3</p>
         <p className="text-muted text-xs mb-1 leading-relaxed">Annual KYC for DIN/DPIN holders</p>
         <p className="text-2xl font-heading font-bold text-primary mb-4">
-          ₹699<span className="text-sm font-normal text-muted">/director</span>
+          ₹499<span className="text-sm font-normal text-muted">/director</span>
         </p>
         <div className="space-y-2 mb-5">
           {["DIN Status Verification", "Full Form or Web KYC", "CA/CS Certification", "Aadhaar OTP Assistance", "MCA APPROVED Status"].map(pt => (
@@ -272,7 +272,7 @@ export function DirectorKYCPage({ pricingSlot, calcPill }: { pricingSlot?: React
                 className="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-6"
               >
                 {[...Array(5)].map((_, i) => <Star key={i} size={11} className="text-amber-400 fill-amber-400" />)}
-                <span className="text-amber-700 text-xs font-heading font-semibold">DIR-3 KYC • Annual DIN Compliance • ₹699/Director</span>
+                <span className="text-amber-700 text-xs font-heading font-semibold">DIR-3 KYC • Annual DIN Compliance • ₹499/Director</span>
               </motion.div>
               <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
                 className="font-heading font-bold text-[2.4rem] md:text-5xl leading-[1.15] tracking-tight text-dark mb-5"
@@ -356,7 +356,7 @@ export function DirectorKYCPage({ pricingSlot, calcPill }: { pricingSlot?: React
                 {[
                   { label: "Annual Due Date", value: "30 Sept" },
                   { label: "Late Filing Fee", value: "₹5,000" },
-                  { label: "Our Price", value: "₹699" },
+                  { label: "Our Price", value: "₹499" },
                   { label: "DIN Restored", value: "Same Day" },
                 ].map(s => (
                   <div key={s.label} className="bg-white rounded-2xl p-4 border border-slate-100">
@@ -570,7 +570,7 @@ export function DirectorKYCPage({ pricingSlot, calcPill }: { pricingSlot?: React
                 ))}
               </div>
               <div className="mt-6 bg-primary rounded-2xl p-6 text-white">
-                <p className="font-heading font-bold text-base mb-2">₹699 per Director — All Inclusive</p>
+                <p className="font-heading font-bold text-base mb-2">₹499 per Director — All Inclusive</p>
                 <p className="text-white/70 text-sm mb-4">DIN check, form preparation, Aadhaar OTP assistance, CA/CS certification, MCA filing, and SRN acknowledgment — everything covered.</p>
                 <Link href="/contact"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-primary font-heading font-bold text-sm rounded-xl hover:bg-white/90 transition-colors"
@@ -662,7 +662,7 @@ export function DirectorKYCPage({ pricingSlot, calcPill }: { pricingSlot?: React
                 Don&apos;t Let Your DIN Get Deactivated This Year
               </h2>
               <p className="text-white/60 text-base leading-relaxed mb-10 max-w-xl mx-auto">
-                DIR-3 KYC by 30 September keeps your DIN APPROVED. Miss the deadline and you pay ₹5,000 to reactivate — plus block your company&apos;s entire compliance chain. File now for ₹699/director.
+                DIR-3 KYC by 30 September keeps your DIN APPROVED. Miss the deadline and you pay ₹5,000 to reactivate — plus block your company&apos;s entire compliance chain. File now for ₹499/director.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/contact"

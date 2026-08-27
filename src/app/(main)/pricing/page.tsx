@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { COMPANY } from "@/lib/constants";
+import { FEE_SCHEDULE, ADDON_SCHEDULE } from "@/lib/pricing";
+import { INCORP_FEE_CARD, inr } from "@/lib/calc-fees";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/pricing" },
@@ -111,9 +113,13 @@ const SME_TIERS = [
 
 /* ──────────────────────────────────────────────────────────────────────────
    Hero services — the six registration mandates founders come to us for.
-   Fees, package contents, SLAs and government-fee notes are taken from the
-   CAPL Service Planning Workbook v2.0 (03 Aug 2026); all professional fees
-   there are marked "(proposed)" pending the Principal's sign-off.
+
+   Every tier price below is BUILT FROM the client workbooks (27 Aug 2026), not
+   quoted from a package sheet: the Basic tier is the incorporation fee card at
+   the lowest capital slab, and Standard/Premium add the bundled add-on rates
+   from the 'Add on cost' tab. The arithmetic is spelled out in each `note` so a
+   client can check it. Sources: CAA_Incorporation_Cost_Calculator_v2 (2).xlsx,
+   CAA_LLP_Cost_Calculator_v2.xlsx, Company_Closure_Exit (1).xlsx.
    ────────────────────────────────────────────────────────────────────────── */
 
 interface HeroService {
@@ -142,9 +148,9 @@ const HERO_SERVICES: HeroService[] = [
     summary:
       "The structure investors expect — separate legal entity, limited liability and a cap table that can take equity. Incorporated through SPICe+ with PAN and TAN included.",
     tiers: [
-      { label: "Basic", price: "₹9,999", note: "Incorporation + PAN + TAN" },
-      { label: "Standard", price: "₹12,999", note: "Adds GST registration, Udyam and bank a/c support" },
-      { label: "Premium", price: "₹14,999", note: "Adds DPIIT, first board minutes, share certificates, INC-20A" },
+      { label: "Basic", price: "₹3,499", note: "Incorporation + PAN + TAN — fee card at ₹1 lakh authorised capital, name approval included" },
+      { label: "Standard", price: "₹5,497", note: "Basic + GST registration ₹999 + Udyam ₹999 at bundled rates" },
+      { label: "Premium", price: "₹15,494", note: "Standard + DPIIT ₹6,999 + INC-20A ₹1,499 + ADT-1 ₹1,499" },
     ],
     inclusions: [
       "Free structure consultation before you commit to a form",
@@ -154,8 +160,8 @@ const HERO_SERVICES: HeroService[] = [
       "Certificate of Incorporation, PAN and TAN, plus a 12-month compliance calendar",
     ],
     turnaround: "7–10 working days from complete documents",
-    govtFee: "Nil MCA fee up to ₹15L authorised capital; Delhi stamp duty ≈ ₹2,500–3,000 at actuals",
-    outOfPocket: "2 × DSC ≈ ₹3,000 · notarisation ≈ ₹500 · RUN re-run ₹1,000 if a name is rejected",
+    govtFee: "Nil MCA fee up to ₹15L authorised capital · Delhi stamp duty ₹360 at ₹1 lakh capital, ₹2,460 at ₹15 lakh · name reservation ₹1,000 · PAN & TAN ₹143",
+    outOfPocket: "2 × DSC ₹4,000 (₹2,000 each, Class 3 two-year) · fresh name attempt ₹999 plus government fee if both reservations lapse",
     retainer: "Ladders into the Startup Compliance Pack at ₹7,999/month",
     featured: true,
     relatedHref: "/services/private-limited-company",
@@ -169,9 +175,9 @@ const HERO_SERVICES: HeroService[] = [
     summary:
       "Partnership flexibility with limited liability and materially lighter annual compliance than a company — the right call when you are not raising equity.",
     tiers: [
-      { label: "Basic", price: "₹5,999", note: "Incorporation + PAN + TAN" },
-      { label: "Standard", price: "₹8,499", note: "Adds LLP Agreement drafting and Form 3 filing" },
-      { label: "Premium", price: "₹11,999", note: "Adds GST, Udyam and DPIIT recognition" },
+      { label: "Basic", price: "₹3,499", note: "Incorporation, LLP Agreement drafting and Form 3 — all included" },
+      { label: "Standard", price: "₹5,497", note: "Basic + GST registration ₹999 + Udyam ₹999 at bundled rates" },
+      { label: "Premium", price: "₹12,496", note: "Standard + DPIIT recognition ₹6,999" },
     ],
     inclusions: [
       "RUN-LLP name reservation and FiLLiP incorporation filing",
@@ -181,8 +187,8 @@ const HERO_SERVICES: HeroService[] = [
       "Written warning on the ₹100/day Form 3 late fee — no cap, and it catches people out",
     ],
     turnaround: "10–14 working days including the LLP Agreement and Form 3",
-    govtFee: "FiLLiP ₹500–₹2,000 by contribution slab · Form 3 ₹50–₹200 · Delhi stamp duty 1% of contribution (min ≈ ₹500)",
-    outOfPocket: "2 × DSC ≈ ₹3,000 · notarisation ≈ ₹500",
+    govtFee: "RUN-LLP ₹200 · FiLLiP ₹500–₹5,000 by contribution slab · Form 3 ₹50–₹200 · DPIN ₹500 per partner without a DIN · PAN & TAN ₹143 · Delhi agreement stamp duty 1% of contribution, min ₹200, max ₹5,000",
+    outOfPocket: "2 × DSC ₹4,000 · franking, stamp paper and notarisation ₹1,799",
     retainer: "Startup Compliance Pack ₹7,999/month (LLP variant: Form 8, Form 11, ITR-5, GST)",
     relatedHref: "/services/llp-registration",
     relatedLabel: "Service details",
@@ -195,9 +201,9 @@ const HERO_SERVICES: HeroService[] = [
     summary:
       "A private limited company with a single shareholder and a mandatory nominee — corporate identity and a liability shield without needing a co-founder.",
     tiers: [
-      { label: "Basic", price: "₹6,499", note: "Incorporation + PAN + TAN" },
-      { label: "Standard", price: "₹8,999", note: "Adds GST registration and Udyam" },
-      { label: "Premium", price: "₹12,999", note: "Adds DPIIT, INC-20A and first board minutes" },
+      { label: "Basic", price: "₹3,499", note: "Incorporation + PAN + TAN — fee card at ₹1 lakh authorised capital, name approval included" },
+      { label: "Standard", price: "₹5,497", note: "Basic + GST registration ₹999 + Udyam ₹999 at bundled rates" },
+      { label: "Premium", price: "₹8,495", note: "Standard + INC-20A ₹1,499 + ADT-1 ₹1,499" },
     ],
     inclusions: [
       "Nominee identification and INC-3 consent collected first — it is the usual delay",
@@ -207,8 +213,8 @@ const HERO_SERVICES: HeroService[] = [
       "Conversion advice for the day a co-founder or investor arrives",
     ],
     turnaround: "7–10 working days from complete documents",
-    govtFee: "Nil MCA fee up to ₹15L authorised capital; stamp duty at actuals",
-    outOfPocket: "1 × DSC ≈ ₹1,500 (plus nominee DSC if needed) · notarisation ≈ ₹500",
+    govtFee: "Nil MCA fee up to ₹15L authorised capital · Delhi stamp duty ₹360 at ₹1 lakh capital · name reservation ₹1,000 · PAN & TAN ₹143",
+    outOfPocket: "1 × DSC ₹2,000 (plus nominee DSC if needed, ₹2,000)",
     retainer: "Startup Compliance Pack ₹7,999/month",
     relatedHref: "/services/one-person-company",
     relatedLabel: "Service details",
@@ -222,12 +228,14 @@ const HERO_SERVICES: HeroService[] = [
       "Convert an LLP into a private limited company so you can issue equity, run an ESOP pool and take institutional money. Scoped after a free structure review — cost turns on partner count, capital and asset transfer.",
     tiers: [
       { label: "LLP → Pvt Ltd conversion", price: "On quote", note: "Scoped on a free review — written quote before any work starts" },
-      { label: "Director add / remove", price: "₹2,999" },
-      { label: "Share transfer", price: "₹3,999" },
-      { label: "Increase authorised capital", price: "₹4,999", note: "Plus slab advice; MCA fee scales with the slab" },
-      { label: "MOA / AOA amendment", price: "₹6,999" },
-      { label: "Company name change", price: "₹9,999" },
-      { label: "Registered office change", price: "₹2,999", note: "Same city; ₹19,999+ for a state change (RD approval, 2–4 months)" },
+      { label: "Director add / remove (DIR-12)", price: "₹1,999", note: "Per filing" },
+      { label: "Share transfer (SH-4)", price: "₹3,499", note: "Per transfer, incl. stamping guidance" },
+      { label: "Allotment of shares (PAS-3)", price: "₹4,999", note: "Per filing" },
+      { label: "Increase authorised capital (SH-7)", price: "₹4,999", note: "Per filing; the MCA fee scales with the slab" },
+      { label: "Alteration of objects clause", price: "₹7,999" },
+      { label: "Adoption of a new set of Articles", price: "₹4,999" },
+      { label: "Company name change (INC-24)", price: "₹9,999" },
+      { label: "Registered office change", price: "₹2,999", note: "Same city; ₹9,999 for a new ROC in the same State; State-to-State on quote" },
     ],
     inclusions: [
       "Free structure review — we tell you honestly whether conversion is worth it yet",
@@ -237,7 +245,8 @@ const HERO_SERVICES: HeroService[] = [
       "Written disclosure and a condonation quote before we proceed if past non-compliance surfaces",
     ],
     turnaround: "Documents in 2–3 working days · each form filed inside its statutory window",
-    govtFee: "Per form at actuals · share-transfer stamp duty 0.015% · capital-increase fee scales with the slab",
+    govtFee: "₹200–₹600 per form on the authorised-capital slab · share-transfer stamp duty 0.015% · capital-increase fee scales with the slab · late filing ₹100 per day per form, no cap",
+    outOfPocket: "Board or shareholder resolution ₹999 each · share certificates ₹499 each, printed and stamped · DSC for a new director ₹2,000",
     relatedHref: "/services/llp-to-company",
     relatedLabel: "Service details",
   },
@@ -249,9 +258,9 @@ const HERO_SERVICES: HeroService[] = [
     summary:
       "A not-for-profit company for charitable objects — with 12A and 80G, the registrations that actually unlock donations and CSR funding.",
     tiers: [
-      { label: "Basic", price: "₹14,999", note: "Incorporation with the Section 8 licence" },
-      { label: "Standard", price: "₹19,999", note: "Adds 12A and 80G filing — the donation unlock" },
-      { label: "Premium", price: "₹29,999", note: "Adds Niti Aayog Darpan, CSR-1 and a first-year compliance calendar" },
+      { label: "Basic", price: "₹7,999", note: "Incorporation with the Section 8 licence" },
+      { label: "Standard", price: "₹17,998", note: "Basic + Form 104 — provisional 12A and 80G ₹9,999, the donation unlock" },
+      { label: "Premium", price: "₹26,497", note: "Standard + NGO Darpan ₹1,999 + CSR-1 registration ₹6,500" },
     ],
     inclusions: [
       "Charitable objects workshop — a vague objects clause is the single biggest cause of CRC rejection",
@@ -260,9 +269,9 @@ const HERO_SERVICES: HeroService[] = [
       "Form 10A filed for 12A and 80G (Standard and above)",
       "80G renewal diarised — provisional runs 3 years, regular 5",
     ],
-    turnaround: "Incorporation 15–25 working days · 12A/80G 1–3 months (department-dependent)",
-    govtFee: "Nominal MCA fee on SPICe+ with the Section 8 licence; stamp duty at actuals",
-    outOfPocket: "2 × DSC ≈ ₹3,000 · declarations and notarisation ≈ ₹1,000",
+    turnaround: "Incorporation 15–25 working days · Form 104 (provisional 12A/80G) 30–45 days · NGO Darpan 7–30 days · CSR-1 3–7 days",
+    govtFee: "Nominal MCA fee on SPICe+ with the Section 8 licence · Delhi exempts Section 8 from MoA and AoA stamp duty, e-Form duty ₹10 still applies",
+    outOfPocket: "2 × DSC ₹4,000 · Form 105 regular registration ₹22,000–₹52,000 by gross-receipts slab · FCRA registration ₹45,000, prior permission ₹30,000",
     retainer: "NGO compliance retainer ₹4,999/month (books, ITR-7, annual filings)",
     relatedHref: "/services/section-8-company",
     relatedLabel: "Service details",
@@ -275,22 +284,25 @@ const HERO_SERVICES: HeroService[] = [
     summary:
       "DPIIT recognition, Udyam, trademark and the licence stack — the certificates that unlock tax holidays, fee rebates, collateral-free credit and government scheme eligibility.",
     tiers: [
-      { label: "Startup India / DPIIT Recognition", price: "₹4,999 – ₹11,999", note: "Standard: we write the innovation note · Premium adds the 80-IAC application" },
-      { label: "Udyam (MSME) Registration", price: "₹999", note: "Free inside any Standard or Premium incorporation package" },
-      { label: "Trademark search + filing", price: "₹2,999", note: "Per class · ₹5,999 with objection-reply cover" },
-      { label: "IEC (Import-Export Code)", price: "₹1,999" },
-      { label: "FSSAI Food Licence", price: "₹1,499 – ₹7,999", note: "Basic / State / Central by turnover and activity" },
-      { label: "Govt scheme & seed fund advisory", price: "from ₹24,999", note: "SISFS, MUDRA, CGTMSE, PMEGP and Stand-Up India" },
+      { label: "Startup India / DPIIT recognition", price: "₹7,999", note: "₹6,999 bundled with an incorporation" },
+      { label: "Startup grant readiness pack", price: "₹9,999", note: "Two stages — ₹499 eligibility check first, ₹9,500 only if you proceed" },
+      { label: "Section 80-IAC exemption application", price: "₹24,999", note: "₹22,999 bundled" },
+      { label: "Udyam (MSME) registration", price: "₹1,999", note: "₹999 bundled" },
+      { label: "Trademark application", price: "₹3,499", note: "Per class · ₹2,499 bundled · search + opinion ₹1,499" },
+      { label: "IEC (Import-Export Code)", price: "₹1,999", note: "₹1,499 bundled · DGFT fee ₹500" },
+      { label: "FSSAI registration or licence", price: "₹3,999", note: "₹3,499 bundled" },
+      { label: "NITI Aayog Darpan ID", price: "₹1,999", note: "₹1,499 bundled" },
     ],
     inclusions: [
       "Honest eligibility check first — under 10 years, under ₹100 Cr turnover, and the innovation test",
-      "Innovation and scalability note drafted by us, not by you (DPIIT Standard and above)",
+      "The grant pack is billed in two stages: we charge ₹499 to assess eligibility, and the ₹9,500 balance only if you elect to proceed",
+      "Innovation and scalability note drafted by us, not by you",
       "Correct NIC codes on Udyam — the classification drives scheme eligibility later",
       "80% patent and 50% trademark statutory-fee rebates claimed under SIPP",
       "Benefits handover sheet mapping every scheme you become eligible for",
     ],
     turnaround: "Udyam same day · DPIIT filing 3 working days (recognition 2–10) · IEC 1–5 days",
-    govtFee: "Nil for DPIIT and Udyam · trademark ₹4,500 per class at the startup/MSME rate · IEC ₹500 · FSSAI ₹100–₹7,500/yr",
+    govtFee: "Nil for DPIIT and Udyam · trademark ₹4,500 per class at the startup/MSME rate, ₹9,000 for a company · IEC ₹500 · FSSAI ₹100–₹7,500/yr",
     retainer: "Feeds directly into government scheme applications — see the scheme directory",
     featured: true,
     relatedHref: "/startup-schemes",
@@ -326,6 +338,12 @@ export default function PricingPage() {
               className="inline-flex items-center gap-2 px-5 py-3 bg-accent hover:bg-accent-dark text-primary-900 hover:text-white text-sm font-heading font-bold rounded-xl transition-colors"
             >
               Jump to Registration &amp; Startup Services <ArrowRight size={14} />
+            </a>
+            <a
+              href="#fee-schedule"
+              className="inline-flex items-center gap-2 px-5 py-3 ml-3 border border-white/25 text-white text-sm font-heading font-bold rounded-xl hover:bg-white/10 transition-colors"
+            >
+              Full fee schedule <ArrowRight size={14} />
             </a>
           </div>
         </div>
@@ -571,6 +589,149 @@ export default function PricingPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+
+      {/* ── À-la-carte fee schedule ───────────────────────────────────────── */}
+      <section id="fee-schedule" className="py-16 bg-background scroll-mt-20">
+        <div className="container-custom">
+          <div className="max-w-3xl mb-10">
+            <span className="text-accent text-xs font-heading font-semibold tracking-widest uppercase mb-3 block">
+              Standalone fee schedule
+            </span>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-dark leading-tight mb-4">
+              Every service, every fee, published
+            </h2>
+            <p className="text-muted text-sm md:text-base leading-relaxed">
+              Buy any of these on its own — no package required. Professional fees are
+              exclusive of GST at 18%. Government fees, where payable, are additional and
+              recovered at actuals; we never mark them up.
+            </p>
+          </div>
+
+          {/* Incorporation fee card — our fee moves with authorised capital */}
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden mb-6">
+            <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+              <p className="font-heading font-bold text-dark text-sm">
+                Company incorporation — fee by authorised capital
+              </p>
+              <p className="text-xs text-muted mt-0.5">
+                Private Limited, OPC and Section 8 all read from this card.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm min-w-[560px]">
+                <thead>
+                  <tr className="text-left border-b border-slate-100">
+                    <th className="px-6 py-3 font-heading font-bold text-dark text-xs uppercase tracking-wider">
+                      Authorised capital up to
+                    </th>
+                    <th className="px-6 py-3 font-heading font-bold text-dark text-xs uppercase tracking-wider text-right">
+                      Name already approved
+                    </th>
+                    <th className="px-6 py-3 font-heading font-bold text-dark text-xs uppercase tracking-wider text-right">
+                      Including name approval
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {INCORP_FEE_CARD.map((row) => (
+                    <tr key={row.upTo}>
+                      <td className="px-6 py-3 text-slate-600">{inr(row.upTo)}</td>
+                      <td className="px-6 py-3 text-right font-heading font-bold text-dark">{inr(row.without)}</td>
+                      <td className="px-6 py-3 text-right font-heading font-bold text-primary">{inr(row.withName)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="px-6 py-3 text-[11px] text-slate-400 leading-relaxed border-t border-slate-100">
+              Capital above {inr(INCORP_FEE_CARD[INCORP_FEE_CARD.length - 1].upTo)} is quoted separately.
+              MCA charges no registration fee up to ₹15,00,000 of authorised capital; stamp duty is
+              a State levy and varies — run the{" "}
+              <Link href="/calculators/company-registration-cost" className="text-primary font-medium hover:underline">
+                registration cost calculator
+              </Link>{" "}
+              for yours.
+            </p>
+          </div>
+
+          {/* Add-ons, standalone vs bundled */}
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden mb-6">
+            <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+              <p className="font-heading font-bold text-dark text-sm">
+                Add-on registrations — cheaper alongside an incorporation
+              </p>
+              <p className="text-xs text-muted mt-0.5">
+                The bundled rate applies only where the service is bought with a company or LLP registration.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm min-w-[640px]">
+                <thead>
+                  <tr className="text-left border-b border-slate-100">
+                    <th className="px-6 py-3 font-heading font-bold text-dark text-xs uppercase tracking-wider">Service</th>
+                    <th className="px-6 py-3 font-heading font-bold text-dark text-xs uppercase tracking-wider text-right">Standalone</th>
+                    <th className="px-6 py-3 font-heading font-bold text-dark text-xs uppercase tracking-wider text-right">Bundled</th>
+                    <th className="px-6 py-3 font-heading font-bold text-dark text-xs uppercase tracking-wider text-right">You save</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {ADDON_SCHEDULE.map((row) => (
+                    <tr key={row.label}>
+                      <td className="px-6 py-3 text-slate-600 leading-snug">{row.label}</td>
+                      <td className="px-6 py-3 text-right font-heading font-bold text-dark whitespace-nowrap">{row.standalone}</td>
+                      <td className="px-6 py-3 text-right font-heading font-bold text-primary whitespace-nowrap">{row.bundled}</td>
+                      <td className="px-6 py-3 text-right text-accent font-heading font-semibold text-xs whitespace-nowrap">
+                        {row.saving ?? "—"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Everything else, by category */}
+          <div className="grid gap-6 lg:grid-cols-2">
+            {FEE_SCHEDULE.map((group) => (
+              <div
+                key={group.category}
+                className="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden"
+              >
+                <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+                  <p className="font-heading font-bold text-dark text-sm">{group.category}</p>
+                </div>
+                <dl className="divide-y divide-slate-100">
+                  {group.rows.map((row) => (
+                    <div key={row.service} className="px-6 py-3 flex items-start justify-between gap-4">
+                      <dt className="text-[13px] text-slate-600 leading-snug">
+                        {row.service}
+                        <span className="block text-[11px] text-slate-400 mt-0.5">
+                          {row.basis}
+                          {row.note ? ` · ${row.note}` : ""}
+                        </span>
+                      </dt>
+                      <dd className="text-[13px] font-heading font-bold text-dark whitespace-nowrap shrink-0">
+                        {row.fee}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-8 text-xs text-muted leading-relaxed max-w-4xl">
+            Fees are per assignment unless the row states otherwise. Where a line reads
+            &ldquo;per financial year&rdquo;, &ldquo;per director&rdquo; or &ldquo;per class&rdquo;,
+            it is charged for each such year, person or class. Out-of-pocket expenses — travel,
+            courier, certified copies — are additional at actuals. Closure is not a discharge:
+            under Section 250 the liability of every director, officer and member survives
+            dissolution, and the NCLT may restore a struck-off company under Section 252 within
+            twenty years.
+          </p>
         </div>
       </section>
 

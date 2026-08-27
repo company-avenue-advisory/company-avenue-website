@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/company-closure" },
   title: "Company Closure — Strike Off & Winding Up",
   description:
-    "Close your company legally via STK-2 strike off under Section 248 or voluntary winding up via NCLT. Clear pending filings, cancel GST, and achieve clean dissolution. Starting ₹7,999.",
+    "Close your company legally via STK-2 strike off under Section 248 or voluntary winding up via NCLT. Clear pending filings, cancel GST, and achieve clean dissolution. Strike-off ₹20,000 end to end; MCA fee ₹2,500 under CCFS-2026 to 31 August 2026.",
 };
 
 export default function CompanyClosureServicePage() {

@@ -166,7 +166,7 @@ function StickySidebar() {
     <div className="space-y-4">
       <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-card">
         <p className="font-heading font-bold text-dark text-base mb-1">Change in Directors / Shareholders</p>
-        <p className="text-muted text-xs mb-4 leading-relaxed">DIR-12, PAS-3, SH-4 filing with MCA. Starting at ₹4,999.</p>
+        <p className="text-muted text-xs mb-4 leading-relaxed">DIR-12 ₹1,999 · SH-4 ₹3,499 · PAS-3 ₹4,999, filed with MCA.</p>
         <div className="space-y-2 mb-5">
           {["DIR-12 Filing (Director Change)", "PAS-3 / SH-4 (Share Change)", "Board Resolution Drafting", "Register Updates", "MCA Compliance"].map(pt => (
             <div key={pt} className="flex items-center gap-2">
@@ -356,7 +356,7 @@ export function ChangeInDirectorsPage({ pricingSlot, calcPill }: { pricingSlot?:
                   <div className="px-5 py-3.5 border-t border-slate-100 flex items-center justify-between bg-slate-50/50">
                     <div>
                       <p className="text-muted text-[10px]">Starting At</p>
-                      <p className="font-heading font-bold text-primary text-sm">₹4,999</p>
+                      <p className="font-heading font-bold text-primary text-sm">₹1,999</p>
                     </div>
                     <div className="text-right">
                       <p className="text-muted text-[10px]">Processing</p>

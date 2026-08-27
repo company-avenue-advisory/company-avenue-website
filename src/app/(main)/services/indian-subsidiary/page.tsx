@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/indian-subsidiary" },
   title: "Indian Subsidiary Registration for Foreign Companies",
   description:
-    "Incorporate a wholly-owned Indian subsidiary (Private Limited Company) with full FEMA/RBI compliance. FCGPR filing, FDI advisory, and ongoing ROC support. Starting ₹14,999.",
+    "Incorporate a wholly-owned Indian subsidiary (Private Limited Company) with full FEMA/RBI compliance. FCGPR filing, FDI advisory, and ongoing ROC support. Starting ₹31,499.",
 };
 
 export default function IndianSubsidiaryServicePage() {

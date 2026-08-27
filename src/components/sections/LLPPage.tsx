@@ -469,7 +469,7 @@ export function LLPPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; ca
                     </div>
                     <div className="text-right">
                       <p className="text-muted text-[10px]">Starting from</p>
-                      <p className="font-heading font-bold text-dark text-xs">₹2,999</p>
+                      <p className="font-heading font-bold text-dark text-xs">₹3,499</p>
                     </div>
                   </div>
                 </div>

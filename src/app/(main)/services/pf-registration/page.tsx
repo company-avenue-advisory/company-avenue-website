@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/pf-registration" },
   title: "PF Registration — Provident Fund (EPFO)",
   description:
-    "Register your establishment under the Employees' Provident Funds Act 1952. Mandatory for 20+ employees. ECR filing, UAN generation. Starting ₹1,999.",
+    "Register your establishment under the Employees' Provident Funds Act 1952. Mandatory for 20+ employees. ECR filing, UAN generation. Starting ₹2,999.",
 };
 
 export default function PFRegistrationServicePage() {

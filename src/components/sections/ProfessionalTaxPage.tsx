@@ -213,7 +213,7 @@ function StickySidebar() {
           <BadgeCheck size={16} className="text-accent" />
           <p className="font-heading font-semibold text-sm">Starting from</p>
         </div>
-        <p className="font-heading font-bold text-3xl text-accent mb-1">₹1,999</p>
+        <p className="font-heading font-bold text-3xl text-accent mb-1">₹2,999</p>
         <p className="text-white/60 text-xs mb-4 leading-relaxed">
           Includes EC / RC registration and first return filing.
         </p>
@@ -371,7 +371,7 @@ export function ProfessionalTaxPage({ pricingSlot, calcPill }: { pricingSlot?: R
                 <div className="bg-primary/5 rounded-xl p-3 flex items-center justify-between">
                   <div>
                     <p className="text-xs text-muted">Registration starts from</p>
-                    <p className="font-heading font-bold text-primary text-xl">₹1,999</p>
+                    <p className="font-heading font-bold text-primary text-xl">₹2,999</p>
                   </div>
                   <Link
                     href="/contact"
@@ -869,7 +869,7 @@ export function ProfessionalTaxPage({ pricingSlot, calcPill }: { pricingSlot?: R
               </a>
             </div>
             <p className="text-white/40 text-xs mt-6">
-              Starting at ₹1,999 • All 21 PT states covered • EC + RC registration included
+              Starting at ₹2,999 • All 21 PT states covered • EC + RC registration included
             </p>
           </motion.div>
         </div>

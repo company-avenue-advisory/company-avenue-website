@@ -58,7 +58,7 @@ const quickFacts = [
   { icon: FileText,    label: "Form",         value: "STK-2" },
   { icon: Landmark,    label: "Authority",    value: "MCA / RoC" },
   { icon: Clock,       label: "Timeline",     value: "3-6 Months" },
-  { icon: DollarSign,  label: "Starting At",  value: "₹7,999" },
+  { icon: DollarSign,  label: "Starting At",  value: "₹20,000" },
   { icon: AlertCircle, label: "Penalty Risk", value: "Director Disqualification" },
   { icon: ShieldCheck, label: "Protection",   value: "Liability Ends" },
 ];
@@ -211,7 +211,7 @@ export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: Re
                   {[
                     { label: "Eligibility", stk: "NIL assets & liabilities",  nclt: "Companies with assets/liabilities" },
                     { label: "Timeline",    stk: "3-6 months",                nclt: "12-24 months" },
-                    { label: "Cost",        stk: "Low (from ₹7,999)",         nclt: "High (liquidator fees)" },
+                    { label: "Cost",        stk: "₹20,000 professional fee",  nclt: "High (liquidator fees)" },
                     { label: "Tribunal",    stk: "Not required",              nclt: "NCLT proceedings required" },
                     { label: "Creditors",   stk: "Must be NIL",               nclt: "Settlement via liquidator" },
                   ].map((row) => (
@@ -414,13 +414,16 @@ export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: Re
             <div className="bg-primary rounded-3xl p-8 text-white">
               <div className="flex items-center gap-2 mb-3">
                 <Wallet size={18} className="text-accent" />
-                <p className="font-heading font-semibold text-base">Starting at ₹7,999</p>
+                <p className="font-heading font-semibold text-base">₹20,000 — strike-off, end to end</p>
               </div>
               <p className="text-white/60 text-xs mb-6 leading-relaxed">
-                All-inclusive professional fee. Includes document preparation, STK-2 filing, CA certification of accounts, and compliance clearance support.
+                Professional fee for Form STK-2 from filing through to the dissolution notice in
+                STK-7. The MCA fee on STK-2 is ₹2,500 until 31 August 2026 under CCFS-2026, down
+                from ₹10,000. Start with the ₹7,500 exit diagnostic — it is adjusted against this
+                fee if you go ahead.
               </p>
               <div className="space-y-2 mb-6">
-                {["STK-2 Form Filing", "CA Certified Accounts", "Director Affidavits (STK-4)", "Indemnity Bonds (STK-3)", "GST/IT Clearance Support", "Closure Certificate"].map(pt => (
+                {["Exit diagnostic & route opinion — ₹7,500", "STK-2 Form Filing", "CA Certified Accounts (STK-8)", "Director Affidavits (STK-4)", "Indemnity Bonds (STK-3)", "GST/IT Clearance Support", "Closure Certificate"].map(pt => (
                   <div key={pt} className="flex items-center gap-2">
                     <CheckCircle size={12} className="text-accent shrink-0" />
                     <span className="text-white/80 text-xs">{pt}</span>

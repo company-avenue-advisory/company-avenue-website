@@ -522,7 +522,7 @@ export const SCHEME_FAQS = [
   },
   {
     q: "What does Company Avenue Advisory charge, and do you take a cut of the grant?",
-    a: "Fixed professional fees, quoted in writing before we start — DPIIT recognition from ₹4,999, SISFS advisory from ₹24,999, government scheme loan advisory from ₹7,999. On SISFS we also charge a success fee on the sanctioned amount, disclosed upfront. On government loan schemes we charge no success fee at all. Government fees, where they exist, are billed at actuals.",
+    a: "Fixed professional fees, quoted in writing before we start — DPIIT recognition ₹7,999 (₹6,999 alongside an incorporation), the startup grant readiness pack ₹9,999 in two stages, Section 80-IAC ₹24,999, SISFS advisory from ₹24,999, government scheme loan advisory from ₹7,999. On SISFS we also charge a success fee on the sanctioned amount, disclosed upfront. On government loan schemes we charge no success fee at all. Government fees, where they exist, are billed at actuals.",
   },
   {
     q: "Can you guarantee my application will be sanctioned?",

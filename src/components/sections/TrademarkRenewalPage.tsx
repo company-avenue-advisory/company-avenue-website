@@ -58,7 +58,7 @@ const quickFacts = [
   { icon: FileText,    label: "Form",            value: "TM-R" },
   { icon: Clock,       label: "Period",          value: "Every 10 Years" },
   { icon: RefreshCcw,  label: "Grace Period",    value: "6 Months (with surcharge)" },
-  { icon: DollarSign,  label: "Starting At",     value: "₹3,999 + Govt Fees" },
+  { icon: DollarSign,  label: "Starting At",     value: "₹4,999 + Govt Fees" },
   { icon: Landmark,    label: "Authority",       value: "Trademarks Registry" },
   { icon: ShieldCheck, label: "Protection",      value: "Indefinitely Renewable" },
 ];
@@ -361,7 +361,7 @@ export function TrademarkRenewalPage({ pricingSlot, calcPill }: { pricingSlot?: 
               <div className="bg-primary rounded-3xl p-8 text-white">
                 <div className="flex items-center gap-2 mb-3">
                   <Wallet size={18} className="text-accent" />
-                  <p className="font-heading font-semibold text-base">Starting at ₹3,999 + Govt. Fees</p>
+                  <p className="font-heading font-semibold text-base">₹4,999 per class + ₹9,000 govt. fee</p>
                 </div>
                 <p className="text-white/60 text-xs mb-5 leading-relaxed">
                   Our professional fee for TM-R filing. Government fee (₹9,000-₹10,000 per class) is charged at actuals. Surcharge if in grace period is additional.

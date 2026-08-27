@@ -157,9 +157,9 @@ function StickySidebar() {
     <div className="space-y-4">
       <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-card">
         <p className="font-heading font-bold text-dark text-base mb-1">Registered Office Change</p>
-        <p className="text-muted text-xs mb-3 leading-relaxed">File INC-22 with complete MCA support. Starting at ₹3,999.</p>
+        <p className="text-muted text-xs mb-3 leading-relaxed">File INC-22 with complete MCA support. Same city ₹2,999 · new ROC in the same State ₹9,999 · State to State on quote.</p>
         <div className="flex items-center gap-2 mb-4">
-          <span className="font-heading font-bold text-primary text-xl">₹3,999</span>
+          <span className="font-heading font-bold text-primary text-xl">₹2,999</span>
           <span className="text-muted text-xs">onwards</span>
         </div>
         <div className="space-y-2 mb-5">

@@ -5,8 +5,10 @@ import { Info, ArrowRight, RefreshCw, Landmark, BadgeIndianRupee, AlertTriangle 
 import Link from "next/link";
 import {
   PRO_FEES, DSC_PER_PERSON, NAME_RESERVATION, NAME_APPROVAL_LLP, PAN_TAN, GST_RATE,
-  GOVT_FEES, STATE_NAMES, getStampRule, companyStampDuty, incorporationCost,
-  llpFillipFee, llpForm3Fee, llpAgreementStampDuty, NIL_FEE_THRESHOLD, inr,
+  GOVT_FEES, STATE_NAMES, getStampRule, incorporationCost,
+  llpFillipFee, llpForm3Fee, llpAgreementStampDuty, getLlpStampRule,
+  LLP_DPIN_FEE, LLP_FRANKING_NOTARY, NIL_FEE_THRESHOLD,
+  incorporationProfessionalFee, FEE_CARD_CEILING, inr,
   type CompanyScale,
 } from "@/lib/calc-fees";
 
@@ -14,13 +16,15 @@ type Entity = "pvtltd" | "opc" | "section8" | "llp" | "partnership" | "proprieto
 
 const ENTITIES: {
   key: Entity; label: string; desc: string; service: keyof typeof PRO_FEES;
-  /** true = priced by the workbook engine; false = indicative */
+  /** true = priced by a verified fee workbook; false = indicative */
   exact: boolean;
 }[] = [
   { key: "pvtltd", label: "Private Limited", desc: "Most popular — investor ready", service: "private-limited-company", exact: true },
   { key: "opc", label: "One Person Company", desc: "Solo founder, limited liability", service: "one-person-company", exact: true },
   { key: "section8", label: "Section 8 (NGO)", desc: "Non-profit company", service: "section-8-company", exact: true },
-  { key: "llp", label: "LLP", desc: "Flexible, low compliance", service: "llp-registration", exact: false },
+  // LLP is now exact — CAA_LLP_Cost_Calculator_v2 supplies the MCA bands, the
+  // DPIN fee, franking and the State-wise agreement stamp duty table.
+  { key: "llp", label: "LLP", desc: "Flexible, low compliance", service: "llp-registration", exact: true },
   { key: "partnership", label: "Partnership Firm", desc: "Simple, 2–20 partners", service: "partnership-firm", exact: false },
   { key: "proprietorship", label: "Sole Proprietorship", desc: "Cheapest way to start", service: "sole-proprietorship", exact: false },
 ];
@@ -34,6 +38,8 @@ export function CompanyRegistrationCalculator() {
   const [people, setPeople] = useState("2");
   const [smallCompany, setSmallCompany] = useState(true);
   const [nameReservation, setNameReservation] = useState(true);
+  /** LLP only — designated partners who do not already hold a DIN or DPIN. */
+  const [newDpin, setNewDpin] = useState("0");
 
   const cfg = ENTITIES.find((e) => e.key === entity)!;
   const isCompany = entity === "pvtltd" || entity === "opc" || entity === "section8";
@@ -42,7 +48,11 @@ export function CompanyRegistrationCalculator() {
 
   const cap = parseFloat(capital) || 0;
   const dsc = Math.max(1, parseInt(people) || 1);
-  const proFee = PRO_FEES[cfg.service];
+
+  /* Companies are priced off the fee card — the fee moves with authorised capital
+     and with whether we also reserve the name. Everything else is a fixed fee. */
+  const card = incorporationProfessionalFee(cap, nameReservation);
+  const proFee = isCompany ? card.fee : PRO_FEES[cfg.service];
 
   const res = useMemo(() => {
     /* ── companies: the workbook engine, exactly ── */
@@ -69,21 +79,36 @@ export function CompanyRegistrationCalculator() {
         { label: "Our professional fee", amount: r.professionalFee, kind: "pro", note: "CA-led filing, end to end" },
         { label: "GST @ 18%", amount: r.gst, kind: "pro", note: "On DSC and professional fee only" },
       ];
-      return { lines, passThrough: r.passThrough, ourSide: r.taxable + r.gst, total: r.total };
+      return { lines, passThrough: r.passThrough, ourSide: r.taxable + r.gst, total: r.total, stampUnknown: false };
     }
 
-    /* ── LLP / firm / proprietor: indicative, outside the workbook ── */
+    /* ── LLP: the LLP workbook engine ── */
     const govt: Line[] = [];
     const g = (label: string, amount: number, note: string) => govt.push({ label, amount, note, kind: "govt" });
-    const rule = getStampRule(state);
+    /* Franking and notarisation sit on our side of the invoice — the LLP workbook
+       treats them as absorbed into the fee and charged with GST, not as a
+       pure-agent disbursement. */
+    let taxableExtras = 0;
+    let stampUnknown = false;
+
     if (entity === "llp") {
-      g("Name approval (RUN-LLP)", NAME_APPROVAL_LLP, "Name reservation");
-      g("FiLLiP incorporation fee", llpFillipFee(cap), "On capital contribution slab");
-      g("Form 3 filing fee", llpForm3Fee(cap), "LLP Agreement filing");
-      g("LLP Agreement stamp duty", llpAgreementStampDuty(cap), `${state} — approx. 1% of contribution`);
-      g("PAN & TAN", PAN_TAN, "Issued after incorporation");
+      const dpin = Math.max(0, parseInt(newDpin) || 0);
+      const llpDuty = llpAgreementStampDuty(cap, state);
+      stampUnknown = llpDuty === null;
+      g("Name approval (RUN-LLP / FiLLiP Part A)", NAME_APPROVAL_LLP, "Flat statutory fee per application");
+      g("FiLLiP incorporation fee", llpFillipFee(cap), "Band set by total capital contribution");
+      g("Form 3 filing fee — LLP Agreement", llpForm3Fee(cap), "Due within 30 days of incorporation");
+      if (dpin) g("DPIN / DIN allotment", dpin * LLP_DPIN_FEE, `${dpin} × ${inr(LLP_DPIN_FEE)} — partners without an existing DIN`);
+      g("LLP Agreement stamp duty", llpDuty ?? 0,
+        stampUnknown
+          ? `${state} — no rate published for this State, obtain before you budget`
+          : `${state} — ${getLlpStampRule(state)?.note ?? ""}`);
+      g("PAN & TAN", PAN_TAN, "Issued on incorporation");
+      taxableExtras = LLP_FRANKING_NOTARY;
     } else if (entity === "partnership") {
-      g("Deed stamp paper", llpAgreementStampDuty(cap), `${state} — on capital contribution`);
+      const deedDuty = llpAgreementStampDuty(cap, state);
+      stampUnknown = deedDuty === null;
+      g("Deed stamp paper", deedDuty ?? 0, `${state} — on capital contribution`);
       g("Notarisation", 200, "Notary charges, approx.");
       g("Firm PAN & TAN", PAN_TAN, "Income Tax Department");
       g("Registrar of Firms fee", 500, "Optional but recommended");
@@ -91,21 +116,23 @@ export function CompanyRegistrationCalculator() {
       g("GST registration", GOVT_FEES.gstRegistration, "No government fee");
       g("MSME (Udyam) registration", GOVT_FEES.udyam, "No government fee");
     }
+
     const dscTotal = entity === "llp" ? dsc * DSC_PER_PERSON : 0;
-    const taxable = dscTotal + proFee;
+    const taxable = dscTotal + proFee + taxableExtras;
     const gst = Math.round(taxable * GST_RATE);
     const passThrough = govt.reduce((s, l) => s + l.amount, 0);
-    void rule;
     return {
       lines: [
         ...govt,
-        ...(dscTotal ? [{ label: "Digital Signature (DSC)", amount: dscTotal, kind: "pro" as const, note: `${dsc} × ${inr(DSC_PER_PERSON)}` }] : []),
-        { label: "Our professional fee", amount: proFee, kind: "pro" as const, note: "CA-led filing, end to end" },
-        { label: "GST @ 18%", amount: gst, kind: "pro" as const, note: dscTotal ? "On DSC and professional fee only" : "On professional fee" },
+        ...(dscTotal ? [{ label: "Digital Signature (DSC)", amount: dscTotal, kind: "pro" as const, note: `${dsc} × ${inr(DSC_PER_PERSON)} — Class 3, two-year validity` }] : []),
+        ...(taxableExtras ? [{ label: "Franking, stamp paper and notarisation", amount: taxableExtras, kind: "pro" as const, note: "Coordination of stamping and notarising the LLP Agreement" }] : []),
+        { label: "Our professional fee", amount: proFee, kind: "pro" as const,
+          note: entity === "llp" ? "Incorporation, LLP Agreement drafting and Form 3" : "CA-led filing, end to end" },
+        { label: "GST @ 18%", amount: gst, kind: "pro" as const, note: dscTotal ? "On DSC, franking and professional fee" : "On professional fee" },
       ],
-      passThrough, ourSide: taxable + gst, total: passThrough + taxable + gst,
+      passThrough, ourSide: taxable + gst, total: passThrough + taxable + gst, stampUnknown,
     };
-  }, [entity, isCompany, smallCompany, state, cap, dsc, proFee, nameReservation]);
+  }, [entity, isCompany, smallCompany, state, cap, dsc, proFee, nameReservation, newDpin]);
 
   const capitalLabel = entity === "llp" || entity === "partnership" ? "Capital contribution (₹)" : "Authorised share capital (₹)";
 
@@ -129,7 +156,11 @@ export function CompanyRegistrationCalculator() {
                 <span className={`block text-sm font-heading font-semibold ${entity === e.key ? "text-white" : "text-dark"}`}>{e.label}</span>
                 <span className={`block text-[11px] ${entity === e.key ? "text-white/70" : "text-muted"}`}>{e.desc}</span>
                 <span className={`block mt-1 text-[11px] font-heading font-bold ${entity === e.key ? "text-accent" : "text-primary"}`}>
-                  Our fee {inr(PRO_FEES[e.service])}
+                  Our fee {inr(
+                    e.key === "pvtltd" || e.key === "opc" || e.key === "section8"
+                      ? incorporationProfessionalFee(cap, nameReservation).fee
+                      : PRO_FEES[e.service]
+                  )}
                 </span>
               </button>
             ))}
@@ -169,11 +200,18 @@ export function CompanyRegistrationCalculator() {
               ))}
             </div>
             {isCompany && (
-              <p className={`text-xs mt-2 ${cap > NIL_FEE_THRESHOLD ? "text-amber-700" : "text-green-700"}`}>
-                {cap > NIL_FEE_THRESHOLD
-                  ? `Above ${inr(NIL_FEE_THRESHOLD)} — the MCA registration fee now applies and rises steeply.`
-                  : `MCA charges no registration fee up to ${inr(NIL_FEE_THRESHOLD)} authorised capital.`}
-              </p>
+              <>
+                <p className={`text-xs mt-2 ${cap > NIL_FEE_THRESHOLD ? "text-amber-700" : "text-green-700"}`}>
+                  {cap > NIL_FEE_THRESHOLD
+                    ? `Above ${inr(NIL_FEE_THRESHOLD)} — the MCA registration fee now applies and rises steeply.`
+                    : `MCA charges no registration fee up to ${inr(NIL_FEE_THRESHOLD)} authorised capital.`}
+                </p>
+                <p className="text-xs text-muted mt-1">
+                  {card.onQuotation
+                    ? `Above ${inr(FEE_CARD_CEILING)} authorised capital our fee is quoted separately — the figure shown is the top slab.`
+                    : `Our fee slab: authorised capital up to ${inr(card.slab.upTo)} → ${inr(card.fee)}.`}
+                </p>
+              </>
             )}
           </div>
         )}
@@ -207,7 +245,10 @@ export function CompanyRegistrationCalculator() {
             </span>
             <span>
               <span className="block text-[13px] font-heading font-semibold text-dark">Reserve the name first (SPICe+ Part A)</span>
-              <span className="block text-[11px] text-muted">₹1,000 per application. Not payable if the name is reserved within Part B.</span>
+              <span className="block text-[11px] text-muted">
+                ₹1,000 government fee per application, and {inr(card.slab.withName - card.slab.without)} on
+                our fee. Neither is payable if the name is reserved within Part B.
+              </span>
             </span>
           </button>
         )}
@@ -232,8 +273,29 @@ export function CompanyRegistrationCalculator() {
           </div>
         )}
 
+        {entity === "llp" && (
+          <div>
+            <label className="block text-sm font-heading font-semibold text-dark mb-2">
+              Partners needing a fresh DPIN / DIN
+            </label>
+            <div className="flex gap-2">
+              {["0", "1", "2", "3"].map((n) => (
+                <button
+                  key={n} onClick={() => setNewDpin(n)}
+                  className={`flex-1 py-2.5 rounded-xl text-sm font-heading font-semibold transition-all ${
+                    newDpin === n ? "bg-primary text-white" : "bg-slate-50 border border-slate-200 text-slate-600 hover:border-primary/30"
+                  }`}
+                >{n}</button>
+              ))}
+            </div>
+            <p className="text-xs text-muted mt-1">
+              {inr(LLP_DPIN_FEE)} each. Count only partners who do not already hold a DIN or DPIN.
+            </p>
+          </div>
+        )}
+
         <button
-          onClick={() => { setCapital("1500000"); setPeople("2"); setState("Delhi"); setEntity("pvtltd"); setSmallCompany(true); setNameReservation(true); }}
+          onClick={() => { setCapital("1500000"); setPeople("2"); setState("Delhi"); setEntity("pvtltd"); setSmallCompany(true); setNameReservation(true); setNewDpin("0"); }}
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-heading font-semibold hover:border-primary hover:text-primary transition-colors"
         >
           <RefreshCw size={14} /> Reset
@@ -243,7 +305,7 @@ export function CompanyRegistrationCalculator() {
       {/* ── Result ── */}
       <div data-calc-result className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
         <motion.div
-          key={`${entity}-${state}-${capital}-${people}-${smallCompany}-${nameReservation}`}
+          key={`${entity}-${state}-${capital}-${people}-${smallCompany}-${nameReservation}-${newDpin}`}
           initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}
           className="space-y-4"
         >
@@ -270,13 +332,24 @@ export function CompanyRegistrationCalculator() {
             </div>
           </div>
 
+          {res.stampUnknown && (
+            <div className="flex gap-2 p-3 bg-amber-50 rounded-xl border border-amber-200">
+              <AlertTriangle size={13} className="text-amber-600 shrink-0 mt-0.5" />
+              <p className="text-xs text-amber-900 leading-relaxed">
+                <strong>Stamp duty not shown for {state}.</strong> Our State schedule carries no
+                published rate for {state}, so the agreement stamp duty is counted as nil above and
+                the total is understated. Ask us for the current rate before you budget.
+              </p>
+            </div>
+          )}
+
           {!cfg.exact && (
             <div className="flex gap-2 p-3 bg-amber-50 rounded-xl border border-amber-200">
               <AlertTriangle size={13} className="text-amber-600 shrink-0 mt-0.5" />
               <p className="text-xs text-amber-900 leading-relaxed">
-                <strong>Indicative figure.</strong> Our verified fee schedule covers companies
-                having share capital. {cfg.label} costs are close estimates — confirm with us
-                before you budget.
+                <strong>Indicative figure.</strong> Our verified fee schedules cover companies
+                having share capital and LLPs. {cfg.label} costs are close estimates — confirm
+                with us before you budget.
               </p>
             </div>
           )}
@@ -305,7 +378,8 @@ export function CompanyRegistrationCalculator() {
             <p className="text-xs text-slate-600 leading-relaxed">
               MCA fees and stamp duty are recovered at actuals as a pure agent under Rule 33 of
               the CGST Rules, 2017 — no GST is added to them. GST at 18% applies only to the
-              Digital Signatures and our professional fee.
+              Digital Signatures, our professional fee
+              {entity === "llp" ? " and the franking and notarisation charge" : ""}.
             </p>
           </div>
 

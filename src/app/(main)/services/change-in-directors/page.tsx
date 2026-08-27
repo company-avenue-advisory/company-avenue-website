@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/change-in-directors" },
   title: "Change in Directors — Appointment & Resignation",
   description:
-    "Appoint new directors or process resignations via Form DIR-12 on MCA portal. Board resolution, DIR-2 consent, e-filing. Compliant with Companies Act 2013. Starting ₹2,999.",
+    "Appoint new directors or process resignations via Form DIR-12 on MCA portal. Board resolution, DIR-2 consent, e-filing. Compliant with Companies Act 2013. Starting ₹1,999.",
 };
 
 export default function ChangeInDirectorsServicePage() {
