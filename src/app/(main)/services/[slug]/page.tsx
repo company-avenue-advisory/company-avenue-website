@@ -735,7 +735,7 @@ const serviceDetails: Record<string, {
     timeline: "3–6 months (ROC process)",
     startingPrice: "₹20,000",
     faqs: [
-      { q: "What is the difference between STK-2 Fast Track Exit and NCLT winding up?", a: "STK-2 (Fast Track) is suitable for companies with NIL liabilities and no operations — it's simpler, cheaper, and faster (3–6 months). NCLT winding up is for companies with assets/liabilities requiring a liquidator, which is more complex and expensive." },
+      { q: "What is the difference between STK-2 Fast Track Exit and NCLT winding up?", a: "STK-2 (Fast Track) is suitable for companies with NIL liabilities and no operations — it's simpler, cheaper, and faster (3–4.5 months). NCLT winding up is for companies with assets/liabilities requiring a liquidator, which is more complex and expensive." },
       { q: "Can a struck-off company be revived?", a: "Yes. An application to NCLT under Sec 252 can be made within 20 years of strike-off to restore the company. Restoration is allowed if the company had a legitimate purpose for revival." },
     ],
   },

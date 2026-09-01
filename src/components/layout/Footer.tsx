@@ -245,8 +245,9 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="container-custom py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/30">
+          {/* COMPANY.fullName already ends in "Pvt. Ltd." — no full stop here, or it doubles up. */}
           <p>
-            © {new Date().getFullYear()} {COMPANY.fullName}. All rights reserved.
+            © {new Date().getFullYear()} {COMPANY.fullName} All rights reserved.
           </p>
           <p>
             GSTIN: {COMPANY.gstin} &nbsp;|&nbsp; CIN: {COMPANY.cin}

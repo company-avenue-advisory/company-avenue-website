@@ -22,8 +22,9 @@
  * up; they are pass-through, shown "at actual".
  */
 import {
-  PRO_FEES, inr, INCORP_FEE_CARD, CLOSURE_HEADLINE, CCFS_2026,
+  PRO_FEES, inr, INCORP_FEE_CARD, CLOSURE_HEADLINE,
   SECTION8_SERVICES, STARTUP_INDIA, ADDON_SERVICES, STANDALONE_FEES,
+  closureAllIn, ccfsStatus, STK2_BUNDLE, STK_NOTARISATION_PER_DIRECTOR, NCLT_LIQUIDATION,
 } from "@/lib/calc-fees";
 
 export type FeeRow = {
@@ -64,6 +65,58 @@ const FEE_CARD_NOTE = `Our fee follows authorised capital: ${INCORP_FEE_CARD
 /** Companies: MCA fees and stamp duty are pure-agent recoveries — no GST on them. */
 const PURE_AGENT_NOTE =
   "GST @18% applies to the Digital Signatures and our professional fee only. MCA fees and stamp duty are recovered at actuals as a pure agent under Rule 33 of the CGST Rules, 2017.";
+
+/**
+ * Closure pricing, built fresh on every read.
+ *
+ * This is the one service entry that moves on its own: the MCA fee on Form STK-2
+ * and the all-in total both flip the day CCFS-2026 expires. Building it per call
+ * — rather than freezing it into SERVICE_PRICING at module load — means a
+ * long-running server picks the change up on the day instead of at the next
+ * deploy. Every figure here comes from lib/calc-fees; nothing is typed twice.
+ *
+ * What the ₹20,000 covers is STK2_BUNDLE, quoted verbatim so this page and
+ * /pricing's Closure & Exit row cannot drift apart again.
+ */
+function closurePricing(now?: Date): ServicePricing {
+  const c = closureAllIn({ directors: 2, now });
+
+  return {
+    label: "Company Closure & Exit Cost",
+    price: PRO_FEES["company-closure"],
+    feeNote: "+ MCA fee at actual — strike-off in Form STK-2, end to end",
+    includes: [
+      "Form STK-2 filed and carried through to the dissolution notice in STK-7",
+      "Statement of accounts in Form STK-8, certified by a Chartered Accountant",
+      "Board meeting, EGM and special resolution support, including Form MGT-14",
+      "Indemnity bond (STK-3) and affidavit (STK-4) drafted for every director",
+      "The first written response to a C-PACE query",
+    ],
+    breakdown: [
+      { label: "Strike-off in Form STK-2 — end to end", value: inr(CLOSURE_HEADLINE.strikeOffStk2), note: "covers everything in the list opposite" },
+      {
+        label: "MCA fee on Form STK-2",
+        value: inr(c.ccfs.stk2Fee),
+        note: c.ccfs.live
+          ? `normally ${inr(c.ccfs.stk2Standard)} — concessional to ${c.ccfs.deadline} under CCFS-2026`
+          : `CCFS-2026 closed on ${c.ccfs.deadline}; the normal fee applies again`,
+      },
+      { label: "Notarisation & stamping of STK-3 / STK-4", value: inr(STK_NOTARISATION_PER_DIRECTOR), note: "per director" },
+      { label: "Exit diagnostic & route opinion", value: inr(CLOSURE_HEADLINE.diagnostic), note: "separate engagement — credited back in full when the closure proceeds" },
+      { label: "Overdue AOC-4 and MGT-7 / MGT-7A", value: inr(CLOSURE_HEADLINE.overdueAnnualFilingPerFy), note: "per financial year — must be cleared first" },
+      { label: "Second C-PACE resubmission", value: "₹5,000", note: "only if needed — the first response is included above" },
+      { label: "GST cancellation (REG-16) & final GSTR-10", value: inr(CLOSURE_HEADLINE.gstCancellation) },
+      { label: "EPFO & ESIC closure intimation", value: inr(CLOSURE_HEADLINE.epfEsicClosure), note: "where registered" },
+      { label: "Voluntary liquidation (Section 59, NCLT)", value: NCLT_LIQUIDATION.fee, note: "where the company owes or holds anything — scoped after a free review" },
+      { label: "Dormant status instead — Form MSC-1", value: inr(CLOSURE_HEADLINE.dormantMsc1), note: "defer rather than close; MSC-3 ₹4,000/year" },
+      { label: "LLP strike-off — Form 24", value: inr(CLOSURE_HEADLINE.llpForm24), note: "overdue Form 8 / Form 11 ₹4,500 per FY" },
+    ],
+    typicalTotal: `≈ ${inr(c.total)} all-in — clean strike-off, ${c.directors} directors, filings up to date, incl. GST and the ${
+      c.ccfs.live ? `concessional ${inr(c.ccfs.stk2Fee)}` : inr(c.ccfs.stk2Fee)
+    } MCA fee${c.ccfs.live ? "" : " now that CCFS-2026 has closed"}`,
+    disclaimer: `Closure is not a discharge — under Section 250 the liability of every director, officer and member survives dissolution, and the NCLT may restore the company under Section 252 within twenty years. ${GST_NOTE}`,
+  };
+}
 
 export const SERVICE_PRICING: Record<string, ServicePricing> = {
   /* ─────────────── Company Formation ─────────────── */
@@ -411,33 +464,7 @@ export const SERVICE_PRICING: Record<string, ServicePricing> = {
     disclaimer: `Plans are priced for small LLPs with turnover up to ₹10 lakh. ${GST_NOTE}`,
   },
 
-  "company-closure": {
-    label: "Company Closure & Exit Cost",
-    price: PRO_FEES["company-closure"],
-    feeNote: "+ MCA fee at actual — strike-off in Form STK-2, end to end",
-    includes: [
-      "Exit diagnostic and route opinion, adjusted against the fee if you proceed",
-      "Board meeting, EGM and special resolution support, including Form MGT-14",
-      "Indemnity bond (STK-3) and affidavits (STK-4) drafted for every director",
-      "Statement of accounts in Form STK-8 certified by a Chartered Accountant",
-      "Form STK-2 filed and carried through to the dissolution notice in STK-7",
-      "C-PACE query handling and resubmission",
-    ],
-    breakdown: [
-      { label: "Exit diagnostic & route opinion", value: inr(CLOSURE_HEADLINE.diagnostic), note: "adjusted against our fee if the engagement proceeds" },
-      { label: "Strike-off in Form STK-2 — end to end", value: inr(CLOSURE_HEADLINE.strikeOffStk2) },
-      { label: "MCA fee on Form STK-2", value: inr(CCFS_2026.stk2Concessional), note: `normally ${inr(CCFS_2026.stk2Standard)} — concessional to ${CCFS_2026.deadline} under CCFS-2026` },
-      { label: "Notarisation & stamping of STK-3 / STK-4", value: "₹1,500", note: "per director" },
-      { label: "Overdue AOC-4 and MGT-7 / MGT-7A", value: inr(CLOSURE_HEADLINE.overdueAnnualFilingPerFy), note: "per financial year — must be cleared first" },
-      { label: "Statement of accounts (STK-8), CA certified", value: "₹5,000" },
-      { label: "GST cancellation (REG-16) & final GSTR-10", value: inr(CLOSURE_HEADLINE.gstCancellation) },
-      { label: "EPFO & ESIC closure intimation", value: inr(CLOSURE_HEADLINE.epfEsicClosure), note: "where registered" },
-      { label: "Dormant status instead — Form MSC-1", value: inr(CLOSURE_HEADLINE.dormantMsc1), note: "defer rather than close; MSC-3 ₹4,000/year" },
-      { label: "LLP strike-off — Form 24", value: inr(CLOSURE_HEADLINE.llpForm24), note: "overdue Form 8 / Form 11 ₹4,500 per FY" },
-    ],
-    typicalTotal: "≈ ₹29,640 all-in — clean strike-off, 2 directors, filings up to date, incl. GST and the concessional ₹2,500 MCA fee",
-    disclaimer: `Closure is not a discharge — under Section 250 the liability of every director, officer and member survives dissolution, and the NCLT may restore the company under Section 252 within twenty years. ${GST_NOTE}`,
-  },
+  "company-closure": closurePricing(),
 
   "agm-services": {
     label: "AGM Compliance Cost",
@@ -1155,10 +1182,14 @@ export type CalcTool = {
 
 export const CALC_TOOLS: Record<string, CalcTool> = {
   "company-registration-cost": {
-    title: "Registration Cost Calculator",
-    desc: "State-wise government fee, stamp duty and DSC for Pvt Ltd, LLP and OPC.",
+    // Renamed from "Company Registration Cost Calculator": the tool prices all
+    // six structures, but only three of them are companies under the Act, so
+    // the old name read narrower than the tool actually is. URL unchanged on
+    // purpose — see RETIRED_ROUTES in lib/legacy-redirects.
+    title: "Business Setup Calculator",
+    desc: "Setup cost for any structure, by State and capital — plus GST, MSME and trademark add-ons.",
     href: "/calculators/company-registration-cost",
-    cta: "Check your price",
+    cta: "Estimate setup cost",
     icon: "Building2",
     tone: "navy",
   },
@@ -1185,14 +1216,6 @@ export const CALC_TOOLS: Record<string, CalcTool> = {
     cta: "Estimate annual cost",
     icon: "ClipboardCheck",
     tone: "rose",
-  },
-  "business-setup-calculator": {
-    title: "Business Setup Calculator",
-    desc: "Total first-year cost of getting your business off the ground.",
-    href: "/calculators/business-setup-calculator",
-    cta: "Estimate setup cost",
-    icon: "Calculator",
-    tone: "teal",
   },
   "gst-calculator": {
     title: "GST Calculator",
@@ -1307,16 +1330,16 @@ const FORMATION_CALCS = [
   "company-name-search",
 ];
 
-const LICENCE_CALCS = ["business-setup-calculator", "compliance-cost-calculator", "gst-calculator"];
-const ROC_CALCS = ["compliance-cost-calculator", "company-registration-cost", "business-setup-calculator"];
+const LICENCE_CALCS = ["company-registration-cost", "compliance-cost-calculator", "gst-calculator"];
+const ROC_CALCS = ["compliance-cost-calculator", "company-registration-cost"];
 
 export const SERVICE_CALCULATORS: Record<string, string[]> = {
   /* Company Formation */
   "private-limited-company": ["company-registration-cost", "llp-vs-pvt-ltd", "compliance-cost-calculator", "company-name-search"],
   "llp-registration": ["company-registration-cost", "llp-vs-pvt-ltd", "compliance-cost-calculator", "business-structure-advisor"],
   "one-person-company": ["company-registration-cost", "business-structure-advisor", "compliance-cost-calculator", "llp-vs-pvt-ltd"],
-  "partnership-firm": ["business-setup-calculator", "business-structure-advisor", "company-registration-cost", "compliance-cost-calculator"],
-  "sole-proprietorship": ["business-setup-calculator", "business-structure-advisor", "gst-registration-cost-calculator", "income-tax-calculator"],
+  "partnership-firm": ["company-registration-cost", "business-structure-advisor", "compliance-cost-calculator"],
+  "sole-proprietorship": ["company-registration-cost", "business-structure-advisor", "gst-registration-cost-calculator", "income-tax-calculator"],
   "section-8-company": FORMATION_CALCS,
   "nidhi-company": FORMATION_CALCS,
   "producer-company": FORMATION_CALCS,
@@ -1324,11 +1347,11 @@ export const SERVICE_CALCULATORS: Record<string, string[]> = {
   "nbfc-registration": FORMATION_CALCS,
   "chit-fund-company": FORMATION_CALCS,
   "microfinance-company": FORMATION_CALCS,
-  "indian-subsidiary": ["company-registration-cost", "compliance-cost-calculator", "business-setup-calculator", "company-name-search"],
-  "branch-office": ["business-setup-calculator", "compliance-cost-calculator", "company-registration-cost"],
+  "indian-subsidiary": ["company-registration-cost", "compliance-cost-calculator", "company-name-search"],
+  "branch-office": ["company-registration-cost", "compliance-cost-calculator"],
 
   /* Tax & GST */
-  "gst-registration": ["gst-registration-cost-calculator", "gst-calculator", "business-setup-calculator", "compliance-cost-calculator"],
+  "gst-registration": ["gst-registration-cost-calculator", "gst-calculator", "company-registration-cost", "compliance-cost-calculator"],
   "gst-filing": ["gst-calculator", "gst-registration-cost-calculator", "compliance-cost-calculator", "tds-calculator"],
   "gst-amendment": ["gst-registration-cost-calculator", "gst-calculator", "compliance-cost-calculator"],
   "gst-lut-filing": ["gst-calculator", "compliance-cost-calculator"],
@@ -1338,10 +1361,10 @@ export const SERVICE_CALCULATORS: Record<string, string[]> = {
   "tax-audit": ["income-tax-calculator", "compliance-cost-calculator"],
   "transfer-pricing": ["compliance-cost-calculator", "income-tax-calculator"],
   "12a-80g-registration": ["compliance-cost-calculator", "income-tax-calculator"],
-  "shops-establishment": ["business-setup-calculator", "compliance-cost-calculator"],
+  "shops-establishment": ["company-registration-cost", "compliance-cost-calculator"],
   "labour-law-compliance": ["salary-calculator", "compliance-cost-calculator", "epf-calculator"],
   "posh-compliance": ["compliance-cost-calculator"],
-  "factories-act": ["compliance-cost-calculator", "business-setup-calculator"],
+  "factories-act": ["compliance-cost-calculator", "company-registration-cost"],
 
   /* MCA / ROC */
   "roc-compliance": ROC_CALCS,
@@ -1362,9 +1385,9 @@ export const SERVICE_CALCULATORS: Record<string, string[]> = {
 
   /* Startup, MSME & Licences */
   "startup-india": ["business-structure-advisor", "company-registration-cost", "compliance-cost-calculator"],
-  "msme-registration": ["business-setup-calculator", "business-structure-advisor", "compliance-cost-calculator"],
+  "msme-registration": ["company-registration-cost", "business-structure-advisor", "compliance-cost-calculator"],
   "iec-registration": LICENCE_CALCS,
-  "fssai-license": ["fssai-license-cost-calculator", "business-setup-calculator", "compliance-cost-calculator"],
+  "fssai-license": ["fssai-license-cost-calculator", "company-registration-cost", "compliance-cost-calculator"],
   "professional-tax": ["salary-calculator", "compliance-cost-calculator"],
   "trade-license": LICENCE_CALCS,
   "drug-license": LICENCE_CALCS,
@@ -1380,17 +1403,17 @@ export const SERVICE_CALCULATORS: Record<string, string[]> = {
   "epr-registration": LICENCE_CALCS,
 
   /* Intellectual Property */
-  "trademark-registration": ["trademark-cost-calculator", "trademark-class-finder", "company-name-search", "business-setup-calculator"],
+  "trademark-registration": ["trademark-cost-calculator", "trademark-class-finder", "company-name-search", "company-registration-cost"],
   "trademark-objection": ["trademark-cost-calculator", "trademark-class-finder", "company-name-search"],
   "trademark-renewal": ["trademark-cost-calculator", "trademark-class-finder", "compliance-cost-calculator"],
   "trademark-watch": ["trademark-class-finder", "company-name-search"],
   "trademark-assignment": ["trademark-cost-calculator", "trademark-class-finder"],
-  "international-trademark": ["trademark-cost-calculator", "trademark-class-finder", "business-setup-calculator"],
-  "copyright-registration": ["business-setup-calculator"],
-  "patent-registration": ["business-setup-calculator"],
-  "patent-search": ["business-setup-calculator"],
-  "design-registration": ["business-setup-calculator"],
-  "gi-tag-registration": ["business-setup-calculator"],
+  "international-trademark": ["trademark-cost-calculator", "trademark-class-finder", "company-registration-cost"],
+  "copyright-registration": ["company-registration-cost"],
+  "patent-registration": ["company-registration-cost"],
+  "patent-search": ["company-registration-cost"],
+  "design-registration": ["company-registration-cost"],
+  "gi-tag-registration": ["company-registration-cost"],
 
   /* Payroll & HR */
   "pf-registration": ["epf-calculator", "salary-calculator", "compliance-cost-calculator"],
@@ -1400,14 +1423,17 @@ export const SERVICE_CALCULATORS: Record<string, string[]> = {
 
   /* Accounting & Finance */
   "accounting-bookkeeping": ["compliance-cost-calculator", "gst-calculator", "income-tax-calculator"],
-  "virtual-cfo": ["compliance-cost-calculator", "business-setup-calculator", "gst-calculator"],
-  "business-valuation": ["business-setup-calculator", "compliance-cost-calculator"],
+  "virtual-cfo": ["compliance-cost-calculator", "company-registration-cost", "gst-calculator"],
+  "business-valuation": ["company-registration-cost", "compliance-cost-calculator"],
   "financial-statements": ["compliance-cost-calculator", "income-tax-calculator"],
 };
 
 /* ── accessors ── */
 
-export function getServicePricing(serviceId: string): ServicePricing | null {
+export function getServicePricing(serviceId: string, now?: Date): ServicePricing | null {
+  // Closure is date-sensitive (CCFS-2026) — rebuild it rather than serving the
+  // snapshot SERVICE_PRICING took when the module first loaded.
+  if (serviceId === "company-closure") return closurePricing(now);
   return SERVICE_PRICING[serviceId] ?? null;
 }
 
@@ -1457,11 +1483,24 @@ export const FEE_SCHEDULE: FeeScheduleGroup[] = (() => {
     if (!g) groups.push((g = { category: f.category, rows: [] }));
     g.rows.push({ service: f.service, basis: f.basis, fee: fmtFee(f.fee, f.onwards), note: f.note });
   }
+  const ccfs = ccfsStatus();
   groups.push({
     category: "Closure & Exit",
     rows: [
-      { service: "Exit diagnostic and route opinion", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.diagnostic), note: "Adjusted against fees if the engagement proceeds" },
-      { service: "Strike-off of a company (STK-2), end to end", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.strikeOffStk2), note: `MCA fee ${inr(CCFS_2026.stk2Concessional)} to ${CCFS_2026.deadline} under CCFS-2026` },
+      { service: "Exit diagnostic and route opinion", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.diagnostic), note: "Credited back in full when the closure proceeds" },
+      {
+        // The inclusion list is STK2_BUNDLE verbatim — the same list
+        // /services/company-closure renders. Neither page can drift from it.
+        service: `Strike-off of a company (STK-2), end to end — includes ${STK2_BUNDLE.join("; ")}`,
+        basis: "Per engagement",
+        fee: inr(CLOSURE_HEADLINE.strikeOffStk2),
+        note: ccfs.live
+          ? `MCA fee ${inr(ccfs.stk2Fee)} to ${ccfs.deadline} under CCFS-2026, then ${inr(ccfs.stk2Standard)}`
+          : `MCA fee ${inr(ccfs.stk2Fee)} — CCFS-2026 closed on ${ccfs.deadline}`,
+      },
+      { service: "Notarisation and stamping of STK-3 / STK-4", basis: "Per director", fee: inr(STK_NOTARISATION_PER_DIRECTOR) },
+      { service: "Second and subsequent C-PACE resubmission", basis: "Per resubmission", fee: "₹5,000", note: "The first response is covered by the strike-off fee above" },
+      { service: "Voluntary liquidation under Section 59 of the IBC (NCLT route)", basis: NCLT_LIQUIDATION.basis, fee: NCLT_LIQUIDATION.fee, note: NCLT_LIQUIDATION.note },
       { service: "Strike-off of an LLP (Form 24), end to end", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.llpForm24) },
       { service: "Application for dormant status (MSC-1)", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.dormantMsc1) },
       { service: "Annual return of a dormant company (MSC-3)", basis: "Per year", fee: inr(CLOSURE_HEADLINE.dormantMsc3) },

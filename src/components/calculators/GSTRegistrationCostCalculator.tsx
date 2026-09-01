@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Info, ArrowRight, Landmark, BadgeIndianRupee, CheckCircle2, AlertTriangle } from "lucide-react";
 import { PRO_FEES, DSC_PER_PERSON, GST_RATE, inr } from "@/lib/calc-fees";
+import { calcContactHref } from "@/lib/calc-lead";
 
 type Entity = "proprietor" | "partnership" | "company";
 
@@ -40,6 +41,21 @@ export function GSTRegistrationCostCalculator() {
     const gst = Math.round((proFee + dsc) * GST_RATE);
     return { dsc, regFee, returnsFee, proFee, gst, total: dsc + proFee + gst };
   }, [cfg.dsc, months]);
+
+  /* T8: the CTA carries the configuration into /contact instead of dropping it. */
+  const contactHref = calcContactHref({
+    service: "GST Registration / Filing",
+    from: "GST Registration Cost Calculator",
+    rows: [
+      { label: "Entity type", value: cfg.label },
+      { label: "Annual turnover", value: inr(parseFloat(turnover) || 0) },
+      { label: "Return filing", value: RETURNS.find((r) => r.key === plan)!.label },
+      { label: "Supplies inter-State", value: interState ? "Yes" : "No" },
+      { label: "Sells through an e-commerce operator", value: ecommerce ? "Yes" : "No" },
+      { label: "Services only", value: servicesOnly ? "Yes" : "No" },
+    ],
+    total: `${inr(res.total)} all-in`,
+  });
 
   // Threshold logic — Section 22 read with the 2019 notification.
   const t = parseFloat(turnover) || 0;
@@ -243,7 +259,7 @@ export function GSTRegistrationCostCalculator() {
           </div>
 
           <Link
-            href="/contact"
+            href={contactHref}
             className="flex items-center justify-between w-full px-4 py-3 bg-primary/5 hover:bg-primary/10 rounded-xl transition-colors group"
           >
             <span className="text-sm font-heading font-semibold text-primary">

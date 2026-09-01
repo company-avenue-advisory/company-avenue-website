@@ -1,14 +1,16 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { MapPin, Phone, Mail, Clock, MessageCircle, CheckCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, MessageCircle, CheckCircle, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { COMPANY } from "@/lib/constants";
 import { trackEvent } from "@/lib/gtag";
+import { CALC_LEAD_PARAMS, CONTACT_SERVICES, isKnownService } from "@/lib/calc-lead";
 
 const schema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -20,28 +22,65 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const services = [
-  "Company Registration",
-  "GST Registration / Filing",
-  "Income Tax Return",
-  "Trademark Registration",
-  "Accounting & Bookkeeping",
-  "Payroll Management",
-  "MSME / Startup India",
-  "ROC Compliance",
-  "IEC Registration",
-  "Other",
-];
+/* Single source shared with the calculators — see lib/calc-lead.ts. A
+   calculator that hands over a service string not in this list would leave the
+   select on its placeholder, so both sides read the same array. */
+const services = CONTACT_SERVICES;
+
+/**
+ * Reads the calculator handover out of the query string and hands it up.
+ *
+ * ISOLATED ON PURPOSE. `useSearchParams` opts its whole Suspense boundary out
+ * of prerendering. Keeping the hook in a component that renders `null` confines
+ * that bail-out to nothing at all, rather than letting it spread to the form.
+ * (This page's body is client-rendered either way today — the containment is so
+ * that stays a property of the layout, not something this ticket cemented in.)
+ */
+function CalcHandoff({ onReceive }: {
+  onReceive: (v: { service: string | null; summary: string | null; from: string | null }) => void;
+}) {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const service = searchParams.get(CALC_LEAD_PARAMS.service);
+    const summary = searchParams.get(CALC_LEAD_PARAMS.summary);
+    const from = searchParams.get(CALC_LEAD_PARAMS.from);
+    // Arriving at /contact directly: return before touching anything, so the
+    // blank form stays exactly as it is. This is additive.
+    if (!service && !summary) return;
+    onReceive({ service, summary, from });
+  }, [searchParams, onReceive]);
+
+  return null;
+}
 
 export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  /** Calculator this visitor arrived from, if any — drives the banner only. */
+  const [cameFrom, setCameFrom] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    setValue,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  /* ── T8: apply a configuration handed over by a calculator ──
+     Written through setValue after mount rather than as `defaultValues`:
+     seeding from the query string during render would make the server and
+     client markup disagree. */
+  const applyHandover = useCallback(
+    ({ service, summary, from }: { service: string | null; summary: string | null; from: string | null }) => {
+      // Only pre-select a value the dropdown actually offers.
+      if (service && isKnownService(service)) setValue("service", service);
+      // Pre-filled, never locked — the visitor can rewrite every word.
+      if (summary) setValue("message", summary);
+      if (from) setCameFrom(from);
+    },
+    [setValue]
+  );
 
   const onSubmit = async (data: FormData) => {
     setSubmitError(null);
@@ -81,6 +120,10 @@ export function ContactPage() {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <CalcHandoff onReceive={applyHandover} />
+      </Suspense>
+
       {/* Page hero */}
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-20">
         <div className="container-custom text-center">
@@ -135,6 +178,18 @@ export function ContactPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+                    {cameFrom && (
+                      <div className="flex items-start gap-3 rounded-xl border border-primary/20 bg-primary/5 px-4 py-3">
+                        <Calculator size={16} className="text-primary shrink-0 mt-0.5" />
+                        <p className="text-xs text-dark leading-relaxed">
+                          <strong className="font-heading font-semibold">
+                            Your {cameFrom} result has been carried over.
+                          </strong>{" "}
+                          We have filled in the service and your configuration below — edit
+                          anything you like before sending.
+                        </p>
+                      </div>
+                    )}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-heading font-medium text-dark mb-1.5">

@@ -329,7 +329,7 @@ export const NAV_LINKS = [
           { label: "HRA Calculator", href: "/calculators/hra-calculator" },
           { label: "Salary Calculator", href: "/calculators/salary-calculator" },
           { label: "Gratuity Calculator", href: "/calculators/gratuity-calculator" },
-          { label: "Business Setup Calculator", href: "/calculators/business-setup-calculator" },
+          { label: "Business Setup Calculator", href: "/calculators/company-registration-cost" },
           { label: "Company Registration Cost", href: "/calculators/company-registration-cost" },
           { label: "Compliance Cost Calculator", href: "/calculators/compliance-cost-calculator" },
         ],

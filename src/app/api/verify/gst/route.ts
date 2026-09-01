@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sandboxPost, isSandboxConfigured } from "@/lib/sandbox";
+import { sandboxPost, isSandboxConfigured, sandboxErrorResponse } from "@/lib/sandbox";
 
 const GSTIN_PATTERN = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
 
@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     console.error("[GST verify]", err);
-    return NextResponse.json({ error: "Could not verify this GSTIN right now. Please try again." }, { status: 502 });
+    const { error, status } = sandboxErrorResponse(err);
+    return NextResponse.json({ error }, { status });
   }
 }

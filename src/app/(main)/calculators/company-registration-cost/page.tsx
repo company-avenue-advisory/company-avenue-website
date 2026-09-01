@@ -6,13 +6,16 @@ import { ChevronRight, Building2 } from "lucide-react";
 import { CompanyRegistrationCalculator } from "@/components/calculators/CompanyRegistrationCalculator";
 import { CalcInteractionTracker } from "@/components/calculators/CalcInteractionTracker";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { DSC_PER_PERSON, inr } from "@/lib/calc-fees";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/company-registration-cost" },
-  title: "Company Registration Cost Calculator India 2025",
+  title: "Business Setup Calculator — Registration Cost India",
   description:
-    "Estimate company registration costs in India — Pvt Ltd, LLP, OPC, Partnership. Includes government fees, state-wise stamp duty, DSC cost, and professional charges. Free tool.",
+    "Estimate the cost of setting up a business in India — Pvt Ltd, OPC, Section 8, LLP, Partnership Firm or Sole Proprietorship. Government fees, state-wise stamp duty, DSC, professional charges, plus optional GST, MSME and trademark add-ons. Free tool.",
   keywords: [
+    "business setup calculator",
+    "cost to start a business India",
     "company registration cost India 2025",
     "pvt ltd registration fees",
     "LLP registration cost",
@@ -28,7 +31,7 @@ export default function CompanyRegistrationCostPage() {
       <JsonLd data={breadcrumbSchema([
           { name: "Home", path: "/" },
           { name: "Calculators", path: "/calculators" },
-          { name: "Company Registration Cost", path: "/calculators/company-registration-cost" },
+          { name: "Business Setup Calculator", path: "/calculators/company-registration-cost" },
         ])} />
       {/* Hero */}
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
@@ -38,7 +41,7 @@ export default function CompanyRegistrationCostPage() {
             <ChevronRight size={12} />
             <Link href="/calculators" className="hover:text-white/70 transition-colors">Calculators</Link>
             <ChevronRight size={12} />
-            <span className="text-white/70">Registration Cost</span>
+            <span className="text-white/70">Business Setup Calculator</span>
           </nav>
 
           <div className="flex items-center gap-4 mb-4">
@@ -50,11 +53,12 @@ export default function CompanyRegistrationCostPage() {
             </span>
           </div>
           <h1 className="font-heading font-bold text-3xl md:text-4xl text-white mb-3 leading-tight">
-            Company Registration Cost Calculator
+            Business Setup Calculator
           </h1>
           <p className="text-white/50 text-base max-w-2xl">
-            Select your entity type and state to get an instant cost breakdown — government
-            fees, stamp duty, DSC, and professional charges. Covers all major states.
+            Pick your structure and state for an instant cost breakdown — government fees,
+            stamp duty, DSC and professional charges — then add GST, MSME, trademark or
+            bookkeeping at our bundled rates. Covers all six structures and every major state.
           </p>
         </div>
       </div>
@@ -62,14 +66,14 @@ export default function CompanyRegistrationCostPage() {
       {/* Calculator */}
       <section className="py-12 bg-background">
         <div className="container-custom">
-          <CalcInteractionTracker name="Company Registration Cost"><CompanyRegistrationCalculator /></CalcInteractionTracker>
+          <CalcInteractionTracker name="Business Setup Calculator"><CompanyRegistrationCalculator /></CalcInteractionTracker>
 
           {/* Cost components explained */}
           <div className="mt-12">
             <h2 className="font-heading font-bold text-dark text-xl mb-6">
-              What&apos;s Included in the Registration Cost?
+              What&apos;s Included in the Setup Cost?
             </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
                 {
                   title: "Government / MCA Fee",
@@ -81,11 +85,17 @@ export default function CompanyRegistrationCostPage() {
                 },
                 {
                   title: "DSC — Digital Signature",
-                  desc: "Mandatory for each director/partner to sign MCA forms digitally. Typically ₹1,500 per person.",
+                  // Read from the fee table rather than restated: this line said
+                  // ₹1,500 while the calculator beside it charged ₹2,000.
+                  desc: `Mandatory for each director/partner to sign MCA forms digitally. ${inr(DSC_PER_PERSON)} per person, Class 3, two-year validity.`,
                 },
                 {
                   title: "Professional Fees",
                   desc: "CA/CS charges for drafting documents, applying for name approval, filing all forms, and post-incorporation support.",
+                },
+                {
+                  title: "Add-on Services",
+                  desc: "GST, MSME/Udyam, trademark, DPIIT recognition, GST filing and bookkeeping — priced at our bundled rate when set up alongside the registration.",
                 },
               ].map((item) => (
                 <div

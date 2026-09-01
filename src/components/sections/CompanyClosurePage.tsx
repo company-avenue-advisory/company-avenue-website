@@ -12,6 +12,9 @@ import {
 } from "lucide-react";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { faqs } from "@/lib/faqs/CompanyClosurePage";
+import {
+  inr, STK2_BUNDLE, NCLT_LIQUIDATION, CLOSURE_HEADLINE, type ClosureAllIn,
+} from "@/lib/calc-fees";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -54,24 +57,49 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+/* The stated timeline is derived from the process-step breakdown further down
+   this page, not asserted independently — the two used to disagree (the steps
+   summed to 81–129 days while the headline said "3–6 months"). PROCESS_TIMELINE
+   below is the single source; TIMELINE_RANGE is computed from it. */
+const PROCESS_TIMELINE = [
+  { phase: "Document Preparation",  low: 5,  high: 7 },
+  { phase: "Pre-Filing Compliance", low: 15, high: 30 },
+  { phase: "STK-2 Filing",          low: 1,  high: 2 },
+  { phase: "RoC Public Notice",     low: 30, high: 30 },
+  { phase: "Final Strike-Off Order", low: 30, high: 60 },
+];
+
+const TOTAL_DAYS = PROCESS_TIMELINE.reduce(
+  (a, s) => ({ low: a.low + s.low, high: a.high + s.high }),
+  { low: 0, high: 0 }
+);
+
+/** Days → months, rounded UP to the nearest half — never promise faster than
+    the steps support. 81 days → "3", 129 days → "4.5". */
+const months = (days: number) => {
+  const m = Math.ceil((days / 30) * 2) / 2;
+  return Number.isInteger(m) ? String(m) : m.toFixed(1);
+};
+const TIMELINE_RANGE = `${months(TOTAL_DAYS.low)}-${months(TOTAL_DAYS.high)} months`;
+
 const quickFacts = [
   { icon: FileText,    label: "Form",         value: "STK-2" },
   { icon: Landmark,    label: "Authority",    value: "MCA / RoC" },
-  { icon: Clock,       label: "Timeline",     value: "3-6 Months" },
-  { icon: DollarSign,  label: "Starting At",  value: "₹20,000" },
+  { icon: Clock,       label: "Timeline",     value: TIMELINE_RANGE },
+  { icon: DollarSign,  label: "Starting At",  value: inr(CLOSURE_HEADLINE.strikeOffStk2) },
   { icon: AlertCircle, label: "Penalty Risk", value: "Director Disqualification" },
   { icon: ShieldCheck, label: "Protection",   value: "Liability Ends" },
 ];
 
 const benefits = [
-  { icon: DollarSign,  title: "Eliminate Ongoing Compliance Costs",      desc: "Closing a dormant company removes annual ROC filing (AOC-4, MGT-7), GST returns, income tax, PF/ESIC, and director KYC obligations — saving ₹25,000-₹50,000 annually." },
+  { icon: DollarSign,  title: "Eliminate Ongoing Compliance Costs",      desc: "Closing a dormant company removes annual ROC filing (AOC-4, MGT-7), GST returns, income tax, PF/ESIC, and director KYC obligations. Our Compliance Cost Calculator works out what those filings cost your company each year." },
   { icon: ShieldCheck, title: "Protect Directors from Disqualification",  desc: "Section 164(2) disqualifies directors of companies that fail to file annual returns for 3 consecutive years. Strike-off ends this risk and cleans the director&apos;s record." },
   { icon: Scale,       title: "Remove Personal Liability Exposure",       desc: "An inactive company can still attract notices and show-cause orders. Formal strike-off under STK-2 provides legal closure and removes the company from regulatory radar." },
   { icon: RefreshCcw,  title: "Free Up Director Capacity",                desc: "Directors are limited in how many companies they can serve. Closing unused companies frees up directorship slots for new ventures and prevents DIN clutter." },
-  { icon: Zap,         title: "Fast Track - No Court Involvement",        desc: "The STK-2 Fast Track Exit route avoids lengthy NCLT proceedings. Eligible companies can be struck off within 3-6 months entirely through the MCA portal." },
+  { icon: Zap,         title: "Fast Track - No Court Involvement",        desc: `The STK-2 Fast Track Exit route avoids lengthy NCLT proceedings. Eligible companies can be struck off within ${TIMELINE_RANGE} entirely through the MCA portal.` },
   { icon: Award,       title: "Clean Closure - Documented and Legal",     desc: "Unlike simply abandoning a company, formal strike-off via STK-2 creates a legal record of closure, satisfying banks, partners, and investors if enquiries arise." },
   { icon: Globe,       title: "Enables Foreign Director Exits",            desc: "Foreign nationals holding directorships in Indian companies can formally exit the Indian regulatory system by closing unused entities through the STK-2 route." },
-  { icon: BadgeCheck,  title: "Creditor Protection via NCLT Route",       desc: "Where creditors exist, the NCLT voluntary winding-up process provides a structured mechanism to settle debts and formally distribute remaining assets before dissolution." },
+  { icon: BadgeCheck,  title: "Creditor Protection via NCLT Route",       desc: `Where creditors exist, voluntary liquidation under Section 59 provides a structured mechanism to settle debts and formally distribute remaining assets before dissolution. Priced ${NCLT_LIQUIDATION.fee.toLowerCase()} — ${NCLT_LIQUIDATION.note.replace("Scoped", "scoped")}.` },
 ];
 
 const whoNeeds = [
@@ -108,7 +136,11 @@ const requiredDocs = [
 ];
 
 
-export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
+export function CompanyClosurePage({ closure, pricingSlot, calcPill }: {
+  closure: ClosureAllIn;
+  pricingSlot?: ReactNode;
+  calcPill?: ReactNode;
+}) {
   return (
     <main className="overflow-x-hidden" itemScope itemType="https://schema.org/Service">
 
@@ -185,7 +217,7 @@ export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: Re
                 The <strong className="text-dark">STK-2 Fast Track Exit</strong> scheme provides a simplified, non-judicial route for companies that have nil assets, nil liabilities, and have not commenced or ceased business — avoiding costly and time-consuming NCLT winding-up proceedings.
               </p>
               <p className="text-muted text-base leading-relaxed mb-6">
-                Over <strong className="text-dark">3 lakh companies</strong> are struck off by the MCA each year. Voluntary strike-off via STK-2 is far preferable to involuntary strike-off, which carries legal consequences for directors and leaves compliance records unresolved.
+                Voluntary strike-off via STK-2 is far preferable to involuntary strike-off by the Registrar, which carries legal consequences for directors under Section 164(2) and leaves compliance records unresolved.
               </p>
               <div className="grid grid-cols-2 gap-3">
                 {["NIL Liabilities Required", "All Returns Must Be Filed", "No NCLT Required", "30-Day Public Notice"].map(pt => (
@@ -210,8 +242,8 @@ export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: Re
                 <div className="space-y-3 mb-5">
                   {[
                     { label: "Eligibility", stk: "NIL assets & liabilities",  nclt: "Companies with assets/liabilities" },
-                    { label: "Timeline",    stk: "3-6 months",                nclt: "12-24 months" },
-                    { label: "Cost",        stk: "₹20,000 professional fee",  nclt: "High (liquidator fees)" },
+                    { label: "Timeline",    stk: TIMELINE_RANGE,              nclt: "12-24 months" },
+                    { label: "Cost",        stk: `${inr(CLOSURE_HEADLINE.strikeOffStk2)} professional fee`, nclt: NCLT_LIQUIDATION.short },
                     { label: "Tribunal",    stk: "Not required",              nclt: "NCLT proceedings required" },
                     { label: "Creditors",   stk: "Must be NIL",               nclt: "Settlement via liquidator" },
                   ].map((row) => (
@@ -225,7 +257,11 @@ export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: Re
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-start gap-2">
                   <AlertTriangle size={13} className="text-amber-500 shrink-0 mt-0.5" />
                   <p className="text-dark text-xs leading-relaxed">
-                    <strong>Note:</strong> Companies with pending liabilities, creditors, or assets must use the NCLT voluntary winding-up route instead of STK-2.
+                    <strong>Note:</strong> Companies with pending liabilities, creditors, or assets must use voluntary
+                    liquidation under Section 59 instead of STK-2. That route is quoted{" "}
+                    {NCLT_LIQUIDATION.fee.toLowerCase()} rather than from our rate card — the insolvency
+                    professional&apos;s remuneration and counsel&apos;s fees depend on creditor count and asset
+                    complexity, and we scope it after a free review.
                   </p>
                 </div>
               </div>
@@ -353,6 +389,7 @@ export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: Re
                 <p className="text-muted text-sm leading-relaxed mb-4">Your company <strong className="text-dark">cannot</strong> use STK-2 if any of the following apply:</p>
                 <div className="space-y-2">
                   {[
+                    "Company is incorporated under Section 8 of the Companies Act, 2013",
                     "Company has any outstanding bank loans or trade liabilities",
                     "GST registration is active and returns are pending",
                     "Income tax returns not filed for all years",
@@ -370,7 +407,13 @@ export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: Re
                 <div className="mt-5 bg-white border border-red-100 rounded-xl p-3 flex items-start gap-2">
                   <Info size={13} className="text-blue-500 shrink-0 mt-0.5" />
                   <p className="text-dark text-xs leading-relaxed">
-                    If any of the above apply, you must use NCLT voluntary winding-up. We can guide you through both routes.
+                    A <Link href="/services/section-8-company" className="font-semibold underline decoration-blue-300 underline-offset-2 hover:text-blue-700">Section 8 company</Link> cannot
+                    be struck off at all: the affidavit in Form STK-4 requires every director to declare the
+                    company is not incorporated under Section 8. It must first convert with the Regional
+                    Director&apos;s approval, or be wound up by voluntary liquidation. For the other
+                    disqualifiers, the route is voluntary liquidation under Section 59 —
+                    quoted {NCLT_LIQUIDATION.fee.toLowerCase()}, scoped after a free review. We can guide you
+                    through either route.
                   </p>
                 </div>
               </div>
@@ -397,12 +440,11 @@ export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: Re
               </div>
               <div className="space-y-3">
                 {[
-                  { phase: "Document Preparation",  time: "5-7 days" },
-                  { phase: "Pre-Filing Compliance", time: "15-30 days" },
-                  { phase: "STK-2 Filing",           time: "1-2 days" },
-                  { phase: "RoC Public Notice",      time: "30 days" },
-                  { phase: "Final Strike-Off Order", time: "30-60 days" },
-                  { phase: "Total (Approx.)",        time: "3-6 months" },
+                  ...PROCESS_TIMELINE.map((s) => ({
+                    phase: s.phase,
+                    time: s.low === s.high ? `${s.low} days` : `${s.low}-${s.high} days`,
+                  })),
+                  { phase: "Total (Approx.)", time: `${TOTAL_DAYS.low}-${TOTAL_DAYS.high} days · ${TIMELINE_RANGE}` },
                 ].map((item) => (
                   <div key={item.phase} className="flex items-center justify-between py-2 border-b border-slate-50 last:border-0">
                     <span className="text-xs text-muted">{item.phase}</span>
@@ -410,26 +452,55 @@ export function CompanyClosurePage({ pricingSlot, calcPill }: { pricingSlot?: Re
                   </div>
                 ))}
               </div>
+              <p className="text-[11px] text-muted leading-relaxed mt-4 pt-3 border-t border-slate-100">
+                Add up to a further six weeks if a C-PACE query needs answering or a resubmission is
+                required — the range above assumes the application clears without one.
+              </p>
             </div>
             <div className="bg-primary rounded-3xl p-8 text-white">
               <div className="flex items-center gap-2 mb-3">
                 <Wallet size={18} className="text-accent" />
-                <p className="font-heading font-semibold text-base">₹20,000 — strike-off, end to end</p>
+                <p className="font-heading font-semibold text-base">
+                  {inr(closure.professional)} — strike-off, end to end
+                </p>
               </div>
-              <p className="text-white/60 text-xs mb-6 leading-relaxed">
+              {/* T2: every figure here comes from `closure`, resolved server-side from
+                  the single CCFS-2026 date constant. Nothing is hard-coded. */}
+              <p className="text-white/60 text-xs mb-4 leading-relaxed">
                 Professional fee for Form STK-2 from filing through to the dissolution notice in
-                STK-7. The MCA fee on STK-2 is ₹2,500 until 31 August 2026 under CCFS-2026, down
-                from ₹10,000. Start with the ₹7,500 exit diagnostic — it is adjusted against this
-                fee if you go ahead.
+                STK-7. {closure.ccfs.note} Add {inr(closure.notarisation)} for notarisation across{" "}
+                {closure.directors} directors and 18% GST on our side of the invoice, and a clean
+                strike-off comes to about <strong className="text-white">{inr(closure.total)}</strong> all-in.
               </p>
-              <div className="space-y-2 mb-6">
-                {["Exit diagnostic & route opinion — ₹7,500", "STK-2 Form Filing", "CA Certified Accounts (STK-8)", "Director Affidavits (STK-4)", "Indemnity Bonds (STK-3)", "GST/IT Clearance Support", "Closure Certificate"].map(pt => (
-                  <div key={pt} className="flex items-center gap-2">
-                    <CheckCircle size={12} className="text-accent shrink-0" />
-                    <span className="text-white/80 text-xs">{pt}</span>
+              {!closure.ccfs.live && (
+                <div className="flex items-start gap-2 mb-4 rounded-xl bg-white/10 border border-white/15 p-3">
+                  <Info size={13} className="text-accent shrink-0 mt-0.5" />
+                  <p className="text-white/70 text-[11px] leading-relaxed">
+                    The CCFS-2026 concession has closed. Applications filed on or before{" "}
+                    {closure.ccfs.deadline} paid {inr(closure.ccfs.stk2Concessional)}; the MCA fee is
+                    now back to its normal {inr(closure.ccfs.stk2Standard)}.
+                  </p>
+                </div>
+              )}
+              {/* T3: the bundle, quoted from STK2_BUNDLE — the same list /pricing shows. */}
+              <div className="space-y-2 mb-5">
+                {[
+                  "Form STK-2 filed, through to the dissolution notice in STK-7",
+                  ...STK2_BUNDLE.map((b) => b.charAt(0).toUpperCase() + b.slice(1)),
+                ].map(pt => (
+                  <div key={pt} className="flex items-start gap-2">
+                    <CheckCircle size={12} className="text-accent shrink-0 mt-0.5" />
+                    <span className="text-white/80 text-xs leading-snug">{pt}</span>
                   </div>
                 ))}
               </div>
+              {/* The diagnostic is a separate engagement, stated once, in one framing. */}
+              <p className="text-white/50 text-[11px] leading-relaxed mb-6 pt-4 border-t border-white/10">
+                Charged separately: the {inr(CLOSURE_HEADLINE.diagnostic)} exit diagnostic and route
+                opinion, credited back in full when the closure proceeds; the{" "}
+                {inr(closure.ccfs.stk2Fee)} MCA fee, at cost; and any GST cancellation, overdue
+                annual filings or second C-PACE resubmission your company actually needs.
+              </p>
               <Link href="/contact"
                 className="w-full py-3 bg-accent text-dark text-xs font-heading font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-amber-400 transition-colors">
                 Start Closure Process <ArrowRight size={13} />

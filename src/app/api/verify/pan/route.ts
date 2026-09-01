@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sandboxPost, isSandboxConfigured } from "@/lib/sandbox";
+import { sandboxPost, isSandboxConfigured, sandboxErrorResponse } from "@/lib/sandbox";
 
 const PAN_PATTERN = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
 const DOB_PATTERN = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/[0-9]{4}$/;
@@ -55,6 +55,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     console.error("[PAN verify]", err);
-    return NextResponse.json({ error: "Could not verify this PAN right now. Please try again." }, { status: 502 });
+    const { error, status } = sandboxErrorResponse(err);
+    return NextResponse.json({ error }, { status });
   }
 }

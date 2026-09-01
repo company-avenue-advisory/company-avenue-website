@@ -8,5 +8,8 @@ export const metadata: Metadata = {
 };
 
 export default function Contact() {
+  // No Suspense boundary here on purpose: ContactPage keeps its own, scoped to
+  // the one child that reads the query string, so the useSearchParams
+  // prerender bail-out cannot spread to the form. See CalcHandoff in that file.
   return <ContactPage />;
 }

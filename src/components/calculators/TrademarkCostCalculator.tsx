@@ -6,6 +6,7 @@ import { Info, ArrowRight, Landmark, BadgeIndianRupee, Award } from "lucide-reac
 import {
   PRO_FEES, TRADEMARK_FEES, GST_RATE, trademarkGovtFee, inr, type TMApplicant,
 } from "@/lib/calc-fees";
+import { calcContactHref } from "@/lib/calc-lead";
 
 const APPLICANTS: { key: TMApplicant; label: string; desc: string }[] = [
   { key: "individual", label: "Individual / Proprietor", desc: "Concessional government fee" },
@@ -41,6 +42,20 @@ export function TrademarkCostCalculator() {
     const gst = Math.round(proFee * GST_RATE);
     return { n, perClassGovt, govtTotal, proFee, gst, total: govtTotal + proFee + gst };
   }, [applicant, classes, stage]);
+
+  /* T8: the CTA carries the configuration into /contact instead of dropping it. */
+  const contactHref = calcContactHref({
+    service: "Trademark Registration",
+    from: "Trademark Cost Calculator",
+    rows: [
+      { label: "Applicant type", value: APPLICANTS.find((a) => a.key === applicant)!.label },
+      { label: "Classes", value: String(res.n) },
+      { label: "Service tier", value: STAGES.find((x) => x.key === stage)!.label },
+      { label: "Government fee", value: `${inr(res.govtTotal)} (${inr(res.perClassGovt)} per class)` },
+      { label: "Our fee incl. GST", value: inr(res.proFee + res.gst) },
+    ],
+    total: `${inr(res.total)} all-in`,
+  });
 
   const concessional = applicant !== "company";
 
@@ -230,7 +245,7 @@ export function TrademarkCostCalculator() {
           </div>
 
           <Link
-            href="/contact"
+            href={contactHref}
             className="flex items-center justify-between w-full px-4 py-3 bg-primary/5 hover:bg-primary/10 rounded-xl transition-colors group"
           >
             <span className="text-sm font-heading font-semibold text-primary">

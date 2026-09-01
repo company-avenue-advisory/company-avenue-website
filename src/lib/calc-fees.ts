@@ -581,6 +581,84 @@ export const ADDON_SERVICES: AddOnService[] = [
   { id: "fcra", label: "FCRA registration", standalone: null, bundled: null },
 ];
 
+/* ══════════════ Business Setup Calculator — add-on step ══════════════
+
+   The six add-ons offered after the base registration cost. Every rate is
+   DERIVED from the tables above — the `bundled` column of ADDON_SERVICES
+   (these are all bought alongside an incorporation, so the bundled rate is the
+   honest one to quote) and PRO_FEES. Nothing is retyped.
+
+   This matters: the retired Business Setup Calculator kept its own hand-typed
+   copy of these numbers and three of the six had drifted out of date. Reading
+   them from the same objects /pricing and the service pages read means that
+   cannot happen again — change ADDON_SERVICES and every surface moves together.
+*/
+
+/** Bundled rate for an ADDON_SERVICES row. Throws at module load if the id or
+    its bundled rate ever disappears, rather than silently pricing at zero. */
+function addonBundled(id: string): number {
+  const a = ADDON_SERVICES.find((x) => x.id === id);
+  if (!a || a.bundled === null) {
+    throw new Error(`calc-fees: no bundled rate for add-on "${id}"`);
+  }
+  return a.bundled;
+}
+
+export type SetupAddon = {
+  id: string;
+  label: string;
+  /** One line on what the visitor actually gets */
+  note: string;
+  /** Our professional fee (₹), exclusive of GST */
+  fee: number;
+  /** Qualifier shown after the fee, e.g. "per class" */
+  unit?: string;
+  /** Government fee that is charged on top and is NOT in `fee` */
+  govtNote?: string;
+};
+
+export const SETUP_ADDONS: SetupAddon[] = [
+  {
+    id: "gst",
+    label: "GST Registration",
+    note: "GSTIN obtained end to end, online — no physical visit",
+    fee: addonBundled("gst-registration"),
+  },
+  {
+    id: "udyam",
+    label: "MSME / Udyam Registration",
+    note: "Udyam certificate — unlocks MSME schemes and 45-day payment protection",
+    fee: addonBundled("udyam"),
+  },
+  {
+    id: "trademark",
+    label: "Trademark Filing",
+    note: "Application filed in one class, to the examination report",
+    fee: addonBundled("trademark"),
+    unit: "per class",
+    govtNote: "Government fee of ₹4,500 per class (MSME / startup) or ₹9,000 is extra",
+  },
+  {
+    id: "dpiit",
+    label: "Startup India (DPIIT) Recognition",
+    note: "DPIIT recognition application, prepared and filed",
+    fee: addonBundled("dpiit"),
+  },
+  {
+    id: "gstFiling",
+    label: "GST Return Filing — 3 months",
+    note: `GSTR-1 and GSTR-3B for your first quarter — ${inr(PRO_FEES["gst-filing"])} per month`,
+    fee: PRO_FEES["gst-filing"] * 3,
+  },
+  {
+    id: "accounting",
+    label: "Accounting & Bookkeeping",
+    note: "Books maintained, monthly — ledgers, reconciliations and MIS",
+    fee: PRO_FEES["accounting-bookkeeping"],
+    unit: "per month",
+  },
+];
+
 /* ══════════════ standalone fee schedule ══════════════
 
    'Other Services Standalone' tab of CAA_Incorporation_Cost_Calculator_v2.
@@ -700,6 +778,41 @@ export type ClosureLine = {
 
 export type ClosureTable = { key: string; title: string; lines: ClosureLine[] };
 
+/* ── what the ₹20,000 STK-2 fee buys ──────────────────────────────────────────
+
+   ONE list, quoted verbatim by /services/company-closure and by /pricing's
+   Closure & Exit row. The two pages previously disagreed: the service page
+   advertised a bundle while the price list charged the pieces separately.
+   Resolved 1 Sep 2026 in favour of bundling (client direction).
+
+   Note what is NOT here: the ₹7,500 exit diagnostic is a separate engagement,
+   credited back in full when the client proceeds, and a SECOND C-PACE
+   resubmission is chargeable — only the first response is covered.
+*/
+export const STK2_BUNDLE = [
+  "statement of accounts in Form STK-8, certified by a Chartered Accountant",
+  "board meeting, EGM and special resolution support, including Form MGT-14",
+  "indemnity bond (STK-3) and affidavit (STK-4) drafted for every director",
+  "the first written response to a C-PACE query",
+] as const;
+
+/* ══════════════ NCLT / Section 59 voluntary liquidation ══════════════
+
+   Priced per engagement, not from the rate card: the insolvency professional's
+   remuneration and counsel's fees dominate the number and both scale with
+   creditor count and asset complexity. Quoting a fixed fee here would be
+   dishonest, so the site says "on enquiry" consistently in every place it is
+   mentioned. Same model /pricing already uses for LLP → Pvt Ltd conversion.
+*/
+export const NCLT_LIQUIDATION = {
+  /** Displayed wherever a fee would otherwise go */
+  fee: "On enquiry",
+  basis: "Per engagement",
+  note: "Scoped after a free review — the insolvency professional's remuneration and counsel's fees depend on creditor count and asset complexity",
+  /** Short form, for tight comparison cells */
+  short: "On enquiry",
+} as const;
+
 export const CLOSURE_FEES: ClosureTable[] = [
   {
     key: "cleanup",
@@ -708,8 +821,8 @@ export const CLOSURE_FEES: ClosureTable[] = [
       { service: "Exit diagnostic and route opinion (adjusted against fees if the engagement proceeds)", pro: 7500, govt: "Nil", timeline: "5–7 working days" },
       { service: "Overdue annual filings — AOC-4 and MGT-7 / MGT-7A (per financial year)", pro: 5000, govt: "At actuals", timeline: "7–10 working days per FY" },
       { service: "Reconstruction of accounts and statutory audit for a defaulting year, nil or low activity (per financial year)", pro: 12000, govt: "Nil", timeline: "2–3 weeks per FY" },
-      { service: "Board meeting, EGM and special resolution support, including Form MGT-14", pro: 5000, govt: "At actuals", timeline: "30 days from resolution" },
-      { service: "Statement of accounts in Form STK-8 certified by a Chartered Accountant", pro: 5000, govt: "Nil", timeline: "3–5 working days" },
+      { service: "Board meeting, EGM and special resolution support, including Form MGT-14 — included in the STK-2 fee on the strike-off route; charged separately only on the Section 8 and dormancy routes", pro: 5000, govt: "At actuals", timeline: "30 days from resolution" },
+      { service: "Statement of accounts in Form STK-8 certified by a Chartered Accountant — included in the STK-2 fee; charged separately only where no STK-2 is filed", pro: 5000, govt: "Nil", timeline: "3–5 working days" },
       { service: "Final income-tax return and closure of the income-tax file", pro: 6000, govt: "Nil", timeline: "15–20 working days" },
       { service: "GST cancellation in Form REG-16 and final return in GSTR-10", pro: 5000, govt: "Nil", timeline: "30–45 days" },
       { service: "EPFO and ESIC closure intimation, where registered", pro: 5000, govt: "Nil", timeline: "15–30 days" },
@@ -723,9 +836,16 @@ export const CLOSURE_FEES: ClosureTable[] = [
     key: "strike-off",
     title: "Route 1 — Voluntary strike-off — Private Limited, OPC, unlisted Public",
     lines: [
-      { service: "Application in Form STK-2 with indemnity bond (STK-3), affidavits (STK-4) and statement of accounts (STK-8) — end to end, to the dissolution notice in Form STK-7", pro: 20000, govt: "At actuals", timeline: "90–150 days from filing" },
+      { service: `Application in Form STK-2, end to end, to the dissolution notice in Form STK-7 — ${STK2_BUNDLE.join("; ")}`, pro: 20000, govt: "At actuals", timeline: "90–150 days from filing" },
       { service: "Notarisation and stamping of STK-3 / STK-4 (per director)", pro: 1500, govt: "At actuals", timeline: "2–3 working days" },
-      { service: "Written response to a C-PACE query or resubmission (second and subsequent)", pro: 5000, govt: "Nil", timeline: "7 working days from receipt" },
+      { service: "Written response to a C-PACE query or resubmission (second and subsequent) — the first response is already covered by the fee above", pro: 5000, govt: "Nil", timeline: "7 working days from receipt" },
+    ],
+  },
+  {
+    key: "nclt",
+    title: "Route 5 — Voluntary liquidation under Section 59 of the IBC — where the company owes or holds anything",
+    lines: [
+      { service: `Voluntary liquidation under Section 59, end to end — appointment of the insolvency professional, public announcement, realisation of assets, settlement of creditors and the application to the Tribunal for dissolution. ${NCLT_LIQUIDATION.note}`, pro: null, govt: "At actuals", timeline: "12–24 months" },
     ],
   },
   {
@@ -780,14 +900,110 @@ export const CLOSURE_HEADLINE = {
   overdueLlpFilingPerFy: 4500,
 } as const;
 
-/** CCFS-2026 concessional STK-2 government fee, to 31 August 2026. */
+/* ══════════════ CCFS-2026 — the one date constant ══════════════
+
+   The concessional STK-2 government fee expires on its own. `end` below is the
+   ONLY place the date is written down; every page that quotes an MCA fee on
+   STK-2 goes through `ccfsStatus()` and flips itself on expiry. Do not hard-code
+   ₹2,500 (or ₹10,000) anywhere — a future concession is then one edit, here.
+*/
+
 export const CCFS_2026 = {
+  /** Last day of the scheme, IST. THE date constant. */
+  end: "2026-08-31",
   stk2Standard: 10_000,
   stk2Concessional: 2_500,
   deadline: "31 August 2026",
   circular:
     "MCA General Circular No. 01/2026 dated 24 February 2026, in force from 15 April 2026 and extended to 31 August 2026 by General Circular No. 03/2026 dated 8 July 2026",
 } as const;
+
+export type CcfsStatus = {
+  /** true while the concessional fee is still available */
+  live: boolean;
+  /** The MCA fee actually payable on Form STK-2 today (₹) */
+  stk2Fee: number;
+  stk2Standard: number;
+  stk2Concessional: number;
+  deadline: string;
+  /** Whole days left while live; 0 once closed */
+  daysLeft: number;
+  /** One sentence of page copy — states the concession, or that it has closed */
+  note: string;
+};
+
+/**
+ * Where CCFS-2026 stands on a given date, and the STK-2 fee that follows from it.
+ *
+ * `now` is injectable so a server component can resolve this once and hand the
+ * result to a "use client" child as a prop — computing `new Date()` on both sides
+ * of hydration is what produces a mismatch. Server pages should call this and
+ * pass `CcfsStatus` down rather than letting the browser recompute it.
+ */
+export function ccfsStatus(now: Date = new Date()): CcfsStatus {
+  // The scheme runs to the end of its last day, Indian Standard Time.
+  const end = new Date(`${CCFS_2026.end}T23:59:59+05:30`);
+  const live = now <= end;
+  const daysLeft = live ? Math.max(0, Math.ceil((end.getTime() - now.getTime()) / 86_400_000)) : 0;
+
+  return {
+    live,
+    stk2Fee: live ? CCFS_2026.stk2Concessional : CCFS_2026.stk2Standard,
+    stk2Standard: CCFS_2026.stk2Standard,
+    stk2Concessional: CCFS_2026.stk2Concessional,
+    deadline: CCFS_2026.deadline,
+    daysLeft,
+    note: live
+      ? `The MCA fee on Form STK-2 is ${inr(CCFS_2026.stk2Concessional)} for applications filed on or before ${CCFS_2026.deadline} under CCFS-2026, down from ${inr(CCFS_2026.stk2Standard)}.`
+      : `CCFS-2026 closed on ${CCFS_2026.deadline}. The MCA fee on Form STK-2 has reverted to its normal ${inr(CCFS_2026.stk2Standard)}.`,
+  };
+}
+
+/** Notarisation and stamping of STK-3 / STK-4, per director. */
+export const STK_NOTARISATION_PER_DIRECTOR = 1_500;
+
+/**
+ * All-in cost of a clean strike-off — the worked example quoted on
+ * /services/company-closure and /pricing.
+ *
+ * "Clean" means: annual filings up to date, nothing to cancel, no C-PACE
+ * resubmission. The ₹7,500 exit diagnostic is deliberately excluded — it is
+ * credited back in full when the engagement proceeds, so counting it here would
+ * overstate what the client actually ends up paying.
+ *
+ * GST applies to our fee and the notarisation charge only. The MCA fee is a
+ * pure-agent recovery under Rule 33 of the CGST Rules, 2017 and carries none.
+ */
+export type ClosureAllIn = {
+  ccfs: CcfsStatus;
+  directors: number;
+  /** Our STK-2 fee (₹) */
+  professional: number;
+  notarisation: number;
+  gst: number;
+  /** MCA fee on STK-2 payable today (₹) */
+  mcaFee: number;
+  total: number;
+};
+
+export function closureAllIn(opts: { directors?: number; now?: Date } = {}): ClosureAllIn {
+  const directors = Math.max(1, opts.directors ?? 2);
+  const ccfs = ccfsStatus(opts.now);
+
+  const professional = CLOSURE_HEADLINE.strikeOffStk2;
+  const notarisation = directors * STK_NOTARISATION_PER_DIRECTOR;
+  const gst = Math.round((professional + notarisation) * GST_RATE);
+
+  return {
+    ccfs,
+    directors,
+    professional,
+    notarisation,
+    gst,
+    mcaFee: ccfs.stk2Fee,
+    total: professional + notarisation + gst + ccfs.stk2Fee,
+  };
+}
 
 /* ══════════════ Section 8 optional services ══════════════
    'Section 8' tab of CAA_Incorporation_Cost_Calculator_v2. Section 8 incorporation

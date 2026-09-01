@@ -18,7 +18,7 @@ const CITY_PAGES = [
 ];
 
 const CALCULATORS = [
-  "business-setup-calculator", "business-structure-advisor", "company-registration-cost",
+  "business-structure-advisor", "company-registration-cost",
   "compliance-cost-calculator", "compound-interest-calculator", "emi-calculator",
   "epf-calculator", "fd-calculator", "gratuity-calculator", "gst-calculator",
   "home-loan-emi-calculator", "hra-calculator", "income-tax-calculator", "llp-vs-pvt-ltd",

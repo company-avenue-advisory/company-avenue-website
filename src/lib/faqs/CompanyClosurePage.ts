@@ -10,7 +10,7 @@ export const faqs = [
   },
   {
     q: "What is the difference between STK-2 Fast Track Exit and NCLT winding-up?",
-    a: "STK-2 Fast Track Exit is a voluntary, MCA portal-based administrative process for companies with nil assets and nil liabilities. It is faster (3-6 months), cost-effective, and requires no court or tribunal involvement. NCLT voluntary winding-up under the Insolvency and Bankruptcy Code is used when a company has assets, liabilities, or creditors to settle. It involves appointing a liquidator, settling all claims, distributing remaining assets to shareholders, and obtaining a dissolution order from the NCLT. STK-2 is preferable when the company is truly dormant with zero financial obligations.",
+    a: "STK-2 Fast Track Exit is a voluntary, MCA portal-based administrative process for companies with nil assets and nil liabilities. It is faster (3-4.5 months), cost-effective, and requires no court or tribunal involvement. NCLT voluntary winding-up under the Insolvency and Bankruptcy Code is used when a company has assets, liabilities, or creditors to settle. It involves appointing a liquidator, settling all claims, distributing remaining assets to shareholders, and obtaining a dissolution order from the NCLT. STK-2 is preferable when the company is truly dormant with zero financial obligations. Strike-off is a published fixed fee; voluntary liquidation is quoted on enquiry and scoped after a free review.",
   },
   {
     q: "Can a company with outstanding GST or income tax liabilities apply for STK-2?",

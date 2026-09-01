@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Company Closure Cost — Build Your Own Estimate | Company Avenue Advisory</title>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     /services/company-closure — FINAL (opt-in pricing)
+     ───────────────────────────────────────────────────────────────
+     THE PRICING MODEL
+       Base   = the work every strike-off needs. Always charged.
+       Add-on = charged only if the visitor ticks it. Every add-on
+                is OFF by default. Nothing is pre-selected, ever.
+       Result = the number grows only when the visitor tells us
+                something true about their company.
+
+     SINGLE SOURCE OF TRUTH
+       All fees live in the RATES object below and nowhere else.
+       Each carries src:"A8" pointing at its row in
+       "Company_Closure_Exit.xlsx" → sheet "Closure Calculator".
+       The static rate card lower down is generated from the SAME
+       object, so the table and the builder can never disagree.
+       Edit the workbook, then edit RATES. Never edit markup.
+
+     CCFS-2026
+       One constant: RATES.ccfs.end. Drives the banner, the
+       government-fee line and the total. Page self-corrects on
+       expiry — do not hard-code ₹2,500 anywhere.
+
+     Reviewed for regulatory currency 29 Aug 2026.
+     ═══════════════════════════════════════════════════════════════ -->
+
+<meta name="description" content="Work out what it costs to close your company or LLP in India. Start from the base fee and add only what applies to you — GST cancellation, overdue filings, bank closure. Live estimate, published rates, government fees at cost.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://companyavenueadvisory.com/services/company-closure">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_IN">
+<meta property="og:site_name" content="Company Avenue Advisory">
+<meta property="og:title" content="What it costs to close your company — build your own estimate">
+<meta property="og:description" content="Base fee plus only the add-ons that apply to you. Nothing pre-ticked, nothing hidden. Government fees at cost.">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Karla:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#0D262A; --ink-2:#45605F; --ink-3:#7B908E;
+  --paper:#FAFAF8; --panel:#FFFFFF; --mist:#EDF2F0;
+  --rule:#DCE3E0; --rule-2:#C3CFCB;
+  --amber:#B57C15; --amber-tint:#FBF3E0; --amber-line:#EBD9AC;
+  --clay:#A33B2A; --clay-tint:#FAEEEB;
+  --jade:#2E6B52; --jade-tint:#E9F2ED;
+  --display:"Fraunces",Georgia,serif;
+  --body:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --max:76rem; --narrow:58rem;
+  --pad:clamp(1.15rem,4.5vw,2.75rem);
+  --shadow:0 1px 2px rgba(13,38,42,.05),0 10px 34px -14px rgba(13,38,42,.2);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.wrap.narrow{max-width:var(--narrow)}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;letter-spacing:-.018em;margin:0}
+h1{font-size:clamp(2.35rem,5.8vw,3.9rem);line-height:1.04;letter-spacing:-.03em}
+h2{font-size:clamp(1.7rem,3.5vw,2.45rem);line-height:1.13}
+h3{font-size:clamp(1.15rem,2.1vw,1.4rem);line-height:1.25;font-weight:500}
+h4{font-size:1.02rem;line-height:1.32;font-weight:600;font-family:var(--body);letter-spacing:0}
+p{margin:0 0 1.05em}
+a{color:var(--ink);text-decoration-color:var(--rule-2);text-underline-offset:.2em;text-decoration-thickness:1px}
+a:hover{text-decoration-color:var(--amber)}
+:focus-visible{outline:2.5px solid var(--amber);outline-offset:3px;border-radius:3px}
+code.f{font-family:var(--mono);font-size:.86em;font-weight:500;letter-spacing:-.02em;background:var(--mist);color:#1E4A45;padding:.1em .38em;border-radius:3px;white-space:nowrap}
+a.cite{font-family:var(--mono);font-size:.66em;font-weight:500;vertical-align:.42em;text-decoration:none;color:var(--ink-3);border:1px solid var(--rule);border-radius:20px;padding:.12em .5em;margin-left:.22em;white-space:nowrap;background:var(--panel)}
+a.cite:hover{color:var(--amber);border-color:var(--amber-line);background:var(--amber-tint)}
+.eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 1rem}
+.lede{font-size:clamp(1.04rem,1.6vw,1.17rem);color:var(--ink-2);max-width:62ch;line-height:1.6}
+section{padding:clamp(3rem,7vw,5rem) 0;border-top:1px solid var(--rule)}
+section.tint{background:var(--mist)}
+.soft{color:var(--ink-3);font-size:.87rem}
+
+/* ── CCFS strip ── */
+#ccfs{font-family:var(--mono);font-size:.78rem;padding:.72rem var(--pad);text-align:center;line-height:1.5}
+#ccfs.live{background:var(--amber-tint);color:#6B4A05;border-bottom:1px solid var(--amber-line)}
+#ccfs.closed{background:var(--ink);color:#B4C6C3}
+#ccfs b{font-weight:500}
+
+/* ── masthead ── */
+.mast{padding:1.15rem 0}
+.mast .wrap{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.brand{font-family:var(--display);font-size:1.1rem;font-weight:500;text-decoration:none;letter-spacing:-.02em}
+.crumb{font-size:.79rem;color:var(--ink-3)}
+.crumb a{color:var(--ink-3)}
+
+/* ── hero ── */
+.hero{padding-top:clamp(2.25rem,5vw,3.75rem);padding-bottom:clamp(2rem,4vw,2.75rem);border-top:none}
+.hero h1{max-width:15ch;margin-bottom:1.3rem}
+.hero h1 em{font-style:italic;color:var(--amber)}
+
+/* ══ BUILDER ══ */
+.builder{background:var(--panel);border:1px solid var(--rule);border-radius:8px;box-shadow:var(--shadow);overflow:hidden;margin-top:2.25rem}
+
+.readout{background:var(--ink);color:#fff;padding:1.5rem clamp(1.25rem,3vw,2.1rem);display:flex;flex-wrap:wrap;gap:1.1rem 2rem;align-items:flex-end;justify-content:space-between}
+.bigrow{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+.gstchip{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:#DCC48A;border:1px solid #2C5157;border-radius:20px;padding:.22rem .65rem;white-space:nowrap}
+.readout .big{display:block;font-family:var(--display);font-size:clamp(2.4rem,6.5vw,3.4rem);font-weight:500;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.readout .cap{font-family:var(--mono);font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;color:#8FA9A6;display:block;margin-bottom:.5rem}
+.readout .parts{font-family:var(--mono);font-size:.76rem;color:#9DB5B2;margin-top:.65rem;line-height:1.75}
+.readout .parts b{color:#fff;font-weight:500}
+.copybtn{font-family:var(--mono);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;background:transparent;color:#DCC48A;border:1px solid #2C5157;border-radius:4px;padding:.6rem 1rem;cursor:pointer}
+.copybtn:hover{background:#164046}
+
+.bgrid{display:grid}
+@media(min-width:60rem){.bgrid{grid-template-columns:1fr 22rem}}
+.bmain{padding:1.6rem clamp(1.25rem,3vw,2.1rem) 2rem}
+.bside{background:var(--mist);border-top:1px solid var(--rule);padding:1.6rem clamp(1.25rem,3vw,1.75rem)}
+@media(min-width:60rem){.bside{border-top:none;border-left:1px solid var(--rule)}}
+
+.bstep{margin-bottom:1.9rem}
+.bstep:last-child{margin-bottom:0}
+.bstep > h4{margin-bottom:.15rem}
+.bstep > .hint{font-size:.87rem;color:var(--ink-3);margin:0 0 .85rem}
+fieldset{border:none;margin:0;padding:0;min-width:0}
+legend{padding:0}
+
+/* segmented radios */
+.seg{display:flex;flex-wrap:wrap;gap:.4rem}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label{display:block;padding:.55rem .95rem;border:1px solid var(--rule);border-radius:4px;font-size:.9rem;cursor:pointer;background:var(--paper)}
+.seg label:hover{border-color:var(--rule-2)}
+.seg input:checked + label{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:500}
+.seg input:focus-visible + label{outline:2.5px solid var(--amber);outline-offset:2px}
+
+/* add-on rows */
+.adds{list-style:none;margin:0;padding:0;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.adds li{border-bottom:1px solid var(--rule);background:var(--paper)}
+.adds li:last-child{border-bottom:none}
+.adds li.on{background:var(--jade-tint)}
+.add{display:flex;gap:.85rem;align-items:flex-start;padding:.85rem 1rem;cursor:pointer}
+.add input[type=checkbox]{margin:.32rem 0 0;width:1.05rem;height:1.05rem;accent-color:var(--jade);flex:none;cursor:pointer}
+.add .txt{flex:1;min-width:0}
+.add .lbl{font-size:.93rem;font-weight:500;line-height:1.4}
+.add .why{display:block;font-size:.82rem;color:var(--ink-3);line-height:1.5;margin-top:.12rem}
+.excl{font-family:var(--mono);font-size:.75rem;color:var(--ink-3);line-height:1.6;margin-top:.5rem}
+.sumlist li.sub{padding-left:.9rem;border-bottom:none;color:var(--ink-3);font-size:.82rem;padding-top:.15rem;padding-bottom:.15rem}
+.sumlist li.sub span:first-child::before{content:"\2713\00a0";color:var(--jade)}
+.add .fee{font-family:var(--mono);font-size:.85rem;font-weight:500;white-space:nowrap;flex:none;padding-top:.08rem}
+.add .fee small{display:block;font-size:.78em;color:var(--ink-3);font-weight:400;text-align:right}
+
+/* qty stepper */
+.qty{display:flex;align-items:center;gap:.3rem;margin:0 0 .1rem 2.9rem;padding:0 1rem .85rem 0}
+.qty[hidden]{display:none}
+.qty span{font-family:var(--mono);font-size:.76rem;color:var(--ink-3);margin-right:.35rem}
+.qty button{width:1.85rem;height:1.85rem;border:1px solid var(--rule-2);background:var(--panel);border-radius:4px;font-size:1rem;line-height:1;cursor:pointer;color:var(--ink);font-family:var(--mono)}
+.qty button:hover{background:var(--mist)}
+.qty input{width:3rem;height:1.85rem;text-align:center;border:1px solid var(--rule-2);border-radius:4px;font-family:var(--mono);font-size:.85rem;background:var(--panel);color:var(--ink)}
+.qty input::-webkit-outer-spin-button,.qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.qty input[type=number]{-moz-appearance:textfield}
+
+/* side summary */
+.bside h4{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.75rem}
+.sumlist{list-style:none;margin:0 0 1.4rem;padding:0;font-size:.86rem}
+.sumlist li{display:flex;justify-content:space-between;gap:.85rem;padding:.34rem 0;border-bottom:1px dotted var(--rule-2);line-height:1.45}
+.sumlist li:last-child{border-bottom:none}
+.sumlist li span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;flex:none;color:var(--ink-2)}
+.sumlist li.opted span:first-child::before{content:"+ ";color:var(--jade);font-weight:700}
+.sumlist .none{color:var(--ink-3);font-style:italic;border:none}
+
+/* blocked-route panel */
+.blocked{padding:1.6rem clamp(1.25rem,3vw,2.1rem);background:var(--clay-tint);border-top:1px solid var(--rule)}
+.blocked[hidden]{display:none}
+.blocked .tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:.45rem}
+.blocked h3{margin-bottom:.5rem}
+.blocked p{font-size:.95rem;color:var(--ink-2);max-width:62ch;margin-bottom:0}
+
+.bfoot{padding:1.15rem clamp(1.25rem,3vw,2.1rem);border-top:1px solid var(--rule);font-size:.84rem;color:var(--ink-3);line-height:1.6}
+
+/* ── callouts ── */
+.note{padding:1.15rem 1.35rem;border-radius:5px;margin:1.6rem 0;font-size:.95rem;max-width:68ch;border-left:3px solid var(--rule-2);background:var(--panel)}
+.note.yes{border-left-color:var(--jade);background:var(--jade-tint)}
+.note.no{border-left-color:var(--clay);background:var(--clay-tint)}
+.note.time{border-left-color:var(--amber);background:var(--amber-tint)}
+.note :last-child{margin-bottom:0}
+.note .h{font-weight:700;display:block;margin-bottom:.35rem;font-size:.93rem}
+.split{display:grid;gap:1.5rem;margin-top:2rem}
+@media(min-width:52rem){.split{grid-template-columns:1fr 1fr;gap:1.75rem}}
+
+/* ── routes ── */
+.routes{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-top:2rem}
+@media(min-width:54rem){.routes{grid-template-columns:1fr 1fr}}
+.route{background:var(--panel);padding:1.5rem 1.6rem;display:flex;flex-direction:column}
+.route .tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);margin-bottom:.5rem}
+.route h3{margin-bottom:.5rem}
+.route p{font-size:.93rem;color:var(--ink-2);margin-bottom:.8rem}
+.route .meta{font-family:var(--mono);font-size:.76rem;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:.7rem;margin-top:auto}
+
+/* ── tables ── */
+.tbl{overflow-x:auto;margin:1.4rem 0 .75rem;border:1px solid var(--rule);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:42rem;font-size:.91rem}
+caption{text-align:left;font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);padding:.95rem 1.1rem .3rem}
+th,td{padding:.7rem 1.1rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+thead th{font-family:var(--mono);font-size:.67rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);background:var(--mist);border-bottom:1px solid var(--rule-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.num{font-weight:500}
+td.soft{color:var(--ink-3);font-family:var(--mono);font-size:.84rem}
+.rn{display:block;color:var(--ink-3);font-size:.82rem;line-height:1.45;margin-top:.15rem}
+
+/* ── disclosure (keeps the page from ballooning) ── */
+details.disc{border:1px solid var(--rule);border-radius:6px;background:var(--panel);margin-top:1.5rem}
+details.disc > summary{cursor:pointer;list-style:none;padding:1rem 1.35rem;font-family:var(--body);font-weight:600;font-size:.95rem;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+details.disc > summary::-webkit-details-marker{display:none}
+details.disc > summary::after{content:"Show";font-family:var(--mono);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--amber);flex:none}
+details.disc[open] > summary::after{content:"Hide"}
+details.disc[open] > summary{border-bottom:1px solid var(--rule)}
+.disc-body{padding:0 1.35rem 1.35rem}
+.disc-body > .tbl:first-child{margin-top:1.35rem}
+
+/* ── lists ── */
+.yn{list-style:none;padding:0;margin:1.1rem 0 0;display:grid;gap:.55rem}
+.yn li{padding-left:1.7rem;position:relative;font-size:.94rem;color:var(--ink-2)}
+.yn.can li::before{content:"✓";position:absolute;left:0;color:var(--jade);font-weight:700}
+.yn.cant li::before{content:"✕";position:absolute;left:0;color:var(--clay);font-weight:700}
+.yn strong{color:var(--ink)}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:1.75rem 0 0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+ol.steps li{counter-increment:s;background:var(--panel);padding:1.1rem 1.5rem 1.1rem 3.8rem;position:relative}
+ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:1.5rem;top:1.2rem;font-family:var(--mono);font-size:.75rem;font-weight:500;color:var(--amber)}
+ol.steps h4{margin-bottom:.2rem}
+ol.steps p{font-size:.9rem;color:var(--ink-2);margin:0}
+.docs{columns:2;column-gap:2.5rem;list-style:none;padding:0;margin:1.4rem 0 0;font-size:.92rem}
+@media(max-width:46rem){.docs{columns:1}}
+.docs li{break-inside:avoid;padding:.32rem 0 .32rem 1.4rem;position:relative;color:var(--ink-2)}
+.docs li::before{content:"—";position:absolute;left:0;color:var(--rule-2)}
+
+/* ── authorities ── */
+.auth{border:1px solid var(--rule);border-radius:6px;background:var(--panel);margin-top:1.75rem;overflow:hidden}
+.auth-row{display:grid;gap:.2rem .5rem;padding:.95rem 1.3rem;border-bottom:1px solid var(--rule)}
+@media(min-width:50rem){.auth-row{grid-template-columns:15rem 1fr;gap:1.5rem;align-items:baseline}}
+.auth-row:last-child{border-bottom:none}
+.auth-row:target{background:var(--amber-tint)}
+.auth-row dt{font-family:var(--mono);font-size:.8rem;font-weight:500;line-height:1.45}
+.auth-row dd{margin:0;font-size:.89rem;color:var(--ink-2)}
+.signoff{border:1px solid var(--rule-2);border-radius:6px;background:var(--panel);padding:1.55rem 1.7rem;margin-top:2rem;max-width:44rem}
+.signoff .who{font-family:var(--display);font-size:1.18rem;font-weight:500;letter-spacing:-.02em}
+.signoff .cred{font-family:var(--mono);font-size:.77rem;color:var(--ink-3);margin:.25rem 0 1rem;line-height:1.6}
+.signoff p{font-size:.88rem;color:var(--ink-2);margin:0}
+.signoff .stamp{font-family:var(--mono);font-size:.71rem;letter-spacing:.09em;text-transform:uppercase;color:var(--amber);border-top:1px solid var(--rule);margin-top:1.05rem;padding-top:.8rem;display:block}
+.fn{font-size:.87rem;color:var(--ink-2);max-width:78ch;margin:1.5rem 0 0}
+.fn dt{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--amber);margin-top:1.2rem;letter-spacing:.04em}
+.fn dd{margin:.3rem 0 0}
+.fn dt:first-child{margin-top:0}
+
+/* ── faq ── */
+details.q{border-bottom:1px solid var(--rule);padding:.95rem 0}
+details.q summary{cursor:pointer;font-family:var(--display);font-size:1.08rem;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:1.25rem;align-items:baseline}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+";font-family:var(--mono);color:var(--amber);font-size:1.15rem;flex:none}
+details.q[open] summary::after{content:"–"}
+details.q .a{padding-top:.7rem;font-size:.93rem;color:var(--ink-2);max-width:72ch}
+details.q .a p:last-child{margin-bottom:0}
+
+/* ── cta / footer ── */
+.btn{display:inline-block;font-size:.94rem;font-weight:600;padding:.78rem 1.45rem;border-radius:4px;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:#fff}
+.btn:hover{background:#164046;color:#fff}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--mist)}
+.btnrow{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.6rem}
+footer{background:var(--ink);color:#A8BEBB;padding:2.9rem 0 2.1rem;font-size:.88rem}
+footer h4{color:#fff;font-size:1.01rem;margin-bottom:.65rem}
+footer a{color:#DCC48A}
+.legal{border-top:1px solid #1D4046;margin-top:1.8rem;padding-top:1.3rem;font-family:var(--mono);font-size:.71rem;color:#6E8B88;line-height:1.75}
+</style>
+</head>
+<body>
+
+<div id="ccfs" role="status"></div>
+
+<header class="mast">
+  <div class="wrap">
+    <a class="brand" href="/">Company Avenue Advisory</a>
+    <nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a> › <a href="/services">Services</a> › Company Closure</nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════════ HERO + BUILDER ══════════ -->
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Closing a company &middot; India</p>
+    <h1>Nothing is added <em>unless you add it.</em></h1>
+    <p class="lede">Most closure quotes start low and grow at invoice stage. This one starts at the real base — the work every strike-off needs — and moves only when you tick something that is actually true about your company. Nothing below is pre-selected.</p>
+
+    <div class="builder">
+      <div class="readout">
+        <div>
+          <span class="cap">Your estimate</span>
+          <span class="bigrow"><strong class="big" id="r-total" aria-live="polite">—</strong><span class="gstchip">+ GST @ 18%</span></span>
+          <div class="parts" id="r-parts"></div>
+        </div>
+        <button type="button" class="copybtn" id="r-copy">Copy breakdown</button>
+      </div>
+
+      <div class="bgrid" id="b-grid">
+        <div class="bmain">
+          <form id="builder">
+
+            <div class="bstep">
+              <fieldset>
+                <legend><h4>What are you closing?</h4></legend>
+                <p class="hint">This sets the base — the filings that cannot be skipped.</p>
+                <div class="seg">
+                  <input type="radio" id="en-co" name="entity" value="company" checked><label for="en-co">Private limited / OPC / unlisted public</label>
+                  <input type="radio" id="en-llp" name="entity" value="llp"><label for="en-llp">LLP</label>
+                  <input type="radio" id="en-s8" name="entity" value="s8"><label for="en-s8">Section 8 company</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="bstep">
+              <fieldset>
+                <legend><h4>Does it still owe anything, or hold assets?</h4></legend>
+                <p class="hint">Strike-off is only open where the answer is no.</p>
+                <div class="seg">
+                  <input type="radio" id="sv-clean" name="solvency" value="clean" checked><label for="sv-clean">Nothing outstanding</label>
+                  <input type="radio" id="sv-owes" name="solvency" value="owes"><label for="sv-owes">Creditors or assets remain</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="bstep" id="step-dirs">
+              <h4 id="dirs-label">How many directors?</h4>
+              <p class="hint" id="dirs-hint">Each one signs an indemnity bond and affidavit that must be notarised.</p>
+              <div class="qty">
+                <span>Count</span>
+                <button type="button" data-step="dirs" data-dir="-1" aria-label="Fewer">−</button>
+                <input type="number" id="q-dirs" value="2" min="1" max="15" step="1" aria-labelledby="dirs-label">
+                <button type="button" data-step="dirs" data-dir="1" aria-label="More">+</button>
+              </div>
+            </div>
+
+            <div class="bstep" id="step-adds">
+              <h4>Now add only what applies to you</h4>
+              <p class="hint">All off by default. Leave anything you're unsure about unticked — the diagnostic settles it, and unticked items are simply not charged.</p>
+              <ul class="adds" id="addons"></ul>
+            </div>
+
+          </form>
+        </div>
+
+        <aside class="bside">
+          <h4>Always included</h4>
+          <ul class="sumlist" id="s-base"></ul>
+          <h4>You added</h4>
+          <ul class="sumlist" id="s-adds"></ul>
+          <h4>Government fees</h4>
+          <ul class="sumlist" id="s-govt"></ul>
+        </aside>
+      </div>
+
+      <div class="blocked" id="blocked" hidden>
+        <span class="tag" id="bl-tag"></span>
+        <h3 id="bl-title"></h3>
+        <p id="bl-body"></p>
+      </div>
+
+      <p class="bfoot">
+        All professional fees are quoted exclusive of GST, charged at 18% on the invoice. Government fees carry no GST. Fees on <code class="f">MGT-14</code>, <code class="f">AOC-4</code>, <code class="f">MGT-7</code> and <code class="f">DIR-5</code> depend on your authorised share capital and the length of the delay — ordinarily ₹200 to ₹600 per form — and are charged at cost on top. The ₹7,500 diagnostic is credited back in full when you proceed, so it does not appear in this total. This is an estimate on the assumptions you have selected, not a quotation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ IF YOU DO NOTHING ══════════ -->
+<section class="tint" id="do-nothing">
+  <div class="wrap">
+    <p class="eyebrow">First time closing a company?</p>
+    <h2>Doing nothing is the expensive option</h2>
+    <p class="lede">An abandoned company doesn't quietly disappear. It keeps costing money and, after three years, it starts costing you personally.</p>
+
+    <div class="split">
+      <div class="note no">
+        <span class="h">₹100 a day, per form, with no ceiling</span>
+        <p>Every missed annual filing — <code class="f">AOC-4</code>, <code class="f">MGT-7</code> or <code class="f">MGT-7A</code> — attracts an additional fee of ₹100 per day until filed, with no upper limit.<a class="cite" href="#a-fees">Fee Rules</a> Two forms unfiled for two years is roughly ₹1.4 lakh in additional fee alone.</p>
+      </div>
+      <div class="note no">
+        <span class="h">Three years of silence disqualifies you</span>
+        <p>A director of a company that fails to file annual returns for three consecutive financial years is disqualified for five years<a class="cite" href="#a-164">§164(2)</a> — from every board, not just that one. It follows the person, not the entity.</p>
+      </div>
+      <div class="note no">
+        <span class="h">The Registrar can strike it off without you</span>
+        <p>The Registrar has its own power to remove a defunct company.<a class="cite" href="#a-248">§248</a> That leaves your compliance record unresolved, gives you no control over timing, and does nothing about GST, income-tax or PF registrations, which keep generating notices.</p>
+      </div>
+      <div class="note no">
+        <span class="h">And liability survives anyway</span>
+        <p>Dissolution is not a discharge. Liability of every director, officer and member continues as though the company had not been struck off,<a class="cite" href="#a-250">§250</a> and the Tribunal can restore it within twenty years<a class="cite" href="#a-252">§252</a> — backlog and all.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ROUTES ══════════ -->
+<section id="routes">
+  <div class="wrap">
+    <p class="eyebrow">The five exits</p>
+    <h2>Your route is decided by facts, not preference</h2>
+    <p class="lede">Entity type and solvency settle this. Choosing wrong is costly — a Section 8 company that files <code class="f">STK-2</code> is rejected on the affidavit, and a company with creditors cannot use that route at all.</p>
+
+    <div class="routes">
+      <article class="route">
+        <span class="tag">Route 1 — the common one</span>
+        <h3>Voluntary strike-off</h3>
+        <p>For a private limited, OPC or unlisted public company that has stopped trading and owes nothing. You file <code class="f">STK-2</code><a class="cite" href="#a-248">§248</a> and it is processed centrally by C-PACE. No tribunal, no liquidator.</p>
+        <div class="meta">₹20,000 + GST · 90–150 days from filing</div>
+      </article>
+      <article class="route">
+        <span class="tag">Route 2 — pause instead</span>
+        <h3>Dormant status</h3>
+        <p>If there's any chance you'll use the entity again, don't kill it. Dormant status<a class="cite" href="#a-455">§455</a> is applied for in <code class="f">MSC-1</code>, keeps the company alive on a light compliance load, and is reversed in <code class="f">MSC-4</code>.</p>
+        <div class="meta">₹12,000 + GST · then ₹4,000 a year · 15–30 days</div>
+      </article>
+      <article class="route">
+        <span class="tag">Route 3 — non-profits</span>
+        <h3>Section 8 company</h3>
+        <p>Cannot be struck off directly. The licence is surrendered and the company converted with the Regional Director's approval in <code class="f">INC-18</code>,<a class="cite" href="#a-s8">§8(4)(ii)</a> then struck off. Exit tax on accreted income is usually the largest figure in the exercise.</p>
+        <div class="meta">₹1.8L+ professional · 6–12 months · <a href="#rates">Full rate card</a></div>
+      </article>
+      <article class="route">
+        <span class="tag">Route 4 — solvent, with assets</span>
+        <h3>Voluntary liquidation</h3>
+        <p>Where the company can pay everyone but still holds assets to realise or creditors to settle. Run by an insolvency professional under Section 59 of the Insolvency and Bankruptcy Code, 2016,<a class="cite" href="#a-59">IBC §59</a> ending in a Tribunal dissolution order.</p>
+        <div class="meta">Quoted per engagement · 12–24 months</div>
+      </article>
+      <article class="route">
+        <span class="tag">Route 5 — partnerships</span>
+        <h3>Closing an LLP</h3>
+        <p>An LLP that has ceased business is struck off in <code class="f">Form 24</code>, with every partner's consent, affidavits, an indemnity and a CA-certified statement of accounts. Overdue <code class="f">Form 8</code> and <code class="f">Form 11</code> come first.</p>
+        <div class="meta">₹12,000 + GST · 60–120 days</div>
+      </article>
+      <article class="route">
+        <span class="tag">Still unsure</span>
+        <h3>Take the diagnostic</h3>
+        <p>₹7,500 for a written opinion: which routes you qualify for, what has to be cleaned up, what the whole thing costs, and your exposure if you leave it. Credited back in full when you proceed.</p>
+        <div class="meta">₹7,500 · 5–7 working days · <a href="/contact">Book it</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FULL RATE CARD (collapsed) ══════════ -->
+<section class="tint" id="rates">
+  <div class="wrap">
+    <p class="eyebrow">Transparency</p>
+    <h2>The full rate card</h2>
+    <p class="lede">Every line we charge, including the ones the builder doesn't cover. Collapsed so the page stays readable — open whichever applies to you. Professional fees exclude GST at 18%; government fees are passed through at cost without mark-up.</p>
+
+    <details class="disc">
+      <summary>Tables A and B — clean-up and voluntary strike-off</summary>
+      <div class="disc-body"><div class="tbl" id="tbl-ab"></div></div>
+    </details>
+
+    <details class="disc">
+      <summary>Table C — dormant status under Section 455</summary>
+      <div class="disc-body">
+        <div class="tbl">
+          <table>
+            <caption>Table C · Dormant status</caption>
+            <thead><tr><th scope="col">Work</th><th scope="col" class="num">Professional</th><th scope="col" class="num">Government</th><th scope="col">Timeline</th></tr></thead>
+            <tbody>
+              <tr data-src="C25"><td>Application for dormant status in <code class="f">MSC-1</code></td><td class="num">₹12,000</td><td class="num soft">At cost</td><td class="soft">15–30 days</td></tr>
+              <tr data-src="C26"><td>Annual return of a dormant company in <code class="f">MSC-3</code><span class="rn">Per year</span></td><td class="num">₹4,000</td><td class="num soft">At cost</td><td class="soft">3–5 working days</td></tr>
+              <tr data-src="C27"><td>Application for active status in <code class="f">MSC-4</code><span class="rn">On revival</span></td><td class="num">₹10,000</td><td class="num soft">At cost</td><td class="soft">15–30 days</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="soft" style="margin:.9rem 0 0">The <code class="f">MSC-1</code> government fee is halved under CCFS-2026.<a class="cite" href="#a-ccfs">GC 01/2026</a></p>
+      </div>
+    </details>
+
+    <details class="disc">
+      <summary>Table D — Section 8 company: convert, then strike off</summary>
+      <div class="disc-body">
+        <div class="tbl">
+          <table>
+            <caption>Table D · Section 8 exit</caption>
+            <thead><tr><th scope="col">Work</th><th scope="col" class="num">Professional</th><th scope="col" class="num">Government</th><th scope="col">Timeline</th></tr></thead>
+            <tbody>
+              <tr data-src="D31"><td>Conversion opinion and exit-tax exposure computation</td><td class="num">₹30,000</td><td class="num soft">Nil</td><td class="soft">10–12 working days</td></tr>
+              <tr data-src="D32"><td>Valuation report of assets by a Registered Valuer</td><td class="num soft">At cost</td><td class="num soft">Nil</td><td class="soft">2–4 weeks</td></tr>
+              <tr data-src="D33"><td>Special resolution for conversion and MOA / AOA alteration, with <code class="f">MGT-14</code></td><td class="num">₹5,000</td><td class="num soft">At cost</td><td class="soft">30 days from resolution</td></tr>
+              <tr data-src="D34"><td>Application to the Regional Director in <code class="f">INC-18</code><span class="rn">Including notice to every authority under Rule 22(2)</span></td><td class="num">₹45,000</td><td class="num soft">At cost</td><td class="soft">90–150 days</td></tr>
+              <tr data-src="D35"><td>Newspaper publication of the conversion notice and <code class="f">INC-19</code></td><td class="num">₹5,000</td><td class="num soft">At cost</td><td class="soft">Within 7 days of <code class="f">INC-18</code></td></tr>
+              <tr data-src="D36"><td>Hearing before the Regional Director<span class="rn">Per appearance</span></td><td class="num">₹12,000</td><td class="num soft">Nil</td><td class="soft">As listed</td></tr>
+              <tr data-src="D37"><td>Transfer of accumulated profit or unutilised income to the IEPF</td><td class="num">₹15,000</td><td class="num soft">At cost</td><td class="soft">Within 30 days of approval</td></tr>
+              <tr data-src="D38"><td><code class="f">INC-20</code> revoking the licence, and <code class="f">INC-27</code></td><td class="num">₹15,000</td><td class="num soft">At cost</td><td class="soft">15–30 days</td></tr>
+              <tr data-src="D39"><td>Surrender of income-tax registration, accreted-income return and exit tax</td><td class="num">₹25,000</td><td class="num soft">Nil</td><td class="soft">30–45 days</td></tr>
+              <tr data-src="D40"><td>Deactivation of CSR-1 and NGO Darpan unique ID</td><td class="num">₹8,000</td><td class="num soft">Nil</td><td class="soft">15–30 days</td></tr>
+              <tr data-src="D41"><td>FCRA surrender or intimation of closure, where applicable</td><td class="num">₹20,000</td><td class="num soft">At cost</td><td class="soft">90–120 working days</td></tr>
+              <tr data-src="D42"><td>Post-conversion strike-off in <code class="f">STK-2</code></td><td class="num soft">See Table B</td><td class="num soft">See Table B</td><td class="soft">90–150 days</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note no" style="margin-top:1.1rem;max-width:none">
+          <span class="h">The tax is usually bigger than every fee combined</span>
+          <p>Where a Section 8 company holds an income-tax registration, conversion or dissolution triggers tax on accreted income at the maximum marginal rate on the fair market value of assets less liabilities.<a class="cite" href="#a-accreted">Accreted income</a> On a well-funded organisation this can exceed everything in Table D put together. We quantify it before the special resolution is passed. It is a liability of the company and is in no fee above.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="disc">
+      <summary>Tables E and F — voluntary liquidation, and LLP strike-off</summary>
+      <div class="disc-body">
+        <div class="tbl">
+          <table>
+            <caption>Table E · Voluntary liquidation &nbsp;·&nbsp; Table F · LLP strike-off</caption>
+            <thead><tr><th scope="col">Work</th><th scope="col" class="num">Professional</th><th scope="col" class="num">Government</th><th scope="col">Timeline</th></tr></thead>
+            <tbody>
+              <tr><td>Solvency assessment, declaration of solvency, appointment of the insolvency professional, realisation and distribution, and the dissolution application to the Tribunal<span class="rn">Excludes the liquidator's remuneration, counsel's fee and publication costs, all at cost</span></td><td class="num soft">On enquiry</td><td class="num soft">At cost</td><td class="soft">12–24 months</td></tr>
+              <tr data-src="E46"><td>LLP strike-off in <code class="f">Form 24</code>, end to end<span class="rn">Partners' consent, affidavits, indemnity and CA-certified statement of accounts</span></td><td class="num">₹12,000</td><td class="num soft">₹500 small LLP<br>₹1,000 others</td><td class="soft">60–120 days</td></tr>
+              <tr data-src="E47"><td>Overdue <code class="f">Form 8</code> and <code class="f">Form 11</code> up to the year of cessation<span class="rn">Per financial year</span></td><td class="num">₹4,500</td><td class="num soft">At cost</td><td class="soft">7–10 working days per FY</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="soft" style="margin:.9rem 0 0">CCFS-2026 is a Companies Act scheme; its concessions do not extend to LLP filings.<a class="cite" href="#a-ccfs">GC 01/2026</a></p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ══════════ ELIGIBILITY ══════════ -->
+<section id="eligibility">
+  <div class="wrap">
+    <p class="eyebrow">Route 1 eligibility</p>
+    <h2>Can you use <code class="f">STK-2</code>?</h2>
+    <div class="split">
+      <div>
+        <h3 style="color:var(--jade)">The route generally fits</h3>
+        <ul class="yn can">
+          <li>Companies incorporated but never traded</li>
+          <li>Companies that stopped trading and settled everything owing</li>
+          <li>Founders closing an entity before starting the real venture</li>
+          <li>SPVs and holding companies left over from a deal that didn't close</li>
+          <li>Subsidiaries no longer needed after a restructuring</li>
+          <li>Directors protecting their DIN from disqualification<a class="cite" href="#a-164">§164(2)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--clay)">It is closed to you if</h3>
+        <ul class="yn cant">
+          <li><strong>The company is registered under Section 8.</strong> The affidavit in <code class="f">STK-4</code> requires each director to declare the company is <em>not</em> incorporated for charitable purposes.<a class="cite" href="#a-s8">§8(4)(ii)</a></li>
+          <li>There are bank loans, trade creditors or any undischarged liability</li>
+          <li>GST registration is live or GST returns are pending</li>
+          <li>Income-tax returns are not filed for all applicable years</li>
+          <li>The company is party to pending litigation</li>
+          <li>There is a pending inquiry, inspection or investigation</li>
+          <li>The company has issued debentures or has secured creditors</li>
+          <li>Bank accounts are still open and carrying a balance</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note time" style="max-width:none;margin-top:2rem">
+      <span class="h">Not every company qualifies for the concessional government fee</span>
+      <p>CCFS-2026 is not available to a company already served a final strike-off notice, one that has already applied for strike-off or dormant status, a company dissolved on amalgamation, or a vanishing company.<a class="cite" href="#a-ccfs">GC 01/2026</a> If an ROC notice has already reached you, say so at the diagnostic stage — it changes both the fee and the route.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROCESS, DOCS, TIMELINE ══════════ -->
+<section class="tint" id="process">
+  <div class="wrap">
+    <p class="eyebrow">How Route 1 runs</p>
+    <h2>From first conversation to dissolution notice</h2>
+    <ol class="steps">
+      <li><h4>Diagnostic and route opinion</h4><p>We confirm which routes you qualify for, identify what has to be cleared first, and price the engagement in writing before you commit to anything.</p></li>
+      <li><h4>Clean-up</h4><p>Whatever you ticked in the builder — overdue filings, GST cancellation, EPFO and ESIC intimation, the final income-tax return, bank closure. Financial statements and the annual return must generally be filed up to the end of the financial year in which the company ceased business.<a class="cite" href="#a-rule4">Rule 4</a></p></li>
+      <li><h4>Resolutions</h4><p>The board authorises the application and appoints a signatory. The special resolution, or consent of members holding 75% of paid-up share capital, is obtained and <code class="f">MGT-14</code> filed where required.</p></li>
+      <li><h4>Indemnity bond and affidavit</h4><p>Every director executes an indemnity bond in <code class="f">STK-3</code> and a sworn affidavit in <code class="f">STK-4</code>. Both are notarised and stamped.</p></li>
+      <li><h4>Statement of accounts</h4><p>Made up to a date not more than thirty days before filing, certified by a practising Chartered Accountant, in <code class="f">STK-8</code>.</p></li>
+      <li><h4>Filing on the MCA V3 portal</h4><p><code class="f">STK-2</code> is filed with every attachment, signed with a valid DSC. It goes to C-PACE — the Centre for Processing Accelerated Corporate Exit — which handles strike-off centrally rather than your jurisdictional ROC.</p></li>
+      <li><h4>Public notice and objection window</h4><p>A public notice is issued in <code class="f">STK-6</code>, allowing thirty days for objections. We respond to queries and resubmissions raised in this window.</p></li>
+      <li><h4>Dissolution</h4><p>If no valid objection stands, the dissolution notice is published in <code class="f">STK-7</code> in the Official Gazette. The company is struck off and ceases to exist.</p></li>
+    </ol>
+
+    <details class="disc" style="margin-top:2rem">
+      <summary>Documents we'll ask you for</summary>
+      <div class="disc-body">
+        <ul class="docs">
+          <li>Certificate of incorporation</li>
+          <li>PAN of the company</li>
+          <li>Memorandum and articles of association</li>
+          <li>Board resolution authorising the filing</li>
+          <li>Special resolution, or consent of 75% of members by paid-up capital</li>
+          <li>Indemnity bond in <code class="f">STK-3</code>, from every director</li>
+          <li>Affidavit in <code class="f">STK-4</code>, from every director</li>
+          <li>Statement of accounts in <code class="f">STK-8</code>, dated within thirty days of filing</li>
+          <li>Income-tax return acknowledgements for all applicable years</li>
+          <li>GST cancellation order, if registered</li>
+          <li>Bank account closure confirmation from the banker</li>
+          <li>Valid DSC of the signing director, and DIN of every director</li>
+          <li>NOC from the sectoral regulator, where the company is regulated</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="disc">
+      <summary>How long it takes</summary>
+      <div class="disc-body">
+        <div class="tbl">
+          <table>
+            <caption>Indicative — running from receipt of complete documents and information</caption>
+            <thead><tr><th scope="col">Stage</th><th scope="col">Duration</th><th scope="col">Who controls it</th></tr></thead>
+            <tbody>
+              <tr><td>Diagnostic and route opinion</td><td class="soft">5–7 working days</td><td class="soft">Us</td></tr>
+              <tr><td>Clean-up — filings, GST, income tax, bank</td><td class="soft">15 days to several months</td><td class="soft">Your backlog</td></tr>
+              <tr><td>Resolutions, affidavits, <code class="f">STK-8</code></td><td class="soft">7–10 working days</td><td class="soft">Us, plus director availability</td></tr>
+              <tr><td><code class="f">STK-2</code> filing to dissolution notice in <code class="f">STK-7</code></td><td class="soft">90–150 days</td><td class="soft">C-PACE</td></tr>
+              <tr><td><strong>Total, company with nothing outstanding</strong></td><td class="soft"><strong>About 4–6 months</strong></td><td class="soft">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="soft" style="margin:.9rem 0 0">Processing time at C-PACE, the Regional Director, the Tribunal, the Income-tax Department and the GST authorities is outside our control. The 90–150 day figure includes the thirty-day objection window in <code class="f">STK-6</code> and publication in the Official Gazette.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ══════════ AUTHORITIES + SIGN-OFF ══════════ -->
+<section id="authorities">
+  <div class="wrap">
+    <p class="eyebrow">Sources</p>
+    <h2>The law this page relies on</h2>
+    <p class="lede">Every statutory claim above carries a reference chip. This is what each points to, so you can check us rather than take our word for it.</p>
+
+    <dl class="auth">
+      <div class="auth-row" id="a-248"><dt>Section 248, Companies Act 2013</dt><dd>Power to remove a company's name from the register — on the Registrar's own motion and on a company's voluntary application in <code class="f">STK-2</code>.</dd></div>
+      <div class="auth-row" id="a-250"><dt>Section 250, Companies Act 2013</dt><dd>Effect of a company notified as dissolved. Liability of every director, officer and member continues as though the company had not been struck off.</dd></div>
+      <div class="auth-row" id="a-252"><dt>Section 252, Companies Act 2013</dt><dd>Appeal against striking off, and restoration to the register on an application made within twenty years of dissolution.</dd></div>
+      <div class="auth-row" id="a-164"><dt>Section 164(2), Companies Act 2013</dt><dd>Disqualification of a director of a company that has not filed financial statements or annual returns for three consecutive financial years, for five years.</dd></div>
+      <div class="auth-row" id="a-455"><dt>Section 455, Companies Act 2013</dt><dd>Dormant company. Application in <code class="f">MSC-1</code>, annual return in <code class="f">MSC-3</code>, restoration to active status in <code class="f">MSC-4</code>.</dd></div>
+      <div class="auth-row" id="a-rule4"><dt>Rule 4, Companies (Removal of Name of Companies from the Register of Companies) Rules, 2016</dt><dd>Application for removal of name. A company is generally required to file its financial statement and annual return up to the end of the financial year in which it ceased to carry on business.</dd></div>
+      <div class="auth-row" id="a-s8"><dt>Section 8(4)(ii), Companies Act 2013, with Rules 21 and 22, Companies (Incorporation) Rules, 2014</dt><dd>Conversion of a Section 8 company into a company of any other kind on the Regional Director's approval in <code class="f">INC-18</code>, with notice to prescribed authorities under Rule 22(2) and transfer of unutilised income to the IEPF under Rules 22(9)(c) and 22(10).</dd></div>
+      <div class="auth-row" id="a-59"><dt>Section 59, Insolvency and Bankruptcy Code, 2016</dt><dd>Voluntary liquidation of a corporate person that has not defaulted — conducted by an insolvency professional, concluded by a dissolution order of the Tribunal.</dd></div>
+      <div class="auth-row" id="a-fees"><dt>Companies (Registration Offices and Fees) Rules, 2014</dt><dd>Normal filing fees on the authorised share capital slab, and additional fee of ₹100 per day per form on a delayed annual filing with no upper limit.</dd></div>
+      <div class="auth-row" id="a-ccfs"><dt>CCFS-2026 — MCA General Circular No. 01/2026 dated 24 February 2026, extended by General Circular No. 03/2026 dated 8 July 2026</dt><dd>Companies Compliance Facilitation Scheme, 2026, issued under Section 460 read with Section 403 of the Companies Act, 2013. In force 15 April 2026 to 31 August 2026. Overdue annual filings at normal fee plus 10% of the additional fee; <code class="f">MSC-1</code> at 50%; <code class="f">STK-2</code> at 25% of the normal fee. Five categories of company excluded. Reduces the additional fee, not the normal filing fee. Does not apply to LLPs.</dd></div>
+      <div class="auth-row" id="a-itact"><dt>Income-tax Act, 2025</dt><dd>In force from 1 April 2026, governing Tax Year 2026-27 onwards. Income earned up to 31 March 2026 remains governed by the Income-tax Act, 1961. A closure engagement started now usually spans both statutes.</dd></div>
+      <div class="auth-row" id="a-accreted"><dt>Tax on accreted income</dt><dd>Charged at the maximum marginal rate on the fair market value of assets less liabilities where a registered institution converts, merges or dissolves. Section numbering changed with the Income-tax Act, 2025; the applicable provision is identified in the written opinion for your facts rather than cited generically here.</dd></div>
+    </dl>
+
+    <div class="signoff">
+      <div class="who">Jatin Aggarwal</div>
+      <div class="cred">Chartered Accountant · FCA · ICAI Membership No. 507822<br>Principal Consultant, Company Avenue Advisory Pvt. Ltd.</div>
+      <p>The statutory positions, forms, fees and scheme references on this page were reviewed for currency on the date below. Fees are our standard professional fees on the assumptions stated. This page and the estimate it produces are an indication of cost and a general explanation of the law — not a quotation, and not a certificate, an attestation or advice on your specific facts. A written engagement letter and a fee quotation follow the diagnostic.</p>
+      <span class="stamp">Reviewed 29 August 2026 · Next review on expiry or extension of CCFS-2026</span>
+    </div>
+
+    <details class="disc" style="margin-top:1.75rem">
+      <summary>Basis of fees, in full</summary>
+      <div class="disc-body">
+        <dl class="fn">
+          <dt>Professional fees</dt>
+          <dd>In Indian Rupees, exclusive of GST at 18%. Per assignment unless the line says otherwise, assuming a single entity with records available. Where a line is marked per financial year, per director or per State registration, it is charged for each such year, person or registration. Out-of-pocket expenses — travel, courier, certified copies — are additional at cost.</dd>
+          <dt>Government fees</dt>
+          <dd>Charged at cost as levied on the MCA V3 portal at the time of filing, without mark-up. <code class="f">STK-2</code> is a flat ₹10,000, reduced to ₹2,500 for applications filed on or before 31 August 2026 under CCFS-2026. <code class="f">Form 24</code> for an LLP is ₹500 for a small LLP and ₹1,000 for others. <code class="f">MGT-14</code>, <code class="f">INC-18</code>, <code class="f">INC-20</code>, <code class="f">INC-27</code>, <code class="f">MSC-1</code>, <code class="f">MSC-3</code> and <code class="f">MSC-4</code> are charged on the authorised share capital slab, ordinarily ₹200 to ₹600 per form; the <code class="f">MSC-1</code> fee is halved under CCFS-2026. <code class="f">DIR-5</code> carries a fee of ₹1,000. Additional fee on a delayed annual filing is ₹100 per day per form with no upper limit, reduced to 10% of that amount under CCFS-2026. The scheme reduces the additional fee only — the normal filing fee remains payable in full.</dd>
+          <dt>Timelines</dt>
+          <dd>Indicative, running from receipt of complete documents and information. Processing time at C-PACE, the Regional Director, the Tribunal, the Income-tax Department and the GST authorities is outside our control.</dd>
+          <dt>Section 8 companies</dt>
+          <dd>A Section 8 company cannot apply for strike-off in <code class="f">STK-2</code>. The affidavit in <code class="f">STK-4</code> requires a declaration that the company is not incorporated for charitable purposes under Section 8 of the Companies Act, 2013 or Section 25 of the Companies Act, 1956. The licence must first be surrendered and the company converted, as in Table D, or wound up by voluntary liquidation, as in Table E.</dd>
+          <dt>Exit tax on accreted income</dt>
+          <dd>On conversion or dissolution of a Section 8 company holding an income-tax registration, tax on accreted income is charged at the maximum marginal rate on the fair market value of assets less liabilities. On a well-funded organisation this can exceed every other cost in Table D combined, and is quantified before the special resolution is passed. It is a tax liability of the company and is not included in any fee.</dd>
+          <dt>Voluntary liquidation</dt>
+          <dd>The route where the entity is solvent but holds assets to realise or creditors to pay, and the only single-step exit open to a Section 8 company without first converting. Fees exclude the liquidator's remuneration, counsel's fee before the Tribunal and publication costs, all at cost.</dd>
+          <dt>LLPs</dt>
+          <dd>CCFS-2026 is a scheme under the Companies Act, 2013 and its concessions do not extend to LLP filings. Additional fees on overdue <code class="f">Form 8</code> and <code class="f">Form 11</code> run on a multiplier scale under the LLP Rules and are computed on the portal at filing.</dd>
+          <dt>Survival of liability</dt>
+          <dd>Closure is not a discharge. Under Section 250 the liability of every director, officer and member survives dissolution as though the company had not been struck off, and the company may be restored by the Tribunal under Section 252 on an application made within twenty years. Any undistributed asset at dissolution vests in the Central Government.</dd>
+          <dt>Attest and non-attest</dt>
+          <dd>Advisory, filing and non-attest services are provided by Company Avenue Advisory Pvt. Ltd. Attest functions, including certification of the statement of accounts in <code class="f">STK-8</code>, are carried out by Jatin Aggarwal &amp; Co., Chartered Accountants, and are engaged and billed separately.</dd>
+        </dl>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ══════════ FAQ ══════════ -->
+<section class="tint" id="faq">
+  <div class="wrap narrow">
+    <p class="eyebrow">Questions we get asked</p>
+    <h2>Frequently asked</h2>
+    <details class="q"><summary>Will the price grow after I've signed?</summary><div class="a"><p>Only if something turns up that you didn't tell us about — a live GST registration, an unfiled year, a bank account nobody remembered. That is exactly what the ₹7,500 diagnostic is for: it inspects the company's actual position before you commit, and the fee is credited back in full when you proceed. After the diagnostic, the engagement letter carries a fixed fee.</p></div></details>
+    <details class="q"><summary>What exactly does the ₹20,000 include?</summary><div class="a"><p>The whole strike-off filing as one fee: preparing and filing <code class="f">STK-2</code>, the CA-certified statement of accounts in <code class="f">STK-8</code>, board and member resolutions with <code class="f">MGT-14</code>, drafting the indemnity bond <code class="f">STK-3</code> and affidavit <code class="f">STK-4</code>, the first written response to a C-PACE query, and carrying it through to the dissolution notice in <code class="f">STK-7</code>. Add GST at 18%. Two things sit outside it: notarisation of the affidavits, charged per director because it scales with how many of you there are, and the MCA filing fee, which is a government charge passed through at cost.</p></div></details>
+    <details class="q"><summary>What if I stop filing and let it lapse?</summary><div class="a"><p>The additional fee runs at ₹100 per day per unfiled form with no ceiling, and after three consecutive years of non-filing every director is disqualified for five years across all boards. The Registrar can strike the company off on its own motion, which leaves your record unresolved and does nothing about GST, income-tax or PF registrations. And liability survives dissolution anyway.</p></div></details>
+    <details class="q"><summary>Can a Section 8 company be struck off in <code class="f">STK-2</code>?</summary><div class="a"><p>No. The affidavit in <code class="f">STK-4</code> requires each director to declare the company is not incorporated for charitable purposes under Section 8. The licence must first be surrendered and the company converted with the Regional Director's approval, or the company wound up by voluntary liquidation. Both are in the full rate card.</p></div></details>
+    <details class="q"><summary>How long does the concessional government fee last?</summary><div class="a"><p>Under CCFS-2026 the filing fee on <code class="f">STK-2</code> is 25% of the normal ₹10,000, so ₹2,500, for applications filed on or before 31 August 2026. <code class="f">MSC-1</code> is at half fee and additional fees on overdue annual filings drop to 10%. Companies already served a final strike-off notice, or that have already applied for strike-off or dormant status, are excluded. Once the scheme closes the normal fees return in full, and the estimate above updates itself.</p></div></details>
+    <details class="q"><summary>Can I close if GST or income-tax returns are pending?</summary><div class="a"><p>Not until they're filed. Pending GST returns block cancellation in <code class="f">REG-16</code>, and the final return in <code class="f">GSTR-10</code> follows. Income-tax returns must be filed for all applicable years. Both are add-ons in the builder, and both are usually what determines how long a closure takes.</p></div></details>
+    <details class="q"><summary>Should I take dormant status instead?</summary><div class="a"><p>If there's any real chance you'll use the entity again, yes. Dormant status keeps the company alive on a much lighter compliance footing and is reversed in <code class="f">MSC-4</code> when you want it back. Strike-off is permanent short of a Tribunal restoration, and a restored company comes back with its entire filing backlog. The diagnostic covers this on your facts.</p></div></details>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<section id="cta">
+  <div class="wrap narrow" style="text-align:center">
+    <p class="eyebrow">Next step</p>
+    <h2>Confirm the estimate before you commit</h2>
+    <p class="lede" style="margin:0 auto">₹7,500 for a written opinion on where you actually stand — which route you qualify for, what has to be cleaned up, what the whole exercise costs, and your exposure if you leave the company as it is. Credited back in full when you proceed.</p>
+    <div class="btnrow" style="justify-content:center">
+      <a class="btn" href="/contact">Book the diagnostic</a>
+      <a class="btn ghost" href="tel:+919953719111">Talk to a CA — +91 99537 19111</a>
+    </div>
+    <p class="soft" style="margin-top:1.4rem">Monday to Saturday, 9 am – 7 pm IST</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h4>Company Avenue Advisory Pvt. Ltd.</h4>
+    <p>209, Jaina Tower 1, District Centre, Professor Joginder Singh Marg, Janakpuri, New Delhi 110058<br>
+    <a href="tel:+919953719111">+91 99537 19111</a> &nbsp;·&nbsp; <a href="mailto:info@companyavenueadvisory.com">info@companyavenueadvisory.com</a> &nbsp;·&nbsp; Mon–Sat, 9 am – 7 pm</p>
+    <div class="legal">
+      GSTIN 07AAVCS4279H1ZM &nbsp;|&nbsp; CIN U74999MH2015PTC260940<br>
+      Attest functions are carried out by Jatin Aggarwal &amp; Co., Chartered Accountants, and not by this company.<br>
+      © 2026 Company Avenue Advisory Pvt. Ltd. All rights reserved. &nbsp;·&nbsp;
+      <a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a> &nbsp;·&nbsp; <a href="/disclaimer">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"ProfessionalService","name":"Company Avenue Advisory Pvt. Ltd.","url":"https://companyavenueadvisory.com","telephone":"+91-99537-19111","email":"info@companyavenueadvisory.com","address":{"@type":"PostalAddress","streetAddress":"209, Jaina Tower 1, District Centre, Janakpuri","addressLocality":"New Delhi","postalCode":"110058","addressCountry":"IN"},"areaServed":"IN"},
+{"@type":"Service","name":"Company closure and exit","serviceType":"Voluntary strike-off, dormant status, Section 8 exit, voluntary liquidation, LLP strike-off","provider":{"@type":"Organization","name":"Company Avenue Advisory Pvt. Ltd."},"areaServed":"IN","offers":{"@type":"Offer","priceCurrency":"INR","price":"20000","description":"Professional fee for voluntary strike-off, covering the STK-2 filing, CA-certified STK-8, resolutions with MGT-14, STK-3 and STK-4 drafting and the first C-PACE response. Exclusive of GST at 18%. Notarisation per director, clean-up work and government fees charged separately, only where applicable."}},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What does the ₹20,000 company closure fee include?","acceptedAnswer":{"@type":"Answer","text":"Preparing and filing Form STK-2, the CA-certified statement of accounts in STK-8, board and member resolutions with MGT-14, drafting the indemnity bond STK-3 and affidavit STK-4, the first response to a C-PACE query, and carrying the application through to the dissolution notice in STK-7. Exclusive of GST at 18%. Notarisation is charged per director and the MCA filing fee is passed through at cost."}},
+{"@type":"Question","name":"What happens if I abandon the company instead of closing it?","acceptedAnswer":{"@type":"Answer","text":"The additional fee runs at ₹100 per day per unfiled form with no upper limit. After three consecutive years of non-filing, every director is disqualified for five years across all boards under Section 164(2). The Registrar can strike the company off on its own motion, and liability survives dissolution under Section 250."}},
+{"@type":"Question","name":"Can a Section 8 company be struck off in Form STK-2?","acceptedAnswer":{"@type":"Answer","text":"No. The affidavit in Form STK-4 requires each director to declare the company is not incorporated for charitable purposes under Section 8. A Section 8 company must first surrender its licence and convert with the Regional Director's approval, or be wound up by voluntary liquidation."}},
+{"@type":"Question","name":"How long does a company strike-off take in India?","acceptedAnswer":{"@type":"Answer","text":"About four to six months for a company with nothing outstanding. STK-2 filing to the dissolution notice in STK-7 takes 90 to 150 days at C-PACE, including the thirty-day objection window. Clean-up of overdue filings, GST and income tax runs before that."}}
+]}]}
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   RATES — mirrors Company_Closure_Exit.xlsx / "Closure Calculator".
+   The builder AND the Table A/B rate card are generated from this
+   object, so they cannot drift apart.
+
+   ┌─ PRICING MODEL SWITCH ────────────────────────────────────┐
+   │ BUNDLED = true                                            │
+   │   ₹20,000 buys STK-2 + STK-8 + MGT-14 as one fee.         │
+   │ BUNDLED = false                                           │
+   │   Reverts to the workbook: STK-2 ₹20,000 (B19),           │
+   │   STK-8 ₹5,000 (A8) and MGT-14 ₹5,000 (A7) charged        │
+   │   separately — base ₹30,000 before notarisation.          │
+   │ Flip this one value; everything downstream follows.        │
+   └───────────────────────────────────────────────────────────┘
+
+   GST: quoted exclusive throughout. The page shows "+ GST @ 18%"
+   as a label and never computes a rupee GST amount.
+   ══════════════════════════════════════════════════════════════ */
+var BUNDLED = true;
+
+var RATES = {
+  ccfs:{ end:'2026-08-31', stk2Normal:10000, stk2Conc:2500 },
+  gstLabel:'+ GST @ 18%',
+  diagnostic:{ fee:7500, src:'A4' },
+
+  base:{
+    company: BUNDLED ? [
+      {id:'stk2', short:'STK-2 filing, end to end', fee:20000, unit:'once', src:'B19', time:'90–150 days from filing',
+       label:'STK-2 filing, end to end',
+       includes:['Statement of accounts in STK-8, CA certified','Board meeting, EGM and resolutions with MGT-14',
+                 'Indemnity bond STK-3 and affidavit STK-4 drafted','First written response to a C-PACE query',
+                 'Carried through to the dissolution notice in STK-7']},
+      {id:'notary', short:'Notarisation and stamping', fee:1500, unit:'director', src:'B20', time:'2–3 working days',
+       label:'Notarisation and stamping of STK-3 and STK-4, per director'}
+    ] : [
+      {id:'stk2',  short:'STK-2 filing, end to end', fee:20000, unit:'once', src:'B19', time:'90–150 days from filing', label:'STK-2 filing, end to end — STK-3, STK-4 and STK-8 attached, through to STK-7'},
+      {id:'stk8',  short:'STK-8, CA certified', fee:5000, unit:'once', src:'A8', time:'3–5 working days', label:'Statement of accounts in STK-8, certified by a Chartered Accountant'},
+      {id:'mgt14', short:'Resolutions and MGT-14', fee:5000, unit:'once', src:'A7', time:'30 days from resolution', label:'Board meeting, EGM and special resolution support, with MGT-14'},
+      {id:'notary',short:'Notarisation and stamping', fee:1500, unit:'director', src:'B20', time:'2–3 working days', label:'Notarisation and stamping of STK-3 and STK-4, per director'}
+    ],
+    llp:[
+      {id:'form24', short:'Form 24, end to end', fee:12000, unit:'once', src:'E46', time:'60–120 days',
+       label:'LLP strike-off in Form 24, end to end',
+       includes:['Consent of every partner','Affidavits and indemnity','Statement of accounts, CA certified']}
+    ]
+  },
+
+  addons:{
+    company:[
+      {id:'overdue', label:'Annual filings are overdue', why:'AOC-4 and MGT-7 / MGT-7A brought current, per financial year', fee:5000, unit:'fy', src:'A5', time:'7–10 working days per FY', govt:'At cost'},
+      {id:'audit',   label:'Books aren\u2019t written up, or the statutory audit is pending', why:'Reconstruction of accounts and audit for a defaulting year, nil or low activity, per FY', fee:12000, unit:'fy', src:'A6', time:'2–3 weeks per FY', govt:'Nil'},
+      {id:'gstcanc', label:'The company has a live GST registration', why:'Cancellation in REG-16 and the final return in GSTR-10', fee:5000, unit:'once', src:'A10', time:'30–45 days', govt:'Nil'},
+      {id:'itr',     label:'The final income-tax return is still to be filed', why:'Final return and closure of the income-tax file', fee:6000, unit:'once', src:'A9', time:'15–20 working days', govt:'Nil'},
+      {id:'bank',    label:'A company bank account is still open', why:'Closure co-ordination and the banker\u2019s closure certificate', fee:2500, unit:'once', src:'A13', time:'7–15 days', govt:'Nil'},
+      {id:'pf',      label:'Registered for EPF or ESI', why:'Closure intimation to EPFO and ESIC', fee:5000, unit:'once', src:'A11', time:'15–30 days', govt:'Nil'},
+      {id:'pt',      label:'Professional tax or Shops &amp; Establishment registration', why:'Surrender, per State registration', fee:3500, unit:'state', src:'A12', time:'15–30 days', govt:'At cost'},
+      {id:'dsc',     label:'A director\u2019s digital signature has expired', why:'DSC renewal, per director', fee:1000, unit:'director', src:'A14', time:'1–3 working days', govt:'At cost'},
+      {id:'din',     label:'Surrender the directors\u2019 DINs afterwards', why:'Optional. DIR-5, per director, plus ₹1,000 government fee each', fee:3000, unit:'director', src:'A15', time:'30–60 days', govt:'₹1,000'},
+      {id:'cpace',   label:'Budget for a second C-PACE resubmission', why:'Optional. The first response is already included above', fee:5000, unit:'once', src:'B21', time:'7 working days from receipt', govt:'Nil'}
+    ],
+    llp:[
+      {id:'llpoverdue', label:'Form 8 or Form 11 is overdue', why:'Brought current up to the year of cessation, per financial year', fee:4500, unit:'fy', src:'E47', time:'7–10 working days per FY', govt:'At cost'},
+      {id:'gstcanc',    label:'The LLP has a live GST registration', why:'Cancellation in REG-16 and the final return in GSTR-10', fee:5000, unit:'once', src:'A10', time:'30–45 days', govt:'Nil'},
+      {id:'itr',        label:'The final income-tax return is still to be filed', why:'Final return and closure of the income-tax file', fee:6000, unit:'once', src:'A9', time:'15–20 working days', govt:'Nil'},
+      {id:'bank',       label:'An LLP bank account is still open', why:'Closure co-ordination and the banker\u2019s closure certificate', fee:2500, unit:'once', src:'A13', time:'7–15 days', govt:'Nil'},
+      {id:'pt',         label:'Professional tax or Shops &amp; Establishment registration', why:'Surrender, per State registration', fee:3500, unit:'state', src:'A12', time:'15–30 days', govt:'At cost'},
+      {id:'dsc',        label:'A designated partner\u2019s digital signature has expired', why:'DSC renewal, per partner', fee:1000, unit:'partner', src:'A14', time:'1–3 working days', govt:'At cost'}
+    ]
+  }
+};
+
+(function(){
+  var C=RATES.ccfs,
+      end=new Date(C.end+'T23:59:59+05:30'),
+      live=new Date()<=end,
+      stk2Fee=live?C.stk2Conc:C.stk2Normal,
+      GST=RATES.gstLabel,
+      inr=function(n){return '₹'+Math.round(n).toLocaleString('en-IN');},
+      days=Math.ceil((end-new Date())/86400000),
+      esc=function(s){return s.replace(/&amp;/g,'&');},
+      forms=function(s){return s.replace(/\b(STK-\d|MGT-14|MGT-7A|MGT-7|AOC-4|REG-16|GSTR-10|DIR-5|Form 24|Form 11|Form 8)\b/g,'<code class="f">$1</code>');};
+
+  /* ── CCFS strip ── */
+  var b=document.getElementById('ccfs');
+  b.className=live?'live':'closed';
+  b.innerHTML=live
+    ? 'CCFS-2026 · MCA fee on <b>STK-2</b> is <b>'+inr(C.stk2Conc)+'</b> instead of '+inr(C.stk2Normal)+
+      ' for applications filed on or before <b>31 August 2026</b>'+(days<=30?' — '+days+' day'+(days===1?'':'s')+' left':'')+'.'
+    : 'CCFS-2026 closed on 31 August 2026. The MCA fee on <b>STK-2</b> has reverted to <b>'+inr(C.stk2Normal)+'</b> and additional fees on overdue annual filings are again ₹100 per day per form.';
+
+  /* ── rate card, generated from RATES ── */
+  (function(){
+    var rows=[['Exit diagnostic and route opinion<span class="rn">Credited back in full when the engagement proceeds</span>',inr(RATES.diagnostic.fee),'Nil','5–7 working days','A4']];
+    RATES.base.company.forEach(function(r){
+      var extra=(r.includes?'<span class="rn">Covers: '+r.includes.join(' · ')+'</span>':'')+(r.unit==='director'?'<span class="rn">Per director</span>':'');
+      rows.push([forms(r.label)+extra, inr(r.fee),
+        r.id==='stk2'?(live?inr(stk2Fee)+'<br><span style="font-size:.82em">to 31 Aug 2026</span>':inr(stk2Fee)):'At cost', r.time, r.src]);
+    });
+    RATES.addons.company.forEach(function(a){
+      var u=a.unit==='fy'?'<span class="rn">Per financial year</span>':a.unit==='director'?'<span class="rn">Per director</span>':a.unit==='state'?'<span class="rn">Per State registration</span>':'';
+      rows.push([forms(esc(a.label))+u+'<span class="rn">'+forms(a.why)+'</span>', inr(a.fee), a.govt, a.time, a.src]);
+    });
+    var html='<table><caption>Tables A and B · clean-up and voluntary strike-off</caption><thead><tr><th scope="col">Work</th><th scope="col" class="num">Professional '+GST+'</th><th scope="col" class="num">Government</th><th scope="col">Timeline</th></tr></thead><tbody>';
+    rows.forEach(function(r){html+='<tr data-src="'+r[4]+'"><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num soft">'+r[2]+'</td><td class="soft">'+r[3]+'</td></tr>';});
+    document.getElementById('tbl-ab').innerHTML=html+'</tbody></table>';
+  })();
+
+  /* ── builder ── */
+  var form=document.getElementById('builder'),
+      addUl=document.getElementById('addons'),
+      grid=document.getElementById('b-grid'),
+      blocked=document.getElementById('blocked'),
+      qty={dirs:2};
+
+  function unitWord(u){return u==='fy'?'financial years':u==='state'?'State registrations':u==='partner'?'partners':'directors';}
+
+  function renderAddons(entity){
+    var list=RATES.addons[entity]||[];
+    addUl.innerHTML=list.map(function(a){
+      var q=a.unit!=='once';
+      return '<li data-id="'+a.id+'">'+
+        '<label class="add"><input type="checkbox" data-add="'+a.id+'">'+
+        '<span class="txt"><span class="lbl">'+a.label+'</span><span class="why">'+a.why+'</span></span>'+
+        '<span class="fee">'+inr(a.fee)+'<small>'+(q?'each, + GST':'+ GST')+'</small></span></label>'+
+        (q?'<div class="qty" hidden><span>'+unitWord(a.unit)+'</span>'+
+          '<button type="button" data-step="'+a.id+'" data-dir="-1" aria-label="Fewer">−</button>'+
+          '<input type="number" data-qty="'+a.id+'" value="1" min="1" max="20" step="1" aria-label="Number of '+unitWord(a.unit)+'">'+
+          '<button type="button" data-step="'+a.id+'" data-dir="1" aria-label="More">+</button></div>':'')+
+        '</li>';
+    }).join('');
+    list.forEach(function(a){ if(a.unit!=='once') qty[a.id]=1; });
+  }
+
+  function calc(){
+    var entity=form.entity.value, solvency=form.solvency.value, stop=null;
+
+    if(entity==='s8'){
+      stop={tag:'Route 3 or 4 — not strike-off',title:'A Section 8 company can\u2019t be struck off',
+        body:'The affidavit in STK-4 requires each director to declare the company is not incorporated for charitable purposes, so this builder doesn\u2019t apply. Either the licence is surrendered and the company converted with the Regional Director\u2019s approval before strike-off — the Table D route, from about ₹1.8 lakh plus GST — or it is wound up by voluntary liquidation, the only single-step exit. Exit tax on accreted income is usually larger than every fee combined, and we quantify it before the special resolution is passed. Open the full rate card below, or start with the diagnostic.'};
+    } else if(solvency==='owes'){
+      stop={tag:'Route 4 — voluntary liquidation',title:'Strike-off is closed while anything is outstanding',
+        body:'STK-2 is only available where the entity owes nothing and holds nothing. With creditors or assets still in play, the exit is voluntary liquidation under Section 59 of the Insolvency and Bankruptcy Code, 2016 — an insolvency professional realises the assets, settles creditors and applies to the Tribunal for dissolution. It is quoted per engagement rather than from a rate card, because the liquidator\u2019s remuneration and counsel\u2019s fees dominate. If you\u2019re not certain anything is outstanding, switch back and take the ₹7,500 diagnostic — that is exactly what it settles.'};
+    }
+    if(stop){
+      grid.hidden=true; blocked.hidden=false;
+      document.getElementById('bl-tag').textContent=stop.tag;
+      document.getElementById('bl-title').textContent=stop.title;
+      document.getElementById('bl-body').textContent=stop.body;
+      document.getElementById('r-total').textContent='On enquiry';
+      document.querySelector('.gstchip').hidden=true;
+      document.getElementById('r-parts').innerHTML='Quoted per engagement, not from the rate card.';
+      document.getElementById('r-copy').hidden=true;
+      return;
+    }
+    grid.hidden=false; blocked.hidden=true;
+    document.getElementById('r-copy').hidden=false;
+    document.querySelector('.gstchip').hidden=false;
+
+    var prof=0, sBase=[], sAdds=[], sGovt=[], plain={base:[],adds:[],govt:[]};
+
+    RATES.base[entity].forEach(function(r){
+      var n=r.unit==='director'?qty.dirs:1, amt=r.fee*n;
+      prof+=amt;
+      sBase.push('<li><span>'+r.short+(n>1?' × '+n:'')+'</span><span>'+inr(amt)+'</span></li>');
+      plain.base.push('  '+r.short+(n>1?' x '+n:'')+'  '+inr(amt));
+      if(r.includes) r.includes.forEach(function(i){
+        sBase.push('<li class="sub"><span>'+i+'</span><span></span></li>');
+        plain.base.push('      includes: '+i);
+      });
+    });
+
+    (RATES.addons[entity]||[]).forEach(function(a){
+      var cb=addUl.querySelector('[data-add="'+a.id+'"]');
+      if(!cb||!cb.checked) return;
+      var n=a.unit==='once'?1:(qty[a.id]||1), amt=a.fee*n;
+      prof+=amt;
+      sAdds.push('<li class="opted"><span>'+esc(a.label)+(n>1?' × '+n:'')+'</span><span>'+inr(amt)+'</span></li>');
+      plain.adds.push('  '+esc(a.label)+(n>1?' x '+n:'')+'  '+inr(amt));
+      if(a.id==='din'){
+        sGovt.push('<li><span>DIR-5, '+n+' × ₹1,000</span><span>'+inr(1000*n)+'</span></li>');
+        plain.govt.push('  DIR-5 x '+n+'  '+inr(1000*n));
+      }
+      if(a.id==='overdue'||a.id==='llpoverdue'){
+        sGovt.push('<li><span>AOC-4 / MGT-7 filing fees</span><span>At cost</span></li>');
+        plain.govt.push('  AOC-4 / MGT-7 filing fees  At cost');
+      }
+    });
+
+    var govt=0;
+    if(entity==='company'){
+      govt+=stk2Fee;
+      sGovt.unshift('<li><span>MCA fee on STK-2'+(live?' (CCFS-2026)':'')+'</span><span>'+inr(stk2Fee)+'</span></li>');
+      plain.govt.unshift('  MCA fee on STK-2  '+inr(stk2Fee));
+      sGovt.push('<li><span>MGT-14 filing fee</span><span>At cost</span></li>');
+      plain.govt.push('  MGT-14 filing fee  At cost');
+    } else {
+      govt+=500;
+      sGovt.unshift('<li><span>MCA fee on Form 24 (small LLP)</span><span>'+inr(500)+'</span></li>');
+      plain.govt.unshift('  MCA fee on Form 24 (small LLP)  '+inr(500));
+    }
+    if(addUl.querySelector('[data-add="din"]') && addUl.querySelector('[data-add="din"]').checked) govt+=1000*(qty.din||1);
+
+    /* headline = professional fees, quoted exclusive of GST */
+    document.getElementById('r-total').textContent=inr(prof);
+    document.getElementById('r-parts').innerHTML=
+      'Professional fees, exclusive of GST &nbsp;·&nbsp; plus government fees of <b>'+inr(govt)+'</b>, charged at cost and carrying no GST';
+    document.getElementById('s-base').innerHTML=sBase.join('');
+    document.getElementById('s-adds').innerHTML=sAdds.length?sAdds.join(''):'<li class="none">Nothing added yet</li>';
+    document.getElementById('s-govt').innerHTML=sGovt.join('')+
+      '<li class="none" style="padding-top:.5rem">Excluded from the fees above and charged at cost</li>';
+
+    window.__breakdown=function(){
+      var t=['Company Avenue Advisory — closure estimate','Generated '+new Date().toLocaleDateString('en-IN'),'',
+        (entity==='company'?'Route: voluntary strike-off (Form STK-2)':'Route: LLP strike-off (Form 24)'),'',
+        'ALWAYS INCLUDED'].concat(plain.base,
+        ['','YOU ADDED'], plain.adds.length?plain.adds:['  Nothing added'],
+        ['','GOVERNMENT FEES (excluded from professional fees, charged at cost)'], plain.govt,
+        ['','Professional fees   '+inr(prof)+'   plus GST at 18%',
+            'Government fees     '+inr(govt)+'   at cost, no GST','',
+         'An estimate on the assumptions selected. Not a quotation.',
+         'Fees on MGT-14, AOC-4, MGT-7 and DIR-5 depend on authorised capital and delay.',
+         'The Rs 7,500 diagnostic is credited back in full when you proceed.']);
+      return t.join('\n');
+    };
+  }
+
+  form.addEventListener('change',function(e){
+    if(e.target.name==='entity'){
+      renderAddons(e.target.value);
+      qty.dirs=parseInt(document.getElementById('q-dirs').value,10)||1;
+      var dl=document.getElementById('dirs-label'), dh=document.getElementById('dirs-hint');
+      if(e.target.value==='llp'){ dl.textContent='How many designated partners?'; dh.textContent='Each signs an affidavit and the indemnity that accompany Form 24.'; }
+      else { dl.textContent='How many directors?'; dh.textContent='Each signs an indemnity bond and affidavit that must be notarised. Charged per director, on top of the fee above.'; }
+      document.getElementById('step-dirs').hidden=(e.target.value==='s8');
+    }
+    if(e.target.dataset.add){
+      var li=e.target.closest('li'), q=li.querySelector('.qty');
+      li.classList.toggle('on',e.target.checked);
+      if(q) q.hidden=!e.target.checked;
+    }
+    if(e.target.dataset.qty) qty[e.target.dataset.qty]=Math.max(1,Math.min(20,parseInt(e.target.value,10)||1));
+    if(e.target.id==='q-dirs') qty.dirs=Math.max(1,Math.min(15,parseInt(e.target.value,10)||1));
+    calc();
+  });
+
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('[data-step]'); if(!btn) return;
+    var k=btn.dataset.step, d=parseInt(btn.dataset.dir,10),
+        input=k==='dirs'?document.getElementById('q-dirs'):addUl.querySelector('[data-qty="'+k+'"]');
+    if(!input) return;
+    var v=Math.max(parseInt(input.min,10),Math.min(parseInt(input.max,10),(parseInt(input.value,10)||1)+d));
+    input.value=v; qty[k]=v; calc();
+  });
+
+  document.getElementById('r-copy').addEventListener('click',function(){
+    var btn=this, txt=window.__breakdown?window.__breakdown():'';
+    function done(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy breakdown';},1800);}
+    function fallback(){var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(err){btn.textContent='Press Ctrl+C';}
+      document.body.removeChild(ta);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback);}else{fallback();}
+  });
+
+  renderAddons('company');
+  calc();
+})();
+</script>
+</body>
+</html>

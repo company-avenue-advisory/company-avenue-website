@@ -183,17 +183,39 @@ export function isGonePath(pathname: string): boolean {
 }
 
 /**
+ * RETIRED ROUTES — pages of THIS build that have been consolidated away.
+ *
+ * Not WordPress legacy: these URLs were live on the Next.js site, were indexed,
+ * and were merged into another page rather than deleted. They get the same
+ * one-hop 301 treatment through middleware so whatever ranking and inbound
+ * links they built up transfer to the surviving page instead of hitting a 404.
+ *
+ * · /calculators/business-setup-calculator → the Registration Cost Calculator,
+ *   which was renamed "Business Setup Calculator" and absorbed the add-on step.
+ *   The surviving URL is deliberately the OLD registration-cost one: it carries
+ *   the "Popular" badge and the older ranking, and keeping it avoids a second
+ *   migration later. Only the display name moved.
+ */
+export const RETIRED_ROUTES: { from: string; to: string; note: string }[] = [
+  {
+    from: "/calculators/business-setup-calculator",
+    to: "/calculators/company-registration-cost",
+    note: "Merged into the renamed Business Setup Calculator (1 Sep 2026). The retired tool had mismatched capital assumptions between its two fee lines and three out-of-date add-on rates.",
+  },
+];
+
+/**
  * Legacy path → destination, normalised. Same-path rows are excluded: /reviews
  * is a same-path takeover (the new page lives at the same URL), and emitting a
  * rule for it would be a redirect loop.
  */
 const REDIRECT_MAP = new Map(
-  LEGACY_REDIRECTS.filter((r) => normalisePath(r.from) !== normalisePath(r.to)).map(
-    (r) => [normalisePath(r.from), r.to] as const
-  )
+  [...LEGACY_REDIRECTS, ...RETIRED_ROUTES]
+    .filter((r) => normalisePath(r.from) !== normalisePath(r.to))
+    .map((r) => [normalisePath(r.from), r.to] as const)
 );
 
-/** Destination for a legacy path, or null if it is not a legacy URL. */
+/** Destination for a legacy or retired path, or null if it is neither. */
 export function legacyDestination(pathname: string): string | null {
   return REDIRECT_MAP.get(normalisePath(pathname)) ?? null;
 }

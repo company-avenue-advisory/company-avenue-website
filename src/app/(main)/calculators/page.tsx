@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "GST calculator India",
     "income tax calculator 2025-26",
     "TDS rate finder",
-    "company registration cost calculator",
+    "business setup calculator",
     "LLP vs pvt ltd comparison",
     "business structure advisor India",
   ],
@@ -55,10 +55,10 @@ const TOOLS = [
   {
     slug: "company-registration-cost",
     icon: Building2,
-    title: "Company Registration Cost Calculator",
+    title: "Business Setup Calculator",
     description:
-      "Estimate registration cost for Pvt Ltd, LLP, OPC, and more. Includes govt fees, stamp duty, DSC, and professional charges by state.",
-    keywords: ["company registration cost India", "pvt ltd registration fees 2024"],
+      "Cost to set up any of the six structures — Pvt Ltd, OPC, Section 8, LLP, Partnership or Proprietorship. Govt fees, stamp duty and DSC by state, plus GST, MSME and trademark add-ons.",
+    keywords: ["business setup calculator", "company registration cost India", "cost to start a business India"],
     badge: "Popular",
     color: "bg-orange-50 text-orange-600 border-orange-100",
     href: "/calculators/company-registration-cost",
@@ -139,17 +139,6 @@ const TOOLS = [
     badge: null,
     color: "bg-amber-50 text-amber-600 border-amber-100",
     href: "/calculators/gratuity-calculator",
-  },
-  {
-    slug: "business-setup-calculator",
-    icon: Building2,
-    title: "Business Setup Calculator",
-    description:
-      "Estimate the total cost to start a business — registration, government fees, GST and licences — across every popular structure.",
-    keywords: ["business setup cost", "company registration cost India"],
-    badge: "New",
-    color: "bg-orange-50 text-orange-600 border-orange-100",
-    href: "/calculators/business-setup-calculator",
   },
   {
     slug: "trademark-cost-calculator",

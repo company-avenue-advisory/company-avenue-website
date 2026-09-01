@@ -41,16 +41,26 @@ export function PANVerification() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pan: pan.trim(), name: name.trim(), dob: dobFormatted, consent: "Y" }),
       });
-      const data = await res.json();
+      // A gateway or platform-level failure answers with HTML, not JSON.
+      // Parsing it unguarded threw, and the catch below then blamed the user's
+      // network for what was actually an upstream outage.
+      const data = await res.json().catch(() => null);
       if (!res.ok) {
-        setError(data.error ?? "Something went wrong.");
+        setError(
+          data?.error ??
+            (res.status >= 500
+              ? "Verification is temporarily unavailable. Please try again shortly."
+              : "Something went wrong. Please check what you entered and try again.")
+        );
+      } else if (!data) {
+        setError("Verification returned an unreadable response. Please try again shortly.");
       } else {
         setResult(data);
         trackEvent("verify_tool_use", { tool_name: "pan_verification" });
         trackEvent("verify_used", { tool: "pan_verification" });
       }
     } catch {
-      setError("Network error. Please try again.");
+      setError("Could not reach the verification service. Check your connection and try again.");
     } finally {
       setLoading(false);
     }
