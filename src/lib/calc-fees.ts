@@ -73,7 +73,7 @@ export const PRO_FEES = {
   "startup-india": 7999, // DPIIT recognition
   "professional-tax": 2999,
   "shops-establishment": 3999, // Delhi
-  "12a-80g-registration": 9999, // Form 104 — provisional 12A + 80G
+  "12a-80g-registration": 9999, // provisional 12A + 80G registration
 
   /* ── intellectual property ── */
   "trademark-registration": 3499, // per class, standalone
@@ -1018,12 +1018,12 @@ export type Section8Service = {
 };
 
 export const SECTION8_SERVICES: Section8Service[] = [
-  { service: "Income-tax registration + 80G (Form 104)", pro: 9999, govt: "Nil", timeline: "30–45 days", note: "Provisional registration under Section 332 and provisional approval under Section 354(2) (formerly 12A and 80G). Valid three years. Filed immediately after incorporation." },
+  { service: "Provisional 12A + 80G registration", pro: 9999, govt: "Nil", timeline: "30–45 days", note: "Provisional income-tax registration and 80G approval for a newly incorporated charitable entity. Valid three years. Filed immediately after incorporation." },
   { service: "NGO Darpan (NITI Aayog Unique ID)", pro: 1999, govt: "Nil", timeline: "7–30 days" },
-  { service: "CSR-1 registration", pro: 6500, govt: "Nil", timeline: "3–7 days", note: "Available once Form 104 registration and 80G approval are in place. Where eligibility rests on the three-year activity record, the fee is ₹12,500." },
-  { service: "Form 105 — regular registration, income below ₹25 lakh", pro: 22000, govt: "Nil", timeline: "3–6 months" },
-  { service: "Form 105 — regular registration, ₹25 lakh to ₹2 crore", pro: 34000, govt: "Nil", timeline: "3–6 months" },
-  { service: "Form 105 — regular registration, above ₹2 crore", pro: 52000, govt: "Nil", timeline: "3–6 months" },
+  { service: "CSR-1 registration", pro: 6500, govt: "Nil", timeline: "3–7 days", note: "Available once provisional 12A registration and 80G approval are in place. Where eligibility rests on the three-year activity record, the fee is ₹12,500." },
+  { service: "Regular 12A + 80G registration, income below ₹25 lakh", pro: 22000, govt: "Nil", timeline: "3–6 months" },
+  { service: "Regular 12A + 80G registration, ₹25 lakh to ₹2 crore", pro: 34000, govt: "Nil", timeline: "3–6 months" },
+  { service: "Regular 12A + 80G registration, above ₹2 crore", pro: 52000, govt: "Nil", timeline: "3–6 months" },
   { service: "Written response to a departmental query (second and subsequent)", pro: 8000, govt: "Nil", timeline: "7 working days from receipt" },
   { service: "Hearing before the Commissioner (Exemptions), per appearance", pro: 12000, govt: "Nil", timeline: "As listed" },
   { service: "CSR structuring opinion", pro: 25000, govt: "Nil", timeline: "7–10 working days" },

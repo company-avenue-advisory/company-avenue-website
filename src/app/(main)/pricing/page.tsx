@@ -259,7 +259,7 @@ const HERO_SERVICES: HeroService[] = [
       "A not-for-profit company for charitable objects — with 12A and 80G, the registrations that actually unlock donations and CSR funding.",
     tiers: [
       { label: "Basic", price: "₹7,999", note: "Incorporation with the Section 8 licence" },
-      { label: "Standard", price: "₹17,998", note: "Basic + Form 104 — provisional 12A and 80G ₹9,999, the donation unlock" },
+      { label: "Standard", price: "₹17,998", note: "Basic + provisional 12A and 80G registration ₹9,999, the donation unlock" },
       { label: "Premium", price: "₹26,497", note: "Standard + NGO Darpan ₹1,999 + CSR-1 registration ₹6,500" },
     ],
     inclusions: [
@@ -269,9 +269,9 @@ const HERO_SERVICES: HeroService[] = [
       "Form 10A filed for 12A and 80G (Standard and above)",
       "80G renewal diarised — provisional runs 3 years, regular 5",
     ],
-    turnaround: "Incorporation 15–25 working days · Form 104 (provisional 12A/80G) 30–45 days · NGO Darpan 7–30 days · CSR-1 3–7 days",
+    turnaround: "Incorporation 15–25 working days · provisional 12A/80G registration 30–45 days · NGO Darpan 7–30 days · CSR-1 3–7 days",
     govtFee: "Nominal MCA fee on SPICe+ with the Section 8 licence · Delhi exempts Section 8 from MoA and AoA stamp duty, e-Form duty ₹10 still applies",
-    outOfPocket: "2 × DSC ₹4,000 · Form 105 regular registration ₹22,000–₹52,000 by gross-receipts slab · FCRA registration ₹45,000, prior permission ₹30,000",
+    outOfPocket: "2 × DSC ₹4,000 · regular 12A/80G registration ₹22,000–₹52,000 by gross-receipts slab · FCRA registration ₹45,000, prior permission ₹30,000",
     retainer: "NGO compliance retainer ₹4,999/month (books, ITR-7, annual filings)",
     relatedHref: "/services/section-8-company",
     relatedLabel: "Service details",
