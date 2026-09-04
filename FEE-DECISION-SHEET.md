@@ -56,6 +56,19 @@ The workbook (`calc-fees.ts`, built from the client workbooks and verified
 | **Payroll** | ₹125 per employee | ₹150 per employee | ☐ 125  ☐ 150  ☐ other: ____ |
 | **TDS return** | ₹2,499 | ₹1,499 | ☐ 2,499  ☐ 1,499  ☐ other: ____ |
 
+**LLP registration — the workbook disagrees with itself**, not with the site.
+`CAA_LLP_Cost_Calculator_v2.xlsx` carries two unreconciled pricing blocks and
+flags both, in its own text: *"the second pricing block in that file quoted
+₹3,950 — settle which applies"* and, on the franking/notary line, *"the source
+calculator carried ₹1,799 in one block and ₹1,950 in the other — settle which
+applies."* The website currently uses the lower figure in each case because
+that's what `calc-fees.ts` had to pick, not because it was confirmed.
+
+| Line | Block A (site uses this) | Block B | Which applies |
+|---|---|---|---|
+| LLP professional fee | ₹3,499 | ₹3,950 | ☐ 3,499  ☐ 3,950  ☐ other: ____ |
+| Franking / notary | ₹1,799 | ₹1,950 | ☐ 1,799  ☐ 1,950  ☐ other: ____ |
+
 ---
 
 ## 4 — Priced on the site, no source at all (13 services)
