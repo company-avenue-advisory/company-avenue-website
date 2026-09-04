@@ -323,7 +323,7 @@ export function AvenueAI() {
       if (err instanceof Error && err.name === "AbortError") return;
       setMessages(prev => prev.map(m =>
         m.id === aiMsgId
-          ? { ...m, content: "I'm having trouble connecting right now. Please try again in a moment, or contact us directly at +91 99537 19111.", streaming: false }
+          ? { ...m, content: `I'm having trouble connecting right now. Please try again in a moment, or contact us directly at ${COMPANY.phone}.`, streaming: false }
           : m
       ));
     } finally {

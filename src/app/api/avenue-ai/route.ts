@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SYSTEM_PROMPT } from "@/lib/avenue-ai-knowledge";
+import { CONTACT, HOURS_LINE } from "@/lib/nap";
 
 /* ─────────────────────────────────────────────────────────────
    Provider abstraction — swap Groq for OpenAI or any other
@@ -30,7 +31,7 @@ function getMockResponse(userMessage: string): string {
     return "An **OPC (One Person Company)** is perfect if you want to run a business solo with the protection of a company structure.\n\n**Key requirements:**\n- Only Indian citizens and residents can incorporate\n- A nominee is mandatory\n- Cannot raise equity investment\n- Timeline: 7–10 working days\n\nFor solo entrepreneurs, OPC offers the best of both worlds — full ownership and limited liability.";
 
   if (msg.includes("gst") && (msg.includes("register") || msg.includes("need") || msg.includes("mandatory")))
-    return "**GST Registration** is mandatory if:\n\n- Annual turnover exceeds ₹40 lakhs (goods) or ₹20 lakhs (services)\n- You sell on Amazon, Flipkart, or any e-commerce marketplace\n- You supply goods/services interstate\n- You export or import\n\n**Timeline:** GSTIN issued in 2–7 working days.\n\nNot sure if you need GST? Tell me about your business and I'll advise you.";
+    return "**GST Registration** is mandatory if:\n\n- Your turnover crosses the registration threshold (this varies by supply type and state — we'll confirm the figure that applies to you)\n- You sell on Amazon, Flipkart, or any e-commerce marketplace\n- You supply goods/services interstate\n- You export or import\n\n**Timeline:** GSTIN issued in 2–7 working days.\n\nNot sure if you need GST? Tell me about your business and I'll advise you.";
 
   if (msg.includes("trademark"))
     return "**Trademark Registration** protects your brand name, logo, and slogan legally.\n\n**Key facts:**\n- Valid for 10 years, renewable indefinitely\n- You can use ™ immediately after filing\n- ® symbol only after registration certificate\n- 45 trademark classes — choosing the right one is critical\n- Timeline: 18–24 months for full certificate\n\nWhat type of mark do you want to protect — a business name, logo, or slogan?";
@@ -48,13 +49,13 @@ function getMockResponse(userMessage: string): string {
     return "Here are approximate starting fees at Company Avenue:\n\n- **OPC Registration:** from ₹4,999\n- **LLP Registration:** from ₹4,999\n- **Private Limited:** from ₹6,999\n- **GST Registration:** from ₹999\n- **Trademark (per class):** from ₹4,999\n- **ITR Filing (individual):** from ₹499\n\n*Final pricing depends on your state, complexity, and add-on services.*\n\nWant an exact quote? Our experts provide a free consultation with full pricing transparency.";
 
   if (msg.includes("consultation") || msg.includes("expert") || msg.includes("call") || msg.includes("speak"))
-    return "I'd be happy to connect you with one of our Chartered Accountants for a **free consultation**.\n\nPlease share:\n1. Your name\n2. Phone number\n3. Service you're interested in\n4. Preferred time (morning/afternoon/evening)\n\nAlternatively, you can reach us directly:\n- 📞 +91 99537 19111\n- ✉️ info@companyavenueadvisory.com\n- Working hours: Mon–Sat, 9 AM – 7 PM";
+    return `I'd be happy to connect you with one of our Chartered Accountants for a **free consultation**.\n\nPlease share:\n1. Your name\n2. Phone number\n3. Service you're interested in\n4. Preferred time (morning/afternoon/evening)\n\nAlternatively, you can reach us directly:\n- 📞 ${CONTACT.phoneDisplay}\n- ✉️ ${CONTACT.email}\n- Working hours: ${HOURS_LINE}`;
 
   if (msg.includes("msme") || msg.includes("udyam"))
-    return "**MSME / Udyam Registration** is free and offers significant benefits:\n\n- Priority sector lending from banks\n- Subsidised government schemes\n- Reduced trademark fee (₹4,500 vs ₹9,000/class)\n- Protection against delayed payments\n- DPIIT startup recognition eligibility\n\nAny business — proprietorship, LLP, company — can register. Would you like help with the registration process?";
+    return "**MSME / Udyam Registration** is free and offers significant benefits:\n\n- Priority sector lending from banks\n- Subsidised government schemes\n- A reduced trademark filing fee for small entities\n- Protection against delayed payments\n- DPIIT startup recognition eligibility\n\nAny business — proprietorship, LLP, company — can register. Would you like help with the registration process?";
 
   if (msg.includes("startup india") || msg.includes("dpiit"))
-    return "**Startup India / DPIIT Recognition** provides:\n\n- Income Tax exemption under Section 80IAC (3 years)\n- Capital gains tax exemption\n- IPR fast-track processing\n- Access to Fund of Funds\n- Self-certification for 6 labour laws\n\n**Eligibility:** Company < 10 years old, turnover < ₹100 crore, and working on innovation.\n\nWant to check if your startup qualifies?";
+    return "**Startup India / DPIIT Recognition** provides:\n\n- The 80-IAC income-tax exemption (via a separate Inter-Ministerial Board approval)\n- Capital gains tax exemption\n- IPR fast-track processing\n- Access to Fund of Funds\n- Self-certification for 6 labour laws\n\n**Eligibility** depends on the company's age, annual turnover and whether it is working on innovation — we'll check whether you qualify.\n\nWant to check if your startup qualifies?";
 
   if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey") || msg.includes("start"))
     return "Hello! I'm Avenue AI, your business compliance assistant.\n\nI can help you with company registration, GST, trademark, income tax, and all compliance matters for your business in India.\n\nWhat are you looking to do today?";
