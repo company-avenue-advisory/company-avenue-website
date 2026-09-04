@@ -33,7 +33,7 @@ export function FAQ() {
                 Still have questions?
               </p>
               <p className="text-muted text-sm leading-relaxed mb-5">
-                Our experts are available Mon–Sat, 9 AM – 7 PM for a free 30-minute consultation.
+                Our experts are available {COMPANY.workingHours} for a free 30-minute consultation.
               </p>
               <div className="space-y-2">
                 <a

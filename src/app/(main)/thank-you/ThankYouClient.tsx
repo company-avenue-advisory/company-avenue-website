@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { trackEvent } from "@/lib/gtag";
 import { PHONE_E164, waLink } from "@/lib/seo";
+import { HOURS_LINE } from "@/lib/nap";
 
 const POPULAR = [
   { label: "Private Limited Registration", href: "/services/private-limited-company" },
@@ -24,7 +25,7 @@ export function ThankYouClient() {
       <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-3xl text-green-600">✓</div>
       <h1 className="heading-lg text-dark mb-3">Thank you — we&apos;ve got your request!</h1>
       <p className="max-w-xl text-muted text-base md:text-lg mb-8">
-        Our team will reach out within business hours (Mon–Sat, 9 AM–7 PM). Prefer to talk now?
+        Our team will reach out within business hours ({HOURS_LINE}). Prefer to talk now?
         Call us or message us on WhatsApp for an instant response.
       </p>
       <div className="mb-12 flex flex-wrap justify-center gap-3">

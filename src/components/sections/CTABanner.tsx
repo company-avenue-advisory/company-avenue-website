@@ -28,7 +28,7 @@ export function CTABanner() {
         >
           <span className="inline-flex items-center gap-2 border border-white/10 bg-white/5 rounded-full px-4 py-1.5 text-white/50 text-xs font-heading font-medium tracking-wide mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            Available Mon–Sat, 9 AM – 7 PM IST
+            Available {COMPANY.workingHours} IST
           </span>
 
           <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-white leading-tight mb-5 max-w-2xl mx-auto">

@@ -57,9 +57,12 @@ export const ADDRESS_LINE = `${ADDRESS.suite}, ${ADDRESS.building}, ${ADDRESS.ar
 export const STREET_ADDRESS = `${ADDRESS.suite}, ${ADDRESS.building}, ${ADDRESS.area}, ${ADDRESS.street}`;
 
 /**
- * Opening hours. The order records the website stating 9:00 AM against a
- * directory stating 10:00 AM. These 24h values are the source for both the
- * display string and the schema `openingHoursSpecification`.
+ * Opening hours. The source for both the display string and the schema
+ * `openingHoursSpecification`.
+ *
+ * CONFIRMED 4 Sep 2026: Monday–Saturday, 9:00 AM – 7:00 PM. The website value
+ * was already correct; the Google Business Profile was showing 9–8 and is what
+ * needs correcting on the GBP side (not a code change).
  */
 export const HOURS = {
   days: [
@@ -72,8 +75,7 @@ export const HOURS = {
   ] as string[],
   opens: "09:00",
   closes: "19:00",
-  /** WS-10.1: BLOCKED — PRINCIPAL. Directory listings disagree. */
-  confirmed: false,
+  confirmed: true,
 } as const;
 
 export const HOURS_LINE = "Mon – Sat: 9:00 AM – 7:00 PM";

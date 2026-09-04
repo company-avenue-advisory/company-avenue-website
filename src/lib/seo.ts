@@ -61,12 +61,11 @@ export function canonical(path: string): { canonical: string } {
  *     (missing the -pvt-ltd suffix). It now contains only confirmed profiles;
  *     an unconfirmed row in nap.ts cannot reach this array.
  *
- * NOTE: still gated on the Principal confirming the canonical NAP in writing.
- * ADDRESS.confirmed / HOURS.confirmed are both false — deploying structured
- * data with an unconfirmed address propagates the error into Google's
- * understanding of the business, which is hard to unwind. The values below are
- * the website's own existing ones, so this is not a new claim; it is the
- * existing claim, stated once instead of twice.
+ * NOTE: HOURS.confirmed is true as of 4 Sep 2026 (Mon–Sat 9:00 AM – 7:00 PM).
+ * ADDRESS.confirmed is still false — a directory lists a different building, so
+ * one line of written confirmation from the Principal is outstanding. The
+ * address below is the website's own long-standing value, so it is not a new
+ * claim; it is the existing claim, stated once instead of twice.
  */
 export const organizationSchema = {
   "@context": "https://schema.org",

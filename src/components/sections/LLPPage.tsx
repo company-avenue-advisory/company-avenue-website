@@ -13,6 +13,7 @@ import {
   TrendingUp, Receipt, PenLine, Layers, BookOpen, CalendarCheck,
 } from "lucide-react";
 import { faqs } from "@/lib/faqs/LLPPage";
+import { HOURS_LINE } from "@/lib/nap";
 
 /* ─── animation variant ─── */
 const fadeUp = {
@@ -1065,7 +1066,7 @@ export function LLPPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; ca
           >
             <span className="inline-flex items-center gap-2 border border-white/10 bg-white/5 rounded-full px-4 py-1.5 text-white/50 text-xs font-heading font-medium mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              Experts Available Mon–Sat, 9 AM – 7 PM
+              Experts Available {HOURS_LINE}
             </span>
             <h2 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-5 leading-tight max-w-2xl mx-auto">
               Ready to Register Your LLP?
