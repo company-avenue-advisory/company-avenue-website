@@ -33,8 +33,15 @@ const ENTITIES: {
 
 type Line = { label: string; amount: number; note: string; kind: "govt" | "pro" };
 
-export function CompanyRegistrationCalculator() {
-  const [entity, setEntity] = useState<Entity>("pvtltd");
+/**
+ * `lockEntity` — embed the calculator on a single service's own page (e.g.
+ * Private Limited) pre-set to that entity, with the entity picker hidden.
+ * The visitor is already on that service's page; asking them to pick it
+ * again is redundant. "Reset" respects the lock rather than jumping back
+ * to Private Limited on every entity's page.
+ */
+export function CompanyRegistrationCalculator({ lockEntity }: { lockEntity?: Entity } = {}) {
+  const [entity, setEntity] = useState<Entity>(lockEntity ?? "pvtltd");
   const [state, setState] = useState("Delhi");
   const [capital, setCapital] = useState("1500000");
   const [people, setPeople] = useState("2");
@@ -233,6 +240,7 @@ export function CompanyRegistrationCalculator() {
         <>
         <p className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest">Registration details</p>
 
+        {!lockEntity && (
         <div>
           <label className="block text-sm font-heading font-semibold text-dark mb-2">Entity type</label>
           <div className="grid sm:grid-cols-2 gap-2">
@@ -257,6 +265,7 @@ export function CompanyRegistrationCalculator() {
             ))}
           </div>
         </div>
+        )}
 
         <div>
           <label className="block text-sm font-heading font-semibold text-dark mb-2">State / Union Territory</label>
@@ -387,7 +396,7 @@ export function CompanyRegistrationCalculator() {
 
         <div className="flex flex-wrap items-center gap-2">
           <button
-            onClick={() => { setCapital("1500000"); setPeople("2"); setState("Delhi"); setEntity("pvtltd"); setSmallCompany(true); setNameReservation(true); setNewDpin("0"); setAddons({}); }}
+            onClick={() => { setCapital("1500000"); setPeople("2"); setState("Delhi"); setEntity(lockEntity ?? "pvtltd"); setSmallCompany(true); setNameReservation(true); setNewDpin("0"); setAddons({}); }}
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-heading font-semibold hover:border-primary hover:text-primary transition-colors"
           >
             <RefreshCw size={14} /> Reset
