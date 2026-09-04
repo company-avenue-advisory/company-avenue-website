@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "npm run test:calc && npm run test:pricing",
     "test:calc": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/lib/calc-fees.test.mjs",
+    "test:pricing": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/lib/pricing-literals.test.mjs",
     "telegram:chat-id": "node scripts/telegram-chat-id.mjs"
   },
   "dependencies": {
