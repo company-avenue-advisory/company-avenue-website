@@ -5,10 +5,17 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { MapPin, Phone, Mail, Clock, MessageCircle, CheckCircle, Calculator } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, MessageCircle, CheckCircle, Calculator, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { COMPANY } from "@/lib/constants";
+import { ADDRESS_LINE } from "@/lib/nap";
+
+// Keyless Google Maps embed + directions, both pinned to the one canonical
+// address in nap.ts so the map, the footer and the schema can never drift.
+const OFFICE_MAP_QUERY = encodeURIComponent(ADDRESS_LINE);
+const OFFICE_MAP_EMBED = `https://www.google.com/maps?q=${OFFICE_MAP_QUERY}&z=16&output=embed`;
+const OFFICE_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${OFFICE_MAP_QUERY}`;
 import { trackEvent } from "@/lib/gtag";
 import { CALC_LEAD_PARAMS, CONTACT_SERVICES, isKnownService } from "@/lib/calc-lead";
 
@@ -345,6 +352,37 @@ export function ContactPage() {
                 </p>
               </div>
             </motion.div>
+          </div>
+
+          {/* Office map — below the form, so a visitor here to send a message
+              doesn't scroll past it. Lazy iframe: it's context, the directions
+              link is the conversion action. */}
+          <div className="mt-12 bg-white rounded-2xl p-6 shadow-card border border-slate-100">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+              <div>
+                <h3 className="font-heading font-semibold text-dark text-base">Visit our office</h3>
+                <p className="text-muted text-sm mt-1">{ADDRESS_LINE}</p>
+              </div>
+              <a
+                href={OFFICE_DIRECTIONS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="directions"
+                className="inline-flex items-center gap-2 shrink-0 rounded-xl bg-primary/8 px-4 py-2.5 text-sm font-heading font-semibold text-primary hover:bg-primary/12 transition-colors"
+              >
+                <Navigation size={15} />
+                Get directions
+              </a>
+            </div>
+            <div className="overflow-hidden rounded-xl border border-black/5">
+              <iframe
+                src={OFFICE_MAP_EMBED}
+                title={`Map to ${COMPANY.name}, ${ADDRESS_LINE}`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-72 w-full"
+              />
+            </div>
           </div>
         </div>
       </section>
