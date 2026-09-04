@@ -657,6 +657,74 @@ export const SETUP_ADDONS: SetupAddon[] = [
     fee: PRO_FEES["accounting-bookkeeping"],
     unit: "per month",
   },
+  {
+    id: "inc20a",
+    label: "Commencement of Business (INC-20A)",
+    note: "Declaration filed within 180 days of incorporation — mandatory before you can start operating",
+    fee: addonBundled("inc-20a"),
+  },
+  {
+    id: "adt1",
+    label: "First Auditor Appointment (ADT-1)",
+    note: "Statutory auditor appointed and Form ADT-1 filed within 30 days of incorporation",
+    fee: addonBundled("adt-1"),
+  },
+  {
+    id: "iec",
+    label: "Import Export Code (IEC)",
+    note: "10-digit DGFT code — needed to import or export, lifetime validity",
+    fee: addonBundled("iec"),
+  },
+  {
+    id: "shopsEstablishment",
+    label: "Shops & Establishment Registration",
+    note: "Delhi registration for your business premises",
+    fee: addonBundled("shops-establishment"),
+  },
+  {
+    id: "pfEsic",
+    label: "PF & ESIC Activation",
+    note: "Provident Fund and ESIC employer registration activated",
+    fee: addonBundled("pf-esic"),
+  },
+  {
+    id: "professionalTax",
+    label: "Professional Tax Registration",
+    note: "State registration where Professional Tax applies to employers",
+    fee: addonBundled("professional-tax"),
+  },
+  {
+    id: "grantPack",
+    label: "Startup Grant Readiness Pack",
+    note: "Readiness report, pitch deck and grant application filing — for DPIIT-recognised startups",
+    fee: addonBundled("grant-pack"),
+  },
+  {
+    id: "section80iac",
+    label: "Section 80-IAC Exemption Application",
+    note: "3-year income-tax holiday application, for DPIIT-recognised startups (separate IMB approval)",
+    fee: addonBundled("80iac"),
+  },
+  {
+    id: "darpan",
+    label: "NITI Aayog Darpan ID",
+    note: "Unique ID required for CSR funding eligibility",
+    fee: addonBundled("darpan"),
+  },
+  {
+    id: "provisional12a",
+    label: "12A Registration (Provisional)",
+    note: "Provisional income-tax registration for a charitable entity — Section 8 companies only",
+    fee: addonBundled("12a-provisional"),
+  },
+  {
+    id: "fssai",
+    label: "FSSAI Registration / Licence",
+    note: "Required if you sell or handle food products",
+    fee: addonBundled("fssai"),
+  },
+  // FCRA is deliberately excluded — ADDON_SERVICES prices it "On quotation"
+  // (standalone/bundled both null), so it has no fixed fee to show here.
 ];
 
 /* ══════════════ standalone fee schedule ══════════════

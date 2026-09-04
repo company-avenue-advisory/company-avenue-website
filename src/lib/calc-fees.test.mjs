@@ -19,6 +19,8 @@ import {
   STK_NOTARISATION_PER_DIRECTOR,
   GST_RATE,
   inr,
+  SETUP_ADDONS,
+  ADDON_SERVICES,
 } from "./calc-fees.ts";
 
 let passed = 0;
@@ -80,6 +82,25 @@ check("inr: Indian-format grouping, rupee prefix, rounded", () => {
   assert.equal(inr(2500), "₹2,500");
   assert.equal(inr(29371.4), "₹29,371"); // rounds
   assert.equal(inr(100000), "₹1,00,000");
+});
+
+check("SETUP_ADDONS: every entry has a positive fee and a unique id", () => {
+  const ids = SETUP_ADDONS.map((a) => a.id);
+  assert.equal(new Set(ids).size, ids.length, "duplicate id in SETUP_ADDONS");
+  for (const a of SETUP_ADDONS) {
+    assert.ok(Number.isFinite(a.fee) && a.fee > 0, `${a.id}: fee must be a positive number, got ${a.fee}`);
+  }
+});
+
+check("SETUP_ADDONS: covers every priced ADDON_SERVICES row (FCRA excluded — priced on quotation)", () => {
+  const pricedIds = ADDON_SERVICES.filter((a) => a.bundled !== null).map((a) => a.id);
+  // SETUP_ADDONS ids don't match ADDON_SERVICES ids 1:1 (gstFiling/accounting are
+  // PRO_FEES-derived, not ADDON_SERVICES rows) — assert coverage by fee value instead.
+  const setupFees = new Set(SETUP_ADDONS.map((a) => a.fee));
+  for (const id of pricedIds) {
+    const bundled = ADDON_SERVICES.find((a) => a.id === id).bundled;
+    assert.ok(setupFees.has(bundled), `ADDON_SERVICES "${id}" (₹${bundled} bundled) is not offered in SETUP_ADDONS`);
+  }
 });
 
 console.log(`\n${passed} checks passed.`);
