@@ -39,8 +39,16 @@ type Line = { label: string; amount: number; note: string; kind: "govt" | "pro" 
  * The visitor is already on that service's page; asking them to pick it
  * again is redundant. "Reset" respects the lock rather than jumping back
  * to Private Limited on every entity's page.
+ *
+ * `initialAddonId` — land straight on the add-on step with one add-on
+ * pre-checked. For a visitor arriving from a DPIIT or MSME certificate
+ * link: they want that line item's price, not a registration form first.
+ * Unrelated to `lockEntity` — the base entity/capital/state still default
+ * normally, since DPIIT/MSME can attach to any structure.
  */
-export function CompanyRegistrationCalculator({ lockEntity }: { lockEntity?: Entity } = {}) {
+export function CompanyRegistrationCalculator(
+  { lockEntity, initialAddonId }: { lockEntity?: Entity; initialAddonId?: string } = {}
+) {
   const [entity, setEntity] = useState<Entity>(lockEntity ?? "pvtltd");
   const [state, setState] = useState("Delhi");
   const [capital, setCapital] = useState("1500000");
@@ -52,11 +60,15 @@ export function CompanyRegistrationCalculator({ lockEntity }: { lockEntity?: Ent
 
   /* Step 2 is the add-on services step. It is a separate step rather than more
      controls under the entity/state/capital block — that screen is already
-     dense, and the add-ons only make sense once a base cost exists. */
-  const [step, setStep] = useState<1 | 2>(1);
+     dense, and the add-ons only make sense once a base cost exists. Starts on
+     step 2 when a visitor arrived wanting one specific add-on's price. */
+  const [step, setStep] = useState<1 | 2>(initialAddonId ? 2 : 1);
 
-  /** Add-on id → quantity. Absent or 0 = not selected. Everything starts off. */
-  const [addons, setAddons] = useState<Record<string, number>>({});
+  /** Add-on id → quantity. Absent or 0 = not selected. Everything starts off,
+      except a deep-linked add-on, pre-checked at quantity 1. */
+  const [addons, setAddons] = useState<Record<string, number>>(
+    initialAddonId ? { [initialAddonId]: 1 } : {}
+  );
 
   const toggleAddon = (id: string) =>
     setAddons((p) => ({ ...p, [id]: p[id] ? 0 : 1 }));

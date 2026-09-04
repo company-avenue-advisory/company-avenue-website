@@ -1321,6 +1321,26 @@ export const CALC_TOOLS: Record<string, CalcTool> = {
     icon: "Search",
     tone: "navy",
   },
+  // Both deep-link into the Business Setup Calculator's add-on step with the
+  // relevant certificate pre-checked (?addon=... , read by the calculator
+  // route page) rather than being separate tools — the pricing already lives
+  // in ADDON_SERVICES / SETUP_ADDONS, one source, not a second one.
+  "dpiit-cost-calculator": {
+    title: "DPIIT (Startup India) Certificate Cost",
+    desc: "What Startup India / DPIIT recognition actually costs — with any registration you're setting up.",
+    href: "/calculators/company-registration-cost?addon=dpiit",
+    cta: "See DPIIT cost",
+    icon: "Lightbulb",
+    tone: "amber",
+  },
+  "msme-cost-calculator": {
+    title: "MSME (Udyam) Certificate Cost",
+    desc: "What MSME / Udyam registration actually costs — with any registration you're setting up.",
+    href: "/calculators/company-registration-cost?addon=udyam",
+    cta: "See MSME cost",
+    icon: "ClipboardCheck",
+    tone: "green",
+  },
 };
 
 const FORMATION_CALCS = [
@@ -1384,8 +1404,8 @@ export const SERVICE_CALCULATORS: Record<string, string[]> = {
   "llp-to-company": ["llp-vs-pvt-ltd", "business-structure-advisor", "company-registration-cost"],
 
   /* Startup, MSME & Licences */
-  "startup-india": ["business-structure-advisor", "company-registration-cost", "compliance-cost-calculator"],
-  "msme-registration": ["company-registration-cost", "business-structure-advisor", "compliance-cost-calculator"],
+  "startup-india": ["dpiit-cost-calculator", "business-structure-advisor", "company-registration-cost", "compliance-cost-calculator"],
+  "msme-registration": ["msme-cost-calculator", "company-registration-cost", "business-structure-advisor", "compliance-cost-calculator"],
   "iec-registration": LICENCE_CALCS,
   "fssai-license": ["fssai-license-cost-calculator", "company-registration-cost", "compliance-cost-calculator"],
   "professional-tax": ["salary-calculator", "compliance-cost-calculator"],

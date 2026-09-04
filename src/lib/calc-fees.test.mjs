@@ -103,4 +103,15 @@ check("SETUP_ADDONS: covers every priced ADDON_SERVICES row (FCRA excluded — p
   }
 });
 
+check("CALC_TOOLS deep-link ids resolve: dpiit-cost-calculator and msme-cost-calculator's ?addon= targets exist in SETUP_ADDONS", () => {
+  // pricing.ts can't be imported directly here (it pulls in @/lib path
+  // aliases node can't resolve without the Next build). The two ids these
+  // deep links pre-check are hardcoded on both sides, so pin them here: if
+  // either SETUP_ADDONS id is ever renamed, this fails instead of the link
+  // silently pre-selecting nothing.
+  const ids = new Set(SETUP_ADDONS.map((a) => a.id));
+  assert.ok(ids.has("dpiit"), '"dpiit" must exist in SETUP_ADDONS — src/lib/pricing.ts CALC_TOOLS["dpiit-cost-calculator"] links to ?addon=dpiit');
+  assert.ok(ids.has("udyam"), '"udyam" must exist in SETUP_ADDONS — src/lib/pricing.ts CALC_TOOLS["msme-cost-calculator"] links to ?addon=udyam');
+});
+
 console.log(`\n${passed} checks passed.`);

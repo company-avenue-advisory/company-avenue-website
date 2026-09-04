@@ -25,7 +25,15 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function CompanyRegistrationCostPage() {
+export default async function CompanyRegistrationCostPage({
+  searchParams,
+}: {
+  // Deep link from a DPIIT / MSME certificate link — e.g. ?addon=dpiit lands
+  // straight on the add-on step with that line item pre-checked.
+  searchParams: Promise<{ addon?: string }>;
+}) {
+  const { addon } = await searchParams;
+
   return (
     <>
       <JsonLd data={breadcrumbSchema([
@@ -66,7 +74,9 @@ export default function CompanyRegistrationCostPage() {
       {/* Calculator */}
       <section className="py-12 bg-background">
         <div className="container-custom">
-          <CalcInteractionTracker name="Business Setup Calculator"><CompanyRegistrationCalculator /></CalcInteractionTracker>
+          <CalcInteractionTracker name="Business Setup Calculator">
+            <CompanyRegistrationCalculator initialAddonId={addon} />
+          </CalcInteractionTracker>
 
           {/* Cost components explained */}
           <div className="mt-12">
