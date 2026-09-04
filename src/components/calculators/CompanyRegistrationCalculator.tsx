@@ -14,7 +14,7 @@ import {
 } from "@/lib/calc-fees";
 import { calcContactHref } from "@/lib/calc-lead";
 
-type Entity = "pvtltd" | "opc" | "section8" | "llp" | "partnership" | "proprietorship";
+export type Entity = "pvtltd" | "opc" | "section8" | "llp" | "partnership" | "proprietorship";
 
 const ENTITIES: {
   key: Entity; label: string; desc: string; service: keyof typeof PRO_FEES;

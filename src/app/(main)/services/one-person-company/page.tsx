@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OPCPage } from "@/components/sections/OPCPage";
-import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
-import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
+import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
+import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/OPCPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -40,8 +40,8 @@ export default function OnePersonCompanyPage() {
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
       <OPCPage
-        pricingSlot={<ServicePricingBlock serviceId="one-person-company" />}
-        calcPill={<ServiceCalcPill serviceId="one-person-company" />}
+        pricingSlot={<CalculatorPricingSlot serviceId="one-person-company" lockEntity="opc" />}
+        calcPill={<JumpToCalculatorPill />}
       />
     </>
   );

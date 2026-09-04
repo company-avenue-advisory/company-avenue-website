@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Section8CompanyPage } from "@/components/sections/Section8CompanyPage";
-import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
-import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
+import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
+import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/Section8CompanyPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo";
@@ -18,8 +18,8 @@ export default function Section8CompanyServicePage() {
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
       <Section8CompanyPage
-        pricingSlot={<ServicePricingBlock serviceId="section-8-company" />}
-        calcPill={<ServiceCalcPill serviceId="section-8-company" />}
+        pricingSlot={<CalculatorPricingSlot serviceId="section-8-company" lockEntity="section8" />}
+        calcPill={<JumpToCalculatorPill />}
       />
     </>
   );

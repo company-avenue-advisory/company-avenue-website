@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { LLPPage } from "@/components/sections/LLPPage";
-import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
-import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
+import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
+import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/LLPPage";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE } from "@/lib/seo";
@@ -39,8 +39,8 @@ export default function LLPRegistrationPage() {
     <>
       <JsonLd data={faqSchema(serviceFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
       <LLPPage
-        pricingSlot={<ServicePricingBlock serviceId="llp-registration" />}
-        calcPill={<ServiceCalcPill serviceId="llp-registration" />}
+        pricingSlot={<CalculatorPricingSlot serviceId="llp-registration" lockEntity="llp" />}
+        calcPill={<JumpToCalculatorPill />}
       />
     </>
   );
