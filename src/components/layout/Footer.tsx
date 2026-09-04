@@ -250,7 +250,12 @@ export function Footer() {
             © {new Date().getFullYear()} {COMPANY.fullName} All rights reserved.
           </p>
           <p>
-            GSTIN: {COMPANY.gstin} &nbsp;|&nbsp; CIN: {COMPANY.cin}
+            {/* GSTIN removed until the firm's certificate is supplied — the
+                previous footer value failed the GSTIN checksum. See nap.ts. */}
+            {COMPANY.gstin && (
+              <>GSTIN: {COMPANY.gstin} &nbsp;|&nbsp; </>
+            )}
+            CIN: {COMPANY.cin}
           </p>
           <p>
             Designed & built with precision in India 🇮🇳

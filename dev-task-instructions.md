@@ -12,7 +12,9 @@ If there's room to do one structural thing alongside these tickets, it's turning
 
 **Where:** The footer component, sitewide (confirmed present on every page checked: homepage, `/calculators`, `/pricing`, `/services/company-closure`, `/services/msme-registration`, `/services/startup-india`).
 
-**Update:** The GSTIN (`07AABCC1234D1Z5`) and CIN (`U74999MH2015PTC260940`) were flagged in the Aug 29 audit as possibly a placeholder and a state-code mismatch. Yug has since confirmed both are correct as-is — no replacement needed, and don't apply the `07AAVCS4279H1ZM` figure the Aug 29 conversation floated; that one is not correct. I also tried to independently verify both through the site's own GST Verification and Company/Director Lookup tools before this was confirmed; see T10 below for why that didn't resolve anything.
+**Update:** ~~Yug has since confirmed both are correct as-is — no replacement needed, and don't apply the `07AAVCS4279H1ZM` figure the Aug 29 conversation floated; that one is not correct.~~
+
+**CORRECTION (4 Sep 2026):** the 31 Aug sign-off above was mistaken. `07AABCC1234D1Z5` **fails the GSTIN check-digit algorithm** — the computed 15th character is `D`, not `5` (verified by two independent implementations). It cannot be a real GSTIN; it embeds `AABCC1234D`, the specimen PAN from sample documentation. It has been **removed** from the site (not replaced) — see `src/lib/nap.ts`. `07AAVCS4279H1ZM` (the IndiaMart value) has a *valid* checksum but is **not** confirmed as CAA's registration, so it was not adopted either; the real GSTIN must come from the firm's GST certificate. The CIN was left in place (unverified, not disproven; required on official publications) but is now flagged for MCA Company Master Data verification — it decodes as Maharashtra / 2015 against a Delhi firm whose IndiaMart profile says 2024, and it appears in `/privacy` and `/terms`.
 
 **Current state (live, checked 31 Aug 2026):**
 ```
@@ -20,12 +22,12 @@ If there's room to do one structural thing alongside these tickets, it's turning
 GSTIN: 07AABCC1234D1Z5 | CIN: U74999MH2015PTC260940
 ```
 
-**Required change:** Just the typo — "Pvt. Ltd.. All rights reserved." → "Pvt. Ltd. All rights reserved." (double period after "Ltd."). Leave the GSTIN and CIN untouched.
+**Required change:** ~~Just the typo.~~ Typo fixed (WS-9.x). GSTIN removed 4 Sep 2026 per the correction above; footer now renders `CIN: …` alone when `gstin` is null. CIN retained.
 
 **Acceptance criteria:**
-- No double period after "Ltd."
-- GSTIN and CIN unchanged.
-- Spot-check 3–4 pages to confirm the footer component update propagated everywhere (it's shared, so one fix should cover all of them — verify rather than assume).
+- No double period after "Ltd." — done.
+- ~~GSTIN and CIN unchanged.~~ GSTIN removed (fails checksum); CIN retained pending MCA verification.
+- Footer renders correctly with the GSTIN line absent, mobile and desktop.
 
 ---
 

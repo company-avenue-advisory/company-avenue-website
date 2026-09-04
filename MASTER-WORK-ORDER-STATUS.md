@@ -19,8 +19,8 @@ against source.
 
 | WS | Item | Status |
 |---|---|---|
-| 1.1 | Placeholder GSTIN | ⏳ Principal — kept rendering on instruction |
-| 1.2 | CIN verification | ⏳ Principal — kept rendering on instruction |
+| 1.1 | Placeholder GSTIN | ✅ REMOVED 4 Sep 2026 — fails GSTIN checksum, provably not real. Not replaced; awaiting the firm's GST certificate |
+| 1.2 | CIN verification | ⏳ Principal — retained (required on official publications; unverified not disproven). Flagged for MCA Master Data lookup: decodes MH/2015 vs a Delhi firm, IndiaMart says est. 2024 |
 | 1.3 | Pages with incorrect law offline | ✅ 410 Gone, both |
 | 1.4 | Dead reviews link | ✅ now `/reviews` |
 | 2 | Legacy redirects | 🔧 all known URLs live as 301; full inventory blocked |
@@ -42,19 +42,32 @@ against source.
 
 ## WS-1 — Emergency content corrections
 
-### 1.1 / 1.2 — GSTIN and CIN ⏳
-Both values were flagged BLOCKED — PRINCIPAL. On your instruction (17 Aug) they
-**continue to render** in the footer while you obtain the live values.
+### 1.1 — GSTIN ✅ REMOVED (4 Sep 2026)
+`07AABCC1234D1Z5` **fails the GSTIN check-digit algorithm** — computed 15th
+character is `D`, not `5`; two independent implementations agree. It cannot be a
+real GSTIN (it embeds `AABCC1234D`, the specimen PAN from sample documentation),
+so displaying it was an affirmative false statement by a regulated firm — on the
+site of a firm that sells GST registration, a few clicks from its own GST
+Verification tool. The 31 Aug sign-off that called it "correct as-is"
+(`dev-task-instructions.md` T1) was mistaken.
 
-What changed: both now live in one place, `src/lib/nap.ts`, with
-`gstinConfirmed: false` / `cinConfirmed: false` flags and the reason recorded.
-Supplying the real values is a two-string edit with no other file touched.
+It has been **removed, not replaced.** GST law requires the GSTIN on invoices and
+at the principal place of business, not in a website footer, so omitting it costs
+nothing and needs no input from the Principal. `07AAVCS4279H1ZM` (IndiaMart) has
+a valid checksum but is **not** confirmed as CAA's — adopting it would repeat the
+error. `src/lib/nap.ts` `gstin` is now `null`; `Footer.tsx` renders the GSTIN
+line only when it is set. Supplying the real value from the GST certificate is a
+one-string edit.
 
-**The exposure this leaves open, stated once for the record:** `07AABCC1234D1Z5`
-embeds `AABCC1234D`, the specimen PAN from sample documentation. The site's own
-GST Verification tool invites visitors to test a GSTIN, and this is the first
-one many will try — against a tool that will report it as invalid, on the page
-footer of the firm offering the service. It renders on every route.
+### 1.2 — CIN ⏳ RETAINED, but now suspect
+Unverified, not disproven — a CIN has no check digit — and the Companies Act
+requires it on official publications, so it stays. But it decodes as Maharashtra
+(`MH`) / 2015 / private company: wrong ROC state for a Delhi firm, and the year
+conflicts with the firm's own IndiaMart profile (year established 2024). It also
+shares the discredited 31 Aug sign-off, and it appears in `/privacy` (DPDP
+data-fiduciary disclosure) and `/terms` (contract) — legal documents that name
+the legal entity. **The MCA Company/LLP Master Data lookup (mca.gov.in) is now a
+priority**, alongside asking Jatin for the GST certificate.
 
 ### 1.3 — Pages carrying incorrect statements of law ✅
 Both now return **410 Gone**, at both URL forms:
