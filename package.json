@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:calc": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON src/lib/calc-fees.test.mjs",
     "telegram:chat-id": "node scripts/telegram-chat-id.mjs"
   },
   "dependencies": {
