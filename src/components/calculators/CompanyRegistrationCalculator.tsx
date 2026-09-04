@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Info, ArrowRight, ArrowLeft, RefreshCw, Landmark, BadgeIndianRupee, AlertTriangle, Check, Plus, Minus } from "lucide-react";
-import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import {
   PRO_FEES, DSC_PER_PERSON, NAME_RESERVATION, NAME_APPROVAL_LLP, PAN_TAN, GST_RATE,
   GOVT_FEES, STATE_NAMES, getStampRule, incorporationCost,
@@ -636,14 +636,19 @@ export function CompanyRegistrationCalculator({ lockEntity }: { lockEntity?: Ent
           </div>
 
           {/* T8: carries entity, State, capital, directors, add-ons and the computed
-              total into /contact, where they pre-fill the form. Editable there. */}
-          <Link
+              total into /contact, where they pre-fill the form. Editable there.
+              This is the highest-intent moment on the whole page — someone who
+              just computed their own number — so it gets the site's strongest
+              CTA treatment (solid accent, full width), not a quiet outline pill. */}
+          <Button
             href={contactHref}
-            className="flex items-center justify-between w-full px-4 py-3 bg-primary/5 hover:bg-primary/10 rounded-xl transition-colors group"
+            variant="accent"
+            size="lg"
+            icon={<ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
+            className="group w-full text-base"
           >
-            <span className="text-sm font-heading font-semibold text-primary">Lock this in — book a free consultation</span>
-            <ArrowRight size={14} className="text-accent group-hover:translate-x-1 transition-transform" />
-          </Link>
+            Lock this in — book a free consultation
+          </Button>
         </motion.div>
       </div>
     </div>
