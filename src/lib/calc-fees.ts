@@ -596,7 +596,7 @@ export const ADDON_SERVICES: AddOnService[] = [
 
 /** Bundled rate for an ADDON_SERVICES row. Throws at module load if the id or
     its bundled rate ever disappears, rather than silently pricing at zero. */
-function addonBundled(id: string): number {
+export function addonBundled(id: string): number {
   const a = ADDON_SERVICES.find((x) => x.id === id);
   if (!a || a.bundled === null) {
     throw new Error(`calc-fees: no bundled rate for add-on "${id}"`);

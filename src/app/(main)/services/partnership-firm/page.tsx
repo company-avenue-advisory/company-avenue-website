@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services/partnership-firm" },
   title: "Partnership Firm Registration Online",
   description:
-    "Register a Partnership Firm under the Indian Partnership Act, 1932. Deed drafting, PAN, bank account opening. Simple, flexible business structure starting ₹1,499.",
+    "Register a Partnership Firm under the Indian Partnership Act, 1932. Deed drafting, PAN, bank account opening. Simple, flexible business structure starting ₹4,999.",
 };
 
 export default function PartnershipFirmServicePage() {

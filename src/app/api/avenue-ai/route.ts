@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SYSTEM_PROMPT } from "@/lib/avenue-ai-knowledge";
 import { CONTACT, HOURS_LINE } from "@/lib/nap";
+import { PRO_FEES, addonBundled, inr } from "@/lib/calc-fees";
 
 /* ─────────────────────────────────────────────────────────────
    Provider abstraction — swap Groq for OpenAI or any other
@@ -46,7 +47,7 @@ function getMockResponse(userMessage: string): string {
     return "For most registrations, you'll need:\n\n**Identity & Address:**\n- PAN Card\n- Aadhaar Card\n- Passport-size photograph\n\n**Business Address:**\n- Electricity bill or property tax receipt\n- Rent agreement (if rented)\n- NOC from property owner\n\n**Additional (for companies):**\n- DSC (Digital Signature Certificate)\n- DIN (Director Identification Number)\n\nWhich specific registration are you planning? I'll give you the exact checklist.";
 
   if (msg.includes("cost") || msg.includes("fee") || msg.includes("price") || msg.includes("charge"))
-    return "Here are approximate starting fees at Company Avenue:\n\n- **OPC Registration:** from ₹4,999\n- **LLP Registration:** from ₹4,999\n- **Private Limited:** from ₹6,999\n- **GST Registration:** from ₹999\n- **Trademark (per class):** from ₹4,999\n- **ITR Filing (individual):** from ₹499\n\n*Final pricing depends on your state, complexity, and add-on services.*\n\nWant an exact quote? Our experts provide a free consultation with full pricing transparency.";
+    return `Here are our starting professional fees (they rise with authorised capital, state and add-ons):\n\n- **Private Limited / OPC / LLP Registration:** from ${inr(PRO_FEES["private-limited-company"])}\n- **GST Registration:** from ${inr(PRO_FEES["gst-registration"])} standalone — or ${inr(addonBundled("gst-registration"))} bundled with a company incorporation\n- **Trademark (per class):** from ${inr(PRO_FEES["trademark-registration"])}\n- **Income Tax Return (individual):** from ${inr(PRO_FEES["income-tax-return"])}\n\n*These are professional fees only; government fees, stamp duty and 18% GST are extra and vary by state.*\n\nWant an exact quote? Our experts provide a free consultation with full pricing transparency.`;
 
   if (msg.includes("consultation") || msg.includes("expert") || msg.includes("call") || msg.includes("speak"))
     return `I'd be happy to connect you with one of our Chartered Accountants for a **free consultation**.\n\nPlease share:\n1. Your name\n2. Phone number\n3. Service you're interested in\n4. Preferred time (morning/afternoon/evening)\n\nAlternatively, you can reach us directly:\n- 📞 ${CONTACT.phoneDisplay}\n- ✉️ ${CONTACT.email}\n- Working hours: ${HOURS_LINE}`;
