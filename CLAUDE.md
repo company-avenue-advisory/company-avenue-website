@@ -58,6 +58,22 @@ This rule is INCOME-TAX SPECIFIC. It does not extend to:
 What is prohibited is citing a 1961 Act section as if it states the
 current law, in evergreen copy with no year attached.
 
+## Section numbers as proper nouns
+
+A section number used as the established NAME of a scheme, registration,
+or service is a proper noun, not a claim about current law. It stays:
+"80-IAC exemption", "12A registration", "80G certificate", "80C
+deduction". These are what clients ask for by name and what the
+administering portals call them.
+
+A section number used to STATE WHAT THE LAW REQUIRES is a claim. It goes.
+
+Test: could you replace the number with a description without the reader
+losing the referent? "The profit-linked exemption for recognised
+startups" — nobody searches that, and DPIIT doesn't call it that. Keep
+the number. "Late filing attracts a fee under section X" — the reader
+only needs to know a fee exists. Drop the number.
+
 ## Other editorial rules
 
 From CAA's verification register, which tiers every statutory assertion
