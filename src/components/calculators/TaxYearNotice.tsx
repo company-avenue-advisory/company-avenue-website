@@ -32,7 +32,8 @@ export function TaxYearNotice() {
         <AlertTriangle size={17} className="mt-0.5 shrink-0 text-amber-600" />
         <div>
           <p className="font-heading text-sm font-bold text-dark">
-            This tool covers FY 2025-26 (Assessment Year 2026-27)
+            This tool covers FY 2025-26 (assessed in 2026-27, under the
+            Income-tax Act, 1961)
           </p>
           <p className="mt-1.5 text-sm leading-relaxed text-slate-700">
             Use it for a belated or revised return for that period, which is
