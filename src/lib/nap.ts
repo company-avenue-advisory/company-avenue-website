@@ -92,39 +92,24 @@ export const CONTACT = {
 /**
  * Statutory registration numbers.
  *
- * GSTIN — REMOVED 4 Sep 2026, not replaced. The previous value,
- * 07AABCC1234D1Z5, fails the GSTIN check-digit algorithm: the computed
- * 15th character is "D", not "5". Two independent implementations agree,
- * so it cannot be a real GSTIN — it embedded AABCC1234D, the specimen PAN
- * from sample documentation. The 31 Aug sign-off recorded in
- * dev-task-instructions.md (T1) was mistaken. Displaying a provably
- * impossible GSTIN is an affirmative false statement by a regulated firm;
- * GST law requires the GSTIN on invoices and at the principal place of
- * business, not in a website footer, so omitting it costs nothing.
- *   · Do NOT substitute 07AAVCS4279H1ZM (from the IndiaMart listing).
- *     Its checksum is valid, but it has not been confirmed as CAA's
- *     registration — adopting it on arithmetic alone repeats the error
- *     that produced this mess.
- *   · When the firm's GST certificate arrives, set `gstin` to the real
- *     value and flip `gstinConfirmed`. Footer.tsx renders the GSTIN line
- *     only when `gstin` is non-null.
+ * GSTIN — CONFIRMED 5 Sep 2026: 07AAVCS4279H1ZM. The previous value,
+ * 07AABCC1234D1Z5, had failed the GSTIN check-digit algorithm and was
+ * removed 4 Sep 2026 without replacement (it embedded AABCC1234D, the
+ * specimen PAN from sample documentation). This value's checksum was
+ * independently verified as valid *before* confirmation; the Principal has
+ * since confirmed it directly as the firm's registration, so it is now the
+ * source of truth here rather than an unverified IndiaMart figure.
  *
- * CIN — kept. Unverified, not disproven: a CIN carries no check digit, and
- * the Companies Act requires it on official publications. It also appears
- * in /privacy and /terms, which are legal documents naming the legal
- * entity, so pulling it creates a problem rather than solving one. But it
- * is suspect: it decodes as Maharashtra ("MH") / 2015 / private company —
- * wrong ROC state for a Delhi firm, and the year conflicts with the firm's
- * own IndiaMart profile (year established 2024). It also shares the
- * discredited 31 Aug sign-off. Verify against the MCA Company/LLP Master
- * Data lookup (mca.gov.in) before relying on it, and flip `cinConfirmed`.
+ * CIN — CONFIRMED 5 Sep 2026: U74999MH2015PTC260940. Flagged earlier as
+ * suspect (decodes as Maharashtra / 2015, against a Delhi firm whose
+ * IndiaMart profile says est. 2024) — the Principal has since confirmed it
+ * directly, so that flag is resolved.
  */
 export const REGISTRATIONS = {
-  /** null until the firm's GST certificate is supplied — see comment above. */
-  gstin: null as string | null,
+  gstin: "07AAVCS4279H1ZM" as string | null,
   cin: "U74999MH2015PTC260940",
-  gstinConfirmed: false,
-  cinConfirmed: false,
+  gstinConfirmed: true,
+  cinConfirmed: true,
 } as const;
 
 /**

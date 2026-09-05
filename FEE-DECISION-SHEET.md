@@ -13,22 +13,20 @@ this sheet is returned.
 
 ---
 
-## 1 — The real GSTIN
+## 1 — GSTIN and CIN — ✅ RESOLVED 5 September 2026
 
-The value on the site until this week — **`07AABCC1234D1Z5`** — **fails the GSTIN
-check-digit algorithm** (verified by two independent implementations). It cannot
-be a real registration number; it embeds `AABCC1234D`, the specimen PAN from
-sample documentation. It has been **removed** from the site.
+The old GSTIN (`07AABCC1234D1Z5`) failed the check-digit algorithm and was
+removed 4 Sep. **Confirmed 5 Sep: the real GSTIN is `07AAVCS4279H1ZM`** — the
+value from the IndiaMart listing, now confirmed directly rather than assumed
+from checksum validity alone. Live on the site.
 
-**Need:** the real GSTIN, from the GST registration certificate.
-
-Do **not** use `07AAVCS4279H1ZM` (from the IndiaMart listing). Its format checks
-out, but it has never been confirmed as CAA's — adopting it on that basis alone
-repeats the error that created this problem.
+**CIN confirmed unchanged:** `U74999MH2015PTC260940`. The Maharashtra/2015-vs-
+Delhi-firm-established-2024 discrepancy that flagged it as suspect was raised
+and the Principal has confirmed the CIN as correct regardless.
 
 *(The address in `nap.ts` — 209, Jaina Tower 1, District Centre, Janakpuri — is
-also flagged unconfirmed because a directory lists a different building. One line
-of written confirmation lets us mark it verified.)*
+still flagged unconfirmed because a directory lists a different building. One
+line of written confirmation lets us mark it verified too.)*
 
 ---
 
@@ -146,9 +144,6 @@ lead ever submitted is still stored in full, including free-text messages.
 
 ## Yug — self-service (not for Jatin)
 
-- **CIN verification.** `U74999MH2015PTC260940` is still live in the footer,
-  `/privacy` and `/terms`. It decodes as Maharashtra / 2015. Confirm it via the
-  free public lookup at **mca.gov.in → MCA Services → Company/LLP Master Data**.
-  If it is wrong, it names the wrong legal entity in two binding documents — so
-  do this before the next directory-citation push. Flip `cinConfirmed` in
-  `nap.ts` once checked.
+- ~~CIN verification~~ — done. Confirmed 5 Sep 2026, `cinConfirmed: true` in
+  `nap.ts`. Safe to proceed with the directory-citation push on both GSTIN and
+  CIN now.
