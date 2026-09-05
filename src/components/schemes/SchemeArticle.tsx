@@ -300,7 +300,7 @@ export function SchemeArticle({ scheme }: { scheme: Scheme }) {
                   <CalendarCheck size={15} /> Book a Free Eligibility Screen
                 </Link>
                 <Link
-                  href="/pricing#startup-services"
+                  href="/calculators"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-white/15 text-white text-sm font-heading font-semibold rounded-xl hover:bg-white/8 transition-colors"
                 >
                   See Fixed Pricing <ArrowRight size={14} />

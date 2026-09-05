@@ -99,7 +99,7 @@ export const SCHEMES_STARTUP_SPECIFIC: Scheme[] = [
     ],
     caaServices: [
       { label: "Startup India / DPIIT Recognition", href: "/services/startup-india" },
-      { label: "SISFS & Govt Scheme Advisory", href: "/pricing#startup-services" },
+      { label: "SISFS & Govt Scheme Advisory", href: "/calculators" },
     ],
     watchOuts: [
       "The ₹10 lakh prior-funding cap counts State schemes too — founders routinely forget a state incubation grant and get disqualified late.",

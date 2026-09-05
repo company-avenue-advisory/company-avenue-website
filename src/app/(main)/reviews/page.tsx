@@ -293,9 +293,9 @@ export default async function ReviewsPage() {
                 desc: "Registration, GST, trademark, ROC and payroll — with fixed fees.",
               },
               {
-                href: "/pricing",
-                title: "See pricing",
-                desc: "One transparent price per service. No packages, no surprises.",
+                href: "/calculators",
+                title: "Estimate your cost",
+                desc: "Free calculators — one number for your exact structure and state, no packages.",
               },
               {
                 href: "/contact",

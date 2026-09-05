@@ -65,7 +65,6 @@ ${SCHEMES.map((s) => `- [${s.abbr ? `${s.abbr} — ` : ""}${s.name}](${SITE_URL}
 ## Contact
 
 - [Contact & free consultation](${SITE_URL}/contact)
-- [Pricing](${SITE_URL}/pricing)
 `;
 
   return new Response(body, {

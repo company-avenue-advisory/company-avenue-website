@@ -23,8 +23,8 @@
  */
 import {
   PRO_FEES, inr, INCORP_FEE_CARD, CLOSURE_HEADLINE,
-  SECTION8_SERVICES, STARTUP_INDIA, ADDON_SERVICES, STANDALONE_FEES,
-  closureAllIn, ccfsStatus, STK2_BUNDLE, STK_NOTARISATION_PER_DIRECTOR, NCLT_LIQUIDATION,
+  SECTION8_SERVICES, STARTUP_INDIA, ADDON_SERVICES,
+  closureAllIn, STK_NOTARISATION_PER_DIRECTOR, NCLT_LIQUIDATION,
 } from "@/lib/calc-fees";
 
 export type FeeRow = {
@@ -1471,86 +1471,6 @@ export function getPrimaryCalculator(serviceId: string): CalcTool | null {
 export function hasPricing(serviceId: string): boolean {
   return serviceId in SERVICE_PRICING;
 }
-
-/* ══════════════════════════════════════════════════════
-   À-la-carte fee schedule — rendered on /pricing
-   ══════════════════════════════════════════════════════ */
-
-export type FeeScheduleRow = {
-  service: string;
-  basis: string;
-  /** Pre-formatted: "₹4,999", "₹24,999 onwards", "On quote" */
-  fee: string;
-  note?: string;
-};
-
-export type FeeScheduleGroup = { category: string; rows: FeeScheduleRow[] };
-
-function fmtFee(fee: number | null, onwards?: boolean): string {
-  if (fee === null) return "On quote";
-  return onwards ? `${inr(fee)} onwards` : inr(fee);
-}
-
-/**
- * The full standalone schedule, grouped for display. Categories are ordered the
- * way the workbook lists them; the closure group is spliced in from the closure
- * workbook, which supersedes the incorporation workbook's Closure & Exit rows.
- */
-export const FEE_SCHEDULE: FeeScheduleGroup[] = (() => {
-  const groups: FeeScheduleGroup[] = [];
-  for (const f of STANDALONE_FEES) {
-    let g = groups.find((x) => x.category === f.category);
-    if (!g) groups.push((g = { category: f.category, rows: [] }));
-    g.rows.push({ service: f.service, basis: f.basis, fee: fmtFee(f.fee, f.onwards), note: f.note });
-  }
-  const ccfs = ccfsStatus();
-  groups.push({
-    category: "Closure & Exit",
-    rows: [
-      { service: "Exit diagnostic and route opinion", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.diagnostic), note: "Credited back in full when the closure proceeds" },
-      {
-        // The inclusion list is STK2_BUNDLE verbatim — the same list
-        // /services/company-closure renders. Neither page can drift from it.
-        service: `Strike-off of a company (STK-2), end to end — includes ${STK2_BUNDLE.join("; ")}`,
-        basis: "Per engagement",
-        fee: inr(CLOSURE_HEADLINE.strikeOffStk2),
-        note: ccfs.live
-          ? `MCA fee ${inr(ccfs.stk2Fee)} to ${ccfs.deadline} under CCFS-2026, then ${inr(ccfs.stk2Standard)}`
-          : `MCA fee ${inr(ccfs.stk2Fee)} — CCFS-2026 closed on ${ccfs.deadline}`,
-      },
-      { service: "Notarisation and stamping of STK-3 / STK-4", basis: "Per director", fee: inr(STK_NOTARISATION_PER_DIRECTOR) },
-      { service: "Second and subsequent C-PACE resubmission", basis: "Per resubmission", fee: "₹5,000", note: "The first response is covered by the strike-off fee above" },
-      { service: "Voluntary liquidation under Section 59 of the IBC (NCLT route)", basis: NCLT_LIQUIDATION.basis, fee: NCLT_LIQUIDATION.fee, note: NCLT_LIQUIDATION.note },
-      { service: "Strike-off of an LLP (Form 24), end to end", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.llpForm24) },
-      { service: "Application for dormant status (MSC-1)", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.dormantMsc1) },
-      { service: "Annual return of a dormant company (MSC-3)", basis: "Per year", fee: inr(CLOSURE_HEADLINE.dormantMsc3) },
-      { service: "Application for active status (MSC-4)", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.revivalMsc4) },
-      { service: "Overdue AOC-4 and MGT-7 / MGT-7A", basis: "Per financial year", fee: inr(CLOSURE_HEADLINE.overdueAnnualFilingPerFy) },
-      { service: "Overdue LLP Form 8 and Form 11", basis: "Per financial year", fee: inr(CLOSURE_HEADLINE.overdueLlpFilingPerFy) },
-      { service: "GST cancellation (REG-16) and final GSTR-10", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.gstCancellation) },
-      { service: "EPFO and ESIC closure intimation", basis: "Per engagement", fee: inr(CLOSURE_HEADLINE.epfEsicClosure) },
-      { service: "Professional tax / Shops & Establishment surrender", basis: "Per State registration", fee: inr(CLOSURE_HEADLINE.ptShopsSurrender) },
-    ],
-  });
-  groups.push({
-    category: "Section 8 & Not-for-Profit",
-    rows: SECTION8_SERVICES.map((x) => ({
-      service: x.service,
-      basis: x.timeline,
-      fee: inr(x.pro),
-      note: x.note,
-    })),
-  });
-  return groups;
-})();
-
-/** Add-on services, with the lower rate that applies alongside an incorporation. */
-export const ADDON_SCHEDULE = ADDON_SERVICES.map((a) => ({
-  label: a.label,
-  standalone: a.standalone === null ? "On quote" : inr(a.standalone),
-  bundled: a.bundled === null ? "—" : inr(a.bundled),
-  saving: a.standalone !== null && a.bundled !== null ? inr(a.standalone - a.bundled) : null,
-}));
 
 /** "₹2,999" */
 export function formatINR(amount: number): string {

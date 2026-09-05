@@ -143,9 +143,9 @@ export const NAV_LINKS = [
         items: [
           { label: "Find My Scheme (5 Questions)", href: "/startup-schemes#scheme-finder" },
           { label: "Startup India / DPIIT Recognition", href: "/services/startup-india" },
-          { label: "CA-Certified Project Report / DPR", href: "/pricing" },
-          { label: "CMA Data for Bank Funding", href: "/pricing" },
-          { label: "Pitch Deck & Financial Model", href: "/pricing" },
+          { label: "CA-Certified Project Report / DPR", href: "/contact" },
+          { label: "CMA Data for Bank Funding", href: "/contact" },
+          { label: "Pitch Deck & Financial Model", href: "/contact" },
           { label: "Book a Free Eligibility Screen", href: "/contact" },
         ],
       },
@@ -313,7 +313,7 @@ export const NAV_LINKS = [
           { label: "Business Resources & Rates", href: "/resources" },
           { label: "Blog & Industry News", href: "/blog" },
           { label: "Government Startup Schemes", href: "/startup-schemes" },
-          { label: "Pricing & Packages", href: "/pricing" },
+          { label: "Cost Calculators", href: "/calculators" },
           // WS-5.1: the reviews destination must be reachable from the main
           // navigation, not only the homepage button.
           { label: "Client Reviews", href: "/reviews" },
@@ -375,7 +375,7 @@ export const NAV_LINKS = [
       },
     ],
   },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Calculators", href: "/calculators" },
   { label: "Get Help", href: "/contact", variant: "gethelp" as const },
 ];
 

@@ -1387,7 +1387,7 @@ export const SCHEMES_STARTUP_RELEVANT: Scheme[] = [
     ],
     caaServices: [
       { label: "MSME / Udyam Registration", href: "/services/msme-registration" },
-      { label: "Govt Scheme Loan Advisory", href: "/pricing#startup-services" },
+      { label: "Govt Scheme Loan Advisory", href: "/calculators" },
     ],
     links: [
       { label: "National SC-ST Hub", href: "https://www.scsthub.in/" },
@@ -1737,7 +1737,7 @@ export const SCHEMES_STARTUP_RELEVANT: Scheme[] = [
     ],
     caaServices: [
       { label: "CA-Certified Project Report / DPR", href: "/contact" },
-      { label: "Govt Scheme Loan Advisory", href: "/pricing#startup-services" },
+      { label: "Govt Scheme Loan Advisory", href: "/calculators" },
       { label: "Producer Company Registration", href: "/services/producer-company" },
     ],
     links: [
@@ -1868,7 +1868,7 @@ export const SCHEMES_STARTUP_RELEVANT: Scheme[] = [
     ],
     caaServices: [
       { label: "CA-Certified Project Report / DPR", href: "/contact" },
-      { label: "Govt Scheme Loan Advisory", href: "/pricing#startup-services" },
+      { label: "Govt Scheme Loan Advisory", href: "/calculators" },
       { label: "Producer Company Registration", href: "/services/producer-company" },
     ],
     links: [
@@ -2062,7 +2062,7 @@ export const SCHEMES_STARTUP_RELEVANT: Scheme[] = [
       "Weekly follow-up cadence and the escalation ladder — branch, then regional office, then the formal grievance route",
     ],
     caaServices: [
-      { label: "Govt Scheme Loan Advisory", href: "/pricing#startup-services" },
+      { label: "Govt Scheme Loan Advisory", href: "/calculators" },
       { label: "MSME / Udyam Registration", href: "/services/msme-registration" },
       { label: "CA-Certified Project Report / DPR", href: "/contact" },
     ],
@@ -2130,7 +2130,7 @@ export const SCHEMES_STARTUP_RELEVANT: Scheme[] = [
       "Branch selection, filing and a documented weekly follow-up cadence through to disbursement",
     ],
     caaServices: [
-      { label: "Govt Scheme Loan Advisory", href: "/pricing#startup-services" },
+      { label: "Govt Scheme Loan Advisory", href: "/calculators" },
       { label: "CA-Certified Project Report / DPR", href: "/contact" },
       { label: "MSME / Udyam Registration", href: "/services/msme-registration" },
     ],

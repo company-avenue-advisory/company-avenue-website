@@ -195,12 +195,27 @@ export function isGonePath(pathname: string): boolean {
  *   The surviving URL is deliberately the OLD registration-cost one: it carries
  *   the "Popular" badge and the older ranking, and keeping it avoids a second
  *   migration later. Only the display name moved.
+ *
+ * · /pricing → /calculators. Retired 5 Sep 2026: its "Monthly retainers"
+ *   section (Startup Compliance Pack, SME Monthly Retainer, Growth Advisory,
+ *   ROC Standalone) had no source anywhere in calc-fees.ts or the client
+ *   workbooks — hand-typed figures the pricing guard never caught because it
+ *   only scans service pages, never /pricing itself. The rest of the page
+ *   (the 18-service tier breakdown, the fee schedule) WAS correctly sourced,
+ *   but the decision was to retire the whole static page rather than patch
+ *   it: the calculators are the trusted, can't-drift source now, so that's
+ *   where a price question should land.
  */
 export const RETIRED_ROUTES: { from: string; to: string; note: string }[] = [
   {
     from: "/calculators/business-setup-calculator",
     to: "/calculators/company-registration-cost",
     note: "Merged into the renamed Business Setup Calculator (1 Sep 2026). The retired tool had mismatched capital assumptions between its two fee lines and three out-of-date add-on rates.",
+  },
+  {
+    from: "/pricing",
+    to: "/calculators",
+    note: "Retired 5 Sep 2026 — the 'Monthly retainers' section had no source anywhere; the calculators are the trusted pricing surface now.",
   },
 ];
 

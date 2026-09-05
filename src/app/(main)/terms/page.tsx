@@ -57,8 +57,8 @@ export default function TermsPage() {
 
       <h2>5. Fees &amp; Payment</h2>
       <p>
-        Package pricing displayed on this Website (see our{" "}
-        <a href="/pricing">Pricing &amp; Packages</a> page) is indicative and exclusive of applicable
+        Pricing displayed on this Website (see our service pages and{" "}
+        <a href="/calculators">cost calculators</a>) is indicative and exclusive of applicable
         GST unless stated otherwise. Government and statutory fees (stamp duty, ROC filing fees, and
         similar third-party charges) are billed separately at actuals. Final pricing for your specific
         engagement will be confirmed in writing before work begins. Refunds, where applicable, are

@@ -464,7 +464,7 @@ export default function StartupSchemesPage() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
-                    href="/pricing#startup-services"
+                    href="/calculators"
                     className="inline-flex items-center gap-2 px-5 py-3 bg-accent hover:bg-accent-dark text-primary-900 hover:text-white text-sm font-heading font-bold rounded-xl transition-colors"
                   >
                     See Startup Service Pricing <ArrowRight size={14} />
@@ -482,7 +482,7 @@ export default function StartupSchemesPage() {
                 {[
                   { label: "DPIIT Recognition", href: "/services/startup-india", price: "from ₹4,999" },
                   { label: "Udyam / MSME Registration", href: "/services/msme-registration", price: "₹999" },
-                  { label: "Govt Scheme & Seed Fund Advisory", href: "/pricing#startup-services", price: "from ₹24,999" },
+                  { label: "Govt Scheme & Seed Fund Advisory", href: "/calculators", price: "from ₹24,999" },
                   { label: "Trademark Filing", href: "/services/trademark-registration", price: "₹2,999/class" },
                   { label: "CA-Certified DPR & CMA Data", href: "/contact", price: "on quote" },
                   { label: "Pitch Deck & Financial Model", href: "/contact", price: "on quote" },
