@@ -20,6 +20,7 @@ import {
 import type { Scheme } from "@/lib/schemes-taxonomy";
 import { COMPANY } from "@/lib/constants";
 import { SupportChip, SUPPORT_ICON } from "./scheme-ui";
+import { EligibilityCheck } from "./EligibilityCheck";
 
 function SectionTitle({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
@@ -111,12 +112,7 @@ export function SchemeArticle({ scheme }: { scheme: Scheme }) {
           </p>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-accent hover:bg-accent-dark text-primary-900 hover:text-white text-sm font-heading font-bold rounded-xl transition-colors"
-            >
-              <CalendarCheck size={15} /> Check My Eligibility — Free
-            </Link>
+            <EligibilityCheck eligibility={scheme.eligibility} caaServices={scheme.caaServices} />
             <a
               href={`tel:${COMPANY.phone}`}
               data-track="call"

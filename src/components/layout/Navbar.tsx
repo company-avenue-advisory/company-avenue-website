@@ -391,7 +391,7 @@ export function Navbar() {
                                     </p>
                                     <div className="space-y-0.5">
                                       {group.items.map((child) => (
-                                        <Link key={child.href} href={child.href}
+                                        <Link key={child.label} href={child.href}
                                           onClick={() => setMobileOpen(false)}
                                           className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-600 hover:text-primary hover:bg-primary/5 transition-colors">
                                           <ArrowRight size={10} className="text-accent shrink-0" />
@@ -491,7 +491,7 @@ function MegaMenuDropdown({ label, groups, popular, viewAll, onClose }: {
             </p>
             <div className="grid grid-cols-2 gap-x-3 gap-y-0.5">
               {current?.items.map((child) => (
-                <Link key={child.href} href={child.href} onClick={onClose}
+                <Link key={child.label} href={child.href} onClick={onClose}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] text-slate-600 hover:text-primary hover:bg-primary/5 transition-all group">
                   <ArrowRight size={10} className="text-accent opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                   {child.label}
@@ -549,7 +549,7 @@ function SimpleDropdown({ groups, showViewAll, onClose }: {
             {group.group}
           </p>
           {group.items.map((child) => (
-            <Link key={child.href} href={child.href} onClick={onClose}
+            <Link key={child.label} href={child.href} onClick={onClose}
               className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-slate-600 hover:text-primary hover:bg-primary/5 transition-all group">
               <ArrowRight size={10} className="text-accent opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
               {child.label}
