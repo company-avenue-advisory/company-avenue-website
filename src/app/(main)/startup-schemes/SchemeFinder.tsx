@@ -2,10 +2,11 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, RotateCcw, Check, Compass, CalendarCheck } from "lucide-react";
+import { ArrowRight, ArrowLeft, RotateCcw, Check, Compass, CalendarCheck, Rocket } from "lucide-react";
 import type { SchemeSummary } from "@/lib/schemes-taxonomy";
 import type { TreeQuestion } from "@/lib/schemes";
 import { SupportChip, shortName } from "@/components/schemes/scheme-ui";
+import { PRO_FEES, inr } from "@/lib/calc-fees";
 
 /**
  * The playbook's five-question decision tree, rebuilt as a stepper.
@@ -63,6 +64,13 @@ export function SchemeFinder({
   };
 
   const q = questions[Math.min(step, questions.length - 1)];
+
+  /* First question splits on whether a legal entity exists yet. Option index 1
+     ("Incorporated, no DPIIT recognition yet") is a business that is already
+     registered but hasn't taken the one step that unlocks most of this list —
+     worth a priced, calculator-linked nudge rather than the generic
+     eligibility-screen CTA alone. */
+  const needsDpiit = answers[0] === 1;
 
   return (
     <div className="rounded-3xl bg-gradient-to-br from-dark to-primary-900 p-6 md:p-10 relative overflow-hidden">
@@ -212,7 +220,42 @@ export function SchemeFinder({
                 ))}
               </div>
 
-              <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 bg-white/[0.05] border border-white/10 rounded-2xl p-4">
+              {/* Registered, no DPIIT yet: the one certificate that unlocks most of
+                  this list, priced — not a bare "book a call" ask. */}
+              {needsDpiit && (
+                <div className="mt-7 rounded-2xl border border-accent/30 bg-accent/[0.08] p-4 sm:p-5">
+                  <div className="flex items-start gap-2.5 mb-3">
+                    <span className="w-8 h-8 shrink-0 rounded-lg bg-accent flex items-center justify-center">
+                      <Rocket size={15} className="text-primary-900" />
+                    </span>
+                    <p className="text-white font-heading font-semibold text-sm leading-snug pt-1">
+                      You&apos;re incorporated — DPIIT recognition is what unlocks most of this list
+                    </p>
+                  </div>
+                  <p className="text-white/60 text-sm leading-relaxed mb-4">
+                    Startup India (DPIIT) recognition is {inr(PRO_FEES["startup-india"])} on its
+                    own. Worth adding MSME (Udyam) registration too, at{" "}
+                    {inr(PRO_FEES["msme-registration"])} — it unlocks 45-day payment protection
+                    and priority lending alongside the schemes above.
+                  </p>
+                  <div className="flex flex-wrap gap-2.5">
+                    <Link
+                      href="/calculators/company-registration-cost?addon=dpiit"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 bg-accent hover:bg-accent-dark text-primary-900 hover:text-white text-sm font-heading font-bold rounded-xl transition-colors"
+                    >
+                      See DPIIT cost <ArrowRight size={14} />
+                    </Link>
+                    <Link
+                      href="/calculators/company-registration-cost?addon=udyam"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 border border-white/20 hover:border-white/40 text-white text-sm font-heading font-semibold rounded-xl transition-colors"
+                    >
+                      See MSME cost
+                    </Link>
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 bg-white/[0.05] border border-white/10 rounded-2xl p-4">
                 <p className="text-white/60 text-sm flex-1 leading-relaxed">
                   <strong className="text-white font-heading font-semibold">Next step:</strong>{" "}
                   a free 30-minute eligibility screen. We check entity age, DPIIT status, prior
