@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star, ShieldCheck, ArrowRight } from "lucide-react";
 import { PHONE_E164, waLink } from "@/lib/seo";
-import { trackEvent } from "@/lib/gtag";
+import { trackEventAndRedirect } from "@/lib/gtag";
 import { HOURS_LINE } from "@/lib/nap";
 import { useGoogleReviews } from "@/hooks/useGoogleReviews";
 import type { LandingPageConfig } from "@/lib/landing-pages";
@@ -36,10 +36,9 @@ export function LandingPageTemplate({ config }: { config: LandingPageConfig }) {
     const mobile = String(data.get("mobile") ?? "");
     const city = String(data.get("city") ?? "");
 
-    trackEvent("generate_lead", { service, lead_method: "website_form", city });
-
     const msg = `Hi CAA, I found you through Google. I want ${service}.\n\nName: ${name}\nMobile: ${mobile}\nCity: ${city}\n\nPlease share pricing and next steps.`;
-    window.location.href = `https://wa.me/${PHONE_E164.replace("+", "")}?text=${encodeURIComponent(msg)}`;
+    const url = `https://wa.me/${PHONE_E164.replace("+", "")}?text=${encodeURIComponent(msg)}`;
+    trackEventAndRedirect("generate_lead", { service, lead_method: "website_form", city }, url);
   }
 
   return (
