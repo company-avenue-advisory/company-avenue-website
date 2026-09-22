@@ -69,3 +69,17 @@ if (violations.length) {
 }
 assert.equal(violations.length, 0, `${violations.length} hand-typed service fee(s) contradict calc-fees.ts`);
 console.log("ok  no service page contradicts calc-fees.ts");
+
+// ── /lp/* landing pages ─────────────────────────────────────────────────────
+// Their prices are never typed as a literal — every figure routes through
+// inr(PRO_FEES[...]) at src/lib/landing-pages.ts, so a stale/contradicting
+// number is structurally impossible there. This just guards that a future
+// edit doesn't reintroduce a hand-typed ₹figure into that file.
+const landingSrc = readFileSync("src/lib/landing-pages.ts", "utf8");
+const landingLiterals = [...landingSrc.matchAll(/₹\s?[0-9][0-9,]*/g)].map((m) => m[0]);
+assert.equal(
+  landingLiterals.length,
+  0,
+  `landing-pages.ts has a hand-typed price literal (${landingLiterals.join(", ")}) — route it through inr(PRO_FEES[...]) instead`
+);
+console.log("ok  landing-pages.ts has no hand-typed price literal");
