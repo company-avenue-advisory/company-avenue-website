@@ -31,7 +31,7 @@ export function isZohoConfigured(): boolean {
   );
 }
 
-async function getZohoAccessToken(): Promise<string> {
+export async function getZohoAccessToken(): Promise<string> {
   const params = new URLSearchParams({
     grant_type: "refresh_token",
     client_id: envValue("ZOHO_CLIENT_ID"),
