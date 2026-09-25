@@ -108,7 +108,7 @@ export function buildZohoLeadPayload(lead: ZohoLead) {
         UTM_Source: lead.utmSource || undefined,
         UTM_Medium: lead.utmMedium || undefined,
         UTM_Campaign: lead.utmCampaign || undefined,
-        GCLID: lead.gclid || undefined,
+        Google_Click_ID: lead.gclid || undefined,
         GA_Client_ID: lead.gaClientId || undefined,
       },
     ],

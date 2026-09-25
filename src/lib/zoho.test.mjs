@@ -38,7 +38,7 @@ check("buildZohoLeadPayload: maps every field through", () => {
   assert.equal(lead.Service_Required, "GST Registration & Filing");
   assert.equal(lead.Lead_Source, "Website");
   assert.equal(lead.UTM_Source, "google");
-  assert.equal(lead.GCLID, "abc123");
+  assert.equal(lead.Google_Click_ID, "abc123");
   assert.equal(lead.GA_Client_ID, "GA1.2.3.4");
 });
 
