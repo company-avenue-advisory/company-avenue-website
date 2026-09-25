@@ -5,14 +5,22 @@ import { getDb, isMongoConfigured } from "@/lib/mongodb";
 import { COMPANY } from "@/lib/constants";
 import { notifyNewLead } from "@/lib/telegram";
 import { newTaskList } from "@/lib/leads";
+import { pushLeadToZoho, mapServiceToZoho } from "@/lib/zoho";
 
-// Same shape the form validates against on the client.
+// Same shape the form validates against on the client. The attribution
+// fields are additive and optional — older clients/cached pages that don't
+// send them must keep working exactly as before.
 const schema = z.object({
   name: z.string().min(2).max(100),
   email: z.string().email().max(200),
   phone: z.string().min(10).max(20),
   service: z.string().min(1).max(100),
   message: z.string().min(10).max(2000),
+  utm_source: z.string().max(200).optional(),
+  utm_medium: z.string().max(200).optional(),
+  utm_campaign: z.string().max(200).optional(),
+  gclid: z.string().max(200).optional(),
+  ga_client_id: z.string().max(200).optional(),
 });
 
 const resendApiKey = process.env.RESEND_API_KEY ?? "";
@@ -101,6 +109,23 @@ export async function POST(req: NextRequest) {
       console.error("[consultation] email notify failed", err);
     }
   }
+
+  // 4) Best-effort push to Zoho CRM. Additive only — pushLeadToZoho never
+  //    throws, so a Zoho outage or misconfiguration can never block the
+  //    submission the visitor just made (the lead is already stored above).
+  const nameParts = data.name.trim().split(/\s+/);
+  await pushLeadToZoho({
+    firstName: nameParts.slice(0, -1).join(" ") || undefined,
+    lastName: nameParts.slice(-1).join(" ") || data.name,
+    email: data.email,
+    phone: data.phone,
+    serviceRequired: mapServiceToZoho(data.service),
+    utmSource: data.utm_source,
+    utmMedium: data.utm_medium,
+    utmCampaign: data.utm_campaign,
+    gclid: data.gclid,
+    gaClientId: data.ga_client_id,
+  });
 
   return NextResponse.json({ ok: true });
 }
