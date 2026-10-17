@@ -5,7 +5,7 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 import { GUIDES } from "@/lib/guides";
 import { TEMPLATES } from "@/lib/templates";
 import { SCHEMES } from "@/lib/schemes";
-import { getRankAiArticles } from "@/lib/rankai";
+import { getRankAiArticles } from "@/lib/rank-ai";
 
 // New city landing pages (Section D of the build spec).
 const CITY_PAGES = [
@@ -69,7 +69,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Content detail pages. These are generated straight from the same data the
     // routes use, so new posts/guides/templates appear in the sitemap on deploy.
     ...BLOG_POSTS.map((p) => entry(`blog/${p.slug}`, 0.7, "monthly")),
-    // RankAI-published articles; refreshed by /api/revalidate/[token].
+    // Rank.ai-published articles; refreshed by the Rank.ai hook at /api/revalidate/[token].
     ...rankAi.map((a) => entry(`blog/${a.slug}`, 0.7, "monthly")),
     ...GUIDES.map((g) => entry(`guides/${g.slug}`, 0.75, "monthly")),
     ...TEMPLATES.map((t) => entry(`templates/${t.slug}`, 0.65, "monthly")),

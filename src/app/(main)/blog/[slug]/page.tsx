@@ -8,10 +8,10 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE_URL, canonical, breadcrumbSchema, PRINCIPAL_ID } from "@/lib/seo";
 import { CATEGORY_SERVICE } from "@/lib/content-links";
-import { getRankAiArticle, humanDate, type RankAiArticle } from "@/lib/rankai";
+import { getRankAiArticle, humanDate, type RankAiArticle } from "@/lib/rank-ai";
 
 // Hand-written posts are prebuilt below. Any other slug is looked up in
-// RankAI on first request, cached, and refreshed by /api/revalidate/[token].
+// Rank.ai on first request, cached, and refreshed by the Rank.ai hook at /api/revalidate/[token].
 export const dynamicParams = true;
 
 export function generateStaticParams() {
@@ -34,7 +34,7 @@ export async function generateMetadata({
   if (!post) {
     const a = await getRankAiArticle(slug);
     if (!a) return {};
-    const images = a.featuredImageUrl ? [{ url: a.featuredImageUrl }] : [];
+    const images = a.imageUrl ? [{ url: a.imageUrl }] : [];
     return {
       title: a.title,
       description: a.description,
@@ -251,7 +251,7 @@ export default async function BlogPostPage({
   );
 }
 
-/* A RankAI-published article. Same shell as a hand-written post, but the body
+/* A Rank.ai-published article. Same shell as a hand-written post, but the body
    arrives as HTML and there is no category, so no service box. Authorship in
    the schema is the firm, not the Principal: WS-4 credits the CA only on copy
    he stands behind, and these articles are not reviewed in this codebase. */
@@ -268,7 +268,7 @@ function RankAiPost({ article }: { article: RankAiArticle }) {
             "@type": "BlogPosting",
             headline: article.title,
             description: article.description,
-            ...(article.featuredImageUrl ? { image: article.featuredImageUrl } : {}),
+            ...(article.imageUrl ? { image: article.imageUrl } : {}),
             url,
             mainEntityOfPage: { "@type": "WebPage", "@id": url },
             ...(published ? { datePublished: published, dateModified: published } : {}),
@@ -308,11 +308,11 @@ function RankAiPost({ article }: { article: RankAiArticle }) {
           </div>
         </header>
 
-        {article.featuredImageUrl && (
+        {article.imageUrl && (
           <div className="container-custom max-w-3xl -mt-8 md:-mt-10 relative z-10">
             <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-card">
               <Image
-                src={article.featuredImageUrl}
+                src={article.imageUrl}
                 alt={article.title}
                 fill
                 priority
@@ -326,7 +326,7 @@ function RankAiPost({ article }: { article: RankAiArticle }) {
 
         <div className="py-12 md:py-16 bg-background">
           <div className="container-custom max-w-3xl">
-            {/* Body HTML is RankAI's, served from our own project feed. */}
+            {/* Body HTML comes from Rank.ai's feed for our domain. */}
             <div className="legal-prose" dangerouslySetInnerHTML={{ __html: article.content }} />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { BlogHubClient } from "./BlogHubClient";
 import { CTABanner } from "@/components/sections/CTABanner";
-import { getRankAiArticles, humanDate } from "@/lib/rankai";
+import { getRankAiArticles, humanDate } from "@/lib/rank-ai";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
@@ -23,7 +23,7 @@ export default async function BlogPage() {
     title: a.title,
     excerpt: a.description,
     date: humanDate(a.publishedDate),
-    image: a.featuredImageUrl,
+    image: a.imageUrl,
   }));
 
   return (

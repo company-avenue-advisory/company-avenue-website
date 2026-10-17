@@ -6,7 +6,7 @@ import { Clock, ArrowRight, ArrowUpRight, Newspaper } from "lucide-react";
 import { BLOG_POSTS, BLOG_CATEGORIES } from "@/lib/blog-posts";
 import { useLiveNews } from "@/hooks/useLiveNews";
 
-/** RankAI-published articles, fetched server-side in page.tsx. */
+/** Rank.ai-published articles, fetched server-side in page.tsx. */
 export interface RankAiCard {
   slug: string;
   title: string;
@@ -15,7 +15,7 @@ export interface RankAiCard {
   image?: string;
 }
 
-/* RankAI articles sit in the grid under their own filter. They carry no
+/* Rank.ai articles sit in the grid under their own filter. They carry no
    category or read time, so those slots show "Latest" and the date. A slug
    that collides with a hand-written post is dropped — the hand-written one
    owns that URL (see blog/[slug]/page.tsx). */
@@ -136,7 +136,7 @@ export function BlogHubClient({ rankAiPosts = [] }: { rankAiPosts?: RankAiCard[]
                   src={post.image}
                   alt={post.title}
                   fill
-                  // RankAI images come from hosts not in next.config's
+                  // Rank.ai images come from hosts not in next.config's
                   // remotePatterns, so they skip the optimiser like the news feed.
                   unoptimized={post.remote}
                   className="object-cover transition-transform duration-500 group-hover:scale-110"

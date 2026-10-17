@@ -1,44 +1,39 @@
-import { timingSafeEqual } from "node:crypto";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-import { RANKAI_TAG } from "@/lib/rankai";
+import { RANK_AI_TAG } from "@/lib/rank-ai";
 
 /* ─────────────────────────────────────────────────────────────
-   RankAI revalidation hook. RankAI calls
-     https://companyavenueadvisory.com/api/revalidate/<token>
-   whenever it publishes or rewrites an article. We drop the cached
-   RankAI feed and the /blog pages so the change is live on the next
-   request — no redeploy.
+   Rank.ai revalidation hook (app.rank.ai → Integrations → Next.js).
 
-   RankAI does not document the method or body it sends, so both GET
-   and POST are accepted and the body is ignored: the token in the
-   path is the only thing checked.
+   Rank.ai POSTs { paths: ["/blog", "/blog/<slug>"] } to
+     /api/revalidate/<token>
+   whenever it publishes or updates an article.
 
-   Config (Vercel env var):
-     RANKAI_REVALIDATE_TOKEN   the rkai_… value at the end of the hook
-                               URL in RankAI
+   Auth follows Rank.ai's documented setup: the unguessable token in
+   the hook URL is the credential and no env var is required. As
+   defence in depth:
+     - only /blog and /blog/* are ever revalidated, whatever is sent,
+       so the worst a stranger can do is refresh blog caches;
+     - if REVALIDATION_SECRET is set in Vercel, the token must match it.
 ───────────────────────────────────────────────────────────── */
 
-function tokenMatches(given: string): boolean {
-  const expected = (process.env.RANKAI_REVALIDATE_TOKEN ?? "").trim();
-  if (!expected) return false;
-  const a = Buffer.from(given);
-  const b = Buffer.from(expected);
-  return a.length === b.length && timingSafeEqual(a, b);
-}
+const ALLOWED = /^\/blog(\/[a-z0-9-]+)?$/;
 
-async function handle(_req: NextRequest, { params }: { params: Promise<{ token: string }> }) {
+export async function POST(req: NextRequest, { params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
-  if (!tokenMatches(token)) {
-    return NextResponse.json({ revalidated: false, error: "Unauthorized" }, { status: 401 });
+  const secret = (process.env.REVALIDATION_SECRET ?? "").trim();
+  if (secret && token !== secret) {
+    return NextResponse.json({ revalidated: [], error: "Unauthorized" }, { status: 401 });
   }
 
-  revalidateTag(RANKAI_TAG);
-  revalidatePath("/blog", "layout"); // /blog and every /blog/[slug]
+  const body = await req.json().catch(() => ({}) as { paths?: unknown });
+  const asked: unknown[] = Array.isArray(body?.paths) ? body.paths : [];
+  const paths = asked.filter((p): p is string => typeof p === "string" && ALLOWED.test(p));
+
+  revalidateTag(RANK_AI_TAG);
+  for (const p of paths) revalidatePath(p);
+  revalidatePath("/blog");
   revalidatePath("/sitemap.xml");
 
-  return NextResponse.json({ revalidated: true, now: Date.now() });
+  return NextResponse.json({ revalidated: paths });
 }
-
-export const GET = handle;
-export const POST = handle;
