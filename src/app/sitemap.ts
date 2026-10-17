@@ -5,6 +5,7 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 import { GUIDES } from "@/lib/guides";
 import { TEMPLATES } from "@/lib/templates";
 import { SCHEMES } from "@/lib/schemes";
+import { getRankAiArticles } from "@/lib/rankai";
 
 // New city landing pages (Section D of the build spec).
 const CITY_PAGES = [
@@ -42,8 +43,10 @@ const STATIC_PAGES = [
   "reviews",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const handWritten = new Set(BLOG_POSTS.map((p) => p.slug));
+  const rankAi = (await getRankAiArticles()).filter((a) => !handWritten.has(a.slug));
 
   const entry = (
     path: string,
@@ -66,6 +69,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Content detail pages. These are generated straight from the same data the
     // routes use, so new posts/guides/templates appear in the sitemap on deploy.
     ...BLOG_POSTS.map((p) => entry(`blog/${p.slug}`, 0.7, "monthly")),
+    // RankAI-published articles; refreshed by /api/revalidate/[token].
+    ...rankAi.map((a) => entry(`blog/${a.slug}`, 0.7, "monthly")),
     ...GUIDES.map((g) => entry(`guides/${g.slug}`, 0.75, "monthly")),
     ...TEMPLATES.map((t) => entry(`templates/${t.slug}`, 0.65, "monthly")),
     // Government scheme one-pagers — the funding hub's detail pages.
