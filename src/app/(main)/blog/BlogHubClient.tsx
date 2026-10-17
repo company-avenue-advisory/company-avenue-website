@@ -6,11 +6,42 @@ import { Clock, ArrowRight, ArrowUpRight, Newspaper } from "lucide-react";
 import { BLOG_POSTS, BLOG_CATEGORIES } from "@/lib/blog-posts";
 import { useLiveNews } from "@/hooks/useLiveNews";
 
-export function BlogHubClient() {
+/** Rank.ai-published articles, fetched server-side in page.tsx. */
+export interface RankAiCard {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  image?: string;
+}
+
+/* Rank.ai articles sit in the grid under their own filter. They carry no
+   category or read time, so those slots show "Latest" and the date. A slug
+   that collides with a hand-written post is dropped — the hand-written one
+   owns that URL (see blog/[slug]/page.tsx). */
+const RANKAI_CATEGORY = "Latest";
+
+export function BlogHubClient({ rankAiPosts = [] }: { rankAiPosts?: RankAiCard[] }) {
   const [filter, setFilter] = useState("All");
   const liveArticles = useLiveNews();
 
-  const [featured, ...rest] = BLOG_POSTS;
+  const featured = BLOG_POSTS[0];
+  const rest = useMemo(() => {
+    const taken = new Set(BLOG_POSTS.map((p) => p.slug));
+    const fromRankAi = rankAiPosts
+      .filter((p) => !taken.has(p.slug))
+      .map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        excerpt: p.excerpt,
+        category: RANKAI_CATEGORY,
+        readTime: p.date,
+        image: p.image ?? "",
+        remote: true,
+      }));
+    const handWritten = BLOG_POSTS.slice(1).map((p) => ({ ...p, remote: false }));
+    return [...fromRankAi, ...handWritten];
+  }, [rankAiPosts]);
 
   /* WS-5.5 — empty-category behaviour.
      The filter row was built from BLOG_CATEGORIES, which is derived from ALL
@@ -21,7 +52,7 @@ export function BlogHubClient() {
      category cannot be offered. "Industry News" stays regardless — it is fed
      by a live feed and carries its own empty state below. */
   const FILTERS = useMemo(() => {
-    const populated = BLOG_CATEGORIES.filter((c) =>
+    const populated = [RANKAI_CATEGORY, ...BLOG_CATEGORIES].filter((c) =>
       rest.some((p) => p.category === c)
     );
     return ["All", ...populated, "Industry News"];
@@ -99,14 +130,23 @@ export function BlogHubClient() {
             href={`/blog/${post.slug}`}
             className="group text-left bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col"
           >
-            <div className="relative aspect-[16/9] overflow-hidden">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
+            <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
+              {post.image ? (
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  // Rank.ai images come from hosts not in next.config's
+                  // remotePatterns, so they skip the optimiser like the news feed.
+                  unoptimized={post.remote}
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full text-slate-300">
+                  <Newspaper size={32} />
+                </div>
+              )}
               <div className="absolute top-3 left-3">
                 <span className="text-xs font-heading font-semibold px-2.5 py-1 rounded-full bg-white/90 text-primary backdrop-blur-sm">
                   {post.category}

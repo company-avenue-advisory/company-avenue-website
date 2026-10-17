@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BlogHubClient } from "./BlogHubClient";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { getRankAiArticles, humanDate } from "@/lib/rank-ai";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
@@ -16,7 +17,15 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const rankAiPosts = (await getRankAiArticles()).map((a) => ({
+    slug: a.slug,
+    title: a.title,
+    excerpt: a.description,
+    date: humanDate(a.publishedDate),
+    image: a.imageUrl,
+  }));
+
   return (
     <>
       <div className="bg-gradient-to-br from-dark to-primary-900 pt-32 pb-16">
@@ -36,7 +45,7 @@ export default function BlogPage() {
 
       <section className="py-16 bg-background">
         <div className="container-custom">
-          <BlogHubClient />
+          <BlogHubClient rankAiPosts={rankAiPosts} />
         </div>
       </section>
 

@@ -8,8 +8,11 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE_URL, canonical, breadcrumbSchema, PRINCIPAL_ID } from "@/lib/seo";
 import { CATEGORY_SERVICE } from "@/lib/content-links";
+import { getRankAiArticle, humanDate, type RankAiArticle } from "@/lib/rank-ai";
 
-export const dynamicParams = false;
+// Hand-written posts are prebuilt below. Any other slug is looked up in
+// Rank.ai on first request, cached, and refreshed by the Rank.ai hook at /api/revalidate/[token].
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
@@ -28,7 +31,25 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
-  if (!post) return {};
+  if (!post) {
+    const a = await getRankAiArticle(slug);
+    if (!a) return {};
+    const images = a.imageUrl ? [{ url: a.imageUrl }] : [];
+    return {
+      title: a.title,
+      description: a.description,
+      alternates: canonical(`/blog/${slug}`),
+      openGraph: {
+        title: a.title,
+        description: a.description,
+        type: "article",
+        url: `${SITE_URL}/blog/${slug}`,
+        images,
+        publishedTime: a.publishedDate || undefined,
+      },
+      twitter: { card: "summary_large_image", title: a.title, description: a.description, images },
+    };
+  }
 
   return {
     title: `${post.title}`,
@@ -58,7 +79,11 @@ export default async function BlogPostPage({
 }) {
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
-  if (!post) notFound();
+  if (!post) {
+    const article = await getRankAiArticle(slug);
+    if (!article) notFound();
+    return <RankAiPost article={article} />;
+  }
 
   // Internal linking: same-category posts first, topped up with recent ones so
   // every article always links onward to three others.
@@ -217,6 +242,92 @@ export default async function BlogPostPage({
                 </div>
               </section>
             )}
+          </div>
+        </div>
+      </article>
+
+      <CTABanner />
+    </>
+  );
+}
+
+/* A Rank.ai-published article. Same shell as a hand-written post, but the body
+   arrives as HTML and there is no category, so no service box. Authorship in
+   the schema is the firm, not the Principal: WS-4 credits the CA only on copy
+   he stands behind, and these articles are not reviewed in this codebase. */
+function RankAiPost({ article }: { article: RankAiArticle }) {
+  const url = `${SITE_URL}/blog/${article.slug}`;
+  const published = article.publishedDate ? article.publishedDate.slice(0, 10) : undefined;
+
+  return (
+    <>
+      <JsonLd
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: article.title,
+            description: article.description,
+            ...(article.imageUrl ? { image: article.imageUrl } : {}),
+            url,
+            mainEntityOfPage: { "@type": "WebPage", "@id": url },
+            ...(published ? { datePublished: published, dateModified: published } : {}),
+            author: { "@id": `${SITE_URL}/#organization` },
+            publisher: { "@id": `${SITE_URL}/#organization` },
+          },
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+            { name: article.title, path: `/blog/${article.slug}` },
+          ]),
+        ]}
+      />
+
+      <article>
+        <header className="relative pt-32 pb-16 bg-gradient-to-br from-dark to-primary-900">
+          <div className="container-custom max-w-3xl">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-1.5 text-white/50 hover:text-accent text-xs font-heading font-semibold mb-6 transition-colors"
+            >
+              <ArrowLeft size={13} /> Back to Blog
+            </Link>
+            <h1 className="font-heading font-bold text-3xl md:text-5xl text-white leading-tight mb-4">
+              {article.title}
+            </h1>
+            {article.description && (
+              <p className="text-white/60 text-base md:text-lg leading-relaxed mb-5">
+                {article.description}
+              </p>
+            )}
+            {published && (
+              <div className="text-white/40 text-xs">
+                <time dateTime={published}>{humanDate(article.publishedDate)}</time>
+              </div>
+            )}
+          </div>
+        </header>
+
+        {article.imageUrl && (
+          <div className="container-custom max-w-3xl -mt-8 md:-mt-10 relative z-10">
+            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-card">
+              <Image
+                src={article.imageUrl}
+                alt={article.title}
+                fill
+                priority
+                unoptimized
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="py-12 md:py-16 bg-background">
+          <div className="container-custom max-w-3xl">
+            {/* Body HTML comes from Rank.ai's feed for our domain. */}
+            <div className="legal-prose" dangerouslySetInnerHTML={{ __html: article.content }} />
           </div>
         </div>
       </article>
