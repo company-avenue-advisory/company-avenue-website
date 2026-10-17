@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { trackEvent } from "@/lib/gtag";
+import { TurnstileWidget, TURNSTILE_ENABLED } from "@/components/tools/TurnstileWidget";
 import { Building2, Loader2, AlertCircle } from "lucide-react";
 
 interface CompanyResult {
@@ -34,6 +35,8 @@ export function CompanyVerification() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<Result | null>(null);
+  const [cfToken, setCfToken] = useState<string | null>(null);
+  const [cfReset, setCfReset] = useState(0);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -44,7 +47,7 @@ export function CompanyVerification() {
       const res = await fetch("/api/verify/company", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type, id: id.trim() }),
+        body: JSON.stringify({ type, id: id.trim(), turnstileToken: cfToken }),
       });
       // A gateway or platform-level failure answers with HTML, not JSON.
       // Parsing it unguarded threw, and the catch below then blamed the user's
@@ -68,6 +71,7 @@ export function CompanyVerification() {
       setError("Could not reach the verification service. Check your connection and try again.");
     } finally {
       setLoading(false);
+      setCfReset((n) => n + 1); // Turnstile tokens are single-use
     }
   }
 
@@ -98,13 +102,14 @@ export function CompanyVerification() {
         />
         <button
           type="submit"
-          disabled={loading || !id.trim()}
+          disabled={loading || !id.trim() || (TURNSTILE_ENABLED && !cfToken)}
           className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white text-sm font-heading font-semibold rounded-xl hover:bg-primary-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? <Loader2 size={16} className="animate-spin" /> : <Building2 size={16} />}
           Verify
         </button>
       </form>
+      <TurnstileWidget onToken={setCfToken} resetKey={cfReset} />
 
       {error && (
         <div className="mt-5 flex items-start gap-2 p-4 bg-red-50 border border-red-100 rounded-xl text-red-700 text-sm">

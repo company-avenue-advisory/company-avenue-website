@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sandboxPost, isSandboxConfigured, sandboxErrorResponse } from "@/lib/sandbox";
+import { guardVerify, readVerifyCache, writeVerifyCache } from "@/lib/verify-guard";
 
 const GSTIN_PATTERN = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
 
@@ -8,15 +9,22 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "GST verification is not configured yet." }, { status: 503 });
   }
 
-  const { gstin } = await req.json();
+  const { gstin, turnstileToken } = await req.json();
   if (!gstin || typeof gstin !== "string" || !GSTIN_PATTERN.test(gstin.toUpperCase())) {
     return NextResponse.json({ error: "Enter a valid 15-character GSTIN." }, { status: 400 });
   }
 
+  const blocked = await guardVerify(req, "gst", turnstileToken);
+  if (blocked) return blocked;
+
+  const key = gstin.toUpperCase();
+  const cached = await readVerifyCache("gst", key);
+  if (cached) return NextResponse.json(cached);
+
   try {
     const result = await sandboxPost<{
       data: { data: Record<string, unknown> };
-    }>("/gst/compliance/public/gstin/search", { gstin: gstin.toUpperCase() });
+    }>("/gst/compliance/public/gstin/search", { gstin: key });
 
     const d = result.data?.data ?? {};
 
@@ -26,7 +34,7 @@ export async function POST(req: NextRequest) {
 
     const addr = (d.pradr as { addr?: Record<string, string> } | undefined)?.addr;
 
-    return NextResponse.json({
+    const payload = {
       gstin: d.gstin,
       legalName: d.lgnm,
       tradeName: d.tradeNam,
@@ -38,7 +46,9 @@ export async function POST(req: NextRequest) {
       address: addr
         ? [addr.bno, addr.bnm, addr.st, addr.loc, addr.dst, addr.stcd, addr.pncd].filter(Boolean).join(", ")
         : null,
-    });
+    };
+    await writeVerifyCache("gst", key, payload);
+    return NextResponse.json(payload);
   } catch (err) {
     console.error("[GST verify]", err);
     const { error, status } = sandboxErrorResponse(err);

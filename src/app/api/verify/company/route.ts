@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sandboxPost, isSandboxConfigured, sandboxErrorResponse, SandboxError } from "@/lib/sandbox";
+import { guardVerify, readVerifyCache, writeVerifyCache } from "@/lib/verify-guard";
 
 const DIN_PATTERN = /^[0-9]{8}$/;
 
@@ -32,13 +33,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Company verification is not configured yet." }, { status: 503 });
   }
 
-  const { type, id } = await req.json();
+  const { type, id, turnstileToken } = await req.json();
   const value = String(id ?? "").toUpperCase().trim();
 
   if (type === "cin") {
     if (value.length < 7 || value.length > 21) {
       return NextResponse.json({ error: "Enter a valid CIN or LLPIN." }, { status: 400 });
     }
+    const blocked = await guardVerify(req, "company", turnstileToken);
+    if (blocked) return blocked;
+    const cached = await readVerifyCache("company", `cin:${value}`);
+    if (cached) return NextResponse.json(cached);
     try {
       const result = await sandboxPost<{
         data: {
@@ -53,7 +58,7 @@ export async function POST(req: NextRequest) {
       });
 
       const d = result.data.company_master_data;
-      return NextResponse.json({
+      const payload = {
         kind: "company",
         cin: d.cin,
         name: d.company_name,
@@ -66,7 +71,9 @@ export async function POST(req: NextRequest) {
         paidUpCapital: d["paid_up_capital(rs)"],
         authorisedCapital: d["authorised_capital(rs)"],
         directors: result.data["directors/signatory_details"] ?? [],
-      });
+      };
+      await writeVerifyCache("company", `cin:${value}`, payload);
+      return NextResponse.json(payload);
     } catch (err) {
       console.error("[Company verify]", err);
       const { error, status } = mcaError(err);
@@ -78,6 +85,10 @@ export async function POST(req: NextRequest) {
     if (!DIN_PATTERN.test(value)) {
       return NextResponse.json({ error: "Enter a valid 8-digit DIN." }, { status: 400 });
     }
+    const blocked = await guardVerify(req, "company", turnstileToken);
+    if (blocked) return blocked;
+    const cached = await readVerifyCache("company", `din:${value}`);
+    if (cached) return NextResponse.json(cached);
     try {
       const result = await sandboxPost<{
         data: {
@@ -93,13 +104,15 @@ export async function POST(req: NextRequest) {
       });
 
       const d = result.data;
-      return NextResponse.json({
+      const payload = {
         kind: "director",
         din: d.director_data.din,
         name: d.director_data.name,
         companies: d.company_data ?? [],
         llps: d.llp_data ?? [],
-      });
+      };
+      await writeVerifyCache("company", `din:${value}`, payload);
+      return NextResponse.json(payload);
     } catch (err) {
       console.error("[Director verify]", err);
       const { error, status } = mcaError(err);

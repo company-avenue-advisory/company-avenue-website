@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { trackEvent } from "@/lib/gtag";
+import { TurnstileWidget, TURNSTILE_ENABLED } from "@/components/tools/TurnstileWidget";
 import Link from "next/link";
 import {
   Search, Loader2, AlertCircle, AlertTriangle, CheckCircle2, XCircle,
@@ -150,6 +151,8 @@ export function CompanyNameSearch() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<SearchResult | null>(null);
+  const [cfToken, setCfToken] = useState<string | null>(null);
+  const [cfReset, setCfReset] = useState(0);
 
   async function runSearch(query: string) {
     setError(null);
@@ -159,7 +162,7 @@ export function CompanyNameSearch() {
       const res = await fetch("/api/verify/company-name", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: query.trim() }),
+        body: JSON.stringify({ name: query.trim(), turnstileToken: cfToken }),
       });
       const data = await res.json();
       if (!res.ok) setError(data.error ?? "Something went wrong.");
@@ -172,6 +175,7 @@ export function CompanyNameSearch() {
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);
+      setCfReset((n) => n + 1); // Turnstile tokens are single-use
     }
   }
 
@@ -217,13 +221,14 @@ export function CompanyNameSearch() {
           </div>
           <button
             type="submit"
-            disabled={loading || name.trim().length < 3}
+            disabled={loading || name.trim().length < 3 || (TURNSTILE_ENABLED && !cfToken)}
             className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-primary to-secondary text-white text-sm font-heading font-semibold rounded-xl hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition shadow-sm whitespace-nowrap"
           >
             {loading ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
             Check Availability
           </button>
         </form>
+        <TurnstileWidget onToken={setCfToken} resetKey={cfReset} />
 
         {/* Example chips */}
         <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
@@ -231,7 +236,7 @@ export function CompanyNameSearch() {
           {EXAMPLES.map((ex) => (
             <button
               key={ex}
-              onClick={() => { setName(ex); runSearch(ex); }}
+              onClick={() => { setName(ex); if (!TURNSTILE_ENABLED || cfToken) runSearch(ex); }}
               className="px-3 py-1 rounded-full border border-slate-200 text-primary hover:bg-primary/5 hover:border-primary/30 font-medium transition"
             >
               {ex}

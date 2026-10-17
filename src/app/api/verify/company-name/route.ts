@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { lookupExactCompanyName, isDataGovConfigured, type CompanyRecord } from "@/lib/datagovin";
 import { sandboxPost, isSandboxConfigured } from "@/lib/sandbox";
+import { guardVerify, readVerifyCache, writeVerifyCache } from "@/lib/verify-guard";
 
 const SUFFIXES = [" PRIVATE LIMITED", " LIMITED", " LLP", " OPC PRIVATE LIMITED"];
 
@@ -64,12 +65,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Company name search is not configured yet." }, { status: 503 });
   }
 
-  const { name } = await req.json();
+  const { name, turnstileToken } = await req.json();
   const cleaned = String(name ?? "").trim().toUpperCase().replace(/\s+/g, " ");
 
   if (cleaned.length < 3) {
     return NextResponse.json({ error: "Enter at least 3 characters." }, { status: 400 });
   }
+
+  const blocked = await guardVerify(req, "company-name", turnstileToken);
+  if (blocked) return blocked;
+  const cached = await readVerifyCache("company-name", cleaned);
+  if (cached) return NextResponse.json(cached);
 
   // If the user already typed a full legal suffix, only check it as-is —
   // don't stack another suffix on top of it.
@@ -99,7 +105,7 @@ export async function POST(req: NextRequest) {
     );
     const comboAvailable = combos.results.filter((r) => r.records.length === 0).map((r) => r.name);
 
-    return NextResponse.json({
+    const payload = {
       query: cleaned,
       checkedVariants: primaryVariants,
       available: primaryMatches.length === 0,
@@ -109,7 +115,9 @@ export async function POST(req: NextRequest) {
         taken: comboTaken,
         available: comboAvailable,
       },
-    });
+    };
+    await writeVerifyCache("company-name", cleaned, payload);
+    return NextResponse.json(payload);
   } catch (err) {
     console.error("[Company name search]", err);
     return NextResponse.json({ error: "Could not complete the search right now. Please try again." }, { status: 502 });

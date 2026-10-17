@@ -121,9 +121,9 @@ messages, `src/components/AvenueAI.tsx`). It is not written to our database.
 
 | | Consultation leads | Newsletter | Verification tools | AI chat |
 |---|---|---|---|---|
-| **Stored** | Yes | Yes | No | Visitor's browser only |
-| **Where** | MongoDB Atlas, `consultations` | MongoDB Atlas, `newsletter_subscribers` | — | `localStorage` |
-| **Retention** | **Indefinite — no deletion exists** | **Indefinite — no deletion exists** | Not retained by us | Until the visitor clears it |
+| **Stored** | Yes | Yes | PAN: no. GST / MCA / name results: yes (public registry data). Visitor ID for rate limits: yes | Visitor's browser only |
+| **Where** | MongoDB Atlas, `consultations` | MongoDB Atlas, `newsletter_subscribers` | MongoDB Atlas, `verify_cache` (results) and `verify_rate_limits` (salted SHA-256 of the IP, never the raw IP) | `localStorage` |
+| **Retention** | **Indefinite — no deletion exists** | **Indefinite — no deletion exists** | Results 24 hours; visitor ID until its hour window closes. Both deleted by TTL index | Until the visitor clears it |
 | **Access** | Admin console, role-gated | No UI — database only | — | The visitor |
 
 ### Retention — the gap that needs a decision
@@ -160,6 +160,7 @@ is set, and the volume grows daily until it is.
 | **Google Places API** | Live reviews on `/reviews` and the homepage | Nothing about our visitors — outbound lookup of our own profile | |
 | **Newsdata.io** | Industry news feed | Nothing about our visitors | |
 | **Vercel** | Hosting | Request logs, IP addresses | Processor |
+| **Cloudflare Turnstile** | Human check on the verification tools | Visitor IP and browser signals, during the check only; no form field values | Active only when `TURNSTILE_SECRET_KEY` is set. **Terms not reviewed by us.** |
 
 ### Warning: the WhatsApp alert path
 If `WHATSAPP_PROVIDER=callmebot`, every new lead's **name, phone number,
