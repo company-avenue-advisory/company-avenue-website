@@ -117,6 +117,8 @@ Create `src/.env.local` for local dev and mirror the same keys in Vercel.
 | `NEWSDATA_API_KEY` | Live news in the Knowledge Hub | optional |
 | `SANDBOX_API_KEY` / `SANDBOX_API_SECRET` | GST / PAN / MCA verification tools | for verify tools |
 | `DATA_GOV_API_KEY` | Company Name Search | for name search |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile human check on the GST / PAN / MCA / name tools. Both blank = check skipped | recommended |
+| `VERIFY_IP_SALT` | Salt for the hashed visitor ID used by the verify-tool rate limits (any long random string) | recommended |
 | `GOOGLE_PLACES_API_KEY` / `GOOGLE_PLACE_ID` | Real Google reviews on the homepage | for live reviews |
 | `MONGODB_URI` | Consultation form storage (MongoDB Atlas) | **yes** |
 | `MONGODB_DB` | DB name (defaults to `avenue-advisory`) | optional |

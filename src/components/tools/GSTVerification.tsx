@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { trackEvent } from "@/lib/gtag";
+import { TurnstileWidget, TURNSTILE_ENABLED } from "@/components/tools/TurnstileWidget";
 import { Search, Loader2, CheckCircle2, XCircle, AlertCircle } from "lucide-react";
 
 interface GSTResult {
@@ -20,6 +21,8 @@ export function GSTVerification() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<GSTResult | null>(null);
+  const [cfToken, setCfToken] = useState<string | null>(null);
+  const [cfReset, setCfReset] = useState(0);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -30,7 +33,7 @@ export function GSTVerification() {
       const res = await fetch("/api/verify/gst", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ gstin: gstin.trim() }),
+        body: JSON.stringify({ gstin: gstin.trim(), turnstileToken: cfToken }),
       });
       // A gateway or platform-level failure answers with HTML, not JSON.
       // Parsing it unguarded threw, and the catch below then blamed the user's
@@ -54,6 +57,7 @@ export function GSTVerification() {
       setError("Could not reach the verification service. Check your connection and try again.");
     } finally {
       setLoading(false);
+      setCfReset((n) => n + 1); // Turnstile tokens are single-use
     }
   }
 
@@ -72,13 +76,14 @@ export function GSTVerification() {
         />
         <button
           type="submit"
-          disabled={loading || gstin.length !== 15}
+          disabled={loading || gstin.length !== 15 || (TURNSTILE_ENABLED && !cfToken)}
           className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white text-sm font-heading font-semibold rounded-xl hover:bg-primary-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
           Verify GSTIN
         </button>
       </form>
+      <TurnstileWidget onToken={setCfToken} resetKey={cfReset} />
 
       {error && (
         <div className="mt-5 flex items-start gap-2 p-4 bg-red-50 border border-red-100 rounded-xl text-red-700 text-sm">

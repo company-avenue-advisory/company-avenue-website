@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { trackEvent } from "@/lib/gtag";
+import { TurnstileWidget, TURNSTILE_ENABLED } from "@/components/tools/TurnstileWidget";
 import { ShieldCheck, Loader2, CheckCircle2, XCircle, AlertCircle } from "lucide-react";
 
 interface PANResult {
@@ -20,6 +21,8 @@ export function PANVerification() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<PANResult | null>(null);
+  const [cfToken, setCfToken] = useState<string | null>(null);
+  const [cfReset, setCfReset] = useState(0);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -39,7 +42,7 @@ export function PANVerification() {
       const res = await fetch("/api/verify/pan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pan: pan.trim(), name: name.trim(), dob: dobFormatted, consent: "Y" }),
+        body: JSON.stringify({ pan: pan.trim(), name: name.trim(), dob: dobFormatted, consent: "Y", turnstileToken: cfToken }),
       });
       // A gateway or platform-level failure answers with HTML, not JSON.
       // Parsing it unguarded threw, and the catch below then blamed the user's
@@ -63,6 +66,7 @@ export function PANVerification() {
       setError("Could not reach the verification service. Check your connection and try again.");
     } finally {
       setLoading(false);
+      setCfReset((n) => n + 1); // Turnstile tokens are single-use
     }
   }
 
@@ -104,7 +108,7 @@ export function PANVerification() {
         <div className="flex items-end">
           <button
             type="submit"
-            disabled={loading || !isValid}
+            disabled={loading || !isValid || (TURNSTILE_ENABLED && !cfToken)}
             className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white text-sm font-heading font-semibold rounded-xl hover:bg-primary-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           >
             {loading ? <Loader2 size={16} className="animate-spin" /> : <ShieldCheck size={16} />}
@@ -123,6 +127,7 @@ export function PANVerification() {
           for the sole purpose of this check. Details are not stored.
         </label>
       </form>
+      <TurnstileWidget onToken={setCfToken} resetKey={cfReset} />
 
       {error && (
         <div className="mt-5 flex items-start gap-2 p-4 bg-red-50 border border-red-100 rounded-xl text-red-700 text-sm">

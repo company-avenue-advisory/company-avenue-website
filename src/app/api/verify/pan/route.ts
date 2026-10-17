@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sandboxPost, isSandboxConfigured, sandboxErrorResponse } from "@/lib/sandbox";
+import { guardVerify } from "@/lib/verify-guard";
 
 const PAN_PATTERN = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
 const DOB_PATTERN = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/[0-9]{4}$/;
@@ -9,7 +10,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "PAN verification is not configured yet." }, { status: 503 });
   }
 
-  const { pan, name, dob, consent } = await req.json();
+  const { pan, name, dob, consent, turnstileToken } = await req.json();
 
   if (!pan || !PAN_PATTERN.test(String(pan).toUpperCase())) {
     return NextResponse.json({ error: "Enter a valid 10-character PAN." }, { status: 400 });
@@ -23,6 +24,10 @@ export async function POST(req: NextRequest) {
   if (consent !== "Y") {
     return NextResponse.json({ error: "Consent is required to run this verification." }, { status: 400 });
   }
+
+  // PAN results are personal data: rate-limited, never cached.
+  const blocked = await guardVerify(req, "pan", turnstileToken);
+  if (blocked) return blocked;
 
   try {
     const result = await sandboxPost<{
