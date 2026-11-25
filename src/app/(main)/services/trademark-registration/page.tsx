@@ -4,10 +4,10 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/TrademarkPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
+import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Trademark Registration in Delhi | Protect Your Brand",
+  title: fitTitle("Trademark Registration in Delhi | Protect Your Brand"),
   description:
     "Register your trademark in Delhi with expert help. Class search, filing & objection support. Transparent pricing, CA & CS led. Book a free consultation.",
   alternates: { canonical: "/services/trademark-registration" },

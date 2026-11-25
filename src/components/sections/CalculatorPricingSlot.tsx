@@ -11,6 +11,7 @@
  * outside CompanyRegistrationCalculator's six entity types — those still use
  * ServicePricingBlock.
  */
+import { SITE_URL } from "@/lib/seo";
 import { CompanyRegistrationCalculator, type Entity } from "@/components/calculators/CompanyRegistrationCalculator";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getServicePricing, pricingOffers } from "@/lib/pricing";
@@ -35,10 +36,14 @@ export function CalculatorPricingSlot({
         <JsonLd
           data={{
             "@context": "https://schema.org",
-            "@type": "Product",
+            // Service, not Product: these are professional services. Product markup
+            // is read by Google as a merchant listing, which requires image,
+            // shipping and return-policy fields a service can't have — Semrush
+            // flagged every page carrying it as invalid structured data.
+            "@type": "Service",
             name: pricing.label,
             description: `${pricing.label} by Company Avenue Advisory — professional fee ${inr(pricing.price)}, ${pricing.feeNote}.`,
-            brand: { "@type": "Brand", name: "Company Avenue Advisory" },
+            provider: { "@id": `${SITE_URL}/#organization` },
             offers,
           }}
         />

@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/AdvanceTaxPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema, OG_IMAGE } from "@/lib/seo";
+import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/advance-tax" },
-  title: "Advance Tax Calculation & Payment | Section 207-209",
+  title: fitTitle("Advance Tax Calculation & Payment | Section 207-209"),
   description:
     "Expert advance tax calculation and payment services. Avoid 234B/234C interest with timely quarterly instalments. Challan 280 filing, 26AS verification, year-end reconciliation. Starting ₹1,999.",
   keywords: [

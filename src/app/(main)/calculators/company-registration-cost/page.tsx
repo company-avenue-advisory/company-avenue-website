@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Building2 } from "lucide-react";
 import { CompanyRegistrationCalculator } from "@/components/calculators/CompanyRegistrationCalculator";
@@ -10,7 +10,7 @@ import { DSC_PER_PERSON, inr } from "@/lib/calc-fees";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/company-registration-cost" },
-  title: "Business Setup Calculator — Registration Cost India",
+  title: fitTitle("Business Setup Calculator — Registration Cost India"),
   description:
     "Estimate the cost of setting up a business in India — Pvt Ltd, OPC, Section 8, LLP, Partnership Firm or Sole Proprietorship. Government fees, state-wise stamp duty, DSC, professional charges, plus optional GST, MSME and trademark add-ons. Free tool.",
   keywords: [

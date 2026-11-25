@@ -4,10 +4,10 @@ import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSl
 import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/PrivateLimitedPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
+import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Private Limited Company Registration in Delhi | Fast",
+  title: fitTitle("Private Limited Company Registration in Delhi | Fast"),
   description:
     "Register your Pvt Ltd company in Delhi in 7–10 days. CA-led, 100% online, fixed transparent pricing, no hidden fees. Book a free consultation now.",
   alternates: { canonical: "/services/private-limited-company" },

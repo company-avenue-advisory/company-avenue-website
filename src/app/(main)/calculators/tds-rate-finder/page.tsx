@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, FileText } from "lucide-react";
 import { TDSRateFinder } from "@/components/calculators/TDSRateFinder";
@@ -9,7 +9,7 @@ import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/tds-rate-finder" },
-  title: "TDS Rate Finder 2025 — Section, Rate & Threshold",
+  title: fitTitle("TDS Rate Finder 2025 — Section, Rate & Threshold"),
   description:
     "Find TDS rates for any payment type instantly — professional fees (194J), rent (194I), contract (194C), salary (192), and 15+ more. Includes section, threshold, and notes.",
   keywords: [

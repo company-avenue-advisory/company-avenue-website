@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/GstAmendmentPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/gst-amendment" },
-  title: "GST Amendment — Update GST Registration Details",
+  title: fitTitle("GST Amendment — Update GST Registration Details"),
   description:
     "Update your GST registration details — business name, address, authorized signatory, bank account. Core and non-core amendments on GST portal. Starting ₹1,499.",
 };

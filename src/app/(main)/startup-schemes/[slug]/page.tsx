@@ -6,7 +6,7 @@ import { SchemeArticle } from "@/components/schemes/SchemeArticle";
 import { SchemeCard } from "@/components/schemes/scheme-ui";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, canonical, breadcrumbSchema, OG_IMAGE } from "@/lib/seo";
+import { SITE_URL, canonical, breadcrumbSchema, OG_IMAGE, fitTitle, TITLE_MAX } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -23,11 +23,25 @@ export async function generateMetadata({
   const scheme = getScheme(slug);
   if (!scheme) return {};
 
-  const label = scheme.abbr ? `${scheme.name} (${scheme.abbr})` : scheme.name;
+  // Don't repeat an abbreviation the name already contains ("ADITI – … (ADITI)").
+  const label =
+    scheme.abbr && !scheme.name.includes(scheme.abbr)
+      ? `${scheme.name} (${scheme.abbr})`
+      : scheme.name;
+  // Longest title that fits 70 characters; long scheme names fall back to the
+  // abbreviation, then to the bare name.
+  const title =
+    [
+      `${label} — Eligibility, Benefits & How to Apply`,
+      `${label} — Eligibility & How to Apply`,
+      `${label} — How to Apply`,
+      ...(scheme.abbr ? [`${scheme.abbr} Scheme — Eligibility & How to Apply`] : []),
+      label,
+    ].find((t) => t.length <= TITLE_MAX) ?? label;
   const description = `${scheme.headline} Eligibility, benefits, documents, step-by-step application process and CA-led support from Company Avenue Advisory. ${scheme.amount}.`;
 
   return {
-    title: `${label} — Eligibility, Benefits & How to Apply`,
+    title: fitTitle(title),
     description: description.slice(0, 300),
     keywords: [
       `${scheme.name} scheme`,

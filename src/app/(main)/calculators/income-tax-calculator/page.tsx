@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, IndianRupee } from "lucide-react";
 import { IncomeTaxCalculator } from "@/components/calculators/IncomeTaxCalculator";
@@ -10,7 +10,7 @@ import { TaxYearNotice } from "@/components/calculators/TaxYearNotice";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/income-tax-calculator" },
-  title: "Income Tax Calculator FY 2025-26 (AY 2026-27) — Old vs New Regime",
+  title: fitTitle("Income Tax Calculator FY 2025-26 (AY 2026-27) — Old vs New Regime"),
   description:
     "Free income tax calculator for FY 2025-26 (AY 2026-27) — for belated and revised returns for that period. Compare Old vs New regime with Sec 87A rebate, standard deduction, HRA, 80C, 80D. Budget 2025 updated — zero tax up to ₹12L in new regime.",
   keywords: [

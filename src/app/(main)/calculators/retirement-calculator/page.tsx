@@ -1,10 +1,11 @@
+import { fitTitle } from "@/lib/seo";
 import type { Metadata } from "next";
 import { RetirementCalculator } from "@/components/calculators/RetirementCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/retirement-calculator" },
-  title: "Retirement Planning Calculator — Corpus & Monthly SIP",
+  title: fitTitle("Retirement Planning Calculator — Corpus & Monthly SIP"),
   description: "Free retirement planning calculator. Compute the inflation-adjusted corpus you need and the monthly SIP required to retire comfortably.",
   keywords: [
     "retirement calculator",

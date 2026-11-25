@@ -117,6 +117,13 @@ export const LEGACY_REDIRECTS: LegacyRedirect[] = [
   },
   { from: "/contact-us", to: "/contact", verified: true },
   {
+    from: "/services/annual-filing",
+    // Linked from the home, GST filing, ITR and LLP pages until Nov 2026 but
+    // never built — Semrush reported it as a 404 and a broken internal link.
+    to: "/services/roc-compliance",
+    verified: true,
+  },
+  {
     from: "/reviews",
     to: "/reviews",
     verified: true,

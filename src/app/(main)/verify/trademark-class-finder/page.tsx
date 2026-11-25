@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Tag } from "lucide-react";
 import { TrademarkClassFinder } from "@/components/tools/TrademarkClassFinder";
@@ -9,7 +9,7 @@ import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/trademark-class-finder" },
-  title: "Trademark Class Finder — Which NICE Class Fits Your Brand?",
+  title: fitTitle("Trademark Class Finder — Which NICE Class Fits Your Brand?"),
   description:
     "Free trademark class finder for India. Describe your business and instantly see which of the 45 NICE trademark classes it falls under, then check name availability.",
   keywords: ["trademark classes India", "NICE classification trademark", "trademark class finder", "which trademark class"],

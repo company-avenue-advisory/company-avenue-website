@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { breadcrumbSchema, faqSchema, fitTitle } from "@/lib/seo";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 import { TrademarkCostCalculator } from "@/components/calculators/TrademarkCostCalculator";
 
@@ -12,7 +12,7 @@ const FAQS = [
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/trademark-cost-calculator" },
-  title: "Trademark Registration Cost Calculator India 2026",
+  title: fitTitle("Trademark Registration Cost Calculator India 2026"),
   description:
     "Work out exactly what a trademark costs in India — government fee per class, MSME and startup concessions, and our professional fee. Free, instant.",
   keywords: ["trademark registration cost india", "trademark government fee per class", "trademark fee msme startup 4500", "tm-a filing fee", "trademark cost calculator"],

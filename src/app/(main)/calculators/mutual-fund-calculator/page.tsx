@@ -1,10 +1,11 @@
+import { fitTitle } from "@/lib/seo";
 import type { Metadata } from "next";
 import { MutualFundCalculator } from "@/components/calculators/MutualFundCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/mutual-fund-calculator" },
-  title: "Mutual Fund Returns Calculator — SIP & Lumpsum",
+  title: fitTitle("Mutual Fund Returns Calculator — SIP & Lumpsum"),
   description: "Free mutual fund returns calculator supporting both SIP and lumpsum. Estimate maturity value and gains with an interactive breakdown.",
   keywords: [
     "mutual fund calculator",

@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/TradeLicensePage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/trade-license" },
-  title: "Trade License Registration — Municipal Corporation",
+  title: fitTitle("Trade License Registration — Municipal Corporation"),
   description:
     "Obtain a Trade License from your Municipal Corporation before starting business. Mandatory for shops, restaurants, factories, and all commercial establishments. Starting ₹1,499.",
 };

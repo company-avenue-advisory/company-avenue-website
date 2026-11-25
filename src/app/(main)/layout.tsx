@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { organizationSchemaWithRating, websiteSchema } from "@/lib/seo";
+import { organizationSchemaWithRating, websiteSchema, TITLE_SUFFIX } from "@/lib/seo";
 import { fetchPlaceReviews, isGooglePlacesConfigured } from "@/lib/google-places";
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -25,7 +25,7 @@ import { fetchPlaceReviews, isGooglePlacesConfigured } from "@/lib/google-places
 export const metadata: Metadata = {
   title: {
     default: "Company Avenue Advisory Pvt. Ltd. | Business Registration & Compliance Experts",
-    template: "%s | Company Avenue Advisory",
+    template: `%s${TITLE_SUFFIX}`,
   },
   description:
     "India's trusted business compliance partner. Company registration, GST, Income Tax, Trademark, Accounting, Payroll, and Secretarial services for startups and SMEs.",

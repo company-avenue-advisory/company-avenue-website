@@ -9,6 +9,7 @@
  *
  * Renders as section 3 of a service page — right after the quick-facts strip.
  */
+import { SITE_URL } from "@/lib/seo";
 import Link from "next/link";
 import {
   Building2, Scale, Lightbulb, ClipboardCheck, Calculator, IndianRupee,
@@ -50,10 +51,14 @@ export function ServicePricingBlock({ serviceId }: { serviceId: string }) {
         <JsonLd
           data={{
             "@context": "https://schema.org",
-            "@type": "Product",
+            // Service, not Product: these are professional services. Product markup
+            // is read by Google as a merchant listing, which requires image,
+            // shipping and return-policy fields a service can't have — Semrush
+            // flagged every page carrying it as invalid structured data.
+            "@type": "Service",
             name: pricing.label,
             description: `${pricing.label} by Company Avenue Advisory — professional fee ${formatINR(pricing.price)}, ${pricing.feeNote}.`,
-            brand: { "@type": "Brand", name: "Company Avenue Advisory" },
+            provider: { "@id": `${SITE_URL}/#organization` },
             offers,
           }}
         />

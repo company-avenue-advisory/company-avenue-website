@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/ROCCompliancePage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/roc-compliance" },
-  title: "ROC Annual Compliance for Private Limited Companies",
+  title: fitTitle("ROC Annual Compliance for Private Limited Companies"),
   description:
     "Complete ROC annual compliance — AOC-4, MGT-7, board meetings, statutory registers. Avoid MCA penalties up to ₹5 lakh. Expert CA support. Starting ₹4,999/year.",
 };

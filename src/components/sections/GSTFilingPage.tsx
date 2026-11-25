@@ -133,7 +133,7 @@ const complianceJourney = [
   { step: "01", title: "GST Registration",        link: "/services/gst-registration",    desc: "Obtain GSTIN for your business" },
   { step: "02", title: "GST Return Filing",        link: "/services/gst-filing",          desc: "Monthly, quarterly & annual returns", active: true },
   { step: "03", title: "Accounting & Bookkeeping", link: "/services/accounting-bookkeeping", desc: "Accurate books & financial records" },
-  { step: "04", title: "Annual Compliance",        link: "/services/annual-filing",       desc: "ROC filings & statutory compliance" },
+  { step: "04", title: "Annual Compliance",        link: "/services/roc-compliance",      desc: "ROC filings & statutory compliance" },
   { step: "05", title: "Income Tax Filing",        link: "/services/income-tax-return",   desc: "ITR for individuals & businesses" },
 ];
 

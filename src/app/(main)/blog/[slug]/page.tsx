@@ -6,7 +6,7 @@ import { Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, canonical, breadcrumbSchema, PRINCIPAL_ID } from "@/lib/seo";
+import { SITE_URL, canonical, breadcrumbSchema, PRINCIPAL_ID, fitTitle } from "@/lib/seo";
 import { CATEGORY_SERVICE } from "@/lib/content-links";
 import { getRankAiArticle, humanDate, type RankAiArticle } from "@/lib/rank-ai";
 
@@ -36,7 +36,7 @@ export async function generateMetadata({
     if (!a) return {};
     const images = a.imageUrl ? [{ url: a.imageUrl }] : [];
     return {
-      title: a.title,
+      title: fitTitle(a.title),
       description: a.description,
       alternates: canonical(`/blog/${slug}`),
       openGraph: {
@@ -52,7 +52,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title}`,
+    title: fitTitle(post.title),
     description: post.excerpt,
     alternates: canonical(`/blog/${post.slug}`),
     openGraph: {

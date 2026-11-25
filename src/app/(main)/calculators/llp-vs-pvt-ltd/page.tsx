@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Scale } from "lucide-react";
 import { LLPvsPvtLtdTool } from "@/components/calculators/LLPvsPvtLtdTool";
@@ -9,7 +9,7 @@ import { CTABanner } from "@/components/sections/CTABanner";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/llp-vs-pvt-ltd" },
-  title: "LLP vs Private Limited Company — Which is Better?",
+  title: fitTitle("LLP vs Private Limited Company — Which is Better?"),
   description:
     "Compare LLP vs Private Limited Company in India — funding, compliance, taxes, liability, ESOPs, and more. Take our 5-question quiz for a personalized recommendation.",
   keywords: [

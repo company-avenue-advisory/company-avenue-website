@@ -22,7 +22,7 @@ const services = [
   { id: "msme-registration", title: "MSME Registration", desc: "Udyam certificate to unlock government benefits instantly.", icon: Award },
   { id: "iec-registration", title: "Import Export Code (IEC)", desc: "IEC registration for businesses in international trade.", icon: Globe },
   { id: "roc-compliance", title: "ROC Compliance", desc: "Timely MCA filings and secretarial compliance management.", icon: ClipboardList },
-  { id: "annual-filing", title: "Annual Compliance", desc: "Annual returns, board resolutions and statutory filings.", icon: CalendarCheck },
+  { id: "llp-annual-filing", title: "LLP Annual Filing", desc: "Form 8, Form 11 and annual LLP compliance, filed on time.", icon: CalendarCheck },
   { id: "tds-return", title: "TDS Return Filing", desc: "Accurate TDS deductions, challans and quarterly returns.", icon: Calculator },
 ];
 

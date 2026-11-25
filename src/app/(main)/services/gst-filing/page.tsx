@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/GSTFilingPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema, OG_IMAGE } from "@/lib/seo";
+import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/gst-filing" },
-  title: "GST Return Filing Online | GSTR-1, GSTR-3B & Annual GST Returns",
+  title: fitTitle("GST Return Filing Online | GSTR-1, GSTR-3B & Annual GST Returns"),
   description:
     "File GST returns online with expert assistance. Learn about GSTR-1, GSTR-3B, annual GST returns, due dates, penalties, compliance requirements, and filing timelines.",
   keywords: [
