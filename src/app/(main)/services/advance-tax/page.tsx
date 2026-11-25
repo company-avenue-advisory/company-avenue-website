@@ -8,7 +8,7 @@ import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/advance-tax" },
-  title: fitTitle("Advance Tax Calculation & Payment | Section 207-209"),
+  title: fitTitle("Advance Tax Calculation & Payment | Quarterly Instalments"),
   description:
     "Expert advance tax calculation and payment services. Avoid 234B/234C interest with timely quarterly instalments. Challan 280 filing, 26AS verification, year-end reconciliation. Starting ₹1,999.",
   keywords: [
