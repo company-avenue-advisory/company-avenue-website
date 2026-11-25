@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/DrugLicensePage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/drug-license" },
-  title: "Drug License Registration — Retail & Wholesale",
+  title: fitTitle("Drug License Registration — Retail & Wholesale"),
   description:
     "Obtain Drug License under the Drugs & Cosmetics Act 1940. Retail, wholesale, and manufacturing licenses. Pharmacies, distributors, importers. Starting ₹5,499.",
 };

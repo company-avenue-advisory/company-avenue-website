@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/MSMERegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema, OG_IMAGE } from "@/lib/seo";
+import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/msme-registration" },
-  title: "MSME / Udyam Registration Online | Collateral-Free Loans & Govt. Schemes | Company Avenue",
+  title: fitTitle("MSME / Udyam Registration Online | Benefits & Govt. Schemes"),
   description:
     "Register your business under Udyam (MSME) and unlock collateral-free loans, government subsidies, priority procurement, and 20+ exclusive schemes. ₹0 government fee. Certificate in 1 business day.",
   keywords: [

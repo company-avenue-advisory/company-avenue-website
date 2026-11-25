@@ -171,7 +171,7 @@ const complianceJourney = [
   { step: "02", title: "GST Compliance",         link: "/services/gst-filing",        desc: "Monthly & annual GST return filing" },
   { step: "03", title: "Accounting & Bookkeeping",link: "/services/accounting-bookkeeping", desc: "Accurate books & financial records" },
   { step: "04", title: "Payroll Management",     link: "/services/payroll-management",desc: "Salaries, PF, ESIC compliance" },
-  { step: "05", title: "Annual Compliance",      link: "/services/annual-filing",     desc: "ROC filings & statutory compliance" },
+  { step: "05", title: "Annual Compliance",      link: "/services/roc-compliance",    desc: "ROC filings & statutory compliance" },
   { step: "06", title: "Business Growth",        link: "/services",                   desc: "Complete business advisory support" },
 ];
 

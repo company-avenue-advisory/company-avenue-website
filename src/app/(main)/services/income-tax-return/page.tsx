@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/ITRPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema, OG_IMAGE } from "@/lib/seo";
+import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/income-tax-return" },
-  title: "Income Tax Return (ITR) Filing Online | Expert Tax Filing Services",
+  title: fitTitle("Income Tax Return (ITR) Filing Online | Expert Tax Filing Services"),
   description:
     "File your Income Tax Return online with Company Avenue Advisory. Understand ITR forms, eligibility, required documents, due dates, deductions, refunds, and expert tax filing services.",
   keywords: [

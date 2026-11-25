@@ -4,11 +4,11 @@ import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSl
 import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/LLPPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema, OG_IMAGE } from "@/lib/seo";
+import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/llp-registration" },
-  title: "LLP Registration in India | Limited Liability Partnership",
+  title: fitTitle("LLP Registration in India | Limited Liability Partnership"),
   description:
     "Register your Limited Liability Partnership (LLP) in India with expert CAs. Complete assistance with DSC, DPIN, name reservation, MCA incorporation, PAN, TAN. 7–10 working days. 100% online.",
   keywords: [

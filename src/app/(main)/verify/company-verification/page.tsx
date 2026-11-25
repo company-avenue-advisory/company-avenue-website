@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, Building2 } from "lucide-react";
 import { CompanyVerification } from "@/components/tools/CompanyVerification";
@@ -9,7 +9,7 @@ import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/company-verification" },
-  title: "Company & Director Verification — CIN/DIN Lookup",
+  title: fitTitle("Company & Director Verification — CIN/DIN Lookup"),
   description:
     "Free MCA lookup tool. Verify any company by CIN/LLPIN or any director by DIN — get incorporation date, status, capital structure, and appointment history.",
   keywords: ["CIN verification", "DIN lookup", "MCA company search", "company verification India", "director verification"],

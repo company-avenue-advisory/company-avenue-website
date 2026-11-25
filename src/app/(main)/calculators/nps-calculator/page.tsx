@@ -1,10 +1,11 @@
+import { fitTitle } from "@/lib/seo";
 import type { Metadata } from "next";
 import { NPSCalculator } from "@/components/calculators/NPSCalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/nps-calculator" },
-  title: "NPS Calculator — National Pension System Corpus & Pension",
+  title: fitTitle("NPS Calculator — National Pension System Corpus & Pension"),
   description: "Free NPS calculator. Estimate your National Pension System corpus at 60, lumpsum withdrawal, annuity amount and monthly pension.",
   keywords: [
     "NPS calculator",

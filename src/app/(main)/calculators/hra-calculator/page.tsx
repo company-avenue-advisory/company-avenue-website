@@ -1,10 +1,11 @@
+import { fitTitle } from "@/lib/seo";
 import type { Metadata } from "next";
 import { HRACalculator } from "@/components/calculators/HRACalculator";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/hra-calculator" },
-  title: "HRA Calculator — House Rent Allowance Exemption",
+  title: fitTitle("HRA Calculator — House Rent Allowance Exemption"),
   description: "Calculate your HRA exemption under Section 10(13A). Enter basic salary, HRA received, rent paid and city to see your taxable and exempt HRA.",
   keywords: [
     "HRA calculator",

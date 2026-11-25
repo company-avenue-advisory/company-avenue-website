@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
 import {
   ChevronRight, Search, ShieldCheck, Database, AlertTriangle, Zap, Gift,
@@ -14,7 +14,7 @@ import { CompanyNameFAQ } from "@/components/tools/CompanyNameFAQ";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/company-name-search" },
-  title: "Company Name Search & Availability Check Online India (Free)",
+  title: fitTitle("Company Name Search & Availability Check Online India (Free)"),
   description:
     "Free company name search and availability checker for India. Instantly check if your proposed Private Limited, LLP, OPC or Limited company name is already registered with the MCA — powered by real Ministry of Corporate Affairs data.",
   keywords: [

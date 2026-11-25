@@ -4,10 +4,10 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/GSTPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
+import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "GST Registration in Delhi | Get GSTIN Online Fast",
+  title: fitTitle("GST Registration Online in India | Get Your GSTIN Fast"),
   description:
     "Get your GSTIN in Delhi quickly with expert CAs. 100% online GST registration, document help, transparent pricing. Free consultation — chat on WhatsApp.",
   alternates: { canonical: "/services/gst-registration" },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "GST consultant Delhi",
   ],
   openGraph: {
-    title: "GST Registration in Delhi | Get GSTIN Online Fast",
+    title: "GST Registration Online in India | Get Your GSTIN Fast",
     description:
       "Get your GSTIN in Delhi quickly with expert CAs. 100% online, transparent pricing, document help.",
     type: "website",

@@ -10,6 +10,17 @@ import {
 
 export const SITE_URL = "https://companyavenueadvisory.com";
 
+/**
+ * Page <title> that stays within 70 characters. The (main) layout appends
+ * TITLE_SUFFIX to every title; when that would push past the limit, the title
+ * is emitted on its own (`absolute`) instead. Keep the two in sync.
+ */
+export const TITLE_SUFFIX = " | Company Avenue Advisory";
+export const TITLE_MAX = 70;
+export function fitTitle(title: string): string | { absolute: string } {
+  return title.length + TITLE_SUFFIX.length <= TITLE_MAX ? title : { absolute: title };
+}
+
 // wa.me requires digits only, no "+" or spaces
 export const WHATSAPP_NUMBER = CONTACT.whatsappDigits;
 export const PHONE_E164 = CONTACT.phoneE164;

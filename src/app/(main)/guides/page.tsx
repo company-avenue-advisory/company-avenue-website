@@ -1,3 +1,4 @@
+import { fitTitle } from "@/lib/seo";
 import type { Metadata } from "next";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { GuidesClient } from "./GuidesClient";
@@ -5,7 +6,7 @@ import { GUIDES } from "@/lib/guides";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/guides" },
-  title: "How-To Guides — Registration, GST, Tax & Compliance",
+  title: fitTitle("How-To Guides — Registration, GST, Tax & Compliance"),
   description:
     "Step-by-step, CA-reviewed guides for Indian businesses: how to register a Private Limited Company in Delhi, GST for freelancers, trademark registration, MSME/Udyam, Startup India (DPIIT), ITR filing and more — with official government sources.",
   keywords: [

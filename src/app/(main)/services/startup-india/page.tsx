@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/StartupIndiaPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema, OG_IMAGE } from "@/lib/seo";
+import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/startup-india" },
-  title: "Startup India Registration | DPIIT Recognition | Company Avenue",
+  title: fitTitle("Startup India Registration | DPIIT Recognition"),
   description:
     "Register your startup under the Startup India initiative with expert DPIIT recognition assistance. Unlock tax exemptions, angel tax relief, funding benefits, patent support, and government incentives with Company Avenue.",
   keywords: [

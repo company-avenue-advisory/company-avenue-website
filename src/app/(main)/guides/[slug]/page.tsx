@@ -5,7 +5,7 @@ import { GUIDES } from "@/lib/guides";
 import { GuideArticle } from "@/components/guides/GuideArticle";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, canonical, breadcrumbSchema, faqSchema, OG_IMAGE } from "@/lib/seo";
+import { SITE_URL, canonical, breadcrumbSchema, faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -23,7 +23,7 @@ export async function generateMetadata({
   if (!guide) return {};
 
   return {
-    title: `${guide.title} | Step-by-Step Guide`,
+    title: fitTitle(guide.title),
     description: guide.excerpt,
     alternates: canonical(`/guides/${guide.slug}`),
     openGraph: {

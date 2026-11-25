@@ -86,7 +86,34 @@ export async function getRankAiArticle(slug: string): Promise<RankAiArticle | nu
   const a = await getJson(`${API}/article/${encodeURIComponent(slug)}`);
   const s = summary(a);
   if (!s || typeof a.content !== "string") return null;
-  return { ...s, content: a.content };
+  return {
+    ...s,
+    description: s.description || excerpt(a.content),
+    content: withImageAlts(a.content, s.title),
+  };
+}
+
+/**
+ * Rank.ai often ships an article with no meta description. Fall back to the
+ * opening text of the body so the page never goes out without one.
+ */
+function excerpt(html: string, max = 155): string {
+  const text = html
+    .replace(/<(script|style)[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\s]+$/, "") + "…";
+}
+
+/** Rank.ai body images arrive without alt text; label them with the article title. */
+function withImageAlts(html: string, title: string): string {
+  const alt = title.replace(/"/g, "&quot;");
+  return html.replace(/<img\b(?![^>]*\balt=)/gi, `<img alt="${alt}"`);
 }
 
 /** "2026-10-17T…" → "17 Oct 2026", matching the dates in blog-posts.ts. */

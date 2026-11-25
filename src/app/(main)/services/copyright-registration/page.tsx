@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/CopyrightRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/copyright-registration" },
-  title: "Copyright Registration in India — Books, Software, Music, Films",
+  title: fitTitle("Copyright Registration in India — Books, Software, Music, Films"),
   description:
     "Register copyright for literary works, software, music, films, and artwork under the Copyright Act 1957. Protection for life + 60 years across 170+ Berne Convention countries. Starting ₹7,999.",
 };

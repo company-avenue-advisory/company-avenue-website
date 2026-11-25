@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_URL, canonical, breadcrumbSchema, faqSchema, serviceSchema, OG_IMAGE } from "@/lib/seo";
+import { SITE_URL, canonical, breadcrumbSchema, faqSchema, serviceSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 import { COMPANY } from "@/lib/constants";
 import {
   SCHEMES,
@@ -50,7 +50,7 @@ const stats = schemeStats();
 const SCHEME_SUMMARIES = SCHEMES.map(toSummary);
 
 export const metadata: Metadata = {
-  title: "Government Startup Schemes & Grants in India — Complete 2026 Directory",
+  title: fitTitle("Government Startup Schemes & Grants in India — Complete 2026 Directory"),
   description:
     `All ${stats.total} Central Government schemes, grants and funding programmes for Indian startups in one place — SISFS, CGSS, BIG, iDEX, PRAYAS, MUDRA, CGTMSE, Startup India Seed Fund and more. Eligibility, how to apply, timelines and CA-led application support from Company Avenue Advisory.`,
   keywords: [

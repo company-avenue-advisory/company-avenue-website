@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/DesignRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/design-registration" },
-  title: "Design Registration in India — Designs Act 2000",
+  title: fitTitle("Design Registration in India — Designs Act 2000"),
   description:
     "Protect your product's visual appearance — shape, pattern, and ornamentation — under the Designs Act 2000. Up to 15 years of exclusive protection. Starting ₹9,999 (excl. govt fees).",
 };

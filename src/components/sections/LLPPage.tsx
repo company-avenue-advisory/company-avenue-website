@@ -169,7 +169,7 @@ const relatedServices = [
   { id: "trademark-registration",   title: "Trademark Registration",   desc: "Protect your brand name." },
   { id: "accounting-bookkeeping",   title: "Accounting Services",       desc: "Books, MIS and statements." },
   { id: "startup-india",            title: "Startup India",             desc: "DPIIT recognition & benefits." },
-  { id: "annual-filing",            title: "Annual Compliance",         desc: "Form 11, Form 8 & ITR filing." },
+  { id: "llp-annual-filing",        title: "Annual Compliance",         desc: "Form 11, Form 8 & ITR filing." },
 ];
 
 /* ─── FAQ accordion item ─── */

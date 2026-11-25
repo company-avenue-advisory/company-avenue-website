@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/AccountingBookkeepingPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema, OG_IMAGE } from "@/lib/seo";
+import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/accounting-bookkeeping" },
-  title: "Professional Accounting & Bookkeeping Services | Company Avenue",
+  title: fitTitle("Professional Accounting & Bookkeeping Services"),
   description:
     "Outsource your accounting to qualified CAs. Get error-free books, monthly P&L reports, GST accounting, payroll management, and end-to-end financial compliance. Starting at ₹2,999/month.",
   keywords: [

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
 import { ChevronRight, ShieldCheck } from "lucide-react";
 import { PANVerification } from "@/components/tools/PANVerification";
@@ -9,7 +9,7 @@ import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/pan-verification" },
-  title: "PAN Verification Online — Verify PAN Card Details",
+  title: fitTitle("PAN Verification Online — Verify PAN Card Details"),
   description:
     "Free PAN verification tool. Confirm a PAN number matches the given name and date of birth, and check Aadhaar-seeding status — with explicit consent.",
   keywords: ["PAN verification online", "verify PAN card", "PAN card status check", "PAN Aadhaar link status"],

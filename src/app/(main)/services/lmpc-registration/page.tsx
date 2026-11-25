@@ -4,11 +4,11 @@ import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
 import { faqs as serviceFaqs } from "@/lib/faqs/LMPCRegistrationPage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema } from "@/lib/seo";
+import { faqSchema, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/lmpc-registration" },
-  title: "LMPC Registration — Legal Metrology Packaged Commodities",
+  title: fitTitle("LMPC Registration — Legal Metrology Packaged Commodities"),
   description:
     "Register under Legal Metrology (Packaged Commodities) Rules 2011 — mandatory for manufacturers, packers, and importers of pre-packaged goods in India. Label compliance + registration. Starting ₹3,999.",
 };
