@@ -37,7 +37,7 @@ export function FAQ() {
               </p>
               <div className="space-y-2">
                 <a
-                  href={`https://wa.me/${COMPANY.whatsapp}`}
+                  href="/whatsapp"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm font-heading font-semibold text-primary hover:underline"

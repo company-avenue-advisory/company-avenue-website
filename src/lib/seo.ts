@@ -12,21 +12,36 @@ export const SITE_URL = "https://companyavenueadvisory.com";
 
 /**
  * Page <title> that stays within 70 characters. The (main) layout appends
- * TITLE_SUFFIX to every title; when that would push past the limit, the title
- * is emitted on its own (`absolute`) instead. Keep the two in sync.
+ * TITLE_SUFFIX to every title; when that would push past the limit, a shorter
+ * brand suffix is used instead. A brand suffix is always kept where it fits,
+ * so the <title> never repeats the page's <h1> word for word (Semrush
+ * "duplicate content in h1 and title").
  */
 export const TITLE_SUFFIX = " | Company Avenue Advisory";
 export const TITLE_MAX = 70;
+const SHORT_SUFFIXES = [" | Company Avenue", " | CAA"];
 export function fitTitle(title: string): string | { absolute: string } {
-  return title.length + TITLE_SUFFIX.length <= TITLE_MAX ? title : { absolute: title };
+  if (title.length + TITLE_SUFFIX.length <= TITLE_MAX) return title;
+  const short = SHORT_SUFFIXES.find((s) => title.length + s.length <= TITLE_MAX);
+  return { absolute: short ? title + short : title };
 }
 
 // wa.me requires digits only, no "+" or spaces
 export const WHATSAPP_NUMBER = CONTACT.whatsappDigits;
 export const PHONE_E164 = CONTACT.phoneE164;
 
+/**
+ * Site links to WhatsApp go through /whatsapp (302 to wa.me, disallowed in
+ * robots.txt). WhatsApp answers crawlers with 429, so direct wa.me links were
+ * reported as ~300 broken external links on every site audit.
+ */
 export function waLink(message: string): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  return `/whatsapp?text=${encodeURIComponent(message)}`;
+}
+
+export function waDirect(message?: string): string {
+  const q = message ? `?text=${encodeURIComponent(message)}` : "";
+  return `https://wa.me/${WHATSAPP_NUMBER}${q}`;
 }
 
 /**

@@ -20,7 +20,7 @@ const AI_CRAWLERS = [
   "cohere-ai",
 ];
 
-const DISALLOW = ["/admin", "/api/", "/thank-you"];
+const DISALLOW = ["/admin", "/api/", "/thank-you", "/whatsapp"];
 
 export default function robots(): MetadataRoute.Robots {
   return {

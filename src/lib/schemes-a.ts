@@ -771,7 +771,6 @@ export const SCHEMES_STARTUP_SPECIFIC: Scheme[] = [
     ],
     links: [
       { label: "RDI Fund — ANRF", href: "https://rdifund.anrf.gov.in/" },
-      { label: "Operational guidelines (PDF)", href: "https://rdifund.anrf.gov.in/images/pdf/2026_IG.pdf" },
     ],
   },
 
@@ -848,7 +847,7 @@ export const SCHEMES_STARTUP_SPECIFIC: Scheme[] = [
     ],
     links: [
       { label: "National Quantum Mission", href: "https://www.psa.gov.in/mission/national-quantum-mission/26" },
-      { label: "Startup support guidelines (PDF)", href: "https://dst.gov.in/sites/default/files/Guidelines%20to%20support%20start-ups.pdf" },
+      { label: "Department of Science & Technology", href: "https://dst.gov.in/" },
     ],
   },
 

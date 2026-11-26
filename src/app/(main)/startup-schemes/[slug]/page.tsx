@@ -36,6 +36,7 @@ export async function generateMetadata({
       `${label} — Eligibility & How to Apply`,
       `${label} — How to Apply`,
       ...(scheme.abbr ? [`${scheme.abbr} Scheme — Eligibility & How to Apply`] : []),
+      `${scheme.name.split(/ [–—-] /)[0]} — Eligibility & How to Apply`,
       label,
     ].find((t) => t.length <= TITLE_MAX) ?? label;
   const description = `${scheme.headline} Eligibility, benefits, documents, step-by-step application process and CA-led support from Company Avenue Advisory. ${scheme.amount}.`;

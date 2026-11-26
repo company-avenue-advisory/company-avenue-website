@@ -328,7 +328,7 @@ export function ContactPage() {
               </div>
 
               <a
-                href={`https://wa.me/${COMPANY.whatsapp}`}
+                href="/whatsapp"
                 data-track="whatsapp"
                 target="_blank"
                 rel="noopener noreferrer"
