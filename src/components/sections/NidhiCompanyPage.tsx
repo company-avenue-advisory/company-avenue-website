@@ -545,7 +545,7 @@ export function NidhiCompanyPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                 <Link href="/contact" className="flex items-center justify-center gap-2 w-full py-2.5 border border-primary text-primary text-xs font-heading font-semibold rounded-xl hover:bg-primary/5 transition-colors">
                   Book Consultation
                 </Link>
-                <a href="https://wa.me/919953719111" data-track="whatsapp" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors">
+                <a href="/whatsapp" data-track="whatsapp" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors">
                   <MessageCircle size={13} /> WhatsApp
                 </a>
               </div>

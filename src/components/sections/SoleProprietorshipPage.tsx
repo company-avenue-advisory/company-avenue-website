@@ -592,7 +592,7 @@ export function SoleProprietorshipPage({ pricingSlot, calcPill }: { pricingSlot?
                 >
                   Book Consultation
                 </Link>
-                <a href="https://wa.me/919953719111" data-track="whatsapp" target="_blank" rel="noopener noreferrer"
+                <a href="/whatsapp" data-track="whatsapp" target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors"
                 >
                   <MessageCircle size={13} /> WhatsApp

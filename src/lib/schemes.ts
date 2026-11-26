@@ -454,7 +454,7 @@ export const PSU_INITIATIVES: { org: string; initiative: string; href: string }[
   { org: "SAIL", initiative: "Startup Connect", href: "https://webapp.sailcorp.in/startup/" },
   { org: "Oil India", initiative: "Start Up Fund", href: "https://www.oil-india.com/start-fund" },
   { org: "Engineers India", initiative: "EngSUI", href: "https://www6.eil.co.in/engsui/Open/Default.aspx" },
-  { org: "Bharat Dynamics", initiative: "BDL Start Ups", href: "https://bdl-india.in/en/start-ups" },
+  { org: "Bharat Dynamics", initiative: "BDL Start Ups", href: "https://bdl-india.in/" },
   { org: "EXIM Bank", initiative: "Ubharte Sitaare", href: "https://www.sidbiventure.co.in/ubharte_sitaare_fund.html" },
   { org: "Reserve Bank of India", initiative: "Regulatory Sandbox", href: "https://fintech.rbi.org.in/FS_Publications?id=1262" },
   { org: "IRDAI", initiative: "Regulatory Sandbox", href: "https://irdai.gov.in/document-detail?documentId=6541188" },

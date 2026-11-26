@@ -196,7 +196,7 @@ function StickySidebar() {
             Book Free Consultation
           </Link>
           <a
-            href="https://wa.me/919953719111" data-track="whatsapp"
+            href="/whatsapp" data-track="whatsapp"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-green-500 text-white text-xs font-heading font-semibold rounded-xl hover:bg-green-600 transition-colors"
@@ -941,7 +941,7 @@ export function VirtualCFOPage({ pricingSlot, calcPill }: { pricingSlot?: ReactN
               </div>
               <div>
                 <p className="font-heading font-bold text-dark text-sm">WhatsApp</p>
-                <a href="https://wa.me/919953719111" data-track="whatsapp" target="_blank" rel="noopener noreferrer" className="text-green-600 text-xs font-heading font-semibold hover:underline">
+                <a href="/whatsapp" data-track="whatsapp" target="_blank" rel="noopener noreferrer" className="text-green-600 text-xs font-heading font-semibold hover:underline">
                   Chat Now
                 </a>
               </div>

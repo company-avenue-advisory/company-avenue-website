@@ -412,7 +412,7 @@ export function AvenueAI() {
             so the floating FAB can be compared against the sticky bar. */}
         <motion.a
           data-track-position="floating_fab"
-          href={`https://wa.me/${COMPANY.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi, I need help with company registration / compliance.")}`}
+          href={`/whatsapp?text=${encodeURIComponent("Hi, I need help with company registration / compliance.")}`}
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.08 }}

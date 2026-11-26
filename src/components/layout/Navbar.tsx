@@ -424,7 +424,7 @@ export function Navbar() {
                   className="flex items-center gap-3 w-full px-4 py-3 bg-primary/5 rounded-xl text-sm font-heading font-medium text-primary hover:bg-primary/10 transition-colors">
                   <Phone size={15} /> {COMPANY.phone}
                 </a>
-                <a href={`https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`} data-track="whatsapp"
+                <a href={"/whatsapp"} data-track="whatsapp"
                   target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-3 w-full px-4 py-3 bg-green-50 rounded-xl text-sm font-heading font-medium text-green-700 hover:bg-green-100 transition-colors">
                   <MessageCircle size={15} className="text-green-600" /> WhatsApp Us
@@ -573,7 +573,7 @@ function SimpleDropdown({ groups, showViewAll, onClose }: {
 function GetHelpDropdown({ onClose }: { onClose: () => void }) {
   const options = [
     { icon: Phone, label: "Call Us", sub: COMPANY.phone, href: `tel:${COMPANY.phone}`, iconBg: "bg-primary/8", iconColor: "text-primary" },
-    { icon: MessageCircle, label: "WhatsApp", sub: COMPANY.whatsapp, href: `https://wa.me/${COMPANY.whatsapp.replace(/[^0-9]/g, "")}`, iconBg: "bg-green-50", iconColor: "text-green-600", external: true },
+    { icon: MessageCircle, label: "WhatsApp", sub: COMPANY.whatsapp, href: "/whatsapp", iconBg: "bg-green-50", iconColor: "text-green-600", external: true },
     { icon: Mail, label: "Email Us", sub: COMPANY.email, href: `mailto:${COMPANY.email}`, iconBg: "bg-accent/8", iconColor: "text-accent" },
   ];
   return (

@@ -359,7 +359,7 @@ export const GUIDES: Guide[] = [
       },
     ],
     sources: [
-      { label: "IP India — Trademarks", href: "https://ipindia.gov.in/trade-marks.htm" },
+      { label: "IP India — Trademarks", href: "https://ipindia.gov.in/" },
       { label: "IP India — Public Search", href: "https://tmrsearch.ipindia.gov.in/tmrpublicsearch/" },
     ],
     relatedService: { label: "Trademark Registration Service", href: "/services/trademark-registration" },

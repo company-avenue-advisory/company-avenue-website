@@ -89,7 +89,7 @@ export async function getRankAiArticle(slug: string): Promise<RankAiArticle | nu
   return {
     ...s,
     description: s.description || excerpt(a.content),
-    content: withImageAlts(a.content, s.title),
+    content: fixDeadLinks(withImageAlts(a.content, s.title)),
   };
 }
 
@@ -108,6 +108,25 @@ function excerpt(html: string, max = 155): string {
   if (text.length <= max) return text;
   const cut = text.slice(0, max);
   return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\s]+$/, "") + "…";
+}
+
+/**
+ * Official pages Rank.ai articles link to that now return 404 (Semrush,
+ * 26 Nov 2026). Pointed at the live section index on the same portal.
+ */
+const DEAD_LINKS: Record<string, string> = {
+  "https://tutorial.gst.gov.in/userguide/registration/FAQs_Aadhaar_Authentication.htm":
+    "https://tutorial.gst.gov.in/userguide/registration/index.htm",
+  "https://tutorial.gst.gov.in/userguide/returns/FAQs_change_profile.htm":
+    "https://tutorial.gst.gov.in/userguide/returns/index.htm",
+  "https://tutorial.gst.gov.in/downloads/news/welcome_kit_for_new_taxpyers.pdf":
+    "https://tutorial.gst.gov.in/userguide/registration/index.htm",
+};
+
+function fixDeadLinks(html: string): string {
+  return html.replace(/href="([^"]+)"/g, (m, url: string) =>
+    DEAD_LINKS[url] ? `href="${DEAD_LINKS[url]}"` : m,
+  );
 }
 
 /** Rank.ai body images arrive without alt text; label them with the article title. */

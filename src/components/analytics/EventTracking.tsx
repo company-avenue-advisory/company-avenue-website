@@ -105,7 +105,8 @@ export function EventTracking() {
       }
 
       // Covers wa.me, api.whatsapp.com and web.whatsapp.com send links.
-      if (/(^https?:\/\/)?(wa\.me|(api|web)\.whatsapp\.com)\//i.test(href)) {
+      // Also the on-site /whatsapp hand-off route that redirects to wa.me.
+      if (/^\/whatsapp(\?|$)|(^https?:\/\/)?(wa\.me|(api|web)\.whatsapp\.com)\//i.test(href)) {
         trackEvent("whatsapp_click", { page_path, link_position: position });
       }
     }
