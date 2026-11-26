@@ -111,21 +111,26 @@ function excerpt(html: string, max = 155): string {
 }
 
 /**
- * Official pages Rank.ai articles link to that now return 404 (Semrush,
- * 26 Nov 2026). Pointed at the live section index on the same portal.
+ * Official pages Rank.ai articles link to that return 404 (Semrush,
+ * 26 Nov 2026). tutorial.gst.gov.in answers crawlers with 404 on every
+ * page, so these point at the GST portal's help section instead.
  */
 const DEAD_LINKS: Record<string, string> = {
   "https://tutorial.gst.gov.in/userguide/registration/FAQs_Aadhaar_Authentication.htm":
-    "https://tutorial.gst.gov.in/userguide/registration/index.htm",
+    "https://www.gst.gov.in/help",
   "https://tutorial.gst.gov.in/userguide/returns/FAQs_change_profile.htm":
-    "https://tutorial.gst.gov.in/userguide/returns/index.htm",
+    "https://www.gst.gov.in/help",
   "https://tutorial.gst.gov.in/downloads/news/welcome_kit_for_new_taxpyers.pdf":
-    "https://tutorial.gst.gov.in/userguide/registration/index.htm",
+    "https://www.gst.gov.in/help",
 };
 
 function fixDeadLinks(html: string): string {
   return html.replace(/href="([^"]+)"/g, (m, url: string) =>
-    DEAD_LINKS[url] ? `href="${DEAD_LINKS[url]}"` : m,
+    DEAD_LINKS[url]
+      ? `href="${DEAD_LINKS[url]}"`
+      : url.startsWith("https://tutorial.gst.gov.in/")
+        ? `href="https://www.gst.gov.in/help"`
+        : m,
   );
 }
 

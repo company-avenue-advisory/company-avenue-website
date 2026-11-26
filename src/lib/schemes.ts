@@ -463,7 +463,7 @@ export const PSU_INITIATIVES: { org: string; initiative: string; href: string }[
 ];
 
 export const STATE_PORTALS: { state: string; href: string }[] = [
-  { state: "Andhra Pradesh", href: "https://apis.ap.gov.in/home/" },
+  { state: "Andhra Pradesh", href: "https://www.startupindia.gov.in/content/sih/en/state-startup-policies/Andhra-Pradesh-state-policy.html" },
   { state: "Arunachal Pradesh", href: "https://www.startup.arunachal.gov.in/startup-policy" },
   { state: "Assam", href: "http://startup.assam.gov.in/" },
   { state: "Bihar", href: "https://startup.bihar.gov.in/" },
@@ -494,7 +494,7 @@ export const STATE_PORTALS: { state: string; href: string }[] = [
   { state: "Tripura", href: "https://startup.tripura.gov.in/" },
   { state: "Uttar Pradesh", href: "https://startinup.up.gov.in/" },
   { state: "Uttarakhand", href: "https://startuputtarakhand.uk.gov.in/" },
-  { state: "West Bengal", href: "https://www.startupbengal.in/" },
+  { state: "West Bengal", href: "https://www.startupindia.gov.in/content/sih/en/state-startup-policies/West-Bengal-state-policy.html" },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
