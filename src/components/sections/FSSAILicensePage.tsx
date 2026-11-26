@@ -268,24 +268,24 @@ export function FSSAILicensePage({ pricingSlot, calcPill }: { pricingSlot?: Reac
           </nav>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show"
+              <motion.div custom={0} variants={fadeUp} initial={false} animate="show"
                 className="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-6"
               >
                 {[...Array(5)].map((_, i) => <Star key={i} size={11} className="text-amber-400 fill-amber-400" />)}
                 <span className="text-amber-700 text-xs font-heading font-semibold">FSSAI Experts • 2,000+ Licenses Filed</span>
               </motion.div>
-              <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
+              <motion.h1 custom={1} variants={fadeUp} initial={false} animate="show"
                 className="font-heading font-bold text-[2.4rem] md:text-5xl leading-[1.15] tracking-tight text-dark mb-5"
               >
                 FSSAI Food License<br /><span className="text-primary">Registration Made Easy</span>
               </motion.h1>
               {calcPill}
-              <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
+              <motion.p custom={2} variants={fadeUp} initial={false} animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >
                 Legally operate your food business with the right FSSAI license — Basic, State, or Central. Mandatory for restaurants, cloud kitchens, Zomato/Swiggy, manufacturers, and all food businesses in India.
               </motion.p>
-              <motion.div custom={3} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap gap-3 mb-10">
+              <motion.div custom={3} variants={fadeUp} initial={false} animate="show" className="flex flex-wrap gap-3 mb-10">
                 <Link href="/contact"
                   className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-heading font-semibold text-sm rounded-xl hover:bg-[#0a2444] transition-colors shadow-sm"
                 >
@@ -297,7 +297,7 @@ export function FSSAILicensePage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                   <Phone size={14} /> Free Consultation
                 </a>
               </motion.div>
-              <motion.div custom={4} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap gap-x-5 gap-y-2">
+              <motion.div custom={4} variants={fadeUp} initial={false} animate="show" className="flex flex-wrap gap-x-5 gap-y-2">
                 {["All License Types", "FOSCOS Portal Filing", "Document Support", "PAN India Service"].map(pt => (
                   <div key={pt} className="flex items-center gap-1.5">
                     <CheckCircle size={13} className="text-primary" />
@@ -307,7 +307,7 @@ export function FSSAILicensePage({ pricingSlot, calcPill }: { pricingSlot?: Reac
               </motion.div>
             </div>
             <motion.div
-              initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }}
+              initial={false} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }} className="relative"
             >
               <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-3xl shadow-[0_12px_60px_rgba(15,45,82,0.12)] p-6 max-w-md mx-auto">
@@ -328,7 +328,7 @@ export function FSSAILicensePage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                 <div className="space-y-2.5 mb-5">
                   {heroGlance.map((item, i) => (
                     <motion.div key={item.label}
-                      initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
+                      initial={false} animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.35, delay: 0.4 + i * 0.07 }}
                       className="flex items-center justify-between py-2 border-b border-slate-50 last:border-0"
                     >

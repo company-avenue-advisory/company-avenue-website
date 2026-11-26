@@ -253,7 +253,7 @@ export function BusinessStructureAdvisor() {
     return (
       <motion.div
         data-calc-result
-        initial={{ opacity: 0, y: 16 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className="space-y-6"
@@ -403,7 +403,7 @@ export function BusinessStructureAdvisor() {
       <AnimatePresence mode="wait">
         <motion.div
           key={step}
-          initial={{ opacity: 0, x: 24 }}
+          initial={false}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -24 }}
           transition={{ duration: 0.25 }}

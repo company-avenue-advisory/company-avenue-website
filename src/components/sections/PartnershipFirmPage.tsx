@@ -186,14 +186,14 @@ export function PartnershipFirmPage({ pricingSlot, calcPill }: { pricingSlot?: R
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show"
+              <motion.div custom={0} variants={fadeUp} initial={false} animate="show"
                 className="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-6"
               >
                 {[...Array(5)].map((_, i) => <Star key={i} size={11} className="text-amber-400 fill-amber-400" />)}
                 <span className="text-amber-700 text-xs font-heading font-semibold">India&apos;s Most Trusted Business Registration Partner</span>
               </motion.div>
 
-              <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
+              <motion.h1 custom={1} variants={fadeUp} initial={false} animate="show"
                 className="font-heading font-bold text-[2.4rem] md:text-5xl leading-[1.15] tracking-tight text-dark mb-5"
               >
                 Partnership Firm<br />
@@ -201,13 +201,13 @@ export function PartnershipFirmPage({ pricingSlot, calcPill }: { pricingSlot?: R
               </motion.h1>
               {calcPill}
 
-              <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
+              <motion.p custom={2} variants={fadeUp} initial={false} animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >
                 Register your Partnership Firm quickly and legally with assistance from experienced Chartered Accountants. We handle deed drafting, notarization, Registrar filing, PAN and current account setup — end to end.
               </motion.p>
 
-              <motion.div custom={3} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap gap-3 mb-10">
+              <motion.div custom={3} variants={fadeUp} initial={false} animate="show" className="flex flex-wrap gap-3 mb-10">
                 <Link href="/contact"
                   className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-heading font-semibold text-sm rounded-xl hover:bg-[#0a2444] transition-colors shadow-sm"
                 >
@@ -220,7 +220,7 @@ export function PartnershipFirmPage({ pricingSlot, calcPill }: { pricingSlot?: R
                 </a>
               </motion.div>
 
-              <motion.div custom={4} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap gap-x-5 gap-y-2">
+              <motion.div custom={4} variants={fadeUp} initial={false} animate="show" className="flex flex-wrap gap-x-5 gap-y-2">
                 {["7–10 Days Timeline", "Deed by Legal Experts", "Expert CAs", "Starting ₹4,999"].map(pt => (
                   <div key={pt} className="flex items-center gap-1.5">
                     <CheckCircle size={13} className="text-primary" />
@@ -230,7 +230,7 @@ export function PartnershipFirmPage({ pricingSlot, calcPill }: { pricingSlot?: R
               </motion.div>
             </div>
 
-            <motion.div initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }}
+            <motion.div initial={false} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }} className="relative"
             >
               <div className="relative max-w-md mx-auto">
@@ -267,14 +267,14 @@ export function PartnershipFirmPage({ pricingSlot, calcPill }: { pricingSlot?: R
                     </div>
                   </div>
                 </div>
-                <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                <motion.div initial={false} animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1, duration: 0.5 }}
                   className="absolute -right-5 top-10 bg-white rounded-2xl px-4 py-3 shadow-xl border border-slate-100"
                 >
                   <p className="text-[10px] text-muted font-heading">Timeline</p>
                   <p className="font-heading font-bold text-primary text-sm">7–10 Days</p>
                 </motion.div>
-                <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                <motion.div initial={false} animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.2, duration: 0.5 }}
                   className="absolute -left-5 bottom-12 bg-white rounded-2xl px-4 py-3 shadow-xl border border-slate-100"
                 >

@@ -271,7 +271,7 @@ export function VirtualCFOPage({ pricingSlot, calcPill }: { pricingSlot?: ReactN
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <motion.div
-                custom={0} variants={fadeUp} initial="hidden" animate="show"
+                custom={0} variants={fadeUp} initial={false} animate="show"
                 className="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-6"
               >
                 {[...Array(5)].map((_, i) => (
@@ -282,7 +282,7 @@ export function VirtualCFOPage({ pricingSlot, calcPill }: { pricingSlot?: ReactN
                 </span>
               </motion.div>
               <motion.h1
-                custom={1} variants={fadeUp} initial="hidden" animate="show"
+                custom={1} variants={fadeUp} initial={false} animate="show"
                 className="font-heading font-bold text-[2.4rem] md:text-5xl leading-[1.15] tracking-tight text-dark mb-5"
               >
                 Your Virtual CFO —<br />
@@ -290,13 +290,13 @@ export function VirtualCFOPage({ pricingSlot, calcPill }: { pricingSlot?: ReactN
               </motion.h1>
               {calcPill}
               <motion.p
-                custom={2} variants={fadeUp} initial="hidden" animate="show"
+                custom={2} variants={fadeUp} initial={false} animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >
                 Get a Senior CA with 15+ years of CFO-level experience managing your MIS, financial strategy, investor relations, board reporting, and tax planning — all on a monthly retainer that costs a fraction of a full-time CFO.
               </motion.p>
               <motion.div
-                custom={3} variants={fadeUp} initial="hidden" animate="show"
+                custom={3} variants={fadeUp} initial={false} animate="show"
                 className="flex flex-wrap gap-3 mb-10"
               >
                 <Link
@@ -313,7 +313,7 @@ export function VirtualCFOPage({ pricingSlot, calcPill }: { pricingSlot?: ReactN
                 </a>
               </motion.div>
               <motion.div
-                custom={4} variants={fadeUp} initial="hidden" animate="show"
+                custom={4} variants={fadeUp} initial={false} animate="show"
                 className="flex flex-wrap gap-x-5 gap-y-2"
               >
                 {["Monthly MIS by Day 7", "Fundraising Support", "Board Meeting Attendance", "Tax Planning Included"].map((pt) => (
@@ -325,7 +325,7 @@ export function VirtualCFOPage({ pricingSlot, calcPill }: { pricingSlot?: ReactN
               </motion.div>
             </div>
             <motion.div
-              initial={{ opacity: 0, x: 28 }} animate={{ opacity: 1, x: 0 }}
+              initial={false} animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
               className="relative"
             >
@@ -356,7 +356,7 @@ export function VirtualCFOPage({ pricingSlot, calcPill }: { pricingSlot?: ReactN
                   ].map((item, i) => (
                     <motion.div
                       key={item.label}
-                      initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
+                      initial={false} animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.35, delay: 0.4 + i * 0.07 }}
                       className="flex items-center justify-between py-2 border-b border-slate-50 last:border-0"
                     >

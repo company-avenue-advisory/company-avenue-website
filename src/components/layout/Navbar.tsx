@@ -265,7 +265,7 @@ export function Navbar() {
                 <AnimatePresence>
                   {activeDropdown === "Get Help" && (
                     <motion.div
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={false}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.14 }}
@@ -295,7 +295,7 @@ export function Navbar() {
             {activeMegaItem && (
               <motion.div
                 key={activeMegaItem.label}
-                initial={{ opacity: 0, y: 8 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.14 }}
@@ -320,7 +320,7 @@ export function Navbar() {
             {activeSimpleItem && (
               <motion.div
                 key={activeSimpleItem.label}
-                initial={{ opacity: 0, y: 8 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.14 }}
@@ -344,7 +344,7 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
+            initial={false}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", stiffness: 280, damping: 28 }}
@@ -365,7 +365,7 @@ export function Navbar() {
               <nav className="space-y-1">
                 {navItems.map((item, i) => (
                   <motion.div key={item.label}
-                    initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
+                    initial={false} animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.04 }}>
                     {item.children ? (
                       <div>
@@ -483,7 +483,7 @@ function MegaMenuDropdown({ label, groups, popular, viewAll, onClose }: {
       <div className="flex-1 p-5 min-w-0">
         <AnimatePresence mode="wait">
           <motion.div key={activeGroup}
-            initial={{ opacity: 0, x: 6 }} animate={{ opacity: 1, x: 0 }}
+            initial={false} animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -6 }} transition={{ duration: 0.1 }}
           >
             <p className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest mb-3">

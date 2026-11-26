@@ -126,7 +126,7 @@ export function SchemeFinder({
           {!done ? (
             <motion.div
               key={`q-${step}`}
-              initial={{ opacity: 0, y: 10 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.18 }}
@@ -178,7 +178,7 @@ export function SchemeFinder({
           ) : (
             <motion.div
               key="results"
-              initial={{ opacity: 0, y: 10 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2 }}
             >

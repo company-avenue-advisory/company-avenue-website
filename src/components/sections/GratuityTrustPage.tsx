@@ -126,20 +126,20 @@ export function GratuityTrustPage({ pricingSlot, calcPill }: { pricingSlot?: Rea
             <span className="text-accent">Gratuity Trust Registration</span>
           </nav>
           <div className="max-w-3xl">
-            <motion.div variants={fadeUp} initial="hidden" animate="show">
+            <motion.div variants={fadeUp} initial={false} animate="show">
               <Eyebrow label="Employee Benefits Compliance" />
             </motion.div>
-            <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1}
+            <motion.h1 variants={fadeUp} initial={false} animate="show" custom={1}
               className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" itemProp="name">
               Private Gratuity{" "}
               <span className="text-accent">Trust Registration</span>
             </motion.h1>
             {calcPill}
-            <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
+            <motion.p variants={fadeUp} initial={false} animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Set up an Income Tax-approved private gratuity trust to claim Section 36(1)(v) deductions, comply with AS 15 / Ind AS 19, manage off-balance-sheet employee liabilities, and protect employee gratuity entitlements. Includes actuarial valuation coordination and IT approval.
             </motion.p>
-            <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-3">
+            <motion.div variants={fadeUp} initial={false} animate="show" custom={3} className="flex flex-wrap gap-3">
               <Link href="/contact"
                 className="inline-flex items-center gap-2 bg-accent text-dark px-7 py-3.5 rounded-xl font-heading font-bold text-sm hover:bg-accent/90 transition-colors">
                 Set Up Gratuity Trust <ArrowRight size={15} />
@@ -150,7 +150,7 @@ export function GratuityTrustPage({ pricingSlot, calcPill }: { pricingSlot?: Rea
               </a>
             </motion.div>
           </div>
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}
+          <motion.div variants={fadeUp} initial={false} animate="show" custom={4}
             className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-14">
             {quickFacts.map((f, i) => {
               const Icon = f.icon;
