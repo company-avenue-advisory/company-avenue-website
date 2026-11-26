@@ -6,6 +6,7 @@ import { GUIDES } from "@/lib/guides";
 import { TEMPLATES } from "@/lib/templates";
 import { SCHEMES } from "@/lib/schemes";
 import { getRankAiArticles } from "@/lib/rank-ai";
+import { CALCULATORS } from "@/lib/calculators";
 
 // New city landing pages (Section D of the build spec).
 const CITY_PAGES = [
@@ -16,18 +17,6 @@ const CITY_PAGES = [
   "gst-registration-dwarka",
   "company-registration-gurgaon",
   "company-registration-noida",
-];
-
-const CALCULATORS = [
-  "business-structure-advisor", "company-registration-cost",
-  "compliance-cost-calculator", "compound-interest-calculator", "emi-calculator",
-  "epf-calculator", "fd-calculator", "gratuity-calculator", "gst-calculator",
-  "home-loan-emi-calculator", "hra-calculator", "income-tax-calculator", "llp-vs-pvt-ltd",
-  "lumpsum-calculator", "mutual-fund-calculator", "nps-calculator", "ppf-calculator",
-  "rd-calculator", "retirement-calculator", "salary-calculator", "sip-calculator",
-  "tds-calculator", "tds-rate-finder",
-  "trademark-cost-calculator", "gst-registration-cost-calculator",
-  "fssai-license-cost-calculator",
 ];
 
 const VERIFY_TOOLS = [
