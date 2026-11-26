@@ -42,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: number,
     changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]
   ): MetadataRoute.Sitemap[number] => ({
-    url: `${SITE_URL}${path ? `/${path}` : ""}`,
+    url: `${SITE_URL}/${path}`,
     lastModified: now,
     changeFrequency,
     priority,

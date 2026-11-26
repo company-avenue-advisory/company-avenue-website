@@ -49,7 +49,7 @@ export function CalcPageShell({
             <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {faqs.map((item) => (
                 <div key={item.title} className="bg-white rounded-2xl border border-slate-100 shadow-card p-5">
-                  <h3 className="font-heading font-bold text-dark text-sm mb-2">{item.title}</h3>
+                  <h2 className="font-heading font-bold text-dark text-sm mb-2">{item.title}</h2>
                   <p className="text-muted text-xs leading-relaxed">{item.content}</p>
                 </div>
               ))}

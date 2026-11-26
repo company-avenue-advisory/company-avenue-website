@@ -203,7 +203,7 @@ export function CompanyNameSearch() {
             <Search size={20} className="text-white" />
           </div>
           <div>
-            <h3 className="font-heading font-bold text-dark text-lg leading-tight">Company Name Availability Checker</h3>
+            <h2 className="font-heading font-bold text-dark text-lg leading-tight">Company Name Availability Checker</h2>
             <p className="text-xs text-muted">Checks identical & suffix-variant names the way MCA&rsquo;s RUN process does</p>
           </div>
         </div>

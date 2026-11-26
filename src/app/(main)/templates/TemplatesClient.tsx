@@ -88,9 +88,9 @@ export function TemplatesClient() {
                 <span className="text-[11px] font-heading font-semibold text-accent uppercase tracking-wider mb-1.5">
                   {t.category}
                 </span>
-                <h3 className="font-heading font-bold text-dark text-lg mb-2 group-hover:text-primary transition-colors leading-snug">
+                <h2 className="font-heading font-bold text-dark text-lg mb-2 group-hover:text-primary transition-colors leading-snug">
                   {t.title}
-                </h3>
+                </h2>
                 <p className="text-muted text-sm leading-relaxed flex-1 mb-4">{t.description}</p>
                 <div className="flex items-center gap-1 text-primary text-xs font-heading font-semibold pt-3 border-t border-slate-50">
                   Preview &amp; download

@@ -14,13 +14,12 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { CalculatorsTeaser } from "@/components/sections/CalculatorsTeaser";
 import { VerifyToolsTeaser } from "@/components/sections/VerifyToolsTeaser";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { faqSchema, OG_IMAGE } from "@/lib/seo";
+import { faqSchema, OG_IMAGE, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Company Registration & GST Services in Delhi | CA-Led",
   description:
     "Register your company, get GST, trademark & compliance done by expert CAs in Delhi. 100% online, transparent pricing. Free consultation — call today.",
-  alternates: { canonical: "/" },
   keywords: [
     "company registration india",
     "private limited company registration",
@@ -46,6 +45,10 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      {/* Canonical with the trailing slash, written here because Next's
+          metadata strips it. The root URL with and without "/" is one page,
+          but site audits count them separately; all links use "/". */}
+      <link rel="canonical" href={`${SITE_URL}/`} />
       <JsonLd data={faqSchema(homeFaqs.map((f) => ({ question: f.q, answer: f.a })))} />
       {/* H1 is inside Hero */}
       <Hero />
