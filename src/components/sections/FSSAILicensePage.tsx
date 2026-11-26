@@ -142,14 +142,13 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div
-      itemScope itemProp="mainEntity" itemType="https://schema.org/Question"
       className="border border-slate-100 rounded-2xl overflow-hidden bg-white"
     >
       <button
         onClick={() => setOpen(!open)} aria-expanded={open}
         className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
       >
-        <span itemProp="name" className="font-heading font-semibold text-dark text-sm leading-snug">{q}</span>
+        <span className="font-heading font-semibold text-dark text-sm leading-snug">{q}</span>
         <span className="shrink-0 w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500">
           {open ? <Minus size={13} /> : <Plus size={13} />}
         </span>
@@ -159,9 +158,8 @@ function FaqItem({ q, a }: { q: string; a: string }) {
           <motion.div
             initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22, ease: "easeInOut" }}
-            itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"
           >
-            <p itemProp="text" className="px-5 pb-4 text-muted text-sm leading-relaxed">{a}</p>
+            <p className="px-5 pb-4 text-muted text-sm leading-relaxed">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -245,7 +243,7 @@ function StickySidebar() {
 ══════════════════════════════════════ */
 export function FSSAILicensePage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; calcPill?: ReactNode }) {
   return (
-    <div className="bg-white" itemScope itemType="https://schema.org/FAQPage">
+    <div className="bg-white" >
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden bg-white pt-[72px]">

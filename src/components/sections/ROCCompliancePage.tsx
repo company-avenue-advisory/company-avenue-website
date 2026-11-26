@@ -44,9 +44,6 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div
-      itemScope
-      itemProp="mainEntity"
-      itemType="https://schema.org/Question"
       className="border border-slate-100 rounded-2xl overflow-hidden bg-white"
     >
       <button
@@ -54,7 +51,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         aria-expanded={open}
         className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
       >
-        <span itemProp="name" className="font-heading font-semibold text-dark text-sm leading-snug">
+        <span className="font-heading font-semibold text-dark text-sm leading-snug">
           {q}
         </span>
         <span className="shrink-0 w-6 h-6 rounded-full bg-primary/8 flex items-center justify-center text-primary">
@@ -65,16 +62,13 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         {open && (
           <motion.div
             key="body"
-            itemScope
-            itemProp="acceptedAnswer"
-            itemType="https://schema.org/Answer"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.28 }}
             className="overflow-hidden"
           >
-            <p itemProp="text" className="px-5 pb-5 text-muted text-sm leading-relaxed">
+            <p className="px-5 pb-5 text-muted text-sm leading-relaxed">
               {a}
             </p>
           </motion.div>
@@ -560,8 +554,6 @@ export function ROCCompliancePage({ pricingSlot, calcPill }: { pricingSlot?: Rea
       {/* ── 10. FAQ ── */}
       <section
         className="py-20 bg-white"
-        itemScope
-        itemType="https://schema.org/FAQPage"
       >
         <div className="container-custom max-w-3xl">
           <div className="text-center mb-14">
