@@ -90,7 +90,7 @@ export function Hero() {
 
       {/* Centered decorative rings */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={false}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none hidden md:block"
@@ -123,7 +123,7 @@ export function Hero() {
       {floatingElements.map((el, idx) => (
         <motion.div
           key={idx}
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={false}
           animate={{ opacity: 0.08, scale: 1 }}
           transition={{ duration: 0.6, delay: el.delay, ease: "easeOut" }}
           className={`absolute ${el.pos} hidden lg:block pointer-events-none z-[3]`}
@@ -160,7 +160,7 @@ export function Hero() {
         <div className="max-w-4xl mx-auto text-center">
 
           {/* Rating pill */}
-          <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show"
+          <motion.div custom={0} variants={fadeUp} initial={false} animate="show"
             className="inline-flex items-center gap-2 md:gap-2.5 rounded-full px-3.5 py-1.5 md:px-5 md:py-2 mb-5 md:mb-8 border"
             style={{ background: "rgba(214,166,79,0.08)", borderColor: "rgba(214,166,79,0.25)" }}
           >
@@ -176,7 +176,7 @@ export function Hero() {
           </motion.div>
 
           {/* H1 */}
-          <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
+          <motion.h1 custom={1} variants={fadeUp} initial={false} animate="show"
             className="font-heading font-bold text-[1.7rem] sm:text-5xl lg:text-[4rem] leading-[1.15] sm:leading-[1.1] tracking-tight mb-4 md:mb-7"
             style={{ color: "#f0f6ff" }}
           >
@@ -187,7 +187,7 @@ export function Hero() {
           </motion.h1>
 
           {/* Subheading */}
-          <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
+          <motion.p custom={2} variants={fadeUp} initial={false} animate="show"
             className="text-slate-300 text-sm md:text-xl leading-relaxed mb-7 md:mb-10 max-w-3xl mx-auto px-1"
           >
             Company registration, GST, trademark, tax filing and ROC compliance —
@@ -201,12 +201,12 @@ export function Hero() {
           </motion.p>
 
           {/* Search */}
-          <motion.div custom={3} variants={fadeUp} initial="hidden" animate="show">
+          <motion.div custom={3} variants={fadeUp} initial={false} animate="show">
             <HeroSearch />
           </motion.div>
 
           {/* Trust strip */}
-          <motion.div custom={5} variants={fadeUp} initial="hidden" animate="show"
+          <motion.div custom={5} variants={fadeUp} initial={false} animate="show"
             className="mt-9 md:mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-10 md:gap-y-4 text-slate-300"
           >
             {[

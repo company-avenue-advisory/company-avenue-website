@@ -92,17 +92,17 @@ export function BranchOfficePage({ pricingSlot, calcPill }: { pricingSlot?: Reac
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
         <div className="container-custom relative">
           <div className="max-w-3xl">
-            <motion.span variants={fadeUp} initial="hidden" animate="show" custom={0} className="inline-flex items-center gap-2 text-accent text-xs font-heading font-bold tracking-widest uppercase mb-4 block">
+            <motion.span variants={fadeUp} initial={false} animate="show" custom={0} className="inline-flex items-center gap-2 text-accent text-xs font-heading font-bold tracking-widest uppercase mb-4 block">
               Company Formation • Company Avenue Advisory
             </motion.span>
-            <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1} className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] mb-6">
+            <motion.h1 variants={fadeUp} initial={false} animate="show" custom={1} className="font-heading font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] mb-6">
               Branch / Liaison /<br />Project Office in India
             </motion.h1>
             {calcPill}
-            <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2} className="text-white/60 text-lg leading-relaxed mb-8 max-w-2xl">
+            <motion.p variants={fadeUp} initial={false} animate="show" custom={2} className="text-white/60 text-lg leading-relaxed mb-8 max-w-2xl">
               Set up a Branch Office, Liaison Office, or Project Office in India with prior RBI approval under FEMA. Full application support, AD bank coordination, and annual compliance. Starting ₹19,999.
             </motion.p>
-            <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-4">
+            <motion.div variants={fadeUp} initial={false} animate="show" custom={3} className="flex flex-wrap gap-4">
               <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 bg-accent text-dark font-heading font-bold text-sm rounded-xl hover:bg-amber-500 transition-colors shadow-lg">
                 Get Started <ArrowRight size={15} />
               </Link>

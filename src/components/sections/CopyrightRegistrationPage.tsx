@@ -133,20 +133,20 @@ export function CopyrightRegistrationPage({ pricingSlot, calcPill }: { pricingSl
             <span className="text-accent">Copyright Registration</span>
           </nav>
           <div className="max-w-3xl">
-            <motion.div variants={fadeUp} initial="hidden" animate="show">
+            <motion.div variants={fadeUp} initial={false} animate="show">
               <Eyebrow label="Intellectual Property" />
             </motion.div>
-            <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1}
+            <motion.h1 variants={fadeUp} initial={false} animate="show" custom={1}
               className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6" itemProp="name">
               Copyright{" "}
               <span className="text-accent">Registration in India</span>
             </motion.h1>
             {calcPill}
-            <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
+            <motion.p variants={fadeUp} initial={false} animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
               Protect your creative works — books, software, music, films, and designs — with official copyright registration. Get a Certificate of Registration from the Copyright Office with 60-year protection across 180+ countries under the Berne Convention.
             </motion.p>
-            <motion.div variants={fadeUp} initial="hidden" animate="show" custom={3} className="flex flex-wrap gap-3">
+            <motion.div variants={fadeUp} initial={false} animate="show" custom={3} className="flex flex-wrap gap-3">
               <Link href="/contact"
                 className="inline-flex items-center gap-2 bg-accent text-dark px-7 py-3.5 rounded-xl font-heading font-bold text-sm hover:bg-accent/90 transition-colors">
                 Register Copyright <ArrowRight size={15} />
@@ -157,7 +157,7 @@ export function CopyrightRegistrationPage({ pricingSlot, calcPill }: { pricingSl
               </a>
             </motion.div>
           </div>
-          <motion.div variants={fadeUp} initial="hidden" animate="show" custom={4}
+          <motion.div variants={fadeUp} initial={false} animate="show" custom={4}
             className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-14">
             {quickFacts.map((f, i) => {
               const Icon = f.icon;

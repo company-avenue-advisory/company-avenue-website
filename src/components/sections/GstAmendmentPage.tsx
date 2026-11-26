@@ -189,7 +189,7 @@ export function GstAmendmentPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
         <div className="container-custom relative z-10">
           {/* Breadcrumb */}
           <motion.nav
-            variants={fadeUp} initial="hidden" animate="show"
+            variants={fadeUp} initial={false} animate="show"
             className="flex items-center gap-2 text-xs text-slate-400 mb-8 font-heading"
           >
             <Link href="/" className="hover:text-accent transition-colors">Home</Link>
@@ -200,11 +200,11 @@ export function GstAmendmentPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
           </motion.nav>
 
           <div className="max-w-3xl">
-            <motion.div variants={fadeUp} initial="hidden" animate="show" custom={1}>
+            <motion.div variants={fadeUp} initial={false} animate="show" custom={1}>
               <Eyebrow label="GST Registration Services" />
             </motion.div>
             <motion.h1
-              variants={fadeUp} initial="hidden" animate="show" custom={2}
+              variants={fadeUp} initial={false} animate="show" custom={2}
               className="text-4xl md:text-5xl lg:text-[54px] font-heading font-extrabold text-white leading-tight mb-5"
             >
               GST Registration{" "}
@@ -212,7 +212,7 @@ export function GstAmendmentPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
             </motion.h1>
             {calcPill}
             <motion.p
-              variants={fadeUp} initial="hidden" animate="show" custom={3}
+              variants={fadeUp} initial={false} animate="show" custom={3}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl"
             >
               Expert filing of REG-14 (amendment) and REG-16 (cancellation) on the GST portal —
@@ -220,7 +220,7 @@ export function GstAmendmentPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
               return, and complete ITC reversal compliance.
             </motion.p>
             <motion.div
-              variants={fadeUp} initial="hidden" animate="show" custom={4}
+              variants={fadeUp} initial={false} animate="show" custom={4}
               className="flex flex-wrap gap-3"
             >
               <Link href="/contact"
@@ -238,13 +238,13 @@ export function GstAmendmentPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
 
           {/* Quick Fact Cards */}
           <motion.div
-            variants={fadeUp} initial="hidden" animate="show" custom={5}
+            variants={fadeUp} initial={false} animate="show" custom={5}
             className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-14"
           >
             {quickFacts.map(({ icon: Icon, label, value }, i) => (
               <motion.div
                 key={label} variants={fadeUp} custom={6 + i}
-                initial="hidden" animate="show"
+                initial={false} animate="show"
                 className="bg-white/6 border border-white/10 rounded-2xl p-4 text-center backdrop-blur-sm"
               >
                 <Icon size={22} className="text-accent mx-auto mb-2" />

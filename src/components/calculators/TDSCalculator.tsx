@@ -78,7 +78,7 @@ export function TDSCalculator() {
       </div>
 
       <div className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
-        <motion.div key={res.tds} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+        <motion.div key={res.tds} initial={false} animate={{ opacity: 1, y: 0 }} className="space-y-4">
           <p className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest">TDS to Deduct</p>
           <HeroResult label="TDS Amount" value={formatINR(res.tds)} />
           <div className="bg-slate-50 rounded-xl p-4 space-y-3">

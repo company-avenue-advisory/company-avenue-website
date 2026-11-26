@@ -42,7 +42,7 @@ export function HRACalculator() {
       </div>
 
       <div className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
-        <motion.div key={res.exempt} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+        <motion.div key={res.exempt} initial={false} animate={{ opacity: 1, y: 0 }} className="space-y-4">
           <p className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest">HRA Exemption (Sec 10(13A))</p>
           <HeroResult label="Exempt HRA" value={formatINR(res.exempt)} />
           <div className="bg-slate-50 rounded-xl p-4 space-y-3">

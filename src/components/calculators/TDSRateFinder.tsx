@@ -136,7 +136,7 @@ export function TDSRateFinder() {
           {!selected ? (
             <motion.div
               key="empty"
-              initial={{ opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="bg-white rounded-2xl border border-slate-100 shadow-card p-8 flex flex-col items-center justify-center text-center min-h-[400px]"
@@ -153,7 +153,7 @@ export function TDSRateFinder() {
             <motion.div
               key={selected.type}
               data-calc-result
-              initial={{ opacity: 0, y: 8 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
               className="bg-white rounded-2xl border border-slate-100 shadow-card p-6 space-y-5"

@@ -2,13 +2,16 @@ import Script from "next/script";
 import { GTM_ID, GA_ID } from "@/lib/gtag";
 
 // Injects Google Tag Manager (preferred) and/or GA4 (gtag.js).
+// lazyOnload: tags load after the page has finished loading. On
+// afterInteractive they added up to ~650 ms of main-thread blocking
+// (Total Blocking Time) on every page.
 // Set NEXT_PUBLIC_GTM_ID and/or NEXT_PUBLIC_GA_ID in .env.local.
 // Renders nothing if neither is configured (safe in dev).
 export function Analytics() {
   return (
     <>
       {GTM_ID && (
-        <Script id="gtm-init" strategy="afterInteractive">
+        <Script id="gtm-init" strategy="lazyOnload">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -20,9 +23,9 @@ export function Analytics() {
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
-          <Script id="ga4-init" strategy="afterInteractive">
+          <Script id="ga4-init" strategy="lazyOnload">
             {`window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());

@@ -339,24 +339,24 @@ export function PayrollManagementPage({ pricingSlot, calcPill }: { pricingSlot?:
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left */}
             <div>
-              <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show"
+              <motion.div custom={0} variants={fadeUp} initial={false} animate="show"
                 className="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-6"
               >
                 {[...Array(5)].map((_, i) => <Star key={i} size={11} className="text-amber-400 fill-amber-400" />)}
                 <span className="text-amber-700 text-xs font-heading font-semibold">Payroll Experts • Statutory Compliant • Guaranteed On-Time</span>
               </motion.div>
-              <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show"
+              <motion.h1 custom={1} variants={fadeUp} initial={false} animate="show"
                 className="font-heading font-bold text-[2.4rem] md:text-5xl leading-[1.15] tracking-tight text-dark mb-5"
               >
                 Payroll Management<br /><span className="text-primary">Services for Indian</span><br />Businesses
               </motion.h1>
               {calcPill}
-              <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show"
+              <motion.p custom={2} variants={fadeUp} initial={false} animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >
                 End-to-end payroll outsourcing — salary computation, payslips, PF, ESIC, TDS, Form 16, and full compliance. Handled by qualified CAs so you never miss a deadline or a rupee.
               </motion.p>
-              <motion.div custom={3} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap gap-3 mb-10">
+              <motion.div custom={3} variants={fadeUp} initial={false} animate="show" className="flex flex-wrap gap-3 mb-10">
                 <Link href="/contact"
                   className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-heading font-semibold text-sm rounded-xl hover:bg-[#0a2444] transition-colors shadow-sm"
                 >
@@ -368,7 +368,7 @@ export function PayrollManagementPage({ pricingSlot, calcPill }: { pricingSlot?:
                   <Phone size={14} /> Talk to an Expert
                 </a>
               </motion.div>
-              <motion.div custom={4} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap gap-x-6 gap-y-2">
+              <motion.div custom={4} variants={fadeUp} initial={false} animate="show" className="flex flex-wrap gap-x-6 gap-y-2">
                 {["CA-Reviewed Payroll", "Zero Missed Deadlines", "Secure & Confidential", "Form 16 Included"].map(pt => (
                   <div key={pt} className="flex items-center gap-1.5">
                     <CheckCircle size={13} className="text-primary" />
@@ -379,7 +379,7 @@ export function PayrollManagementPage({ pricingSlot, calcPill }: { pricingSlot?:
             </div>
 
             {/* Right — Payslip mockup card */}
-            <motion.div initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
+            <motion.div initial={false} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.35 }} className="relative"
             >
               <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-3xl shadow-[0_12px_60px_rgba(15,45,82,0.12)] p-6 max-w-md mx-auto">
@@ -429,14 +429,14 @@ export function PayrollManagementPage({ pricingSlot, calcPill }: { pricingSlot?:
                 </div>
               </div>
               {/* Floating badges */}
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
+              <motion.div initial={false} animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1, duration: 0.5 }}
                 className="absolute -right-4 top-12 bg-white rounded-2xl px-4 py-3 shadow-xl border border-slate-100"
               >
                 <p className="text-[10px] text-muted font-heading">PF Deposited</p>
                 <p className="font-heading font-bold text-primary text-sm">15th June ✓</p>
               </motion.div>
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+              <motion.div initial={false} animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.2, duration: 0.5 }}
                 className="absolute -left-4 bottom-16 bg-white rounded-2xl px-4 py-3 shadow-xl border border-slate-100"
               >

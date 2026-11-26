@@ -184,7 +184,7 @@ export function GSTRegistrationCostCalculator() {
       <div data-calc-result className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
         <motion.div
           key={`${entity}-${plan}-${mandatory}`}
-          initial={{ opacity: 0, y: 8 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25 }}
           className="space-y-4"

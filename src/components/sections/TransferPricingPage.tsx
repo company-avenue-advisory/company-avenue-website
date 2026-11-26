@@ -194,11 +194,11 @@ export function TransferPricingPage({ pricingSlot, calcPill }: { pricingSlot?: R
           </nav>
 
           <div className="max-w-3xl">
-            <motion.div variants={fadeUp} initial="hidden" animate="show">
+            <motion.div variants={fadeUp} initial={false} animate="show">
               <Eyebrow label="International Tax Compliance" />
             </motion.div>
             <motion.h1
-              variants={fadeUp} initial="hidden" animate="show" custom={1}
+              variants={fadeUp} initial={false} animate="show" custom={1}
               className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
               itemProp="name"
             >
@@ -207,14 +207,14 @@ export function TransferPricingPage({ pricingSlot, calcPill }: { pricingSlot?: R
             </motion.h1>
             {calcPill}
             <motion.p
-              variants={fadeUp} initial="hidden" animate="show" custom={2}
+              variants={fadeUp} initial={false} animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl"
               itemProp="description"
             >
               Comprehensive transfer pricing documentation for Indian entities with cross-border related-party transactions. OECD-aligned benchmarking, Form 3CEB certification, and APA support — all before the 30 November deadline.
             </motion.p>
             <motion.div
-              variants={fadeUp} initial="hidden" animate="show" custom={3}
+              variants={fadeUp} initial={false} animate="show" custom={3}
               className="flex flex-wrap gap-3"
             >
               <Link
@@ -234,7 +234,7 @@ export function TransferPricingPage({ pricingSlot, calcPill }: { pricingSlot?: R
 
           {/* Quick Fact Cards */}
           <motion.div
-            variants={fadeUp} initial="hidden" animate="show" custom={4}
+            variants={fadeUp} initial={false} animate="show" custom={4}
             className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-14"
           >
             {quickFacts.map((f, i) => (

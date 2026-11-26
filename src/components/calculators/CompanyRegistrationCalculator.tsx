@@ -524,7 +524,7 @@ export function CompanyRegistrationCalculator(
       <div data-calc-result className="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
         <motion.div
           key={`${entity}-${state}-${capital}-${people}-${smallCompany}-${nameReservation}-${newDpin}-${JSON.stringify(addons)}`}
-          initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}
+          initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}
           className="space-y-4"
         >
           <p className="text-[10px] font-heading font-bold text-muted uppercase tracking-widest">Your estimated cost</p>

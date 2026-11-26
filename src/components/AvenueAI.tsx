@@ -351,7 +351,7 @@ export function AvenueAI() {
         <AnimatePresence>
           {showTooltip && !isOpen && (
             <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.95 }}
+              initial={false}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.95 }}
               transition={{ duration: 0.2 }}
@@ -428,7 +428,7 @@ export function AvenueAI() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 24 }}
+            initial={false}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 24 }}
             transition={{ type: "spring", stiffness: 380, damping: 32 }}
@@ -496,7 +496,7 @@ export function AvenueAI() {
 
                     {/* Welcome screen */}
                     {showWelcome && messages.length === 0 && (
-                      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                      <motion.div initial={false} animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }} className="space-y-4"
                       >
                         {/* Illustration */}
@@ -540,7 +540,7 @@ export function AvenueAI() {
                     {/* Message list */}
                     {messages.map((msg, i) => (
                       <motion.div key={msg.id}
-                        initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                        initial={false} animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.25, delay: i === messages.length - 1 ? 0 : 0 }}
                         className={`flex gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}
                       >
@@ -590,7 +590,7 @@ export function AvenueAI() {
 
                     {/* Suggested questions after AI responds */}
                     {!showWelcome && messages.length > 0 && !isLoading && !isStreaming && messages.at(-1)?.role === "assistant" && (
-                      <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
+                      <motion.div initial={false} animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
                       >
                         <p className="text-[10px] font-heading font-semibold text-muted uppercase tracking-wider mb-1.5">Suggested</p>

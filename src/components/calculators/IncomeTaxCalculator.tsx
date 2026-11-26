@@ -303,7 +303,7 @@ export function IncomeTaxCalculator() {
           {!result ? (
             <motion.div
               key="empty"
-              initial={{ opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="bg-white rounded-2xl border border-slate-100 shadow-card p-8 flex flex-col items-center justify-center text-center min-h-[300px]"
@@ -322,7 +322,7 @@ export function IncomeTaxCalculator() {
             <motion.div
               key="result"
               data-calc-result
-              initial={{ opacity: 0, y: 12 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35 }}
               className="space-y-4"
