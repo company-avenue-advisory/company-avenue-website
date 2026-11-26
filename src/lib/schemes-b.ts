@@ -1209,8 +1209,8 @@ export const SCHEMES_STARTUP_RELEVANT: Scheme[] = [
       { label: "Business Valuation", href: "/services/business-valuation" },
     ],
     links: [
-      { label: "NVCFL — express interest", href: "https://nvcfl.co.in/Home/InterestAsMSME" },
-      { label: "Empanelled daughter funds", href: "https://nvcfl.co.in/Corporate/EmpanelledDaughterFunds" },
+      { label: "SRI Fund — Invest India", href: "https://www.investindia.gov.in/schemes-msmes-india/self-reliant-india-sri-fund-empowering-msmes-aatmanirbhar-bharat" },
+      { label: "NSIC (fund sponsor)", href: "https://www.nsic.co.in/" },
     ],
   },
   {
