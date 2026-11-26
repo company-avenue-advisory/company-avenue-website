@@ -56,14 +56,10 @@ export function FAQ() {
 
           {/* Right — 3 cols */}
           <div className="lg:col-span-3">
-            {/* Schema-ready itemscope */}
-            <div itemScope itemType="https://schema.org/FAQPage" className="space-y-3">
+            <div className="space-y-3">
               {faqs.map((faq, i) => (
                 <div
                   key={i}
-                  itemScope
-                  itemProp="mainEntity"
-                  itemType="https://schema.org/Question"
                   className="bg-white border border-slate-100 rounded-2xl overflow-hidden"
                 >
                   <button
@@ -72,7 +68,6 @@ export function FAQ() {
                     className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 rounded-2xl"
                   >
                     <span
-                      itemProp="name"
                       className="font-heading font-semibold text-dark text-sm leading-snug"
                     >
                       {faq.q}
@@ -89,12 +84,8 @@ export function FAQ() {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.22, ease: "easeInOut" }}
-                        itemScope
-                        itemProp="acceptedAnswer"
-                        itemType="https://schema.org/Answer"
                       >
                         <p
-                          itemProp="text"
                           className="px-5 pb-4 text-muted text-sm leading-relaxed"
                         >
                           {faq.a}
