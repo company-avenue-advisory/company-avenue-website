@@ -417,9 +417,9 @@ export function BusinessStructureAdvisor() {
               Business Structure Advisor
             </span>
           </div>
-          <h3 className="font-heading font-bold text-dark text-xl mb-2 mt-4">
+          <h2 className="font-heading font-bold text-dark text-xl mb-2 mt-4">
             {currentStep.question}
-          </h3>
+          </h2>
           {currentStep.hint && (
             <p className="text-sm text-muted mb-5">{currentStep.hint}</p>
           )}

@@ -209,11 +209,11 @@ export function ServicePricingBlock({ serviceId }: { serviceId: string }) {
                   <span className="w-6 h-px bg-accent" />
                   Free Tools
                 </span>
-                <h3 className="font-heading font-bold text-dark text-xl sm:text-2xl mb-1.5">
+                <h2 className="font-heading font-bold text-dark text-xl sm:text-2xl mb-1.5">
                   {pricing
                     ? "Check your price before you commit"
                     : "Plan your costs before you start"}
-                </h3>
+                </h2>
                 <p className="text-sm text-muted leading-relaxed">
                   Your exact cost depends on your state, capital and structure. Run the
                   numbers yourself — free, instant, no signup.

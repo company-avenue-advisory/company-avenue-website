@@ -88,7 +88,7 @@ export default function GSTCalculatorPage() {
                 key={item.title}
                 className="bg-white rounded-2xl border border-slate-100 shadow-card p-5"
               >
-                <h3 className="font-heading font-bold text-dark text-sm mb-2">{item.title}</h3>
+                <h2 className="font-heading font-bold text-dark text-sm mb-2">{item.title}</h2>
                 <p className="text-muted text-xs leading-relaxed">{item.content}</p>
               </div>
             ))}
