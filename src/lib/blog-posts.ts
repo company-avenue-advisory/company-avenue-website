@@ -1,3 +1,4 @@
+import { GUIDE_POSTS } from "./blog-guides";
 export type ContentBlock =
   | { type: "p"; text: string }
   | { type: "h2"; text: string }
@@ -14,7 +15,7 @@ export interface BlogPost {
   content: ContentBlock[];
 }
 
-export const BLOG_POSTS: BlogPost[] = [
+const BASE_POSTS: BlogPost[] = [
   {
     slug: "private-limited-vs-llp-vs-opc",
     title: "Private Limited vs LLP vs OPC: Which Structure Fits Your Startup",
@@ -733,5 +734,7 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
   },
 ];
+
+export const BLOG_POSTS: BlogPost[] = [...BASE_POSTS, ...GUIDE_POSTS];
 
 export const BLOG_CATEGORIES = Array.from(new Set(BLOG_POSTS.map((p) => p.category)));
