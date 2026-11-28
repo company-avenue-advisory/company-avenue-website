@@ -94,10 +94,10 @@ const decisionCards = [
 ];
 
 const eligibility = [
-  { n: "01", title: "Indian Citizen",                desc: "Only Indian citizens can incorporate an OPC." },
-  { n: "02", title: "Resident in India",             desc: "Must have stayed in India for ≥182 days in the preceding calendar year." },
+  { n: "01", title: "Indian Citizen",                desc: "Only Indian citizens can incorporate an OPC. Foreign nationals are not eligible." },
+  { n: "02", title: "NRIs Allowed",                  desc: "Since 1 April 2021, Indian citizens living abroad can also form an OPC." },
   { n: "03", title: "One Shareholder",               desc: "Only one natural person can be the sole member of the OPC." },
-  { n: "04", title: "One Nominee Required",          desc: "A nominee (Indian citizen & resident) must be named who takes over in case of death/incapacity." },
+  { n: "04", title: "One Nominee Required",          desc: "A nominee must be named who takes over in case of death or incapacity." },
   { n: "05", title: "Natural Person Only",           desc: "Neither a body corporate nor any other legal entity can be the single member." },
   { n: "06", title: "Single OPC Limit",              desc: "A person cannot incorporate more than one OPC at a time." },
 ];
@@ -167,7 +167,7 @@ const commonMistakes = [
   { title: "Using residential address without NOC",         desc: "Registered office needs an NOC from the property owner even for residential addresses." },
   { title: "Selecting unsuitable business activity",        desc: "Activities like banking, insurance & NBFC cannot be conducted under OPC." },
   { title: "Ignoring annual compliance",                    desc: "Late ROC filings attract ₹100/day penalty — set up compliance reminders from Day 1." },
-  { title: "Choosing the wrong nominee",                    desc: "Nominee must be an Indian citizen and resident. Verify eligibility before filing." },
+  { title: "Choosing the wrong nominee",                    desc: "The nominee must meet the MCA eligibility rules. Verify before filing." },
 ];
 
 const whyUsPoints = [
@@ -825,7 +825,7 @@ export function OPCPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; ca
                       OPC to Private Limited Company Conversion
                     </h2>
                     <p className="text-white/70 text-sm leading-relaxed mb-6">
-                      Businesses often begin as OPCs and later convert into Private Limited Companies as they expand, hire co-founders, or seek equity investment. Conversion is mandatory when paid-up capital exceeds ₹50 lakhs or average turnover exceeds ₹2 crore for 3 years.
+                      Businesses often begin as OPCs and later convert into Private Limited Companies as they expand, hire co-founders, or seek equity investment. Conversion is voluntary: since 1 April 2021, no capital or turnover limit forces an OPC to convert.
                     </p>
                     <Link href="/contact"
                       className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-dark font-heading font-semibold text-sm rounded-xl hover:bg-accent-light transition-colors"
