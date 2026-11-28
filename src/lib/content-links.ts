@@ -1,3 +1,4 @@
+import { GUIDE_POST_SERVICE } from "./blog-guides";
 // ─────────────────────────────────────────────────────────────────────────────
 // Internal-linking map: content category → the money page it should point at.
 //
@@ -27,6 +28,8 @@ export const CATEGORY_SERVICE: Record<string, ServiceLink> = {
   "MSME & Startup": { label: "Startup India Registration", href: "/services/startup-india" },
   "Payroll & Labour": { label: "Payroll Management", href: "/services/payroll-management" },
   "Business Advisory": { label: "Virtual CFO Services", href: "/services/virtual-cfo" },
+  "Business Licences": { label: "Trade License", href: "/services/trade-license" },
+  "NGO & Trust": { label: "Section 8 Company Registration", href: "/services/section-8-company" },
 };
 
 /** Guide categories use slightly different labels to the blog's. */
@@ -36,6 +39,7 @@ export const CATEGORY_SERVICE: Record<string, ServiceLink> = {
  * the LLP post sent readers to the Pvt Ltd page).
  */
 export const POST_SERVICE: Record<string, ServiceLink> = {
+  ...GUIDE_POST_SERVICE,
   "llp-registration-process-cost": { label: "LLP Registration", href: "/services/llp-registration" },
   "opc-registration-solo-founders": { label: "OPC Registration", href: "/services/one-person-company" },
   "section-8-company-registration-guide": { label: "Section 8 Company Registration", href: "/services/section-8-company" },
