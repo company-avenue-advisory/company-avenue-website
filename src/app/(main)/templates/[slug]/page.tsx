@@ -48,9 +48,13 @@ export default async function TemplatePage({
   const template = TEMPLATES.find((t) => t.slug === slug);
   if (!template) notFound();
 
-  const related = TEMPLATES.filter(
-    (t) => t.slug !== template.slug && t.category === template.category
-  ).slice(0, 3);
+  // The next three templates in the same category, wrapping round, so every
+  // template is linked from its neighbours (not just the first three listed).
+  const sameCategory = TEMPLATES.filter((t) => t.category === template.category);
+  const at = sameCategory.findIndex((t) => t.slug === template.slug);
+  const related = [1, 2, 3]
+    .map((k) => sameCategory[(at + k) % sameCategory.length])
+    .filter((t, i, arr) => t.slug !== template.slug && arr.findIndex((x) => x.slug === t.slug) === i);
   const service = TEMPLATE_CATEGORY_SERVICE[template.category];
 
   return (

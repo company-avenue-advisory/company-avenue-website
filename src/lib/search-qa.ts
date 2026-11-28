@@ -44,7 +44,7 @@ export const SEARCH_QA: Record<string, SearchQaItem[]> = {
   ],
   "/services/partnership-firm": [
     { q: "What is firm registration?", a: "Firm registration means registering a partnership firm with the Registrar of Firms in your state, using a signed partnership deed." },
-    { q: "How does partnership deed registration work?", a: "For partnership deed registration, the deed is printed on stamp paper, signed by all partners and filed with the Registrar of Firms along with the registration form." },
+    { q: "How does partnership deed registration work?", a: "For partnership deed registration, the deed is printed on stamp paper, signed by all partners and filed with the Registrar of Firms along with the registration form.", link: { label: "Free partnership deed format", href: "/templates/partnership-deed" } },
     { q: "What are the partnership firm registration fees?", a: "Partnership firm registration fees include stamp duty and registrar fees for your state, plus our fee for drafting and filing. The pricing section above shows the details." },
     { q: "Can you do partnership firm registration in Delhi?", a: "Yes. We handle partnership firm registration in Delhi and other states, from drafting the deed to filing with the Registrar of Firms." },
   ],
@@ -98,7 +98,7 @@ export const SEARCH_QA: Record<string, SearchQaItem[]> = {
   ],
   "/services/pf-registration": [
     { q: "What is the PF registration process?", a: "The PF registration process is done online on the EPFO portal. The employer registers the establishment and then adds employees to get their UAN." },
-    { q: "Do you help with PF registration?", a: "Yes. We handle PF registration, UAN generation for employees and monthly ECR filing." },
+    { q: "Do you help with PF registration?", a: "Yes. We handle PF registration, UAN generation for employees and monthly ECR filing.", link: { label: "Free salary slip format", href: "/templates/salary-slip" } },
   ],
   "/services/esic-registration": [
     { q: "Do you handle ESI return filing?", a: "Yes. Along with ESIC registration, we handle monthly ESI contributions and ESI return filing." },

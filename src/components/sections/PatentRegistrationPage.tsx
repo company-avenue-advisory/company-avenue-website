@@ -44,19 +44,19 @@ const quickFacts = [
 
 const whoNeeds = [
   { icon: Lightbulb,   title: "Inventors & Innovators",         desc: "Individual inventors with novel ideas or technical solutions that meet patentability criteria." },
-  { icon: Cpu,         title: "Tech Startups",                  desc: "Technology companies developing unique software systems, hardware devices, or innovative processes." },
+  { icon: Cpu,         title: "Tech Startups",                  desc: "Tech companies building new software, hardware or processes." },
   { icon: FlaskConical,title: "Pharmaceutical Companies",       desc: "Pharma firms developing new drug formulations, compounds, synthesis methods, or delivery systems." },
-  { icon: Package,     title: "FMCG Product Companies",         desc: "Consumer goods manufacturers with innovative product formulations, packaging, or manufacturing processes." },
-  { icon: Building2,   title: "Manufacturing Companies",        desc: "Industrial manufacturers with novel machinery, production processes, or engineering solutions." },
+  { icon: Package,     title: "FMCG Product Companies",         desc: "Consumer goods makers with new formulas, packaging or ways of making products." },
+  { icon: Building2,   title: "Manufacturing Companies",        desc: "Factories with new machines, production methods or engineering ideas." },
   { icon: BookOpen,    title: "Research Institutions & Universities", desc: "Academic and R&D institutions with patentable inventions emerging from research projects." },
-  { icon: Zap,         title: "Engineers with Novel Processes", desc: "Engineers and technical professionals with inventive process improvements or unique solutions." },
+  { icon: Zap,         title: "Engineers with Novel Processes", desc: "Engineers and technical people who have found a better process or a new solution." },
   { icon: Microscope,  title: "Medical Device Developers",      desc: "Companies designing new diagnostic equipment, surgical tools, implants, or monitoring devices." },
 ];
 
 const benefits = [
   { icon: ShieldCheck,  title: "20-Year Monopoly",              desc: "Exclusive rights to manufacture, sell, and use your invention in India for 20 years from filing date." },
   { icon: DollarSign,   title: "License & Royalty Income",      desc: "License your patent to companies and earn recurring royalty income without manufacturing yourself." },
-  { icon: TrendingUp,   title: "Attract Investors & Acquirers", desc: "Patents signal innovation and R&D capability, significantly boosting company valuation and investor appeal." },
+  { icon: TrendingUp,   title: "Attract Investors & Acquirers", desc: "Patents show you invent things. That raises your company's value and appeal to investors." },
   { icon: AlertTriangle,title: "Block Competitors",             desc: "Legally prevent competitors from copying, manufacturing, using, or selling your patented invention." },
   { icon: Globe,        title: "Technology Transfer Deals",     desc: "Monetise your IP through technology transfer agreements with Indian and global corporations." },
   { icon: Award,        title: "IP Portfolio Building",         desc: "Build a defensible intellectual property portfolio that becomes a core business asset." },
@@ -66,12 +66,12 @@ const benefits = [
 
 const processSteps = [
   { n: "01", title: "Patentability Search",              desc: "Conduct a thorough novelty and prior-art search to assess whether the invention meets patentability criteria before investment." },
-  { n: "02", title: "Patent Draft Preparation",          desc: "Prepare complete patent specification including detailed description, claims, abstract, and technical drawings or diagrams." },
+  { n: "02", title: "Patent Draft Preparation",          desc: "Prepare the complete patent specification: the full description, claims, abstract and drawings." },
   { n: "03", title: "File Provisional or Complete Spec", desc: "File a provisional specification to fix your priority date. Then file the complete specification within 12 months. Or file the complete spec directly." },
   { n: "04", title: "Filing at Indian Patent Office",    desc: "Submit application at the relevant Patent Office — Chennai, Delhi, Mumbai, or Kolkata — based on applicant's jurisdiction." },
   { n: "05", title: "Publication after 18 Months",       desc: "Application is automatically published in the Official Patent Journal 18 months from earliest filing or priority date." },
-  { n: "06", title: "Request for Examination",           desc: "File Form 18 requesting substantive examination within 48 months of filing. Early publication and examination is possible on request." },
-  { n: "07", title: "Examination Report Response",       desc: "Respond to First Examination Report (FER) objections — addressing patentability, novelty, and claim clarity issues raised by the examiner." },
+  { n: "06", title: "Request for Examination",           desc: "File Form 18 to ask for examination within 48 months of filing. You can ask for early publication and examination." },
+  { n: "07", title: "Examination Report Response",       desc: "Reply to the First Examination Report (FER). We answer the examiner's points on patentability, novelty and how clear the claims are." },
   { n: "08", title: "Grant & Annual Renewal",            desc: "Patent granted after examination satisfaction. Annual renewal fees (Form 4) must be paid from the 3rd year onwards." },
 ];
 
@@ -510,7 +510,7 @@ export function PatentRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?
                 </div>
                 <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-start gap-3">
                   <Info size={14} className="text-amber-600 shrink-0 mt-0.5" />
-                  <p className="text-dark text-xs leading-relaxed">The patent specification (description + claims) is the most critical document and must be drafted with precision. Our patent attorneys ensure claims are broad enough to provide comprehensive protection while meeting patentability requirements.</p>
+                  <p className="text-dark text-xs leading-relaxed">The patent specification (description + claims) is the most important document. It must be drafted with care. Our patent attorneys write claims wide enough to protect you well, while still meeting the rules for a patent.</p>
                 </div>
               </div>
             </section>
@@ -541,7 +541,7 @@ export function PatentRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?
                 </div>
                 <div className="mt-6 bg-primary/5 border border-primary/15 rounded-xl p-4 flex items-center gap-3">
                   <Info size={15} className="text-primary shrink-0" />
-                  <p className="text-dark text-xs leading-relaxed">Patent grant in India typically takes <strong>3–5 years</strong> from filing. Expedited examination is available for startups and certain technology areas. Annual renewal fees are required from Year 3 onwards to maintain patent validity.</p>
+                  <p className="text-dark text-xs leading-relaxed">A patent in India typically takes <strong>3–5 years</strong> from filing to grant. Startups and some technology areas can get faster examination. You pay a renewal fee every year from Year 3 to keep the patent alive.</p>
                 </div>
               </div>
             </section>
@@ -613,7 +613,7 @@ export function PatentRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?
             <section>
               <Eyebrow label="International Patents" />
               <h2 className="font-heading font-bold text-3xl text-dark mb-4">Protect Your Invention Globally via PCT</h2>
-              <p className="text-muted text-sm mb-8 leading-relaxed">The Patent Cooperation Treaty (PCT) allows you to file a single international patent application covering 150+ countries. It is the most cost-effective route for inventors seeking global protection.</p>
+              <p className="text-muted text-sm mb-8 leading-relaxed">The Patent Cooperation Treaty (PCT) lets you file one international patent application covering 150+ countries. It is the cheapest route for inventors who want global protection.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
                 <div className="rounded-3xl overflow-hidden aspect-video shadow-[0_8px_32px_rgba(15,45,82,0.08)] relative">
                   <Image
@@ -647,7 +647,7 @@ export function PatentRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?
                 <Bell size={15} className="text-primary shrink-0 mt-0.5" />
                 <div>
                   <p className="font-heading font-bold text-dark text-sm mb-1">File Indian + PCT Together</p>
-                  <p className="text-muted text-xs leading-relaxed">For maximum protection, file your Indian provisional application first to secure the priority date, then file a PCT application within 12 months. This strategy gives you global protection while minimising upfront costs.</p>
+                  <p className="text-muted text-xs leading-relaxed">For the best protection, first file an Indian provisional application to lock in your priority date. Then file a PCT application within 12 months. You get global protection and pay less upfront.</p>
                 </div>
               </div>
             </section>

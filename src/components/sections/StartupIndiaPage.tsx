@@ -100,10 +100,10 @@ const requiredDocs = [
 ];
 
 const registrationSteps = [
-  { n: "01", icon: UserCheck, title: "Eligibility Assessment", desc: "We review your incorporation date, turnover, entity type, and business model to confirm DPIIT recognition eligibility." },
+  { n: "01", icon: UserCheck, title: "Eligibility Assessment", desc: "We check your start date, turnover, entity type and business model. Then we tell you if you qualify for DPIIT recognition." },
   { n: "02", icon: FileText, title: "Document Collection", desc: "Gather incorporation certificate, PAN, founder KYC, business pitch deck, and any funding information." },
   { n: "03", icon: Monitor, title: "Startup India Portal Registration", desc: "Create your profile on the Startup India portal (startupindia.gov.in) with complete business details." },
-  { n: "04", icon: Rocket, title: "DPIIT Recognition Application", desc: "Submit Form 2 (online self-certification) with business description, innovation details, and supporting documents." },
+  { n: "04", icon: Rocket, title: "DPIIT Recognition Application", desc: "Submit Form 2 online. It is a self-certification with your business details, what is new about it, and documents." },
   { n: "05", icon: ShieldCheck, title: "Review & Verification", desc: "DPIIT reviews the application. We track status and respond to any queries raised during the review process." },
   { n: "06", icon: BadgeCheck, title: "Recognition Certificate Issued", desc: "DPIIT issues the official Startup India Recognition Certificate with a unique number. It stays valid while you meet the eligibility criteria." },
 ];
@@ -127,14 +127,14 @@ const taxBenefits = [
     title: "Patent Fee Rebate",
     section: "IP Support",
     badge: "bg-amber-50 text-amber-700 border-amber-200",
-    desc: "Startups receive 80% rebate on patent filing fees and fast-track examination. An IP Facilitation Centre provides free advisory on patents, trademarks, design, and copyright.",
+    desc: "Startups get an 80% rebate on patent filing fees and faster examination. An IP Facilitation Centre gives free advice on patents, trademarks, designs and copyright.",
     points: ["80% rebate on patent fees", "Fast-track IP examination", "Free IP facilitation support", "Trademark & design support"],
   },
   {
     title: "Government Tender Relaxation",
     section: "Public Procurement",
     badge: "bg-purple-50 text-purple-700 border-purple-200",
-    desc: "Recognized startups are exempt from prior experience and turnover requirements in government procurement. EMD (Earnest Money Deposit) exemption also available in certain tender processes.",
+    desc: "Recognized startups can bid for government work without the usual past experience and turnover conditions. Some tenders also waive the EMD (Earnest Money Deposit).",
     points: ["No prior experience required", "No turnover criteria", "EMD exemption possible", "Compete on merit"],
   },
 ];
@@ -158,10 +158,10 @@ const whyUsPoints = [
   { icon: Award, title: "Startup Registration Specialists", desc: "We've guided 500+ startups through DPIIT recognition. We know exactly what DPIIT looks for in the application." },
   { icon: FileText, title: "Complete Documentation Support", desc: "From business pitch preparation to innovation description — we handle every document that strengthens your application." },
   { icon: Rocket, title: "End-to-End Application Filing", desc: "We manage your entire Startup India portal registration and DPIIT application so you focus on building." },
-  { icon: UserCheck, title: "Dedicated Expert Assigned", desc: "One CA/expert manages your application from assessment to certificate delivery with regular status updates." },
+  { icon: UserCheck, title: "Dedicated Expert Assigned", desc: "One CA or expert looks after your application from start to certificate. You get regular updates." },
   { icon: Clock, title: "Fast-Track Processing", desc: "We know the process inside-out. Most applications are submitted within 2 business days of document receipt." },
   { icon: DollarSign, title: "Transparent, Fixed Pricing", desc: "No hidden fees. One flat professional fee covering eligibility check, documentation, and complete filing." },
-  { icon: ShieldCheck, title: "Post-Recognition Support", desc: "We help you leverage your recognition — tax exemption applications, patent filings, and scheme benefits after certification." },
+  { icon: ShieldCheck, title: "Post-Recognition Support", desc: "After you get the certificate, we help you use it. We apply for tax exemption, file patents and claim scheme benefits." },
   { icon: TrendingUp, title: "Funding Readiness Guidance", desc: "Post-recognition, we advise on SIDBI Fund of Funds, government grants, and angel investor readiness." },
 ];
 
@@ -429,7 +429,7 @@ export function StartupIndiaPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                     <strong className="text-dark">Startup India</strong> is a flagship initiative of the Government of India launched in January 2016. The <strong className="text-dark">DPIIT (Department for Promotion of Industry and Internal Trade)</strong> grants official recognition to eligible startups, making them part of India&apos;s regulated startup ecosystem.
                   </p>
                   <p className="text-muted text-base leading-relaxed">
-                    DPIIT Recognition is not the same as company registration. It&apos;s an <strong className="text-dark">additional government certification</strong> that certifies your innovative business model and unlocks a stack of exclusive benefits unavailable to regular businesses.
+                    DPIIT Recognition is not the same as company registration. It is an <strong className="text-dark">additional government certification</strong> for new, innovative businesses. It opens up benefits that regular businesses do not get.
                   </p>
                   <p className="text-muted text-base leading-relaxed">
                     Any Pvt. Ltd., LLP, or registered partnership firm that is less than 10 years old, with turnover below ₹100 Crore, and working towards innovation or scalability can apply — <strong className="text-dark">completely free of government charges</strong>.
@@ -466,7 +466,7 @@ export function StartupIndiaPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                   8 Benefits of Startup India Recognition
                 </h2>
                 <p className="text-muted text-lg leading-relaxed max-w-2xl mb-10">
-                  A single DPIIT certificate unlocks an entire ecosystem of government support, financial relief, and regulatory ease.
+                  One DPIIT certificate opens the door to government support, tax relief and easier rules.
                 </p>
               </motion.div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4">
@@ -549,7 +549,7 @@ export function StartupIndiaPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                 <Lightbulb size={18} className="text-primary shrink-0 mt-0.5" />
                 <div>
                   <p className="font-heading font-semibold text-primary text-sm mb-1">The Business Description Matters Most</p>
-                  <p className="text-muted text-xs leading-relaxed">DPIIT&apos;s primary evaluation is based on your business pitch — how innovative and scalable your model is. We help craft a compelling, DPIIT-compliant description that maximizes approval chances.</p>
+                  <p className="text-muted text-xs leading-relaxed">DPIIT mainly judges your business pitch: how new your idea is and how big it can grow. We help you write a clear description that gives you the best chance of approval.</p>
                 </div>
               </motion.div>
             </section>
@@ -562,7 +562,7 @@ export function StartupIndiaPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                   How We Get You DPIIT Recognized
                 </h2>
                 <p className="text-muted text-lg leading-relaxed max-w-2xl mb-10">
-                  A structured 6-step process from eligibility assessment to certificate delivery — completely managed by our team.
+                  A simple 6-step process, from checking eligibility to getting your certificate. Our team handles all of it.
                 </p>
               </motion.div>
               <div className="relative">

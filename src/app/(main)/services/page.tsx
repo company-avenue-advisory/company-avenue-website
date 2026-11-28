@@ -34,13 +34,13 @@ const iconMap: Record<string, React.ElementType> = {
 const categories = [...new Set(SERVICES.map((s) => s.category))];
 
 const categoryMeta: Record<string, { icon: React.ElementType; desc: string }> = {
-  "Company Formation": { icon: Building2, desc: "Register any business structure — Pvt Ltd, LLP, OPC, Partnership, NGO and more." },
-  "Tax & GST":         { icon: IndianRupee, desc: "GST registration, returns, income tax, TDS, advance tax and audit — full tax compliance." },
-  "MCA / ROC Compliance": { icon: ClipboardList, desc: "Annual ROC filings, director KYC, company changes and corporate governance." },
-  "Startup & MSME":   { icon: Rocket, desc: "DPIIT recognition, Udyam, IEC, FSSAI, trade license and sector-specific registrations." },
-  "Intellectual Property": { icon: Lightbulb, desc: "Trademark, copyright, patent and design registration — protect your brand and innovations." },
-  "Payroll & HR":     { icon: Users, desc: "PF, ESIC, payroll processing and gratuity — complete employee compliance." },
-  "Accounting & Finance": { icon: BarChart3, desc: "Bookkeeping, financial statements, virtual CFO and business valuation." },
+  "Company Formation": { icon: Building2, desc: "Start any kind of business: Pvt Ltd, LLP, OPC, partnership, NGO and more." },
+  "Tax & GST":         { icon: IndianRupee, desc: "GST, income tax, TDS and tax audit. We file it all on time." },
+  "MCA / ROC Compliance": { icon: ClipboardList, desc: "Yearly ROC filings, director KYC and any change to your company." },
+  "Startup & MSME":   { icon: Rocket, desc: "DPIIT, Udyam, IEC, FSSAI, trade license and other licences for your sector." },
+  "Intellectual Property": { icon: Lightbulb, desc: "Trademark, copyright, patent and design. Protect your brand and your ideas." },
+  "Payroll & HR":     { icon: Users, desc: "PF, ESIC, payroll and gratuity. Everything you owe your staff, handled." },
+  "Accounting & Finance": { icon: BarChart3, desc: "Bookkeeping, financial statements, a virtual CFO and business valuation." },
 };
 
 export default function ServicesPage() {
@@ -56,7 +56,7 @@ export default function ServicesPage() {
             Complete Compliance. One Partner.
           </h1>
           <p className="text-white/50 text-lg max-w-2xl mx-auto mb-8">
-            49 services across 7 categories — everything your business needs to stay registered, compliant, and growing. Handled by expert CAs, CSs, and legal professionals.
+            49 services in 7 groups. Everything your business needs to register, stay compliant and grow. Our experts handle it for you.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-white/30 text-sm">
             <span>✓ 15+ Years of CA Practice</span>
