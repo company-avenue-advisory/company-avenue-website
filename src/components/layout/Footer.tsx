@@ -214,6 +214,37 @@ export function Footer() {
           </div>
         </div>
 
+        {/* More services — server-rendered links to service pages that had too few
+            internal links (Search Console, 23 Nov 2026: "Crawled - currently not indexed"). */}
+        <div className="mt-12 border-t border-white/10 pt-8">
+          <h4 className="font-heading font-semibold text-white text-sm mb-4 uppercase tracking-wider">
+            More Services
+          </h4>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2.5">
+            {[
+              { label: "FSSAI License", href: "/services/fssai-license" },
+              { label: "Trade License", href: "/services/trade-license" },
+              { label: "Professional Tax", href: "/services/professional-tax" },
+              { label: "Digital Signature (DSC)", href: "/services/digital-signature-certificate" },
+              { label: "Director KYC", href: "/services/director-kyc" },
+              { label: "Change in Directors", href: "/services/change-in-directors" },
+              { label: "Increase Authorised Capital", href: "/services/increase-authorised-capital" },
+              { label: "Company Closure", href: "/services/company-closure" },
+              { label: "Tax Audit", href: "/services/tax-audit" },
+              { label: "Virtual CFO", href: "/services/virtual-cfo" },
+              { label: "Copyright Registration", href: "/services/copyright-registration" },
+              { label: "Producer Company", href: "/services/producer-company" },
+              { label: "FSSAI Cost Calculator", href: "/calculators/fssai-license-cost-calculator" },
+            ].map((c) => (
+              <li key={c.href}>
+                <Link href={c.href} className="text-white/50 hover:text-white text-sm transition-colors">
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* Locations we serve — internal links to local landing pages (local SEO) */}
         <div className="mt-12 border-t border-white/10 pt-8">
           <h4 className="font-heading font-semibold text-white text-sm mb-4 uppercase tracking-wider">
