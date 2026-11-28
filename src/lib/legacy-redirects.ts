@@ -96,6 +96,12 @@ export interface LegacyRedirect {
  */
 export const LEGACY_REDIRECTS: LegacyRedirect[] = [
   {
+    from: "/guides/convert-proprietorship-to-private-limited",
+    to: "/blog/converting-proprietorship-to-private-limited",
+    verified: true,
+    note: "Not a legacy URL: duplicate of the blog post on the same topic. Search Console (23 Nov 2026) had it as 'Crawled - currently not indexed'; merged into the indexed blog post.",
+  },
+  {
     from: "/books-keeping-outsourcing",
     to: "/services/accounting-bookkeeping",
     verified: true,
