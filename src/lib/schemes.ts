@@ -445,8 +445,6 @@ export const CAA_DIFFERENTIATORS = [
 
 export const PSU_INITIATIVES: { org: string; initiative: string; href: string }[] = [
   { org: "ONGC", initiative: "ONGC Startup Fund", href: "https://startup.ongc.co.in/web/ongcstartup" },
-  { org: "BHEL", initiative: "SanRachna Platform", href: "https://sanrachna.bhel.in/home" },
-  { org: "Bharat Petroleum", initiative: "Project Ankur / Ankur Fund", href: "https://ebiz.bpc.co.in/BPCLStartup/" },
   { org: "Coal India", initiative: "CIL Innovation & Incubation Centre", href: "https://ciicentre.iitism.ac.in/" },
   { org: "GAIL (India)", initiative: "Pankh", href: "https://gailebank.gail.co.in/GSUICBG/frmStartUpGAIL.aspx" },
   { org: "Hindustan Petroleum", initiative: "HP Udgam", href: "https://startup.hpcl.co.in/HPCLStartup/index.jsp" },

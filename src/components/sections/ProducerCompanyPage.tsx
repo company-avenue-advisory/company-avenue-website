@@ -68,31 +68,31 @@ const whoShouldRegister = [
   { icon: Tractor,     title: "Agricultural Producer Groups",   desc: "Farming collectives that process and sell agri-commodities." },
   { icon: Leaf,        title: "Horticulture & Floriculture",    desc: "Fruit, vegetable and flower growers operating in cooperative fashion." },
   { icon: HandCoins,   title: "Fishermen Cooperatives",         desc: "Artisan fishing groups seeking formal corporate status and credit access." },
-  { icon: Briefcase,   title: "Artisan & Handicraft Groups",    desc: "Weavers, potters and craftspeople commercializing their produce collectively." },
+  { icon: Briefcase,   title: "Artisan & Handicraft Groups",    desc: "Weavers, potters and craftspeople who sell their work together." },
   { icon: PackageCheck,title: "Dairy Farmer Collectives",       desc: "Milk producers seeking formal vehicle for aggregation and sale." },
   { icon: BarChart3,   title: "Producer Institutions",          desc: "Two or more producer institutions forming a larger Producer Company." },
   { icon: Landmark,    title: "Agri-Value Chain Groups",        desc: "Producer groups building integrated supply chains from farm to market." },
 ];
 
 const benefits = [
-  { icon: ShieldCheck,  title: "Limited Liability",              desc: "Members' personal assets are protected — liability limited to unpaid share capital." },
+  { icon: ShieldCheck,  title: "Limited Liability",              desc: "Members' own assets are safe. Their liability is limited to unpaid share capital." },
   { icon: HandCoins,    title: "Collective Bargaining Power",    desc: "Negotiate better prices, bulk discounts and market rates as a unified entity." },
-  { icon: DollarSign,   title: "Easier Access to Credit",       desc: "Banks and NBFCs extend institutional credit to Producer Companies more readily than to individuals." },
-  { icon: TrendingUp,   title: "Profit Sharing Among Members",  desc: "Surplus distributed as patronage bonus, dividend or price differential to member-producers." },
-  { icon: BadgeCheck,   title: "MCA-Recognized Legal Entity",   desc: "Recognized corporate entity under Companies Act 2013 — opens institutional doors." },
-  { icon: Globe,        title: "Export & Market Access",        desc: "Formal entity enables APEDA registration, export licenses and direct market linkages." },
-  { icon: Zap,          title: "Tax Benefits",                  desc: "Section 80P deductions for eligible agricultural income; no mandatory dividend tax in certain cases." },
+  { icon: DollarSign,   title: "Easier Access to Credit",       desc: "Banks and NBFCs lend to Producer Companies more easily than to individuals." },
+  { icon: TrendingUp,   title: "Profit Sharing Among Members",  desc: "Profits go back to members as a bonus, a dividend or a better price for their produce." },
+  { icon: BadgeCheck,   title: "MCA-Recognized Legal Entity",   desc: "A company recognized under the Companies Act 2013. Banks and institutions take it seriously." },
+  { icon: Globe,        title: "Export & Market Access",        desc: "As a formal company, you can get APEDA registration and export licenses, and sell directly to buyers." },
+  { icon: Zap,          title: "Tax Benefits",                  desc: "Section 80P deductions on eligible farm income. In some cases, no dividend tax is due." },
   { icon: Briefcase,    title: "FPO Benefits & Grants",         desc: "Eligible for NABARD, SFAC and government FPO promotion schemes and equity grants." },
 ];
 
 const registrationSteps = [
   { n: "01", title: "Eligibility & Consultation",         desc: "Determine if your group qualifies as a Producer Company under Part IXA of the Companies Act 2013." },
   { n: "02", title: "Name Reservation (RUN)",             desc: "Reserve a unique name for the Producer Company via the MCA RUN (Reserve Unique Name) portal." },
-  { n: "03", title: "Draft MOA & AOA",                   desc: "Draft Memorandum and Articles of Association specifying producer activities as primary objects (INC-33, INC-34)." },
-  { n: "04", title: "Obtain DSC & DIN",                  desc: "Obtain Digital Signature Certificates and Director Identification Numbers for all proposed directors." },
+  { n: "03", title: "Draft MOA & AOA",                   desc: "Draft the Memorandum and Articles of Association (INC-33, INC-34). They name producer work as the main objects." },
+  { n: "04", title: "Obtain DSC & DIN",                  desc: "Get Digital Signature Certificates and Director Identification Numbers for all the directors." },
   { n: "05", title: "File SPICe+ (INC-32)",              desc: "Submit SPICe+ integrated form with MOA, AOA, subscriber declaration, office proof and director details." },
-  { n: "06", title: "MCA Processing",                    desc: "MCA scrutinizes the application; any queries raised are resolved within the stipulated time." },
-  { n: "07", title: "Certificate of Incorporation",      desc: "ROC issues the Certificate of Incorporation with CIN, confirming legal existence of the Producer Company." },
+  { n: "06", title: "MCA Processing",                    desc: "MCA checks the application. We answer any questions within the time given." },
+  { n: "07", title: "Certificate of Incorporation",      desc: "The ROC issues the Certificate of Incorporation with a CIN. Your Producer Company now legally exists." },
   { n: "08", title: "PAN, TAN & Bank Account",           desc: "Apply for PAN and TAN; open a current bank account in the Producer Company's name." },
 ];
 
@@ -189,7 +189,7 @@ export function ProducerCompanyPage({ pricingSlot, calcPill }: { pricingSlot?: R
               <motion.p custom={2} variants={fadeUp} initial={false} animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >
-                Register a Producer Company (Farmer Producer Organization) under Part IXA of the Companies Act 2013. We handle MOA drafting with producer objects, SPICe+ filing, and full MCA compliance — empowering India&apos;s primary producers.
+                Register a Producer Company (Farmer Producer Organization) under Part IXA of the Companies Act 2013. We draft the MOA, file SPICe+ and handle all MCA work. Built for India&apos;s farmers and producers.
               </motion.p>
               <motion.div custom={3} variants={fadeUp} initial={false} animate="show" className="flex flex-wrap gap-3 mb-10">
                 <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-white font-heading font-semibold text-sm rounded-xl hover:bg-[#0a2444] transition-colors shadow-sm">

@@ -59,7 +59,7 @@ const whoNeeds = [
   { icon: Building2,    title: "Companies Doing M&A",            desc: "Mergers, acquisitions, and business combinations need independent valuation for fair pricing." },
   { icon: Users,        title: "ESOP Issuance",                  desc: "Companies issuing employee stock options need FMV certification on the grant date." },
   { icon: RefreshCcw,   title: "Share Buyback",                  desc: "Buyback of shares requires a CA-certified valuation under the Companies Act, 2013." },
-  { icon: Scale,        title: "Shareholder Disputes",           desc: "Shareholder exit disputes, minority buyouts, and litigation require independent valuation." },
+  { icon: Scale,        title: "Shareholder Disputes",           desc: "Shareholder exits, minority buyouts and court cases need an independent valuation." },
   { icon: BookOpen,     title: "Succession Planning",            desc: "Business inheritance, family settlements, and succession planning require fair valuation." },
   { icon: Globe,        title: "FDI Investments (Rule 11UA)",    desc: "Foreign direct investment under FEMA requires share valuation at fair market value." },
   { icon: Percent,      title: "ESOP Grants under Startup Plans",desc: "Startup equity plans and ESOP trusts require annual FMV valuation per Income Tax rules." },
@@ -78,11 +78,11 @@ const benefits = [
 
 const processSteps = [
   { n: "01", title: "Information Request & Document Collection",   desc: "We send you a structured information request — financial statements, business plan, cap table, and other key data." },
-  { n: "02", title: "Financial Statement Review & Normalization",  desc: "We analyse and normalise 3 years of audited financials, adjusting for one-time items, related-party transactions, and accounting anomalies." },
-  { n: "03", title: "Industry & Market Analysis",                  desc: "We research comparable companies, sector benchmarks, market multiples, and macro-economic factors relevant to your business." },
+  { n: "02", title: "Financial Statement Review & Normalization",  desc: "We study 3 years of audited accounts. We adjust for one-off items, related-party deals and odd entries." },
+  { n: "03", title: "Industry & Market Analysis",                  desc: "We study similar companies, sector benchmarks, market multiples and the wider economy as they affect your business." },
   { n: "04", title: "Select Valuation Methodology",               desc: "We select the most appropriate method — DCF for growth businesses, NAV for asset-heavy companies, Comparable for benchmarking." },
-  { n: "05", title: "Build Detailed Financial Model",              desc: "We construct a multi-year financial model incorporating revenue growth assumptions, cost structure, capex, and working capital." },
-  { n: "06", title: "Apply Methodology & Compute Value Range",    desc: "We apply the selected methodology to derive a defendable valuation range with a point estimate and supporting rationale." },
+  { n: "05", title: "Build Detailed Financial Model",              desc: "We build a financial model for several years. It covers revenue growth, costs, capex and working capital." },
+  { n: "06", title: "Apply Methodology & Compute Value Range",    desc: "We apply the chosen method to reach a value range you can defend, with a single figure and the reasons behind it." },
   { n: "07", title: "Sensitivity Analysis",                        desc: "We stress-test key assumptions (growth rate, discount rate, multiples) to show the value range under different scenarios." },
   { n: "08", title: "CA Certification & Final Report Delivery",   desc: "The completed valuation report is reviewed, certified by a qualified CA, and delivered in PDF and Excel format." },
 ];
@@ -108,7 +108,7 @@ const timelineStages = [
 ];
 
 const deliverables = [
-  { icon: FileText,    title: "Certified Business Valuation Report",   desc: "Comprehensive report detailing methodology, assumptions, analysis, and final value range." },
+  { icon: FileText,    title: "Certified Business Valuation Report",   desc: "A full report with the method, assumptions, analysis and final value range." },
   { icon: Calculator,  title: "Financial Model (Excel)",               desc: "Fully editable financial model with revenue projections, cost structure, and valuation workings." },
   { icon: BarChart2,   title: "DCF / NAV Workings",                   desc: "Detailed computation of discounted cash flows or net asset value as applicable." },
   { icon: Percent,     title: "Sensitivity Analysis",                  desc: "Scenario table showing value range under different growth and discount rate assumptions." },
@@ -289,7 +289,7 @@ export function BusinessValuationPage({ pricingSlot, calcPill }: { pricingSlot?:
                 custom={2} variants={fadeUp} initial={false} animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >
-                Independent, CA-certified business valuation reports for funding rounds, M&A, ESOPs, FDI compliance, and shareholder disputes. Built on ICAI standards and accepted by regulators.
+                Independent, CA-certified business valuation reports for funding, M&A, ESOPs, FDI and shareholder disputes. Built on ICAI standards. Accepted by regulators.
               </motion.p>
               <motion.div
                 custom={3} variants={fadeUp} initial={false} animate="show"
@@ -457,7 +457,7 @@ export function BusinessValuationPage({ pricingSlot, calcPill }: { pricingSlot?:
           <div className="text-center mb-14">
             <Eyebrow label="Who Needs This" />
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-dark mb-3">Who Needs a Business Valuation?</h2>
-            <p className="text-muted text-base max-w-2xl mx-auto">Business valuation is required across a wide range of corporate transactions, regulatory filings, and dispute situations.</p>
+            <p className="text-muted text-base max-w-2xl mx-auto">You need a business valuation for many deals, filings and disputes.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {whoNeeds.map((item, i) => {
@@ -550,7 +550,7 @@ export function BusinessValuationPage({ pricingSlot, calcPill }: { pricingSlot?:
                     color: "bg-purple-50 border-purple-100",
                     iconColor: "bg-purple-100 text-purple-600",
                     best: "Best for: Benchmarking, cross-checks, M&A transactions",
-                    desc: "Values the business by applying revenue or EBITDA multiples derived from comparable listed companies or recent private market transactions. Provides a market-based reference point.",
+                    desc: "Values the business using revenue or EBITDA multiples from similar listed companies or recent private deals. This gives a market-based check.",
                     points: ["Peer group selection", "EV/Revenue or EV/EBITDA multiples", "Control premium / minority discount", "Market conditions adjustment"],
                   },
                   {
@@ -672,7 +672,7 @@ export function BusinessValuationPage({ pricingSlot, calcPill }: { pricingSlot?:
                 </div>
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-center gap-3">
                   <CalendarCheck size={16} className="text-amber-500 shrink-0" />
-                  <p className="text-dark text-xs leading-relaxed">Timeline depends on the completeness of documents provided. Expedited delivery in 3–5 days available on request for an additional fee.</p>
+                  <p className="text-dark text-xs leading-relaxed">The time taken depends on how complete your documents are. Faster delivery in 3–5 days is possible for an extra fee.</p>
                 </div>
               </div>
             </section>
