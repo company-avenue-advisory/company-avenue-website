@@ -21,6 +21,17 @@ export interface RankAiCard {
    owns that URL (see blog/[slug]/page.tsx). */
 const RANKAI_CATEGORY = "Latest";
 
+const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+/** "28 Nov 2026" or "7 Sept 2026" → 20261128, for sorting. Unreadable dates sort last. */
+export function dateKey(d: string): number {
+  const m = /^(\d{1,2})\s+([A-Za-z]{3})[A-Za-z]*\s+(\d{4})$/.exec(d.trim());
+  if (!m) return 0;
+  const month = MONTHS.indexOf(m[2].toLowerCase());
+  if (month < 0) return 0;
+  return Number(m[3]) * 10000 + (month + 1) * 100 + Number(m[1]);
+}
+
 export function BlogHubClient({ rankAiPosts = [] }: { rankAiPosts?: RankAiCard[] }) {
   const [filter, setFilter] = useState("All");
   const liveArticles = useLiveNews();
@@ -38,9 +49,12 @@ export function BlogHubClient({ rankAiPosts = [] }: { rankAiPosts?: RankAiCard[]
         readTime: p.date,
         image: p.image ?? "",
         remote: true,
+        sortKey: dateKey(p.date),
       }));
-    const handWritten = BLOG_POSTS.slice(1).map((p) => ({ ...p, remote: false }));
-    return [...fromRankAi, ...handWritten];
+    const handWritten = BLOG_POSTS.slice(1).map((p) => ({ ...p, remote: false, sortKey: dateKey(p.date) }));
+    // Newest first. Array.sort is stable, so posts with the same date keep
+    // their source order (Rank.ai first, then the order in blog-posts.ts).
+    return [...fromRankAi, ...handWritten].sort((a, b) => b.sortKey - a.sortKey);
   }, [rankAiPosts]);
 
   /* WS-5.5 — empty-category behaviour.
