@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { PatentRegistrationPage } from "@/components/sections/PatentRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function PatentRegistrationServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="patent-registration" />}
         calcPill={<ServiceCalcPill serviceId="patent-registration" />}
       />
+      <SearchQA path="/services/patent-registration" />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { IncreaseAuthorisedCapitalPage } from "@/components/sections/IncreaseAuthorisedCapitalPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function IncreaseAuthorisedCapitalServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="increase-authorised-capital" />}
         calcPill={<ServiceCalcPill serviceId="increase-authorised-capital" />}
       />
+      <SearchQA path="/services/increase-authorised-capital" />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { PSARALicensePage } from "@/components/sections/PSARALicensePage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function PSARALicenseServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="psara-license" />}
         calcPill={<ServiceCalcPill serviceId="psara-license" />}
       />
+      <SearchQA path="/services/psara-license" />
     </>
   );
 }
