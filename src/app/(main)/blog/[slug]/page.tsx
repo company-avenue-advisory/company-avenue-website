@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +8,7 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE_URL, canonical, breadcrumbSchema, PRINCIPAL_ID, fitTitle } from "@/lib/seo";
-import { CATEGORY_SERVICE } from "@/lib/content-links";
+import { CATEGORY_SERVICE, POST_SERVICE } from "@/lib/content-links";
 import { getRankAiArticle, humanDate, type RankAiArticle } from "@/lib/rank-ai";
 
 // Hand-written posts are prebuilt below. Any other slug is looked up in
@@ -92,7 +93,7 @@ export default async function BlogPostPage({
     ...BLOG_POSTS.filter((p) => p.slug !== post.slug && p.category !== post.category),
   ].slice(0, 3);
 
-  const service = CATEGORY_SERVICE[post.category];
+  const service = POST_SERVICE[post.slug] ?? CATEGORY_SERVICE[post.category];
   const published = isoDate(post.date);
 
   return (
@@ -192,7 +193,7 @@ export default async function BlogPostPage({
             {service && (
               <div className="mt-10 p-6 rounded-2xl bg-white border border-slate-100 shadow-card">
                 <p className="text-muted text-sm leading-relaxed mb-4">
-                  Need help with this in practice? Our CA-led team handles{" "}
+                  Need help with this in practice? Our expert team handles{" "}
                   <Link href={service.href} className="text-primary font-semibold hover:underline">
                     {service.label}
                   </Link>{" "}
@@ -246,6 +247,7 @@ export default async function BlogPostPage({
         </div>
       </article>
 
+      <SearchQA path={`/blog/${post.slug}`} />
       <CTABanner />
     </>
   );

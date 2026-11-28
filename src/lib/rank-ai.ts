@@ -89,7 +89,7 @@ export async function getRankAiArticle(slug: string): Promise<RankAiArticle | nu
   return {
     ...s,
     description: s.description || excerpt(a.content),
-    content: fixDeadLinks(withImageAlts(a.content, s.title)),
+    content: unlinkCompetitors(fixDeadLinks(withImageAlts(a.content, s.title))),
   };
 }
 
@@ -131,6 +131,20 @@ function fixDeadLinks(html: string): string {
       : url.startsWith("https://tutorial.gst.gov.in/")
         ? `href="https://www.gst.gov.in/help"`
         : m,
+  );
+}
+
+/**
+ * Rank.ai sometimes cites competitor firms (Semrush, 27 Nov 2026: an
+ * ebizfiling.com link that also returned 403). Keep the anchor text,
+ * drop the link.
+ */
+const COMPETITOR_HOSTS =
+  /^https?:\/\/(?:www\.)?(?:ebizfiling\.com|vakilsearch\.com|indiafilings\.com|legalwiz\.in|cleartax\.in|taxmann\.com|corpbiz\.io|registrationwala\.com)\b/i;
+
+function unlinkCompetitors(html: string): string {
+  return html.replace(/<a\b[^>]*\bhref="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, (m, url: string, text: string) =>
+    COMPETITOR_HOSTS.test(url) ? text : m,
   );
 }
 

@@ -35,7 +35,7 @@ export function CTABanner() {
             Ready to Start Your<br className="hidden md:block" /> Business Journey?
           </h2>
           <p className="text-white/45 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-            Let our Chartered Accountants handle your registrations, taxation and compliance
+            Let our experts handle your registrations, taxation and compliance
             while you focus on building your business.
           </p>
 

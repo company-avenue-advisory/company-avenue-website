@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { CityLandingPage } from "@/components/sections/CityLandingPage";
 import { canonical, fitTitle } from "@/lib/seo";
 import { CITY_PAGES } from "@/lib/city-pages";
@@ -12,5 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default function TrademarkRegistrationDelhiPage() {
-  return <CityLandingPage config={page.config} />;
+  return (
+    <>
+      <CityLandingPage config={page.config} />
+      <SearchQA path="/services/trademark-registration-delhi" />
+    </>
+  );
 }

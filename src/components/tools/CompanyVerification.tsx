@@ -29,8 +29,8 @@ interface DirectorResult {
 
 type Result = CompanyResult | DirectorResult;
 
-export function CompanyVerification() {
-  const [type, setType] = useState<"cin" | "din">("cin");
+export function CompanyVerification({ initialType = "cin" }: { initialType?: "cin" | "din" } = {}) {
+  const [type, setType] = useState<"cin" | "din">(initialType);
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

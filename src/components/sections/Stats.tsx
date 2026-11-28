@@ -10,9 +10,9 @@ const stats = [
   // and footer wording. (This label form escaped the first pass, which matched
   // "Years Experience" and "Years Exp." but not "Years of Experience".)
   { value: 15, suffix: "+", label: "Years CA Practice", icon: Clock, color: "text-primary", bg: "bg-primary/8" },
-  { value: 1000, suffix: "+", label: "Businesses Served", icon: Briefcase, color: "text-secondary", bg: "bg-secondary/8" },
-  { value: 98, suffix: "%", label: "Client Satisfaction", icon: Star, color: "text-accent", bg: "bg-accent/10" },
-  { value: 25, suffix: "+", label: "Professional Experts", icon: Users, color: "text-primary", bg: "bg-primary/8" },
+  { value: 500, suffix: "+", label: "Businesses Served", icon: Briefcase, color: "text-secondary", bg: "bg-secondary/8" },
+  { value: 96, suffix: "%+", label: "Client Satisfaction", icon: Star, color: "text-accent", bg: "bg-accent/10" },
+  { value: 15, suffix: "+", label: "Professional Experts", icon: Users, color: "text-primary", bg: "bg-primary/8" },
   { value: 100, suffix: "%", label: "Digital Process", icon: Monitor, color: "text-secondary", bg: "bg-secondary/8" },
 ];
 

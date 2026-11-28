@@ -211,7 +211,7 @@ export const TRUST_CLAIMS = {
   /** Approved replacement for any bare "15+ Years Experience" badge. */
   experienceLine: "Led by a Chartered Accountant with 15+ years in practice",
   /** Shorter variant for tight badges and stat tiles. */
-  experienceShort: "CA-led · 15+ yrs in practice",
+  experienceShort: "Expert-led · 15+ yrs in practice",
   /** Years the Principal has been in practice. Confirmed verbally, not in writing. */
   principalYearsInPractice: "15+",
   /** Years the firm has existed. Derived from the [VERIFIED] 2015 incorporation. */
@@ -220,8 +220,10 @@ export const TRUST_CLAIMS = {
    * Client count shown in the hero, stats band and ~30 service pages.
    * BLOCKED — PRINCIPAL: no substantiating record supplied. Left rendering on
    * the Principal's instruction; change this one string to restate it
-   * everywhere it is read from.
+   * everywhere it is read from. Lowered from 1000+ to 500+ on 28 Nov 2026 at
+   * Anshika Singh's instruction (with 96%+ satisfaction and 15+ experts in
+   * Stats.tsx); still not backed by a written record.
    */
-  clientsServed: "1000+",
+  clientsServed: "500+",
   clientsServedConfirmed: false,
 } as const;

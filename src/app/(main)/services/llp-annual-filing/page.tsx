@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { LLPAnnualFilingPage } from "@/components/sections/LLPAnnualFilingPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function LLPAnnualFilingServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="llp-annual-filing" />}
         calcPill={<ServiceCalcPill serviceId="llp-annual-filing" />}
       />
+      <SearchQA path="/services/llp-annual-filing" />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { ITRPage } from "@/components/sections/ITRPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -43,6 +44,7 @@ export default function IncomeTaxReturnPage() {
         pricingSlot={<ServicePricingBlock serviceId="income-tax-return" />}
         calcPill={<ServiceCalcPill serviceId="income-tax-return" />}
       />
+      <SearchQA path="/services/income-tax-return" />
     </>
   );
 }

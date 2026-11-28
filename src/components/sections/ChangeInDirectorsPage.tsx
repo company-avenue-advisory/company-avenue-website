@@ -139,7 +139,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award, title: "MCA Compliance Specialists", desc: "1,500+ director changes and share transfers handled across Pvt. Ltd., OPC, and Section 8 companies." },
+  { icon: Award, title: "MCA Compliance Specialists", desc: "500+ director changes and share transfers handled across Pvt. Ltd., OPC, and Section 8 companies." },
   { icon: Clock, title: "DIR-12 Filed Within Deadline", desc: "We ensure DIR-12 is filed well within the 30-day window — never miss the deadline, never pay late fees." },
   { icon: Scale, title: "End-to-End Share Transfer", desc: "Complete SH-4 drafting, stamp duty guidance (state-specific), and MCA filing included in our service." },
   { icon: UserCheck, title: "DIN Acquisition Support", desc: "We help new directors obtain DIN through DIR-3/SPICe+ before DIR-12 filing — no bottlenecks." },
@@ -665,7 +665,7 @@ export function ChangeInDirectorsPage({ pricingSlot, calcPill }: { pricingSlot?:
                     Why Businesses Trust Us with MCA Filings
                   </h2>
                   <p className="text-muted text-lg leading-relaxed max-w-2xl mb-10">
-                    1,500+ director and shareholder changes processed. Zero penalties. Zero rejections. We know MCA inside out.
+                    500+ director and shareholder changes processed. Zero penalties. Zero rejections. We know MCA inside out.
                   </p>
                 </motion.div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

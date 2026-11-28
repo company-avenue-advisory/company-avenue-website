@@ -5,12 +5,13 @@ import {
   Mail, FileCheck, Lock, FileText, Landmark, UserPlus, CalendarClock,
   Handshake, Briefcase, Users, Receipt, FileSpreadsheet, Search,
   ArrowRight, FileType2,
+  CalendarCheck, FileSignature,
 } from "lucide-react";
 import { TEMPLATES, TEMPLATE_CATEGORIES } from "@/lib/templates";
 
 const ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Mail, FileCheck, Lock, FileText, Landmark, UserPlus, CalendarClock,
-  Handshake, Briefcase, Users, Receipt, FileSpreadsheet,
+  Handshake, Briefcase, Users, Receipt, FileSpreadsheet, CalendarCheck, FileSignature,
 };
 
 const FILTERS = ["All", ...TEMPLATE_CATEGORIES];

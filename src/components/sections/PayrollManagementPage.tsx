@@ -297,7 +297,7 @@ function StickySidebar() {
       {/* Stats */}
       <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
         <div className="grid grid-cols-2 gap-3">
-          {[{ v: "1000+", l: "Employees Managed" }, { v: "100%", l: "On-Time Filing" }, { v: "15+", l: "Years CA Practice" }, { v: "24h", l: "Response Time" }].map(s => (
+          {[{ v: "500+", l: "Employees Managed" }, { v: "100%", l: "On-Time Filing" }, { v: "15+", l: "Years CA Practice" }, { v: "24h", l: "Response Time" }].map(s => (
             <div key={s.l} className="text-center">
               <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
               <p className="text-muted text-[10px] mt-0.5">{s.l}</p>
@@ -816,7 +816,7 @@ export function PayrollManagementPage({ pricingSlot, calcPill }: { pricingSlot?:
                   What Makes Us Different
                 </h2>
                 <p className="text-muted text-lg leading-relaxed max-w-2xl mb-10">
-                  We&apos;re not a payroll software — we&apos;re a CA-led payroll team that takes end-to-end ownership.
+                  We&apos;re not a payroll software — we&apos;re an expert-led payroll team that takes end-to-end ownership.
                 </p>
               </motion.div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

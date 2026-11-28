@@ -131,7 +131,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "CA-Led — 15+ Years Incorporating Every Entity Type" },
+  { icon: Award,       label: "Expert-Led — 15+ Years Incorporating Every Entity Type" },
   { icon: Building2,   label: "100+ Producer Companies & FPOs Registered Across India" },
   { icon: UserCheck,   label: "Dedicated CA & CS for Part IXA Compliance" },
   { icon: DollarSign,  label: "Fixed Transparent Pricing — Starting ₹9,999" },
@@ -294,10 +294,10 @@ export function ProducerCompanyPage({ pricingSlot, calcPill }: { pricingSlot?: R
                   <Eyebrow label="Overview" />
                   <h2 className="font-heading font-bold text-3xl md:text-4xl text-dark mb-5 leading-tight">What is a Producer Company?</h2>
                   <p className="text-slate-500 text-base leading-relaxed mb-5">
-                    A Producer Company is a legally recognized corporate entity under <strong>Part IXA of the Companies Act 2013</strong> designed specifically for farmers, fishermen, artisans and other primary producers. It combines the features of a cooperative society with the corporate governance of a private limited company — giving producers collective market power without the complexities of cooperative law.
+                    A Producer Company is a legally recognized corporate entity under <strong>Part IXA of the Companies Act 2013</strong> designed for farmers, fishermen, artisans and other primary producers. It mixes the features of a cooperative society with the governance of a private limited company. Producers get joint market power without the complexity of cooperative law.
                   </p>
                   <p className="text-slate-500 text-base leading-relaxed mb-6">
-                    Unlike regular companies, a Producer Company can only accept producers as members and must primarily engage in activities related to primary produce — from farming and fishing to weaving and dairy. It is the preferred vehicle for Farmer Producer Organizations (FPOs) supported by NABARD, SFAC and the Government of India.
+                    Unlike a regular company, a Producer Company can only have producers as members. Its main work must relate to primary produce, from farming and fishing to weaving and dairy. It is the preferred structure for Farmer Producer Organizations (FPOs) backed by NABARD, SFAC and the Government of India.
                   </p>
                   <div className="grid grid-cols-2 gap-3">
                     {[
@@ -583,7 +583,7 @@ export function ProducerCompanyPage({ pricingSlot, calcPill }: { pricingSlot?: R
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">Empower India&apos;s Farmers — Register Your FPO Today</h2>
             <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
-              Producer Company under Part IXA — the fastest route to collective market power, government grants, and institutional credit for primary producers.
+              Producer Company under Part IXA. The fastest way for primary producers to get joint market power, government grants and bank credit.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-dark font-heading font-bold text-sm rounded-xl hover:bg-amber-400 transition-colors shadow-lg">

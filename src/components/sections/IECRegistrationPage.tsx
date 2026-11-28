@@ -155,7 +155,7 @@ const govtBenefits = [
 ];
 
 const whyUsPoints = [
-  { icon: Award, title: "DGFT Registration Experts", desc: "1,000+ IEC registrations handled across proprietorships, companies, LLPs, and individuals." },
+  { icon: Award, title: "DGFT Registration Experts", desc: "500+ IEC registrations handled across proprietorships, companies, LLPs, and individuals." },
   { icon: FileText, title: "End-to-End Registration", desc: "From DGFT portal setup to application submission — every step handled for you." },
   { icon: Clock, title: "Fast 2-Day Processing", desc: "Applications submitted within 1 business day of receiving complete documents." },
   { icon: UserCheck, title: "Complete Documentation", desc: "All documents verified before submission — zero deficiency notices, zero rejections." },
@@ -251,7 +251,7 @@ function StickySidebar() {
       {/* Stats */}
       <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
         <div className="grid grid-cols-2 gap-3">
-          {[{ v: "1000+", l: "IECs Issued" }, { v: "2 Days", l: "Avg. Processing" }, { v: "100%", l: "Success Rate" }, { v: "Free", l: "Govt. Fee" }].map(s => (
+          {[{ v: "500+", l: "IECs Issued" }, { v: "2 Days", l: "Avg. Processing" }, { v: "100%", l: "Success Rate" }, { v: "Free", l: "Govt. Fee" }].map(s => (
             <div key={s.l} className="text-center">
               <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
               <p className="text-muted text-[10px] mt-0.5">{s.l}</p>

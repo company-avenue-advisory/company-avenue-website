@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import Link from "next/link";
 import {
   Gift,
@@ -52,7 +53,7 @@ const SCHEME_SUMMARIES = SCHEMES.map(toSummary);
 export const metadata: Metadata = {
   title: fitTitle("Government Startup Schemes & Grants in India — Complete 2026 Directory"),
   description:
-    `All ${stats.total} Central Government schemes, grants and funding programmes for Indian startups in one place — SISFS, CGSS, BIG, iDEX, PRAYAS, MUDRA, CGTMSE, Startup India Seed Fund and more. Eligibility, how to apply, timelines and CA-led application support from Company Avenue Advisory.`,
+    `All ${stats.total} Central Government schemes, grants and funding programmes for Indian startups in one place — SISFS, CGSS, BIG, iDEX, PRAYAS, MUDRA, CGTMSE, Startup India Seed Fund and more. Eligibility, how to apply, timelines and expert-led application support from Company Avenue Advisory.`,
   keywords: [
     "government schemes for startups india",
     "startup india seed fund scheme apply",
@@ -116,7 +117,7 @@ export default function StartupSchemesPage() {
           serviceSchema({
             name: "Government Startup Scheme & Grant Advisory",
             description:
-              "CA-led advisory for Indian startups applying to Central Government funding schemes — eligibility screening, DPIIT recognition, application drafting, CA-certified projections, filing and post-sanction compliance.",
+              "Expert-led advisory for Indian startups applying to Central Government funding schemes — eligibility screening, DPIIT recognition, application drafting, CA-certified projections, filing and post-sanction compliance.",
             path: "/startup-schemes",
           }),
           breadcrumbSchema([
@@ -636,6 +637,7 @@ export default function StartupSchemesPage() {
         </div>
       </section>
 
+      <SearchQA path="/startup-schemes" />
       <CTABanner />
     </>
   );

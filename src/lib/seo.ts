@@ -57,7 +57,7 @@ export const OG_IMAGE = {
   url: `${SITE_URL}/opengraph-image.png`,
   width: 1200,
   height: 630,
-  alt: "Company Avenue Advisory Pvt. Ltd. — CA-led company registration, GST, trademark and compliance services in New Delhi and Delhi NCR.",
+  alt: "Company Avenue Advisory Pvt. Ltd. — expert-led company registration, GST, trademark and compliance services in New Delhi and Delhi NCR.",
 };
 
 /**

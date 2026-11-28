@@ -39,7 +39,7 @@ export async function generateMetadata({
       `${scheme.name.split(/ [–—-] /)[0]} — Eligibility & How to Apply`,
       label,
     ].find((t) => t.length <= TITLE_MAX) ?? label;
-  const description = `${scheme.headline} Eligibility, benefits, documents, step-by-step application process and CA-led support from Company Avenue Advisory. ${scheme.amount}.`;
+  const description = `${scheme.headline} Eligibility, benefits, documents, step-by-step application process and expert-led support from Company Avenue Advisory. ${scheme.amount}.`;
 
   return {
     title: fitTitle(title),

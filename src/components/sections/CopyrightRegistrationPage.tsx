@@ -64,43 +64,43 @@ const quickFacts = [
 ];
 
 const copyrightCategories = [
-  { icon: BookOpen, title: "Literary Works",       desc: "Books, articles, blog posts, scripts, song lyrics, computer programs, databases, and any written or printed content qualify as literary works under the Copyright Act." },
+  { icon: BookOpen, title: "Literary Works",       desc: "Books, articles, blog posts, scripts, song lyrics, computer programs, databases and any written or printed content are literary works under the Copyright Act." },
   { icon: Music,    title: "Musical Works",         desc: "Original compositions including melody and musical notations are protectable. Note: sound recordings are a separate category from the underlying musical work." },
-  { icon: Camera,   title: "Artistic Works",        desc: "Paintings, drawings, sculptures, photographs, logos, architectural plans, maps, and charts are all categorised as artistic works eligible for copyright protection." },
-  { icon: Monitor,  title: "Computer Software",     desc: "Source code, object code, and software programs are treated as literary works under Indian copyright law and receive full copyright protection from the moment of creation." },
+  { icon: Camera,   title: "Artistic Works",        desc: "Paintings, drawings, sculptures, photos, logos, building plans, maps and charts are artistic works. All can get copyright protection." },
+  { icon: Monitor,  title: "Computer Software",     desc: "Indian copyright law treats source code, object code and software as literary works. They are fully protected from the moment they are created." },
   { icon: Layers,   title: "Cinematographic Films", desc: "Films, documentaries, animations, and video content including the visual and audio elements are protected as a unified cinematographic work." },
-  { icon: FileText, title: "Sound Recordings",      desc: "Any recording of sounds — music, audio books, podcasts, or other recordings — is protected as a sound recording independent of the underlying musical or literary work." },
+  { icon: FileText, title: "Sound Recordings",      desc: "Any sound recording, such as music, audiobooks or podcasts, is protected in its own right. This is separate from the music or text it is based on." },
 ];
 
 const benefits = [
   { icon: ShieldCheck, title: "Legal Proof of Ownership",              desc: "A copyright registration certificate is prima facie evidence of ownership in any legal dispute. Without registration, proving ownership and creation date becomes difficult and costly in court." },
   { icon: Globe,       title: "Protection in 180+ Countries",          desc: "India is a signatory to the Berne Convention and TRIPS Agreement. Registered copyright in India enjoys automatic protection in all 180+ member countries without separate registration in each." },
   { icon: DollarSign,  title: "Enables Licensing and Royalty Income",  desc: "Registered copyright owners can license their works commercially, collect royalties, and sign publishing or distribution agreements. Registration strengthens the legal basis for royalty enforcement." },
-  { icon: Scale,       title: "Basis for Legal Action Against Infringers", desc: "Copyright registration is essential to file a civil suit for infringement, claim damages, seek an injunction, or initiate criminal prosecution for willful infringement under Section 63." },
+  { icon: Scale,       title: "Basis for Legal Action Against Infringers", desc: "Registration is key if you want to sue for infringement, claim damages or seek an injunction. It also helps you start criminal action for wilful infringement under Section 63." },
   { icon: Award,       title: "60-Year Protection Period",             desc: "Copyright protection lasts for the lifetime of the author plus 60 years. For software companies and content businesses, this provides multi-generational protection of valuable IP assets." },
-  { icon: TrendingUp,  title: "Increases IP Asset Valuation",          desc: "Registered copyrights are tangible IP assets that can be valued, mortgaged, transferred, or included in balance sheet intangibles — enhancing your company&apos;s overall IP portfolio value." },
+  { icon: TrendingUp,  title: "Increases IP Asset Valuation",          desc: "Registered copyrights are real IP assets. You can value, mortgage or transfer them, or show them as intangibles on the balance sheet. This adds to your company&apos;s IP value." },
   { icon: BadgeCheck,  title: "Prevents Unauthorised Use",             desc: "A registered copyright acts as a deterrent to plagiarism. Infringers know that registered works carry a stronger legal standing for enforcement including police complaints and customs notices." },
   { icon: Users,       title: "Transferable and Inheritable Asset",    desc: "Copyright is a property right. It can be assigned, licensed, inherited, or transferred. Registration creates clear documentation of ownership, simplifying asset transfer and estate planning." },
 ];
 
 const whoNeeds = [
-  { icon: BookOpen,   title: "Authors and Writers",                    desc: "Books, articles, scripts, and any written content benefit from copyright registration as definitive proof of authorship date and ownership for publishing and licensing." },
+  { icon: BookOpen,   title: "Authors and Writers",                    desc: "For books, articles, scripts and other writing, registration is clear proof of who wrote it and when. This helps with publishing and licensing." },
   { icon: Monitor,    title: "Software and Technology Companies",      desc: "Source code, SaaS platforms, mobile applications, and databases are valuable assets. Copyright registration protects these investments from unauthorised copying or reverse engineering." },
-  { icon: Camera,     title: "Designers and Visual Artists",           desc: "Logo designers, photographers, graphic artists, and illustrators should register their creative works to enforce ownership against clients who misuse work beyond agreed scope." },
-  { icon: Music,      title: "Musicians and Composers",                desc: "Songwriters, music producers, and composers should register both the musical composition and sound recording separately to maximise protection of their creative output." },
-  { icon: Layers,     title: "Film and Content Producers",             desc: "Production companies, YouTube creators, and OTT content producers benefit from copyright registration of films, scripts, and audio-visual works to enable licensing and prevent piracy." },
-  { icon: Briefcase,  title: "Businesses with Original Content",       desc: "Marketing materials, training manuals, website content, brand stories, and product catalogues created in-house should be copyright-registered to prevent competitor duplication." },
+  { icon: Camera,     title: "Designers and Visual Artists",           desc: "Logo designers, photographers, graphic artists and illustrators should register their work. Then they can act against clients who use it beyond what was agreed." },
+  { icon: Music,      title: "Musicians and Composers",                desc: "Songwriters, music producers and composers should register the composition and the sound recording separately. This gives the most protection." },
+  { icon: Layers,     title: "Film and Content Producers",             desc: "Production houses, YouTube creators and OTT producers should register films, scripts and videos. It helps with licensing and fighting piracy." },
+  { icon: Briefcase,  title: "Businesses with Original Content",       desc: "Register in-house marketing material, training manuals, website content, brand stories and catalogues. This stops competitors copying them." },
 ];
 
 const processSteps = [
-  { n: "01", title: "Work Categorisation",               desc: "Identify the category of your work (literary, artistic, musical, software, film, or sound recording) as this determines the application form and fee applicable under the Copyright Act." },
-  { n: "02", title: "Prepare the Application",           desc: "Complete the copyright application (Form XIV) with details of the work, its nature, year of creation, author details, and ownership. For software, a redacted version of source code may be required." },
+  { n: "01", title: "Work Categorisation",               desc: "Identify your work's category: literary, artistic, musical, software, film or sound recording. It decides the form and fee under the Copyright Act." },
+  { n: "02", title: "Prepare the Application",           desc: "Fill in the copyright application (Form XIV). Give details of the work, its type, the year it was made, the author and the owner. For software, a redacted copy of the source code may be needed." },
   { n: "03", title: "File Online at Copyright Office",   desc: "File the application at the Copyright Office portal (copyright.gov.in) with the requisite government fee. Upload two copies of the work as required by the Copyright Office." },
   { n: "04", title: "Diary Number Issuance",             desc: "The Copyright Office issues a Diary Number immediately upon successful submission. This Diary Number is the reference for tracking the status of your application." },
-  { n: "05", title: "Mandatory 30-Day Waiting Period",   desc: "There is a mandatory waiting period of 30 days during which any third party can file an objection to the registration of the copyright. This is a statutory requirement under the Act." },
+  { n: "05", title: "Mandatory 30-Day Waiting Period",   desc: "There is a mandatory 30-day wait. During this time, anyone can object to the registration. The Act requires this." },
   { n: "06", title: "Objection Examination (If Any)",    desc: "If an objection is received, both parties are given a hearing. If no objection is raised within 30 days, the Copyright Office proceeds to examine the application independently." },
   { n: "07", title: "Copyright Office Examination",      desc: "The Copyright Office examines the application for completeness, correctness, and eligibility. Queries (if any) are communicated to the applicant. Timely response is critical." },
-  { n: "08", title: "Registration Certificate",          desc: "Upon satisfactory examination and no valid objection, the Copyright Office issues the Copyright Registration Certificate with the unique registration number and effective date of registration." },
+  { n: "08", title: "Registration Certificate",          desc: "If the examination is clear and there is no valid objection, the Copyright Office issues the certificate. It shows a unique registration number and the date of registration." },
 ];
 
 const requiredDocs = [

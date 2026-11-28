@@ -9,7 +9,7 @@ import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/company-verification" },
-  title: fitTitle("Company & Director Verification — CIN/DIN Lookup"),
+  title: fitTitle("CIN Number Check & DIN Search — MCA Company & Director Lookup"),
   description:
     "Free MCA lookup tool. Verify any company by CIN/LLPIN or any director by DIN — get incorporation date, status, capital structure, and appointment history.",
   keywords: ["CIN verification", "DIN lookup", "MCA company search", "company verification India", "director verification"],
@@ -42,11 +42,16 @@ export default function CompanyVerificationPage() {
             </span>
           </div>
           <h1 className="font-heading font-bold text-3xl md:text-4xl text-white mb-3 leading-tight">
-            Company & Director Verification
+            CIN Number Check &amp; DIN Search
           </h1>
           <p className="text-white/50 text-base max-w-2xl">
             Look up any company by CIN or LLPIN, or any director by DIN, and pull live data
             straight from the Ministry of Corporate Affairs registry.
+          </p>
+          <p className="text-white/50 text-sm max-w-2xl mt-3">
+            Jump straight to the{" "}
+            <Link href="/verify/cin-search" className="text-accent hover:underline">CIN number check</Link> or the{" "}
+            <Link href="/verify/din-search" className="text-accent hover:underline">DIN number search</Link>.
           </p>
         </div>
       </div>

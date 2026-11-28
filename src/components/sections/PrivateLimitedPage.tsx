@@ -134,8 +134,8 @@ const whyUsPoints = [
   { icon: Zap, label: "Fast Documentation & Filing" },
   { icon: Monitor, label: "100% Digital Process" },
   { icon: LifeBuoy, label: "End-to-End Compliance Support" },
-  { icon: Award, label: "CA-Led — 15+ Years in Practice" },
-  { icon: Building2, label: "1000+ Businesses Registered" },
+  { icon: Award, label: "Expert-Led — 15+ Years in Practice" },
+  { icon: Building2, label: "500+ Businesses Registered" },
 ];
 
 
@@ -776,7 +776,7 @@ export function PrivateLimitedPage({ pricingSlot, calcPill }: { pricingSlot?: Re
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
               </div>
               <div className="absolute -right-4 bottom-8 bg-white rounded-2xl p-4 shadow-card border border-slate-100">
-                <p className="font-heading font-bold text-2xl text-primary leading-none">1000+</p>
+                <p className="font-heading font-bold text-2xl text-primary leading-none">500+</p>
                 <p className="text-muted text-xs mt-1">Businesses registered</p>
               </div>
               <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-primary/8 rounded-2xl -z-10" />

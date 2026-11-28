@@ -1209,7 +1209,6 @@ export const SCHEMES_STARTUP_RELEVANT: Scheme[] = [
       { label: "Business Valuation", href: "/services/business-valuation" },
     ],
     links: [
-      { label: "SRI Fund — Invest India", href: "https://www.investindia.gov.in/schemes-msmes-india/self-reliant-india-sri-fund-empowering-msmes-aatmanirbhar-bharat" },
       { label: "NSIC (fund sponsor)", href: "https://www.nsic.co.in/" },
     ],
   },
@@ -2453,7 +2452,6 @@ export const SCHEMES_STARTUP_RELEVANT: Scheme[] = [
       { label: "Accounting & Bookkeeping", href: "/services/accounting-bookkeeping" },
     ],
     links: [
-      { label: "CPRI — MAHIR", href: "https://cpri.res.in/en/content/mahir" },
       {
         label: "MAHIR call for proposals (PDF)",
         href: "https://cpri.res.in/sites/default/files/MAHIR_Call%20for%20proposals.pdf",

@@ -71,7 +71,7 @@ export function WhyChoose() {
               transition={{ delay: 0.4, duration: 0.5 }}
               className="absolute right-3 bottom-3 sm:-right-6 sm:bottom-10 bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-card border border-slate-100 max-w-[150px] sm:max-w-[180px]"
             >
-              <p className="font-heading font-bold text-2xl sm:text-3xl text-primary leading-none">1000+</p>
+              <p className="font-heading font-bold text-2xl sm:text-3xl text-primary leading-none">500+</p>
               <p className="text-muted text-[11px] sm:text-xs mt-1 leading-snug">Businesses trusted us with their compliance</p>
             </motion.div>
 

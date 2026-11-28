@@ -152,8 +152,8 @@ const commonMistakes = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "CA-Led — 15+ Years in Practice" },
-  { icon: Building2,   label: "1000+ Businesses Successfully Registered" },
+  { icon: Award,       label: "Expert-Led — 15+ Years in Practice" },
+  { icon: Building2,   label: "500+ Businesses Successfully Registered" },
   { icon: UserCheck,   label: "Experienced Chartered Accountants" },
   { icon: DollarSign,  label: "Transparent Pricing — No Hidden Fees" },
   { icon: Zap,         label: "Fast Documentation & Filing" },
@@ -299,7 +299,7 @@ function StickySidebar() {
     <div className="space-y-4">
       <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-card">
         <p className="font-heading font-bold text-dark text-base mb-1">Need Expert Assistance?</p>
-        <p className="text-muted text-xs mb-4 leading-relaxed">Talk to our Chartered Accountants before choosing your business structure.</p>
+        <p className="text-muted text-xs mb-4 leading-relaxed">Talk to our experts before choosing your business structure.</p>
         <div className="space-y-2 mb-5">
           {["Free Consultation", "Transparent Pricing", "End-to-End Registration", "Dedicated Relationship Manager"].map(pt => (
             <div key={pt} className="flex items-center gap-2">
@@ -342,7 +342,7 @@ function StickySidebar() {
       {/* Quick stats */}
       <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
         <div className="grid grid-cols-2 gap-3">
-          {[{ v: "7–10", l: "Day Timeline" }, { v: "1000+", l: "LLPs Formed" }, { v: "15+", l: "Years CA Practice" }, { v: "100%", l: "Online" }].map(s => (
+          {[{ v: "7–10", l: "Day Timeline" }, { v: "500+", l: "LLPs Formed" }, { v: "15+", l: "Years CA Practice" }, { v: "100%", l: "Online" }].map(s => (
             <div key={s.l} className="text-center">
               <p className="font-heading font-bold text-primary text-lg leading-none">{s.v}</p>
               <p className="text-muted text-[10px] mt-0.5">{s.l}</p>
@@ -981,7 +981,7 @@ export function LLPPage({ pricingSlot, calcPill }: { pricingSlot?: ReactNode; ca
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
                   </div>
                   <div className="absolute -right-4 bottom-8 bg-white rounded-2xl p-4 shadow-card border border-slate-100">
-                    <p className="font-heading font-bold text-2xl text-primary leading-none">1000+</p>
+                    <p className="font-heading font-bold text-2xl text-primary leading-none">500+</p>
                     <p className="text-muted text-xs mt-1">Businesses registered</p>
                   </div>
                 </div>

@@ -105,7 +105,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,        label: "CA-Led — 15+ Years in Trademark Law" },
+  { icon: Award,        label: "Expert-Led — 15+ Years in Trademark Law" },
   { icon: Scale,        label: "Expert Sec 9 & Sec 11 Objection Handling" },
   { icon: Search,       label: "Thorough Cited Mark Research & Analysis" },
   { icon: FileText,     label: "Professional TM-M Counter-Statement Drafting" },

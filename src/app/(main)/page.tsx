@@ -17,7 +17,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema, OG_IMAGE, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Company Registration & GST Services in Delhi | CA-Led",
+  title: "Company Registration & GST Services in Delhi | Expert-Led",
   description:
     "Register your company, get GST, trademark & compliance done by expert CAs in Delhi. 100% online, transparent pricing. Free consultation — call today.",
   keywords: [

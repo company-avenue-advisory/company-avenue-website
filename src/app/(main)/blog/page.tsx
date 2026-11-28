@@ -38,7 +38,7 @@ export default async function BlogPage() {
           </h1>
           <p className="text-white/50 text-lg max-w-2xl mx-auto">
             Practical, fact-checked guides on GST, income tax, company registration, and
-            compliance — written by our CA-led team, plus live business news.
+            compliance — written by our expert team, plus live business news.
           </p>
         </div>
       </div>

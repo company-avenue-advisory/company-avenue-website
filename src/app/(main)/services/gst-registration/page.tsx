@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { GSTPage } from "@/components/sections/GSTPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -7,9 +8,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: fitTitle("GST Registration Online in India | Get Your GSTIN Fast"),
+  title: fitTitle("GST Registration Online — Apply for GST Number, Fees & Documents"),
   description:
-    "Get your GSTIN in Delhi quickly with expert CAs. 100% online GST registration, document help, transparent pricing. Free consultation — chat on WhatsApp.",
+    "Apply for GST registration online. New GST number (GSTIN), GST registration fees and charges, documents required and step-by-step process. Expert help across India.",
   alternates: { canonical: "/services/gst-registration" },
   keywords: [
     "GST registration in Delhi",
@@ -20,9 +21,9 @@ export const metadata: Metadata = {
     "GST consultant Delhi",
   ],
   openGraph: {
-    title: "GST Registration Online in India | Get Your GSTIN Fast",
+    title: "GST Registration Online — Apply for GST Number, Fees & Documents",
     description:
-      "Get your GSTIN in Delhi quickly with expert CAs. 100% online, transparent pricing, document help.",
+      "Apply for GST registration online. New GST number (GSTIN), GST registration fees and charges, documents required and step-by-step process. Expert help across India.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",
@@ -54,6 +55,7 @@ export default function GSTRegistrationPage() {
         pricingSlot={<ServicePricingBlock serviceId="gst-registration" />}
         calcPill={<ServiceCalcPill serviceId="gst-registration" />}
       />
+      <SearchQA path="/services/gst-registration" />
     </>
   );
 }

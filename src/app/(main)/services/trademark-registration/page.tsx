@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { TrademarkPage } from "@/components/sections/TrademarkPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -7,9 +8,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: fitTitle("Trademark Registration in Delhi | Protect Your Brand"),
+  title: fitTitle("Trademark Registration Online in India — Fees, Process & Status"),
   description:
-    "Register your trademark in Delhi with expert help. Class search, filing & objection support. Transparent pricing, CA & CS led. Book a free consultation.",
+    "Trademark registration online in India: check trademark availability, pick the right class, file your TM application and track trademark status. Expert-led, transparent fees.",
   alternates: { canonical: "/services/trademark-registration" },
   keywords: [
     "trademark registration in Delhi",
@@ -20,9 +21,9 @@ export const metadata: Metadata = {
     "trademark objection",
   ],
   openGraph: {
-    title: "Trademark Registration in Delhi | Protect Your Brand",
+    title: "Trademark Registration Online in India — Fees, Process & Status",
     description:
-      "Register your trademark in Delhi with expert help. Class search, filing & objection support. CA & CS led.",
+      "Trademark registration online in India: check trademark availability, pick the right class, file your TM application and track trademark status. Expert-led, transparent fees.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",
@@ -54,6 +55,7 @@ export default function TrademarkRegistrationPage() {
         pricingSlot={<ServicePricingBlock serviceId="trademark-registration" />}
         calcPill={<ServiceCalcPill serviceId="trademark-registration" />}
       />
+      <SearchQA path="/services/trademark-registration" />
     </>
   );
 }

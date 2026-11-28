@@ -67,7 +67,7 @@ const benefits = [
 const processSteps = [
   { n: "01", title: "Patentability Search",              desc: "Conduct a thorough novelty and prior-art search to assess whether the invention meets patentability criteria before investment." },
   { n: "02", title: "Patent Draft Preparation",          desc: "Prepare complete patent specification including detailed description, claims, abstract, and technical drawings or diagrams." },
-  { n: "03", title: "File Provisional or Complete Spec", desc: "File a provisional specification to establish a priority date, followed by complete specification within 12 months, or file complete spec directly." },
+  { n: "03", title: "File Provisional or Complete Spec", desc: "File a provisional specification to fix your priority date. Then file the complete specification within 12 months. Or file the complete spec directly." },
   { n: "04", title: "Filing at Indian Patent Office",    desc: "Submit application at the relevant Patent Office — Chennai, Delhi, Mumbai, or Kolkata — based on applicant's jurisdiction." },
   { n: "05", title: "Publication after 18 Months",       desc: "Application is automatically published in the Official Patent Journal 18 months from earliest filing or priority date." },
   { n: "06", title: "Request for Examination",           desc: "File Form 18 requesting substantive examination within 48 months of filing. Early publication and examination is possible on request." },
@@ -384,7 +384,7 @@ export function PatentRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?
                 A <strong>patent</strong> is a statutory right granted by the Government of India to an inventor, giving them exclusive rights to manufacture, sell, and use their invention for a period of <strong>20 years</strong> from the date of filing. It is governed by the <strong>Patents Act 1970</strong> and administered by the Indian Patent Office with offices in Chennai, Delhi, Mumbai, and Kolkata.
               </p>
               <p className="text-slate-500 text-base leading-relaxed mb-8">
-                Patent registration is the process of legally protecting a novel, inventive, and industrially applicable invention. Once granted, the patent owner holds a territorial monopoly — no one else can manufacture, use, sell, or import the patented invention in India without authorisation. Patents can be licensed, sold, or used as collateral, making them powerful business assets.
+                Patent registration legally protects an invention that is new, inventive and usable in industry. Once granted, the owner has a monopoly in India. No one else can make, use, sell or import the invention here without permission. You can license, sell or borrow against a patent. That makes it a strong business asset.
               </p>
               <div className="grid grid-cols-2 gap-3">
                 {["Exclusive Manufacturing Rights", "Royalty & License Income", "Blocks Competitor Copying", "Global PCT Protection"].map(pt => (
@@ -405,7 +405,7 @@ export function PatentRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?
           <div className="text-center mb-14">
             <Eyebrow label="Who Needs This" />
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-dark mb-3">Who Needs Patent Registration?</h2>
-            <p className="text-muted text-base max-w-2xl mx-auto">Any individual or organisation with a novel, inventive, and industrially applicable invention should consider patent registration to protect their competitive advantage.</p>
+            <p className="text-muted text-base max-w-2xl mx-auto">Do you have an invention that is new, inventive and usable in industry? Consider a patent to protect your edge.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {whoNeeds.map((item, i) => {
@@ -709,7 +709,7 @@ export function PatentRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?
               Your Innovation Deserves<br />Legal Protection
             </h2>
             <p className="text-white/70 text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-              Don&apos;t let competitors copy your invention. Company Avenue Advisory manages your entire patent journey — from novelty search and specification drafting to filing, examination response, grant, and annual renewal — so your innovation is protected for 20 years.
+              Don&apos;t let competitors copy your invention. Company Avenue Advisory handles your whole patent journey. We do the novelty search, draft the specification, file, reply to examination, get the grant and renew every year. Your innovation stays protected for 20 years.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contact"
