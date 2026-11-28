@@ -64,19 +64,19 @@ const quickFacts = [
 ];
 
 const statementTypes = [
-  { icon: TrendingUp,  title: "Profit & Loss Account",       desc: "Comprehensive income statement showing revenues, cost of goods sold, gross profit, operating expenses, EBITDA, depreciation, interest, and net profit/loss for the financial year." },
-  { icon: BarChart3,   title: "Balance Sheet",                desc: "Financial position statement showing equity and liabilities on one side and non-current assets, current assets, and other assets on the other — compliant with Schedule III format." },
-  { icon: Banknote,    title: "Cash Flow Statement",          desc: "Mandatory for most companies — shows cash generated and used in operating, investing, and financing activities, reconciled with opening and closing bank balance." },
+  { icon: TrendingUp,  title: "Profit & Loss Account",       desc: "A full income statement for the year. It shows revenue, cost of goods sold, gross profit, operating costs, EBITDA, depreciation, interest and net profit or loss." },
+  { icon: BarChart3,   title: "Balance Sheet",                desc: "A statement of financial position in Schedule III format. Equity and liabilities are on one side. Non-current, current and other assets are on the other." },
+  { icon: Banknote,    title: "Cash Flow Statement",          desc: "Mandatory for most companies. It shows cash earned and spent in operating, investing and financing activities. It ties back to the opening and closing bank balance." },
   { icon: ClipboardList, title: "Notes to Accounts",         desc: "Detailed disclosures required under Schedule III including accounting policies, contingent liabilities, related party transactions, segment information, and statutory notes." },
-  { icon: FileText,    title: "Directors&apos; Report",       desc: "Annual report from the Board of Directors covering financial highlights, CSR activities, risk management, remuneration policy, and other statutory disclosures required under the Companies Act." },
-  { icon: BookOpen,    title: "Schedules and Annexures",      desc: "Supporting schedules for fixed assets, investments, loans, borrowings, and other financial statement items that provide granular detail not shown in the main statements." },
+  { icon: FileText,    title: "Directors&apos; Report",       desc: "The Board of Directors' yearly report. It covers financial highlights, CSR, risk management, pay policy and other disclosures the Companies Act requires." },
+  { icon: BookOpen,    title: "Schedules and Annexures",      desc: "Supporting schedules for fixed assets, investments, loans, borrowings and other items. They give detail that the main statements do not show." },
 ];
 
 const benefits = [
   { icon: ShieldCheck, title: "Mandatory for AOC-4 Filing",           desc: "Companies must file audited financial statements with the Registrar of Companies in Form AOC-4. Without properly prepared statements in Schedule III format, the ROC filing cannot be completed." },
-  { icon: Banknote,    title: "Essential for Bank Loan Sanction",      desc: "Every bank and NBFC requires at least 2-3 years of audited financial statements for evaluating term loans, working capital, overdraft, and project finance applications." },
-  { icon: BarChart3,   title: "Required for Tax Audit (Form 3CB)",     desc: "Businesses above the Section 44AB threshold must have audited financial statements for the CA to certify Form 3CB + 3CD. No financial statements means no tax audit report." },
-  { icon: TrendingUp,  title: "Investor and Due Diligence Ready",      desc: "Investors, private equity firms, and strategic acquirers demand professionally prepared, audited financial statements as the starting point for any due diligence process." },
+  { icon: Banknote,    title: "Essential for Bank Loan Sanction",      desc: "Every bank and NBFC asks for at least 2-3 years of audited financial statements. They use them to assess term loans, working capital, overdrafts and project finance." },
+  { icon: BarChart3,   title: "Required for Tax Audit (Form 3CB)",     desc: "Businesses above the Section 44AB threshold need audited financial statements. The CA needs them to certify Form 3CB + 3CD. No financial statements means no tax audit report." },
+  { icon: TrendingUp,  title: "Investor and Due Diligence Ready",      desc: "Investors, private equity firms and buyers want properly prepared, audited financial statements. Every due diligence starts with them." },
   { icon: Scale,       title: "Ind AS and AS Compliance",              desc: "Large companies must prepare Ind AS-compliant statements while smaller companies follow AS (Accounting Standards). Non-compliance attracts qualifications in the statutory audit report." },
   { icon: Award,       title: "Accurate ITR Filing",                   desc: "The income tax return for companies (ITR-6) is directly derived from the financial statements. Errors in the financials cascade into incorrect ITR, attracting scrutiny and notices." },
   { icon: Database,    title: "GST Reconciliation",                    desc: "Financial statements must be reconciled with GST returns (GSTR-1, 3B, 9). Unexplained differences between financial statement turnover and GST turnover attract GST audit and notice." },
@@ -84,22 +84,22 @@ const benefits = [
 ];
 
 const whoNeeds = [
-  { icon: Building2,   title: "All Private Limited Companies",         desc: "Every Pvt Ltd company must prepare audited financial statements annually for ROC filing (AOC-4), regardless of turnover or profit levels." },
-  { icon: Landmark,    title: "LLPs with Turnover Above ₹40 Lakh",    desc: "LLPs with turnover exceeding ₹40 lakh or contribution exceeding ₹25 lakh must prepare and get accounts audited and file them with the MCA." },
-  { icon: Users,       title: "Proprietorships and Partnerships Seeking Loans", desc: "While not always mandatory, banks require professionally prepared financial statements to process credit facilities for sole proprietorships and partnership firms." },
-  { icon: TrendingUp,  title: "Companies with Tax Audit Requirement",  desc: "Businesses and professionals above Section 44AB thresholds must have CA-prepared and certified financial statements as the basis for Form 3CB/3CD tax audit reporting." },
+  { icon: Building2,   title: "All Private Limited Companies",         desc: "Every Pvt Ltd company must prepare audited financial statements each year for ROC filing (AOC-4). Turnover and profit do not matter." },
+  { icon: Landmark,    title: "LLPs with Turnover Above ₹40 Lakh",    desc: "LLPs with turnover above ₹40 lakh or contribution above ₹25 lakh must get their accounts audited. They must then file them with the MCA." },
+  { icon: Users,       title: "Proprietorships and Partnerships Seeking Loans", desc: "It is not always mandatory. But banks want properly prepared financial statements before giving credit to sole proprietors and partnership firms." },
+  { icon: TrendingUp,  title: "Companies with Tax Audit Requirement",  desc: "Businesses and professionals above the Section 44AB thresholds need financial statements prepared and certified by a CA. These are the base for the Form 3CB/3CD tax audit report." },
   { icon: Briefcase,   title: "Startups Raising Funds",                desc: "Investors perform financial due diligence on audited statements. Startups preparing for seed, Series A, or any institutional funding must have proper financial statements ready." },
-  { icon: Database,    title: "Companies Filing for Government Tenders", desc: "Most government and PSU tenders require submission of audited financial statements for the past 2-3 years as part of technical and financial eligibility criteria." },
+  { icon: Database,    title: "Companies Filing for Government Tenders", desc: "Most government and PSU tenders ask for audited financial statements for the last 2-3 years. They are part of the technical and financial eligibility checks." },
 ];
 
 const processSteps = [
-  { n: "01", title: "Books of Accounts Review",           desc: "Review all accounting entries in Tally or accounting software — purchases, sales, expenses, bank entries, journal entries — and identify errors, missing entries, or unreconciled items." },
+  { n: "01", title: "Books of Accounts Review",           desc: "Review every entry in Tally or your accounting software. Check purchases, sales, expenses, bank and journal entries. Find errors, missing entries and unreconciled items." },
   { n: "02", title: "Bank Reconciliation",                desc: "Reconcile every bank account balance as per books with bank statements. Identify and clear outstanding cheques, ECS mismatches, and bank charges not recorded in books." },
   { n: "03", title: "Fixed Asset Register Update",        desc: "Update the fixed asset register with all additions and disposals during the year. Compute depreciation as per Companies Act Schedule II rates (SLM or WDV method as applicable)." },
   { n: "04", title: "Closing Stock Verification",         desc: "Obtain and verify the closing stock statement. Reconcile with purchase and sales records. Apply the consistent valuation method (FIFO/weighted average) as per accounting policies." },
-  { n: "05", title: "Ledger Scrutiny and Provisions",     desc: "Scrutinise all ledger balances. Make year-end provisions for expenses payable, audit fees, income tax, gratuity, leave encashment, and any other accruals required by accounting standards." },
-  { n: "06", title: "Financial Statement Preparation",    desc: "Prepare the Trading Account, Profit & Loss Account, and Balance Sheet in Schedule III format (for companies) or standard format (for firms/proprietorships) with complete notes to accounts." },
-  { n: "07", title: "Schedules and Notes to Accounts",    desc: "Prepare all supporting schedules and disclosure notes as required — related party transactions, segment reporting, statutory dues, contingent liabilities, lease disclosures, and accounting policies." },
+  { n: "05", title: "Ledger Scrutiny and Provisions",     desc: "Check every ledger balance. Make year-end provisions for expenses payable, audit fees, income tax, gratuity, leave encashment and any other accruals the accounting standards need." },
+  { n: "06", title: "Financial Statement Preparation",    desc: "Prepare the Trading Account, Profit & Loss Account and Balance Sheet with full notes to accounts. Companies use the Schedule III format. Firms and proprietorships use the standard format." },
+  { n: "07", title: "Schedules and Notes to Accounts",    desc: "Prepare all required schedules and notes. These cover related party deals, segments, statutory dues, contingent liabilities, leases and accounting policies." },
   { n: "08", title: "Director/Partner Approval",          desc: "Present the draft financial statements to the board of directors or partners for review and approval. Incorporate feedback and prepare the final signed set for statutory audit and MCA/IT filing." },
 ];
 

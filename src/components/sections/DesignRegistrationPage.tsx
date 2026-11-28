@@ -64,7 +64,7 @@ const quickFacts = [
 ];
 
 const designTypes = [
-  { icon: Eye,         title: "Shape",           desc: "Three-dimensional shape of a product — the contours, curves, and form factor that give a product its distinctive visual appearance." },
+  { icon: Eye,         title: "Shape",           desc: "The three-dimensional shape of a product. Its contours, curves and form give it a distinctive look." },
   { icon: Layers,      title: "Configuration",   desc: "The arrangement or positioning of elements — how components are spatially organised in a product or article." },
   { icon: FileText,    title: "Pattern",         desc: "Repeated or non-repeated decorative motifs applied to a product surface — textile patterns, wallpaper designs, surface decorations." },
   { icon: Eye,         title: "Ornamentation",   desc: "Decorative elements applied to a product — embossing, etching, surface embellishment — that enhance visual appeal without functional purpose." },
@@ -72,34 +72,34 @@ const designTypes = [
 ];
 
 const benefits = [
-  { icon: ShieldCheck, title: "15-Year Exclusive Monopoly",            desc: "Registration grants a 15-year exclusive right (10 years + 5-year renewal) to use the design commercially and prevent competitors from copying the visual appearance of your product." },
+  { icon: ShieldCheck, title: "15-Year Exclusive Monopoly",            desc: "Registration gives you a 15-year exclusive right (10 years + 5-year renewal) to use the design commercially. Competitors cannot copy how your product looks." },
   { icon: DollarSign,  title: "Prevents Cheaper Copies",              desc: "Without design registration, competitors can legally replicate your product&apos;s appearance and undercut you in price. Registration gives you legal recourse including injunctions and damages." },
   { icon: Scale,       title: "Civil and Criminal Enforcement",        desc: "Registered design owners can file a civil suit for infringement and claim ₹50,000 per item per infringement. Criminal proceedings under Section 22 provide an additional deterrent." },
-  { icon: TrendingUp,  title: "Competitive Differentiation",           desc: "Protecting your product design ensures customers associate the unique appearance exclusively with your brand, building recognition and loyalty over the 15-year protection period." },
+  { icon: TrendingUp,  title: "Competitive Differentiation",           desc: "When your design is protected, customers link its unique look only with your brand. That builds recognition and loyalty over the 15-year period." },
   { icon: Award,       title: "Enhances IP Portfolio Value",           desc: "Registered designs are valuable IP assets that can be licensed, assigned, or used as collateral. They add tangible value to your business for investors and acquisition due diligence." },
   { icon: Globe,       title: "International Protection via Hague",    desc: "Indian design registrations can be used as a basis for international protection through the Hague System (WIPO), enabling protection in 95+ countries with a single filing." },
   { icon: Zap,         title: "Faster than Patent",                    desc: "Design registration is significantly faster and less expensive than utility patent filing. While patents take years, a design registration can provide protection within 6-12 months." },
-  { icon: BadgeCheck,  title: "Marketing and Retail Advantage",        desc: "The &ldquo;Registered Design&rdquo; marking on your product acts as a deterrent to copyists and builds consumer trust by signalling innovation and originality in your product category." },
+  { icon: BadgeCheck,  title: "Marketing and Retail Advantage",        desc: "The &ldquo;Registered Design&rdquo; mark on your product warns off copycats. It also builds trust by showing your product is original." },
 ];
 
 const whoNeeds = [
-  { icon: Building2,   title: "Consumer Product Companies",            desc: "FMCG, electronics, toys, furniture, and household goods companies should register distinctive product shapes and packaging designs to prevent cheap imitations." },
-  { icon: Briefcase,   title: "Fashion and Apparel Designers",         desc: "Clothing patterns, accessories, jewellery designs, and textile motifs can all be registered to prevent fast-fashion imitators from copying signature designs." },
-  { icon: Layers,      title: "Packaging and Label Designers",         desc: "Distinctive bottle shapes, carton designs, blister pack configurations, and label layouts are eligible for design protection and should be registered before commercial launch." },
+  { icon: Building2,   title: "Consumer Product Companies",            desc: "FMCG, electronics, toy, furniture and household goods companies should register distinctive product shapes and packaging. This stops cheap copies." },
+  { icon: Briefcase,   title: "Fashion and Apparel Designers",         desc: "You can register clothing patterns, accessories, jewellery designs and textile motifs. This stops fast-fashion brands copying your signature designs." },
+  { icon: Layers,      title: "Packaging and Label Designers",         desc: "Distinctive bottle shapes, cartons, blister packs and label layouts can be protected. Register them before you launch." },
   { icon: Users,       title: "Industrial and Engineering Companies",   desc: "Machine parts, tooling, industrial equipment, and vehicle components with distinctive visual features can be registered to protect design investments." },
-  { icon: Eye,         title: "Graphic and Product Designers",         desc: "Freelance and in-house designers who create original product appearances can register designs to protect their work from being copied by competitors of their clients." },
-  { icon: TrendingUp,  title: "Startups Launching New Products",       desc: "Before launching a product with a unique form factor or appearance, startups should register the design to establish prior rights and deter imitators from day one." },
+  { icon: Eye,         title: "Graphic and Product Designers",         desc: "Freelance and in-house designers can register their original product designs. This stops their clients' competitors from copying the work." },
+  { icon: TrendingUp,  title: "Startups Launching New Products",       desc: "Launching a product with a unique shape or look? Register the design first. You secure prior rights and deter copycats from day one." },
 ];
 
 const processSteps = [
-  { n: "01", title: "Design Novelty Check",                 desc: "Search the Design Registry database to verify the proposed design is novel and has not been previously registered or published. A thorough novelty search prevents rejection." },
+  { n: "01", title: "Design Novelty Check",                 desc: "Search the Design Registry database to check your design is new and not already registered or published. A careful search helps avoid rejection." },
   { n: "02", title: "Locarno Classification",               desc: "Classify the article in the correct Locarno Class. India uses the Locarno International Classification for industrial designs. Correct classification is critical for proper examination." },
-  { n: "03", title: "Prepare Design Drawings",              desc: "Prepare precise representations of the design — typically 6 perspective drawings (front, back, left, right, top, bottom views) plus isometric view showing the complete design from all angles." },
-  { n: "04", title: "File Application at Patent Office",    desc: "File the design application at the appropriate Patent Office branch (Mumbai, Delhi, Chennai, or Kolkata) with Form 1, design representations, and prescribed government fee." },
+  { n: "03", title: "Prepare Design Drawings",              desc: "Prepare exact drawings of the design. Usually this means 6 views (front, back, left, right, top, bottom) plus an isometric view showing the whole design." },
+  { n: "04", title: "File Application at Patent Office",    desc: "File the application at the right Patent Office branch (Mumbai, Delhi, Chennai or Kolkata). Include Form 1, the drawings and the government fee." },
   { n: "05", title: "Examination by Patent Office",         desc: "The Patent Office examines the application for novelty, originality, and compliance with the Designs Act. A First Examination Report (FER) may be issued with objections to be addressed." },
-  { n: "06", title: "Respond to Objections (if any)",       desc: "If the Patent Office issues objections — typically about novelty, classification, or representation quality — we draft and submit a comprehensive response within the prescribed deadline." },
+  { n: "06", title: "Respond to Objections (if any)",       desc: "The Patent Office may raise objections, usually about novelty, class or drawing quality. We draft and file a full reply before the deadline." },
   { n: "07", title: "Registration and Publication",         desc: "Upon successful examination, the design is registered and published in the Design Journal (Official Gazette). The registration number and certificate are issued to the applicant." },
-  { n: "08", title: "Renewal at 10 Years",                  desc: "Design registration is initially valid for 10 years. It can be renewed for an additional 5 years (total 15 years) by filing the renewal application before the 10-year expiry." },
+  { n: "08", title: "Renewal at 10 Years",                  desc: "Design registration is first valid for 10 years. You can renew it for 5 more years (total 15 years). File the renewal before the 10 years end." },
 ];
 
 const requiredDocs = [
@@ -143,7 +143,7 @@ export function DesignRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?
             {calcPill}
             <motion.p variants={fadeUp} initial={false} animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
-              Protect the visual appearance of your products — shape, pattern, configuration, and ornamentation — with a 15-year exclusive monopoly under Indian design law. Stop competitors from copying your product&apos;s look before they enter the market.
+              Protect how your products look: shape, pattern, configuration and ornamentation. Indian design law gives you a 15-year exclusive right. Stop competitors from copying your product&apos;s look before they reach the market.
             </motion.p>
             <motion.div variants={fadeUp} initial={false} animate="show" custom={3} className="flex flex-wrap gap-3">
               <Link href="/contact"
@@ -225,7 +225,7 @@ export function DesignRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?
                 <div className="mt-4 bg-red-50 border border-red-200 rounded-xl p-3 flex items-start gap-2">
                   <AlertTriangle size={13} className="text-red-500 shrink-0 mt-0.5" />
                   <p className="text-dark text-xs leading-relaxed">
-                    <strong>Not Protected:</strong> Functional features, mechanical devices, methods of construction, and any feature dictated solely by function cannot be registered as a design.
+                    <strong>Not Protected:</strong> You cannot register functional features, mechanical devices, building methods or any feature that exists only for function.
                   </p>
                 </div>
               </div>

@@ -105,7 +105,7 @@ const registrationSteps = [
   { n: "03", icon: Monitor, title: "Startup India Portal Registration", desc: "Create your profile on the Startup India portal (startupindia.gov.in) with complete business details." },
   { n: "04", icon: Rocket, title: "DPIIT Recognition Application", desc: "Submit Form 2 (online self-certification) with business description, innovation details, and supporting documents." },
   { n: "05", icon: ShieldCheck, title: "Review & Verification", desc: "DPIIT reviews the application. We track status and respond to any queries raised during the review process." },
-  { n: "06", icon: BadgeCheck, title: "Recognition Certificate Issued", desc: "DPIIT issues the official Startup India Recognition Certificate with a unique recognition number — valid until eligibility criteria are met." },
+  { n: "06", icon: BadgeCheck, title: "Recognition Certificate Issued", desc: "DPIIT issues the official Startup India Recognition Certificate with a unique number. It stays valid while you meet the eligibility criteria." },
 ];
 
 const taxBenefits = [
@@ -113,7 +113,7 @@ const taxBenefits = [
     title: "Income Tax Exemption",
     section: "Section 80-IAC",
     badge: "bg-green-50 text-green-700 border-green-200",
-    desc: "Eligible DPIIT-recognized startups can apply for 100% exemption on profits for 3 consecutive financial years out of the first 10 years since incorporation. Requires approval from the Inter-Ministerial Board (IMB).",
+    desc: "Eligible DPIIT-recognized startups can apply for a 100% exemption on profits. It covers 3 years in a row out of the first 10 years after incorporation. You need approval from the Inter-Ministerial Board (IMB).",
     points: ["Applicable to Pvt. Ltd. & LLPs", "3 out of first 10 years", "IMB approval required", "No carry forward restrictions"],
   },
   {
@@ -306,7 +306,7 @@ export function StartupIndiaPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
               <motion.p custom={2} variants={fadeUp} initial={false} animate="show"
                 className="text-slate-500 text-lg leading-relaxed mb-8 max-w-xl"
               >
-                Get DPIIT Startup India Recognition to unlock tax exemptions, angel tax relief, funding opportunities, patent rebates, and exclusive startup benefits — handled end-to-end by our experts.
+                Get DPIIT Startup India Recognition and unlock tax exemptions, angel tax relief, funding, patent rebates and other startup benefits. Our experts handle it end to end.
               </motion.p>
               <motion.div custom={3} variants={fadeUp} initial={false} animate="show" className="flex flex-wrap gap-3 mb-10">
                 <Link href="/contact"
@@ -514,7 +514,7 @@ export function StartupIndiaPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                 </div>
                 <div className="bg-amber-50 border-t border-amber-100 px-5 py-3 flex items-start gap-2">
                   <AlertCircle size={14} className="text-amber-600 shrink-0 mt-0.5" />
-                  <p className="text-amber-700 text-xs font-heading font-medium leading-relaxed">If you&apos;re unsure about any criterion — especially &quot;innovation&quot; and &quot;scalability&quot; — our experts will assess your business model during the free consultation.</p>
+                  <p className="text-amber-700 text-xs font-heading font-medium leading-relaxed">Not sure if you meet a criterion, such as &quot;innovation&quot; or &quot;scalability&quot;? Our experts will review your business model in the free consultation.</p>
                 </div>
               </div>
             </section>
@@ -758,7 +758,7 @@ export function StartupIndiaPage({ pricingSlot, calcPill }: { pricingSlot?: Reac
               Get Your Startup India Recognition<br />and Unlock Exclusive Government Benefits
             </h2>
             <p className="text-white/70 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-              Get your Startup India Recognition with expert assistance from Company Avenue and unlock exclusive government benefits, tax exemptions, funding opportunities, and startup ecosystem support.
+              Get your Startup India Recognition with help from Company Avenue. Unlock government benefits, tax exemptions, funding and startup support.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/contact"

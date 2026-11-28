@@ -436,7 +436,7 @@ export function BusinessValuationPage({ pricingSlot, calcPill }: { pricingSlot?:
                 <strong>Business valuation</strong> is the process of determining the economic worth of a business or its equity shares. In India, it is governed by the <strong>Companies Act, 2013</strong>, FEMA regulations, and ICAI Valuation Standards, and is required for a wide range of transactions including FDI, M&A, ESOPs, and dispute resolution.
               </p>
               <p className="text-slate-500 text-base leading-relaxed mb-8">
-                A professionally prepared, CA-certified valuation report provides an independent, defensible estimate of value using recognised methodologies — DCF, Net Asset Value, Comparable Company Analysis, or a combination — that is accepted by regulators, banks, and courts.
+                A CA-certified valuation report gives an independent value you can defend. It uses accepted methods: DCF, Net Asset Value, Comparable Company Analysis or a mix. Regulators, banks and courts accept it.
               </p>
               <div className="grid grid-cols-2 gap-3">
                 {["Regulatory Compliance", "Investor Negotiations", "ESOP Grant Pricing", "Dispute Resolution"].map(pt => (
@@ -532,7 +532,7 @@ export function BusinessValuationPage({ pricingSlot, calcPill }: { pricingSlot?:
                     color: "bg-blue-50 border-blue-100",
                     iconColor: "bg-blue-100 text-blue-600",
                     best: "Best for: Growth startups, SaaS, recurring revenue businesses",
-                    desc: "Values the business based on projected future free cash flows, discounted back to present value using a Weighted Average Cost of Capital (WACC). Most widely accepted by investors and regulators.",
+                    desc: "Values the business on its expected future free cash flows. These are discounted to today using the Weighted Average Cost of Capital (WACC). Investors and regulators accept it most widely.",
                     points: ["Future cash flow projection (5–10 years)", "Terminal value computation", "WACC / discount rate determination", "Sensitivity on growth and discount rate"],
                   },
                   {
@@ -822,7 +822,7 @@ export function BusinessValuationPage({ pricingSlot, calcPill }: { pricingSlot?:
               Know What Your<br />Business is Worth
             </h2>
             <p className="text-white/70 text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-              A certified business valuation is more than a number — it is a legal document, a negotiation tool, and a regulatory requirement. Let Company Avenue Advisory deliver a report that is accurate, defensible, and ready for any transaction.
+              A certified valuation is more than a number. It is a legal document, a negotiating tool and a regulatory must. Let Company Avenue Advisory give you a report that is accurate, defensible and ready for any deal.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link

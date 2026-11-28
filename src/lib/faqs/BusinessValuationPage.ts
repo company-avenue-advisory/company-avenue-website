@@ -10,15 +10,15 @@ export const faqs = [
   },
   {
     q: "Which valuation method is best for startups?",
-    a: "For startups, the Discounted Cash Flow (DCF) method is most commonly used — it values the business based on projected future cash flows discounted at an appropriate rate. However, DCF requires reliable financial projections. For early-stage startups with limited history, the Comparable Company Method (market multiples of similar funded startups) or Revenue Multiple approach may supplement DCF. The appropriate method depends on the startup's stage, industry, and the purpose of valuation.",
+    a: "For startups, the Discounted Cash Flow (DCF) method is the most common. It values the business on expected future cash flows, discounted at a suitable rate. But DCF needs reliable projections. Early-stage startups have little history. For them, the Comparable Company Method (multiples of similar funded startups) or a Revenue Multiple may be used alongside DCF. The right method depends on the startup's stage, industry and why it needs the valuation.",
   },
   {
     q: "Which method is used for asset-heavy companies?",
-    a: "The Net Asset Value (NAV) method is most appropriate for asset-heavy businesses such as real estate companies, investment holding companies, manufacturing businesses with significant fixed assets, and financial institutions. NAV computes the fair market value of all assets minus liabilities to derive the business's intrinsic worth. It is also used alongside DCF as a cross-check ('floor value') for most businesses.",
+    a: "The Net Asset Value (NAV) method suits asset-heavy businesses. Examples are real estate companies, investment holding companies, factories with large fixed assets and financial institutions. NAV takes the fair market value of all assets and subtracts liabilities. That gives the business's underlying worth. For most businesses, it is also used next to DCF as a cross-check ('floor value').",
   },
   {
     q: "How is a pre-revenue startup valued?",
-    a: "Pre-revenue startups are typically valued using: (1) Revenue multiples — applying industry EV/Revenue multiples to projected revenues; (2) Market approach — comparing with recent funding rounds of similar startups; (3) Scorecard method — benchmarking against funded startups adjusting for team, product, market, and traction; (4) Venture Capital method — working backwards from exit value to present value. A combination of methods is used to present a credible, defensible valuation.",
+    a: "Pre-revenue startups are usually valued with: (1) Revenue multiples: industry EV/Revenue multiples applied to expected revenue; (2) Market approach: comparing with recent funding rounds of similar startups; (3) Scorecard method: comparing with funded startups and adjusting for team, product, market and traction; (4) Venture Capital method: working back from the exit value to today. Several methods are combined to give a credible value you can defend.",
   },
   {
     q: "How is the valuation determined for ESOP grants?",
@@ -34,7 +34,7 @@ export const faqs = [
   },
   {
     q: "How long is a valuation report valid?",
-    a: "A business valuation report is typically valid for 6 months for most regulatory purposes in India (e.g., FDI, FEMA, ROC filings). After 6 months, a fresh valuation is recommended as business performance, market conditions, and financial position may have changed materially. For ESOP purposes, many companies obtain an annual valuation that is used for the entire financial year's grant rounds. The specific validity period depends on the regulatory requirement for which the valuation is being used.",
+    a: "For most regulatory uses in India (such as FDI, FEMA and ROC filings), a valuation report is typically valid for 6 months. After 6 months, get a fresh one. Performance, markets and the financial position may have changed a lot. For ESOP purposes, many companies get one valuation a year and use it for all grants in that financial year. The exact validity depends on the rule the valuation is used for.",
   },
   {
     q: "What is angel tax and how does proper valuation help?",

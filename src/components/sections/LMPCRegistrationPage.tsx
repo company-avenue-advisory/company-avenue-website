@@ -66,31 +66,31 @@ const quickFacts = [
 const benefits = [
   { icon: ShieldCheck, title: "Legal Compliance with Legal Metrology Act",  desc: "LMPC registration ensures full compliance with the Legal Metrology (Packaged Commodities) Rules, 2011. Operating without registration exposes importers and re-packers to seizure and penalties." },
   { icon: Globe,       title: "Mandatory for Amazon and Flipkart Sellers",  desc: "Amazon India and Flipkart both require LMPC registration proof for import vendors. Without it, your import vendor account will be suspended and you cannot list imported products." },
-  { icon: Package,     title: "MRP Declaration Compliance",                  desc: "LMPC registration enables proper MRP declaration on imported/re-packed goods — ensuring the retail price includes all taxes and is clearly printed on the label as required." },
-  { icon: Tag,         title: "Labelling Requirement Compliance",            desc: "Registered entities can legally print mandatory label information (net quantity, expiry date, country of origin, manufacturer/packer details, customer care number) on packaging." },
+  { icon: Package,     title: "MRP Declaration Compliance",                  desc: "LMPC registration lets you declare MRP correctly on imported or re-packed goods. The retail price includes all taxes and is printed clearly on the label, as required." },
+  { icon: Tag,         title: "Labelling Requirement Compliance",            desc: "Registered businesses can legally print the mandatory label details on packs. These are net quantity, expiry date, country of origin, maker or packer details and a customer care number." },
   { icon: Award,       title: "Avoid Product Seizure and Business Disruption", desc: "Legal Metrology officers can seize non-compliant products at the port of entry or from retail shelves. LMPC registration ensures your products pass inspection without disruption." },
-  { icon: TrendingUp,  title: "Build Consumer and Marketplace Trust",        desc: "LMPC-compliant products with proper MRP labels, net quantity, and expiry date build consumer trust and meet the listing requirements of all major Indian e-commerce platforms." },
-  { icon: Zap,         title: "Fast Registration Process",                   desc: "LMPC registration is processed by the state Legal Metrology Controller and typically takes 15-25 business days — one of the faster regulatory registrations for import businesses." },
+  { icon: TrendingUp,  title: "Build Consumer and Marketplace Trust",        desc: "LMPC-compliant products with proper MRP, net quantity and expiry labels earn buyer trust. They also meet the listing rules of all major Indian e-commerce platforms." },
+  { icon: Zap,         title: "Fast Registration Process",                   desc: "The state Legal Metrology Controller processes LMPC registration. It typically takes 15-25 business days, which is fast for an import registration." },
   { icon: BadgeCheck,  title: "Enables Customs Clearance of Imported Goods", desc: "Customs authorities and Legal Metrology inspection at ports verify LMPC compliance. A registered importer with compliant labels faces smoother customs clearance." },
 ];
 
 const whoNeeds = [
   { icon: Globe,       title: "Importers of Pre-Packaged Goods",            desc: "Any person importing packaged commodities into India for sale must have LMPC registration. This covers importers of electronics, food, cosmetics, toys, and all consumer goods." },
-  { icon: Package,     title: "Re-Packers and Re-Labellers",                desc: "Companies that buy goods in bulk and re-pack them into smaller consumer units must register as packers under the Legal Metrology Act before selling re-packed goods." },
-  { icon: Globe,       title: "Amazon and Flipkart Import Vendors",          desc: "E-commerce import vendors on Amazon, Flipkart, Meesho, and Snapdeal are mandated to provide LMPC registration number to continue selling imported products on these platforms." },
-  { icon: Building2,   title: "Brand Owners Importing Products",             desc: "Indian brand owners who have products manufactured outside India and import them under their brand must have LMPC registration as the importer/packer." },
+  { icon: Package,     title: "Re-Packers and Re-Labellers",                desc: "Do you buy in bulk and re-pack into smaller consumer packs? You must register as a packer under the Legal Metrology Act before selling them." },
+  { icon: Globe,       title: "Amazon and Flipkart Import Vendors",          desc: "Amazon, Flipkart, Meesho and Snapdeal require import vendors to give their LMPC registration number. Without it, they cannot keep selling imported products there." },
+  { icon: Building2,   title: "Brand Owners Importing Products",             desc: "Indian brands that make products abroad and import them under their own name need LMPC registration as the importer or packer." },
   { icon: Briefcase,   title: "Wholesale Distributors of Imported Goods",   desc: "Distributors handling imported packaged commodities in bulk must ensure all products carry compliant labels under the Legal Metrology Rules." },
-  { icon: AlertCircle, title: "Companies Receiving Legal Metrology Notices", desc: "Businesses that have received compliance notices from Legal Metrology authorities should immediately obtain LMPC registration and rectify labelling to avoid penalties." },
+  { icon: AlertCircle, title: "Companies Receiving Legal Metrology Notices", desc: "Got a notice from Legal Metrology authorities? Get LMPC registration and fix your labels right away to avoid penalties." },
 ];
 
 const processSteps = [
   { n: "01", title: "Applicant Type Identification",             desc: "Determine whether you are registering as an importer (for imported goods), packer (for goods packed in India), or both. The application category determines the documents and officer jurisdiction." },
-  { n: "02", title: "State vs Central Registration",             desc: "LMPC registration is obtained from the state Legal Metrology Controller in the state where the principal place of business is registered. For pan-India operations, the state of registered office is typically used." },
-  { n: "03", title: "Application Form Preparation",             desc: "Complete the LMPC application form with details of the business, nature of commodities, premises details, and declaration of compliance with labelling requirements under the Packaged Commodities Rules." },
-  { n: "04", title: "Document Compilation",                     desc: "Compile all required documents: identity proof, address proof, GST certificate, import export code (IEC), rent agreement or property documents, and list of commodities to be imported/packed." },
-  { n: "05", title: "Online Application Filing",                desc: "File the application online on the state Legal Metrology Department&apos;s portal (or physically submit at the district or state office as applicable). Pay the government fee." },
-  { n: "06", title: "Premises Inspection (if required)",        desc: "The Legal Metrology officer may conduct a physical inspection of the premises (warehouse, packing facility) to verify the details provided in the application. Ensure premises are in order." },
-  { n: "07", title: "Query Response",                           desc: "Respond to any queries raised by the Legal Metrology officer regarding commodities, labelling specifications, or additional documentation within the stipulated timeframe." },
+  { n: "02", title: "State vs Central Registration",             desc: "You get LMPC registration from the Legal Metrology Controller of the state where your principal place of business is registered. For pan-India businesses, the registered office state is typically used." },
+  { n: "03", title: "Application Form Preparation",             desc: "Fill in the LMPC application form. Add your business details, the type of goods and premises details. Include a declaration that you follow the labelling rules under the Packaged Commodities Rules." },
+  { n: "04", title: "Document Compilation",                     desc: "Collect your documents: identity proof, address proof, GST certificate, import export code (IEC), rent agreement or property papers, and the list of goods you will import or pack." },
+  { n: "05", title: "Online Application Filing",                desc: "File online on the state Legal Metrology Department's portal, or submit at the district or state office if needed. Pay the government fee." },
+  { n: "06", title: "Premises Inspection (if required)",        desc: "The Legal Metrology officer may inspect your warehouse or packing unit to check your details. Make sure the premises are in order." },
+  { n: "07", title: "Query Response",                           desc: "Answer any questions from the officer about goods, labels or extra documents within the given time." },
   { n: "08", title: "Certificate Issuance",                     desc: "Once satisfied, the Controller of Legal Metrology issues the LMPC registration certificate. This certificate is required for Amazon/Flipkart vendor accounts and customs clearance." },
 ];
 
@@ -137,7 +137,7 @@ export function LMPCRegistrationPage({ pricingSlot, calcPill }: { pricingSlot?: 
             {calcPill}
             <motion.p variants={fadeUp} initial={false} animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
-              Mandatory registration under the Legal Metrology Act 2009 for all importers and re-packers of pre-packaged goods. Required by Amazon, Flipkart, and customs for MRP declaration, net quantity compliance, and label information requirements on all imported products sold in India.
+              Mandatory registration under the Legal Metrology Act 2009 for all importers and re-packers of pre-packaged goods. Amazon, Flipkart and customs require it. It covers MRP, net quantity and label details on every imported product sold in India.
             </motion.p>
             <motion.div variants={fadeUp} initial={false} animate="show" custom={3} className="flex flex-wrap gap-3">
               <Link href="/contact"

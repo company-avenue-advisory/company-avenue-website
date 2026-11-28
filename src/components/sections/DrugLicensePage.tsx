@@ -67,7 +67,7 @@ const whoNeeds = [
 
 const benefits = [
   { icon: ShieldCheck,  title: "Legal Authorization to Sell/Distribute",  desc: "Obtain complete legal authority to sell, stock, distribute, or exhibit drugs under State Drug Controller rules." },
-  { icon: AlertTriangle,title: "Avoid Criminal Prosecution",               desc: "Selling drugs without a license attracts imprisonment of up to 5 years — a Drug License keeps you legally protected." },
+  { icon: AlertTriangle,title: "Avoid Criminal Prosecution",               desc: "Selling drugs without a license can mean up to 5 years in prison. A Drug License keeps you legally safe." },
   { icon: Briefcase,    title: "Pharma Dealership / Distributorship",      desc: "Pharmaceutical manufacturers and brands require authorized dealers to hold a valid wholesale Drug License." },
   { icon: DollarSign,   title: "Bank Loan Eligibility",                    desc: "A valid Drug License is a prerequisite document for business loans and financial assistance for pharmacy businesses." },
   { icon: Building2,    title: "Supply to Hospitals & Institutions",       desc: "Only licensed wholesale dealers can supply drugs to hospitals, clinics, nursing homes, and government institutions." },
@@ -78,7 +78,7 @@ const benefits = [
 
 const processSteps = [
   { n: "01", title: "Determine License Type",                   desc: "Identify whether you need a Retail (Form 20/21), Wholesale (Form 20B/21B), or Manufacturing license based on your business activity." },
-  { n: "02", title: "Hire Qualified Pharmacist",               desc: "A registered pharmacist (B.Pharm or D.Pharm) is mandatory for a Retail Drug License and must be present during business hours." },
+  { n: "02", title: "Hire Qualified Pharmacist",               desc: "A Retail Drug License needs a registered pharmacist (B.Pharm or D.Pharm). The pharmacist must be present during business hours." },
   { n: "03", title: "Prepare Premises",                        desc: "Set up premises as per minimum area requirements (10 sq meters for retail). Install cold storage if dealing in Schedule 2 drugs like vaccines." },
   { n: "04", title: "Compile All Required Documents",          desc: "Gather all premises, pharmacist, identity, and business documents as specified by the State Drug Licensing Authority." },
   { n: "05", title: "Apply to State Drug Licensing Authority", desc: "Submit the application to the State Drug Control Department along with prescribed fee and all supporting documents." },
@@ -484,7 +484,7 @@ export function DrugLicensePage({ pricingSlot, calcPill }: { pricingSlot?: React
             <Eyebrow label="Who Needs This" />
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-dark mb-3">Who Needs a Drug License?</h2>
             <p className="text-muted text-base max-w-2xl mx-auto">
-              Any business involved in selling, distributing, or manufacturing drugs in India is legally required to hold a valid Drug License.
+              Any business that sells, distributes or makes drugs in India must hold a valid Drug License.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -840,7 +840,7 @@ export function DrugLicensePage({ pricingSlot, calcPill }: { pricingSlot?: React
               Don&apos;t Risk Operating<br />Without a Drug License
             </h2>
             <p className="text-white/70 text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-              Company Avenue Advisory handles your Drug License application end-to-end — from document preparation and pharmacist compliance to site inspection support and license receipt. Stay compliant, stay protected.
+              Company Avenue Advisory handles your Drug License application end to end. We prepare documents, sort out pharmacist compliance, support the site inspection and see it through to the license. Stay compliant, stay protected.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link

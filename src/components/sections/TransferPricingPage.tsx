@@ -264,7 +264,7 @@ export function TransferPricingPage({ pricingSlot, calcPill }: { pricingSlot?: R
                 <strong className="text-dark">Sections 92 to 92F of the Income Tax Act, 1961</strong> mandates that all such transactions be conducted at an <em>arm&apos;s length price</em> (ALP).
               </p>
               <p className="text-muted text-base leading-relaxed mb-5">
-                An arm&apos;s length price is the price that independent, unrelated parties would agree to for a comparable transaction in similar market conditions. If your company charges below-market prices for services rendered to an overseas parent, or pays above-market royalties to a foreign licensor, the Income Tax Department can make an adjustment — treating the difference as additional taxable income in India.
+                An arm&apos;s length price is the price two unrelated parties would agree on for a similar deal in similar market conditions. Say your company charges an overseas parent less than the market rate. Or it pays a foreign licensor more than the market rate in royalties. The Income Tax Department can then make an adjustment. It treats the difference as extra taxable income in India.
               </p>
               <p className="text-muted text-base leading-relaxed mb-6">
                 A Transfer Pricing Study is a detailed economic report that documents your transactions, benchmarks prices against comparable market data, and certifies through{" "}
@@ -424,7 +424,7 @@ export function TransferPricingPage({ pricingSlot, calcPill }: { pricingSlot?: R
                 Under Rule 10D of the Income Tax Rules, every person required to maintain information and documentation must keep these records for a period of <strong className="text-dark">8 years</strong> from the end of the relevant assessment year.
               </p>
               <p className="text-muted text-sm leading-relaxed mb-5">
-                Failure to maintain prescribed documentation not only attracts a 2% penalty on the transaction value but also shifts the burden of proof entirely to the taxpayer during assessment.
+                If you do not keep the required documents, a penalty of 2% of the transaction value applies. You also have to prove your case yourself during assessment.
               </p>
               <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex items-start gap-3">
                 <AlertTriangle size={15} className="text-amber-600 shrink-0 mt-0.5" />

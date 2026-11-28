@@ -69,9 +69,9 @@ const benefits = [
   { icon: BarChart3,   title: "AS 15 / Ind AS 19 Compliance",           desc: "Proper accounting treatment under AS 15 (Employee Benefits) and Ind AS 19 requires actuarial valuation of defined benefit obligations. A trust provides the funding mechanism for this." },
   { icon: Users,       title: "Employee Benefit and Retention Tool",     desc: "An approved gratuity trust demonstrates employer commitment to employee welfare. It reassures long-serving employees that their statutory entitlement is ring-fenced and secure." },
   { icon: Scale,       title: "Managed by Independent Trustees",         desc: "Trust assets are managed separately from the company&apos;s operations by appointed trustees. This protects employee benefits even if the company faces financial difficulties." },
-  { icon: Award,       title: "Actuarial Valuation for Accurate Provisioning", desc: "Annual actuarial valuation (required under AS 15 / Ind AS 19) ensures the trust corpus is adequate to meet projected gratuity obligations, preventing funding shortfalls." },
+  { icon: Award,       title: "Actuarial Valuation for Accurate Provisioning", desc: "A yearly actuarial valuation (required under AS 15 / Ind AS 19) checks that the trust has enough money for future gratuity payouts. This prevents shortfalls." },
   { icon: Banknote,    title: "Maximum Tax Exemption ₹20 Lakh",         desc: "Under the Payment of Gratuity Act, gratuity up to ₹20 lakh per employee is exempt from income tax. The trust structure ensures this exemption is properly administered." },
-  { icon: TrendingUp,  title: "Better Cash Flow Management",             desc: "Regular contributions to the trust spread the gratuity cost over the service period rather than creating a large one-time cash outflow when senior employees retire or leave." },
+  { icon: TrendingUp,  title: "Better Cash Flow Management",             desc: "Regular payments into the trust spread the gratuity cost over the years of service. You avoid a large one-time cash outflow when senior staff retire or leave." },
 ];
 
 const whoNeeds = [
@@ -85,10 +85,10 @@ const whoNeeds = [
 
 const processSteps = [
   { n: "01", title: "Actuarial Valuation",                    desc: "Commission an actuarial valuation from a Fellow of the Institute of Actuaries of India (FIAI). The actuary calculates the Present Value of Obligation (PVO) using assumptions for salary growth, attrition, mortality, and discount rate." },
-  { n: "02", title: "Trust Deed Drafting",                    desc: "Draft the Trust Deed establishing the Private Gratuity Trust — specifying the settlor (company), trustees (at least two: one employer, one employee representative), beneficiaries, contribution provisions, investment norms, and administration rules." },
+  { n: "02", title: "Trust Deed Drafting",                    desc: "Draft the Trust Deed that sets up the Private Gratuity Trust. It names the settlor (the company) and the trustees (at least two: one employer, one employee representative). It also sets out the beneficiaries, contributions, investment norms and how the trust is run." },
   { n: "03", title: "Board Resolution",                       desc: "Pass a Board Resolution authorising: (1) establishment of the gratuity trust; (2) appointment of trustees; (3) initial contribution to the trust corpus; and (4) authorisation to apply for Income Tax approval." },
   { n: "04", title: "Trust Registration",                     desc: "Register the Trust Deed with the Sub-Registrar of Assurances where the trust is situated. Pay stamp duty as applicable in the state. The registered Trust Deed is the foundational legal document." },
-  { n: "05", title: "Application for IT Approval",            desc: "File an application before the Commissioner of Income Tax (Exemptions) under Section 2(5) of the Income Tax Act requesting approval of the gratuity trust as an &lsquo;approved gratuity fund&rsquo;." },
+  { n: "05", title: "Application for IT Approval",            desc: "Apply to the Commissioner of Income Tax (Exemptions) under Section 2(5) of the Income Tax Act. Ask for the trust to be approved as an &lsquo;approved gratuity fund&rsquo;." },
   { n: "06", title: "IT Approval Hearing",                    desc: "Attend hearing before the Commissioner of Income Tax. Submit Trust Deed, actuarial valuation report, Board Resolution, and supporting documents. Respond to queries raised by the Income Tax authority." },
   { n: "07", title: "Approval Order",                         desc: "Once satisfied, the Commissioner of Income Tax issues the approval order designating the trust as an &lsquo;approved gratuity fund&rsquo;. This enables Section 36(1)(v) deduction for contributions from the date of approval." },
   { n: "08", title: "Annual Administration",                  desc: "Invest trust corpus as per IT Rules (IRDA-approved funds, government securities). Conduct annual actuarial valuation. Make annual contributions. Maintain trust accounts and file trust income tax return (ITR-7)." },
@@ -137,7 +137,7 @@ export function GratuityTrustPage({ pricingSlot, calcPill }: { pricingSlot?: Rea
             {calcPill}
             <motion.p variants={fadeUp} initial={false} animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
-              Set up an Income Tax-approved private gratuity trust to claim Section 36(1)(v) deductions, comply with AS 15 / Ind AS 19, manage off-balance-sheet employee liabilities, and protect employee gratuity entitlements. Includes actuarial valuation coordination and IT approval.
+              Set up an Income Tax-approved private gratuity trust. Claim Section 36(1)(v) deductions and comply with AS 15 / Ind AS 19. Keep employee liabilities off the balance sheet and protect your staff&apos;s gratuity. Includes help with actuarial valuation and IT approval.
             </motion.p>
             <motion.div variants={fadeUp} initial={false} animate="show" custom={3} className="flex flex-wrap gap-3">
               <Link href="/contact"
@@ -222,7 +222,7 @@ export function GratuityTrustPage({ pricingSlot, calcPill }: { pricingSlot?: Rea
                 <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-start gap-2">
                   <AlertTriangle size={13} className="text-amber-500 shrink-0 mt-0.5" />
                   <p className="text-dark text-xs leading-relaxed">
-                    <strong>Note:</strong> Without an approved trust, gratuity contributions are NOT deductible in the year of provision — only when actual payment is made.
+                    <strong>Note:</strong> Without an approved trust, gratuity contributions are NOT deductible in the year you provide for them. They are deductible only when actually paid.
                   </p>
                 </div>
               </div>

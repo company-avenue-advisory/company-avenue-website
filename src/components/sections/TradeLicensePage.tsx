@@ -65,32 +65,32 @@ const quickFacts = [
 
 const benefits = [
   { icon: ShieldCheck, title: "Legal Permission to Operate Business Premises", desc: "A Trade License is the formal municipal permission to conduct business from specific premises. Operating a commercial establishment without it constitutes an illegal business activity." },
-  { icon: Globe,       title: "GST Address Verification",                      desc: "GST registration requires proof of business address. Trade License issued for the premises is one of the most widely accepted address proof documents for GST principal place of business." },
-  { icon: Landmark,    title: "Required for Bank Account Opening",             desc: "Banks and NBFCs require Trade License as one of the business address proof documents when opening current accounts for proprietorships, partnerships, and small businesses." },
+  { icon: Globe,       title: "GST Address Verification",                      desc: "GST registration requires proof of business address. A Trade License for the premises is one of the most accepted proofs for your GST principal place of business." },
+  { icon: Landmark,    title: "Required for Bank Account Opening",             desc: "Banks and NBFCs ask for a Trade License as business address proof. This applies when proprietorships, partnerships and small businesses open a current account." },
   { icon: Scale,       title: "Commercial Zoning Compliance",                 desc: "Trade License ensures your business activity is permitted in the commercial zone where your premises are located. Operating in a residential area without permission attracts enforcement action." },
-  { icon: Award,       title: "Enables Food Business License",                desc: "FSSAI food business registration/license and state pollution control permits require a valid Trade License as a supporting document confirming the premises&apos; legal business status." },
+  { icon: Award,       title: "Enables Food Business License",                desc: "FSSAI registration or licence and state pollution control permits need a valid Trade License. It shows the premises can legally be used for business." },
   { icon: TrendingUp,  title: "Required for Government and PSU Tenders",      desc: "Many government procurement tenders and PSU vendor registrations require a valid Trade License as proof of establishment. Without it, you cannot qualify for government supply contracts." },
   { icon: Zap,         title: "Quick Annual Renewal Process",                 desc: "Trade License renewal is a relatively straightforward annual process. With our assistance, the renewal can be completed well before the 31 March deadline, avoiding penalties." },
   { icon: BadgeCheck,  title: "Protects Business Against Municipal Raids",    desc: "Operating without a Trade License exposes businesses to municipal raids, temporary shutdown orders, and fines. A valid license provides legal protection against such actions." },
 ];
 
 const whoNeeds = [
-  { icon: Store,       title: "Retail Shops and Showrooms",                  desc: "Every retail shop, store, boutique, and showroom operating from a commercial or semi-commercial premises requires a Trade License from the local municipal body." },
+  { icon: Store,       title: "Retail Shops and Showrooms",                  desc: "Every retail shop, store, boutique and showroom in a commercial or semi-commercial premises needs a Trade License. It is issued by the local municipal body." },
   { icon: Building2,   title: "Restaurants, Cafes, and Food Establishments", desc: "Food service businesses require a Trade License before applying for FSSAI license and other food business permits. It confirms the premises is legally authorised for food operations." },
-  { icon: Briefcase,   title: "Professional Offices and Clinics",            desc: "Doctor clinics, law offices, CA practices, consulting firms, and other professional service offices require Trade License to establish their legal business address." },
-  { icon: Users,       title: "Manufacturing Units and Workshops",            desc: "Small manufacturing units, workshops, and artisan enterprises need Trade License from the Municipality or Industrial Development Corporation as part of their operating clearances." },
-  { icon: Globe,       title: "E-Commerce Businesses with Warehouses",       desc: "Online sellers with physical warehouses or fulfilment centres need Trade License for those premises as part of their GST address compliance and marketplace seller verification." },
-  { icon: Landmark,    title: "Service Centres and Repair Shops",            desc: "Auto repair workshops, electronic service centres, tailoring shops, and other service businesses require Trade License to legally operate from commercial premises." },
+  { icon: Briefcase,   title: "Professional Offices and Clinics",            desc: "Clinics, law offices, CA practices, consulting firms and other professional offices need a Trade License. It sets up their legal business address." },
+  { icon: Users,       title: "Manufacturing Units and Workshops",            desc: "Small factories, workshops and artisan units need a Trade License. It comes from the Municipality or the Industrial Development Corporation as part of their clearances." },
+  { icon: Globe,       title: "E-Commerce Businesses with Warehouses",       desc: "Online sellers with a warehouse or fulfilment centre need a Trade License for that premises. It is used for GST address proof and marketplace seller checks." },
+  { icon: Landmark,    title: "Service Centres and Repair Shops",            desc: "Auto repair shops, electronics service centres, tailors and other service businesses need a Trade License. Without it, they cannot legally run from commercial premises." },
 ];
 
 const processSteps = [
-  { n: "01", title: "Identify the Issuing Authority",          desc: "Determine the correct issuing authority based on location: Municipal Corporation (for urban areas), Municipal Council (for smaller towns), Gram Panchayat (for rural areas), or Industrial Area Development Authority." },
+  { n: "01", title: "Identify the Issuing Authority",          desc: "Find the right issuing authority for your location. It is the Municipal Corporation in cities, the Municipal Council in smaller towns, the Gram Panchayat in rural areas, or the Industrial Area Development Authority." },
   { n: "02", title: "Check Zone and Land Use",                 desc: "Verify that the premises is in a zone that permits the proposed business activity. Commercial zoning is required for most business activities. Industrial zoning for manufacturing. Residential zone typically restricts commercial use." },
-  { n: "03", title: "Document Preparation",                    desc: "Prepare all required documents including proof of premises ownership or lease/rent agreement, NOC from landlord, proof of business identity, PAN of the business owner, and photographs of the premises." },
+  { n: "03", title: "Document Preparation",                    desc: "Get your documents ready. You need proof of ownership or a lease/rent agreement, an NOC from the landlord, proof of business identity, the owner's PAN and photos of the premises." },
   { n: "04", title: "Online or Physical Application",          desc: "Most municipal corporations now offer online Trade License applications through their portals. File the application with correct business category selection, premises details, and upload all required documents." },
   { n: "05", title: "Pay Government Fee",                      desc: "Pay the Trade License fee as applicable. The fee varies by municipality, business type, floor area, and number of employees. Fees typically range from ₹500 to ₹10,000 for small businesses." },
-  { n: "06", title: "Premises Inspection",                     desc: "A municipal inspector may visit the premises to verify the details provided in the application — actual business activity, premises area, number of employees, fire safety measures, and sanitation." },
-  { n: "07", title: "NOC from Fire Department (if required)", desc: "For restaurants, hotels, large retail stores, and certain other businesses, a No Objection Certificate from the Fire Department is required before the Trade License is issued." },
+  { n: "06", title: "Premises Inspection",                     desc: "A municipal inspector may visit to check your application details. They look at the actual business, the area, the number of employees, fire safety and sanitation." },
+  { n: "07", title: "NOC from Fire Department (if required)", desc: "Restaurants, hotels, large stores and some other businesses need a No Objection Certificate from the Fire Department. The Trade License is issued only after that." },
   { n: "08", title: "Trade License Certificate",               desc: "Upon successful verification, the municipality issues the Trade License certificate. It must be displayed prominently at the business premises and renewed annually by 31 March." },
 ];
 
@@ -137,7 +137,7 @@ export function TradeLicensePage({ pricingSlot, calcPill }: { pricingSlot?: Reac
             {calcPill}
             <motion.p variants={fadeUp} initial={false} animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
-              Obtain your municipal Trade License from the local Municipal Corporation, Council, or Gram Panchayat for legal business operation from your premises. Annual renewal by 31 March required. Essential for GST address proof, bank accounts, and government tenders.
+              Get your Trade License from the local Municipal Corporation, Council or Gram Panchayat. It lets you legally run your business from your premises. Annual renewal by 31 March required. You also need it for GST address proof, bank accounts and government tenders.
             </motion.p>
             <motion.div variants={fadeUp} initial={false} animate="show" custom={3} className="flex flex-wrap gap-3">
               <Link href="/contact"

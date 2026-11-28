@@ -66,32 +66,32 @@ const quickFacts = [
 const benefits = [
   { icon: ShieldCheck, title: "Legal Authority to Operate Security Agency", desc: "PSARA license is the only legal basis to operate a private security agency in India. Operating without it is a cognizable criminal offence under Section 4 of the PSARA Act." },
   { icon: Award,       title: "Eligibility for Corporate Contracts",        desc: "Large corporates, banks, hospitals, malls, and government organisations only engage PSARA-licensed security agencies. The license opens the door to high-value, long-term contracts." },
-  { icon: Users,       title: "Ability to Deploy Trained Guards and Supervisors", desc: "PSARA license allows you to legally deploy guards (100 hours training) and supervisors (160 hours training) trained at NSDC-approved or government-recognised training institutes." },
+  { icon: Users,       title: "Ability to Deploy Trained Guards and Supervisors", desc: "A PSARA license lets you legally deploy guards (100 hours training) and supervisors (160 hours training). They must be trained at an NSDC-approved or government-recognised institute." },
   { icon: Globe,       title: "State-Specific License for Operations",      desc: "Each state issues its own PSARA license through the District Licensing Authority. Multi-state operations require separate licenses in each state — we manage multi-state applications." },
-  { icon: Scale,       title: "Legally Deploy Armed Security Personnel",    desc: "With appropriate endorsements on the PSARA license and arms licenses for guards, you can legally deploy armed security personnel — a premium service category for banks and VIP protection." },
+  { icon: Scale,       title: "Legally Deploy Armed Security Personnel",    desc: "With the right endorsements on your PSARA license, and arms licenses for your guards, you can deploy armed security. This is a premium service for banks and VIP protection." },
   { icon: TrendingUp,  title: "Qualifies for Government Security Tenders",  desc: "Central and state government security tenders mandatorily require PSARA license as an eligibility criterion. Without it, you cannot participate in government security procurement." },
   { icon: RefreshCcw,  title: "Renewable License Structure",                desc: "PSARA license is initially issued for 5 years and can be renewed. A consistent compliance and renewal record builds institutional trust with clients and regulators." },
-  { icon: UserCheck,   title: "Protects Business Against Legal Action",     desc: "A valid PSARA license protects your security agency from criminal complaints, police action, and regulatory shutdowns — providing operational security for your business." },
+  { icon: UserCheck,   title: "Protects Business Against Legal Action",     desc: "A valid PSARA license protects your agency from criminal complaints, police action and shutdowns. Your business can run without that risk." },
 ];
 
 const whoNeeds = [
   { icon: Building2,   title: "New Security Agency Startups",              desc: "Anyone starting a private security company in India must obtain a PSARA license before deploying any guards or supervisors. No security agency can legally operate without it." },
-  { icon: Users,       title: "Housekeeping Companies Adding Security",    desc: "Facility management and housekeeping companies adding security services to their portfolio need a separate PSARA license for the security division." },
+  { icon: Users,       title: "Housekeeping Companies Adding Security",    desc: "Facility management and housekeeping companies that add security services need a separate PSARA license. It covers the security division." },
   { icon: Globe,       title: "Agencies Expanding to New States",          desc: "Security agencies licensed in one state must obtain a fresh license in each new state before deploying guards there. Multi-state expansion requires multi-state PSARA compliance." },
-  { icon: Briefcase,   title: "Companies Seeking Large Corporate Contracts", desc: "Agencies eyeing contracts with banks, IT parks, malls, airports, or large corporates need a valid and current PSARA license as a mandatory eligibility criterion." },
-  { icon: TrendingUp,  title: "Agencies Upgrading to Armed Security Services", desc: "Security agencies seeking to provide armed guard services need both a PSARA license and appropriate arms license endorsements for the deployment of armed personnel." },
+  { icon: Briefcase,   title: "Companies Seeking Large Corporate Contracts", desc: "Want contracts with banks, IT parks, malls, airports or large companies? A valid, current PSARA license is a must-have condition." },
+  { icon: TrendingUp,  title: "Agencies Upgrading to Armed Security Services", desc: "To offer armed guards, an agency needs a PSARA license. It also needs the right arms license endorsements for armed staff." },
   { icon: AlertCircle, title: "Agencies with Expired or Lapsed Licenses",  desc: "Agencies whose PSARA license has expired must immediately apply for renewal. Operating with an expired license is equivalent to operating without a license." },
 ];
 
 const processSteps = [
   { n: "01", title: "Company Incorporation and INC Compliance",  desc: "Ensure the agency is incorporated (Pvt Ltd, LLP, or partnership). The applicant must be an Indian citizen with no criminal record. Directors/partners must submit police verification certificates." },
-  { n: "02", title: "Training Institute Agreement",              desc: "Execute an agreement with a NSDC-approved training institute or government-recognised security training institute for mandatory training of guards (100 hours) and supervisors (160 hours) as per Schedule I of PSARA Rules." },
-  { n: "03", title: "State Rules Familiarisation",               desc: "Each state has its own PSARA Rules under the central PSARA Act. Review the specific state&apos;s licensing requirements, fee structure, and document requirements before filing." },
-  { n: "04", title: "Application to District Licensing Authority", desc: "File the PSARA license application with the Controlling Authority (District Licensing Authority / Commissioner of Police) in the district where the principal office is registered. Pay prescribed fee." },
+  { n: "02", title: "Training Institute Agreement",              desc: "Sign an agreement with an NSDC-approved or government-recognised training institute. It will run the mandatory training for guards (100 hours) and supervisors (160 hours), as set out in Schedule I of the PSARA Rules." },
+  { n: "03", title: "State Rules Familiarisation",               desc: "Each state has its own PSARA Rules under the central PSARA Act. Review the specific state's licensing requirements, fee structure, and document requirements before filing." },
+  { n: "04", title: "Application to District Licensing Authority", desc: "File the PSARA license application with the Controlling Authority. This is the District Licensing Authority or Commissioner of Police where your main office is registered. Pay prescribed fee." },
   { n: "05", title: "Police Verification of Directors/Partners",  desc: "All directors, partners, and principal officers of the agency must undergo police verification. Criminal background checks are conducted by local police. Clean records are mandatory for license grant." },
-  { n: "06", title: "Premises Verification",                     desc: "The licensing authority may physically verify the registered office premises of the security agency to confirm the address, facilities, and operational readiness of the applicant." },
+  { n: "06", title: "Premises Verification",                     desc: "The authority may visit your registered office. It checks the address, the facilities and whether you are ready to operate." },
   { n: "07", title: "Hearing Before Controlling Authority",       desc: "The Controlling Authority reviews the application, police verification reports, training institute agreement, and other documents. An oral hearing may be scheduled before the license is granted." },
-  { n: "08", title: "PSARA License Issuance",                    desc: "Once satisfied with all requirements, the Controlling Authority issues the PSARA license specifying the state(s) of operation, category (armed/unarmed), and validity period (typically 5 years)." },
+  { n: "08", title: "PSARA License Issuance",                    desc: "Once all requirements are met, the Controlling Authority issues the PSARA license. It states where you can operate, the category (armed or unarmed) and the validity period (typically 5 years)." },
 ];
 
 const requiredDocs = [
@@ -137,7 +137,7 @@ export function PSARALicensePage({ pricingSlot, calcPill }: { pricingSlot?: Reac
             {calcPill}
             <motion.p variants={fadeUp} initial={false} animate="show" custom={2}
               className="text-slate-300 text-lg leading-relaxed mb-8 max-w-2xl" itemProp="description">
-              Obtain your mandatory Private Security Agencies Regulation Act license from the District Licensing Authority. State-specific, mandatory before deploying guards or supervisors — required for corporate contracts, government tenders, and legal operation of any security business in India.
+              Get your mandatory Private Security Agencies Regulation Act license from the District Licensing Authority. It is state-specific. You need it before you deploy any guard or supervisor. It is also required for corporate contracts, government tenders and running any security business legally in India.
             </motion.p>
             <motion.div variants={fadeUp} initial={false} animate="show" custom={3} className="flex flex-wrap gap-3">
               <Link href="/contact"
