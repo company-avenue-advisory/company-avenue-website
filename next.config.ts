@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
     // Optimised derivatives are immutable — cache them for a year instead of
     // Next's 60-second default, which made repeat visitors re-fetch every image.
     minimumCacheTTL: 31536000,
+    // Fewer candidate widths = shorter srcset on every <img>. Next's defaults
+    // emit 16 widths per image, which made the client-logo strip alone ~54 KB
+    // of homepage HTML and dragged the text-to-HTML ratio down site-wide.
+    imageSizes: [32, 64, 128, 256],
+    deviceSizes: [640, 1080, 1920],
   },
   // Strips the "X-Powered-By: Next.js" fingerprint from every response.
   poweredByHeader: false,
