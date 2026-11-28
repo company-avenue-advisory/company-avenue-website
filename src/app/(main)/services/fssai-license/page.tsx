@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/seo";
 import { FSSAILicensePage } from "@/components/sections/FSSAILicensePage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -8,9 +9,9 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/fssai-license" },
-  title: "FSSAI License Registration for Food Business",
+  title: fitTitle("FSSAI Registration & Food License Online — Fees & Process"),
   description:
-    "Get FSSAI Basic Registration, State License, or Central License for your food business. Restaurants, manufacturers, importers. Starting ₹3,999.",
+    "FSSAI registration and food license online: basic registration, state license or central license for restaurants, manufacturers and importers. Fees, documents and process.",
 };
 
 export default function FSSAILicenseServicePage() {

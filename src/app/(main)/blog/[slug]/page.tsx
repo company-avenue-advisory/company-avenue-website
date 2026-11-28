@@ -7,7 +7,7 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE_URL, canonical, breadcrumbSchema, PRINCIPAL_ID, fitTitle } from "@/lib/seo";
-import { CATEGORY_SERVICE } from "@/lib/content-links";
+import { CATEGORY_SERVICE, POST_SERVICE } from "@/lib/content-links";
 import { getRankAiArticle, humanDate, type RankAiArticle } from "@/lib/rank-ai";
 
 // Hand-written posts are prebuilt below. Any other slug is looked up in
@@ -92,7 +92,7 @@ export default async function BlogPostPage({
     ...BLOG_POSTS.filter((p) => p.slug !== post.slug && p.category !== post.category),
   ].slice(0, 3);
 
-  const service = CATEGORY_SERVICE[post.category];
+  const service = POST_SERVICE[post.slug] ?? CATEGORY_SERVICE[post.category];
   const published = isoDate(post.date);
 
   return (

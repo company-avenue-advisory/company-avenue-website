@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/seo";
 import { PartnershipFirmPage } from "@/components/sections/PartnershipFirmPage";
 import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
 import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
@@ -8,9 +9,9 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/partnership-firm" },
-  title: "Partnership Firm Registration Online",
+  title: fitTitle("Partnership Firm Registration Online — Fees, Deed & Process"),
   description:
-    "Register a Partnership Firm under the Indian Partnership Act, 1932. Deed drafting, PAN, bank account opening. Simple, flexible business structure starting ₹4,999.",
+    "Partnership firm registration online. Partnership deed drafting and registration, firm registration fees, documents and process. PAN and bank account help included.",
 };
 
 export default function PartnershipFirmServicePage() {

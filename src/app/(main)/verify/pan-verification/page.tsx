@@ -9,7 +9,7 @@ import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/pan-verification" },
-  title: fitTitle("PAN Verification Online — Verify PAN Card Details"),
+  title: fitTitle("PAN Verification Online — Verify PAN Number & Name Free"),
   description:
     "Free PAN verification tool. Confirm a PAN number matches the given name and date of birth, and check Aadhaar-seeding status — with explicit consent.",
   keywords: ["PAN verification online", "verify PAN card", "PAN card status check", "PAN Aadhaar link status"],
@@ -42,7 +42,7 @@ export default function PANVerificationPage() {
             </span>
           </div>
           <h1 className="font-heading font-bold text-3xl md:text-4xl text-white mb-3 leading-tight">
-            PAN Verification
+            PAN Verification Online — Verify PAN Number
           </h1>
           <p className="text-white/50 text-base max-w-2xl">
             Confirm a PAN card is genuine and matches the holder&rsquo;s name and date of birth.

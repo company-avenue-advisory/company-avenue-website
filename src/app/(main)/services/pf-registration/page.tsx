@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/seo";
 import { PFRegistrationPage } from "@/components/sections/PFRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -8,9 +9,9 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/pf-registration" },
-  title: "PF Registration — Provident Fund (EPFO)",
+  title: fitTitle("PF Registration Online — EPF Registration for Employers"),
   description:
-    "Register your establishment under the Employees' Provident Funds Act 1952. Mandatory for 20+ employees. ECR filing, UAN generation. Starting ₹2,999.",
+    "PF registration online for employers. EPF (EPFO) establishment registration, PF registration process, documents, UAN generation and monthly ECR filing support.",
 };
 
 export default function PFRegistrationServicePage() {

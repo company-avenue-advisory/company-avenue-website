@@ -8,9 +8,9 @@ import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/llp-registration" },
-  title: fitTitle("LLP Registration in India | Limited Liability Partnership"),
+  title: fitTitle("LLP Registration Online in India — Fees, Documents & Process"),
   description:
-    "Register your Limited Liability Partnership (LLP) in India with expert CAs. Complete assistance with DSC, DPIN, name reservation, MCA incorporation, PAN, TAN. 7–10 working days. 100% online.",
+    "LLP registration online in India. LLP registration fees, documents required, process and certificate of incorporation, handled by experts. 7–10 working days, 100% online.",
   keywords: [
     "LLP registration",
     "limited liability partnership registration",
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     "benefits of LLP registration",
   ],
   openGraph: {
-    title: "LLP Registration in India | Company Avenue Advisory",
+    title: "LLP Registration Online in India — Fees, Documents & Process",
     description:
-      "Register your LLP with experienced CAs. 7–10 working days, 100% online, transparent pricing.",
+      "LLP registration online in India. LLP registration fees, documents required, process and certificate of incorporation, handled by experts. 7–10 working days, 100% online.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",

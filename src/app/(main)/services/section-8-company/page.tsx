@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/seo";
 import { Section8CompanyPage } from "@/components/sections/Section8CompanyPage";
 import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
 import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
@@ -8,9 +9,9 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/section-8-company" },
-  title: "Section 8 Company Registration (NGO)",
+  title: fitTitle("Section 8 Company Registration — NGO Registration Online"),
   description:
-    "Register a Section 8 Company (Non-Profit) under Companies Act 2013. Ideal for NGOs, charities, and social enterprises. MCA license, 12A & 80G registration assistance. Starting ₹7,999.",
+    "Section 8 company registration and NGO registration online. Register a non-profit under the Companies Act 2013, with 12A and 80G registration help. Fees, documents and process.",
 };
 
 export default function Section8CompanyServicePage() {

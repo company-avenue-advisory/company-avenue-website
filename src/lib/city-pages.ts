@@ -62,7 +62,7 @@ const related = [
 export const CITY_PAGES: Record<string, { meta: { title: string; description: string }; config: CityLandingConfig }> = {
   "private-limited-company-registration-delhi": {
     meta: {
-      title: "Private Limited Company Registration in Delhi | CA",
+      title: "Company Registration in Delhi — Private Limited (Pvt Ltd)",
       description: "Register a Private Limited company in Delhi in 7–10 days. Expert-led, 100% online, fixed transparent pricing. Free consultation — call or WhatsApp today.",
     },
     config: {
@@ -182,7 +182,7 @@ export const CITY_PAGES: Record<string, { meta: { title: string; description: st
 
   "company-registration-janakpuri": {
     meta: {
-      title: "Company Registration in Janakpuri, West Delhi | CA",
+      title: "Company Registration in Janakpuri, West Delhi | Pvt Ltd & LLP",
       description: "Company registration in Janakpuri, West Delhi by a local CA firm. Pvt Ltd, LLP, OPC & GST — 100% online, fixed pricing. Visit our Jaina Tower office.",
     },
     config: {

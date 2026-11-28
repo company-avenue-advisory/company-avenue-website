@@ -8,9 +8,9 @@ import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/gst-filing" },
-  title: fitTitle("GST Return Filing Online | GSTR-1, GSTR-3B & Annual GST Returns"),
+  title: fitTitle("GST Return Filing Services — GSTR-1, GSTR-3B & GST Filing Charges"),
   description:
-    "File GST returns online with expert assistance. Learn about GSTR-1, GSTR-3B, annual GST returns, due dates, penalties, compliance requirements, and filing timelines.",
+    "GST return filing services online: GSTR-1, GSTR-3B and annual GST returns. GST filing charges, due dates and expert filing support for businesses across India.",
   keywords: [
     "GST return filing",
     "GSTR filing",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     "annual GST return",
   ],
   openGraph: {
-    title: "GST Return Filing Online | GSTR-1, GSTR-3B | Company Avenue Advisory",
+    title: "GST Return Filing Services — GSTR-1, GSTR-3B & GST Filing Charges",
     description:
-      "Expert GST return filing — GSTR-1, GSTR-3B, GSTR-9 and more. Timely filing, ITC reconciliation, zero late fees. PAN India service.",
+      "GST return filing services online: GSTR-1, GSTR-3B and annual GST returns. GST filing charges, due dates and expert filing support for businesses across India.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",

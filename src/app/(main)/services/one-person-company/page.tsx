@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/seo";
 import { OPCPage } from "@/components/sections/OPCPage";
 import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
 import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
@@ -8,9 +9,9 @@ import { faqSchema, OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/one-person-company" },
-  title: "One Person Company (OPC) Registration Online",
+  title: fitTitle("OPC Registration Online — One Person Company Fees & Process"),
   description:
-    "Register your One Person Company (OPC) online with Company Avenue Advisory. Compare OPC vs Sole Proprietorship vs Pvt Ltd, understand eligibility, documents, process, compliance, and pricing.",
+    "OPC registration online in India. How to register a one person company, OPC registration fees, documents required and process. Compare OPC vs proprietorship vs Pvt Ltd.",
   keywords: [
     "one person company registration",
     "OPC registration india",
@@ -25,9 +26,9 @@ export const metadata: Metadata = {
     "startup registration",
   ],
   openGraph: {
-    title: "One Person Company (OPC) Registration Online | Company Avenue Advisory",
+    title: "OPC Registration Online — One Person Company Fees & Process",
     description:
-      "Register your OPC with experienced CAs. Compare OPC vs Sole Proprietorship vs Pvt Ltd. 7–10 working days, 100% online, transparent pricing.",
+      "OPC registration online in India. How to register a one person company, OPC registration fees, documents required and process. Compare OPC vs proprietorship vs Pvt Ltd.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",

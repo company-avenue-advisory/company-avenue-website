@@ -369,6 +369,8 @@ export const NAV_LINKS = [
           { label: "GST Verification", href: "/verify/gst-verification" },
           { label: "PAN Verification", href: "/verify/pan-verification" },
           { label: "Company & Director Verification", href: "/verify/company-verification" },
+          { label: "CIN Number Search", href: "/verify/cin-search" },
+          { label: "DIN Number Search", href: "/verify/din-search" },
           { label: "Trademark Class Finder", href: "/verify/trademark-class-finder" },
           { label: "Company Name Search", href: "/verify/company-name-search" },
         ],

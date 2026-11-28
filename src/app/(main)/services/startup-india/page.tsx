@@ -8,9 +8,9 @@ import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/startup-india" },
-  title: fitTitle("Startup India Registration | DPIIT Recognition"),
+  title: fitTitle("Startup India Registration & DPIIT Certificate — Apply Online"),
   description:
-    "Register your startup under the Startup India initiative with expert DPIIT recognition assistance. Unlock tax exemptions, angel tax relief, funding benefits, patent support, and government incentives with Company Avenue.",
+    "Startup India registration and DPIIT recognition certificate online. Eligibility, documents, Startup India registration fees and process, with expert help end to end.",
   keywords: [
     "Startup India registration",
     "DPIIT recognition",
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     "startup government schemes India",
   ],
   openGraph: {
-    title: "Startup India Registration | DPIIT Recognition | Company Avenue",
+    title: "Startup India Registration & DPIIT Certificate — Apply Online",
     description:
-      "Get DPIIT Startup India Recognition in 7–15 days. Unlock 3-year income tax exemption, angel tax relief, 80% patent rebate, and government tender benefits.",
+      "Startup India registration and DPIIT recognition certificate online. Eligibility, documents, Startup India registration fees and process, with expert help end to end.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",

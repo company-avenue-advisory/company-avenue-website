@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/seo";
 import { SoleProprietorshipPage } from "@/components/sections/SoleProprietorshipPage";
 import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
 import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
@@ -8,9 +9,9 @@ import { faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/sole-proprietorship" },
-  title: "Sole Proprietorship Registration",
+  title: fitTitle("Sole Proprietorship Registration Online — Fees & Documents"),
   description:
-    "Start your sole proprietorship business in India with Udyam/MSME, GST, shop act registrations. Simplest business form for individual entrepreneurs. Starting ₹2,999.",
+    "Sole proprietorship registration online in India with Udyam, GST and shop act registrations. Proprietorship registration fees, documents and process for individual owners.",
 };
 
 export default function SoleProprietorshipServicePage() {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema } from "@/lib/seo";
 import Link from "next/link";
@@ -9,7 +10,7 @@ import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/gst-verification" },
-  title: "GST Verification Online — Check GSTIN Status",
+  title: fitTitle("GST Number Search & GSTIN Verification Online — Free"),
   description:
     "Free GSTIN verification tool. Enter any GSTIN and instantly see legal name, trade name, registration status, and address — sourced live from GSTN.",
   keywords: ["GSTIN verification online", "GST number check", "verify GST number", "GSTIN status check"],
@@ -42,7 +43,7 @@ export default function GSTVerificationPage() {
             </span>
           </div>
           <h1 className="font-heading font-bold text-3xl md:text-4xl text-white mb-3 leading-tight">
-            GST Verification
+            GST Number Search &amp; GSTIN Verification
           </h1>
           <p className="text-white/50 text-base max-w-2xl">
             Check any GSTIN instantly. Get the registered legal name, trade name, status, business

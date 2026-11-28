@@ -573,4 +573,309 @@ For [YOUR COMPANY NAME]
 _____________________
 Authorised Signatory`,
   },
+
+  // ── Added Nov 2026 (keyword gap: NOC, MOU, AGM notice, deed, salary slip) ──
+  {
+    slug: "noc-letter",
+    title: "No Objection Certificate (NOC) Format",
+    description:
+      "NOC format from a property owner allowing a business to run from their premises — the letter most often asked for in GST registration, Trade License and bank KYC.",
+    category: "Agreements & Contracts",
+    icon: "FileCheck",
+    accent: "bg-emerald-50 text-emerald-600 border-emerald-100",
+    format: "Editable letter",
+    fields: ["Owner name & address", "Business / tenant name", "Premises address", "Purpose"],
+    body: `NO OBJECTION CERTIFICATE
+
+Date: [DD/MM/YYYY]
+
+To,
+[The Concerned Authority / Whomsoever It May Concern]
+
+I/We, [OWNER NAME], son/daughter/wife of [FATHER'S / SPOUSE'S NAME], residing at [OWNER ADDRESS], am/are the lawful owner(s) of the premises situated at:
+
+[FULL PREMISES ADDRESS WITH PIN CODE]
+
+I/We hereby confirm that I/we have no objection to [BUSINESS / TENANT NAME], [proprietor / partners / company] represented by [NAME OF AUTHORISED PERSON], using the above premises as its [principal place of business / registered office / branch] for carrying on the business of [NATURE OF BUSINESS].
+
+I/We also have no objection to the above premises being used as the business address for [GST registration / Trade License / bank account / other registration].
+
+This certificate is issued at the request of [BUSINESS / TENANT NAME] for the purpose stated above.
+
+Enclosed: Copy of [property tax receipt / electricity bill / sale deed] as proof of ownership.
+
+_____________________
+[OWNER NAME]
+(Owner of the premises)
+Place: [CITY]`,
+  },
+  {
+    slug: "mou-format",
+    title: "Memorandum of Understanding (MOU) Format",
+    description:
+      "A simple MOU format for two parties agreeing to work together — purpose, roles, cost sharing, confidentiality and exit — before a full contract is signed.",
+    category: "Agreements & Contracts",
+    icon: "Handshake",
+    accent: "bg-indigo-50 text-indigo-600 border-indigo-100",
+    format: "Editable agreement",
+    fields: ["Party names & addresses", "Purpose", "Roles of each party", "Term", "Signatories"],
+    body: `MEMORANDUM OF UNDERSTANDING
+
+This Memorandum of Understanding ("MOU") is made on [DD/MM/YYYY] at [CITY]
+
+BETWEEN
+
+[PARTY A NAME], [a company / LLP / firm / individual] having its office at [ADDRESS] (hereinafter "Party A")
+
+AND
+
+[PARTY B NAME], [a company / LLP / firm / individual] having its office at [ADDRESS] (hereinafter "Party B")
+
+(Party A and Party B together, the "Parties")
+
+1. PURPOSE
+The Parties wish to work together on [DESCRIBE THE PROJECT / COLLABORATION].
+
+2. ROLES AND RESPONSIBILITIES
+2.1 Party A will: [RESPONSIBILITIES].
+2.2 Party B will: [RESPONSIBILITIES].
+
+3. COSTS AND REVENUE
+[How costs, fees or revenue will be shared, or state that each Party bears its own costs.]
+
+4. TERM
+This MOU starts on the date above and continues for [PERIOD], unless ended earlier under clause 7.
+
+5. CONFIDENTIALITY
+Each Party will keep confidential any information marked or understood as confidential that it receives from the other Party, and use it only for the purpose of this MOU.
+
+6. NATURE OF THIS MOU
+[This MOU records the Parties' intent. Except for clauses 5, 7 and 8, it is not legally binding, and a detailed agreement will be signed before work begins.] / [This MOU is binding on the Parties.] — keep one option.
+
+7. TERMINATION
+Either Party may end this MOU by giving [NUMBER] days' written notice to the other.
+
+8. GOVERNING LAW AND DISPUTES
+This MOU is governed by the laws of India. Courts at [CITY] will have jurisdiction.
+
+IN WITNESS WHEREOF the Parties have signed this MOU on the date first written above.
+
+For [PARTY A NAME]                    For [PARTY B NAME]
+
+_____________________                 _____________________
+[Name, Designation]                    [Name, Designation]
+
+Witnesses:
+1. ____________________
+2. ____________________`,
+  },
+  {
+    slug: "agm-notice",
+    title: "Notice of Annual General Meeting (AGM)",
+    description:
+      "AGM notice format for a private limited company — ordinary business (accounts, auditor, directors) and space for special business, with an explanatory statement.",
+    category: "Company Secretarial",
+    icon: "CalendarCheck",
+    accent: "bg-rose-50 text-rose-600 border-rose-100",
+    format: "Editable notice",
+    fields: ["Company name & CIN", "AGM number, date, time & venue", "Financial year", "Business items"],
+    body: `[COMPANY NAME]
+CIN: [CIN]
+Registered Office: [ADDRESS]
+Email: [EMAIL]   Phone: [PHONE]
+
+NOTICE OF [NUMBER] ANNUAL GENERAL MEETING
+
+Notice is hereby given that the [NUMBER] Annual General Meeting of the Members of [COMPANY NAME] will be held on [DAY], [DD/MM/YYYY] at [HH:MM AM/PM] at [VENUE / through Video Conferencing] to transact the following business:
+
+ORDINARY BUSINESS
+1. To receive, consider and adopt the audited financial statements of the Company for the financial year ended [31 March YYYY], together with the reports of the Board of Directors and the Auditors thereon.
+2. [To appoint / ratify the appointment of] [AUDITOR NAME], Chartered Accountants (Firm Registration No. [FRN]), as Statutory Auditors of the Company [for the term / on such remuneration as may be decided by the Board].
+3. [To appoint a Director in place of [NAME] (DIN: [DIN]), who retires by rotation and, being eligible, offers himself/herself for re-appointment.] — delete if not applicable.
+
+SPECIAL BUSINESS
+4. [TITLE OF ITEM]
+To consider and, if thought fit, to pass the following resolution as an [Ordinary / Special] Resolution:
+"RESOLVED THAT [TEXT OF RESOLUTION]."
+
+By order of the Board
+For [COMPANY NAME]
+
+_____________________
+[NAME]
+[Director / Company Secretary]
+DIN / Membership No.: [NUMBER]
+Place: [CITY]
+Date: [DD/MM/YYYY]
+
+NOTES
+1. A member entitled to attend and vote may appoint a proxy to attend and vote instead of himself/herself. The proxy form must reach the registered office within the time stated in the Articles and the Companies Act, 2013.
+2. An explanatory statement for the special business is attached.
+3. [Add route map / video conferencing instructions as applicable.]
+
+EXPLANATORY STATEMENT
+Item No. 4: [Explain the reason for the resolution and any interest of directors or key managerial personnel.]
+
+Check the notice period, mode of sending and any shorter-notice consent with your company secretary before issuing.`,
+  },
+  {
+    slug: "partnership-deed",
+    title: "Partnership Deed Format",
+    description:
+      "Partnership deed format in plain language — firm name, business, capital, profit sharing, duties, banking, retirement and dissolution — ready to adapt for registration.",
+    category: "Agreements & Contracts",
+    icon: "Users",
+    accent: "bg-indigo-50 text-indigo-600 border-indigo-100",
+    format: "Editable deed",
+    fields: ["Partner names & details", "Firm name & address", "Capital contributions", "Profit-sharing ratio"],
+    body: `PARTNERSHIP DEED
+
+This Deed of Partnership is made on [DD/MM/YYYY] at [CITY]
+
+BETWEEN
+
+1. [PARTNER 1 NAME], son/daughter/wife of [NAME], aged [AGE], residing at [ADDRESS], PAN [PAN] (the "First Partner")
+2. [PARTNER 2 NAME], son/daughter/wife of [NAME], aged [AGE], residing at [ADDRESS], PAN [PAN] (the "Second Partner")
+
+(together, the "Partners")
+
+The Partners have agreed to carry on business in partnership on the following terms:
+
+1. NAME: The firm will carry on business under the name "[FIRM NAME]".
+
+2. PLACE OF BUSINESS: The principal place of business will be [ADDRESS], or any other place the Partners agree on.
+
+3. BUSINESS: The business of the firm will be [NATURE OF BUSINESS], and any other business the Partners agree on.
+
+4. COMMENCEMENT AND DURATION: The partnership starts on [DD/MM/YYYY] and is [at will / for a period of ___ years].
+
+5. CAPITAL: The Partners will contribute capital as follows:
+   First Partner: ₹[AMOUNT]
+   Second Partner: ₹[AMOUNT]
+   Further capital may be brought in as the Partners agree.
+
+6. PROFIT AND LOSS: Net profits and losses will be shared in the ratio:
+   First Partner: [__]%
+   Second Partner: [__]%
+
+7. INTEREST AND REMUNERATION: [Interest on capital at ___% per year and/or remuneration to working partners as the Partners agree in writing, within the limits allowed under the income tax law for the relevant year.] — delete if not applicable.
+
+8. BANK ACCOUNT: The firm's bank account(s) will be operated by [ANY ONE / JOINTLY BY] the Partners.
+
+9. BOOKS OF ACCOUNT: Proper books will be kept at the principal place of business, closed on [31 March] each year, and open to every Partner.
+
+10. DUTIES: Each Partner will work for the firm diligently, act in good faith, and not carry on a competing business without the written consent of the other Partners.
+
+11. RETIREMENT: A Partner may retire by giving [NUMBER] months' written notice. The remaining Partners may continue the business.
+
+12. DEATH OR INSOLVENCY: The death, retirement or insolvency of a Partner will not dissolve the firm; the remaining Partners may continue it [with the legal heirs if they agree].
+
+13. DISSOLUTION: On dissolution, assets will be realised, liabilities paid, and any balance shared in the profit-sharing ratio.
+
+14. DISPUTES: Disputes between the Partners will be referred to arbitration by a sole arbitrator agreed by the Partners, under the Arbitration and Conciliation Act, 1996, seated at [CITY].
+
+15. GENERAL: Matters not covered here will be governed by the Indian Partnership Act, 1932.
+
+IN WITNESS WHEREOF the Partners have signed this deed on the date first written above.
+
+_____________________          _____________________
+[FIRST PARTNER]                  [SECOND PARTNER]
+
+Witnesses:
+1. ____________________
+2. ____________________
+
+Print on stamp paper of the value required in your state, and have it reviewed before registration.`,
+  },
+  {
+    slug: "salary-slip",
+    title: "Salary Slip Format",
+    description:
+      "Monthly salary slip / payslip format with earnings, deductions and net pay — clean layout to fill in for each employee every month.",
+    category: "HR & Employment",
+    icon: "Receipt",
+    accent: "bg-blue-50 text-blue-600 border-blue-100",
+    format: "Editable payslip",
+    fields: ["Employee details", "Month", "Earnings", "Deductions"],
+    body: `[COMPANY NAME]
+[COMPANY ADDRESS]
+
+SALARY SLIP FOR THE MONTH OF [MONTH YYYY]
+
+Employee Name     : [NAME]            Employee ID     : [ID]
+Designation       : [DESIGNATION]     Department      : [DEPARTMENT]
+Date of Joining   : [DD/MM/YYYY]      PAN             : [PAN]
+Bank A/c No.      : [XXXX1234]        UAN / ESIC No.  : [IF APPLICABLE]
+Days in Month     : [__]              Days Paid       : [__]
+
+EARNINGS                     ₹         DEDUCTIONS                    ₹
+Basic Salary            [AMOUNT]       Provident Fund           [AMOUNT]
+House Rent Allowance    [AMOUNT]       ESIC                     [AMOUNT]
+Conveyance / Travel     [AMOUNT]       Professional Tax         [AMOUNT]
+Special Allowance       [AMOUNT]       TDS (Income Tax)         [AMOUNT]
+Other Allowances        [AMOUNT]       Other Deductions         [AMOUNT]
+--------------------------------       --------------------------------
+Gross Earnings          [AMOUNT]       Total Deductions         [AMOUNT]
+
+NET PAY: ₹[AMOUNT]
+(Rupees [AMOUNT IN WORDS] only)
+
+Payment mode: [Bank transfer] on [DD/MM/YYYY]
+
+This is a computer-generated salary slip and does not need a signature.
+
+Fill only the deductions that apply to the employee.`,
+  },
+  {
+    slug: "employment-agreement",
+    title: "Employment Agreement Format",
+    description:
+      "Employment agreement format covering role, pay, probation, working hours, leave, confidentiality, IP, notice period and termination.",
+    category: "HR & Employment",
+    icon: "FileSignature",
+    accent: "bg-blue-50 text-blue-600 border-blue-100",
+    format: "Editable agreement",
+    fields: ["Employer & employee details", "Designation", "CTC", "Probation & notice period"],
+    body: `EMPLOYMENT AGREEMENT
+
+This Employment Agreement is made on [DD/MM/YYYY] at [CITY]
+
+BETWEEN
+
+[COMPANY NAME], having its registered office at [ADDRESS] (the "Company")
+
+AND
+
+[EMPLOYEE NAME], son/daughter of [NAME], residing at [ADDRESS] (the "Employee")
+
+1. APPOINTMENT: The Company appoints the Employee as [DESIGNATION] from [DD/MM/YYYY], reporting to [MANAGER / DESIGNATION].
+
+2. PLACE OF WORK: [OFFICE ADDRESS / Remote / Hybrid]. The Company may transfer the Employee to another location with reasonable notice.
+
+3. REMUNERATION: The Employee's annual cost to company (CTC) is ₹[AMOUNT], with the break-up in Annexure A. Salary is paid monthly, after deductions required by law.
+
+4. PROBATION: The first [NUMBER] months are probation. The Company may confirm, extend or end employment during or at the end of probation.
+
+5. WORKING HOURS AND LEAVE: Working hours are [HOURS] on [DAYS]. Leave is as per the Company's leave policy.
+
+6. DUTIES: The Employee will perform the duties of the role honestly and diligently, follow Company policies, and not take up other paid work without written consent.
+
+7. CONFIDENTIALITY: The Employee will keep the Company's confidential information secret during and after employment.
+
+8. INTELLECTUAL PROPERTY: All work created by the Employee in the course of employment belongs to the Company.
+
+9. NOTICE AND TERMINATION: After confirmation, either party may end employment by giving [NUMBER] days' written notice or salary in lieu of notice. The Company may terminate immediately for serious misconduct.
+
+10. RETURN OF PROPERTY: On leaving, the Employee will return all Company property, documents and data.
+
+11. GOVERNING LAW: This Agreement is governed by the laws of India. Courts at [CITY] will have jurisdiction.
+
+For [COMPANY NAME]                    Employee
+
+_____________________                 _____________________
+[Authorised Signatory]                 [EMPLOYEE NAME]
+
+Annexure A: Salary break-up
+[ADD TABLE]`,
+  },
 ];

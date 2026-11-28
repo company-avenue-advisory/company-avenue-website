@@ -21,7 +21,7 @@ const CITY_PAGES = [
 
 const VERIFY_TOOLS = [
   "company-name-search", "company-verification", "gst-verification",
-  "pan-verification", "trademark-class-finder",
+  "pan-verification", "trademark-class-finder", "cin-search", "din-search",
 ];
 
 const STATIC_PAGES = [

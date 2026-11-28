@@ -14,7 +14,7 @@ import { CompanyNameFAQ } from "@/components/tools/CompanyNameFAQ";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/company-name-search" },
-  title: fitTitle("Company Name Search & Availability Check Online India (Free)"),
+  title: fitTitle("Company Name Search & MCA Company Search — Check Name Availability"),
   description:
     "Free company name search and availability checker for India. Instantly check if your proposed Private Limited, LLP, OPC or Limited company name is already registered with the MCA — powered by real Ministry of Corporate Affairs data.",
   keywords: [
@@ -127,9 +127,9 @@ export default function CompanyNameSearchPage() {
             </span>
           </div>
           <h1 className="font-heading font-bold text-3xl md:text-5xl text-white mb-4 leading-[1.1] max-w-3xl">
-            Check if your company or LLP name{" "}
+            Company Name Search &amp; MCA Company Search{" "}
             <span className="bg-gradient-to-r from-accent-light to-accent bg-clip-text text-transparent">
-              will clear MCA approval
+              — check name availability free
             </span>
           </h1>
           <p className="text-white/60 text-base md:text-lg max-w-2xl leading-relaxed mb-8">

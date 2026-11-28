@@ -9,7 +9,7 @@ import { ToolNextStep } from "@/components/tools/ToolNextStep";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/verify/trademark-class-finder" },
-  title: fitTitle("Trademark Class Finder — Which NICE Class Fits Your Brand?"),
+  title: fitTitle("Trademark Class List & Class Finder — All 45 Trademark Classes"),
   description:
     "Free trademark class finder for India. Describe your business and instantly see which of the 45 NICE trademark classes it falls under, then check name availability.",
   keywords: ["trademark classes India", "NICE classification trademark", "trademark class finder", "which trademark class"],
@@ -42,7 +42,7 @@ export default function TrademarkClassFinderPage() {
             </span>
           </div>
           <h1 className="font-heading font-bold text-3xl md:text-4xl text-white mb-3 leading-tight">
-            Trademark Class Finder
+            Trademark Class List &amp; Class Finder
           </h1>
           <p className="text-white/50 text-base max-w-2xl">
             Trademarks are registered under one or more of 45 NICE classes. Describe what your

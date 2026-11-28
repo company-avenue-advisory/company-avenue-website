@@ -10,7 +10,7 @@ import { DSC_PER_PERSON, inr } from "@/lib/calc-fees";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/company-registration-cost" },
-  title: fitTitle("Business Setup Calculator — Registration Cost India"),
+  title: fitTitle("MCA Fee Calculator — Company Registration Fees & Stamp Duty"),
   description:
     "Estimate the cost of setting up a business in India — Pvt Ltd, OPC, Section 8, LLP, Partnership Firm or Sole Proprietorship. Government fees, state-wise stamp duty, DSC, professional charges, plus optional GST, MSME and trademark add-ons. Free tool.",
   keywords: [
