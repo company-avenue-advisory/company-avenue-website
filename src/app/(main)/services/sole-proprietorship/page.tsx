@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { fitTitle } from "@/lib/seo";
 import { SoleProprietorshipPage } from "@/components/sections/SoleProprietorshipPage";
 import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
@@ -22,6 +23,7 @@ export default function SoleProprietorshipServicePage() {
         pricingSlot={<CalculatorPricingSlot serviceId="sole-proprietorship" lockEntity="proprietorship" />}
         calcPill={<JumpToCalculatorPill />}
       />
+      <SearchQA path="/services/sole-proprietorship" />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PenLine, FileType2, ArrowLeft } from "lucide-react";
@@ -185,6 +186,7 @@ export default async function TemplatePage({
         </div>
       </article>
 
+      <SearchQA path={`/templates/${template.slug}`} />
       <CTABanner />
     </>
   );

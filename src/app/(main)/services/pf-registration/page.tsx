@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { fitTitle } from "@/lib/seo";
 import { PFRegistrationPage } from "@/components/sections/PFRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
@@ -22,6 +23,7 @@ export default function PFRegistrationServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="pf-registration" />}
         calcPill={<ServiceCalcPill serviceId="pf-registration" />}
       />
+      <SearchQA path="/services/pf-registration" />
     </>
   );
 }

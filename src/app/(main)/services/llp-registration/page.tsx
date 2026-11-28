@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { LLPPage } from "@/components/sections/LLPPage";
 import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
 import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
@@ -42,6 +43,7 @@ export default function LLPRegistrationPage() {
         pricingSlot={<CalculatorPricingSlot serviceId="llp-registration" lockEntity="llp" />}
         calcPill={<JumpToCalculatorPill />}
       />
+      <SearchQA path="/services/llp-registration" />
     </>
   );
 }

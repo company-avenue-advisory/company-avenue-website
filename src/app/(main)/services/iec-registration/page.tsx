@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { IECRegistrationPage } from "@/components/sections/IECRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -42,6 +43,7 @@ export default function IECRegistrationServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="iec-registration" />}
         calcPill={<ServiceCalcPill serviceId="iec-registration" />}
       />
+      <SearchQA path="/services/iec-registration" />
     </>
   );
 }

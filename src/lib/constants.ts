@@ -372,6 +372,7 @@ export const NAV_LINKS = [
           { label: "CIN Number Search", href: "/verify/cin-search" },
           { label: "DIN Number Search", href: "/verify/din-search" },
           { label: "Trademark Class Finder", href: "/verify/trademark-class-finder" },
+          { label: "Trademark Search & Status", href: "/verify/trademark-search" },
           { label: "Company Name Search", href: "/verify/company-name-search" },
         ],
       },

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { fitTitle } from "@/lib/seo";
 import { FSSAILicensePage } from "@/components/sections/FSSAILicensePage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
@@ -22,6 +23,7 @@ export default function FSSAILicenseServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="fssai-license" />}
         calcPill={<ServiceCalcPill serviceId="fssai-license" />}
       />
+      <SearchQA path="/services/fssai-license" />
     </>
   );
 }

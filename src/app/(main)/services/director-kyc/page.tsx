@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { DirectorKYCPage } from "@/components/sections/DirectorKYCPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function DirectorKYCServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="director-kyc" />}
         calcPill={<ServiceCalcPill serviceId="director-kyc" />}
       />
+      <SearchQA path="/services/director-kyc" />
     </>
   );
 }

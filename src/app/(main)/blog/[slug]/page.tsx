@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -246,6 +247,7 @@ export default async function BlogPostPage({
         </div>
       </article>
 
+      <SearchQA path={`/blog/${post.slug}`} />
       <CTABanner />
     </>
   );

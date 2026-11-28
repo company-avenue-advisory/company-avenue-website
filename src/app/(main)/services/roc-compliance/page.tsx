@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { ROCCompliancePage } from "@/components/sections/ROCCompliancePage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function ROCComplianceServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="roc-compliance" />}
         calcPill={<ServiceCalcPill serviceId="roc-compliance" />}
       />
+      <SearchQA path="/services/roc-compliance" />
     </>
   );
 }

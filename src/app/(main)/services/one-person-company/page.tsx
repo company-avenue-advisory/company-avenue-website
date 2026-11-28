@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { fitTitle } from "@/lib/seo";
 import { OPCPage } from "@/components/sections/OPCPage";
 import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
@@ -44,6 +45,7 @@ export default function OnePersonCompanyPage() {
         pricingSlot={<CalculatorPricingSlot serviceId="one-person-company" lockEntity="opc" />}
         calcPill={<JumpToCalculatorPill />}
       />
+      <SearchQA path="/services/one-person-company" />
     </>
   );
 }

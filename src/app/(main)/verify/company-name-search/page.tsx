@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
@@ -331,6 +332,7 @@ export default function CompanyNameSearchPage() {
         />
       </div>
 
+      <SearchQA path="/verify/company-name-search" />
       <CTABanner />
     </>
   );

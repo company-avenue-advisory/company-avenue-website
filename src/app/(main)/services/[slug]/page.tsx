@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
@@ -2611,6 +2612,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
+      <SearchQA path={`/services/${slug}`} />
       <CTABanner />
     </>
   );

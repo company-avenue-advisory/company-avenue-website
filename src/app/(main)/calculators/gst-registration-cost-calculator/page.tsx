@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { fitTitle } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
@@ -40,6 +41,7 @@ export default function Page() {
       >
         <GSTRegistrationCostCalculator />
       </CalcPageShell>
+      <SearchQA path="/calculators/gst-registration-cost-calculator" />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, fitTitle } from "@/lib/seo";
 import Link from "next/link";
@@ -100,6 +101,7 @@ export default function TDSRateFinderPage() {
         </div>
       </section>
 
+      <SearchQA path="/calculators/tds-rate-finder" />
       <CTABanner />
     </>
   );

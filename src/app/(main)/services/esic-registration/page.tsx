@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { ESICRegistrationPage } from "@/components/sections/ESICRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function ESICRegistrationServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="esic-registration" />}
         calcPill={<ServiceCalcPill serviceId="esic-registration" />}
       />
+      <SearchQA path="/services/esic-registration" />
     </>
   );
 }

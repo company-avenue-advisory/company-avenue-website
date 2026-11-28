@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { StartupIndiaPage } from "@/components/sections/StartupIndiaPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -42,6 +43,7 @@ export default function StartupIndiaServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="startup-india" />}
         calcPill={<ServiceCalcPill serviceId="startup-india" />}
       />
+      <SearchQA path="/services/startup-india" />
     </>
   );
 }

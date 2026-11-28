@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import Link from "next/link";
 import {
   Gift,
@@ -636,6 +637,7 @@ export default function StartupSchemesPage() {
         </div>
       </section>
 
+      <SearchQA path="/startup-schemes" />
       <CTABanner />
     </>
   );

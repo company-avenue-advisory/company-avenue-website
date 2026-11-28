@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { GSTPage } from "@/components/sections/GSTPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -54,6 +55,7 @@ export default function GSTRegistrationPage() {
         pricingSlot={<ServicePricingBlock serviceId="gst-registration" />}
         calcPill={<ServiceCalcPill serviceId="gst-registration" />}
       />
+      <SearchQA path="/services/gst-registration" />
     </>
   );
 }

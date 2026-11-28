@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { PrivateLimitedPage } from "@/components/sections/PrivateLimitedPage";
 import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
 import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
@@ -54,6 +55,7 @@ export default function PrivateLimitedCompanyPage() {
         pricingSlot={<CalculatorPricingSlot serviceId="private-limited-company" lockEntity="pvtltd" />}
         calcPill={<JumpToCalculatorPill />}
       />
+      <SearchQA path="/services/private-limited-company" />
     </>
   );
 }

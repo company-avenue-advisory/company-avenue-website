@@ -878,4 +878,55 @@ _____________________                 _____________________
 Annexure A: Salary break-up
 [ADD TABLE]`,
   },
+  {
+    slug: "gift-deed",
+    title: "Gift Deed Format",
+    description:
+      "Gift deed format for gifting money, shares or property to a family member or another person — donor, donee, the gift, acceptance and witnesses.",
+    category: "Agreements & Contracts",
+    icon: "FileSignature",
+    accent: "bg-indigo-50 text-indigo-600 border-indigo-100",
+    format: "Editable deed",
+    fields: ["Donor & donee details", "Relationship", "Description of the gift", "Witnesses"],
+    body: `GIFT DEED
+
+This Gift Deed is made on [DD/MM/YYYY] at [CITY]
+
+BY
+
+[DONOR NAME], son/daughter/wife of [NAME], aged [AGE], residing at [ADDRESS], PAN [PAN] (the "Donor")
+
+IN FAVOUR OF
+
+[DONEE NAME], son/daughter/wife of [NAME], aged [AGE], residing at [ADDRESS], PAN [PAN] (the "Donee")
+
+The Donee is the [RELATIONSHIP] of the Donor.
+
+1. THE GIFT
+Out of natural love and affection for the Donee, and without any payment, the Donor gives to the Donee the following (the "Gift"):
+[DESCRIBE THE GIFT — e.g. a sum of ₹[AMOUNT] / [NUMBER] shares of [COMPANY] / the property at [FULL ADDRESS, AREA, BOUNDARIES]].
+
+2. TRANSFER
+From the date of this deed, all of the Donor's rights in the Gift pass to the Donee, who may use, keep or deal with it as the owner.
+
+3. ACCEPTANCE
+The Donee accepts the Gift, as shown by signing this deed.
+
+4. DONOR'S STATEMENTS
+The Donor confirms that the Gift belongs to the Donor, is free from any charge, loan or dispute, and that the Donor makes this gift of the Donor's own free will.
+
+5. COSTS
+[Stamp duty and registration charges, if any, will be paid by the Donor / Donee.]
+
+IN WITNESS WHEREOF the Donor and the Donee have signed this deed on the date first written above.
+
+_____________________          _____________________
+[DONOR]                          [DONEE]
+
+Witnesses:
+1. Name, address, signature ____________________
+2. Name, address, signature ____________________
+
+A gift of immovable property must be stamped and registered as your state requires. Have the deed reviewed before signing.`,
+  },
 ];
