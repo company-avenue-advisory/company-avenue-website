@@ -30,7 +30,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { type: "h2", text: "LLP (Limited Liability Partnership)" },
       { type: "p", text: "An LLP gives you the liability protection of a company with a far lighter compliance load — no mandatory audit below ₹40 lakh turnover or ₹25 lakh capital contribution, no board meeting requirements, and simpler annual filings (just Form 11 and Form 8). The catch: you cannot raise equity funding in an LLP, and converting an LLP to a Private Limited Company later is possible but adds cost and paperwork you'd have avoided by choosing correctly upfront." },
       { type: "h2", text: "One Person Company (OPC)" },
-      { type: "p", text: "An OPC exists for exactly one scenario — a single founder who wants limited liability without bringing in a co-founder or investor. It converts automatically into a Private Limited Company if turnover crosses ₹2 crore or paid-up capital crosses ₹50 lakh, so treat it as a starting point, not a permanent structure." },
+      { type: "p", text: "An OPC exists for exactly one scenario — a single founder who wants limited liability without bringing in a co-founder or investor. Since 1 April 2021 there is no capital or turnover limit that forces an OPC to convert. It can convert into a Private Limited Company at any time by adding members and directors, which most founders do once they bring in co-founders or investors." },
       { type: "h2", text: "A Simple Way to Decide" },
       { type: "list", items: [
         "Raising VC/angel money in the next 2–3 years → Private Limited Company",
@@ -109,17 +109,16 @@ export const BLOG_POSTS: BlogPost[] = [
     content: [
       { type: "p", text: "An OPC lets a single individual incorporate a company and enjoy limited liability protection — something a sole proprietorship simply cannot offer, since a proprietor's personal assets remain fully exposed to business liabilities." },
       { type: "h2", text: "Who Can Incorporate an OPC" },
-      { type: "p", text: "Only an Indian citizen and resident (someone who has stayed in India for at least 120 days in the preceding financial year) can be the sole member of an OPC. A nominee — also an Indian citizen and resident — must be named at incorporation, since the nominee automatically becomes the member if the original owner dies or becomes incapacitated." },
+      { type: "p", text: "Any natural person who is an Indian citizen, whether resident in India or not, can be the sole member of an OPC. NRIs have been allowed since 1 April 2021. Foreign nationals are not eligible. A nominee must be named at incorporation, since the nominee becomes the member if the original owner dies or becomes incapacitated. Check the nominee's eligibility under the current MCA rules before filing." },
       { type: "h2", text: "Key Restrictions" },
       { type: "list", items: [
         "Cannot be incorporated for, or later converted into, a Section 8 (non-profit) company",
         "Cannot carry out non-banking financial investment activities",
         "One person cannot be the member of more than one OPC at a time",
-        "Automatically must convert to a Private Limited Company if turnover exceeds ₹2 crore or paid-up capital exceeds ₹50 lakh",
       ] },
       { type: "h2", text: "Compliance Load" },
       { type: "p", text: "An OPC's compliance sits between a proprietorship and a full Private Limited Company — annual filing of AOC-4 and MGT-7A is mandatory, along with a statutory audit regardless of turnover, but the requirement for a minimum of two directors and regular board meetings is relaxed for a one-director OPC." },
-      { type: "p", text: "For a freelancer or consultant who wants the credibility and liability protection of a registered company without bringing in a co-founder, an OPC is a genuinely good fit — just go in expecting the automatic conversion threshold and plan for it rather than being surprised by it." },
+      { type: "p", text: "For a freelancer or consultant who wants the credibility and liability protection of a registered company without bringing in a co-founder, an OPC is a genuinely good fit. It can grow as an OPC, and convert into a Private Limited Company whenever you bring in co-founders or investors." },
     ],
   },
   {
