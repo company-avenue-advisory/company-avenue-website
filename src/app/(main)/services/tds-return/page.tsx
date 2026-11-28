@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { TdsReturnPage } from "@/components/sections/TdsReturnPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function TDSReturnServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="tds-return" />}
         calcPill={<ServiceCalcPill serviceId="tds-return" />}
       />
+      <SearchQA path="/services/tds-return" />
     </>
   );
 }

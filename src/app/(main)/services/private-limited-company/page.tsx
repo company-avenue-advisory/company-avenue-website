@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { PrivateLimitedPage } from "@/components/sections/PrivateLimitedPage";
 import { CalculatorPricingSlot } from "@/components/sections/CalculatorPricingSlot";
 import { JumpToCalculatorPill } from "@/components/sections/JumpToCalculatorPill";
@@ -7,9 +8,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: fitTitle("Private Limited Company Registration in Delhi | Fast"),
+  title: fitTitle("Private Limited Company Registration Online in India — Fees & Process"),
   description:
-    "Register your Pvt Ltd company in Delhi in 7–10 days. Expert-led, 100% online, fixed transparent pricing, no hidden fees. Book a free consultation now.",
+    "Register a private limited company online in India. Pvt Ltd company registration fees, cost, documents and step-by-step process, handled end to end by experts. Incorporation in 7–10 days.",
   alternates: { canonical: "/services/private-limited-company" },
   keywords: [
     "private limited company registration in Delhi",
@@ -20,9 +21,9 @@ export const metadata: Metadata = {
     "company registration in india",
   ],
   openGraph: {
-    title: "Private Limited Company Registration in Delhi",
+    title: "Private Limited Company Registration Online in India — Fees & Process",
     description:
-      "Register your Pvt Ltd company in Delhi in 7–10 days. Expert-led, 100% online, transparent pricing.",
+      "Register a private limited company online in India. Pvt Ltd company registration fees, cost, documents and step-by-step process, handled end to end by experts. Incorporation in 7–10 days.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",
@@ -54,6 +55,7 @@ export default function PrivateLimitedCompanyPage() {
         pricingSlot={<CalculatorPricingSlot serviceId="private-limited-company" lockEntity="pvtltd" />}
         calcPill={<JumpToCalculatorPill />}
       />
+      <SearchQA path="/services/private-limited-company" />
     </>
   );
 }

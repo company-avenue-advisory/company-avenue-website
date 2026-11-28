@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { MSMERegistrationPage } from "@/components/sections/MSMERegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -8,9 +9,9 @@ import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/msme-registration" },
-  title: fitTitle("MSME / Udyam Registration Online | Benefits & Govt. Schemes"),
+  title: fitTitle("Udyam Registration Online — MSME Registration Certificate"),
   description:
-    "Register your business under Udyam (MSME) and unlock collateral-free loans, government subsidies, priority procurement, and 20+ exclusive schemes. ₹0 government fee. Certificate in 1 business day.",
+    "Udyam registration online for MSMEs. Get your Udyam (MSME) registration certificate with expert help. ₹0 government fee. Benefits, documents and process explained.",
   keywords: [
     "MSME registration",
     "Udyam registration",
@@ -24,9 +25,9 @@ export const metadata: Metadata = {
     "MSME benefits India",
   ],
   openGraph: {
-    title: "MSME / Udyam Registration | Company Avenue",
+    title: "Udyam Registration Online — MSME Registration Certificate",
     description:
-      "Get your Udyam Certificate in 1 business day. Zero government fees. Unlock CGTMSE loans, subsidies, and 20+ government schemes for MSMEs.",
+      "Udyam registration online for MSMEs. Get your Udyam (MSME) registration certificate with expert help. ₹0 government fee. Benefits, documents and process explained.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",
@@ -42,6 +43,7 @@ export default function MSMERegistrationServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="msme-registration" />}
         calcPill={<ServiceCalcPill serviceId="msme-registration" />}
       />
+      <SearchQA path="/services/msme-registration" />
     </>
   );
 }

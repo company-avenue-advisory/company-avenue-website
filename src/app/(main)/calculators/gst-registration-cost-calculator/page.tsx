@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
+import { fitTitle } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { CalcPageShell } from "@/components/calculators/CalcPageShell";
@@ -12,7 +14,7 @@ const FAQS = [
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/gst-registration-cost-calculator" },
-  title: "GST Registration Cost Calculator India 2026",
+  title: fitTitle("GST Registration Fees 2026 — Govt Fee, Charges & Calculator"),
   description:
     "Find out whether GST registration is mandatory for you and what it costs. No government fee, DSC only where required, and our fixed professional fee. Free tool.",
   keywords: ["gst registration cost", "gst registration fees india", "is gst registration mandatory", "gst threshold 40 lakh 20 lakh", "gst registration calculator"],
@@ -39,6 +41,7 @@ export default function Page() {
       >
         <GSTRegistrationCostCalculator />
       </CalcPageShell>
+      <SearchQA path="/calculators/gst-registration-cost-calculator" />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { IECRegistrationPage } from "@/components/sections/IECRegistrationPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -8,9 +9,9 @@ import { faqSchema, OG_IMAGE, fitTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services/iec-registration" },
-  title: fitTitle("Import Export Code (IEC) Registration | DGFT Registration"),
+  title: fitTitle("IEC Code Apply Online — Import Export Code Registration"),
   description:
-    "Get your Import Export Code (IEC) registration online with Company Avenue. Expert DGFT registration assistance, documentation support, fast processing, and complete guidance for import-export businesses across India.",
+    "Apply for an IEC code online. Import Export Code registration with DGFT: documents, process and expert help for importers, exporters and e-commerce sellers across India.",
   keywords: [
     "IEC registration",
     "import export code",
@@ -24,9 +25,9 @@ export const metadata: Metadata = {
     "IEC registration fee",
   ],
   openGraph: {
-    title: "IEC Registration | DGFT Import Export Code | Company Avenue",
+    title: "IEC Code Apply Online — Import Export Code Registration",
     description:
-      "Register your Import Export Code (IEC) with DGFT in 2–5 days. Lifetime validity, ₹0 government fee, and complete expert assistance from Company Avenue.",
+      "Apply for an IEC code online. Import Export Code registration with DGFT: documents, process and expert help for importers, exporters and e-commerce sellers across India.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",
@@ -42,6 +43,7 @@ export default function IECRegistrationServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="iec-registration" />}
         calcPill={<ServiceCalcPill serviceId="iec-registration" />}
       />
+      <SearchQA path="/services/iec-registration" />
     </>
   );
 }

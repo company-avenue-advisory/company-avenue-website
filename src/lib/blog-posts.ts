@@ -75,7 +75,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "llp-registration-process-cost",
-    title: "LLP Registration: Process, Cost & Compliance Explained",
+    title: "How to Register an LLP in India: Step-by-Step Process",
     excerpt: "Lower compliance, full liability protection — here's exactly how to register and what it costs.",
     category: "Company Registration",
     readTime: "6 min read",

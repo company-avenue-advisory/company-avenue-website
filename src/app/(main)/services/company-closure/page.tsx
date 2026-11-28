@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { CompanyClosurePage } from "@/components/sections/CompanyClosurePage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -43,6 +44,7 @@ export default function CompanyClosureServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="company-closure" />}
         calcPill={<ServiceCalcPill serviceId="company-closure" />}
       />
+      <SearchQA path="/services/company-closure" />
     </>
   );
 }

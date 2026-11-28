@@ -5,7 +5,7 @@ import { CalcPageShell } from "@/components/calculators/CalcPageShell";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/calculators/gratuity-calculator" },
-  title: fitTitle("Gratuity Calculator — Payment of Gratuity Act"),
+  title: fitTitle("Gratuity Calculator Online — Calculate Your Gratuity Amount"),
   description: "Free gratuity calculator as per the Payment of Gratuity Act, 1972. Compute gratuity from last drawn salary and years of service, up to the ₹20 lakh cap.",
   keywords: [
     "gratuity calculator",
