@@ -195,7 +195,7 @@ export function Hero() {
             <span className="inline-flex items-center rounded-full px-2.5 py-0.5 md:px-3 md:py-1 text-sm md:text-base font-heading font-semibold align-middle"
               style={{ background: "rgba(77,166,232,0.14)", border: "1px solid rgba(77,166,232,0.3)", color: "#9fcbf0" }}
             >
-              expert CAs &amp; CS
+              our experts
             </span>
             . 100% online, across India.
           </motion.p>
