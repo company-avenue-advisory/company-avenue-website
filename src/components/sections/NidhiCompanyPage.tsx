@@ -108,7 +108,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "CA-Led — 15+ Years in NBFC & Nidhi Structures" },
+  { icon: Award,       label: "Expert-Led — 15+ Years in NBFC & Nidhi Structures" },
   { icon: Building2,   label: "200+ Nidhi Companies Successfully Formed" },
   { icon: UserCheck,   label: "Expert CA & CS for Nidhi Compliance" },
   { icon: DollarSign,  label: "Fixed Transparent Pricing — Starting ₹14,999" },

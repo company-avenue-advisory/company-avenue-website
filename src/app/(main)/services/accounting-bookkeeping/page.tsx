@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Professional Accounting & Bookkeeping Services | Company Avenue",
     description:
-      "Expert CA-led accounting services for growing businesses. Monthly reports, GST reconciliation, payroll, and compliance — all under one plan.",
+      "Expert-led accounting services for growing businesses. Monthly reports, GST reconciliation, payroll, and compliance — all under one plan.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",

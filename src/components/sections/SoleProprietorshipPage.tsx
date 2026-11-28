@@ -101,7 +101,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "CA-Led — 15+ Years in Business Registration" },
+  { icon: Award,       label: "Expert-Led — 15+ Years in Business Registration" },
   { icon: Building2,   label: "5,000+ Proprietorships Assisted" },
   { icon: UserCheck,   label: "Dedicated Chartered Accountant Support" },
   { icon: DollarSign,  label: "Starting at just ₹2,999 — Fully Transparent" },

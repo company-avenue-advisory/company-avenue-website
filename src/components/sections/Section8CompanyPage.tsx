@@ -110,7 +110,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "CA-Led — 15+ Years in NGO Registrations" },
+  { icon: Award,       label: "Expert-Led — 15+ Years in NGO Registrations" },
   { icon: Building2,   label: "500+ Section 8 Companies Successfully Registered" },
   { icon: UserCheck,   label: "Expert CA & CS Team for Charitable Entities" },
   { icon: DollarSign,  label: "Fixed Transparent Pricing — Starting ₹7,999" },

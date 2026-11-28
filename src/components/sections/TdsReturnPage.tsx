@@ -110,7 +110,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "CA-Led — 15+ Years in TDS Compliance" },
+  { icon: Award,       label: "Expert-Led — 15+ Years in TDS Compliance" },
   { icon: UserCheck,   label: "Dedicated TDS Compliance Manager" },
   { icon: Bell,        label: "Auto Reminders for Quarterly Due Dates" },
   { icon: RefreshCcw,  label: "26AS Reconciliation Included" },

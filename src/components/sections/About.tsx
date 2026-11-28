@@ -10,7 +10,7 @@ const milestones = [
   { year: "2009", label: "Founded in New Delhi" },
   { year: "2014", label: "500+ clients milestone" },
   { year: "2018", label: "Expanded to GST & Startup services" },
-  { year: "2024", label: "1000+ businesses served" },
+  { year: "2024", label: "500+ businesses served" },
 ];
 
 const values = [

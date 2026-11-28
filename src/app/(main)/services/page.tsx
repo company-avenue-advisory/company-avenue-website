@@ -60,7 +60,7 @@ export default function ServicesPage() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 text-white/30 text-sm">
             <span>✓ 15+ Years of CA Practice</span>
-            <span>✓ 1000+ Businesses Served</span>
+            <span>✓ 500+ Businesses Served</span>
             <span>✓ 100% Online Process</span>
             <span>✓ Transparent Pricing</span>
           </div>

@@ -9,7 +9,7 @@ import { serviceSchema, breadcrumbSchema, faqSchema, OG_IMAGE, fitTitle } from "
 export const metadata: Metadata = {
   title: fitTitle("Private Limited Company Registration in Delhi | Fast"),
   description:
-    "Register your Pvt Ltd company in Delhi in 7–10 days. CA-led, 100% online, fixed transparent pricing, no hidden fees. Book a free consultation now.",
+    "Register your Pvt Ltd company in Delhi in 7–10 days. Expert-led, 100% online, fixed transparent pricing, no hidden fees. Book a free consultation now.",
   alternates: { canonical: "/services/private-limited-company" },
   keywords: [
     "private limited company registration in Delhi",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Private Limited Company Registration in Delhi",
     description:
-      "Register your Pvt Ltd company in Delhi in 7–10 days. CA-led, 100% online, transparent pricing.",
+      "Register your Pvt Ltd company in Delhi in 7–10 days. Expert-led, 100% online, transparent pricing.",
     type: "website",
     siteName: "Company Avenue Advisory",
     locale: "en_IN",
@@ -39,7 +39,7 @@ export default function PrivateLimitedCompanyPage() {
           serviceSchema({
             name: "Private Limited Company Registration in Delhi",
             description:
-              "CA-led Private Limited Company registration in Delhi in 7–10 days — name approval, MCA incorporation, PAN, TAN and compliance.",
+              "Expert-led Private Limited Company registration in Delhi in 7–10 days — name approval, MCA incorporation, PAN, TAN and compliance.",
             path: "/services/private-limited-company",
             areaServed: "Delhi",
           }),

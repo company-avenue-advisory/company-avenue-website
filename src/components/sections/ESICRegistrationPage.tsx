@@ -110,7 +110,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,        label: "CA-Led — 15+ Years in ESIC Compliance" },
+  { icon: Award,        label: "Expert-Led — 15+ Years in ESIC Compliance" },
   { icon: Shield,       label: "Zero-Penalty Guarantee — Always On Time" },
   { icon: Headphones,   label: "Dedicated ESIC Relationship Manager" },
   { icon: Monitor,      label: "100% Digital, ESIC Portal-Based Process" },

@@ -237,7 +237,7 @@ function StickySidebar() {
         <div className="grid grid-cols-2 gap-3">
           {[
             { v: "2,000+", l: "Licenses Issued" },
-            { v: "98%", l: "Success Rate" },
+            { v: "96%+", l: "Success Rate" },
             { v: "15+", l: "Years CA Practice" },
             { v: "24h", l: "Response" },
           ].map((s) => (

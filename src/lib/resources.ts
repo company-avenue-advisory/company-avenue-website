@@ -305,7 +305,7 @@ export const RESOURCE_SECTIONS: ResourceSection[] = [
     accent: "bg-indigo-50 text-indigo-600 border-indigo-100",
     tagline: "Which Registrar of Companies governs your registered office.",
     updated: "Jul 2026",
-    source: { label: "MCA — RoC Offices", href: "https://www.mca.gov.in/content/mca/global/en/mca/about-mca/roc-offices.html" },
+    source: { label: "MCA portal", href: "https://www.mca.gov.in/" },
     intro:
       "Your company's compliance is handled by the Registrar of Companies (RoC) for the state where your registered office is located. Here are the major RoC offices and the regions they cover.",
     tables: [

@@ -816,7 +816,7 @@ export function PayrollManagementPage({ pricingSlot, calcPill }: { pricingSlot?:
                   What Makes Us Different
                 </h2>
                 <p className="text-muted text-lg leading-relaxed max-w-2xl mb-10">
-                  We&apos;re not a payroll software — we&apos;re a CA-led payroll team that takes end-to-end ownership.
+                  We&apos;re not a payroll software — we&apos;re an expert-led payroll team that takes end-to-end ownership.
                 </p>
               </motion.div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

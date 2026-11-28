@@ -192,7 +192,7 @@ export default async function BlogPostPage({
             {service && (
               <div className="mt-10 p-6 rounded-2xl bg-white border border-slate-100 shadow-card">
                 <p className="text-muted text-sm leading-relaxed mb-4">
-                  Need help with this in practice? Our CA-led team handles{" "}
+                  Need help with this in practice? Our expert team handles{" "}
                   <Link href={service.href} className="text-primary font-semibold hover:underline">
                     {service.label}
                   </Link>{" "}

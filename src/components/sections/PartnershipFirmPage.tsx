@@ -112,7 +112,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "CA-Led — 15+ Years in Practice" },
+  { icon: Award,       label: "Expert-Led — 15+ Years in Practice" },
   { icon: Building2,   label: "2,000+ Partnership Firms Registered" },
   { icon: UserCheck,   label: "Qualified Chartered Accountants & CS" },
   { icon: DollarSign,  label: "Transparent Fixed Pricing — No Surprises" },

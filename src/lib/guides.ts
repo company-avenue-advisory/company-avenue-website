@@ -282,7 +282,7 @@ export const GUIDES: Guide[] = [
       },
     ],
     sources: [
-      { label: "MCA — LLP e-filing", href: "https://www.mca.gov.in/content/mca/global/en/mca/llp-e-filing.html" },
+      { label: "MCA portal (LLP e-filing)", href: "https://www.mca.gov.in/" },
     ],
     relatedService: { label: "LLP Registration Service", href: "/services/llp-registration" },
   },

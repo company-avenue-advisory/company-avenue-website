@@ -143,7 +143,7 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
       { title: "Name approval guidance", body: "Help with preparing the proposed LLP name." },
       { title: "LLP incorporation support", body: "Support through the online registration workflow." },
       { title: "LLP Agreement support", body: "Assistance with the agreement and partner structure." },
-      { title: "Professional review", body: "CA-led and compliance-focused document support." },
+      { title: "Professional review", body: "Expert-led and compliance-focused document support." },
       { title: "Next-step guidance", body: "Direction on post-incorporation compliance requirements." },
     ],
     compare: {
@@ -207,7 +207,7 @@ export const LANDING_PAGES: Record<string, LandingPageConfig> = {
       { title: "Document checklist", body: "Know what to prepare before filing." },
       { title: "Application support", body: "Professional assistance through the online registration workflow." },
       { title: "Business details review", body: "Reduce avoidable mismatches in the application." },
-      { title: "CA-led guidance", body: "Get answers around the registration path and next steps." },
+      { title: "Expert-led guidance", body: "Get answers around the registration path and next steps." },
       { title: "Post-registration direction", body: "Know what comes next once the registration is active." },
     ],
     compare: {

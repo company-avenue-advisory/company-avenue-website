@@ -111,7 +111,7 @@ export function CompanyRegistrationCalculator(
         ...(r.nameFee ? [{ label: "Name reservation (SPICe+ Part A)", amount: r.nameFee, kind: "govt" as const, note: "₹1,000 per application" }] : []),
         { label: "Digital Signature (DSC)", amount: r.dscTotal, kind: "pro",
           note: `${dsc} × ${inr(DSC_PER_PERSON)} — Class 3, two-year validity` },
-        { label: "Our professional fee", amount: r.professionalFee, kind: "pro", note: "CA-led filing, end to end" },
+        { label: "Our professional fee", amount: r.professionalFee, kind: "pro", note: "Expert-led filing, end to end" },
         { label: "GST @ 18%", amount: r.gst, kind: "pro", note: "On DSC and professional fee only" },
       ];
       return { lines, passThrough: r.passThrough, ourSide: r.taxable + r.gst, total: r.total, stampUnknown: false };
@@ -162,7 +162,7 @@ export function CompanyRegistrationCalculator(
         ...(dscTotal ? [{ label: "Digital Signature (DSC)", amount: dscTotal, kind: "pro" as const, note: `${dsc} × ${inr(DSC_PER_PERSON)} — Class 3, two-year validity` }] : []),
         ...(taxableExtras ? [{ label: "Franking, stamp paper and notarisation", amount: taxableExtras, kind: "pro" as const, note: "Coordination of stamping and notarising the LLP Agreement" }] : []),
         { label: "Our professional fee", amount: proFee, kind: "pro" as const,
-          note: entity === "llp" ? "Incorporation, LLP Agreement drafting and Form 3" : "CA-led filing, end to end" },
+          note: entity === "llp" ? "Incorporation, LLP Agreement drafting and Form 3" : "Expert-led filing, end to end" },
         { label: "GST @ 18%", amount: gst, kind: "pro" as const, note: dscTotal ? "On DSC, franking and professional fee" : "On professional fee" },
       ],
       passThrough, ourSide: taxable + gst, total: passThrough + taxable + gst, stampUnknown,

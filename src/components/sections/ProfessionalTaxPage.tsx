@@ -105,7 +105,7 @@ const deliverables = [
 ];
 
 const whyUs = [
-  { icon: Award,       label: "CA-Led — 15+ Years in State Tax Compliance" },
+  { icon: Award,       label: "Expert-Led — 15+ Years in State Tax Compliance" },
   { icon: MapPin,      label: "Pan-India Coverage — All 21 PT States" },
   { icon: ShieldCheck, label: "Dual Registration: EC + RC in One Engagement" },
   { icon: RefreshCcw,  label: "Return Filing & Renewal Reminders Included" },

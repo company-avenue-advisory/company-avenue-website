@@ -63,7 +63,7 @@ export const CITY_PAGES: Record<string, { meta: { title: string; description: st
   "private-limited-company-registration-delhi": {
     meta: {
       title: "Private Limited Company Registration in Delhi | CA",
-      description: "Register a Private Limited company in Delhi in 7–10 days. CA-led, 100% online, fixed transparent pricing. Free consultation — call or WhatsApp today.",
+      description: "Register a Private Limited company in Delhi in 7–10 days. Expert-led, 100% online, fixed transparent pricing. Free consultation — call or WhatsApp today.",
     },
     config: {
       path: "/services/private-limited-company-registration-delhi",

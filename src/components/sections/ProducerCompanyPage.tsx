@@ -131,7 +131,7 @@ const deliverables = [
 ];
 
 const whyUsPoints = [
-  { icon: Award,       label: "CA-Led — 15+ Years Incorporating Every Entity Type" },
+  { icon: Award,       label: "Expert-Led — 15+ Years Incorporating Every Entity Type" },
   { icon: Building2,   label: "100+ Producer Companies & FPOs Registered Across India" },
   { icon: UserCheck,   label: "Dedicated CA & CS for Part IXA Compliance" },
   { icon: DollarSign,  label: "Fixed Transparent Pricing — Starting ₹9,999" },
