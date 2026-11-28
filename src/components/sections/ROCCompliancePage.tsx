@@ -155,7 +155,7 @@ const deliverables = [
 const whyUs = [
   { icon: UserCheck, point: "Qualified Company Secretaries and CAs on staff" },
   { icon: Calendar, point: "Proactive deadline reminders — never miss a due date" },
-  { icon: Award, point: "10,000+ annual filings completed across India" },
+  { icon: Award, point: "500+ annual filings completed across India" },
   { icon: ShieldCheck, point: "Error-free SRN generation — first time, every time" },
   { icon: DollarSign, point: "Fixed pricing — ₹4,999/year, no hidden extras" },
   { icon: BookOpen, point: "Includes AGM and Board meeting resolution drafting" },

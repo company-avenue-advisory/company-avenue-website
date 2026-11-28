@@ -272,7 +272,7 @@ export function FSSAILicensePage({ pricingSlot, calcPill }: { pricingSlot?: Reac
                 className="inline-flex items-center gap-2 bg-amber-50 border border-amber-100 rounded-full px-4 py-1.5 mb-6"
               >
                 {[...Array(5)].map((_, i) => <Star key={i} size={11} className="text-amber-400 fill-amber-400" />)}
-                <span className="text-amber-700 text-xs font-heading font-semibold">FSSAI Experts • 2,000+ Licenses Filed</span>
+                <span className="text-amber-700 text-xs font-heading font-semibold">FSSAI Experts • 500+ Licenses Filed</span>
               </motion.div>
               <motion.h1 custom={1} variants={fadeUp} initial={false} animate="show"
                 className="font-heading font-bold text-[2.4rem] md:text-5xl leading-[1.15] tracking-tight text-dark mb-5"

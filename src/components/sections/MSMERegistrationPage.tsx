@@ -904,7 +904,7 @@ export function MSMERegistrationPage({ pricingSlot, calcPill }: { pricingSlot?: 
               Register Your MSME Today &<br />Unlock ₹Crores in Government Benefits
             </h2>
             <p className="text-white/70 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-              Join 2,000+ businesses that have obtained their Udyam Certificate through Company Avenue. Zero government fees. Certificate in 1 business day. No paperwork headache.
+              Join 500+ businesses that have obtained their Udyam Certificate through Company Avenue. Zero government fees. Certificate in 1 business day. No paperwork headache.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/contact"
