@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { TradeLicensePage } from "@/components/sections/TradeLicensePage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function TradeLicenseServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="trade-license" />}
         calcPill={<ServiceCalcPill serviceId="trade-license" />}
       />
+      <SearchQA path="/services/trade-license" />
     </>
   );
 }

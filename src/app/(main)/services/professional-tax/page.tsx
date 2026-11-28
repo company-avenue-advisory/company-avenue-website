@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { ProfessionalTaxPage } from "@/components/sections/ProfessionalTaxPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function ProfessionalTaxServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="professional-tax" />}
         calcPill={<ServiceCalcPill serviceId="professional-tax" />}
       />
+      <SearchQA path="/services/professional-tax" />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SearchQA } from "@/components/seo/SearchQA";
 import { TrademarkRenewalPage } from "@/components/sections/TrademarkRenewalPage";
 import { ServicePricingBlock } from "@/components/sections/ServicePricingBlock";
 import { ServiceCalcPill } from "@/components/sections/ServiceCalcPill";
@@ -21,6 +22,7 @@ export default function TrademarkRenewalServicePage() {
         pricingSlot={<ServicePricingBlock serviceId="trademark-renewal" />}
         calcPill={<ServiceCalcPill serviceId="trademark-renewal" />}
       />
+      <SearchQA path="/services/trademark-renewal" />
     </>
   );
 }

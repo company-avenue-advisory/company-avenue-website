@@ -273,6 +273,7 @@ export const NAV_LINKS = [
           { label: "ROC Annual Filing (Pvt Ltd)", href: "/services/roc-compliance" },
           { label: "LLP Annual Filing", href: "/services/llp-annual-filing" },
           { label: "Director KYC (DIR-3)", href: "/services/director-kyc" },
+          { label: "Digital Signature (DSC)", href: "/services/digital-signature-certificate" },
           { label: "Post-Incorporation Compliance", href: "/services/post-incorporation-compliance" },
           { label: "XBRL Filing", href: "/services/xbrl-filing" },
           { label: "AGM & Board Meeting Services", href: "/services/agm-services" },

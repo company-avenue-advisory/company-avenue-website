@@ -53,6 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...STATIC_PAGES.filter((p) => p !== "").map((p) => entry(p, 0.7, "monthly")),
     ...SERVICES.map((s) => entry(`services/${s.id}`, 0.9, "monthly")),
     ...CITY_PAGES.map((p) => entry(`services/${p}`, 0.85, "monthly")),
+    entry("services/digital-signature-certificate", 0.8, "monthly"),
     ...CALCULATORS.map((c) => entry(`calculators/${c}`, 0.6, "monthly")),
     ...VERIFY_TOOLS.map((v) => entry(`verify/${v}`, 0.6, "monthly")),
     // Content detail pages. These are generated straight from the same data the
